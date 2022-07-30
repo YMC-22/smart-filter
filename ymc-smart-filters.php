@@ -2,10 +2,10 @@
 
 /**
  *
- * Plugin Name:       YMC Smart Filters
+ * Plugin Name:       YMC Smart Filter
  * Description:       The smart filter posts/custom post types by category allows to solve a variety of tasks for displaying posts on site pages. Easy to use.
  * Version:           1.0.0
- * Author:            YMC
+ * Author:            YMC Cor
  * Author URI:        https://ymc.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
