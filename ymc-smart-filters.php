@@ -17,7 +17,6 @@
  * along with Password. If not, see http://www.gnu.org/licenses/gpl-2.0.txt.
  */
 
-
 require_once( plugin_dir_path( __FILE__ ) . 'inc/YMC_smart_filters.php' );
 
 
