@@ -9,7 +9,7 @@
  * Author URI:        https://github.com/YMC-22/smart-filter
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       links
+ * Text Domain:       links d
  * Domain Path:       /languages
  *
  *
