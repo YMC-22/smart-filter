@@ -43,7 +43,7 @@ function custom_post_layout($layouts, $post_id, $cpt_id) {
 
 add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);
 
-============================
+===============================
 
 Add Hooks:
 
@@ -52,5 +52,7 @@ Add custom content before or after filters panel
 do_action("ymc_before_filter_layout");
 
 do_action("ymc_after_filter_layout");
+
+
 
 
