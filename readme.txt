@@ -1,11 +1,13 @@
 ====================
 === YMC Smart Filter ===
+Plugin Name: YMC Smart Filter
 Contributors: YMC Cor
 Version: 1.0.0
 Donate link: https://github.com/YMC-22/smart-filter
 Tags: filters, posts, mind, ajax posts, category posts
 Requires at least: 4.8
 Tested up to: 6.0
+Stable tag: 2.5.1
 Requires PHP: 5.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
