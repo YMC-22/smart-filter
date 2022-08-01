@@ -466,7 +466,6 @@
 
 
         /*** SEARCH POSTS ***/
-
         $(document).on('click','.ymc-smart-filter-container .search-form .btn-submit',function (e) {
             e.preventDefault();
 
@@ -503,8 +502,7 @@
             }
         });
 
-        /*** Autocomplete search ***/
-
+        /*** Autocomplete Search ***/
         $(document).on('input','.ymc-smart-filter-container .search-form .field-search',function (e) {
 
             let _self = $(this);
@@ -556,7 +554,98 @@
                 });
             }
         });
-    });
 
+
+
+
+
+        /*** API JS ===> DEV ***/
+        const _FN = (function () {
+
+            const _info = {
+                version: '1.0.0',
+                author: 'YMC Co'
+            }
+
+            const _defaults = {
+                target: '.data-target-ymc1'
+            }
+
+            function YMCTools(settings = _defaults) {
+
+                let properties = Object.assign({}, _defaults, settings);
+
+                for (let key in properties) {
+                    this[key] = properties[key];
+                }
+                this.length = Object.keys(properties).length;
+            }
+
+            YMCTools.prototype.getInfo = function () {
+                return `Author: ${_info.author}. Version: ${_info.version}`;
+            }
+
+            YMCTools.prototype.updateParams = function (params=[]) {
+
+                let $elem = document.querySelector(''+ this.target +'');
+
+                if( ! $elem )  throw new Error("Dom element not found");
+
+                let dataParams = JSON.parse($elem.dataset.params);
+
+                params.forEach((el) => {
+
+                    for ( let [key, value] of Object.entries(el) ) {
+
+                        for ( let _key in dataParams ) {
+
+                            if( _key === key ) {
+                                dataParams[_key] = value;
+                            }
+                        }
+                    }
+                });
+
+                $elem.dataset.params = JSON.stringify(dataParams);
+            }
+
+            YMCTools.prototype.getFilterPosts = function () {
+
+                let $elem = document.querySelector(''+ this.target +'');
+
+                if( ! $elem )  throw new Error("Dom element not found");
+
+                let params      = JSON.parse($elem.dataset.params);
+                let data_target = params.data_target;
+                let type_pg     = params.type_pg;
+
+                getFilterPosts({
+                    'paged'     : 1,
+                    'toggle_pg' : 1,
+                    'target'    : data_target,
+                    'type_pg'   : type_pg
+                });
+
+            }
+
+            return function (settings) {
+                return  new YMCTools(settings);
+            }
+
+        }());
+
+        ( typeof window.YMCTools === 'undefined' ) ? window.YMCTools = _FN : console.error('YMCTools is existed');
+
+        // Ex:
+        // let ymc = YMCTools('.data-target-ymc1');
+        // ymc.updateParams([{ "terms" : "3,4,5" }, {"per_page":"1"}, {"type_pg":"load-more"} ]);
+        // ymc.getFilterPosts();
+
+
+
+
+
+
+    });
 
 }( jQuery ));
