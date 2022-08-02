@@ -29,7 +29,8 @@ Add this code to `function.php` to your theme
 
 <h4>Custom Post Layout</h4>
 
-<pre>
+```php
+
 @parmas:
 $layouts - HTML markup
 $post_id - Post ID
@@ -42,8 +43,8 @@ function custom_post_layout($layouts, $post_id, $cpt_id) {
    return $layouts;
 }
 add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);
-   
-</pre>
+
+```  
 
 ===============================
 
