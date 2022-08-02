@@ -1,59 +1,62 @@
 #  PLUGIN YMC SMART FILTER
-Plugin YMC Smart Filters - Filter posts/custom post types by custom taxonomy/category without page reload and with pagination too. It has different filter and post layouts.
+> Plugin YMC Smart Filters - Filter posts/custom post types by custom taxonomy/category without page reload and with pagination too. It has different filter and post layouts.
 
-####
-<h3>List Filters.</h3>
+### List Filters
 
-<code>add_filter('ymc_pagination_prev_text', $ymc_pagination_prev_text, 3, 1);</code>
-
-<code>add_filter('ymc_pagination_next_text', $ymc_pagination_next_text, 3, 1);</code>
-
-<code>add_filter('ymc_pagination_load_more', $ymc_pagination_load_more, 3, 1);</code>
-
-<code>add_filter('ymc_post_date_format', $ymc_post_date_format, 3, 1);</code>
-
-<code>add_filter('ymc_post_excerpt_length', $ymc_post_excerpt_length, 3, 1);</code>
-
-<code>add_filter('ymc_post_read_more', $ymc_post_read_more, 3, 1);</code>
-
-<code>add_filter('ymc_button_show_all', $ymc_button_show_all, 3, 1);</code>
-
-<code>add_filter('ymc_select_term_dropdown', $ymc_select_term_dropdown, 3, 1);</code>
+**Change previous or next numbered paginator arrows:**
+```php
+add_filter('ymc_pagination_prev_text', $ymc_pagination_prev_text, 3, 1);
+add_filter('ymc_pagination_next_text', $ymc_pagination_next_text, 3, 1);
+```
+**Change button text Load More**
+```php
+add_filter('ymc_pagination_load_more', $ymc_pagination_load_more, 3, 1);
+```
+**Change publication date of a post in grid of cards**
+```php
+add_filter('ymc_post_date_format', $ymc_post_date_format, 3, 1);
+```
+**Change post text length (excerpt)**
+```php
+add_filter('ymc_post_excerpt_length', $ymc_post_excerpt_length, 3, 1);
+```
+**Change button text in post card**
+```php
+add_filter('ymc_post_read_more', $ymc_post_read_more, 3, 1);
+```
+**Change text of Show All button in filter panel**
+```php
+add_filter('ymc_button_show_all', $ymc_button_show_all, 3, 1);
+```
 
 =============================
 
-<h3>Layouts</h3>
+### Layouts
+**Add this code to `function.php` to your theme**
 
-Add a file function.php to your theme filters
+```php
+add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);
+```
 
-<code>add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);</code>
-
-<h4>Custom Post Layout</h4>
-
-<pre>
+**Example Custom Post Layout**
+```php
 @parmas:
 $layouts - HTML markup
 $post_id - Post ID
 $cpt_id - Custom Posst Type ID
 
 function custom_post_layout($layouts, $post_id, $cpt_id) {  
-   $layouts .= get_the_title($post_id);
-   $layouts .= wp_trim_words(get_the_content($post_id), 30);
-   $layouts .= get_the_permalink($post_id);   
+   $layouts .= '<h2>'.get_the_title($post_id).'</h2>';
+   $layouts .= '<p>'.wp_trim_words(get_the_content($post_id), 30).'</p>';
+   $layouts .= '<a href="'.get_the_permalink($post_id).'">Read More</a>;   
    return $layouts;
 }
 add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);
-   
-</pre>
-
-===============================
-
-<h3>Add custom content before or after filters panel.</h3>
-
-<code>do_action("ymc_before_filter_layout");</code>
-
-<code>do_action("ymc_after_filter_layout");</code>
+```  
 
 
-
-
+**Add your content before or after the filter bar**
+```php
+do_action("ymc_before_filter_layout");
+do_action("ymc_after_filter_layout");
+```
