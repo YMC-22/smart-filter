@@ -46,9 +46,9 @@ $post_id - Post ID
 $cpt_id - Custom Posst Type ID
 
 function custom_post_layout($layouts, $post_id, $cpt_id) {  
-   $layouts .= get_the_title($post_id);
-   $layouts .= wp_trim_words(get_the_content($post_id), 30);
-   $layouts .= get_the_permalink($post_id);   
+   $layouts .= '<h2>'.get_the_title($post_id).'</h2>';
+   $layouts .= '<p>'.wp_trim_words(get_the_content($post_id), 30).'</p>';
+   $layouts .= '<a href="'.get_the_permalink($post_id).'">Read More</a>;   
    return $layouts;
 }
 add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);
