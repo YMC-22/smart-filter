@@ -2,7 +2,7 @@
 Plugin YMC Smart Filters - Filter posts/custom post types by custom taxonomy/category without page reload and with pagination too. It has different filter and post layouts.
 
 ####
-List Filters:
+<h3>List Filters.</h3>
 
 <code>add_filter('ymc_pagination_prev_text', $ymc_pagination_prev_text, 3, 1);</code>
 
@@ -22,26 +22,26 @@ List Filters:
 
 =============================
 
-Layouts:
-Custom Post Layout
+<h3>Layouts</h3>
+<h4>Custom Post Layout</h4>
+<code>add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);</code>
 
+<pre>
 @parmas: 
 
 $layouts - HTML markup
-
 $post_id - Post ID
-
 $cpt_id - Custom Posst Type ID
 
-add_filter('ymc_post_custom_layout', $layouts, 10, 3);
-
-Example:
-
 function custom_post_layout($layouts, $post_id, $cpt_id) {  
+   $layouts .= get_the_title($post_id);
+   $layouts .= wp_trim_words(get_the_content($post_id), 30);
+   $layouts .= get_the_permalink($post_id);   
    return $layouts;
 }
-
 add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);
+   
+</pre>
 
 ===============================
 
@@ -49,13 +49,11 @@ add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);
 
 ===============================
 
-Add Hooks:
+<h3>Add custom content before or after filters panel.</h3>
 
-Add custom content before or after filters panel
+<code>do_action("ymc_before_filter_layout");</code>
 
-do_action("ymc_before_filter_layout");
-
-do_action("ymc_after_filter_layout");
+<code>do_action("ymc_after_filter_layout");</code>
 
 
 
