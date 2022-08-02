@@ -1,6 +1,12 @@
 #  PLUGIN YMC SMART FILTER
 Plugin YMC Smart Filters - Filter posts/custom post types by custom taxonomy/category without page reload and with pagination too. It has different filter and post layouts.
 
+```
+function test() {
+  console.log("notice the blank line before this function?");
+}
+```
+
 <h3>List Filters</h3>
 
 <code>add_filter('ymc_pagination_prev_text', $ymc_pagination_prev_text, 3, 1);</code>
