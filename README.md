@@ -31,18 +31,13 @@ $layouts - HTML markup
 
 $post_id - Post ID
 
-$cpt_id - CPT ID
+$cpt_id - Custom Posst Type ID
 
 add_filter('ymc_post_custom_layout', $layouts, 10, 3);
 
 Example:
 
-function custom_post_layout($layouts, $post_id, $cpt_id) {   
-
-$layouts = '<h2>'. get_the_title($post_id) .'</h2>
-				<p>'.wp_trim_words(get_the_content($post_id), 25).'</p>
-				<a href="'. get_the_permalink($post_id) .'">Link post</a>';
-
+function custom_post_layout($layouts, $post_id, $cpt_id) {  
    return $layouts;
 }
 
