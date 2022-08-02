@@ -4,21 +4,21 @@ Plugin YMC Smart Filters - Filter posts/custom post types by custom taxonomy/cat
 ####
 List Filters:
 
-add_filter('ymc_pagination_prev_text', $ymc_pagination_prev_text, 3, 1);
+<code>add_filter('ymc_pagination_prev_text', $ymc_pagination_prev_text, 3, 1);</code>
 
-add_filter('ymc_pagination_next_text', $ymc_pagination_next_text, 3, 1);
+<code>add_filter('ymc_pagination_next_text', $ymc_pagination_next_text, 3, 1);</code>
 
-add_filter('ymc_pagination_load_more', $ymc_pagination_load_more, 3, 1);
+<code>add_filter('ymc_pagination_load_more', $ymc_pagination_load_more, 3, 1);</code>
 
-add_filter('ymc_post_date_format', $ymc_post_date_format, 3, 1);
+<code>add_filter('ymc_post_date_format', $ymc_post_date_format, 3, 1);</code>
 
-add_filter('ymc_post_excerpt_length', $ymc_post_excerpt_length, 3, 1);
+<code>add_filter('ymc_post_excerpt_length', $ymc_post_excerpt_length, 3, 1);</code>
 
-add_filter('ymc_post_read_more', $ymc_post_read_more, 3, 1);
+<code>add_filter('ymc_post_read_more', $ymc_post_read_more, 3, 1);</code>
 
-add_filter('ymc_button_show_all', $ymc_button_show_all, 3, 1);
+<code>add_filter('ymc_button_show_all', $ymc_button_show_all, 3, 1);</code>
 
-add_filter('ymc_select_term_dropdown', $ymc_select_term_dropdown, 3, 1);
+<code>add_filter('ymc_select_term_dropdown', $ymc_select_term_dropdown, 3, 1);</code>
 
 =============================
 
