@@ -28,9 +28,6 @@ add_filter('ymc_post_read_more', $ymc_post_read_more, 3, 1);
 ```php
 add_filter('ymc_button_show_all', $ymc_button_show_all, 3, 1);
 ```
-
-=============================
-
 ### Layouts
 **Add this code to `function.php` to your theme**
 
