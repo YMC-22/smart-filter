@@ -556,10 +556,7 @@
         });
 
 
-
-
-
-        /*** API JS ===> DEV ***/
+        /*** API JS ***/
         const _FN = (function () {
 
             const _info = {
@@ -585,26 +582,44 @@
                 return `Author: ${_info.author}. Version: ${_info.version}`;
             }
 
-            YMCTools.prototype.updateParams = function (params=[]) {
+            YMCTools.prototype.updateParams = function (self) {
 
                 let $elem = document.querySelector(''+ this.target +'');
+                let link  = $(self);
+                let dataParams = JSON.parse($elem.dataset.params);
+
+                let termIds  = link.data('termid');
+                let term_sel = link.data('selected');
 
                 if( ! $elem )  throw new Error("Dom element not found");
 
-                let dataParams = JSON.parse($elem.dataset.params);
+                if( link.hasClass('multiple') ) {
 
-                params.forEach((el) => {
+                    link.toggleClass('active').closest('.filter-item').siblings().find('.all').removeClass('active');
 
-                    for ( let [key, value] of Object.entries(el) ) {
+                    termIds = '';
 
-                        for ( let _key in dataParams ) {
+                    let listActiveItems = link.closest('.filter-entry').find('.active');
+                    if(listActiveItems.length > 0) {
 
-                            if( _key === key ) {
-                                dataParams[_key] = value;
-                            }
-                        }
+                        link.closest('.filter-entry').find('.active').each(function (){
+                            termIds += $(this).data('termid')+',';
+                        });
+
+                        termIds = termIds.replace(/,\s*$/, "");
                     }
-                });
+                    else {
+                        termIds = link.closest('.filter-entry').find('.all').data('termid');
+                    }
+                }
+                else {
+                    link.addClass('active').closest('.filter-item').siblings().find('.filter-link').removeClass('active');
+                }
+
+                dataParams.terms = termIds;
+                dataParams.page = 1;
+                dataParams.search = '';
+                dataParams.post_sel = term_sel;
 
                 $elem.dataset.params = JSON.stringify(dataParams);
             }
@@ -635,16 +650,6 @@
         }());
 
         ( typeof window.YMCTools === 'undefined' ) ? window.YMCTools = _FN : console.error('YMCTools is existed');
-
-        // Ex:
-        // let ymc = YMCTools('.data-target-ymc1');
-        // ymc.updateParams([{ "terms" : "3,4,5" }, {"per_page":"1"}, {"type_pg":"load-more"} ]);
-        // ymc.getFilterPosts();
-
-
-
-
-
 
     });
 

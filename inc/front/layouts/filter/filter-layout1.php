@@ -28,12 +28,12 @@ $filter_css = "#ymc-smart-filter-container-".$c_target." .filter-layout.filter-l
 
 	            ( $ymc_sort_terms === 'asc' ) ? asort($terms_selected) : arsort($terms_selected);
 
-                echo '<li class="filter-item"><a class="filter-link all active" href="#" data-selected="all" data-termid="' . esc_attr($ymc_terms) . '">' . __("All",'ymc-smart-filter') . '</a></li>';
+                echo '<li class="filter-item"><a class="filter-link all active" href="#" data-selected="all" data-termid="' . esc_attr($ymc_terms) . '">' . esc_html__("All",'ymc-smart-filter') . '</a></li>';
 
                 foreach ($terms_selected as $term) {
 
                     echo "<li class='filter-item'>
-                            <a class='filter-link ".$type_multiple."' href='#' data-selected='" . esc_html(get_term( $term )->slug) . "' data-termid='" . esc_attr($term) . "'>" . esc_html(get_term( $term )->name) . "</a>
+                            <a class='filter-link ".$type_multiple."' href='#' data-selected='" . esc_attr(get_term( $term )->slug) . "' data-termid='" . esc_attr($term) . "'>" . esc_html(get_term( $term )->name) . "</a>
                           </li>";
                 }
             }

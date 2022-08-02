@@ -390,6 +390,38 @@ $font-size: 16;
 				}
 			}
 		}
+
+		&.filter-custom-layout {
+			.cf-wrp {
+				border: 1px solid #ccc;
+				margin-bottom: 15px;
+				padding: 15px;
+			}
+			.head-filter {
+				font-size: 18px;
+				margin-bottom: 10px;
+				padding-bottom: 5px;
+				font-weight: 500;
+			}
+			.inform {
+				color: #949494;
+				line-height: 1.6;
+				font-size: 12px;
+				.doc-text {
+					color: #098ab8;
+					font-weight: 500;
+					border: 0.5px dashed #098ab8;
+					padding: 1px 5px;
+					font-size: 12px;
+				}
+				a {
+					color: #098ab8;
+					text-decoration: underline;
+					display: inline-block;
+					margin-left: 5px;
+				}
+			}
+		}
 	}
 
 	// Posts style
@@ -562,6 +594,13 @@ $font-size: 16;
 							border: 0.5px dashed #098ab8;
 							padding: 1px 5px;
 						}
+					}
+					a {
+						display: block;
+						font-size: 12px;
+						color: #098ab8;
+						text-decoration: underline;
+						margin-top: 5px;
 					}
 				}
 			}
