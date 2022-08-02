@@ -29,21 +29,17 @@ add_filter('ymc_post_read_more', $ymc_post_read_more, 3, 1);
 add_filter('ymc_button_show_all', $ymc_button_show_all, 3, 1);
 ```
 
-
-<code>add_filter('ymc_select_term_dropdown', $ymc_select_term_dropdown, 3, 1);</code>
-
 =============================
 
-<h3>Layouts</h3>
-
-Add this code to `function.php` to your theme
-
-<code>add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);</code>
-
-<h4>Custom Post Layout</h4>
+### Layouts
+**Add this code to `function.php` to your theme**
 
 ```php
+add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);
+```
 
+**Example Custom Post Layout**
+```php
 @parmas:
 $layouts - HTML markup
 $post_id - Post ID
@@ -56,17 +52,11 @@ function custom_post_layout($layouts, $post_id, $cpt_id) {
    return $layouts;
 }
 add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);
-
 ```  
 
-===============================
 
-<h3>Add custom content before or after filters panel.</h3>
-
-<code>do_action("ymc_before_filter_layout");</code>
-
-<code>do_action("ymc_after_filter_layout");</code>
-
-
-
-
+**Add your content before or after the filter bar**
+```php
+do_action("ymc_before_filter_layout");
+do_action("ymc_after_filter_layout");
+```
