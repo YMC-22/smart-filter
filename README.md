@@ -23,12 +23,15 @@ Plugin YMC Smart Filters - Filter posts/custom post types by custom taxonomy/cat
 =============================
 
 <h3>Layouts</h3>
-<h4>Custom Post Layout</h4>
+
+Add a file function.php to your theme filters
+
 <code>add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);</code>
 
-<pre>
-@parmas: 
+<h4>Custom Post Layout</h4>
 
+<pre>
+@parmas:
 $layouts - HTML markup
 $post_id - Post ID
 $cpt_id - Custom Posst Type ID
@@ -42,10 +45,6 @@ function custom_post_layout($layouts, $post_id, $cpt_id) {
 add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);
    
 </pre>
-
-===============================
-
-
 
 ===============================
 
