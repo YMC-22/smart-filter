@@ -39,10 +39,12 @@ add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);
 
 **Example Custom Post Layout**
 ```php
-@parmas:
-$layouts - HTML markup
-$post_id - Post ID
-$cpt_id - Custom Posst Type ID
+/***
+* @Parmas:
+* $layouts - HTML markup
+* $post_id - Post ID
+* $cpt_id - Custom Posst Type ID
+**/
 
 function custom_post_layout($layouts, $post_id, $cpt_id) {  
    $layouts .= '<h2>'.get_the_title($post_id).'</h2>';
