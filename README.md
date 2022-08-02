@@ -1,3 +1,5 @@
+![This is an image](/inc/front/assets/images/YMC-logos.png)
+
 #  PLUGIN YMC SMART FILTER
 > Plugin YMC Smart Filters - Filter posts/custom post types by custom taxonomy/category without page reload and with pagination too. It has different filter and post layouts.
 
