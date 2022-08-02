@@ -279,7 +279,7 @@
         // Filter Post / Layout3 (Dropdown) / Dropdown Filter
         $(document).on('click','.ymc-smart-filter-container .filter-layout3 .dropdown-filter .menu-active',function (e) {
             e.preventDefault();
-            $el = $(this);
+            let $el = $(this);
             $el.find('.arrow').toggleClass('open').end().next().toggle();
             $el.closest('.dropdown-filter').siblings().find('.menu-passive').hide();
         });
