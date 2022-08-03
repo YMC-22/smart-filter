@@ -4,6 +4,7 @@
 > Plugin YMC Smart Filters - Filter posts/custom post types by custom taxonomy/category without page reload and with pagination too. It has different filter and post layouts.
 
 ### List Filters
+**Add code to `function.php` to your theme**
 
 **Change previous or next numbered paginator arrows:**
 ```php
@@ -31,12 +32,10 @@ add_filter('ymc_post_read_more', $ymc_post_read_more, 3, 1);
 add_filter('ymc_button_show_all', $ymc_button_show_all, 3, 1);
 ```
 ### Layouts
-**Add this code to `function.php` to your theme**
-
+**This filter allows you to change the post card template**
 ```php
 add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);
 ```
-
 **Example Custom Post Layout**
 ```php
 /**
