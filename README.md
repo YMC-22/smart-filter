@@ -67,7 +67,7 @@ function custom_post_layout($layout, $post_id, $cpt_id) {
 add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);
 ```  
 
-**This filter allows you to change the post card template**
+**This filter allows you to change the filter bar template**
 ```php
 add_filter('ymc_filter_custom_layout', 'custom_filter_layout', 10, 3);
 ```
