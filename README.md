@@ -46,11 +46,11 @@ add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);
  * @param {int} cpt_id - Custom Post Type ID
  * @returns {string} HTML markup card post
  */
-function custom_post_layout($layouts, $post_id, $cpt_id) {  
-   $layouts .= '<h2>'.get_the_title($post_id).'</h2>';
-   $layouts .= '<p>'.wp_trim_words(get_the_content($post_id), 30).'</p>';
-   $layouts .= '<a href="'.get_the_permalink($post_id).'">Read More</a>;   
-   return $layouts;
+function custom_post_layout($layout, $post_id, $cpt_id) {  
+   $layout .= '<h2>'.get_the_title($post_id).'</h2>';
+   $layout .= '<p>'.wp_trim_words(get_the_content($post_id), 30).'</p>';
+   $layout .= '<a href="'.get_the_permalink($post_id).'">Read More</a>;   
+   return $layout;
 }
 add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);
 ```  
