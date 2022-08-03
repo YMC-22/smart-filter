@@ -39,13 +39,13 @@ add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);
 
 **Example Custom Post Layout**
 ```php
-/***
-* @Parmas:
-* $layouts - HTML markup
-* $post_id - Post ID
-* $cpt_id - Custom Posst Type ID
-**/
-
+/**
+ * Creating a custom post template
+ * @param {string} layout - HTML markup
+ * @param {int} post_id - Post ID
+ * @param {int} cpt_id - Custom Post Type ID
+ * @returns {string} HTML markup card post
+ */
 function custom_post_layout($layouts, $post_id, $cpt_id) {  
    $layouts .= '<h2>'.get_the_title($post_id).'</h2>';
    $layouts .= '<p>'.wp_trim_words(get_the_content($post_id), 30).'</p>';
