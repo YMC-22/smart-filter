@@ -1,7 +1,7 @@
 ![This is an image](/inc/front/assets/images/YMC-logos.png)
 
 #  PLUGIN YMC SMART FILTER
-> Plugin YMC Smart Filters - Filter posts/custom post types by custom taxonomy/category without page reload and with pagination too. It has different filter and post layouts. To use custom templates for the filter bar and plugin post cards, you need a basic understanding of technologies: html javascript and PHP
+> Plugin YMC Smart Filters - Filter posts/custom post types by custom taxonomy/category without page reload and with pagination too. It has different filter and post layouts. The plugin allows you to create multiple filters on one page. To use custom templates for the filter bar and plugin post cards, you need a basic understanding of technologies: html javascript and PHP
 
 ### List Filters
 **Add code to `function.php` to your theme**
