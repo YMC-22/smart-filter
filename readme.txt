@@ -21,7 +21,7 @@ YMC Smart Filter - allows to solve a variety of tasks for displaying posts on si
 1. Activate Plugin or upload the entire 'ymc-smart-filters' folder to the '/wp-content/plugins/' directory.
 2. Add new YMC Smart Filter
 3. Copy YMC Smart Filter shortcode and paste to any page or post
-4. Set setting for each post.
+4. Set setting for each post
 
 
 == ScreenShots ==
