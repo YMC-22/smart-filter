@@ -107,8 +107,7 @@ function custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target ) 
     $layout = '<ul class="filter-entry">';
     $multiple = ( $multiple ) ? 'multiple' : '';
     $all_terms = implode(",", $terms);
-    $layout .= '<li class="filter-item">
-                <a class="filter-link all active" href="#" data-selected="all" data-termid="'. esc_attr($all_terms) .'">'.esc_html__('ALL','theme').'</a></li>';
+    $layout .= '<li class="filter-item"><a class="filter-link all active" href="#" data-selected="all" data-termid="'. esc_attr($all_terms) .'">'.esc_html__('ALL','theme').'</a></li>';
 
     foreach ( $terms as $term ) {
         $layout .= '<li class="filter-item"><a class="filter-link '. $multiple .'" href="#" data-selected="'. esc_attr(get_term( $term )->slug).'" data-termid="'. esc_attr($term) .'">'.esc_html(get_term( $term )->name) .'</a></li>';
