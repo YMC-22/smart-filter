@@ -75,9 +75,28 @@ add_filter('ymc_filter_custom_layout', 'custom_filter_layout', 10, 3);
  * @param {string} target - name class target element
  * @returns {string} HTML markup filter bar
  */
-function custom_filter_layout( $layout, $terms, $tax, $multiple, $target ) { 
+function custom_filter_layout( $layout, $terms, $tax, $multiple, $target ) { ?>
 
-   if( count($terms) > 0 ) {
+   <script type="application/javascript">
+       window.addEventListener('DOMContentLoaded', () => {
+          let _target = "<?php echo $target; ?>";
+          document.querySelectorAll( _target + ' .filter-custom-layout .filter-link' ).forEach((el) => {
+               el.addEventListener('click', function (e) {
+               e.preventDefault();
+               let settings = {
+                   target: _target,
+                   self: this
+               }
+               const ymc = YMCTools(settings);
+               ymc.updateParams();
+               ymc.getFilterPosts();
+
+            });
+         });
+      });
+   </script>
+
+   <?php if( count($terms) > 0 ) {
     $layout = '<ul class="filter-entry">';
     $multiple = ( $multiple ) ? 'multiple' : '';
     $all_terms = implode(",", $terms);
@@ -86,7 +105,7 @@ function custom_filter_layout( $layout, $terms, $tax, $multiple, $target ) {
 
     foreach ( $terms as $term ) {
         $layout .= '<li class="filter-item">
-                   <a class="filter-link '. $multiple .'" href="#" data-selected="'. esc_attr(get_term( $term )->slug).'" data-termid="'. esc_attr($term) .'">'.                          esc_html(get_term( $term )->name) .'</a></li>';
+                   <a class="filter-link '. $multiple .'" href="#" data-selected="'. esc_attr(get_term( $term )->slug).'" data-termid="'. esc_attr($term) .'">'.esc_html(get_term( $term )->name) .'</a></li>';
     }
     $layout .= '</ul><div class="posts-found"></div>';
   }
