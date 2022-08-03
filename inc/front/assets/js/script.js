@@ -186,10 +186,11 @@
 
                 link.toggleClass('active').closest('.filter-item').siblings().find('.all').removeClass('active');
 
-                term_id = '';
-
                 let listActiveItems = link.closest('.filter-entry').find('.active');
+
                 if(listActiveItems.length > 0) {
+
+                    term_id = '';
 
                     link.closest('.filter-entry').find('.active').each(function (){
                         term_id += $(this).data('termid')+',';
@@ -232,10 +233,11 @@
 
                 link.toggleClass('active').closest('.filter-entry').find('.all').removeClass('active');
 
-                term_id = '';
-
                 let listActiveItems = link.closest('.filter-entry').find('.active');
+
                 if(listActiveItems.length > 0) {
+
+                    term_id = '';
 
                     link.closest('.filter-entry').find('.active').each(function (){
                         term_id += $(this).data('termid')+',';
@@ -556,7 +558,7 @@
         });
 
 
-        /*** API JS ***/
+        /*** API JS Custom Filter Layout ***/
         const _FN = (function () {
 
             const _info = {
@@ -565,7 +567,8 @@
             }
 
             const _defaults = {
-                target: '.data-target-ymc1'
+                target : '.data-target-ymc1',
+                self   : null
             }
 
             function YMCTools(settings = _defaults) {
@@ -582,25 +585,28 @@
                 return `Author: ${_info.author}. Version: ${_info.version}`;
             }
 
-            YMCTools.prototype.updateParams = function (self) {
+            YMCTools.prototype.updateParams = function () {
 
                 let $elem = document.querySelector(''+ this.target +'');
-                let link  = $(self);
+
+                if( ! $elem )  throw new Error("Dom element not found");
+                if( this.self === null )  throw new Error("Сontext is not defined");
+
+                let link  = $(this.self);
                 let dataParams = JSON.parse($elem.dataset.params);
 
                 let termIds  = link.data('termid');
-                let term_sel = link.data('selected');
-
-                if( ! $elem )  throw new Error("Dom element not found");
+                let termSelected = link.data('selected');
 
                 if( link.hasClass('multiple') ) {
 
-                    link.toggleClass('active').closest('.filter-item').siblings().find('.all').removeClass('active');
-
-                    termIds = '';
+                    link.toggleClass('active').parent().siblings().find('.all').removeClass('active');
 
                     let listActiveItems = link.closest('.filter-entry').find('.active');
+
                     if(listActiveItems.length > 0) {
+
+                        termIds = '';
 
                         link.closest('.filter-entry').find('.active').each(function (){
                             termIds += $(this).data('termid')+',';
@@ -613,13 +619,13 @@
                     }
                 }
                 else {
-                    link.addClass('active').closest('.filter-item').siblings().find('.filter-link').removeClass('active');
+                    link.addClass('active').parent().siblings().find('.filter-link').removeClass('active');
                 }
 
                 dataParams.terms = termIds;
                 dataParams.page = 1;
                 dataParams.search = '';
-                dataParams.post_sel = term_sel;
+                dataParams.post_sel = termSelected;
 
                 $elem.dataset.params = JSON.stringify(dataParams);
             }
