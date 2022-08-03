@@ -89,7 +89,7 @@ function custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target ) 
                    target: _target,
                    self: this
                }
-               const ymc = YMCTools(settings);
+               let ymc = YMCTools(settings);
                ymc.updateParams();
                ymc.getFilterPosts();
 
