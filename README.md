@@ -7,8 +7,7 @@
 - Activate Plugin or upload the entire 'ymc-smart-filters' folder to the '/wp-content/plugins/' directory.
 - Add new YMC Smart Filter
 - Copy YMC Smart Filter shortcode and paste to any page or post
-- Set setting for each post
-
+- Set setting for each post 
 
 ### List Filters
 **Add code to `function.php` to your theme**
