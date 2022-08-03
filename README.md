@@ -92,7 +92,6 @@ function custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target ) 
                let ymc = YMCTools(settings);
                ymc.updateParams();
                ymc.getFilterPosts();
-
             });
          });
       });
