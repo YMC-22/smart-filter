@@ -10,7 +10,7 @@
 - Set setting for each post 
 
 ### List Filters
-**Add code to `function.php` to your theme**
+Add code to `function.php` to your theme
 
 **Change previous or next numbered paginator arrows:**
 ```php
