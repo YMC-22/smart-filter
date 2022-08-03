@@ -122,6 +122,8 @@ function custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target ) 
 add_filter('ymc_filter_custom_layout', 'custom_filter_layout', 10, 5);
 ```
 
+### Support
+For support questions, please write to: wss.office21@gmail.com
 
 
 
