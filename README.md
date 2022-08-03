@@ -72,7 +72,7 @@ add_filter('ymc_filter_custom_layout', 'custom_filter_layout', 10, 3);
  * Creating a custom filter template
  * @param {string} layout - HTML markup
  * @param {string} terms - list terms ids
- * @param {string} tax - list tax ids
+ * @param {string} tax - list taxonomy ids
  * @param {int} multiple - multiple or single selection of posts (0/1)
  * @param {string} target - name class target element
  * @returns {string} HTML markup filter bar
