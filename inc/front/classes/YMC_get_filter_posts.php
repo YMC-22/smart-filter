@@ -49,7 +49,12 @@ class YMC_get_filter_posts {
 
 		if ( is_array($taxonomy) && is_array($terms) ) :
 
-			$tax_qry = [ 'relation' => $tax_rel, ];
+			if( $post_sel === 'all' ) {
+				$tax_qry = [ 'relation' => 'OR', ];
+			}
+			else {
+				$tax_qry = [ 'relation' => $tax_rel, ];
+			}
 
 			foreach ($taxonomy as $tax) :
 

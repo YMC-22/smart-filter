@@ -8,6 +8,7 @@ $ymc_filter_layout = 'filter-layout1';
 $tax_selected = '';
 $terms_selected = '';
 $tax_rel = 'AND';
+$tax_sort = null;
 
 
 // APPEARANCE TAB SUBMITTED VARIABLE VALUES
