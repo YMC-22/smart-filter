@@ -39,7 +39,7 @@
         }, optionsInfinityScroll);
 
 
-        // Send Main Request
+        // Main Request
         function getFilterPosts( options ) {
 
             let paged     = options.paged;
@@ -150,10 +150,6 @@
                 }
             });
         }
-
-        // Set Function getFilterPosts global
-        // ( typeof window.YMCGetPosts === 'undefined' ) ? window.YMCGetPosts = getFilterPosts : console.error('YMCGetPosts is existed');
-
 
         // Init Load Posts
         document.querySelectorAll('.ymc-smart-filter-container').forEach(function (el) {

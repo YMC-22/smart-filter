@@ -9,8 +9,9 @@
 				/**
 				 * Creating a custom filter template
 				 * @param {string} layout - HTML markup
-				 * @param {string} terms_selected - list terms ids
-				 * @param {string} tax_selected - list tax ids
+				 * @param {array} terms_selected - list terms ids
+				 * @param {array} tax_selected - list tax ids
+				 * @param {array} tax_sort - sort taxonomies slugs
 				 * @param {int} ymc_multiple_filter - multiple or single selection of posts (0/1)
                  * @param {string} target - name class target element
 				 * @returns {string} HTML markup filter bar
@@ -30,6 +31,7 @@
                                      $layout,
                                      $terms_selected,
 					                 $tax_selected,
+					                 $tax_sort,
                                      (int) $ymc_multiple_filter,
                                      $target);
 

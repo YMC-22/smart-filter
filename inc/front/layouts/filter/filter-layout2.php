@@ -31,7 +31,6 @@ wp_add_inline_style($handle, $filter_css);
 
                 $arr_taxonomies = [];
                 foreach ($terms_selected as $term) {
-
                     $arr_taxonomies[] = get_term( $term )->taxonomy;
                 }
                 $arr_taxonomies = array_unique($arr_taxonomies);
