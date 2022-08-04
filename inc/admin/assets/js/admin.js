@@ -68,7 +68,7 @@
                         termWrp.html('').closest('.wrapper-terms').addClass('hidden');
 
                         res.data.forEach((el) => {
-                            taxonomyWrp.append(`<div class="group-elements">
+                            taxonomyWrp.append(`<div id="${el}" class="group-elements" draggable="true">
                             <input id="id-${el}" type="checkbox" name="ymc-taxonomy[]" value="${el}">
                             <label for="id-${el}">${el}</label>
                             </div>`);
@@ -163,7 +163,7 @@
         // Drag & Drop Sort Taxonomy
         function sortTaxonomy() {
 
-            let taxListElement = document.querySelector('.ymc-tax-checkboxes');
+            let taxListElement = document.querySelector('#ymc-tax-checkboxes');
             let taxElements = taxListElement.querySelectorAll('.group-elements');
 
             for (let tax of taxElements) {

@@ -30,6 +30,8 @@ class YMC_admin_ajax {
 
 		$data = get_object_taxonomies($cpt);
 
+		update_post_meta( (int) $_POST["post_id"], 'ymc_tax_sort', $data );
+
 		$data = array(
 			'data' => $data
 		);
