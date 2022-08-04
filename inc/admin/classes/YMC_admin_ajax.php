@@ -74,8 +74,7 @@ class YMC_admin_ajax {
 		}
 
 		$data = array(
-			'data' => $id,
-			'clean_data' => $clean_data
+			'updated' => $id
 		);
 
 		wp_send_json($data);
