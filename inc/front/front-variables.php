@@ -7,6 +7,7 @@ $ymc_post_layout = 'post-layout1';
 $ymc_filter_layout = 'filter-layout1';
 $tax_selected = '';
 $terms_selected = '';
+$tax_rel = 'AND';
 
 
 // APPEARANCE TAB SUBMITTED VARIABLE VALUES
@@ -18,6 +19,12 @@ if (get_post_meta($id, 'ymc_taxonomy')) {
 }
 if (get_post_meta($id, 'ymc_terms')) {
 	$terms_selected = get_post_meta($id, 'ymc_terms', true);
+}
+if( get_post_meta($id, 'ymc_tax_relation') ) {
+	$tax_rel = get_post_meta($id, 'ymc_tax_relation', true);
+}
+if( get_post_meta($id, 'ymc_tax_sort', true) ) {
+	$tax_sort = get_post_meta($id, 'ymc_tax_sort', true);
 }
 if (get_post_meta($id, 'ymc_filter_status', true)) {
 	$ymc_filter_status = get_post_meta($id, 'ymc_filter_status', true);

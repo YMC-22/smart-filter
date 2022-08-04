@@ -13,32 +13,32 @@ class YMC_admin_filters {
 
 	}
 
-	public function ymc_filter_layouts($layouts) {
+	public function ymc_filter_layouts($layout) {
 
-		$layouts = [
+		$layout = [
 			"filter-layout1" => 'Simple Posts Filter',
-			"filter-layout2" => 'Taxonomy Filter',
+			"filter-layout2" => 'Grouped Taxonomies Filter',
 			"filter-layout3" => 'Dropdown Filter',
 			"filter-custom-layout" => 'Custom Filter Layout',
 		];
 
-		return $layouts;
+		return $layout;
 	}
 
-	public function ymc_post_layouts($layouts) {
+	public function ymc_post_layouts($layout) {
 
-		$layouts = [
+		$layout = [
 			"post-layout1" => 'Post Layout 1',
 			"post-layout2" => 'Post Layout 2',
 			"post-custom-layout"  => 'Custom Post Layout'
 		];
 
-		return $layouts;
+		return $layout;
 	}
 
 	public function ymc_pagination_type($type) {
 		$type = [
-			"numeric" => 'Number',
+			"numeric" => 'Numeric',
 			"load-more" => 'Load more',
 			"scroll-infinity" => 'Scroll infinity'
 		];

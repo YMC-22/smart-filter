@@ -20,6 +20,8 @@ $cpt = 'post';
 $tax = 'category';
 $tax_sel = array('category');
 $terms_sel = array();
+$tax_rel = 'AND';
+$tax_sort = null;
 
 // LAYOUT TAB USED DEFAULT VARIABLES
 $ymc_filter_status = 'on';
@@ -58,6 +60,12 @@ if( get_post_meta($post->ID, 'ymc_taxonomy') ) {
 }
 if( get_post_meta($post->ID, 'ymc_terms') ) {
 	$terms_sel = get_post_meta($post->ID, 'ymc_terms', true);
+}
+if( get_post_meta($post->ID, 'ymc_tax_relation') ) {
+	$tax_rel = get_post_meta($post->ID, 'ymc_tax_relation', true);
+}
+if( get_post_meta($post->ID, 'ymc_tax_sort', true) ) {
+	$tax_sort = get_post_meta($post->ID, 'ymc_tax_sort', true);
 }
 
 // LAYOUTS TAB SUBMITTED VARIABLE VALUES

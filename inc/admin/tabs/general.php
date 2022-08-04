@@ -39,11 +39,11 @@
 	<label for="ymc-tax-checkboxes" class="form-label">
 		<?php echo esc_html__('Taxonomy','ymc-smart-filter'); ?>
 		<span class="information">
-        <?php echo esc_html__('Select taxonomy.','ymc-smart-filter'); ?>
+        <?php echo esc_html__('Select taxonomy. Sortable with Drag & Drop feature.','ymc-smart-filter'); ?>
         </span>
 	</label>
 
-    <div id="ymc-tax-checkboxes" class="ymc-tax-checkboxes">
+    <div id="ymc-tax-checkboxes" class="ymc-tax-checkboxes" data-postid="<?php echo $post->ID; ?>">
 
 	    <?php
 
@@ -51,7 +51,17 @@
 
             if($taxo) {
 
-                foreach($taxo as $val) :
+                if( !is_null($tax_sort)) {
+	                $result_tax = [];
+	                foreach($tax_sort as $val) {
+		                $result_tax[array_search($val, $taxo)] = $val;
+	                }
+                }
+                else {
+	                $result_tax = $taxo;
+                }
+
+	            foreach($result_tax as $val) :
 
                     $sl0 = '';
 
@@ -65,12 +75,14 @@
                         }
                     }
 
-                    echo '<div class="group-elements">
-                            <input id="id-'. esc_html($val) .'" type="checkbox" name="ymc-taxonomy[]" value="'. esc_html($val) .'" '.$sl0.'>
-                            <label for="id-'. esc_html($val) .'">'. esc_html($val) . '</label>
+                    echo '<div id="'. esc_attr($val) .'" class="group-elements">
+                            <input id="id-'. esc_attr($val) .'" type="checkbox" name="ymc-taxonomy[]" value="'. esc_html($val) .'" '.$sl0.'>
+                            <label for="id-'. esc_attr($val) .'">'. str_replace ('_',' ', esc_html($val)) . '</label>
                          </div>';
 
                 endforeach;
+
+                unset($result_tax);
             }
             else {
               echo '<span class="notice">'. esc_html__('No data for Post Type / Taxonomy', 'ymc-smart-filter') .'</span>';
@@ -108,7 +120,7 @@
                     echo '<article class="group-term item-'. $tax .'">';
 
                     echo '<div class="item-inner all-categories">
-                          <header class="header-tax">'. esc_html__('Taxonomy', 'ymc-smart-filter') .': '.$tax.'</header>
+                          <header class="header-tax">'. esc_html__('Taxonomy', 'ymc-smart-filter') .': '. str_replace ('_',' ', $tax) .'</header>
                           <input name="all-select" class="category-all" id="category-all-'.$tax.'" type="checkbox">
                           <label for="category-all-'.$tax.'" class="category-all-label">'. esc_html__('All', 'ymc-smart-filter') .'</label></div>';
 
@@ -138,6 +150,32 @@
         ?>
 
 	</div>
+
+</div>
+
+<hr/>
+
+<div class="form-group wrapper-relation">
+
+    <label for="ymc-terms" class="form-label">
+		<?php echo esc_html__('Taxonomy Relation','ymc-smart-filter'); ?>
+        <span class="information"><?php echo esc_html__('Select taxonomy relation','ymc-smart-filter'); ?></span>
+    </label>
+
+    <select class="form-select" id="ymc-tax-relation" name="ymc-tax-relation">
+		<?php
+            $tax_relations = array('AND', 'OR');
+            foreach($tax_relations as $tax_val) {
+                if($tax_rel === $tax_val) {
+                    $sel_rel = 'selected';
+                } else {
+                    $sel_rel = '';
+                }
+                echo "<option value='" . $tax_val ."' $sel_rel>" . esc_html($tax_val) . "</option>";
+            }
+		?>
+    </select>
+
 
 </div>
 

@@ -13,6 +13,8 @@ $wpdb->get_results('DELETE FROM wp_postmeta WHERE meta_key IN (
                                   "ymc_cpt_value", 
                                   "ymc_taxonomy", 
                                   "ymc_terms", 
+                                  "ymc_tax_relation", 
+                                  "ymc_tax_sort", 
                                   "ymc_filter_status", 
                                   "ymc_filter_layout",
                                   "ymc_filter_text_color",

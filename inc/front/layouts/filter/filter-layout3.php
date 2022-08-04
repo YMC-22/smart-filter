@@ -40,13 +40,25 @@ wp_add_inline_style($handle, $filter_css);
 
             echo '<a class="btn-all" href="#" data-selected="all" data-terms="' . $all_terms . '">'. $show_all .'</a>';
 
-            foreach ($arr_taxonomies as $tax) {
+            if( !is_null($tax_sort)) {
+                $result_tax = [];
+                foreach($tax_sort as $val) {
+                    if(array_search($val, $arr_taxonomies) !== false) {
+                        $result_tax[array_search($val, $arr_taxonomies)] = $val;
+                    }
+                }
+            }
+            else {
+                $result_tax = $arr_taxonomies;
+            }
+
+            foreach ($result_tax as $tax) {
 
 	            $select_term = apply_filters('ymc_select_term_dropdown', $tax);
 
                 echo '<div class="dropdown-filter">';
                 echo '<div class="menu-active">';
-                echo '<span>'.$select_term.'</span> <i class="arrow down"></i>';
+                echo '<span>' . str_replace ('_',' ', $select_term) .'</span> <i class="arrow down"></i>';
                 echo '</div>';
                 echo '<div class="menu-passive">';
                 echo '<i class="btn-close">x</i>';
@@ -57,21 +69,19 @@ wp_add_inline_style($handle, $filter_css);
 
                      $is_disabled = ( get_term( $term )->count === 0 ) ? 'isDisabled' : '';
 
-
                         echo '<div class="menu-passive__item">
-                                  <a class="menu-link '. $is_disabled .' '. $type_multiple .'" 
-                                  href="#" data-selected="'.esc_attr(get_term( $term )->slug).'" data-termid="' . esc_attr($term) . '" data-name="'.esc_attr(get_term( $term )->name).'">'.
-                                  esc_html(get_term( $term )->name) . ' <span class="count">' .esc_html(get_term( $term )->count) . '</span>'.
+                              <a class="menu-link '. $is_disabled .' '. $type_multiple .'" 
+                              href="#" data-selected="'.esc_attr(get_term( $term )->slug).'" data-termid="' . esc_attr($term) . '" data-name="'.esc_attr(get_term( $term )->name).'">'.
+                              esc_html(get_term( $term )->name) . ' <span class="count">' .esc_html(get_term( $term )->count) . '</span>'.
                              '</a></div>';
-
                     }
-
-
                 }
 
                 echo '</div>';
                 echo '</div>';
             }
+
+            unset($result_tax);
 
         ?>
 

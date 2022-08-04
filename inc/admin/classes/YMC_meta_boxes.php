@@ -31,6 +31,12 @@ class YMC_meta_boxes {
 			update_post_meta( $post_id, 'ymc_terms', $terms );
 		}
 
+        // Taxonomy Relation
+		if( isset($_POST['ymc-tax-relation']) ) {
+			$tax_relation = sanitize_html_class( $_POST['ymc-tax-relation'] );
+			update_post_meta( $post_id, 'ymc_tax_relation', $tax_relation );
+		}
+
         // Filter Status (on/off)
 		if( isset($_POST['ymc-filter-status']) ) {
 			$filter_status = sanitize_text_field( $_POST['ymc-filter-status']);

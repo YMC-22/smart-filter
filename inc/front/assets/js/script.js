@@ -283,7 +283,7 @@
             e.preventDefault();
             let $el = $(this);
             $el.find('.arrow').toggleClass('open').end().next().toggle();
-            $el.closest('.dropdown-filter').siblings().find('.menu-passive').hide();
+            $el.closest('.dropdown-filter').siblings().find('.menu-passive').hide().end().find('.arrow').removeClass('open');
         });
 
         $(document).on('click','.ymc-smart-filter-container .filter-layout3 .dropdown-filter .menu-passive .btn-close',function (e) {

@@ -36,19 +36,36 @@ wp_add_inline_style($handle, $filter_css);
                 }
                 $arr_taxonomies = array_unique($arr_taxonomies);
 
-                foreach ($arr_taxonomies as $tax) {
+                if( !is_null($tax_sort)) {
+	                $result_tax = [];
+	                foreach($tax_sort as $val) {
+                        if(array_search($val, $arr_taxonomies) !== false) {
+	                        $result_tax[array_search($val, $arr_taxonomies)] = $val;
+                        }
+	                }
+                }
+                else {
+	                $result_tax = $arr_taxonomies;
+                }
 
-                    echo '<li class="group-filters"><h3 class="name-tax">'.$tax .'</h3><ul class="sub-filters">';
+                foreach ($result_tax as $tax) {
+
+                    echo '<li class="group-filters">
+                          <header class="name-tax">'. str_replace ('_',' ', $tax) .'</header>
+                          <ul class="sub-filters">';
 
                     foreach ($terms_selected as $term) {
 
                         if( $tax === get_term( $term )->taxonomy ) {
-                            echo  "<li class='filter-item'><a class='filter-link ". $type_multiple ."' href='#' data-selected='" . esc_attr(get_term( $term )->slug) . "' data-termid='" . esc_attr($term) . "'>" . esc_html(get_term( $term )->name) . "</a></li>";
+                            echo  "<li class='filter-item'>
+                            <a class='filter-link ". $type_multiple ."' href='#' data-selected='" . esc_attr(get_term( $term )->slug) . "' data-termid='" . esc_attr($term) . "'>" . esc_html(get_term( $term )->name) . "</a></li>";
                         }
                     }
 
                     echo '</ul></li>';
                 }
+
+	            unset($result_tax);
             }
 		?>
 
