@@ -122,11 +122,11 @@ function custom_filter_layout_1( $layout, $terms, $taxonomy, $multiple, $target 
 
   foreach ($taxonomy as $tax) {
     $layout .= '<li>';
-	 $layout .= '<header>'.$tax.'</header>';
-	 $layout .= '<ul>';
+    $layout .= '<header>'.$tax.'</header>';
+    $layout .= '<ul>';
     foreach ( $terms as $term ) {
-		if( $tax === get_term( $term )->taxonomy ) {
-		$layout .= '<li><a class="filter-link '. $multiple .'" href="#" data-selected="'. esc_attr(get_term($term)->slug).'" data-termid="'.esc_attr($term).'">'.esc_html(get_term($term)->name).'</a></li>';
+	if( $tax === get_term( $term )->taxonomy ) {
+	$layout .= '<li><a class="filter-link '. $multiple .'" href="#" data-selected="'. esc_attr(get_term($term)->slug).'" data-termid="'.esc_attr($term).'">'.esc_html(get_term($term)->name).'</a></li>';
 	  }
    }
     $layout .= '</ul>';
