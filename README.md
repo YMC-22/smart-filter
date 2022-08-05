@@ -100,7 +100,7 @@ function custom_filter_layout_1( $layout, $terms, $taxonomy, $multiple, $target 
 <script type="application/javascript">   
    window.addEventListener('DOMContentLoaded', () => {
          let _target = "<?php echo $target; ?>";
-         document.querySelectorAll( _target + ' .filter-custom-layout .filter-link' ).forEach((el) => {
+         document.querySelectorAll( _target + ' .filter-custom-layout [data-termid]' ).forEach((el) => {
                el.addEventListener('click', function (e) {
                e.preventDefault();
                let ymc = YMCTools({
@@ -118,7 +118,7 @@ function custom_filter_layout_1( $layout, $terms, $taxonomy, $multiple, $target 
   if( count($terms) > 0 ) {
   $multiple = ( $multiple ) ? 'multiple' : '';
   $layout = '<ul>';
-  $layout .= '<li><a class="filter-link all active" href="#" data-selected="all" data-termid="'. esc_attr(implode(",", $terms)) .'">'.esc_html__('ALL','theme').'</a></li>';
+  $layout .= '<li><a class="all active" href="#" data-selected="all" data-termid="'. esc_attr(implode(",", $terms)) .'">'.esc_html__('ALL','theme').'</a></li>';
 
   foreach ($taxonomy as $tax) {
     $layout .= '<li>';
@@ -126,7 +126,7 @@ function custom_filter_layout_1( $layout, $terms, $taxonomy, $multiple, $target 
     $layout .= '<ul>';
     foreach ( $terms as $term ) {
 	if( $tax === get_term( $term )->taxonomy ) {
-	   $layout .= '<li><a class="filter-link '. $multiple .'" href="#" data-selected="'. esc_attr(get_term($term)->slug).'" data-termid="'.esc_attr($term).'">'.esc_html(get_term($term)->name).'</a></li>';
+	   $layout .= '<li><a class="'. $multiple .'" href="#" data-selected="'. esc_attr(get_term($term)->slug).'" data-termid="'.esc_attr($term).'">'.esc_html(get_term($term)->name).'</a></li>';
 	}
    }
     $layout .= '</ul>';
