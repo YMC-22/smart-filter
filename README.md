@@ -79,7 +79,7 @@ If you need to create your custom filter bar, you can use the filter which will 
 
 **Date Attributes:**
 - `data-selected="all"`
-- `data-termid=""`
+- `data-termid`
 
 **Example Custom Filter Layout**
 ```php
