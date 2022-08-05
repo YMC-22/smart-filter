@@ -50,7 +50,7 @@ wp_add_inline_style($handle, $filter_css);
                 foreach ($result_tax as $tax) {
 
                     echo '<li class="group-filters">
-                          <header class="name-tax">'. str_replace ('_',' ', $tax) .'</header>
+                          <header class="name-tax">'. get_taxonomy( $tax )->label .'</header>
                           <ul class="sub-filters">';
 
                     foreach ($terms_selected as $term) {

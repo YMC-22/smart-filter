@@ -39,7 +39,7 @@
                             <span class="doc-text">add_filter("ymc_filter_custom_layout", "func_custom_layout", 10, 5);</span>
                             <a target="_blank" href="https://github.com/YMC-22/smart-filter">'.esc_html__('See documentation.','ymc-smart-filter').'</a></div></div>';
 
-				$filter_layout = apply_filters('ymc_filter_custom_layout',
+				$filter_layout = apply_filters('ymc_filter_custom_layout_'.$c_target,
                                      $layout,
                                      $terms_selected,
 					                 $result_tax,

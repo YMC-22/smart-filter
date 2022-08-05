@@ -125,7 +125,7 @@
 
                     echo '<div class="item-inner all-categories">
                           <input name="all-select" class="category-all" id="category-all-'.$tax.'" type="checkbox">
-                          <label for="category-all-'.$tax.'" class="category-all-label">'. esc_html__('All [ '. str_replace ('_',' ', $tax) .']', 'ymc-smart-filter') .'</label>                                                    
+                          <label for="category-all-'.$tax.'" class="category-all-label">'. esc_html__('All [ '. get_taxonomy( $tax )->label .']', 'ymc-smart-filter') .'</label>                                                    
                           </div>';
 
 		            foreach( $terms as $term ) :
