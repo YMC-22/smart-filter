@@ -84,7 +84,8 @@ If you need to create your custom filter bar, you can use the filter which will 
  * @returns {string} HTML markup filter bar
  */
 function custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target ) { ?>
-	<script type="application/javascript">   
+
+<script type="application/javascript">   
    window.addEventListener('DOMContentLoaded', () => {
          let _target = "<?php echo $target; ?>";
          document.querySelectorAll( _target + ' .filter-custom-layout .filter-link' ).forEach((el) => {
@@ -99,9 +100,9 @@ function custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target ) 
            });
        });
    });
-	</script>
+</script>
    
- <?php
+<?php
   if( count($terms) > 0 ) {
   $multiple = ( $multiple ) ? 'multiple' : '';
   $layout = '<ul>';
