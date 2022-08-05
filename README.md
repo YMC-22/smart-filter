@@ -77,44 +77,52 @@ If you need to create your custom filter bar, you can use the filter which will 
 /**
  * Creating a custom filter template
  * @param {string} layout - HTML markup
- * @param {array} terms - list terms ids
- * @param {array} taxonomy - list taxonomy ids
+ * @param {array} terms - list ids terms
+ * @param {array} taxonomy - list sorted slugs taxonomies
  * @param {int} multiple - multiple or single selection of posts (0/1)
  * @param {string} target - name class target element
  * @returns {string} HTML markup filter bar
  */
 function custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target ) { ?>
-
-   <script type="application/javascript">
-       window.addEventListener('DOMContentLoaded', () => {
-          let _target = "<?php echo $target; ?>";
-          document.querySelectorAll( _target + ' .filter-custom-layout .filter-link' ).forEach((el) => {
+	<script type="application/javascript">   
+   window.addEventListener('DOMContentLoaded', () => {
+         let _target = "<?php echo $target; ?>";
+         document.querySelectorAll( _target + ' .filter-custom-layout .filter-link' ).forEach((el) => {
                el.addEventListener('click', function (e) {
                e.preventDefault();
-               let settings = {
+               let ymc = YMCTools({
                    target: _target,
                    self: this
-               }
-               let ymc = YMCTools(settings);
+               });
                ymc.updateParams();
                ymc.getFilterPosts();
-            });
-         });
-      });
-   </script>
+           });
+       });
+   });
+	</script>
+   
+ <?php
+  if( count($terms) > 0 ) {
+  $multiple = ( $multiple ) ? 'multiple' : '';
+  $layout = '<ul>';
+  $layout .= '<li><a class="filter-link all active" href="#" data-selected="all" data-termid="'. esc_attr(implode(",", $terms)) .'">'.esc_html__('ALL','theme').'</a></li>';
 
-   <?php if( count($terms) > 0 ) {
-    $layout = '<ul class="filter-entry">';
-    $multiple = ( $multiple ) ? 'multiple' : '';
-    $all_terms = implode(",", $terms);
-    $layout .= '<li class="filter-item"><a class="filter-link all active" href="#" data-selected="all" data-termid="'. esc_attr($all_terms) .'">'.esc_html__('ALL','theme').'</a></li>';
-
+  foreach ($taxonomy as $tax) {
+    $layout .= '<li>';
+	 $layout .= '<header>'.$tax.'</header>';
+	 $layout .= '<ul>';
     foreach ( $terms as $term ) {
-        $layout .= '<li class="filter-item"><a class="filter-link '. $multiple .'" href="#" data-selected="'. esc_attr(get_term( $term )->slug).'" data-termid="'. esc_attr($term) .'">'.esc_html(get_term( $term )->name) .'</a></li>';
-    }
-    $layout .= '</ul><div class="posts-found"></div>';
-  }
-    return $layout;
+		if( $tax === get_term( $term )->taxonomy ) {
+		$layout .= '<li><a class="filter-link '. $multiple .'" href="#" data-selected="'. esc_attr(get_term($term)->slug).'" data-termid="'.esc_attr($term).'">'.esc_html(get_term($term)->name).'</a></li>';
+	  }
+   }
+    $layout .= '</ul>';
+    $layout .= '</li>';
+ }
+    $layout .= '</ul>';
+	 $layout .= '<div class="posts-found"></div>';
+ }
+ return $layout;
 }
 
 add_filter('ymc_filter_custom_layout', 'custom_filter_layout', 10, 5);
