@@ -133,7 +133,7 @@
                             output += `<article class="group-term item-${val}">
                                        <div class="item-inner all-categories">
                                        <input name='all-select' class='category-all' id='category-all-${val}' type='checkbox'>
-                                       <label for='category-all-${val}' class='category-all-label'>All [ ${val.replace('_',' ')} ]</label></div>`;
+                                       <label for='category-all-${val}' class='category-all-label'>All [ ${$(e.target).siblings('label').text()} ]</label></div>`;
 
                             res.data.terms.forEach((el) => {
                                 output += `<div class='item-inner'><input name="ymc-terms[]" class="category-list" id="category-id-${el.term_id}" type="checkbox" value="${el.term_id}">
