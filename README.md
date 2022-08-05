@@ -68,9 +68,12 @@ add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);
 
 **This filter allows you to change the filter template**
 ```php
-add_filter('ymc_filter_custom_layout', 'custom_filter_layout', 10, 3);
+add_filter('ymc_filter_custom_layout_ID', 'custom_filter_layout', 10, 3);
 ```
 If you need to create your custom filter bar, you can use the filter which will allow you to create your filter bar. This requires a basic understanding of HTML JavaScript, CSS and PHP languages. In the example, it is indicated how you can use the settings and output of a custom filter. ***For your filter to work correctly, follow the following class and attribute names in your HTML markup:***
+
+**Required ID:**
+- `ID filter on page`
 
 **Required Classes:**
 - `all`
@@ -92,7 +95,7 @@ If you need to create your custom filter bar, you can use the filter which will 
  * @param {string} target - name class target element
  * @returns {string} HTML markup filter bar
  */
-function custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target ) { ?>
+function custom_filter_layout_1( $layout, $terms, $taxonomy, $multiple, $target ) { ?>
 
 <script type="application/javascript">   
    window.addEventListener('DOMContentLoaded', () => {
@@ -135,7 +138,7 @@ function custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target ) 
  return $layout;
 }
 
-add_filter('ymc_filter_custom_layout', 'custom_filter_layout', 10, 5);
+add_filter('ymc_filter_custom_layout_1', 'custom_filter_layout_1', 10, 5);
 ```
 
 ### Support
