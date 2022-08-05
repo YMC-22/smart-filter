@@ -615,7 +615,7 @@
                     }
                 }
                 else {
-                    link.addClass('active').closest('.filter-custom-layout').find('.filter-link').removeClass('active');
+                    link.addClass('active').closest('.filter-custom-layout').find('[data-termid]').removeClass('active');
                 }
 
                 dataParams.terms = termIds;
@@ -642,7 +642,6 @@
                     'target'    : data_target,
                     'type_pg'   : type_pg
                 });
-
             }
 
             return function (settings) {
