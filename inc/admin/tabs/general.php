@@ -47,46 +47,50 @@
 
 	    <?php
 
-            $taxo = get_object_taxonomies($cpt);
+	    $data_object = get_object_taxonomies($cpt, $output = 'objects');
+	    $taxo = [];
 
-            if($taxo) {
+	    foreach ($data_object as $val) {
+		    $taxo[$val->label] = $val->name;
+	    }
 
-                if( !is_null($tax_sort)) {
-	                $result_tax = [];
-	                foreach($tax_sort as $val) {
-		                $result_tax[array_search($val, $taxo)] = $val;
-	                }
+        if( $taxo ) {
+
+            if( !is_null($tax_sort) ) {
+                $result_tax = [];
+                foreach($tax_sort as $val) {
+                    $result_tax[array_search($val, $taxo)] = $val;
                 }
-                else {
-	                $result_tax = $taxo;
-                }
-
-	            foreach($result_tax as $val) :
-
-                    $sl0 = '';
-
-                    if(is_array($tax_sel) && count($tax_sel) > 0) {
-
-                        if (in_array($val, $tax_sel)) {
-                            $sl0 = 'checked';
-                        }
-                        else{
-                            $sl0 ='';
-                        }
-                    }
-
-                    echo '<div id="'. esc_attr($val) .'" class="group-elements">
-                            <input id="id-'. esc_attr($val) .'" type="checkbox" name="ymc-taxonomy[]" value="'. esc_html($val) .'" '.$sl0.'>
-                            <label for="id-'. esc_attr($val) .'">'. str_replace ('_',' ', esc_html($val)) . '</label>
-                         </div>';
-
-                endforeach;
-
-                unset($result_tax);
             }
             else {
-              echo '<span class="notice">'. esc_html__('No data for Post Type / Taxonomy', 'ymc-smart-filter') .'</span>';
+                $result_tax = $taxo;
             }
+
+            foreach($result_tax as $label => $slug) :
+
+                $sl0 = '';
+                if(is_array($tax_sel) && count($tax_sel) > 0) {
+
+                    if (in_array($slug, $tax_sel)) {
+                        $sl0 = 'checked';
+                    }
+                    else{
+                        $sl0 ='';
+                    }
+                }
+
+                echo '<div id="'. esc_attr($slug) .'" class="group-elements">
+                      <input id="id-'. esc_attr($slug) .'" type="checkbox" name="ymc-taxonomy[]" value="'. esc_html($slug) .'" '.$sl0.'>
+                      <label for="id-'. esc_attr($slug) .'">'.  esc_html($label) . '</label></div>';
+
+            endforeach;
+
+            unset($result_tax);
+        }
+        else {
+          echo '<span class="notice">'. esc_html__('No data for Post Type / Taxonomy', 'ymc-smart-filter') .'</span>';
+        }
+
 	    ?>
 
     </div>
@@ -120,9 +124,9 @@
                     echo '<article class="group-term item-'. $tax .'">';
 
                     echo '<div class="item-inner all-categories">
-                          <header class="header-tax">'. esc_html__('Taxonomy', 'ymc-smart-filter') .': '. str_replace ('_',' ', $tax) .'</header>
                           <input name="all-select" class="category-all" id="category-all-'.$tax.'" type="checkbox">
-                          <label for="category-all-'.$tax.'" class="category-all-label">'. esc_html__('All', 'ymc-smart-filter') .'</label></div>';
+                          <label for="category-all-'.$tax.'" class="category-all-label">'. esc_html__('All [ '. str_replace ('_',' ', $tax) .']', 'ymc-smart-filter') .'</label>                                                    
+                          </div>';
 
 		            foreach( $terms as $term ) :
 

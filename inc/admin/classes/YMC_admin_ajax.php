@@ -27,13 +27,18 @@ class YMC_admin_ajax {
 			update_post_meta( (int) $_POST["post_id"], 'ymc_terms', '' );
 		}
 
+		$data_slugs  = get_object_taxonomies($cpt);
+		$data_object = get_object_taxonomies($cpt, $output = 'objects');
 
-		$data = get_object_taxonomies($cpt);
+		$arr_result = [];
+		foreach ($data_object as $val) {
+			$arr_result[$val->name] = $val->label;
+		}
 
-		update_post_meta( (int) $_POST["post_id"], 'ymc_tax_sort', $data );
+		update_post_meta( (int) $_POST["post_id"], 'ymc_tax_sort', $data_slugs );
 
 		$data = array(
-			'data' => $data
+			'data' => json_encode($arr_result)
 		);
 
 		wp_send_json($data);

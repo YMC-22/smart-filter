@@ -61,20 +61,24 @@
 
                     container.removeClass('loading').find('.preloader').remove();
 
+                    let dataTax = (JSON.parse(res.data));
+
                     // Get Taxonomies
-                    if( res.data.length ) {
+                    if(Object.keys(dataTax).length > 0) {
 
                         taxonomyWrp.html('');
                         termWrp.html('').closest('.wrapper-terms').addClass('hidden');
 
-                        res.data.forEach((el) => {
-                            taxonomyWrp.append(`<div id="${el}" class="group-elements" draggable="true">
-                            <input id="id-${el}" type="checkbox" name="ymc-taxonomy[]" value="${el}">
-                            <label for="id-${el}">${el}</label>
+                        for (let key in dataTax) {
+
+                            taxonomyWrp.append(`<div id="${key}" class="group-elements" draggable="true">
+                            <input id="id-${key}" type="checkbox" name="ymc-taxonomy[]" value="${key}">
+                            <label for="id-${key}">${dataTax[key]}</label>
                             </div>`);
-                        });
+                        }
                     }
-                    else {
+                    else  {
+
                         taxonomyWrp.html('').append(`<span class="notice">No data for Post Type / Taxonomy</span>`);
                         termWrp.html('').closest('.wrapper-terms').addClass('hidden');
                     }
@@ -83,7 +87,6 @@
                     console.log( obj, err );
                 }
             });
-
         });
 
         // Taxonomy Event
@@ -129,9 +132,8 @@
 
                             output += `<article class="group-term item-${val}">
                                        <div class="item-inner all-categories">
-                                       <header class="header-tax">Taxonomy: ${val}</header>
                                        <input name='all-select' class='category-all' id='category-all-${val}' type='checkbox'>
-                                       <label for='category-all-${val}' class='category-all-label'>All</label></div>`;
+                                       <label for='category-all-${val}' class='category-all-label'>All [ ${val.replace('_',' ')} ]</label></div>`;
 
                             res.data.terms.forEach((el) => {
                                 output += `<div class='item-inner'><input name="ymc-terms[]" class="category-list" id="category-id-${el.term_id}" type="checkbox" value="${el.term_id}">
@@ -144,8 +146,10 @@
 
                             output = '';
 
-                        } else  {
-                            termWrp.append(`<article class="group-term item-${val}"><div class='item-inner notice-error'>No terms for taxonomy ${val}</div></article>`);
+                        }
+                        else  {
+                            termWrp.append(`<article class="group-term item-${val}">
+                            <div class='item-inner notice-error'>No terms for taxonomy <b>${$(e.target).siblings('label').text()}</b></div></article>`);
                         }
                     },
                     error: function (obj, err) {
