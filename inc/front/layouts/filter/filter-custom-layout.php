@@ -9,9 +9,8 @@
 				/**
 				 * Creating a custom filter template
 				 * @param {string} layout - HTML markup
-				 * @param {array} terms_selected - list terms ids
-				 * @param {array} tax_selected - list tax ids
-				 * @param {array} tax_sort - sort taxonomies slugs
+				 * @param {array} terms_selected - list ids terms
+				 * @param {array} result_tax - list sorted slugs taxonomies
 				 * @param {int} ymc_multiple_filter - multiple or single selection of posts (0/1)
                  * @param {string} target - name class target element
 				 * @returns {string} HTML markup filter bar
@@ -19,6 +18,19 @@
 
 
                 $target = '.data-target-ymc'.$c_target;
+	            $multiple = (int) $ymc_multiple_filter;
+
+                if( !is_null($tax_sort)) {
+                    $result_tax = [];
+                    foreach($tax_sort as $val) {
+                        if(array_search($val, $tax_selected) !== false) {
+                            $result_tax[array_search($val, $tax_selected)] = $val;
+                        }
+                    }
+                }
+                else {
+                    $result_tax = $tax_selected;
+                }
 
                 $layout  = '<div class="cf-wrp"><header class="head-filter">'.esc_html__('Add custom filter layout.','ymc-smart-filter').'</header>';
 				$layout .= '<div class="inform">'.esc_html__('Use a filter:','ymc-smart-filter').' 
@@ -30,9 +42,8 @@
 				$filter_layout = apply_filters('ymc_filter_custom_layout',
                                      $layout,
                                      $terms_selected,
-					                 $tax_selected,
-					                 $tax_sort,
-                                     (int) $ymc_multiple_filter,
+					                 $result_tax,
+					                 $multiple,
                                      $target);
 
 				echo $filter_layout;
