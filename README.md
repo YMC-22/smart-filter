@@ -122,7 +122,7 @@ function custom_filter_layout_1( $layout, $terms, $taxonomy, $multiple, $target 
 
   foreach ($taxonomy as $tax) {
     $layout .= '<li>';
-    $layout .= '<header>'.$tax.'</header>';
+    $layout .= '<header>'.get_taxonomy( $tax )->label.'</header>';
     $layout .= '<ul>';
     foreach ( $terms as $term ) {
 	if( $tax === get_term( $term )->taxonomy ) {
