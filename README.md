@@ -44,7 +44,7 @@ do_action("ymc_after_filter_layout");
 ```
 
 ### Layouts
-**This filter allows you to change the postcard template**
+**This filter allows you to change the post template**
 ```php
 add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);
 ```
@@ -66,18 +66,18 @@ function custom_post_layout($layout, $post_id, $cpt_id) {
 add_filter('ymc_post_custom_layout', 'custom_post_layout', 10, 3);
 ```  
 
-**This filter allows you to change the filter bar template**
+**This filter allows you to change the filter template**
 ```php
 add_filter('ymc_filter_custom_layout', 'custom_filter_layout', 10, 3);
 ```
 If you need to create your custom filter bar, you can use the filter which will allow you to create your filter bar. This requires a basic understanding of HTML JavaScript, CSS and PHP languages. In the example, it is indicated how you can use the settings and output of a custom filter. ***For your filter to work correctly, follow the following class and attribute names in your HTML markup:***
 
-**Classes:**
+**Required Classes:**
 - `all`
 - `active`
 - `filter-link`
 
-**Date Attributes:**
+**Required Date Attributes:**
 - `data-selected="all"`
 - `data-termid`
 
