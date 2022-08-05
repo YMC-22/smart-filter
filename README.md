@@ -80,7 +80,7 @@ If you need to create your custom filter bar, you can use the filter which will 
 - `active`
 
 **Required Date Attributes:**
-- `data-selected="all"`
+- `data-selected`
 - `data-termid`
 
 **Example Custom Filter Layout**
