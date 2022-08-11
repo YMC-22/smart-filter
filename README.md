@@ -78,10 +78,9 @@ If you need to create your custom filter bar, you can use the filter which will 
 **Required Classes:**
 - `all`
 - `active`
-- `filter-link`
 
 **Required Date Attributes:**
-- `data-selected="all"`
+- `data-selected`
 - `data-termid`
 
 **Example Custom Filter Layout**
