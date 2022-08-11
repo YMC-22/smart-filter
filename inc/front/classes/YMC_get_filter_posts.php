@@ -31,6 +31,7 @@ class YMC_get_filter_posts {
 		$type_pagination = $clean_data['type_pg'];
 		$keyword = $clean_data['search'];
 		$post_sel = $clean_data['post_sel'];
+		$target_id = $clean_data['target_id'];
 
 		$paged = (int) $_POST['paged'];
 

@@ -16,7 +16,7 @@ while ($query->have_posts()) : $query->the_post();
                  <a target="_blank" href="https://github.com/YMC-22/smart-filter">'.esc_html__('See documentation.','ymc-smart-filter').'</a>
                  </div>';
 
-	echo apply_filters('ymc_post_custom_layout', $layouts, get_the_ID(), $filter_id );
+	echo apply_filters('ymc_post_custom_layout_'.$target_id, $layouts, get_the_ID(), $filter_id );
 
 	$layouts = null;
 
