@@ -16,7 +16,7 @@ class YMC_admin_filters {
 	public function ymc_filter_layouts($layout) {
 
 		$layout = [
-			"filter-layout1" => 'Simple Posts Filter',
+			"filter-layout1" => 'Simple Posts Filter (merged taxonomies)',
 			"filter-layout2" => 'Grouped Taxonomies Filter',
 			"filter-layout3" => 'Dropdown Filter',
 			"filter-custom-layout" => 'Custom Filter Layout',

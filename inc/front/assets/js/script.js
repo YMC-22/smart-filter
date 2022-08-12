@@ -179,26 +179,36 @@
             let term_sel = link.data('selected');
 
             if(link.hasClass('multiple')) {
-
                 link.toggleClass('active').closest('.filter-item').siblings().find('.all').removeClass('active');
-
-                let listActiveItems = link.closest('.filter-entry').find('.active');
-
-                if(listActiveItems.length > 0) {
-
-                    term_id = '';
-
-                    link.closest('.filter-entry').find('.active').each(function (){
-                        term_id += $(this).data('termid')+',';
-                    });
-
-                    term_id = term_id.replace(/,\s*$/, "");
-                }
-                else {
-                    term_id = link.closest('.filter-entry').find('.all').data('termid');
-                }
             }
             else {
+                link.addClass('active').
+                closest('.filter-item').
+                siblings().
+                find('.filter-link').
+                removeClass('active').
+                closest('.filter-entry').
+                find('.all').
+                removeClass('active');
+            }
+
+            let listActiveItems = link.closest('.filter-entry').find('.active');
+
+            if(listActiveItems.length > 0) {
+
+                term_id = '';
+
+                link.closest('.filter-entry').find('.active').each(function (){
+                    term_id += $(this).data('termid')+',';
+                });
+
+                term_id = term_id.replace(/,\s*$/, "");
+            }
+            else {
+                term_id = link.closest('.filter-entry').find('.all').data('termid');
+            }
+
+            if(link.hasClass('all')) {
                 link.addClass('active').closest('.filter-item').siblings().find('.filter-link').removeClass('active');
             }
 
