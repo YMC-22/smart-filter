@@ -17,7 +17,7 @@ class YMC_get_filter_posts {
 		$output  = '';
 		$message = '';
 
-		$posted_data = $_POST['params'];
+		$posted_data = sanitize_text_field($_POST['params']);
 		$temp_data = str_replace("\\", "", $posted_data);
 		$clean_data = json_decode($temp_data, true);
 

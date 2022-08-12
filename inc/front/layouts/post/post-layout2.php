@@ -30,11 +30,11 @@
         $css_special =  !empty($ymc_special_post_class) ? $ymc_special_post_class : '';
 
 
-        echo '<article class="ymc-'.$post_layout.' post-'.get_the_id().' post-item '.$css_special.'">';
-        echo '<div class="category">'. $list_categories .'</div>';
+        echo '<article class="ymc-'.esc_attr($post_layout).' post-'.get_the_id().' post-item '.esc_attr($css_special).'">';
+        echo '<div class="category">'. wp_kses_post($list_categories) .'</div>';
         echo '<header class="title">'. esc_html($title) .'</header>';
         echo '<div class="date"><i class="far fa-calendar-alt"></i> '. get_the_date($post_date_format) . '</div>';
-        echo '<div class="excerpt">'. $content .'</div>';
+        echo '<div class="excerpt">'. wp_kses_post($content) .'</div>';
         echo '<div class="read-more">
 			  <a class="btn btn-read-more" '. $target .' href="'. esc_url($link) .'">'. esc_html($read_more) .'</a></div>';
         echo '</article>';

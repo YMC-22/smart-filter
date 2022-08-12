@@ -52,9 +52,9 @@ class YMC_shortcode {
 				$ymc_terms = implode(',', $terms_selected);
 			}
 
-			echo '<div id="ymc-smart-filter-container-'.$c_target.'" 
-				  class="ymc-smart-filter-container ymc-'.$ymc_filter_layout.' ymc-'. $ymc_post_layout.' ymc-pagination-'.$ymc_pagination_type.' data-target-ymc'.$c_target.'"
-				  data-params=\'{"cpt":"'.$ymc_cpt_value.'","tax":"'.$ymc_tax.'","terms":"'.$ymc_terms.'","type_pg":"'.$ymc_pagination_type.'","per_page":"'.$ymc_per_page.'","page":"1","post_layout":"'.$ymc_post_layout.'","filter_layout":"'.$ymc_filter_layout.'","filter_id":"'.$id.'","post_sel":"all","search":"","data_target":"data-target-ymc'.$c_target.'","target_id":"'.$c_target.'"}\'>';
+			echo '<div id="ymc-smart-filter-container-'. esc_attr($c_target) .'" 
+				  class="ymc-smart-filter-container ymc-'. esc_attr($ymc_filter_layout) .' ymc-'. esc_attr($ymc_post_layout) .' ymc-pagination-'. esc_attr($ymc_pagination_type) .' data-target-ymc'. esc_attr($c_target) .'"
+				  data-params=\'{"cpt":"'.esc_attr($ymc_cpt_value).'","tax":"'.esc_attr($ymc_tax).'","terms":"'.esc_attr($ymc_terms).'","type_pg":"'.esc_attr($ymc_pagination_type).'","per_page":"'.esc_attr($ymc_per_page).'","page":"1","post_layout":"'.esc_attr($ymc_post_layout).'","filter_layout":"'.esc_attr($ymc_filter_layout).'","filter_id":"'.esc_attr($id).'","post_sel":"all","search":"","data_target":"data-target-ymc'.esc_attr($c_target).'","target_id":"'.esc_attr($c_target).'"}\'>';
 
 
 			if ( $ymc_filter_search_status === 'on' ) {
@@ -88,7 +88,7 @@ class YMC_shortcode {
 
 			endif;
 
-			echo '<div class="container-posts container-'. $ymc_post_layout .'"><div class="post-entry '. $ymc_post_layout .'"></div></div>';
+			echo '<div class="container-posts container-'. esc_attr($ymc_post_layout) .'"><div class="post-entry '. esc_attr($ymc_post_layout) .'"></div></div>';
 
 			echo '</div>';
 		}

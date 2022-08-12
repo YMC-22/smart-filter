@@ -142,8 +142,8 @@
 			            }
 
 			            echo '<div class="item-inner">
-                              <input name="ymc-terms[]" class="category-list" id="category-id-'.$term->term_id.'" type="checkbox" value="'. esc_attr($term->term_id) .'" '. $sl1 .'>';
-			            echo '<label for="category-id-'.$term->term_id.'" class="category-list-label">' . esc_html($term->name) . '</label></div>';
+                              <input name="ymc-terms[]" class="category-list" id="category-id-'. esc_attr($term->term_id) .'" type="checkbox" value="'. esc_attr($term->term_id) .'" '. esc_attr($sl1) .'>';
+			            echo '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">' . esc_html($term->name) . '</label></div>';
 
                    endforeach;
 
