@@ -29,7 +29,6 @@ YMC Smart Filter - allows to solve a variety of tasks for displaying posts on si
 2. Example with settings
 3. Example work
 
-== Video ==
 
 
 
