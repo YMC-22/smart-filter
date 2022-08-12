@@ -32,7 +32,7 @@
 
         echo '<article class="ymc-'.$post_layout.' post-'.get_the_id().' post-item '.$css_special.'">';
         echo '<div class="category">'. $list_categories .'</div>';
-        echo '<header class="title">'. esc_attr($title) .'</header>';
+        echo '<header class="title">'. esc_html($title) .'</header>';
         echo '<div class="date"><i class="far fa-calendar-alt"></i> '. get_the_date($post_date_format) . '</div>';
         echo '<div class="excerpt">'. $content .'</div>';
         echo '<div class="read-more">

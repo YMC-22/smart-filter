@@ -14,10 +14,6 @@
             </span>
         </label>
 
-	    <?php
-        //global $post;
-        //$pid=$post->ID;
-        //$sh_code="&lt;?php echo do_shortcode('[ymc_filter id=&quot;".$pid."&quot;]'); ?&gt;"; ?>
         <input type="text" readonly value="[ymc_filter id='<?php echo esc_attr($post->ID); ?>']" onfocus="this.select()" class="random-shortcode">
     </div>
 
@@ -29,10 +25,7 @@
             </span>
         </label>
 
-		<?php
-		//global $post;
-		//$pid=$post->ID;
-		$sh_code="&lt;?php echo do_shortcode('[ymc_filter id=&quot;".$post->ID."&quot;]'); ?&gt;"; ?>
+		<?php $sh_code = "&lt;?php echo do_shortcode('[ymc_filter id=&quot;". esc_attr($post->ID) ."&quot;]'); ?&gt;"; ?>
         <input type="text" readonly value="<?php echo esc_attr($sh_code); ?>" onfocus="this.select()" class="random-shortcode">
     </div>
 

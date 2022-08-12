@@ -170,6 +170,11 @@ class YMC_meta_boxes {
 			update_post_meta( $post_id, 'ymc_search_text_button', $search_text_button );
 		}
 
+        // Change Placeholder Field Search
+		if( isset($_POST['ymc-search-placeholder']) ) {
+			$search_placeholder = sanitize_text_field( $_POST['ymc-search-placeholder']);
+			update_post_meta( $post_id, 'ymc_search_placeholder', $search_placeholder );
+		}
     }
 
 	public function add_post_metabox() {

@@ -36,9 +36,9 @@
 
 
         echo '<article class="ymc-'.$post_layout.' post-'.get_the_id().' post-item '.$css_special.'">';
-        echo '<figure class="media"><img src="'. $image_url .'"></figure>';
+        echo '<figure class="media"><img src="'. esc_attr($image_url) .'"></figure>';
 		echo '<div class="category">'. $list_categories .'</div>';
-        echo '<header class="title">'. esc_attr($title) .'</header>';
+        echo '<header class="title">'. esc_html($title) .'</header>';
         echo '<div class="date"><i class="far fa-calendar-alt"></i> '. get_the_date($post_date_format) . '</div>';
         echo '<div class="excerpt">'. $content .'</div>';
         echo '<div class="read-more">

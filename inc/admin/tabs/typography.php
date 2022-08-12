@@ -31,7 +31,7 @@
                     else {
                         $selected = '';
                     }
-                    echo '<option value="' . $key . '" ' . $selected . '>' . esc_html($font) . '</option>';
+                    echo '<option value="' . esc_attr($key) . '" ' . esc_attr($selected) . '>' . esc_html($font) . '</option>';
                 }
 	        ?>
         </select>
@@ -65,7 +65,7 @@
 			    else {
 				    $selected = '';
 			    }
-			    echo '<option value="' . $key . '" ' . $selected . '>' . esc_html($font) . '</option>';
+			    echo '<option value="' . esc_attr($key) . '" ' . esc_attr($selected) . '>' . esc_html($font) . '</option>';
 		    }
 		    ?>
         </select>

@@ -214,8 +214,8 @@ class YMC_get_filter_posts {
 		if (!wp_verify_nonce($_POST['nonce_code'], 'custom_ajax_nonce')) exit;
 
 		$output  = '';
-		$phrase = trim(mb_strtolower(strip_tags($_POST['phrase'])));
-		$post_type = $_POST['cpt'];
+		$phrase = trim(mb_strtolower(sanitize_text_field($_POST['phrase'])));
+		$post_type = sanitize_text_field($_POST['cpt']);
 		$per_page  = -1;
 		$total = 0;
 

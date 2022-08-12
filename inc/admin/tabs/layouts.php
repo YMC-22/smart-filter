@@ -52,7 +52,7 @@
 
                                 $selected = ( $ymc_filter_layout === $key ) ? 'selected' : '';
 
-                                echo '<option value="' . $key . '" ' . $selected . '>' . esc_attr($layout) . '</option>';
+                                echo '<option value="' . esc_attr($key) . '" ' . esc_attr($selected) . '>' . esc_html__($layout, 'ymc-smart-filter') . '</option>';
 
                             endforeach;
                         endif;
@@ -140,7 +140,7 @@
 
                                 $selected = ( $ymc_post_layout === $key ) ? 'selected' : '';
 
-                                echo '<option value="' . $key . '" ' . $selected . '>' . esc_attr($layout) . '</option>';
+                                echo '<option value="' . esc_attr($key) . '" ' . esc_attr($selected) . '>' . esc_attr($layout) . '</option>';
 
                             endforeach;
 

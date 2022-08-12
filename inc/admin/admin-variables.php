@@ -49,6 +49,7 @@ $ymc_multiple_filter = 0;
 
 $ymc_filter_search_status = 'off';
 $ymc_search_text_button = 'Search';
+$ymc_search_placeholder = 'Search posts...';
 
 
 // GENERAL TAB SUBMITTED VARIABLE VALUES
@@ -137,5 +138,7 @@ if( get_post_meta($post->ID, 'ymc_filter_search_status') ) {
 if( get_post_meta($post->ID, 'ymc_search_text_button') ) {
 	$ymc_search_text_button = get_post_meta($post->ID, 'ymc_search_text_button', true);
 }
-
+if( get_post_meta($post->ID, 'ymc_search_placeholder') ) {
+	$ymc_search_placeholder = get_post_meta($post->ID, 'ymc_search_placeholder', true);
+}
 

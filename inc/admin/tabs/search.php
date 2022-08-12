@@ -34,12 +34,26 @@
             <div class="from-element">
 
                 <label class="form-label">
+		            <?php echo esc_html__('Placeholder Field Search', 'ymc-smart-filter');?>
+                    <span class="information">
+                        <?php echo esc_html__('Change placeholder field search.', 'ymc-smart-filter');?>
+                    </span>
+                </label>
+
+                <input class="input-field" type="text" name="ymc-search-placeholder" value="<?php echo esc_attr($ymc_search_placeholder); ?>">
+
+            </div>
+
+            <br/>
+
+            <div class="from-element">
+
+                <label class="form-label">
 			        <?php echo esc_html__('Text Button Search', 'ymc-smart-filter');?>
                         <span class="information">
                         <?php echo esc_html__('Change name of Search button.', 'ymc-smart-filter');?>
                     </span>
                 </label>
-
                 <input class="input-field" type="text" name="ymc-search-text-button" value="<?php echo esc_attr($ymc_search_text_button); ?>">
 
             </div>

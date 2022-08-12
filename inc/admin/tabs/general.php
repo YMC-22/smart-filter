@@ -14,19 +14,17 @@
         </span>
 	</label>
 
-	<select class="form-select" id="ymc-cpt-select" name="ymc-cpt-select" data-postid="<?php echo $post->ID; ?>">
+	<select class="form-select" id="ymc-cpt-select" name="ymc-cpt-select" data-postid="<?php echo esc_attr($post->ID); ?>">
 		<option value="post"><?php echo esc_html__('Post','ymc-smart-filter'); ?></option>
 		<?php
-		foreach($cpost_types as $cpost_type) {
-		    //if($cpost_type !== 'page') {
-			    if($cpt === $cpost_type) {
-				    $sel = 'selected';
-			    } else {
-				    $sel = '';
-			    }
-			    echo "<option value='" . $cpost_type ."' $sel>" . esc_html($cpost_type) . "</option>";
-            //}
-		}
+            foreach( $cpost_types as $cpost_type ) {
+                if( $cpt === $cpost_type ) {
+                    $sel = 'selected';
+                } else {
+                    $sel = '';
+                }
+                echo "<option value='" . esc_attr($cpost_type) ."' ". esc_attr($sel) .">" . esc_html($cpost_type) . "</option>";
+            }
 		?>
 	</select>
 

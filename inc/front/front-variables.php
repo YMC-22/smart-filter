@@ -93,3 +93,6 @@ if (get_post_meta($id, 'ymc_filter_search_status', true)) {
 if (get_post_meta($id, 'ymc_search_text_button', true)) {
 	$ymc_search_text_button = get_post_meta($id, 'ymc_search_text_button', true);
 }
+if (get_post_meta($id, 'ymc_search_placeholder', true)) {
+	$ymc_search_placeholder = get_post_meta($id, 'ymc_search_placeholder', true);
+}
