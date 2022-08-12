@@ -128,8 +128,7 @@ function custom_filter_layout_1( $layout, $terms, $taxonomy, $multiple, $target 
 	   $layout .= '<li><a class="'. $multiple .'" href="#" data-selected="'. esc_attr(get_term($term)->slug).'" data-termid="'.esc_attr($term).'">'.esc_html(get_term($term)->name).'</a></li>';
 	}
    }
-    $layout .= '</ul>';
-    $layout .= '</li>';
+    $layout .= '</ul></li>';   
  }
     $layout .= '</ul>';
 	 $layout .= '<div class="posts-found"></div>';
