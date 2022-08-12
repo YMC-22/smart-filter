@@ -30,7 +30,8 @@ YMC Smart Filter - allows to solve a variety of tasks for displaying posts on si
 3. Example work
 
 
-
+== Video ==
+https://www.youtube.com/watch?v=FIBNE0Ix6Vg
 
 
 
