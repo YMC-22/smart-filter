@@ -41,7 +41,7 @@
         </span>
 	</label>
 
-    <div id="ymc-tax-checkboxes" class="ymc-tax-checkboxes" data-postid="<?php echo $post->ID; ?>">
+    <div id="ymc-tax-checkboxes" class="ymc-tax-checkboxes" data-postid="<?php echo esc_attr($post->ID); ?>">
 
 	    <?php
 
@@ -55,7 +55,9 @@
         if( $taxo ) {
 
             if( !is_null($tax_sort) ) {
+
                 $result_tax = [];
+
                 foreach($tax_sort as $val) {
                     $result_tax[array_search($val, $taxo)] = $val;
                 }
@@ -67,6 +69,7 @@
             foreach($result_tax as $label => $slug) :
 
                 $sl0 = '';
+
                 if(is_array($tax_sel) && count($tax_sel) > 0) {
 
                     if (in_array($slug, $tax_sel)) {
@@ -78,7 +81,7 @@
                 }
 
                 echo '<div id="'. esc_attr($slug) .'" class="group-elements">
-                      <input id="id-'. esc_attr($slug) .'" type="checkbox" name="ymc-taxonomy[]" value="'. esc_html($slug) .'" '.$sl0.'>
+                      <input id="id-'. esc_attr($slug) .'" type="checkbox" name="ymc-taxonomy[]" value="'. esc_attr($slug) .'" '. esc_attr($sl0) .'>
                       <label for="id-'. esc_attr($slug) .'">'.  esc_html($label) . '</label></div>';
 
             endforeach;
@@ -139,7 +142,7 @@
 			            }
 
 			            echo '<div class="item-inner">
-                              <input name="ymc-terms[]" class="category-list" id="category-id-'.$term->term_id.'" type="checkbox" value="'. $term->term_id .'" '.$sl1.'>';
+                              <input name="ymc-terms[]" class="category-list" id="category-id-'.$term->term_id.'" type="checkbox" value="'. esc_attr($term->term_id) .'" '. $sl1 .'>';
 			            echo '<label for="category-id-'.$term->term_id.'" class="category-list-label">' . esc_html($term->name) . '</label></div>';
 
                    endforeach;
@@ -173,7 +176,7 @@
                 } else {
                     $sel_rel = '';
                 }
-                echo "<option value='" . $tax_val ."' $sel_rel>" . esc_html($tax_val) . "</option>";
+                echo "<option value='". esc_attr($tax_val) ."' ". esc_attr($sel_rel) .">" . esc_html($tax_val) . "</option>";
             }
 		?>
     </select>
