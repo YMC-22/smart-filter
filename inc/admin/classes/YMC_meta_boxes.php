@@ -181,7 +181,7 @@ class YMC_meta_boxes {
 
 		add_meta_box( 'ymc_top_meta_box' , __('Settings','ymc-smart-filter'), array($this,'ymc_top_meta_box'), 'ymc_filters', 'normal', 'core');
 
-		add_meta_box( 'ymc_side_meta_box' , __('YMC Features','ymc-smart-filter'), array($this,'ymc_side_meta_box'), 'ymc_filters', 'side', 'core');
+		add_meta_box( 'ymc_side_meta_box' , __('YMC SF Features','ymc-smart-filter'), array($this,'ymc_side_meta_box'), 'ymc_filters', 'side', 'core');
 
 	}
 
@@ -307,9 +307,9 @@ class YMC_meta_boxes {
 
 	public function ymc_side_meta_box() { ?>
 		<article>
-            The smart filter posts/custom post types by category allows to solve
+            YMC Smart Filter posts/custom post types by category allows to solve
             a variety of tasks for displaying posts on site pages. Easy to use.
-            Customization of card templates will allow you to fine-tune the display of posts. For more detailed
+            Customization of card templates and filters templates will allow you to fine-tune the display of posts. For more detailed
             information, please see the <a target="_blank" href="https://github.com/YMC-22/smart-filter">documentation</a>  for using the plugin.
 		</article>
 	<?php }
