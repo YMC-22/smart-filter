@@ -75,7 +75,7 @@ add_filter('ymc_filter_custom_layout_ID', 'custom_filter_layout', 10, 3);
 If you need to create your custom filter bar, you can use the filter which will allow you to create your filter bar. This requires a basic understanding of HTML JavaScript, CSS and PHP languages. In the example, it is indicated how you can use the settings and output of a custom filter. ***For your filter to work correctly, follow the following class and attribute names in your HTML markup:***
 
 **Required ID:**
-- `ID filter container on page`
+- `ID filter container on the page`
 
 **Required Classes:**
 - `all`
