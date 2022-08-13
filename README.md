@@ -12,35 +12,37 @@
 ### List Filters
 Add code to `function.php` to your theme
 
+`ID` is serial number of the filter on the page
+
 **Change previous or next numbered paginator arrows:**
 ```php
-add_filter('ymc_pagination_prev_text', $ymc_pagination_prev_text, 3, 1);
-add_filter('ymc_pagination_next_text', $ymc_pagination_next_text, 3, 1);
+add_filter('ymc_pagination_prev_text_ID', $ymc_pagination_prev_text, 3, 1);
+add_filter('ymc_pagination_next_text_ID', $ymc_pagination_next_text, 3, 1);
 ```
 **Change button text Load More**
 ```php
-add_filter('ymc_pagination_load_more', $ymc_pagination_load_more, 3, 1);
+add_filter('ymc_pagination_load_more_ID', $ymc_pagination_load_more, 3, 1);
 ```
 **Change publication date of a post in grid of cards**
 ```php
-add_filter('ymc_post_date_format', $ymc_post_date_format, 3, 1);
+add_filter('ymc_post_date_format_ID', $ymc_post_date_format, 3, 1);
 ```
 **Change post text length (excerpt)**
 ```php
-add_filter('ymc_post_excerpt_length', $ymc_post_excerpt_length, 3, 1);
+add_filter('ymc_post_excerpt_length_ID', $ymc_post_excerpt_length, 3, 1);
 ```
 **Change button text in post card**
 ```php
-add_filter('ymc_post_read_more', $ymc_post_read_more, 3, 1);
+add_filter('ymc_post_read_more_ID', $ymc_post_read_more, 3, 1);
 ```
 **Change text of Show All button in filter panel**
 ```php
-add_filter('ymc_button_show_all', $ymc_button_show_all, 3, 1);
+add_filter('ymc_button_show_all_ID', $ymc_button_show_all, 3, 1);
 ```
 **Add your content before or after the filter bar**
 ```php
-do_action("ymc_before_filter_layout");
-do_action("ymc_after_filter_layout");
+do_action("ymc_before_filter_layout_ID");
+do_action("ymc_after_filter_layout_ID");
 ```
 
 ### Layouts
@@ -73,7 +75,7 @@ add_filter('ymc_filter_custom_layout_ID', 'custom_filter_layout', 10, 3);
 If you need to create your custom filter bar, you can use the filter which will allow you to create your filter bar. This requires a basic understanding of HTML JavaScript, CSS and PHP languages. In the example, it is indicated how you can use the settings and output of a custom filter. ***For your filter to work correctly, follow the following class and attribute names in your HTML markup:***
 
 **Required ID:**
-- `ID filter container on page`
+- `ID filter container on the page`
 
 **Required Classes:**
 - `all`
