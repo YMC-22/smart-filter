@@ -1,15 +1,10 @@
 <?php
 
-require_once YMC_SMART_FILTER_DIR . '/front/classes/YMC_front_filters.php';
-
-
 class YMC_shortcode {
 
 	public function __construct() {
 
 		add_shortcode("ymc_filter", array($this, "ymc_filter_apply"));
-
-		new YMC_front_filters();
 	}
 
 	public function ymc_filter_apply( $atts ) {

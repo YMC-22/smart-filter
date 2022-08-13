@@ -16,7 +16,7 @@ wp_add_inline_style($handle, $filter_css);
 
 <div id="<?php echo  esc_attr($ymc_filter_layout); ?>" class="filter-layout <?php echo  esc_attr($ymc_filter_layout); ?>">
 
-	<?php do_action("ymc_before_filter_layout"); ?>
+	<?php do_action("ymc_before_filter_layout_".$c_target); ?>
 
 	<ul class="filter-entry">
 
@@ -28,7 +28,9 @@ wp_add_inline_style($handle, $filter_css);
 
                 ( $ymc_sort_terms === 'asc' ) ? asort($terms_selected) : arsort($terms_selected);
 
-                echo '<li class="filter-item"><a class="filter-link all active" href="#" data-selected="all" data-termid="' . esc_attr($ymc_terms) . '">' . esc_html__("All",'ymc-smart-filter') . '</a></li>';
+	            $show_all = apply_filters('ymc_button_show_all_'.$c_target, __('All','ymc-smart-filter'));
+
+                echo '<li class="filter-item"><a class="filter-link all active" href="#" data-selected="all" data-termid="' . esc_attr($ymc_terms) . '">'. esc_html__($show_all) .'</a></li>';
 
                 $arr_taxonomies = [];
                 foreach ($terms_selected as $term) {
@@ -73,6 +75,6 @@ wp_add_inline_style($handle, $filter_css);
 
     <div class="posts-found"></div>
 
-	<?php do_action("ymc_after_filter_layout"); ?>
+	<?php do_action("ymc_after_filter_layout_".$c_target); ?>
 
 </div>

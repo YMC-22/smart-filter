@@ -8,7 +8,7 @@
         $post_id = get_the_ID();
         $title   = wp_trim_words(get_the_title($post_id), 15, '...');
         $link    = get_the_permalink($post_id);
-        $post_date_format = apply_filters('ymc_post_date_format', 'd, M Y');
+        $post_date_format = apply_filters('ymc_post_date_format_'.$target_id, 'd, M Y');
 
         $content = $post->post_excerpt;
         if( empty($content) ) {
@@ -16,10 +16,10 @@
         }
 
         $content  = preg_replace('#\[[^\]]+\]#', '', $content);
-        $c_length = apply_filters('ymc_post_excerpt_length', 30);
+        $c_length = apply_filters('ymc_post_excerpt_length_'.$target_id, 30);
         $content  = wp_trim_words($content, $c_length);
 
-        $read_more = apply_filters('ymc_post_read_more', 'Read More');
+        $read_more = apply_filters('ymc_post_read_more_'.$target_id, __('Read More','ymc-smart-filter'));
         $target = "target='" . $ymc_link_target . "'";
 
         $term_list = get_the_terms($post_id, $taxonomy);

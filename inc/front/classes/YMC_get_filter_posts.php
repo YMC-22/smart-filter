@@ -37,7 +37,6 @@ class YMC_get_filter_posts {
 
 		$id = $filter_id;
 
-		require_once YMC_SMART_FILTER_DIR . '/front/classes/YMC_front_filters.php';
 		require_once YMC_SMART_FILTER_DIR . '/front/front-variables.php';
 
 		$default_order_by = apply_filters('ymc_filter_posts_order_by', $ymc_order_post_by);
