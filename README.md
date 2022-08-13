@@ -11,6 +11,7 @@
 
 ### List Filters
 Add code to `function.php` to your theme
+`ID` is number container filter on page
 
 **Change previous or next numbered paginator arrows:**
 ```php
