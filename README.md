@@ -16,24 +16,24 @@ Add code to `function.php` to your theme
 
 **Change previous or next numbered paginator arrows:**
 ```php
-add_filter('ymc_pagination_prev_text', $ymc_pagination_prev_text, 3, 1);
-add_filter('ymc_pagination_next_text', $ymc_pagination_next_text, 3, 1);
+add_filter('ymc_pagination_prev_text_ID', $ymc_pagination_prev_text, 3, 1);
+add_filter('ymc_pagination_next_text_ID', $ymc_pagination_next_text, 3, 1);
 ```
 **Change button text Load More**
 ```php
-add_filter('ymc_pagination_load_more', $ymc_pagination_load_more, 3, 1);
+add_filter('ymc_pagination_load_more_ID', $ymc_pagination_load_more, 3, 1);
 ```
 **Change publication date of a post in grid of cards**
 ```php
-add_filter('ymc_post_date_format', $ymc_post_date_format, 3, 1);
+add_filter('ymc_post_date_format_ID', $ymc_post_date_format, 3, 1);
 ```
 **Change post text length (excerpt)**
 ```php
-add_filter('ymc_post_excerpt_length', $ymc_post_excerpt_length, 3, 1);
+add_filter('ymc_post_excerpt_length_ID', $ymc_post_excerpt_length, 3, 1);
 ```
 **Change button text in post card**
 ```php
-add_filter('ymc_post_read_more', $ymc_post_read_more, 3, 1);
+add_filter('ymc_post_read_more_ID', $ymc_post_read_more, 3, 1);
 ```
 **Change text of Show All button in filter panel**
 ```php
@@ -41,8 +41,8 @@ add_filter('ymc_button_show_all_ID', $ymc_button_show_all, 3, 1);
 ```
 **Add your content before or after the filter bar**
 ```php
-do_action("ymc_before_filter_layout");
-do_action("ymc_after_filter_layout");
+do_action("ymc_before_filter_layout_ID");
+do_action("ymc_after_filter_layout_ID");
 ```
 
 ### Layouts
