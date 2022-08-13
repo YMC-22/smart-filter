@@ -47,26 +47,26 @@
     <div class="from-element">
         <label class="form-label">
 	    <?php echo esc_html__('Filter Posts', 'ymc-smart-filter');?>
-        <span class="information">
-                    <?php echo esc_html__('Select fonts for posts.', 'ymc-smart-filter');?>
-                </span>
+            <span class="information">
+                <?php echo esc_html__('Select fonts for posts.', 'ymc-smart-filter');?>
+            </span>
         </label>
 
 	    <?php $post_font = apply_filters('ymc_post_font', ['ymc_post_font']); ?>
 
         <select class="form-select"  id="ymc-post-font" name="ymc-post-font">
 		    <?php
-		    foreach ($post_font as $key => $font) {
+                foreach ($post_font as $key => $font) {
 
-			    if ($ymc_post_font === $key) {
+                    if ($ymc_post_font === $key) {
 
-				    $selected = 'selected';
-			    }
-			    else {
-				    $selected = '';
-			    }
-			    echo '<option value="' . esc_attr($key) . '" ' . esc_attr($selected) . '>' . esc_html($font) . '</option>';
-		    }
+                        $selected = 'selected';
+                    }
+                    else {
+                        $selected = '';
+                    }
+                    echo '<option value="' . esc_attr($key) . '" ' . esc_attr($selected) . '>' . esc_html($font) . '</option>';
+                }
 		    ?>
         </select>
 

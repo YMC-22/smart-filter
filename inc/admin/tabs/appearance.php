@@ -83,7 +83,7 @@
                         else {
                             $selected = '';
                         }
-                        echo '<option value="' . $key . '" ' . $selected . '>' . esc_html($value) . '</option>';
+                        echo '<option value="' . esc_attr($key) . '" ' . esc_attr($selected) . '>' . esc_html($value) . '</option>';
                     }
                 ?>
                 </select>
@@ -154,6 +154,5 @@
         </div>
 
     </div>
-
 
 </div>

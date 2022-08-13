@@ -35,8 +35,7 @@
         echo '<header class="title">'. esc_html($title) .'</header>';
         echo '<div class="date"><i class="far fa-calendar-alt"></i> '. get_the_date($post_date_format) . '</div>';
         echo '<div class="excerpt">'. wp_kses_post($content) .'</div>';
-        echo '<div class="read-more">
-			  <a class="btn btn-read-more" '. $target .' href="'. esc_url($link) .'">'. esc_html($read_more) .'</a></div>';
+        echo '<div class="read-more"><a class="btn btn-read-more" '. esc_attr($target) .' href="'. esc_url($link) .'">'. esc_html($read_more) .'</a></div>';
         echo '</article>';
 
     endwhile;

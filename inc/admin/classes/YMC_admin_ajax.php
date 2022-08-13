@@ -76,8 +76,9 @@ class YMC_admin_ajax {
 
 			$temp_data = str_replace("\\", "", sanitize_text_field($_POST["tax_sort"]));
 			$clean_data = json_decode($temp_data, true);
+			$post_id = (int) sanitize_text_field($_POST["post_id"]);
 
-			$id = update_post_meta( (int) $_POST["post_id"], 'ymc_tax_sort', $clean_data );
+			$id = update_post_meta( $post_id, 'ymc_tax_sort', $clean_data );
 		}
 
 		$data = array(

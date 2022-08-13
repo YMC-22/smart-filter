@@ -27,7 +27,7 @@ class YMC_post_pagination {
 		]);
 
 		if ($query->max_num_pages > 1):
-			$output .= "<ul id='ymc-layout-pagination' class='ymc-pagination pagination-" . $type_pagination ."'>";
+			$output .= "<ul id='ymc-layout-pagination' class='ymc-pagination pagination-" . esc_attr($type_pagination) ."'>";
 			foreach ($paginate as $page):
 				$output .= "<li>" . $page ."</li>";
 			endforeach;
@@ -46,8 +46,8 @@ class YMC_post_pagination {
 		$load_more = apply_filters('ymc_pagination_load_more', $load_more);
 
 		if( $query->max_num_pages > 1 ) :
-			$output .= "<div id='ymc-layout-pagination' class='ymc-pagination pagination-" . $type_pagination ."'>";
-			$output .= "<a class='btn-load' href='#'>". $load_more ."</a>";
+			$output .= "<div id='ymc-layout-pagination' class='ymc-pagination pagination-" . esc_attr($type_pagination) ."'>";
+			$output .= "<a class='btn-load' href='#'>". esc_html($load_more) ."</a>";
 			$output .= "</div>";
 		endif;
 

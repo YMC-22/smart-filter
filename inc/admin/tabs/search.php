@@ -54,6 +54,7 @@
                         <?php echo esc_html__('Change name of Search button.', 'ymc-smart-filter');?>
                     </span>
                 </label>
+
                 <input class="input-field" type="text" name="ymc-search-text-button" value="<?php echo esc_attr($ymc_search_text_button); ?>">
 
             </div>

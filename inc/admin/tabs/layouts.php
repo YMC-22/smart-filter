@@ -106,7 +106,7 @@
                 <div class="group-elements">
                     <?php  $check_multiple =  ( (int) $ymc_multiple_filter === 1 ) ? 'checked' : '';  ?>
                     <input type="hidden" name='ymc-multiple-filter' value="0">
-                    <input class="ymc-multiple-filter" type="checkbox" value="1"  name='ymc-multiple-filter' id="ymc-multiple-filter" <?php echo $check_multiple; ?>/>
+                    <input class="ymc-multiple-filter" type="checkbox" value="1"  name='ymc-multiple-filter' id="ymc-multiple-filter" <?php echo esc_attr($check_multiple); ?>/>
                     <label for="ymc-multiple-filter"><?php echo esc_html__('Set Multiple Taxonomy Filter','ymc-smart-filter'); ?></label>
                 </div>
 
@@ -187,12 +187,7 @@
 
             </div>
 
-
-
-
         </div>
-
-
 
     </div>
 

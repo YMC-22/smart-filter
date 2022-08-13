@@ -2,14 +2,13 @@
 defined('ABSPATH') or exit;
 
 // Add Style
-
-
 $filter_css = "";
+
 wp_add_inline_style($handle, $filter_css);
 ?>
 
 
-<div id="<?php echo $ymc_filter_layout; ?>" class="filter-layout <?php echo $ymc_filter_layout; ?>">
+<div id="<?php echo esc_attr($ymc_filter_layout); ?>" class="filter-layout <?php echo esc_attr($ymc_filter_layout); ?>">
 
 	<?php do_action("ymc_before_filter_layout"); ?>
 
@@ -18,7 +17,7 @@ wp_add_inline_style($handle, $filter_css);
 		$all_terms = implode(',', $terms_selected);
     ?>
 
-    <div class="filter-entry" data-terms="<?php echo $all_terms; ?>">
+    <div class="filter-entry" data-terms="<?php echo esc_attr($all_terms); ?>">
 
 		<?php
 
@@ -38,7 +37,7 @@ wp_add_inline_style($handle, $filter_css);
 
             $show_all = apply_filters('ymc_button_show_all', 'Show All');
 
-            echo '<a class="btn-all" href="#" data-selected="all" data-terms="' . $all_terms . '">'. $show_all .'</a>';
+            echo '<a class="btn-all" href="#" data-selected="all" data-terms="' . esc_attr($all_terms) . '">'. esc_html($show_all) .'</a>';
 
             if( !is_null($tax_sort)) {
                 $result_tax = [];
@@ -70,10 +69,9 @@ wp_add_inline_style($handle, $filter_css);
                      $is_disabled = ( get_term( $term )->count === 0 ) ? 'isDisabled' : '';
 
                         echo '<div class="menu-passive__item">
-                              <a class="menu-link '. $is_disabled .' '. $type_multiple .'" 
-                              href="#" data-selected="'.esc_attr(get_term( $term )->slug).'" data-termid="' . esc_attr($term) . '" data-name="'.esc_attr(get_term( $term )->name).'">'.
-                              esc_html(get_term( $term )->name) . ' <span class="count">' .esc_html(get_term( $term )->count) . '</span>'.
-                             '</a></div>';
+                              <a class="menu-link '.  esc_attr($is_disabled) .' '.  esc_attr($type_multiple) .'" 
+                              href="#" data-selected="'. esc_attr(get_term( $term )->slug) .'" data-termid="' . esc_attr($term) . '" data-name="'.esc_attr(get_term( $term )->name).'">'.
+                              esc_html(get_term( $term )->name) . ' <span class="count">'. esc_html(get_term( $term )->count) .'</span></a></div>';
                     }
                 }
 

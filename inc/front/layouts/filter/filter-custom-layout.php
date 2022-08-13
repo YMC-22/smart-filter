@@ -1,6 +1,6 @@
 <?php // Custom Filter Layout ?>
 
-<div id="<?php echo $ymc_filter_layout . $c_target; ?>" class="filter-layout <?php echo $ymc_filter_layout; ?>">
+<div id="<?php echo esc_attr($ymc_filter_layout) . esc_attr($c_target); ?>" class="filter-layout <?php echo esc_attr($ymc_filter_layout); ?>">
 
 	<?php do_action("ymc_before_filter_layout");
 

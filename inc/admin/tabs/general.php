@@ -122,11 +122,11 @@
 
 	            if( $terms ) {
 
-                    echo '<article class="group-term item-'. $tax .'">';
+                    echo '<article class="group-term item-'. esc_attr($tax) .'">';
 
                     echo '<div class="item-inner all-categories">
-                          <input name="all-select" class="category-all" id="category-all-'.$tax.'" type="checkbox">
-                          <label for="category-all-'.$tax.'" class="category-all-label">'. esc_html__('All [ '. get_taxonomy( $tax )->label .']', 'ymc-smart-filter') .'</label>                                                    
+                          <input name="all-select" class="category-all" id="category-all-'.esc_attr($tax).'" type="checkbox">
+                          <label for="category-all-'.esc_attr($tax).'" class="category-all-label">'. esc_html__('All [ '. get_taxonomy( $tax )->label .']', 'ymc-smart-filter') .'</label>                                                    
                           </div>';
 
 		            foreach( $terms as $term ) :
@@ -180,7 +180,6 @@
             }
 		?>
     </select>
-
 
 </div>
 
