@@ -41,6 +41,10 @@ The plugin supports custom post types. You can filter custom post types with the
 
 Yes, YMC Smart Filter is a free WordPress plugin.
 
+= Where can I find the Documentation for the plugin? =
+
+Detailed information can be found on GitHub at this <a target="_blank" href="https://github.com/YMC-22/smart-filter">link</a>.
+
 == Changelog ==
 = 1.1.0 =
 
