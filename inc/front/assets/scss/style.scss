@@ -230,7 +230,7 @@ $font-size: 16;
 				}
 				.menu-active {
 					border: 1px solid #141518;
-					padding: 10px 10px;
+					padding: 10px 20px 10px 10px;
 					width: 100%;
 					position: relative;
 					cursor: pointer;
@@ -601,6 +601,7 @@ $font-size: 16;
 							font-weight: 500;
 							border: 0.5px dashed #098ab8;
 							padding: 1px 5px;
+							display: block;
 						}
 					}
 					a {

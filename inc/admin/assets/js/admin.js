@@ -158,7 +158,6 @@
                 });
             }
             else {
-                console.log('.item-'+$(e.target).val());
                 termWrp.find('.item-'+$(e.target).val()).remove();
             }
 
@@ -345,4 +344,4 @@
 
     });
 
-}( jQuery ))
+}( jQuery ));
