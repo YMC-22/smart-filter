@@ -15,8 +15,10 @@ Filter posts or custom post types by custom taxonomy / category without page rel
 
 == Description ==
 
-YMC Smart Filter allows to solve a variety of tasks for displaying posts on site pages. For advanced developers,
-there is an opportunity to independently develop layouts for filters and post cards, which makes the plugin universal.
+Filter posts or custom post types by custom taxonomy / category without page reload with different pagination types. Plugin allows to solve a variety of tasks for displaying posts on site pages. For advanced developers, there is an opportunity to independently develop layouts for filters and post cards, which makes the plugin universal.
+
+== Custom Post Type & Taxonomies Support ==
+The plugin supports custom post types. You can filter custom post types with the AJAX filter. You can select specific custom taxonomies and their terms to showcase. If you need to create your custom filter bar or custom post card, you can use the filters which will allow you to create your templates. This requires a basic understanding of HTML JavaScript, CSS and PHP languages. You can find more details <a href='https://github.com/YMC-22/smart-filter' target='_blank'>here.</a>
 
 == Installation ==
 
@@ -30,7 +32,7 @@ there is an opportunity to independently develop layouts for filters and post ca
 1. Individual Setting Filter
 2. Use Shortcode Filter with search filed
 3. Display filter on the page
-4. Example work Filter
+4. Example work filter
 
 
 == Frequently Asked Questions ==
@@ -41,9 +43,6 @@ Yes, YMC Smart Filter is a free WordPress plugin.
 
 == Changelog ==
 = 1.1.0 =
-
-== Upgrade Notice ==
-= Upgrade Notice =
 
 == Video ==
 https://www.youtube.com/watch?v=FIBNE0Ix6Vg
