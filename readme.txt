@@ -27,15 +27,10 @@ there is an opportunity to independently develop layouts for filters and post ca
 
 
 == ScreenShots ==
-1. Individual Setting Page
-2. Use Shortcode Filter with Search filed
+1. Individual Setting Filter
+2. Use Shortcode Filter with search filed
 3. Display filter on the page
-4. Example work
-
-/ymc-smart-filters/inc/front/assets/images/screenshot-1.png
-/ymc-smart-filters/inc/front/assets/images/screenshot-2.png
-/ymc-smart-filters/inc/front/assets/images/screenshot-3.png
-/ymc-smart-filters/inc/front/assets/images/screenshot-4.png
+4. Example work Filter
 
 
 == Frequently Asked Questions ==
