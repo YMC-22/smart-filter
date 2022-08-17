@@ -20,6 +20,16 @@ Filter posts or custom post types by custom taxonomy / category without page rel
 == Custom Post Type & Taxonomies Support ==
 The plugin supports custom post types. You can filter custom post types with the AJAX filter. You can select specific custom taxonomies and their terms to showcase. If you need to create your custom filter bar or custom post card, you can use the filters which will allow you to create your templates. This requires a basic understanding of HTML JavaScript, CSS and PHP languages. You can find more details <a href='https://github.com/YMC-22/smart-filter' target='_blank'>here.</a>
 
+== Plugin Features ==
+The plugin provides the following functionality:
+- Sorting taxonomies and terms.
+- Installation of different types of pagination (Numeric, Load more, Scroll infinity).
+- Choice of different templates for filters and post cards.
+- Customization of the color palette.
+- Adding a post search bar.
+- Typography customization.
+- Ability to independently develop templates for filters and post cards and add them to the filter (requires basic knowledge of WordPress, HTML JavaScript, CSS and PHP).
+
 == Installation ==
 
 1. Activate Plugin or upload the entire 'ymc-smart-filters' folder to the '/wp-content/plugins/' directory.
