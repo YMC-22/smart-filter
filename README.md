@@ -142,7 +142,7 @@ function custom_filter_layout_1( $layout, $terms, $taxonomy, $multiple, $target 
  return $layout;
 }
 
-add_filter('ymc_filter_custom_layout_1', 'custom_filter_layout_1', 10, 5);
+add_filter('ymc_filter_custom_layout_ID', 'custom_filter_layout_1', 10, 5);
 ```
 
 ### Support
