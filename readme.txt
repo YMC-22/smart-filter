@@ -1,12 +1,12 @@
 ===  YMC Smart Filter ===
 Plugin Name: YMC Smart Filter
 Contributors: YMC
-Version: 1.1.0
+Version: 1.1.1
 Donate link: https://github.com/YMC-22/smart-filter
-Tags: filters, posts, mind, ajax posts, category posts, taxonomy, custom taxonomy
+Tags: filters, posts, mind, ajax posts, category posts, taxonomy, custom taxonomy, woocommerce
 Requires at least: 4.8
 Tested up to: 6.0.1
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -56,7 +56,11 @@ Yes, YMC Smart Filter is a free WordPress plugin.
 Detailed information can be found on GitHub at this <a target="_blank" href="https://github.com/YMC-22/smart-filter">link</a>.
 
 == Changelog ==
-= 1.1.0 =
+
+= 1.1.1 =
+* Added ability to filter Products from WooCommerce plugin.
+
+
 
 == Video ==
 https://www.youtube.com/watch?v=FIBNE0Ix6Vg

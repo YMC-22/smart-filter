@@ -31,8 +31,13 @@ class YMC_admin_ajax {
 		$data_object = get_object_taxonomies($cpt, $output = 'objects');
 
 		$arr_result = [];
+		// Exclude Taxonomies WooCommerce
+		$arr_exclude_slugs = ['product_type','product_visibility','product_shipping_class'];
+
 		foreach ($data_object as $val) {
-			$arr_result[$val->name] = $val->label;
+			if(array_search($val->name, $arr_exclude_slugs) === false ) {
+				$arr_result[$val->name] = $val->label;
+			}
 		}
 
 		update_post_meta( (int) $_POST["post_id"], 'ymc_tax_sort', $data_slugs );

@@ -47,6 +47,8 @@
 
 	    $data_object = get_object_taxonomies($cpt, $output = 'objects');
 	    $taxo = [];
+	    // Exclude Taxonomies WooCommerce
+	    $arr_exclude_slugs = ['product_type','product_visibility','product_shipping_class'];
 
 	    foreach ($data_object as $val) {
 		    $taxo[$val->label] = $val->name;
@@ -57,7 +59,6 @@
             if( !is_null($tax_sort) ) {
 
                 $result_tax = [];
-
                 foreach($tax_sort as $val) {
                     $result_tax[array_search($val, $taxo)] = $val;
                 }
@@ -70,19 +71,22 @@
 
                 $sl0 = '';
 
-                if(is_array($tax_sel) && count($tax_sel) > 0) {
+                if(array_search($slug, $arr_exclude_slugs) === false ) {
 
-                    if (in_array($slug, $tax_sel)) {
-                        $sl0 = 'checked';
-                    }
-                    else{
-                        $sl0 ='';
-                    }
-                }
+	                if(is_array($tax_sel) && count($tax_sel) > 0) {
 
-                echo '<div id="'. esc_attr($slug) .'" class="group-elements">
+		                if (in_array($slug, $tax_sel)) {
+			                $sl0 = 'checked';
+		                }
+		                else{
+			                $sl0 ='';
+		                }
+	                }
+
+	                echo '<div id="'. esc_attr($slug) .'" class="group-elements">
                       <input id="id-'. esc_attr($slug) .'" type="checkbox" name="ymc-taxonomy[]" value="'. esc_attr($slug) .'" '. esc_attr($sl0) .'>
                       <label for="id-'. esc_attr($slug) .'">'.  esc_html($label) . '</label></div>';
+                }
 
             endforeach;
 
