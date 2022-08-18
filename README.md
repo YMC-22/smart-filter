@@ -118,8 +118,9 @@ function custom_filter_layout_1( $layout, $terms, $taxonomy, $multiple, $target 
 <?php
   if( count($terms) > 0 ) {
   $multiple = ( $multiple ) ? 'multiple' : '';
+  $terms_list = implode(",", $terms);
   $layout = '<ul>';
-  $layout .= '<li><a class="all active" href="#" data-selected="all" data-termid="'. esc_attr(implode(",", $terms)) .'">'.esc_html__('ALL','theme').'</a></li>';
+  $layout .= '<li><a class="all active" href="#" data-selected="all" data-termid="'. esc_attr($terms_list) .'">'.esc_html__('ALL','theme').'</a></li>';
 
   foreach ($taxonomy as $tax) {
     $layout .= '<li>';
