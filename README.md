@@ -50,6 +50,9 @@ do_action("ymc_after_filter_layout_ID");
 ```php
 add_filter('ymc_post_custom_layout_ID', 'custom_post_layout', 10, 3);
 ```
+**Required ID:**
+- `ID filter container on the page`
+
 **Example Custom Post Layout**
 ```php
 /**
@@ -65,7 +68,7 @@ function custom_post_layout_1($layout, $post_id, $cpt_id) {
    $layout .= '<a href="'.get_the_permalink($post_id).'">Read More</a>;   
    return $layout;
 }
-add_filter('ymc_post_custom_layout_1', 'custom_post_layout_1', 10, 3);
+add_filter('ymc_post_custom_layout_ID', 'custom_post_layout_1', 10, 3);
 ```  
 
 **This filter allows you to change the filter template**
@@ -139,7 +142,7 @@ function custom_filter_layout_1( $layout, $terms, $taxonomy, $multiple, $target 
  return $layout;
 }
 
-add_filter('ymc_filter_custom_layout_1', 'custom_filter_layout_1', 10, 5);
+add_filter('ymc_filter_custom_layout_ID', 'custom_filter_layout_1', 10, 5);
 ```
 
 ### Support
