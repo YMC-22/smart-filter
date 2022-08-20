@@ -5,6 +5,8 @@ class YMC_meta_boxes {
 	public function __construct() {
 		add_action( 'add_meta_boxes', array($this, 'add_post_metabox'));
 		add_action( 'save_post', array($this, 'save_meta_box'), 10, 2);
+        // Run popup
+		//add_thickbox();
 	}
 
 	public function save_meta_box( $post_id, $post ) {

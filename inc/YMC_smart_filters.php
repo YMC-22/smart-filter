@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 if ( ! defined('YMC_SMART_FILTER_VERSION') ) {
 
-	define( 'YMC_SMART_FILTER_VERSION', '1.1.0' );
+	define( 'YMC_SMART_FILTER_VERSION', '1.1.1' );
 }
 
 if ( ! defined('YMC_SMART_FILTER_DIR') ) {
