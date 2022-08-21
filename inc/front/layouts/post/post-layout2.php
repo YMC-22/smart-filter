@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
     while ($query->have_posts()) : $query->the_post();
 
         global $post;

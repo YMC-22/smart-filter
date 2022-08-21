@@ -1,7 +1,10 @@
 <?php
-	defined( 'ABSPATH' ) or exit;
-?>
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+?>
 
 <div id="search-layout" class="search-layout">
 

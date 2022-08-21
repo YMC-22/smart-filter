@@ -1,4 +1,10 @@
 <?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+
 // DEFAULT VALUES
 $ymc_cpt_value = 'post';
 $ymc_tax = 'category';

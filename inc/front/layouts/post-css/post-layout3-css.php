@@ -1,5 +1,8 @@
 <?php
-defined('ABSPATH') or exit;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 // Add Style
 $post_css = ".container-posts .post-entry {color:red;}";

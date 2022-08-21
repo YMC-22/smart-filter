@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $pagin = new YMC_post_pagination();
 
 switch ( $type_pagination ) :

@@ -2,7 +2,9 @@
 
 namespace YMCSFilters;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**-------------------------------------------------------------------------------
  *    DEFINES
@@ -10,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 if ( ! defined('YMC_SMART_FILTER_VERSION') ) {
 
-	define( 'YMC_SMART_FILTER_VERSION', '1.1.1' );
+	define( 'YMC_SMART_FILTER_VERSION', '1.1.2' );
 }
 
 if ( ! defined('YMC_SMART_FILTER_DIR') ) {

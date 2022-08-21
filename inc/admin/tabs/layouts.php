@@ -1,3 +1,11 @@
+<?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+?>
+
 
 <div class="header">
 	<?php echo esc_html__('Layouts Options', 'ymc-smart-filter'); ?>

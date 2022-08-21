@@ -1,4 +1,10 @@
-<?php // Custom Filter Layout ?>
+<?php // Custom Filter Layout
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+?>
 
 <div id="<?php echo esc_attr($ymc_filter_layout) . esc_attr($c_target); ?>" class="filter-layout <?php echo esc_attr($ymc_filter_layout); ?>">
 

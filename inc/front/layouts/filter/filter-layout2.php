@@ -1,5 +1,9 @@
 <?php
-defined('ABSPATH') or exit;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 // Add Style
 $ymc_filter_text_color = !empty($ymc_filter_text_color) ? "color:".$ymc_filter_text_color.";" : '';

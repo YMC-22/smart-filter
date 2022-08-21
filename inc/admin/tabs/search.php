@@ -1,3 +1,11 @@
+<?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+?>
+
 
 <div class="header">
 	<?php echo esc_html__('Search Options', 'ymc-smart-filter'); ?>

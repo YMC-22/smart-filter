@@ -1,5 +1,8 @@
 <?php
-defined('ABSPATH') or exit;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 // Add Style
 $filter_css = "";
