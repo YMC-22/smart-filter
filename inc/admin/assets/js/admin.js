@@ -167,80 +167,86 @@
         function sortTaxonomy() {
 
             let taxListElement = document.querySelector('#ymc-tax-checkboxes');
-            let taxElements = taxListElement.querySelectorAll('.group-elements');
 
-            for (let tax of taxElements) {
-                tax.draggable = true;
-            }
+            if( taxListElement ) {
 
-            taxListElement.addEventListener('dragstart', (evt) => {
-                evt.target.classList.add('selected');
-            })
+                let taxElements = taxListElement.querySelectorAll('.group-elements');
 
-            taxListElement.addEventListener('dragend', (evt) => {
-                evt.target.classList.remove('selected');
+                for (let tax of taxElements) {
+                    tax.draggable = true;
+                }
 
-                let arrTax = [];
+                taxListElement.addEventListener('dragstart', (evt) => {
+                    evt.target.classList.add('selected');
+                })
 
-                taxListElement.querySelectorAll('.group-elements').forEach((el) => {
-                    arrTax.push(el.id);
+                taxListElement.addEventListener('dragend', (evt) => {
+                    evt.target.classList.remove('selected');
+
+                    let arrTax = [];
+
+                    taxListElement.querySelectorAll('.group-elements').forEach((el) => {
+                        arrTax.push(el.id);
+                    });
+
+                    let data = {
+                        'action': 'ymc_tax_sort',
+                        'nonce_code' : _global_object.nonce,
+                        'tax_sort' : JSON.stringify(arrTax),
+                        'post_id' : taxListElement.dataset.postid
+                    };
+
+                    $.ajax({
+                        type: 'POST',
+                        dataType: 'json',
+                        url: _global_object.ajax_url,
+                        data: data,
+                        success: function (res) {},
+                        error: function (obj, err) {
+                            console.log( obj, err );
+                        }
+                    });
                 });
 
-                let data = {
-                    'action': 'ymc_tax_sort',
-                    'nonce_code' : _global_object.nonce,
-                    'tax_sort' : JSON.stringify(arrTax),
-                    'post_id' : taxListElement.dataset.postid
+                let getNextElement = (cursorPosition, currentElement) => {
+                    let currentElementCoord = currentElement.getBoundingClientRect();
+                    let currentElementCenter = currentElementCoord.y + currentElementCoord.height / 2;
+                    let nextElement = (cursorPosition < currentElementCenter) ?
+                        currentElement :
+                        currentElement.nextElementSibling;
+
+                    return nextElement;
                 };
 
-                $.ajax({
-                    type: 'POST',
-                    dataType: 'json',
-                    url: _global_object.ajax_url,
-                    data: data,
-                    success: function (res) {},
-                    error: function (obj, err) {
-                        console.log( obj, err );
+                taxListElement.addEventListener('dragover', (evt) => {
+                    evt.preventDefault();
+
+                    const activeElement = taxListElement.querySelector(`.selected`);
+
+                    const currentElement = evt.target;
+
+                    const isMoveable = activeElement !== currentElement &&
+                        currentElement.classList.contains('group-elements');
+
+                    if (!isMoveable) {
+                        return;
                     }
+
+                    const nextElement = getNextElement(evt.clientY, currentElement);
+
+                    if (
+                        nextElement &&
+                        activeElement === nextElement.previousElementSibling ||
+                        activeElement === nextElement
+                    ) {
+                        return;
+                    }
+
+                    taxListElement.insertBefore(activeElement, nextElement);
                 });
-            });
 
-            let getNextElement = (cursorPosition, currentElement) => {
-                let currentElementCoord = currentElement.getBoundingClientRect();
-                let currentElementCenter = currentElementCoord.y + currentElementCoord.height / 2;
-                let nextElement = (cursorPosition < currentElementCenter) ?
-                    currentElement :
-                    currentElement.nextElementSibling;
+            }
 
-                return nextElement;
-            };
-
-            taxListElement.addEventListener('dragover', (evt) => {
-                evt.preventDefault();
-
-                const activeElement = taxListElement.querySelector(`.selected`);
-
-                const currentElement = evt.target;
-
-                const isMoveable = activeElement !== currentElement &&
-                    currentElement.classList.contains('group-elements');
-
-                if (!isMoveable) {
-                    return;
-                }
-
-                const nextElement = getNextElement(evt.clientY, currentElement);
-
-                if (
-                    nextElement &&
-                    activeElement === nextElement.previousElementSibling ||
-                    activeElement === nextElement
-                ) {
-                    return;
-                }
-
-                taxListElement.insertBefore(activeElement, nextElement);
-            });
         }
         sortTaxonomy();
 
