@@ -65,5 +65,3 @@ Detailed information can be found on GitHub at this <a target="_blank" href="htt
 == Video ==
 https://www.youtube.com/watch?v=FIBNE0Ix6Vg
 
-
-

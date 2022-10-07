@@ -33,6 +33,3 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once( plugin_dir_path( __FILE__ ) . 'inc/YMC_smart_filters.php' );
 
 
-
-
-
