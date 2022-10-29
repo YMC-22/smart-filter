@@ -5,7 +5,7 @@ Version: 1.1.3
 Donate link: https://github.com/YMC-22/smart-filter
 Tags: filters, posts, mind, ajax posts, category posts, taxonomy, custom taxonomy, woocommerce
 Requires at least: 4.8
-Tested up to: 6.0.1
+Tested up to: 6.1
 Stable tag: 1.1.3
 Requires PHP: 7.0
 License: GPLv2 or later
