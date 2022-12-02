@@ -560,6 +560,66 @@
             }
         });
 
+        // Sort Posts on Frontend
+        $(document).on('click','.ymc-smart-filter-container .sort-container .dropdown-filter .menu-active',function (e) {
+            e.preventDefault();
+            let $el = $(this);
+            $el.find('.arrow').toggleClass('open').end().next().toggle();
+            $el.closest('.dropdown-filter').siblings().find('.menu-passive').hide().end().find('.arrow').removeClass('open');
+        });
+
+        $(document).on('click','.ymc-smart-filter-container .sort-container .dropdown-filter .menu-passive .btn-close',function (e) {
+            e.preventDefault();
+            $(this).closest('.dropdown-filter').find('.down').removeClass('open').end().find('.menu-passive').hide();
+        });
+
+        $(document).on('click','.ymc-smart-filter-container .sort-container .dropdown-filter .menu-passive .menu-link',function (e) {
+            e.preventDefault();
+
+            let link = $(this);
+            let sort_order = this.getAttribute('data-order');
+            let sort_orderby = this.getAttribute('data-orderby');
+
+            link.closest('.dropdown-filter').find('.menu-active .name-sort').html($(this).text());
+
+
+            if( sort_order === 'desc' ) {
+                sort_order = 'asc';
+                this.classList.add("asc");
+                this.classList.remove("desc");
+                link.closest('.dropdown-filter').find('.menu-active .arrow-orderby').addClass('asc').removeClass('desc');
+            }
+            else {
+                sort_order = 'desc';
+                this.classList.add("desc");
+                this.classList.remove("asc");
+                link.closest('.dropdown-filter').find('.menu-active .arrow-orderby').addClass('desc').removeClass('asc');
+            }
+
+            link.closest('.menu-passive__item').
+            siblings().find('.menu-link').
+            removeClass('asc desc');
+
+            this.setAttribute('data-order',sort_order);
+
+            // Update data params
+            let params = JSON.parse( this.closest('.ymc-smart-filter-container').dataset.params);
+            //params.terms = term_id;
+            params.page = 1;
+            params.search = '';
+            params.sort_order = sort_order;
+            params.sort_orderby = sort_orderby;
+            this.closest('.ymc-smart-filter-container').dataset.params = JSON.stringify(params);
+
+            getFilterPosts({
+                'paged'     : 1,
+                'toggle_pg' : 1,
+                'target'    : params.data_target,
+                'type_pg'   : params.type_pg
+            });
+
+        });
+
 
         /*** API JS Custom Filter Layout ***/
         const _FN = (function () {

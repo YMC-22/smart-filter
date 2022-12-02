@@ -1,7 +1,7 @@
 ===  YMC Smart Filter ===
 Plugin Name: YMC Smart Filter
 Contributors: YMC
-Version: 1.1.3
+Version: 1.2.0
 Donate link: https://github.com/YMC-22/smart-filter
 Tags: filters, posts, mind, ajax posts, category posts, taxonomy, custom taxonomy, woocommerce
 Requires at least: 4.8
@@ -25,6 +25,7 @@ The plugin provides the following functionality:
 - Sorting taxonomies and terms.
 - Installation of different types of pagination (Numeric, Load more, Scroll infinity).
 - Choice of different templates for filters and post cards.
+- Sorting posts on the frontend
 - Customization of the color palette.
 - Adding a post search bar.
 - Typography customization.
@@ -59,7 +60,8 @@ Detailed information can be found on GitHub at this <a target="_blank" href="htt
 
 = 1.1.1 =
 * Added ability to filter Products from WooCommerce plugin.
-
+= 1.2.0 =
+* Added sorting of posts on the frontend
 
 
 == Video ==

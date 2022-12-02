@@ -36,6 +36,9 @@ if( get_post_meta($id, 'ymc_tax_sort', true) ) {
 if (get_post_meta($id, 'ymc_filter_status', true)) {
 	$ymc_filter_status = get_post_meta($id, 'ymc_filter_status', true);
 }
+if (get_post_meta($id, 'ymc_sort_status', true)) {
+	$ymc_sort_status = get_post_meta($id, 'ymc_sort_status', true);
+}
 if (get_post_meta($id, 'ymc_filter_layout', true)) {
 	$ymc_filter_layout = get_post_meta($id, 'ymc_filter_layout', true);
 }

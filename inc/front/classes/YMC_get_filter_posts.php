@@ -35,6 +35,9 @@ class YMC_get_filter_posts {
 		$type_pagination = $clean_data['type_pg'];
 		$keyword = $clean_data['search'];
 		$post_sel = $clean_data['post_sel'];
+		$sort_order = $clean_data['sort_order'];
+		$sort_orderby = $clean_data['sort_orderby'];
+
 		$target_id = $clean_data['target_id'];
 
 		$paged = (int) $_POST['paged'];
@@ -45,6 +48,11 @@ class YMC_get_filter_posts {
 
 		$default_order_by = apply_filters('ymc_filter_posts_order_by', $ymc_order_post_by);
 		$default_order    = apply_filters('ymc_filter_posts_order', $ymc_order_post_type);
+
+		if( !empty($sort_order) && !empty($sort_orderby) ) :
+			$default_order_by = $sort_orderby;
+			$default_order = $sort_order;
+		endif;
 
 		// Convert Taxonomy & Terms to Array
 		$taxonomy = !empty( $taxonomy ) ? explode(',', $taxonomy) : false;

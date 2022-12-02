@@ -256,7 +256,7 @@ $font-size: 16;
 				.menu-passive {
 					display: none;
 					max-width: 300px;
-					margin-top: 12px;
+					margin-top: 15px;
 					padding: 30px 20px 15px 20px;
 					background: #141518;
 					color: #FAF7ED;
@@ -771,6 +771,128 @@ $font-size: 16;
 				i {
 					color: #098ab8;
 					font-size: 14px;
+				}
+			}
+		}
+	}
+
+	// Sort style
+	.sort-container {
+		display: flex;
+		justify-content: left;
+		align-items: center;
+		padding: 10px 0;
+		.dropdown-filter {
+			font-size: 16px;
+			position: relative;
+			margin-right: 10px;
+			margin-bottom: 10px;
+			max-width: 300px;
+			width: 100%;
+			display: inline-flex;
+			&:last-child {
+				margin-right: 0;
+			}
+			.menu-active {
+				border: 1px solid #141518;
+				padding: 10px 20px 10px 10px;
+				width: 100%;
+				position: relative;
+				cursor: pointer;
+				text-transform: capitalize;
+				background: #fff;
+				.arrow-orderby {
+					position: relative;
+					font-weight: normal;
+					&:after {
+						content: '';
+						position: absolute;
+						right: -15px;
+						top: -2px;
+					}
+					&.desc:after {
+						content: '\2193';
+					}
+					&.asc:after {
+						content: '\2191';
+					}
+				}
+				.arrow {
+					position: absolute;
+					right: 13px;
+					top: 50%;
+					z-index: 1;
+					width: 0;
+					height: 0;
+					border: solid #141518;
+					border-width: 0 3px 3px 0;
+					padding: 3px;
+					transform: translateY(-50%) rotate(45deg);
+					transition: .3s;
+					&.open {
+						transform: rotate(227deg);
+					}
+				}
+			}
+			.menu-passive {
+				display: none;
+				max-width: 300px;
+				margin-top: 15px;
+				padding: 30px 20px 15px 20px;
+				background: #474747;
+				color: #FAF7ED;
+				position: absolute;
+				left: 0;
+				top: 40px;
+				width: 100%;
+				z-index: 2;
+				transition: .3s;
+				&:before {
+					content: '';
+					position: absolute;
+					width: 15px;
+					height: 15px;
+					background: #474747;
+					left: 10px;
+					top: -14px;
+					clip-path: polygon(50% 50%, 0% 100%, 100% 100%);
+				}
+
+				.btn-close {
+					position: absolute;
+					right: 15px;
+					top: 15px;
+					font-size: 14px;
+					font-style: normal;
+					cursor: pointer;
+				}
+
+				&__item {
+					padding: 8px 0;
+					.menu-link {
+						color: #fff;
+						position: relative;
+						font-size: 14px;
+						display: inline-block;
+						word-break: break-word;
+						line-height: 1.35;
+						text-decoration: none;
+						&:hover {
+							text-decoration: none;
+						}
+						&:after {
+							content: '';
+							position: absolute;
+							right: -15px;
+							top: 0;
+						}
+						&.desc:after {
+							content: '\2193';
+						}
+						&.asc:after {
+							content: '\2191';
+						}
+					}
 				}
 			}
 		}

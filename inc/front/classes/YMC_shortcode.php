@@ -53,7 +53,7 @@ class YMC_shortcode {
 
 			echo '<div id="ymc-smart-filter-container-'. esc_attr($c_target) .'" 
 				  class="ymc-smart-filter-container ymc-'. esc_attr($ymc_filter_layout) .' ymc-'. esc_attr($ymc_post_layout) .' ymc-pagination-'. esc_attr($ymc_pagination_type) .' data-target-ymc'. esc_attr($c_target) .'"
-				  data-params=\'{"cpt":"'.esc_attr($ymc_cpt_value).'","tax":"'.esc_attr($ymc_tax).'","terms":"'.esc_attr($ymc_terms).'","type_pg":"'.esc_attr($ymc_pagination_type).'","per_page":"'.esc_attr($ymc_per_page).'","page":"1","post_layout":"'.esc_attr($ymc_post_layout).'","filter_layout":"'.esc_attr($ymc_filter_layout).'","filter_id":"'.esc_attr($id).'","post_sel":"all","search":"","data_target":"data-target-ymc'.esc_attr($c_target).'","target_id":"'.esc_attr($c_target).'"}\'>';
+				  data-params=\'{"cpt":"'.esc_attr($ymc_cpt_value).'","tax":"'.esc_attr($ymc_tax).'","terms":"'.esc_attr($ymc_terms).'","type_pg":"'.esc_attr($ymc_pagination_type).'","per_page":"'.esc_attr($ymc_per_page).'","page":"1","post_layout":"'.esc_attr($ymc_post_layout).'","filter_layout":"'.esc_attr($ymc_filter_layout).'","filter_id":"'.esc_attr($id).'","post_sel":"all","search":"","sort_order":"","sort_orderby":"","data_target":"data-target-ymc'.esc_attr($c_target).'","target_id":"'.esc_attr($c_target).'"}\'>';
 
 
 			if ( $ymc_filter_search_status === 'on' ) {
@@ -74,6 +74,15 @@ class YMC_shortcode {
 					if ( file_exists($filepath_filter) ) {
 						include $filepath_filter;
 					}
+				}
+			}
+
+			if ( $ymc_sort_status === 'on' ) {
+
+				$filepath_sort = YMC_SMART_FILTER_DIR . "/front/layouts/sort/sort-posts.php";
+
+				if ( file_exists($filepath_sort) ) {
+					include $filepath_sort;
 				}
 			}
 

@@ -84,8 +84,6 @@ class YMC_admin_filters {
 		return $font;
 	}
 
-
-
 }
 
 new YMC_admin_filters();

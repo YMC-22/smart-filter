@@ -49,6 +49,13 @@ class YMC_meta_boxes {
 			update_post_meta( $post_id, 'ymc_filter_status', $filter_status );
 		}
 
+		// Sort Posts on Frontend
+		if( isset($_POST['ymc-sort-status']) ) {
+			$sort_status = sanitize_text_field( $_POST['ymc-sort-status']);
+			update_post_meta( $post_id, 'ymc_sort_status', $sort_status );
+		}
+
+
 		// Filter Layout
 		if ( isset($_POST['ymc-filter-layout']) ) {
 			$filter_layout = sanitize_text_field($_POST['ymc-filter-layout']);

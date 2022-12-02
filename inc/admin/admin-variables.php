@@ -27,6 +27,7 @@ $tax_sort = null;
 
 // LAYOUT TAB USED DEFAULT VARIABLES
 $ymc_filter_status = 'on';
+$ymc_sort_status = 'off';
 $ymc_filter_layout = 'filter-layout1';
 $ymc_filter_text_color = '';
 $ymc_filter_bg_color = '';
@@ -74,6 +75,9 @@ if( get_post_meta($post->ID, 'ymc_tax_sort', true) ) {
 // LAYOUTS TAB SUBMITTED VARIABLE VALUES
 if( get_post_meta($post->ID, 'ymc_filter_status') ) {
 	$ymc_filter_status = get_post_meta($post->ID, 'ymc_filter_status', true);
+}
+if( get_post_meta($post->ID, 'ymc_sort_status') ) {
+	$ymc_sort_status = get_post_meta($post->ID, 'ymc_sort_status', true);
 }
 if( get_post_meta($post->ID, 'ymc_filter_layout') ) {
 	$ymc_filter_layout = get_post_meta($post->ID, 'ymc_filter_layout', true);

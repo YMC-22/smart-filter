@@ -111,6 +111,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 			            <?php echo esc_html__('Desc', 'ymc-smart-filter'); ?>
                     </option>
                 </select>
+            </div>
+
+            <div class="from-element">
+                <label class="form-label">
+		            <?php echo esc_html__('Post Sorting', 'ymc-smart-filter'); ?>
+                    <span class="information">
+                    <?php echo esc_html__('Enable sorting posts on frontend.', 'ymc-smart-filter');?>
+                </span>
+                </label>
+
+                <div class="ymc-toggle-group">
+                    <label class="switch">
+                        <input type="checkbox" <?php echo ($ymc_sort_status === "off") ? "checked" : ""; ?>>
+                        <input type="hidden" name="ymc-sort-status" value='<?php echo esc_attr($ymc_sort_status); ?>'>
+                        <span class="slider"></span>
+                    </label>
+                </div>
 
             </div>
 

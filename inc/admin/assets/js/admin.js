@@ -346,8 +346,6 @@
         // Add Color Picker for all inputs
         $('.ymc-custom-color').wpColorPicker();
 
-
-
     });
 
 }( jQuery ));
