@@ -59,11 +59,11 @@ add_filter('ymc_post_custom_layout_ID', 'custom_post_layout', 10, 3);
  * Creating a custom post template
  * @param {string} layout - HTML markup
  * @param {int} post_id - Post ID
- * @param {int} cpt_id - Custom Post Type ID
+ * @param {int} filter_id - Filter ID
  * @returns {string} HTML markup card post
  */
-function custom_post_layout_1($layout, $post_id, $cpt_id) {  
-   $layout .= '<h2>'.get_the_title($post_id).'</h2>';
+function custom_post_layout_1($layout, $post_id, $filter_id) {  
+   $layout  = '<h2>'.get_the_title($post_id).'</h2>';
    $layout .= '<p>'.wp_trim_words(get_the_content($post_id), 30).'</p>';
    $layout .= '<a href="'.get_the_permalink($post_id).'">Read More</a>;   
    return $layout;
