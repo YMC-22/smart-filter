@@ -7,7 +7,7 @@ Tags: filters, posts, mind, ajax posts, category posts, taxonomy, custom taxonom
 Requires at least: 4.8
 Tested up to: 6.1
 Stable tag: 1.1.3
-Requires PHP: 8.0
+Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,7 +62,8 @@ Detailed information can be found on GitHub at this <a target="_blank" href="htt
 * Added ability to filter Products from WooCommerce plugin.
 = 1.2.0 =
 * Added sorting of posts on the frontend
-
+= 1.2.3 =
+* Fixed files
 
 == Video ==
 https://www.youtube.com/watch?v=FIBNE0Ix6Vg
