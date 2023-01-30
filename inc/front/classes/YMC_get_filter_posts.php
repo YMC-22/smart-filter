@@ -78,7 +78,7 @@ class YMC_get_filter_posts {
 
 				endforeach;
 
-				if( count($term_id) > 0 ) :
+				if( !empty($term_id) ) :
 
 					$tax_qry[] = [
 						'taxonomy' => $tax,
