@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 
+
 <div class="header">
 	<?php echo esc_html__('Advanced Options', 'ymc-smart-filter'); ?>
 </div>

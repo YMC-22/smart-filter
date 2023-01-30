@@ -4,6 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+
 class YMC_shortcode {
 
 	public function __construct() {

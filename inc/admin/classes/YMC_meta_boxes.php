@@ -4,6 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+
 class YMC_meta_boxes {
 
 	public function __construct() {

@@ -4,6 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+
 class YMC_admin_filters {
 
 	public function __construct() {

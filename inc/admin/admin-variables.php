@@ -4,6 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+
 global $post;
 $args = array( 'public' => true,  );
 $output = 'names';

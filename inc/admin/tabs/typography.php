@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 
+
 <div class="header">
 	<?php echo esc_html__('Typography Options', 'ymc-smart-filter'); ?>
 </div>

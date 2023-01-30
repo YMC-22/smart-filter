@@ -4,7 +4,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-
 class YMC_post_pagination {
 
 	public function __construct() {}

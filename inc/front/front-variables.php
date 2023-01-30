@@ -5,6 +5,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
+
+
 // DEFAULT VALUES
 $ymc_cpt_value = 'post';
 $ymc_tax = 'category';

@@ -4,6 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+
 class YMC_init {
 
 	const post_type = 'ymc_filters';
