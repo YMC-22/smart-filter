@@ -36,9 +36,9 @@ add_filter('ymc_post_excerpt_length_ID', $ymc_post_excerpt_length, 3, 1);
 add_filter('ymc_post_read_more_ID', $ymc_post_read_more, 3, 1);
 ```
 
-**Change filter result text: "2 posts selected". Params: $layouts, $found_posts**
+**Change result text: "2 posts selected". Params: $layouts, $found_posts**
 ```php
-add_filter('ymc_posts_selected', 'my_ymc_posts_selected', 3, 2);
+add_filter('ymc_posts_selected', '$ymc_posts_selected', 3, 2);
 ```
 
 **Change text of Show All button in filter panel**
