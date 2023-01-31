@@ -69,7 +69,7 @@
                 success: function (res) {
 
                     if(params.post_sel !== 'all') {
-                        container.find('.filter-layout .posts-found').html(`<b>${res.found}</b> posts selected.`);
+                        container.find('.filter-layout .posts-found').html(`<span>${res.posts_selected}</span>`);
                     }
                     else {
                         container.find('.filter-layout .posts-found').empty();
