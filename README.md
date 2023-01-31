@@ -36,7 +36,7 @@ add_filter('ymc_post_excerpt_length_ID', $ymc_post_excerpt_length, 3, 1);
 add_filter('ymc_post_read_more_ID', $ymc_post_read_more, 3, 1);
 ```
 
-**Change result text: "2 posts selected". Params: $layouts, $found_posts**
+**Change result text: "# posts selected". Params: $layouts, $found_posts**
 ```php
 add_filter('ymc_posts_selected', '$ymc_posts_selected', 3, 2);
 ```
