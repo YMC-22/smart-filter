@@ -181,7 +181,7 @@ class YMC_get_filter_posts {
 
 		$posts_selected = "{$query->found_posts} posts selected";
 		$posts_found = $query->found_posts;
-		$default_posts_selected = apply_filters('ymc_posts_selected', $posts_selected, $posts_found);
+		$default_posts_selected = apply_filters('ymc_posts_selected_'.$target_id, $posts_selected, $posts_found);
 
 
 		$data = array(
