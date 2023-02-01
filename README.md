@@ -38,7 +38,7 @@ add_filter('ymc_post_read_more_ID', $ymc_post_read_more, 3, 1);
 
 **Change result text: "# posts selected". Params: $layouts, $found_posts**
 ```php
-add_filter('ymc_posts_selected', '$ymc_posts_selected', 3, 2);
+add_filter('ymc_posts_selected_ID', '$ymc_posts_selected', 3, 2);
 ```
 
 **Change text of Show All button in filter panel**
