@@ -35,6 +35,12 @@ add_filter('ymc_post_excerpt_length_ID', $ymc_post_excerpt_length, 3, 1);
 ```php
 add_filter('ymc_post_read_more_ID', $ymc_post_read_more, 3, 1);
 ```
+
+**Change result text: "# posts selected". Params: $layouts, $found_posts**
+```php
+add_filter('ymc_posts_selected', '$ymc_posts_selected', 3, 2);
+```
+
 **Change text of Show All button in filter panel**
 ```php
 add_filter('ymc_button_show_all_ID', $ymc_button_show_all, 3, 1);
