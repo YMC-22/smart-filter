@@ -5,7 +5,7 @@
     $(document).on('ready', function () {
 
         // Path preloader image
-        const pathPreloader = _global_object.path+"/front/assets/images/preloader.gif";
+        const pathPreloader = _global_object.path+"/front/assets/images/preloader.svg";
 
         // Options IntersectionObserver
         const optionsInfinityScroll = {
