@@ -18,12 +18,17 @@ Add code to `function.php` to your theme
 ```php
 add_filter('ymc_pagination_prev_text_ID', $ymc_pagination_prev_text, 3, 1);
 add_filter('ymc_pagination_next_text_ID', $ymc_pagination_next_text, 3, 1);
+
+add_filter('ymc_pagination_next_text_ID', function () {
+   return 'My Text';
+}, 3, 1);
+
 ```
 **Change button text Load More**
 ```php
 add_filter('ymc_pagination_load_more_ID', $ymc_pagination_load_more, 3, 1);
 
-add_filter('ymc_pagination_load_more_1', function ($load){
+add_filter('ymc_pagination_load_more_ID', function ($load){
     $load = 'Button More';
     return $load;
 }, 3, 1);
