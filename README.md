@@ -22,6 +22,11 @@ add_filter('ymc_pagination_next_text_ID', $ymc_pagination_next_text, 3, 1);
 **Change button text Load More**
 ```php
 add_filter('ymc_pagination_load_more_ID', $ymc_pagination_load_more, 3, 1);
+
+add_filter('ymc_pagination_load_more_ID', function ($load){
+    return 'More';
+}, 3, 1);
+
 ```
 **Change publication date of a post in grid of cards**
 ```php
@@ -52,7 +57,7 @@ add_filter('ymc_posts_selected_ID', 'ymc_posts_selected', 10, 2);
 add_filter('ymc_sort_posts_by_ID', '$ymc_sort_posts', 3, 1);
 
 List of fields for sorting posts: ID, author, title, name, date, modified, type, parent, rand, comment_count
-Examples: Add a new item for sorting posts by the 'name' field
+Add a new item for sorting posts by the 'name' field
 function ymc_sort_posts($layouts) {
    $layouts .= '<div class="menu-passive__item">
                  <a class="menu-link" data-order="'.esc_attr('desc').'" data-orderby="'.esc_attr('name').'" href="#">'.
