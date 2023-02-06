@@ -52,6 +52,10 @@ add_filter('ymc_post_excerpt_length_ID', function () {
 **Change button text in post card**
 ```php
 add_filter('ymc_post_read_more_ID', $ymc_post_read_more, 3, 1);
+
+add_filter('ymc_post_read_more_ID', function () {
+    return 'Read...';
+}, 3, 1);
 ```
 
 **Change result text: "# posts selected". Parameters: $layouts, $found_posts**
