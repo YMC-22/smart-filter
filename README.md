@@ -38,12 +38,16 @@ add_filter('ymc_pagination_load_more_ID', function ($load){
 add_filter('ymc_post_date_format_ID', $ymc_post_date_format, 3, 1);
 
 add_filter('ymc_post_date_format_ID', function () {
-	return 'Y-m-d';
+   return 'Y-m-d';
 }, 3, 1);
 ```
 **Change post text length (excerpt)**
 ```php
 add_filter('ymc_post_excerpt_length_ID', $ymc_post_excerpt_length, 3, 1);
+
+add_filter('ymc_post_excerpt_length_ID', function () {
+   return 10;
+}, 3, 1);
 ```
 **Change button text in post card**
 ```php
