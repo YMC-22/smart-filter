@@ -41,6 +41,12 @@ add_filter('ymc_post_read_more_ID', $ymc_post_read_more, 3, 1);
 add_filter('ymc_posts_selected_ID', '$ymc_posts_selected', 3, 2);
 ```
 
+**Change list of post sort items**
+```php
+add_filter('ymc_sort_posts_by_ID', '$ymc_sort_posts', 3, 1);
+```
+
+
 **Change text of Show All button in filter panel**
 ```php
 add_filter('ymc_button_show_all_ID', $ymc_button_show_all, 3, 1);
