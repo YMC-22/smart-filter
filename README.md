@@ -18,32 +18,80 @@ Add code to `function.php` to your theme
 ```php
 add_filter('ymc_pagination_prev_text_ID', $ymc_pagination_prev_text, 3, 1);
 add_filter('ymc_pagination_next_text_ID', $ymc_pagination_next_text, 3, 1);
+
+add_filter('ymc_pagination_next_text_ID', function() {
+   return 'My Text';
+}, 3, 1);
+
 ```
 **Change button text Load More**
 ```php
 add_filter('ymc_pagination_load_more_ID', $ymc_pagination_load_more, 3, 1);
+
+add_filter('ymc_pagination_load_more_ID', function ($load){
+    $load = 'Button More';
+    return $load;
+}, 3, 1);
 ```
 **Change publication date of a post in grid of cards**
 ```php
 add_filter('ymc_post_date_format_ID', $ymc_post_date_format, 3, 1);
+
+add_filter('ymc_post_date_format_ID', function () {
+   return 'Y-m-d';
+}, 3, 1);
 ```
 **Change post text length (excerpt)**
 ```php
 add_filter('ymc_post_excerpt_length_ID', $ymc_post_excerpt_length, 3, 1);
+
+add_filter('ymc_post_excerpt_length_ID', function () {
+   return 10;
+}, 3, 1);
 ```
 **Change button text in post card**
 ```php
 add_filter('ymc_post_read_more_ID', $ymc_post_read_more, 3, 1);
+
+add_filter('ymc_post_read_more_ID', function () {
+    return 'Read...';
+}, 3, 1);
 ```
 
-**Change result text: "# posts selected". Params: $layouts, $found_posts**
+**Change result text: "# posts selected". Parameters: $layouts, $found_posts**
 ```php
 add_filter('ymc_posts_selected_ID', '$ymc_posts_selected', 3, 2);
+
+function ymc_posts_selected($layouts, $founded_post) {
+    $layouts = 'Example text ' . $founded_post .'';
+    return $layouts;
+}
+add_filter('ymc_posts_selected_ID', 'ymc_posts_selected', 10, 2);
 ```
+
+**Change list of post sort items**
+```php
+add_filter('ymc_sort_posts_by_ID', '$ymc_sort_posts', 3, 1);
+
+List of fields for sorting posts: ID, author, title, name, date, modified, type, parent, rand, comment_count
+Add a new item for sorting posts by the 'name' field
+function ymc_sort_posts($layouts) {
+   $layouts .= '<div class="menu-passive__item">
+                 <a class="menu-link" data-order="'.esc_attr('desc').'" data-orderby="'.esc_attr('name').'" href="#">'.
+                 esc_html__('Sort by Name', 'ymc-smart-filter').'</a></div>';;
+   return $layouts;
+}
+add_filter('ymc_sort_posts_by_ID', 'ymc_sort_posts', 10, 1);
+```
+
 
 **Change text of Show All button in filter panel**
 ```php
 add_filter('ymc_button_show_all_ID', $ymc_button_show_all, 3, 1);
+
+add_filter('ymc_button_show_all_ID', function () {
+    return 'My All';
+}, 3, 1);
 ```
 **Add your content before or after the filter bar**
 ```php
