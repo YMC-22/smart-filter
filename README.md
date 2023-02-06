@@ -51,6 +51,7 @@ add_filter('ymc_posts_selected_ID', 'ymc_posts_selected', 10, 2);
 ```php
 add_filter('ymc_sort_posts_by_ID', '$ymc_sort_posts', 3, 1);
 
+List of fields for sorting posts: ID, author, title, name, date, modified, type, parent, rand, comment_count
 Examples: Add a new item for sorting posts by the 'name' field
 function ymc_sort_posts($layouts) {
    $layouts .= '<div class="menu-passive__item">
