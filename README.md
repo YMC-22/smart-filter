@@ -36,6 +36,10 @@ add_filter('ymc_pagination_load_more_ID', function ($load){
 **Change publication date of a post in grid of cards**
 ```php
 add_filter('ymc_post_date_format_ID', $ymc_post_date_format, 3, 1);
+
+add_filter('ymc_post_date_format_ID', function () {
+	return 'Y-m-d';
+}, 3, 1);
 ```
 **Change post text length (excerpt)**
 ```php
