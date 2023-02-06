@@ -44,7 +44,7 @@ add_filter('ymc_posts_selected_ID', '$ymc_posts_selected', 3, 2);
 **Change list of post sort items**
 ```php
 add_filter('ymc_sort_posts_by_ID', '$ymc_sort_posts', 3, 1);
-Examples: Add a new item for sorting posts with the Name
+Examples: Add a new item for sorting posts by the 'name' field
 function ymc_sort_posts($layouts) {
    $layouts .= '<div class="menu-passive__item">
                  <a class="menu-link" data-order="'.esc_attr('desc').'" data-orderby="'.esc_attr('name').'" href="#">'.
