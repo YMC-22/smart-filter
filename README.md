@@ -23,10 +23,10 @@ add_filter('ymc_pagination_next_text_ID', $ymc_pagination_next_text, 3, 1);
 ```php
 add_filter('ymc_pagination_load_more_ID', $ymc_pagination_load_more, 3, 1);
 
-add_filter('ymc_pagination_load_more_ID', function ($load){
-    return 'More';
+add_filter('ymc_pagination_load_more_1', function ($load){
+    $load = 'Button More';
+    return $load;
 }, 3, 1);
-
 ```
 **Change publication date of a post in grid of cards**
 ```php
