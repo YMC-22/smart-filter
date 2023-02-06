@@ -39,11 +39,18 @@ add_filter('ymc_post_read_more_ID', $ymc_post_read_more, 3, 1);
 **Change result text: "# posts selected". Parameters: $layouts, $found_posts**
 ```php
 add_filter('ymc_posts_selected_ID', '$ymc_posts_selected', 3, 2);
+
+function ymc_posts_selected($layouts, $founded_post) {
+    $layouts = 'Example text ' . $founded_post .'';
+    return $layouts;
+}
+add_filter('ymc_posts_selected_ID', 'ymc_posts_selected', 10, 2);
 ```
 
 **Change list of post sort items**
 ```php
 add_filter('ymc_sort_posts_by_ID', '$ymc_sort_posts', 3, 1);
+
 Examples: Add a new item for sorting posts by the 'name' field
 function ymc_sort_posts($layouts) {
    $layouts .= '<div class="menu-passive__item">
@@ -51,7 +58,7 @@ function ymc_sort_posts($layouts) {
                  esc_html__('Sort by Name', 'ymc-smart-filter').'</a></div>';;
    return $layouts;
 }
-add_filter('ymc_sort_posts_by_1', 'ymc_sort_posts', 10, 1);
+add_filter('ymc_sort_posts_by_ID', 'ymc_sort_posts', 10, 1);
 ```
 
 
