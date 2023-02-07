@@ -66,7 +66,7 @@ function ymc_posts_selected($layouts, $founded_post) {
     $layouts = 'Example text ' . $founded_post .'';
     return $layouts;
 }
-add_filter('ymc_posts_selected_ID', 'ymc_posts_selected', 10, 2);
+add_filter('ymc_posts_selected_ID', 'ymc_posts_selected', 3, 2);
 ```
 
 **Change list of post sort items**
