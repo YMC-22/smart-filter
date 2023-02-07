@@ -16,54 +16,60 @@ Add code to `function.php` to your theme
 
 **Change previous or next numbered paginator arrows:**
 ```php
-add_filter('ymc_pagination_prev_text_ID', $ymc_pagination_prev_text, 3, 1);
-add_filter('ymc_pagination_next_text_ID', $ymc_pagination_next_text, 3, 1);
+add_filter('ymc_pagination_prev_text_ID', $ymc_pagination_prev_text, 10, 1);
+add_filter('ymc_pagination_next_text_ID', $ymc_pagination_next_text, 10, 1);
 
+Usage example:
 add_filter('ymc_pagination_next_text_ID', function() {
    return 'My Text';
-}, 3, 1);
+}, 10, 1);
 
 ```
 **Change button text Load More**
 ```php
-add_filter('ymc_pagination_load_more_ID', $ymc_pagination_load_more, 3, 1);
+add_filter('ymc_pagination_load_more_ID', $ymc_pagination_load_more, 10, 1);
 
+Usage example:
 add_filter('ymc_pagination_load_more_ID', function ($load){
     $load = 'Button More';
     return $load;
-}, 3, 1);
+}, 10, 1);
 ```
 **Change publication date of a post in grid of cards**
 ```php
-add_filter('ymc_post_date_format_ID', $ymc_post_date_format, 3, 1);
+add_filter('ymc_post_date_format_ID', $ymc_post_date_format, 10, 1);
 
+Usage example:
 add_filter('ymc_post_date_format_ID', function () {
    return 'Y-m-d';
-}, 3, 1);
+}, 10, 1);
 ```
 **Change post text length (excerpt)**
 ```php
-add_filter('ymc_post_excerpt_length_ID', $ymc_post_excerpt_length, 3, 1);
+add_filter('ymc_post_excerpt_length_ID', $ymc_post_excerpt_length, 10, 1);
 
+Usage example:
 add_filter('ymc_post_excerpt_length_ID', function () {
    return 10;
-}, 3, 1);
+}, 10, 1);
 ```
 **Change button text in post card**
 ```php
-add_filter('ymc_post_read_more_ID', $ymc_post_read_more, 3, 1);
+add_filter('ymc_post_read_more_ID', $ymc_post_read_more, 10, 1);
 
+Usage example:
 add_filter('ymc_post_read_more_ID', function () {
     return 'Read...';
-}, 3, 1);
+}, 10, 1);
 ```
 
 **Change result text: "# posts selected". Parameters: $layouts, $found_posts**
 ```php
-add_filter('ymc_posts_selected_ID', '$ymc_posts_selected', 3, 2);
+add_filter('ymc_posts_selected_ID', '$ymc_posts_selected', 10, 2);
 
+Usage example:
 function ymc_posts_selected($layouts, $founded_post) {
-    $layouts = 'Example text ' . $founded_post .'';
+    $layouts = 'Posts found: ' . $founded_post .'';
     return $layouts;
 }
 add_filter('ymc_posts_selected_ID', 'ymc_posts_selected', 10, 2);
@@ -71,14 +77,17 @@ add_filter('ymc_posts_selected_ID', 'ymc_posts_selected', 10, 2);
 
 **Change list of post sort items**
 ```php
-add_filter('ymc_sort_posts_by_ID', '$ymc_sort_posts', 3, 1);
+add_filter('ymc_sort_posts_by_ID', '$ymc_sort_posts', 10, 1);
 
+Usage example:
 List of fields for sorting posts: ID, author, title, name, date, modified, type, parent, rand, comment_count
-Add a new item for sorting posts by the 'name' field
+Important! Keep HTML structure with all attributes as in the example below.
+Add a new item for sorting posts by the 'name' field:
+
 function ymc_sort_posts($layouts) {
    $layouts .= '<div class="menu-passive__item">
-                 <a class="menu-link" data-order="'.esc_attr('desc').'" data-orderby="'.esc_attr('name').'" href="#">'.
-                 esc_html__('Sort by Name', 'ymc-smart-filter').'</a></div>';;
+                <a class="menu-link" data-order="'.esc_attr('desc').'" data-orderby="'.esc_attr('name').'" href="#">'.
+                esc_html__('Sort by Name', 'ymc-smart-filter').'</a></div>';
    return $layouts;
 }
 add_filter('ymc_sort_posts_by_ID', 'ymc_sort_posts', 10, 1);
@@ -87,11 +96,12 @@ add_filter('ymc_sort_posts_by_ID', 'ymc_sort_posts', 10, 1);
 
 **Change text of Show All button in filter panel**
 ```php
-add_filter('ymc_button_show_all_ID', $ymc_button_show_all, 3, 1);
+add_filter('ymc_button_show_all_ID', $ymc_button_show_all, 10, 1);
 
+Usage example:
 add_filter('ymc_button_show_all_ID', function () {
     return 'My All';
-}, 3, 1);
+}, 10, 1);
 ```
 **Add your content before or after the filter bar**
 ```php
@@ -103,6 +113,8 @@ do_action("ymc_after_filter_layout_ID");
 **This filter allows you to change the post template**
 ```php
 add_filter('ymc_post_custom_layout_ID', 'custom_post_layout', 10, 3);
+
+Important! Keep HTML structure with all attributes as in the example below.
 ```
 **Required ID:**
 - `ID filter container on the page`
@@ -116,13 +128,13 @@ add_filter('ymc_post_custom_layout_ID', 'custom_post_layout', 10, 3);
  * @param {int} filter_id - Filter ID
  * @returns {string} HTML markup card post
  */
-function custom_post_layout_1($layout, $post_id, $filter_id) {  
+function my_custom_post_layout($layout, $post_id, $filter_id) {  
    $layout  = '<h2>'.get_the_title($post_id).'</h2>';
    $layout .= '<p>'.wp_trim_words(get_the_content($post_id), 30).'</p>';
    $layout .= '<a href="'.get_the_permalink($post_id).'">Read More</a>;   
    return $layout;
 }
-add_filter('ymc_post_custom_layout_ID', 'custom_post_layout_1', 10, 3);
+add_filter('ymc_post_custom_layout_ID', 'my_custom_post_layout', 10, 3);
 ```  
 
 **This filter allows you to change the filter template**
@@ -130,6 +142,9 @@ add_filter('ymc_post_custom_layout_ID', 'custom_post_layout_1', 10, 3);
 add_filter('ymc_filter_custom_layout_ID', 'custom_filter_layout', 10, 3);
 ```
 If you need to create your custom filter bar, you can use the filter which will allow you to create your filter bar. This requires a basic understanding of HTML JavaScript, CSS and PHP languages. In the example, it is indicated how you can use the settings and output of a custom filter. ***For your filter to work correctly, follow the following class and attribute names in your HTML markup:***
+
+Important! Keep HTML structure with all attributes as in the example below.
+Use, for example, following WordPress functions to get the required data: get_taxonomy(), get_term().
 
 **Required ID:**
 - `ID filter container on the page`
@@ -153,7 +168,7 @@ If you need to create your custom filter bar, you can use the filter which will 
  * @param {string} target - name class target element
  * @returns {string} HTML markup filter bar
  */
-function custom_filter_layout_1( $layout, $terms, $taxonomy, $multiple, $target ) { ?>
+function my_custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target ) { ?>
 
 <script type="application/javascript">   
    window.addEventListener('DOMContentLoaded', () => {
@@ -196,7 +211,7 @@ function custom_filter_layout_1( $layout, $terms, $taxonomy, $multiple, $target 
  return $layout;
 }
 
-add_filter('ymc_filter_custom_layout_ID', 'custom_filter_layout_1', 10, 5);
+add_filter('ymc_filter_custom_layout_ID', 'my_custom_filter_layout', 10, 5);
 ```
 
 ### Support
