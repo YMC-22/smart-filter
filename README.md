@@ -87,7 +87,7 @@ Add a new item for sorting posts by the 'name' field:
 function ymc_sort_posts($layouts) {
    $layouts .= '<div class="menu-passive__item">
                 <a class="menu-link" data-order="'.esc_attr('desc').'" data-orderby="'.esc_attr('name').'" href="#">'.
-                esc_html__('Sort by Name', 'ymc-smart-filter').'</a></div>';;
+                esc_html__('Sort by Name', 'ymc-smart-filter').'</a></div>';
    return $layouts;
 }
 add_filter('ymc_sort_posts_by_ID', 'ymc_sort_posts', 10, 1);
