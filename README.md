@@ -81,7 +81,7 @@ function ymc_sort_posts($layouts) {
                  esc_html__('Sort by Name', 'ymc-smart-filter').'</a></div>';;
    return $layouts;
 }
-add_filter('ymc_sort_posts_by_ID', 'ymc_sort_posts', 10, 1);
+add_filter('ymc_sort_posts_by_ID', 'ymc_sort_posts', 3, 1);
 ```
 
 
