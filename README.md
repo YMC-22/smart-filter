@@ -19,7 +19,7 @@ Add code to `function.php` to your theme
 add_filter('ymc_pagination_prev_text_ID', $ymc_pagination_prev_text, 10, 1);
 add_filter('ymc_pagination_next_text_ID', $ymc_pagination_next_text, 10, 1);
 
-_Usage example:_
+Usage example:
 add_filter('ymc_pagination_next_text_ID', function() {
    return 'My Text';
 }, 10, 1);
