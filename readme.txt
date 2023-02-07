@@ -1,7 +1,7 @@
 ===  YMC Smart Filter ===
 Plugin Name: YMC Smart Filter
 Contributors: YMC
-Version: 1.2.3
+Version: 1.2.4
 Donate link: https://github.com/YMC-22/smart-filter
 Tags: filters, posts, mind, ajax posts, category posts, taxonomy, custom taxonomy, woocommerce
 Requires at least: 4.8
@@ -66,6 +66,9 @@ Detailed information can be found on GitHub at this <a target="_blank" href="htt
 * Add filter ymc_posts_selected_ID
 = 1.2.3 =
 * Add filter ymc_sort_posts_by_ID
+= 1.2.4 =
+* Fixed file js (frontend)
+
 
 
 == Video ==
