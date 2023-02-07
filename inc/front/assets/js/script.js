@@ -80,9 +80,9 @@
                         case 'numeric' :
 
                             // Filter is act scroll top
-                            // if(toggle_pg === 1) {
-                            //     $('html, body').animate({scrollTop: container.offset().top - 100}, 300);
-                            // }
+                            if(toggle_pg === 1) {
+                                $('html, body').animate({scrollTop: container.offset().top - 100}, 500);
+                            }
 
                             container.find('.container-posts').
                             removeClass('loading').
