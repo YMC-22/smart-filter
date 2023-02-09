@@ -80,9 +80,12 @@
                         case 'numeric' :
 
                             // Filter is act scroll top
-                            if(toggle_pg === 1) {
-                                $('html, body').animate({scrollTop: container.offset().top - 100}, 500);
+                            if(!container.hasClass('ymc-loaded-filter') ) {
+                                if(toggle_pg === 1) {
+                                    $('html, body').animate({scrollTop: container.offset().top - 100}, 500);
+                                }
                             }
+
 
                             container.find('.container-posts').
                             removeClass('loading').
@@ -435,6 +438,7 @@
         $(document).on('click','.ymc-smart-filter-container .pagination-numeric li a',function (e) {
             e.preventDefault();
 
+            this.closest('.ymc-smart-filter-container').classList.remove('ymc-loaded-filter');
             let paged = parseInt($(this).attr("href").replace(/\D/g, ""));
             let data_target = JSON.parse(this.closest('.ymc-smart-filter-container').dataset.params).data_target;
             let type_pg = JSON.parse(this.closest('.ymc-smart-filter-container').dataset.params).type_pg;

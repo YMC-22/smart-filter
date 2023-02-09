@@ -8,7 +8,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div id="<?php echo esc_attr($ymc_filter_layout) . esc_attr($c_target); ?>" class="filter-layout <?php echo esc_attr($ymc_filter_layout); ?>">
 
-	<?php do_action("ymc_before_filter_layout");
+	<?php
+
+        do_action("ymc_before_filter_layout_".$c_target."");
 
         if ( is_array($terms_selected) && is_array($tax_selected) ) {
 
@@ -56,7 +58,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			}
 
-		 do_action("ymc_after_filter_layout");
+		 do_action("ymc_after_filter_layout_".$c_target."");
 
    ?>
 
