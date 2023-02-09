@@ -105,8 +105,8 @@ add_filter('ymc_button_show_all_ID', function () {
 ```
 **Add your content before or after the filter bar**
 ```php
-do_action("ymc_before_filter_layout_ID");
-do_action("ymc_after_filter_layout_ID");
+add_action("ymc_before_filter_layout_ID");
+add_action("ymc_after_filter_layout_ID");
 ```
 
 ### Layouts
