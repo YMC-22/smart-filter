@@ -18,8 +18,8 @@ class YMC_init {
 		register_post_type( self::post_type,
 			array(
 				'labels'              => array(
-					'name'          => __( 'YMC Smart Filter', 'ymc-smart-filter' ),
-					'singular_name' => __( 'YMC Smart Filter', 'ymc-smart-filter' ),
+					'name'          => __( 'Smart Filter', 'ymc-smart-filter' ),
+					'singular_name' => __( 'Smart Filter', 'ymc-smart-filter' ),
 				),
 				'public'              => false,
 				'hierarchical'        => false,
