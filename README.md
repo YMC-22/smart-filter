@@ -147,7 +147,7 @@ Important! Keep HTML structure with all attributes as in the example below.
 Use, for example, following WordPress functions to get the required data: get_taxonomy(), get_term().
 
 **Required ID:**
-- `ID filter container on the page`
+- `ID filter container on the page (Number)`
 
 **Required Classes:**
 - `all`
