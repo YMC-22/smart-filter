@@ -117,7 +117,7 @@ add_filter('ymc_post_custom_layout_ID', 'custom_post_layout', 10, 3);
 Important! Keep HTML structure with all attributes as in the example below.
 ```
 **Required ID:**
-- `ID filter container on the page`
+- `ID filter container on the page (Number)`
 
 **Example Custom Post Layout**
 ```php
