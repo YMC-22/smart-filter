@@ -1,5 +1,5 @@
-===  YMC Smart Filter ===
-Plugin Name: YMC Smart Filter
+===  Smart Filter ===
+Plugin Name: Smart Filter
 Contributors: YMC
 Version: 1.2.5
 Donate link: https://github.com/YMC-22/smart-filter
