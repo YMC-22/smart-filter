@@ -57,7 +57,8 @@ class YMC_admin_filters {
 			"name" =>  'Name',
 			"date" =>  'Date',
 			"ID" =>    'ID',
-			"author" => 'Author'
+			"author" => 'Author',
+			"menu_order" => 'Menu Order'
 		];
 
 		return $order;
