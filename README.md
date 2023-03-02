@@ -214,6 +214,23 @@ function my_custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target
 add_filter('ymc_filter_custom_layout_ID', 'my_custom_filter_layout', 10, 5);
 ```
 
+**API JS**
+To interact with the filter through js, you should use the following methods:
+```php
+<script type="application/javascript"> 
+    let termID = document.querySelector('[data-termid="7"]');
+    let ymc = YMCTools({
+                   target: 'data-target-ymc1',
+                   self: termID
+               });
+               ymc.updateParams();
+               ymc.getFilterPosts();
+   
+</script>
+
+```
+
+
 ### Support
 For support questions, please write to: wss.office21@gmail.com
 
