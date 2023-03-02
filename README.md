@@ -220,7 +220,7 @@ add_filter('ymc_filter_custom_layout_ID', 'my_custom_filter_layout', 10, 5);
 To interact with the filter through js, should use the following methods:
 
 **Required Classes:**
-- `termID - ID term`
+- `term - ID term (Number). Example, number 7 is termID`
 
 ```php
 <script type="application/javascript"> 
