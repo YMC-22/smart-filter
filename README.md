@@ -217,7 +217,7 @@ add_filter('ymc_filter_custom_layout_ID', 'my_custom_filter_layout', 10, 5);
 
 **API JS**
 
-To interact with the filter through js, should use the following methods:
+To interact with the filter through JS, should use the following methods:
 
 **Required Classes:**
 - `term - ID term (Number). Example, number 7 is termID`
