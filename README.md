@@ -226,7 +226,7 @@ To interact with the filter through js, should use the following methods:
 <script type="application/javascript"> 
     let termID = document.querySelector('[data-termid="7"]');
     let ymc = YMCTools({
-                   target: 'data-target-ymc1',
+                   target: '.data-target-ymc1',
                    self: termID
                });
                ymc.updateParams();
