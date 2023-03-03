@@ -220,13 +220,14 @@ add_filter('ymc_filter_custom_layout_ID', 'my_custom_filter_layout', 10, 5);
 To interact with the filter through JS, should use the chain of the following methods:
 
 **Required Classes:**
+- `ID filter container on the page (Number)`
 - `term - ID term (Number). Example, number 7 is termID`
 
 ```php
 <script type="application/javascript"> 
     let termID = document.querySelector('[data-termid="7"]');
     let ymc = YMCTools({
-                   target: '.data-target-ymc1',
+                   target: '.data-target-ymcID',
                    self: termID
                });
                ymc.updateParams();
