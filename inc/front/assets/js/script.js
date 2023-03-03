@@ -440,6 +440,8 @@
 
             this.closest('.ymc-smart-filter-container').classList.remove('ymc-loaded-filter');
             let paged = parseInt($(this).attr("href").replace(/\D/g, ""));
+            paged =  (!isNaN(paged)) ? paged : 1;
+
             let data_target = JSON.parse(this.closest('.ymc-smart-filter-container').dataset.params).data_target;
             let type_pg = JSON.parse(this.closest('.ymc-smart-filter-container').dataset.params).type_pg;
 
@@ -629,7 +631,7 @@
         const _FN = (function () {
 
             const _info = {
-                version: '1.0.0',
+                version: '1.2.5',
                 author: 'YMC Co'
             }
 
