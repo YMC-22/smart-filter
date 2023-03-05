@@ -151,6 +151,7 @@ It will be possible to insert any content in the place you need (before or after
 
 **Required ID:**
 - `ID filter container on the page (Number)`
+ 
 **Example add custom action after selected post**
 ```php
 /**
