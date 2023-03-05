@@ -126,16 +126,53 @@ Important! Keep HTML structure with all attributes as in the example below.
  * @param {string} layout - HTML markup
  * @param {int} post_id - Post ID
  * @param {int} filter_id - Filter ID
+ * @param {int} increment_post - post counter
+ * @param {array} arrOptions - array of additional post parameters. It includes: 
+     - arrOptions['paged'] - page number
+     - arrOptions['per_page'] - number of posts per page
+     - arrOptions['total'] - number of all posts
  * @returns {string} HTML markup card post
  */
-function my_custom_post_layout($layout, $post_id, $filter_id) {  
+function my_custom_post_layout($layout, $post_id, $filter_id, $increment_post, $arrOptions) {  
    $layout  = '<h2>'.get_the_title($post_id).'</h2>';
    $layout .= '<p>'.wp_trim_words(get_the_content($post_id), 30).'</p>';
    $layout .= '<a href="'.get_the_permalink($post_id).'">Read More</a>;   
    return $layout;
 }
-add_filter('ymc_post_custom_layout_ID', 'my_custom_post_layout', 10, 3);
+add_filter('ymc_post_custom_layout_ID', 'my_custom_post_layout', 10, 5);
 ```  
+
+**This action allows you to change the post grid template**
+```php
+add_action('ymc_before_custom_layout_ID', 'my_before_custom_layout', 10, 2);
+add_action('ymc_after_custom_layout_ID', 'my_after_custom_layout', 10, 2);
+```
+It will be possible to insert any content in the place you need (before or after the selected post).
+
+**Required ID:**
+- `ID filter container on the page (Number)`
+ 
+**Example add custom action after selected post**
+```php
+/**
+ * Add custom content after every second post
+ * @param {int} increment_post - post counter
+ * @param {array} arrOptions - array of additional post parameters. It includes: 
+     - arrOptions['paged'] - page number
+     - arrOptions['per_page'] - number of posts per page
+     - arrOptions['total'] - number of all posts
+ * @returns {string} HTML markup card post
+ */
+ function ymc_after_custom_layout( $increment, $arrOptions ) {
+    if( $increment === 2 || $increment === ( 2 + $arrOptions['per_page'] ) ) {
+      echo '<div class="content">
+              <h3>My Header</h3>
+	      <div>Custom text...</div> 
+            </div>';
+    }
+}
+add_action( 'ymc_after_custom_layout_ID', 'ymc_after_custom_layout', 10, 2 ); 
+```
 
 **This filter allows you to change the filter template**
 ```php
