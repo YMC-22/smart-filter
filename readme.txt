@@ -71,12 +71,7 @@ Detailed information can be found on GitHub at this <a target="_blank" href="htt
 = 1.2.5 =
 * Added criteria for filtering posts by the criterion Menu Order (backeend)
 = 1.2.6 =
-* Added the ability to customize posts (ymc_post_custom_layout_ID), as well as the ability to add any content to the grid of posts
- (after or before the selected posts) using new actions: ymc_before_custom_layout_ID and ymc_post_custom_layout_ID.
- !!! Important: if you used the ymc_post_custom_layout_ID filter to customize your posts, then you will need to
- add 5 parameters inside the filter instead of 3 as before.
- For example: add_filter('ymc_post_custom_layout_ID', 'custom_post_layout_1', 10, 5);
- See documentation: https://github.com/YMC-22/smart-filter
+* Added the ability to customize posts (filter: ymc_post_custom_layout_ID)
 
 == Video ==
 https://www.youtube.com/watch?v=FIBNE0Ix6Vg
