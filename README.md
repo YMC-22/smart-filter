@@ -165,10 +165,10 @@ It will be possible to insert any content in the place you need (before or after
  */
  function ymc_after_custom_layout( $increment, $arrOptions ) {
     if( $increment === 2 || $increment === ( 2 + $arrOptions['per_page'] ) ) {
-      echo '<div class="content">
+      echo '<article class="post-item">
               <h3>My Header</h3>
-	      <div>Custom text...</div> 
-            </div>';
+	      <div>Custom text</div> 
+            </article>';
     }
 }
 add_action( 'ymc_after_custom_layout_ID', 'ymc_after_custom_layout', 10, 2 ); 
