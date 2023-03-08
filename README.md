@@ -262,7 +262,7 @@ To interact with the filter through JS, should use the chain of the following me
 
 ```php
 <script type="application/javascript"> 
-    let termID = document.querySelector('[data-termid="7"]');
+    let termID = document.querySelector('.data-target-ymcID [data-termid="7"]');
     let ymc = YMCTools({
                    target: '.data-target-ymcID',
                    self: termID
