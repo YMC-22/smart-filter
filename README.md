@@ -136,7 +136,7 @@ Important! Keep HTML structure with all attributes as in the example below.
 function my_custom_post_layout($layout, $post_id, $filter_id, $increment_post, $arrOptions) {  
    $layout  = '<h2>'.get_the_title($post_id).'</h2>';
    $layout .= '<p>'.wp_trim_words(get_the_content($post_id), 30).'</p>';
-   $layout .= '<a href="'.get_the_permalink($post_id).'">Read More</a>;   
+   $layout .= '<a href="'.get_the_permalink($post_id).'">Read More</a>';   
    return $layout;
 }
 add_filter('ymc_post_custom_layout_ID', 'my_custom_post_layout', 10, 5);
