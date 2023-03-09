@@ -1,12 +1,12 @@
 ===  Smart Filter ===
 Plugin Name: Smart Filter
 Contributors: YMC
-Version: 1.2.6
+Version: 1.2.7
 Donate link: https://github.com/YMC-22/smart-filter
 Tags: filters, posts, mind, ajax posts, category posts, taxonomy, custom taxonomy, woocommerce
 Requires at least: 4.8
 Tested up to: 6.1
-Stable tag: 1.2.6
+Stable tag: 1.2.7
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -72,6 +72,13 @@ Detailed information can be found on GitHub at this <a target="_blank" href="htt
 * Added criteria for filtering posts by the criterion Menu Order (backeend)
 = 1.2.6 =
 * Added the ability to customize posts (filter: ymc_post_custom_layout_ID)
+= 1.2.7 =
+Fixed all filters on the plugin. Changed numbering in filter names.
+For example, instead of ymc_after_custom_layout_ID should be set to: ymc_after_custom_layout_FilterID_LayoutID
+where:
+- FilterID - filter ID
+- LayoutID - filter numbering on the page
+More details can be found in the documentation.
 
 == Video ==
 https://www.youtube.com/watch?v=FIBNE0Ix6Vg

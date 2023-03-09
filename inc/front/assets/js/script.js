@@ -631,8 +631,8 @@
         const _FN = (function () {
 
             const _info = {
-                version: '1.2.6',
-                author: 'YMC Co'
+                version: '1.2.7',
+                author: 'YMC'
             }
 
             const _defaults = {

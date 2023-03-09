@@ -16,8 +16,8 @@ class YMC_post_pagination {
 
 		$prev_text = __('Prev','ymc-smart-filter');
 		$next_text = __('Next','ymc-smart-filter');
-		$prev_text = apply_filters('ymc_pagination_prev_text_'.$target_id, $prev_text);
-		$next_text = apply_filters('ymc_pagination_next_text_'.$target_id, $next_text);
+		$prev_text = apply_filters('ymc_pagination_prev_text_'.$filter_id.'_'.$target_id, $prev_text);
+		$next_text = apply_filters('ymc_pagination_next_text_'.$filter_id.'_'.$target_id, $next_text);
 
 		$paginate = paginate_links([
 			'base' => '%_%',
@@ -46,7 +46,7 @@ class YMC_post_pagination {
 
 		$output = '';
 
-		$load_more = apply_filters('ymc_pagination_load_more_'.$target_id, __('Load More','ymc-smart-filter'));
+		$load_more = apply_filters('ymc_pagination_load_more_'.$filter_id.'_'.$target_id, __('Load More','ymc-smart-filter'));
 
 		if( $query->max_num_pages > 1 ) :
 			$output .= "<div id='ymc-layout-pagination' class='ymc-pagination pagination-" . esc_attr($type_pagination) ."'>";
