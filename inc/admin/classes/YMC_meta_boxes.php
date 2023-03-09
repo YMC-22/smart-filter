@@ -321,6 +321,7 @@ class YMC_meta_boxes {
 
 	public function ymc_side_meta_box() { ?>
 		<article>
+            <img style="width:70px;float:left;margin:0 10px 0 0;" class="ymc-logo" src="<?php esc_attr_e(YMC_SMART_FILTER_URL . '/admin/assets/images/logo.png'); ?>">
             YMC Smart Filter posts/custom post types by category allows to solve
             a variety of tasks for displaying posts on site pages. Easy to use.
             Customization of card templates and filters templates will allow you to fine-tune the display of posts. For more detailed
