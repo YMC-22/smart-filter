@@ -13,6 +13,7 @@
 Add code to `function.php` to your theme
 
 `FilterID` is ID of the filter inside Smart Filter Admin Panel Shortcode tab [ymc_filter id='165']
+
 `LayoutID` is serial number of the custom filter layout on the page. Can be find by inspecting the filter css ID like: ymc-smart-filter-container-1
 
 
