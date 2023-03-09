@@ -112,7 +112,7 @@ add_action("ymc_after_filter_layout_ID");
 ### Layouts
 **This filter allows you to change the post template**
 ```php
-add_filter('ymc_post_custom_layout_ID', 'custom_post_layout', 10, 3);
+add_filter('ymc_post_custom_layout_ID', 'custom_post_layout', 10, 5);
 
 Important! Keep HTML structure with all attributes as in the example below.
 ```
