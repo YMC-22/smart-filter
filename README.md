@@ -68,7 +68,7 @@ add_filter('ymc_post_read_more_FilterID_LayoutID', function () {
 
 **Change result text: "# posts selected". Parameters: $layouts, $found_posts**
 ```php
-add_filter('ymc_posts_selected_FilterID_LayoutID', '$ymc_posts_selected', 10, 2);
+add_filter('ymc_posts_selected_FilterID_LayoutID', 'ymc_posts_selected', 10, 2);
 
 Usage example:
 function ymc_posts_selected($layouts, $founded_post) {
