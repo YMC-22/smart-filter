@@ -304,9 +304,9 @@ Usage example:
 YMCTools({
 	target: '.data-target-ymc80-1',
         meta : [
-                 {"relation" : "OR"},
-                 {"key" : "color", "value" : "blue" },
-                 {"key" : "price", "value" : "10" }
+                 { "relation" : "OR" },
+                 { "key" : "color", "value" : "blue" },
+                 { "key" : "price", "value" : "10", "compare": "LIKE" }
                ]
 	}).apiMetaUpdate();
 ```
