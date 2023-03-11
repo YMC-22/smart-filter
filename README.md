@@ -255,26 +255,32 @@ add_filter('ymc_filter_custom_layout_FilterID_LayoutID', 'my_custom_filter_layou
 ```
 
 
-**API JS**
+**API SMART FILTER JS -> On development stage**
 
-To interact with the filter through JS, should use the chain of the following methods:
+To control the post filter via javascript, use the following methods of the Filter's global YMCTools object. All parameters, their name and values that are passed to the object, are built on the principles and rules of the global WP_Query object in the WordPress core. Therefore, please, refer to the relevant documentation for using the WP_Query object for clarification.
 
-**Required Classes:**
-- `ID - ID (Number) filter container on the page`
-- `termID - ID term (Number). Example, number 7 is termID`
+**This method allows to get posts by ID terms of different taxonomies.**
 
 ```php
+YMCTools({target: ".data-target-ymc-FilterID-LayoutID", terms: "termID"}).apiTermUpdate();
+```
+**Required params:**
+- `.data-target-ymcFilterID-LayoutID - class filter container on the page.`
+- `termID - ID term. Example, number 7 is termID.`
+**Optional parameter**
+- `taxRel - define the interaction between different taxonomies in the query. The default is "AND". If set "all" will match the relation "OR". Installed in the admin panel Filter -> Tab Ganeral -> Taxonomy Relation.`
+
+```php
+Usage example:
+
 <script type="application/javascript"> 
-    let termid = document.querySelector('.data-target-ymcID [data-termid="7"]');
-    let ymc = YMCTools({
-                   target: '.data-target-ymcID',
-                   self: termid
-               });
-               ymc.updateParams();
-               ymc.getFilterPosts();
+     YMCTools({
+             target: '.data-target-ymc80-1',
+             terms: '5',
+             taxRel: 'all'
+           }).apiTermUpdate();  
    
 </script>
-
 ```
 
 
