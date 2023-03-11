@@ -284,7 +284,7 @@ Usage example:
 </script>
 ```
 
-**This method allows to get posts by meta fields..**
+**This method allows to get posts by meta fields.**
 
 ```php
 YMCTools({target: ".data-target-ymcFilterID-LayoutID", meta: [params]}).apiTermUpdate();
@@ -310,8 +310,17 @@ YMCTools({
 	}).apiMetaUpdate();
 ```
 
+**This method allows to clear query parameters in the filter by terms.**
 
+```php
+YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiTermReset();
+```
 
+**This method allows to clear query parameters in the filter by meta fields.**
+
+```php
+YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiMetaReset();
+```
 
 
 ### Support
