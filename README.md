@@ -284,7 +284,7 @@ Usage example:
 </script>
 ```
 
-**This method allows you to get posts by meta fields..**
+**This method allows to get posts by meta fields..**
 
 All parameters correspond to the parameters of the global WP_Query object. 
 To make a correct request, specify all the necessary parameters in JSON format.
