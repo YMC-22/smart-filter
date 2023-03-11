@@ -278,7 +278,7 @@ Usage example:
 <script type="application/javascript"> 
      YMCTools({
              target: '.data-target-ymc80-1',
-             terms: '5'            
+             terms: '35'            
            }).apiTermUpdate();  
    
 </script>
