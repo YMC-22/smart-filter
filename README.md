@@ -267,6 +267,7 @@ YMCTools({target: ".data-target-ymc-FilterID-LayoutID", terms: "termID"}).apiTer
 **Required params:**
 - `.data-target-ymcFilterID-LayoutID - class filter container on the page.`
 - `termID - ID term.`
+
 **Optional parameter**
 - `taxRel - define the interaction between different taxonomies in the query. The default is "AND". If set "all" will match the relation "OR". Installed in the admin panel Filter -> Tab Ganeral -> Taxonomy Relation.`
 
