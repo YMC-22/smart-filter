@@ -263,7 +263,7 @@ To control the post filter via javascript, use the following methods of the Filt
 **This method allows to get posts by ID terms of different taxonomies.**
 
 ```php
-YMCTools({target: ".data-target-ymc-FilterID-LayoutID", terms: "termID"}).apiTermUpdate();
+YMCTools({target: ".data-target-ymcFilterID-LayoutID", terms: "termID"}).apiTermUpdate();
 ```
 **Required params:**
 - `.data-target-ymcFilterID-LayoutID - class filter container on the page.`
@@ -286,15 +286,25 @@ Usage example:
 
 **This method allows to get posts by meta fields..**
 
+```php
+YMCTools({target: ".data-target-ymcFilterID-LayoutID", meta: [params]}).apiTermUpdate();
+```
 All parameters correspond to the parameters of the global WP_Query object. 
-To make a correct request, specify all the necessary parameters in JSON format.
+To make a correct request, specify all the necessary parameters in JSON format. All parameters in double quotes.
+
+**Required params:**
+- `.data-target-ymcFilterID-LayoutID - class filter container on the page.`
+- `meta - (Array) is an array of objects that include in the request settings. All objects must be in josn data format.`
+- `relation - defines a logical relationship between nested arrays.`
 
 ```php
+Usage example:
+
 YMCTools({
-	target: '.data-target-ymcFilterID-LayoutID',
+	target: '.data-target-ymc80-1',
         meta : [
                  {"relation" : "OR"},
-                 {"key" : "my_key", "value" : "my_value" },
+                 {"key" : "color", "value" : "blue" },
                  {"key" : "price", "value" : "10" }
                ]
 	}).apiMetaUpdate();
