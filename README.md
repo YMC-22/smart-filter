@@ -269,7 +269,7 @@ YMCTools({target: ".data-target-ymc-FilterID-LayoutID", terms: "termID"}).apiTer
 - `.data-target-ymcFilterID-LayoutID - class filter container on the page.`
 - `termID - ID term (String). It is a string data type and is enclosed in quotes. Can set several ID terms separated by commas, for example: "11,35,47"`
 
-**Optional parameter**
+**Optional params:**
 - `taxRel - define the interaction between different taxonomies in the query. The default is "AND". If set "all" will match the relation "OR". Installed in the admin panel Filter -> Tab Ganeral -> Taxonomy Relation.`
 
 ```php
@@ -283,6 +283,23 @@ Usage example:
    
 </script>
 ```
+
+**This method allows you to get posts by meta fields..**
+All parameters correspond to the parameters of the global WP_Query object. 
+To make a correct request, specify all the necessary parameters in JSON format.
+```php
+YMCTools({
+	target: '.data-target-ymcFilterID-LayoutID',
+        meta : [
+                 {"relation" : "OR"},
+                 {"key" : "my_key", "value" : "my_value" },
+                 {"key" : "price", "value" : "10" }
+               ]
+	}).apiMetaUpdate();
+```
+
+
+
 
 
 ### Support
