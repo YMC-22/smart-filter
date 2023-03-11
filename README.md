@@ -294,7 +294,7 @@ All parameters correspond to the parameters of the global WP_Query object.
 To make a correct request, specify all the necessary parameters in JSON format. All parameters in double quotes.
 
 **Required params:**
-- `.data-target-ymcFilterID-LayoutID - class filter container on the page.`
+- `.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.`
 - `meta - (Array) is an array of objects that include in the request settings. All objects must be in josn data format.`
 - `relation - defines a logical relationship between nested arrays. Default is "AND"`
 
