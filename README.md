@@ -267,7 +267,7 @@ To control the post filter via javascript, use the following methods of the Filt
 YMCTools({target: ".data-target-ymcFilterID-LayoutID", terms: "termID"}).apiTermUpdate();
 ```
 **Required params:**
-- `.data-target-ymcFilterID-LayoutID - class filter container on the page.`
+- `.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.`
 - `termID - ID term (String). It is a string data type and is enclosed in quotes. Can set several ID terms separated by commas, for example: "11,35,47"`
 
 **Optional params:**
