@@ -278,8 +278,8 @@ Usage example:
 
 <script type="application/javascript"> 
      YMCTools({
-             target: '.data-target-ymc80-1',
-             terms: '35'            
+             target: '.data-target-ymcFilterID-LayoutID',
+             terms: 'termID'            
            }).apiTermUpdate();  
    
 </script>
@@ -296,13 +296,13 @@ To make a correct request, specify all the necessary parameters in JSON format. 
 **Required params:**
 - `.data-target-ymcFilterID-LayoutID - class filter container on the page.`
 - `meta - (Array) is an array of objects that include in the request settings. All objects must be in josn data format.`
-- `relation - defines a logical relationship between nested arrays.`
+- `relation - defines a logical relationship between nested arrays. Default is "AND"`
 
 ```php
 Usage example:
 
 YMCTools({
-	target: '.data-target-ymc80-1',
+	target: '.data-target-ymcFilterID-LayoutID',
         meta : [
                  { "relation" : "OR" },
                  { "key" : "color", "value" : "blue" },
