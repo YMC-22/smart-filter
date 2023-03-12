@@ -367,7 +367,7 @@ YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiDateClear();
 
 ```php
 <script type="application/javascript">
-    document.querySelector('.data-target-ymcFilterID-LayoutID').dataset.load = 0;
+    document.querySelector('.data-target-ymcFilterID-LayoutID').dataset.load = 'false';
 </script>
 ```
 
