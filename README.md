@@ -296,6 +296,8 @@ To make a correct request, specify all the necessary parameters in JSON format. 
 **Required params:**
 - `.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.`
 - `meta - (Array) is an array of objects that include in the request settings. All objects must be in josn data format.`
+
+**Optional params:**
 - `relation - defines a logical relationship between nested arrays. Default is "AND"`
 
 ```php
@@ -324,6 +326,8 @@ To make a correct request, specify all the necessary parameters in JSON format. 
 **Required params:**
 - `.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.`
 - `date - (Array) is an array of objects that include in the request settings. All objects must be in josn data format.`
+
+**Optional params:**
 - `relation - defines a logical relationship between nested arrays. Default is "AND"`
 
 ```php
