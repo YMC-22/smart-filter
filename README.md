@@ -314,13 +314,13 @@ YMCTools({
 **This method allows to clear query parameters in the filter by terms.**
 
 ```php
-YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiTermReset();
+YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiTermClear();
 ```
 
 **This method allows to clear query parameters in the filter by meta fields.**
 
 ```php
-YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiMetaReset();
+YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiMetaClear();
 ```
 
 
