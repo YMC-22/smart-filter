@@ -68,7 +68,7 @@ add_filter('ymc_post_read_more_FilterID_LayoutID', function () {
 
 **Change result text: "# posts selected". Parameters: $layouts, $found_posts**
 ```php
-add_filter('ymc_posts_selected_FilterID_LayoutID', '$ymc_posts_selected', 10, 2);
+add_filter('ymc_posts_selected_FilterID_LayoutID', 'ymc_posts_selected', 10, 2);
 
 Usage example:
 function ymc_posts_selected($layouts, $founded_post) {
@@ -255,27 +255,115 @@ add_filter('ymc_filter_custom_layout_FilterID_LayoutID', 'my_custom_filter_layou
 ```
 
 
-**API JS**
 
-To interact with the filter through JS, should use the chain of the following methods:
 
-**Required Classes:**
-- `ID - ID (Number) filter container on the page`
-- `termID - ID term (Number). Example, number 7 is termID`
+**API JS SMART FILTER**
+
+To control the post filter via javascript, use the following methods of the Filter's global YMCTools object. All parameters, their name and values that are passed to the object, are built on the principles and rules of the global WP_Query object in the WordPress core. Therefore, please, refer to the relevant documentation for using the WP_Query object for clarification.
+
+**This method allows to get posts by ID terms of different taxonomies.**
 
 ```php
+YMCTools({target: ".data-target-ymcFilterID-LayoutID", terms: "termID"}).apiTermUpdate();
+```
+**Required params:**
+- `.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.`
+- `termID - ID term (String). It is a string data type and is enclosed in quotes. Can set several ID terms separated by commas, for example: "11,35,47"`
+
+**Optional params:**
+- `taxRel - define the interaction between different taxonomies in the query. The default is "AND". If set "all" will match the relation "OR". Installed in the admin panel Filter -> Tab Ganeral -> Taxonomy Relation.`
+
+```php
+Usage example:
+
 <script type="application/javascript"> 
-    let termid = document.querySelector('.data-target-ymcID [data-termid="7"]');
-    let ymc = YMCTools({
-                   target: '.data-target-ymcID',
-                   self: termid
-               });
-               ymc.updateParams();
-               ymc.getFilterPosts();
+     YMCTools({
+             target: '.data-target-ymcFilterID-LayoutID',
+             terms: 'termID'            
+           }).apiTermUpdate();  
    
 </script>
-
 ```
+
+**This method allows to get posts by meta fields.**
+
+```php
+YMCTools({target: ".data-target-ymcFilterID-LayoutID", meta: [params]}).apiTermUpdate();
+```
+All parameters correspond to the parameters of the global WP_Query object. 
+To make a correct request, specify all the necessary parameters in JSON format. All parameters in double quotes.
+
+**Required params:**
+- `.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.`
+- `meta - (Array) is an array of objects that include in the request settings. All objects must be in josn data format.`
+
+**Optional params:**
+- `relation - defines a logical relationship between nested arrays. Default is "AND"`
+
+```php
+Usage example:
+
+<script type="application/javascript"> 
+YMCTools({
+	target: '.data-target-ymcFilterID-LayoutID',
+        meta : [
+                 { "relation" : "OR" },
+                 { "key" : "color", "value" : "blue" },
+                 { "key" : "price", "value" : "10", "compare": "LIKE" }
+               ]
+	}).apiMetaUpdate();
+</script>	
+```
+
+**This method allows to get posts by date.**
+
+```php
+YMCTools({target: ".data-target-ymcFilterID-LayoutID", date: [params]}).apiDateUpdate();
+```
+All parameters correspond to the parameters of the global WP_Query object. 
+To make a correct request, specify all the necessary parameters in JSON format. All parameters in double quotes.
+
+**Required params:**
+- `.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.`
+- `date - (Array) is an array of objects that include in the request settings. All objects must be in josn data format.`
+
+**Optional params:**
+- `relation - defines a logical relationship between nested arrays. Default is "AND"`
+
+```php
+Usage example:
+
+<script type="application/javascript"> 
+YMCTools({
+	  target: '.data-target-ymcFilterID-LayoutID',
+          date : [                  
+                   { "monthnum" : "1", "compare" : "=" },
+                   { "year" : "2023", "compare" : "=" },
+                   { "day" : "10", "compare" : ">=" },
+                ]
+	 }).apiDateUpdate();
+</script>	 
+```
+
+**This method allows to clear query parameters in the filter by terms.**
+
+```php
+YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiTermClear();
+```
+
+**This method allows to clear query parameters in the filter by meta fields.**
+
+```php
+YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiMetaClear();
+```
+
+**This method allows to clear query parameters in the filter by date.**
+
+```php
+YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiDateClear();
+```
+
+
 
 
 ### Support
