@@ -627,17 +627,21 @@
         });
 
 
-        /*** API JS Custom Filter Layout ***/
+        /*** API FILTER ***/
         const _FN = (function () {
 
             const _info = {
-                version: '1.2.7',
+                version: '1.2.8',
                 author: 'YMC'
             }
 
             const _defaults = {
                 target : '.data-target-ymc1',
-                self   : null
+                self   : null,
+                terms  : null,
+                taxRel : null,
+                meta   : null,
+                date   : null
             }
 
             function YMCTools(settings = _defaults) {
@@ -654,12 +658,13 @@
                 return `Author: ${_info.author}. Version: ${_info.version}`;
             }
 
+            // Use fo custom filter layout
             YMCTools.prototype.updateParams = function () {
 
                 let container = document.querySelector(''+ this.target +'');
 
-                if( ! container )  throw new Error("Dom element not found");
-                if( this.self === null )  throw new Error("Context is not defined");
+                if( ! container )  throw new Error("Filter not found");
+                if( this.self === null )  throw new Error("Terms is not defined");
 
                 let link  = $(this.self);
                 let dataParams = JSON.parse(container.dataset.params);
@@ -705,6 +710,7 @@
                 container.dataset.params = JSON.stringify(dataParams);
             }
 
+            // Run filter get posts
             YMCTools.prototype.getFilterPosts = function () {
 
                 let container = document.querySelector(''+ this.target +'');
@@ -722,6 +728,91 @@
                     'type_pg'   : type_pg
                 });
             }
+
+            //  === API ===
+            YMCTools.prototype.apiTermUpdate = function () {
+
+                let container = document.querySelector(''+ this.target +'');
+                if( ! container )  throw new Error("API Term: Filter not found");
+                if( this.terms === null || typeof this.terms === 'number')  throw new Error("Terms is not defined");
+
+                let dataParams = JSON.parse(container.dataset.params);
+
+                dataParams.page = 1;
+                dataParams.search = '';
+                dataParams.terms = this.terms.replace(/<[^>]+>/g, '');
+                dataParams.post_sel = this.taxRel;
+
+                container.dataset.params = JSON.stringify(dataParams);
+                this.getFilterPosts();
+            }
+
+            YMCTools.prototype.apiMetaUpdate = function () {
+
+                let container = document.querySelector(''+ this.target +'');
+                if( ! container )  throw new Error("API Meta: Filter not found");
+
+                let dataParams = JSON.parse(container.dataset.params);
+
+                dataParams.page = 1;
+                dataParams.search = '';
+                dataParams.meta_query = ( this.meta !== null ) ? this.meta : '';
+
+                container.dataset.params = JSON.stringify(dataParams);
+                this.getFilterPosts();
+            }
+
+            YMCTools.prototype.apiDateUpdate = function () {
+
+                let container = document.querySelector(''+ this.target +'');
+                if( ! container )  throw new Error("API Date: Filter not found");
+
+                let dataParams = JSON.parse(container.dataset.params);
+
+                dataParams.page = 1;
+                dataParams.search = '';
+                dataParams.date_query = ( this.date !== null ) ? this.date : '';
+
+                container.dataset.params = JSON.stringify(dataParams);
+                this.getFilterPosts();
+            }
+
+            YMCTools.prototype.apiTermClear = function () {
+
+                let container = document.querySelector(''+ this.target +'');
+                if( ! container )  throw new Error("API TermReset: Filter not found");
+
+                let dataParams = JSON.parse(container.dataset.params);
+                dataParams.terms = "";
+                container.dataset.params = JSON.stringify(dataParams);
+
+                this.getFilterPosts();
+            }
+
+            YMCTools.prototype.apiMetaClear = function () {
+
+                let container = document.querySelector(''+ this.target +'');
+                if( ! container )  throw new Error("API MetaReset: Filter not found");
+
+                let dataParams = JSON.parse(container.dataset.params);
+                dataParams.meta_query = "";
+                container.dataset.params = JSON.stringify(dataParams);
+
+                this.getFilterPosts();
+            }
+
+            YMCTools.prototype.apiDateClear = function () {
+
+                let container = document.querySelector(''+ this.target +'');
+                if( ! container )  throw new Error("API Date: Filter not found");
+
+                let dataParams = JSON.parse(container.dataset.params);
+                dataParams.date_query = "";
+                container.dataset.params = JSON.stringify(dataParams);
+
+                this.getFilterPosts();
+            }
+
 
             return function (settings) {
                 return  new YMCTools(settings);

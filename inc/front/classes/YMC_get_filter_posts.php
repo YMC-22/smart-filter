@@ -22,7 +22,7 @@ class YMC_get_filter_posts {
 		$output  = '';
 		$message = '';
 
-		$posted_data = sanitize_text_field($_POST['params']);
+		$posted_data = $_POST['params'];
 		$temp_data = str_replace("\\", "", $posted_data);
 		$clean_data = json_decode($temp_data, true);
 
@@ -38,6 +38,8 @@ class YMC_get_filter_posts {
 		$post_sel = $clean_data['post_sel'];
 		$sort_order = $clean_data['sort_order'];
 		$sort_orderby = $clean_data['sort_orderby'];
+		$meta_params = $clean_data['meta_query'];
+		$date_params = $clean_data['date_query'];
 
 		$target_id = $clean_data['target_id'];
 
@@ -115,6 +117,54 @@ class YMC_get_filter_posts {
 			$args['sentence'] = true;
 			$args['s'] = trim($keyword);
 		}
+
+		// API Meta Query
+		if( !empty($meta_params) && is_array($meta_params) ) {
+
+			$meta_query = [];
+
+			foreach ( $meta_params as $array ) {
+
+				if( array_key_exists('relation', $array) ) {
+					$meta_query['relation'] = $array['relation'];
+				}
+				else {
+					$meta_query[] = [
+						'key' => trim($array['key']),
+						'value' => trim($array['value']),
+						'compare' => array_key_exists('compare', $array) ? trim($array['compare']) : 'IN',
+						'type' => array_key_exists('type', $array) ? trim($array['type']) : 'CHAR'
+					];
+				}
+			}
+
+			$args['meta_query'] = $meta_query;
+		}
+
+		// API Date Query
+		if( !empty($date_params) && is_array($date_params) ) {
+
+			$date_query = [];
+			$sub_arr_date = [];
+
+			foreach ( $date_params as $array ) {
+
+				if( array_key_exists('relation', $array) ) {
+					$date_query['relation'] = $array['relation'];
+				}
+
+				foreach ($array as $k => $v) {
+					$sub_arr_date[$k] = $v;
+				}
+
+				$date_query[] = $sub_arr_date;
+				$sub_arr_date = [];
+			}
+
+			$args['date_query'] = $date_query;
+
+		}
+
 
 		$query = new WP_Query($args);
 
@@ -194,7 +244,9 @@ class YMC_get_filter_posts {
 			'term' => $tax_qry,
 			'max_num_pages' => $query->max_num_pages,
 			'get_current_posts' => ($query->found_posts - $paged * $per_page),
-			'pagin' => !empty($pagin) ? $pagin : ''
+			'pagin' => !empty($pagin) ? $pagin : '',
+			'meta_query' => $meta_params,
+			'date_query' => $date_query
 		);
 
 		wp_send_json($data);
