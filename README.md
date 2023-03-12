@@ -339,7 +339,7 @@ YMCTools({
           date : [                  
                    { "monthnum" : "1", "compare" : "=" },
                    { "year" : "2023", "compare" : "=" },
-                   { "day" : "10", "compare" : ">=" },
+                   { "day" : "10", "compare" : ">=" }
                 ]
 	 }).apiDateUpdate();
 </script>	 
