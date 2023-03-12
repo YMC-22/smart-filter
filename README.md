@@ -311,6 +311,32 @@ YMCTools({
 	}).apiMetaUpdate();
 ```
 
+**This method allows to get posts by date.**
+
+```php
+YMCTools({target: ".data-target-ymcFilterID-LayoutID", meta: [params]}).apiDateUpdate();
+```
+All parameters correspond to the parameters of the global WP_Query object. 
+To make a correct request, specify all the necessary parameters in JSON format. All parameters in double quotes.
+
+**Required params:**
+- `.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.`
+- `date - (Array) is an array of objects that include in the request settings. All objects must be in josn data format.`
+- `relation - defines a logical relationship between nested arrays. Default is "AND"`
+
+```php
+Usage example:
+
+YMCTools({
+	  target: '.data-target-ymcFilterID-LayoutID',
+          date : [                  
+                   { "monthnum" : "1", "compare" : "=" },
+                   { "year" : "2023", "compare" : "=" },
+                   { "day" : "10", "compare" : ">=" },
+                ]
+	 }).apiDateUpdate();
+```
+
 **This method allows to clear query parameters in the filter by terms.**
 
 ```php
