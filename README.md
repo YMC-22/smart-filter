@@ -363,11 +363,17 @@ YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiMetaClear();
 YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiDateClear();
 ```
 
-**Stop loading posts for selected filter on page load**
+**Stop loading posts for the selected filter on page load and load posts by the selected term**
 
 ```php
 <script type="application/javascript">
     document.querySelector('.data-target-ymcFilterID-LayoutID').dataset.load = 'false';
+    window.addEventListener("load", (event) => {
+         YMCTools({
+             target: '.data-target-ymcFilterID-LayoutID',
+             terms: 'termID'
+         }).apiTermUpdate();
+     });
 </script>
 ```
 
