@@ -301,6 +301,7 @@ To make a correct request, specify all the necessary parameters in JSON format. 
 ```php
 Usage example:
 
+<script type="application/javascript"> 
 YMCTools({
 	target: '.data-target-ymcFilterID-LayoutID',
         meta : [
@@ -309,6 +310,7 @@ YMCTools({
                  { "key" : "price", "value" : "10", "compare": "LIKE" }
                ]
 	}).apiMetaUpdate();
+</script>	
 ```
 
 **This method allows to get posts by date.**
@@ -327,6 +329,7 @@ To make a correct request, specify all the necessary parameters in JSON format. 
 ```php
 Usage example:
 
+<script type="application/javascript"> 
 YMCTools({
 	  target: '.data-target-ymcFilterID-LayoutID',
           date : [                  
@@ -335,6 +338,7 @@ YMCTools({
                    { "day" : "10", "compare" : ">=" },
                 ]
 	 }).apiDateUpdate();
+</script>	 
 ```
 
 **This method allows to clear query parameters in the filter by terms.**
