@@ -349,6 +349,14 @@ YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiTermClear();
 YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiMetaClear();
 ```
 
+**This method allows to clear query parameters in the filter by date.**
+
+```php
+YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiDateClear();
+```
+
+
+
 
 ### Support
 For support questions, please write to: wss.office21@gmail.com
