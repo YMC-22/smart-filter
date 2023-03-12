@@ -363,7 +363,7 @@ YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiMetaClear();
 YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiDateClear();
 ```
 
-**Stop loading posts on selected filter.**
+**Stop loading posts for selected filter on page load**
 
 ```php
 <script type="application/javascript">
