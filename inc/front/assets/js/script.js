@@ -157,17 +157,20 @@
         // Init Load Posts
         document.querySelectorAll('.ymc-smart-filter-container').forEach(function (el) {
 
+            let loadPosts   = el.dataset.load;
             let params      = JSON.parse(el.dataset.params);
             let data_target = params.data_target;
             let type_pg     = params.type_pg;
 
-            // Init Load Posts
-            getFilterPosts({
-                'paged'     : 1,
-                'toggle_pg' : 1,
-                'target'    : data_target,
-                'type_pg'   : type_pg
-            });
+            if( loadPosts === 'true' ) {
+                // Init Load Posts
+                getFilterPosts({
+                    'paged'     : 1,
+                    'toggle_pg' : 1,
+                    'target'    : data_target,
+                    'type_pg'   : type_pg
+                });
+            }
         });
 
 
