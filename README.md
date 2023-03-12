@@ -314,7 +314,7 @@ YMCTools({
 **This method allows to get posts by date.**
 
 ```php
-YMCTools({target: ".data-target-ymcFilterID-LayoutID", meta: [params]}).apiDateUpdate();
+YMCTools({target: ".data-target-ymcFilterID-LayoutID", date: [params]}).apiDateUpdate();
 ```
 All parameters correspond to the parameters of the global WP_Query object. 
 To make a correct request, specify all the necessary parameters in JSON format. All parameters in double quotes.
