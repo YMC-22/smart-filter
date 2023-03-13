@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	    $content  = wp_trim_words($content, $c_length);
 
 	    $read_more = apply_filters('ymc_post_read_more_'.$filter_id.'_'.$target_id, __('Read More','ymc-smart-filter'));
-	    $target = "target='" . $ymc_link_target . "'";
+	    $target = "target=" . $ymc_link_target . "";
 
 	    $term_list = get_the_terms($post_id, $taxonomy);
 	    $list_categories = '';
