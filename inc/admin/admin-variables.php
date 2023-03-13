@@ -50,6 +50,8 @@ $ymc_special_post_class = '';
 $ymc_filter_font = 'inherit';
 $ymc_post_font = 'inherit';
 $ymc_multiple_filter = 0;
+$ymc_pagination_hide = 'off';
+
 
 $ymc_filter_search_status = 'off';
 $ymc_search_text_button = 'Search';
@@ -120,6 +122,9 @@ if (get_post_meta($post->ID, 'ymc_per_page')) {
 }
 if (get_post_meta($post->ID, 'ymc_pagination_type')) {
 	$ymc_pagination_type = get_post_meta($post->ID, 'ymc_pagination_type', true);
+}
+if (get_post_meta($post->ID, 'ymc_pagination_hide')) {
+	$ymc_pagination_hide = get_post_meta($post->ID, 'ymc_pagination_hide', true);
 }
 if (get_post_meta($post->ID, 'ymc_sort_terms')) {
 	$ymc_sort_terms = get_post_meta($post->ID, 'ymc_sort_terms', true);

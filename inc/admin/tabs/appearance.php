@@ -176,6 +176,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 
             </div>
 
+            <div class="from-element">
+                <label class="form-label">
+		            <?php echo esc_html__('Disable pagination', 'ymc-smart-filter');?>
+                    <span class="information">
+                    <?php echo esc_html__('Hide pagination for filter.', 'ymc-smart-filter');?>
+                </span>
+                </label>
+
+                <div class="group-elements">
+		            <?php  $check_pagination_hide = ( $ymc_pagination_hide === 'on' ) ? 'checked' : '';  ?>
+                    <input type="hidden" name='ymc-pagination-hide' value="off">
+                    <input class="ymc-pagination-hide" type="checkbox" value="on"  name='ymc-pagination-hide' id="ymc-pagination-hide" <?php echo esc_attr($check_pagination_hide); ?>/>
+                    <label for="ymc-pagination-hide"><?php echo esc_html__('Disable','ymc-smart-filter'); ?></label>
+                </div>
+
+            </div>
+
         </div>
 
     </div>

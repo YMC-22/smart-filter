@@ -34,6 +34,7 @@ $wpdb->get_results('DELETE FROM wp_postmeta WHERE meta_key IN (
                                   "ymc_link_target",
                                   "ymc_per_page",
                                   "ymc_pagination_type",
+                                  "ymc_pagination_hide",         
                                   "ymc_sort_terms",
                                   "ymc_order_post_by",
                                   "ymc_order_post_type",

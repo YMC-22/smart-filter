@@ -136,6 +136,12 @@ class YMC_meta_boxes {
 			update_post_meta($post_id, 'ymc_pagination_type', $ymc_pagination_type);
 		}
 
+		// Hide Pagination
+		if ( isset($_POST['ymc-pagination-hide']) ) {
+			$ymc_pagination_hide = sanitize_text_field($_POST['ymc-pagination-hide']);
+			update_post_meta($post_id, 'ymc_pagination_hide', $ymc_pagination_hide);
+		}
+
 		// Sort Terms Filter
 		if (isset($_POST['ymc-sort-terms'])) {
 			$ymc_sort_terms = sanitize_text_field($_POST['ymc-sort-terms']);

@@ -175,7 +175,6 @@ class YMC_get_filter_posts {
 			$file_layout = YMC_SMART_FILTER_DIR . "/front/layouts/post/" . $post_layout . ".php";
 			require_once YMC_SMART_FILTER_DIR . "/front/classes/YMC_post_pagination.php";
 
-
 			// Add Layouts posts
 			if ( file_exists($file_layout) ) :
 
@@ -217,7 +216,9 @@ class YMC_get_filter_posts {
 			endif;
 
 			// Add Pagination
-			require_once YMC_SMART_FILTER_DIR . "/front/pagination/pagination.php";
+			if( $ymc_pagination_hide === "off" ) :
+				require_once YMC_SMART_FILTER_DIR . "/front/pagination/pagination.php";
+			endif;
 
 		else :
 

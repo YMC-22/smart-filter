@@ -17,6 +17,7 @@ $tax_selected = '';
 $terms_selected = '';
 $tax_rel = 'AND';
 $tax_sort = null;
+$ymc_pagination_hide = "off";
 
 
 // APPEARANCE TAB SUBMITTED VARIABLE VALUES
@@ -79,6 +80,9 @@ if (get_post_meta($id, 'ymc_per_page')) {
 }
 if (get_post_meta($id, 'ymc_pagination_type')) {
 	$ymc_pagination_type = get_post_meta($id, 'ymc_pagination_type', true);
+}
+if (get_post_meta($id, 'ymc_pagination_hide')) {
+	$ymc_pagination_hide = get_post_meta($id, 'ymc_pagination_hide', true);
 }
 if (get_post_meta($id, 'ymc_sort_terms')) {
 	$ymc_sort_terms = get_post_meta($id, 'ymc_sort_terms', true);

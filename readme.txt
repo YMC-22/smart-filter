@@ -1,12 +1,12 @@
 ===  Smart Filter ===
 Plugin Name: Smart Filter
 Contributors: YMC
-Version: 1.2.8
+Version: 1.2.9
 Donate link: https://github.com/YMC-22/smart-filter
 Tags: filters, posts, mind, ajax posts, category posts, taxonomy, custom taxonomy, woocommerce
 Requires at least: 4.8
 Tested up to: 6.1
-Stable tag: 1.2.8
+Stable tag: 1.2.9
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -82,8 +82,8 @@ Added the ability to interact with the filter through javascript. Implemented AP
 - meta fields
 - date fields
 - taxonomy terms
-
-
+= 1.2.9 =
+Added the ability to hide / show the pagination panel in the admin panel
 
 == Video ==
 https://www.youtube.com/watch?v=FIBNE0Ix6Vg
