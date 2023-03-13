@@ -97,12 +97,14 @@ class YMC_shortcode {
 
 			endif;
 
-			echo '<div class="container-posts container-'. esc_attr($ymc_post_layout) .'"><div class="post-entry '. esc_attr($ymc_post_layout) .'"></div></div>';
+			echo '<div class="container-posts container-'. esc_attr($ymc_post_layout) .'">
+				  <div class="post-entry '. esc_attr($ymc_post_layout) .'"></div></div>';
 
 			echo '</div>';
 		}
 		else {
-			echo "<div class='ymc-smart-filter-container'><div class='notice'>" . esc_html__('ID parameter is missing or invalid.', 'ymc-smart-filter') ."</div></div>";
+			echo "<div class='ymc-smart-filter-container'>
+				  <div class='notice'>" . esc_html__('ID parameter is missing or invalid.', 'ymc-smart-filter') ."</div></div>";
 		}
 
 
