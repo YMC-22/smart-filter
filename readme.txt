@@ -30,6 +30,7 @@ The plugin provides the following functionality:
 - Adding a post search bar.
 - Typography customization.
 - Ability to independently develop templates for filters and post cards and add them to the filter (requires basic knowledge of WordPress, HTML JavaScript, CSS and PHP).
+- Flexible filter management via Javascript API
 
 == Installation ==
 
