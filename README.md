@@ -277,11 +277,12 @@ YMCTools({target: ".data-target-ymcFilterID-LayoutID", terms: "termID"}).apiTerm
 Usage example:
 
 <script type="application/javascript"> 
+   window.addEventListener("load", (event) => {
      YMCTools({
              target: '.data-target-ymcFilterID-LayoutID',
              terms: 'termID'            
            }).apiTermUpdate();  
-   
+   });
 </script>
 ```
 
@@ -304,7 +305,8 @@ To make a correct request, specify all the necessary parameters in JSON format. 
 Usage example:
 
 <script type="application/javascript"> 
-YMCTools({
+   window.addEventListener("load", (event) => {
+     YMCTools({
 	target: '.data-target-ymcFilterID-LayoutID',
         meta : [
                  { "relation" : "OR" },
@@ -312,6 +314,7 @@ YMCTools({
                  { "key" : "price", "value" : "10", "compare": "LIKE" }
                ]
 	}).apiMetaUpdate();
+   });
 </script>	
 ```
 
@@ -333,8 +336,9 @@ To make a correct request, specify all the necessary parameters in JSON format. 
 ```php
 Usage example:
 
-<script type="application/javascript"> 
-YMCTools({
+<script type="application/javascript">
+    window.addEventListener("load", (event) => {
+      YMCTools({
 	  target: '.data-target-ymcFilterID-LayoutID',
           date : [                  
                    { "monthnum" : "1", "compare" : "=" },
@@ -342,6 +346,7 @@ YMCTools({
                    { "day" : "10", "compare" : ">=" }
                 ]
 	 }).apiDateUpdate();
+     });
 </script>	 
 ```
 
