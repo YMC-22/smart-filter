@@ -17,7 +17,7 @@ $filter_css = "#ymc-smart-filter-container-".$c_target." .filter-layout.filter-l
     wp_add_inline_style($handle, $filter_css);
 ?>
 
-<div id="<?php echo esc_attr($ymc_filter_layout); ?>" class="filter-layout <?php echo esc_attr($ymc_filter_layout); ?>">
+<div id="<?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?>" class="filter-layout <?php echo esc_attr($ymc_filter_layout); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?>">
 
 	<?php do_action("ymc_before_filter_layout_".$id.'_'.$c_target); ?>
 
