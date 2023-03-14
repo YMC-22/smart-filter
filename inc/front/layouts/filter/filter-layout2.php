@@ -18,7 +18,7 @@ wp_add_inline_style($handle, $filter_css);
 ?>
 
 
-<div id="<?php echo  esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?>" class="filter-layout <?php echo  esc_attr($ymc_filter_layout); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?>">
+<div id="<?php echo  esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($c_target); ?>" class="filter-layout <?php echo  esc_attr($ymc_filter_layout); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?>-<?php echo esc_attr($c_target); ?>">
 
 	<?php do_action("ymc_before_filter_layout_".$id.'_'.$c_target); ?>
 

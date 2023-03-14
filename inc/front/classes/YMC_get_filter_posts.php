@@ -162,7 +162,6 @@ class YMC_get_filter_posts {
 			}
 
 			$args['date_query'] = $date_query;
-
 		}
 
 
@@ -247,7 +246,7 @@ class YMC_get_filter_posts {
 			'get_current_posts' => ($query->found_posts - $paged * $per_page),
 			'pagin' => !empty($pagin) ? $pagin : '',
 			'meta_query' => $meta_params,
-			'date_query' => $date_query
+			'date_query' => $date_params
 		);
 
 		wp_send_json($data);

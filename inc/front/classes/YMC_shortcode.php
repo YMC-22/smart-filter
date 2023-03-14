@@ -97,8 +97,7 @@ class YMC_shortcode {
 
 			endif;
 
-			echo '<div class="container-posts container-'. esc_attr($ymc_post_layout) .'">
-				  <div class="post-entry '. esc_attr($ymc_post_layout) .' '. esc_attr($ymc_post_layout) .'-'.$id.' '.esc_attr($ymc_post_layout).'-'.$id.'-'.$c_target.'"></div></div>';
+			echo '<div class="container-posts container-'. esc_attr($ymc_post_layout) .'"><div class="post-entry '. esc_attr($ymc_post_layout) .' '. esc_attr($ymc_post_layout) .'-'.$id.' '.esc_attr($ymc_post_layout).'-'.$id.'-'.$c_target.'"></div></div>';
 
 			echo '</div>';
 		}
