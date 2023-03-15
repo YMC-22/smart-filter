@@ -383,6 +383,7 @@ wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(elem) {
 ```
 
 **Before loaded posts. Arguments: target is the name of the filter container class.**
+
 Arguments: target is the name of the filter container class.
 ```php
 wp.hooks.addAction('ymc_before_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback');
@@ -394,6 +395,7 @@ wp.hooks.addAction('ymc_before_loaded_data_80_1', 'smartfilter', function(target
 ```
 
 **After loaded posts and insert into DOM node.** 
+
 Arguments: target is the name of the filter container class.
 ```php
 wp.hooks.addAction('ymc_after_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback');
@@ -405,6 +407,7 @@ wp.hooks.addAction('ymc_after_loaded_data_80_1', 'smartfilter', function(target)
 ```
 
 **An example of using hooks in combination with the YMCTools object and its methods**
+
 Stop loading posts for the selected filter and then load posts for the selected term
 
 ```php
