@@ -50,6 +50,9 @@
             let container = $("."+target+"");
             let params = JSON.parse(document.querySelector('.'+target+'').dataset.params);
 
+            let filterID = params.filter_id;
+            let targetID = params.target_id;
+
             const data = {
                 'action'     : 'ymc_get_posts',
                 'nonce_code' : _global_object.nonce,
@@ -65,6 +68,9 @@
                 beforeSend: function () {
                     container.find('.container-posts').addClass('loading').
                     prepend(`<img class="preloader" src="${pathPreloader}">`);
+
+                    // Add Hook: before loaded posts
+                    wp.hooks.doAction('ymc_before_loaded_data_'+filterID+'_'+targetID, target);
                 },
                 success: function (res) {
 
@@ -147,6 +153,13 @@
 
                             break;
                     }
+
+                    // updated attr data-loading
+                    document.querySelector('.'+target).dataset.loading = 'true';
+
+                    // Add Hook: after loaded posts
+                    wp.hooks.doAction('ymc_after_loaded_data_'+filterID+'_'+targetID, target);
+
                 },
                 error: function (obj, err) {
                     console.log( obj, err );
@@ -154,15 +167,18 @@
             });
         }
 
-        // Init Load Posts
+        // Init Loading Posts
         document.querySelectorAll('.ymc-smart-filter-container').forEach(function (el) {
 
-            let loadPosts   = el.dataset.load;
+            // Add Hook: stop loading posts on page load
+            wp.hooks.doAction('ymc_stop_loading_data', el);
+
+            let loadingPosts   = el.dataset.loading;
             let params      = JSON.parse(el.dataset.params);
             let data_target = params.data_target;
             let type_pg     = params.type_pg;
 
-            if( loadPosts === 'true' ) {
+            if( loadingPosts === 'true' ) {
                 // Init Load Posts
                 getFilterPosts({
                     'paged'     : 1,
@@ -634,7 +650,7 @@
         const _FN = (function () {
 
             const _info = {
-                version: '1.2.8',
+                version: '1.3.0',
                 author: 'YMC'
             }
 

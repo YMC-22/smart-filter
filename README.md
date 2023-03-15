@@ -259,7 +259,7 @@ add_filter('ymc_filter_custom_layout_FilterID_LayoutID', 'my_custom_filter_layou
 
 **JS API SMART FILTER**
 
-To control the post filter via javascript, use the following methods of the Filter's global YMCTools object. All parameters, their name and values that are passed to the object, are built on the principles and rules of the global WP_Query object in the WordPress core. Therefore, please, refer to the relevant documentation for using the WP_Query object for clarification.
+To control the post filter via javascript, use the following methods of the Filter's global YMCTools object. All parameters, their name and values that are passed to the object, are built on the principles and rules of the global WP_Query object in the WordPress core. Therefore, please, refer to the relevant documentation for using the WP_Query object for clarification. All of these methods should be used when creating event handlers. but for example, when clicking on a button or link, call one or another method.
 
 **This method allows to get posts by ID terms of different taxonomies.**
 
@@ -368,15 +368,58 @@ YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiMetaClear();
 YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiDateClear();
 ```
 
-**Stop loading posts for the selected filter on page load and load posts by the selected term**
+**Hooks JS.**
+
+Stop loading posts on page load. Arguments: elem - DOM container filter.
+```php
+wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', 'callback');
+
+Usage example:
+wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(elem) {
+     if( elem.classList.contains('data-target-ymc80-1') ) {
+            elem.dataset.loading = 'false';
+         }
+    });
+```
+
+**Before loaded posts. Arguments: target is the name of the filter container class.**
+Arguments: target is the name of the filter container class.
+```php
+wp.hooks.addAction('ymc_before_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback');
+
+Usage example:
+wp.hooks.addAction('ymc_before_loaded_data_80_1', 'smartfilter', function(target){
+       console.log('Before loaded data' + target);
+   });
+```
+
+**After loaded posts and insert into DOM node.** 
+Arguments: target is the name of the filter container class.
+```php
+wp.hooks.addAction('ymc_after_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback');
+
+Usage example:
+wp.hooks.addAction('ymc_after_loaded_data_80_1', 'smartfilter', function(target){
+      console.log('After loaded data' + target);
+   });
+```
+
+**An example of using hooks in combination with the YMCTools object and its methods**
+Stop loading posts for the selected filter and then load posts for the selected term
 
 ```php
-<script type="application/javascript">
-    document.querySelector('.data-target-ymcFilterID-LayoutID').dataset.load = 'false';
+<script type="application/javascript">    
+    
+    wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(el){
+        if( el.classList.contains('data-target-ymc80-1') ) {
+            el.dataset.loading = 'false';
+        }
+    });    
+    
     window.addEventListener("load", (event) => {
          YMCTools({
-             target: '.data-target-ymcFilterID-LayoutID',
-             terms: 'termID'
+             target: '.data-target-ymc80-1',
+             terms: '7'
          }).apiTermUpdate();
      });
 </script>
