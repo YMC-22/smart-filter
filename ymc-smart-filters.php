@@ -2,7 +2,7 @@
 
 /**
  *
- * Plugin Name:       YMC Smart Filter
+ * Plugin Name:       Smart Filter
  * Description:       Filter posts or custom post types by category / taxonomies without page reload. Easy to use.
  * Version:           1.3.0
  * Author:            YMC Cor
