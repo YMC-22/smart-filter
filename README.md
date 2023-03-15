@@ -382,7 +382,7 @@ wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(elem) {
     });
 ```
 
-**Before loaded posts. Arguments: target is the name of the filter container class.**
+**Before loaded posts.**
 
 Arguments: target is the name of the filter container class.
 ```php
