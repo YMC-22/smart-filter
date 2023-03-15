@@ -394,7 +394,7 @@ wp.hooks.addAction('ymc_before_loaded_data_80_1', 'smartfilter', function(target
    });
 ```
 
-**After loaded posts and insert into DOM node.** 
+**After loaded posts.** 
 
 Arguments: target is the name of the filter container class.
 ```php
