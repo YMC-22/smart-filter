@@ -370,7 +370,7 @@ YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiDateClear();
 
 **Hooks JS.**
 
-Stop loading posts on page load. Arguments: elem - DOM container filter.
+**Stop loading posts on page load. Arguments: elem - DOM container filter.**
 ```php
 wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', 'callback');
 
