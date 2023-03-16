@@ -276,14 +276,11 @@ YMCTools({target: ".data-target-ymcFilterID-LayoutID", terms: "termID"}).apiTerm
 ```php
 Usage example:
 
-<script type="application/javascript"> 
-   window.addEventListener("load", (event) => {
      YMCTools({
-             target: '.data-target-ymcFilterID-LayoutID',
-             terms: 'termID'            
-           }).apiTermUpdate();  
-   });
-</script>
+         target: '.data-target-ymcFilterID-LayoutID',
+         terms: 'termID'            
+     }).apiTermUpdate();  
+
 ```
 
 **This method allows to get posts by meta fields.**
@@ -304,9 +301,7 @@ To make a correct request, specify all the necessary parameters in JSON format. 
 ```php
 Usage example:
 
-<script type="application/javascript"> 
-   window.addEventListener("load", (event) => {
-     YMCTools({
+    YMCTools({
 	target: '.data-target-ymcFilterID-LayoutID',
         meta : [
                  { "relation" : "OR" },
@@ -314,8 +309,7 @@ Usage example:
                  { "key" : "price", "value" : "10", "compare": "LIKE" }
                ]
 	}).apiMetaUpdate();
-   });
-</script>	
+
 ```
 
 **This method allows to get posts by date.**
@@ -336,8 +330,6 @@ To make a correct request, specify all the necessary parameters in JSON format. 
 ```php
 Usage example:
 
-<script type="application/javascript">
-    window.addEventListener("load", (event) => {
       YMCTools({
 	  target: '.data-target-ymcFilterID-LayoutID',
           date : [                  
@@ -346,7 +338,7 @@ Usage example:
                    { "day" : "10", "compare" : ">=" }
                 ]
 	 }).apiDateUpdate();
-     });
+     
 </script>	 
 ```
 
@@ -370,11 +362,19 @@ YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiDateClear();
 
 **Hooks JS.**
 
-**Stop loading posts on page load. Arguments: elem - DOM container filter.**
-```php
-wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', 'callback');
+**Stop loading posts on page load.**
 
+```php
+wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', 'callback(elem)');
+```
+Set the selected filter's data-loading attribute to false ( data-loading="false" )
+
+**Params function callback:**
+- `elem - DOM container filter.`
+
+```php
 Usage example:
+
 wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(elem) {
      if( elem.classList.contains('data-target-ymc80-1') ) {
             elem.dataset.loading = 'false';
@@ -382,27 +382,41 @@ wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(elem) {
     });
 ```
 
-**Before loaded posts.**
+**Before loaded all posts.**
 
-Arguments: target is the name of the filter container class.
 ```php
-wp.hooks.addAction('ymc_before_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback');
+wp.hooks.addAction('ymc_before_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name)');
+```
 
+Hook works before loading all posts.
+
+**Params function callback:**
+- `class_name - is the name of the filter container class.`
+
+```php
 Usage example:
-wp.hooks.addAction('ymc_before_loaded_data_80_1', 'smartfilter', function(target){
-       console.log('Before loaded data' + target);
+
+wp.hooks.addAction('ymc_before_loaded_data_80_1', 'smartfilter', function(class_name){
+       console.log('Before loading all posts: ' + class_name);
    });
 ```
 
-**After loaded posts.** 
+**After loaded all posts.** 
 
-Arguments: target is the name of the filter container class.
 ```php
-wp.hooks.addAction('ymc_after_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback');
+wp.hooks.addAction('ymc_after_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name)');
+```
 
+Hook works after loading all posts.
+
+**Params function callback:**
+- `class_name - is the name of the filter container class.`
+
+```php
 Usage example:
-wp.hooks.addAction('ymc_after_loaded_data_80_1', 'smartfilter', function(target){
-      console.log('After loaded data' + target);
+
+wp.hooks.addAction('ymc_after_loaded_data_80_1', 'smartfilter', function(class_name){
+      console.log('After loading all posts:' + class_name);
    });
 ```
 
@@ -410,9 +424,7 @@ wp.hooks.addAction('ymc_after_loaded_data_80_1', 'smartfilter', function(target)
 
 Stop loading posts for the selected filter and then load posts for the selected term
 
-```php
-<script type="application/javascript">    
-    
+```php       
     wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(el){
         if( el.classList.contains('data-target-ymc80-1') ) {
             el.dataset.loading = 'false';
@@ -425,11 +437,7 @@ Stop loading posts for the selected filter and then load posts for the selected 
              terms: '7'
          }).apiTermUpdate();
      });
-</script>
 ```
-
-
-
 
 ### Support
 For support questions, please write to: wss.office21@gmail.com
