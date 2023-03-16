@@ -161,6 +161,10 @@
                     wp.hooks.doAction('ymc_after_loaded_data_'+filterID+'_'+targetID, target);
 
                 },
+                complete: function (){
+                    // Add Hook: called regardless of if the request was successful, or not
+                    wp.hooks.doAction('ymc_complete_loaded_data_'+filterID+'_'+targetID, target);
+                },
                 error: function (obj, err) {
                     console.log( obj, err );
                 }

@@ -420,6 +420,26 @@ wp.hooks.addAction('ymc_after_loaded_data_80_1', 'smartfilter', function(class_n
    });
 ```
 
+**Complete loaded all data.**
+
+This hook is called regardless of if the request was successful, or not. 
+You will always receive a complete callback, even for synchronous requests.
+
+```php
+wp.hooks.addAction('ymc_complete_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name)');
+```
+
+**Params function callback:**
+- `class_name - is the name of the filter container class.`
+
+```php
+Usage example:
+
+wp.hooks.addAction('ymc_complete_loaded_data_data_80_1', 'smartfilter', function(class_name){
+      console.log('Complete loaded all data:' + class_name);
+   });
+```
+
 **An example of using hooks in combination with the YMCTools object and its methods**
 
 Stop loading posts for the selected filter and then load posts for the selected term
