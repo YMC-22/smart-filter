@@ -434,17 +434,18 @@ This hook is called regardless of if the request was successful, or not.
 You will always receive a complete callback, even for synchronous requests.
 
 ```php
-wp.hooks.addAction('ymc_complete_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name)');
+wp.hooks.addAction('ymc_complete_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name, status)');
 ```
 
 **Params function callback:**
 - `class_name - is the name of the filter container class.`
+- `status - a string categorizing the status of the request ("success", "notmodified", "nocontent", "error", "timeout", "abort", or "parsererror").`
 
 ```php
 Usage example:
 
-wp.hooks.addAction('ymc_complete_loaded_data_data_80_1', 'smartfilter', function(class_name){
-      console.log('Complete loaded all data:' + class_name);
+wp.hooks.addAction('ymc_complete_loaded_data_data_80_1', 'smartfilter', function(class_name, status){
+      console.log('Complete loaded all data:' + class_name + ' status:' + status);
    });
 ```
 
