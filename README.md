@@ -362,6 +362,14 @@ YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiDateClear();
 
 ### Hooks JS.
 
+Note: hooks should be used in: 
+
+**Vanilla javascript**
+- addEventListener('DOMContentLoaded', (event) => {});
+ 
+**jQuery**
+- $(document).on('ready', function() {});
+
 **Stop loading posts on page load.**
 
 ```php
