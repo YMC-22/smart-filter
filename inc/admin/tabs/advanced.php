@@ -20,9 +20,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     <div class="from-element">
         <label class="form-label">
-			<?php echo esc_html__('Add CSS Class', 'ymc-smart-filter');?>
+			<?php echo esc_html__('Add Custom Class', 'ymc-smart-filter');?>
             <span class="information">
-                    <?php echo esc_html__('This class will add to every post.', 'ymc-smart-filter');?>
+                    <?php echo esc_html__('This class will be added to the filter container.', 'ymc-smart-filter');?>
                 </span>
         </label>
         <input class="input-field" type="text" name="ymc-special-post-class" value="<?php echo esc_attr($ymc_special_post_class); ?>">

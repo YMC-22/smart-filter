@@ -18,7 +18,7 @@ while ($query->have_posts()) : $query->the_post();
 
 	do_action( "ymc_before_custom_layout_".$filter_id.'_'.$target_id, $increment_post, $arrOptions );
 
-	echo '<article class="ymc-'.esc_attr($post_layout).' post-'.get_the_id().' post-item '.esc_attr($css_special).'">';
+	echo '<article class="ymc-'.esc_attr($post_layout).' post-'.get_the_id().' post-item">';
 
 	$layouts .= '<header class="head-post">'.esc_html__('Add your custom post layout.','ymc-smart-filter').'</header>';
 	$layouts .= '<div class="inform">'.esc_html__('Use a filter:','ymc-smart-filter').' 

@@ -31,10 +31,9 @@ if ( ! defined( 'ABSPATH' ) ) {
         foreach($term_list as $term_single) {
             $list_categories .= '<span class="cat-inner">'. esc_html($term_single->name) .'</span>';
         }
-        $css_special =  !empty($ymc_special_post_class) ? $ymc_special_post_class : '';
 
 
-        echo '<article class="ymc-'.esc_attr($post_layout).' post-'.get_the_id().' post-item '.esc_attr($css_special).'">';
+        echo '<article class="ymc-'.esc_attr($post_layout).' post-'.get_the_id().' post-item">';
         echo '<div class="category">'. wp_kses_post($list_categories) .'</div>';
         echo '<header class="title">'. esc_html($title) .'</header>';
         echo '<div class="date"><i class="far fa-calendar-alt"></i> '. get_the_date($post_date_format) . '</div>';
