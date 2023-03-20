@@ -13,10 +13,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	    $title   = wp_trim_words(get_the_title($post_id), 15, '...');
 	    $link    = get_the_permalink($post_id);
 	    $post_date_format = apply_filters('ymc_post_date_format_'.$filter_id.'_'.$target_id, 'd, M Y');
-	    $image_url = YMC_SMART_FILTER_URL . '/includes/assets/images/dummy-Image.svg';
-	    $image = wp_get_attachment_image_src(get_post_thumbnail_id($post_id), 'full');
-	    if( is_array($image) ) {
-		  $image_url = $image[0];
+		$image_post = '<img class="dummy-image" src="'. YMC_SMART_FILTER_URL . '/includes/assets/images/dummy-Image.svg" alt="Dummy image">';
+
+	    if( !empty(get_the_post_thumbnail($post_id, 'full')) ) {
+		    $image_post = get_the_post_thumbnail($post_id, 'full');
         }
 
 	    $content = $post->post_excerpt;
@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
         echo '<article class="ymc-'.esc_attr($post_layout).' post-'.get_the_id().' post-item">';
-        echo '<figure class="media"><img src="'. esc_attr($image_url) .'"></figure>';
+        echo '<figure class="media">'. wp_kses_post($image_post) .'</figure>';
 		echo '<div class="category">'. wp_kses_post($list_categories) .'</div>';
         echo '<header class="title">'. esc_html($title) .'</header>';
         echo '<span class="date"><i class="far fa-calendar-alt"></i> '. get_the_date($post_date_format) . '</span>';
