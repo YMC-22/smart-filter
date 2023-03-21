@@ -450,7 +450,7 @@ wp.hooks.addAction('ymc_complete_loaded_data_FilterID_LayoutID', 'smartfilter', 
 ```php
 Usage example:
 
-wp.hooks.addAction('ymc_complete_loaded_data_data_80_1', 'smartfilter', function(class_name, status){
+wp.hooks.addAction('ymc_complete_loaded_data_80_1', 'smartfilter', function(class_name, status){
       console.log('Complete loaded all data:' + class_name + ' status:' + status);
    });
 ```
