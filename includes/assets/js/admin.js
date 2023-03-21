@@ -5,7 +5,7 @@
     $(document).on('ready', function () {
 
         // Path preloader image
-        const pathPreloader = _smart_filter_object.path+"/admin/assets/images/preloader.svg";
+        const pathPreloader = _smart_filter_object.path+"/includes/assets/images/preloader.svg";
 
         // Wrapper tab
         const container   = $('.ymc__container-settings .tab-panel');

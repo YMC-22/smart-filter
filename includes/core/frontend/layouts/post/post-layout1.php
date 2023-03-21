@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
         // Get data
 	    $post_id = get_the_ID();
-	    $title   = wp_trim_words(get_the_title($post_id), 15, '...');
+	    $title   = get_the_title($post_id);
 	    $link    = get_the_permalink($post_id);
 	    $post_date_format = apply_filters('ymc_post_date_format_'.$filter_id.'_'.$target_id, 'd, M Y');
 		$image_post = '<img class="dummy-image" src="'. YMC_SMART_FILTER_URL . '/includes/assets/images/dummy-Image.svg" alt="Dummy image">';
