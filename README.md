@@ -367,7 +367,7 @@ YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiDateClear();
 
 ### Hooks JS.
 
-Note: hooks should be used in: 
+**Note**: hooks should be used in: 
 
 **Vanilla javascript**
 - addEventListener('DOMContentLoaded', (event) => {});
@@ -395,7 +395,7 @@ wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(elem) {
     });
 ```
 
-Note: this hook only works when the page is loaded. By default, it stops all posts from loading. Therefore, inside this hook, you must specify the class of the selected filter.
+**Note**: this hook only works when the page is loaded. By default, it stops all posts from loading. Therefore, inside this hook, you must specify the class of the selected filter.
 
 
 **Before loaded all posts.**
