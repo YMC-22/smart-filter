@@ -389,8 +389,6 @@ wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(elem) {
          }
     });
 ```
-Note: The ymc_stop_loading_data hook and ymc_before_loaded_data_FilterID_LayoutID is executed when the theme's custom script is included in the header and not in the footer.
-wp_enqueue_script function parameter $in_footer must be false (by default).
 
 
 **Before loaded all posts.**
@@ -411,8 +409,7 @@ wp.hooks.addAction('ymc_before_loaded_data_80_1', 'smartfilter', function(class_
        console.log('Before loading all posts: ' + class_name);
    });
 ```
-Note: The ymc_before_loaded_data_FilterID_LayoutID hook is executed when the theme's custom script is included in the header and not in the footer.
-wp_enqueue_script function parameter $in_footer must be false (by default).
+
 
 
 **After loaded all posts.** 
