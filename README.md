@@ -261,6 +261,11 @@ add_filter('ymc_filter_custom_layout_FilterID_LayoutID', 'my_custom_filter_layou
 
 To control the post filter via javascript, use the following methods of the Filter's global YMCTools object. All parameters, their name and values that are passed to the object, are built on the principles and rules of the global WP_Query object in the WordPress core. Therefore, please, refer to the relevant documentation for using the WP_Query object for clarification. All of these methods should be used when creating event handlers. but for example, when clicking on a button or link, call one or another method.
 
+**Note***: calling the YMCTools() object when the page is fully loaded should be placed in the block window.addEventListener("load", (e) => {});
+In some cases, this object is used in handler function callbacks.
+
+
+
 **This method allows to get posts by ID terms of different taxonomies.**
 
 ```php
@@ -389,6 +394,8 @@ wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(elem) {
          }
     });
 ```
+
+Note: this hook only works when the page is loaded. By default, it stops all posts from loading. Therefore, inside this hook, you must specify the class of the selected filter.
 
 
 **Before loaded all posts.**
