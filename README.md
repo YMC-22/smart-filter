@@ -1,4 +1,4 @@
-![This is an image](/inc/front/assets/images/YMC-logos.png)
+![This is an image](/includes/assets/images/YMC-logos.png)
 
 #  Documentation for SMART FILTER
 > Plugin Smart Filters - Filter posts/custom post types by custom taxonomy/category without page reload and with pagination too. It has a different filter and post layouts. The plugin allows you to create multiple filters on one page. To use custom templates for the filter bar and plugin postcards, you need a basic understanding of technologies: HTML JavaScript, CSS and PHP. This plugin allows you to customize your post and filter templates, giving you total freedom in your presentation. JS API interface allows you to interact with the filter from the outside. This allows you to develop all sorts of complex post filtering interfaces.
