@@ -158,7 +158,7 @@
                     document.querySelector('.'+target).dataset.loading = 'true';
 
                     // Add Hook: after loaded posts
-                    wp.hooks.doAction('ymc_after_loaded_data_'+filterID+'_'+targetID, target);
+                    wp.hooks.doAction('ymc_after_loaded_data_'+filterID+'_'+targetID, target, res);
 
                 },
                 complete: function (XHR, status){
@@ -848,3 +848,4 @@
     });
 
 }( jQuery ));
+

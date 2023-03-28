@@ -248,13 +248,14 @@ class Get_Posts {
 
 		$data = array(
 			'data' => $output,
-			'found' => $query->found_posts,
 			'posts_selected' => $default_posts_selected,
 			'message' => $message,
 			'post_type' => $post_type,
 			'tax' => $taxonomy,
 			'term' => $tax_qry,
+			'found' => $query->found_posts,
 			'max_num_pages' => $query->max_num_pages,
+			'post_count' => $query->post_count,
 			'get_current_posts' => ($query->found_posts - $paged * $per_page),
 			'pagin' => !empty($pagin) ? $pagin : '',
 			'meta_query' => $meta_params,

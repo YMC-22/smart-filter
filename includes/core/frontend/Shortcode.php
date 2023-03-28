@@ -45,7 +45,8 @@ class Shortcode {
 		require YMC_SMART_FILTER_DIR . '/includes/core/util/variables.php';
 
 
-		if ( !empty($id) && $ymc_post_type === 'ymc_filters' && $post_status === 'publish' ) {
+		if ( !empty($id) && $ymc_post_type === 'ymc_filters' && $post_status === 'publish' )
+		{
 
 			if (is_array($tax_selected)) {
 				$ymc_tax = implode(",", $tax_selected);
