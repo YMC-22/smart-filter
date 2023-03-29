@@ -161,7 +161,7 @@
                     wp.hooks.doAction('ymc_after_loaded_data_'+filterID+'_'+targetID, target, res);
 
                 },
-                complete: function (XHR, status){
+                complete: function (XHR, status) {
                     // Add Hook: called regardless of if the request was successful, or not
                     wp.hooks.doAction('ymc_complete_loaded_data_'+filterID+'_'+targetID, target, status);
                 },
@@ -848,4 +848,5 @@
     });
 
 }( jQuery ));
+
 

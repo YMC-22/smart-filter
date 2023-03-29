@@ -371,4 +371,3 @@ class Get_Posts {
 
 }
 
-

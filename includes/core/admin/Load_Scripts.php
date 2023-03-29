@@ -65,5 +65,4 @@ class Load_Scripts {
 	public function generate_handle() {
 		return wp_create_nonce('smart-filter');
 	}
-
 }

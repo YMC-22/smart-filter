@@ -268,7 +268,7 @@ In some cases, this object is used in handler function callbacks.
 
 **This method allows to get posts by ID terms of different taxonomies.**
 
-```php
+```js
 YMCTools({target: ".data-target-ymcFilterID-LayoutID", terms: "termID"}).apiTermUpdate();
 ```
 **Required params:**
@@ -278,7 +278,7 @@ YMCTools({target: ".data-target-ymcFilterID-LayoutID", terms: "termID"}).apiTerm
 **Optional params:**
 - `taxRel - define the interaction between different taxonomies in the query. The default is "AND". If set "all" will match the relation "OR". Installed in the admin panel Filter -> Tab Ganeral -> Taxonomy Relation.`
 
-```php
+```js
 Usage example:
 
      YMCTools({
@@ -290,7 +290,7 @@ Usage example:
 
 **This method allows to get posts by meta fields.**
 
-```php
+```js
 YMCTools({target: ".data-target-ymcFilterID-LayoutID", meta: [params]}).apiTermUpdate();
 ```
 All parameters correspond to the parameters of the global WP_Query object. 
@@ -303,7 +303,7 @@ To make a correct request, specify all the necessary parameters in JSON format. 
 **Optional params:**
 - `relation - defines a logical relationship between nested arrays. Default is "AND"`
 
-```php
+```js
 Usage example:
 
     YMCTools({
@@ -319,7 +319,7 @@ Usage example:
 
 **This method allows to get posts by date.**
 
-```php
+```js
 YMCTools({target: ".data-target-ymcFilterID-LayoutID", date: [params]}).apiDateUpdate();
 ```
 All parameters correspond to the parameters of the global WP_Query object. 
@@ -332,7 +332,7 @@ To make a correct request, specify all the necessary parameters in JSON format. 
 **Optional params:**
 - `relation - defines a logical relationship between nested arrays. Default is "AND"`
 
-```php
+```js
 Usage example:
 
       YMCTools({
@@ -349,19 +349,19 @@ Usage example:
 
 **This method allows to clear query parameters in the filter by terms.**
 
-```php
+```js
 YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiTermClear();
 ```
 
 **This method allows to clear query parameters in the filter by meta fields.**
 
-```php
+```js
 YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiMetaClear();
 ```
 
 **This method allows to clear query parameters in the filter by date.**
 
-```php
+```js
 YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiDateClear();
 ```
 
@@ -377,7 +377,7 @@ YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiDateClear();
 
 **Stop loading posts on page load.**
 
-```php
+```js
 wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', 'callback(elem)');
 ```
 Set the selected filter's data-loading attribute to false ( data-loading="false" )
@@ -385,7 +385,7 @@ Set the selected filter's data-loading attribute to false ( data-loading="false"
 **Params function callback:**
 - `elem - DOM container filter.`
 
-```php
+```js
 Usage example:
 
 wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(elem) {
@@ -400,7 +400,7 @@ wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(elem) {
 
 **Before loaded all posts.**
 
-```php
+```js
 wp.hooks.addAction('ymc_before_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name)');
 ```
 
@@ -409,7 +409,7 @@ Hook works before loading all posts.
 **Params function callback:**
 - `class_name - is the name of the filter container class.`
 
-```php
+```js
 Usage example:
 
 wp.hooks.addAction('ymc_before_loaded_data_80_1', 'smartfilter', function(class_name){
@@ -421,16 +421,21 @@ wp.hooks.addAction('ymc_before_loaded_data_80_1', 'smartfilter', function(class_
 
 **After loaded all posts.** 
 
-```php
-wp.hooks.addAction('ymc_after_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name)');
+```js
+wp.hooks.addAction('ymc_after_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name, res)');
 ```
 
 Hook works after loading all posts.
 
 **Params function callback:**
 - `class_name - is the name of the filter container class.`
+- `res - returned data object, includes the following properties:`
+- `post_count - number of displayed posts per page;`
+- `max_num_pages - maximum number of pages;`
+- `found - number of found posts;`
+- `post_type - post type name;`
 
-```php
+```js
 Usage example:
 
 wp.hooks.addAction('ymc_after_loaded_data_80_1', 'smartfilter', function(class_name){
@@ -443,7 +448,7 @@ wp.hooks.addAction('ymc_after_loaded_data_80_1', 'smartfilter', function(class_n
 This hook is called regardless of if the request was successful, or not. 
 You will always receive a complete callback, even for synchronous requests.
 
-```php
+```js
 wp.hooks.addAction('ymc_complete_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name, status)');
 ```
 
@@ -451,7 +456,7 @@ wp.hooks.addAction('ymc_complete_loaded_data_FilterID_LayoutID', 'smartfilter', 
 - `class_name - is the name of the filter container class.`
 - `status - a string categorizing the status of the request ("success", "notmodified", "nocontent", "error", "timeout", "abort", or "parsererror").`
 
-```php
+```js
 Usage example:
 
 wp.hooks.addAction('ymc_complete_loaded_data_80_1', 'smartfilter', function(class_name, status){
@@ -463,7 +468,7 @@ wp.hooks.addAction('ymc_complete_loaded_data_80_1', 'smartfilter', function(clas
 
 Stop loading posts for the selected filter and then load posts for the selected term
 
-```php       
+```js       
     wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(el){
         if( el.classList.contains('data-target-ymc80-1') ) {
             el.dataset.loading = 'false';
@@ -476,6 +481,46 @@ Stop loading posts for the selected filter and then load posts for the selected 
              terms: '7'
          }).apiTermUpdate();
      });
+```
+
+
+### Masonry Layout.
+
+To build post cards in Masonry form, use the ymc_after_loaded_data_FilterID_LayoutID hooks and the Masonry mini library. To do this, you need to use the following code:
+The MagicGrid object has the following settings:
+
+- `class_name - is the name of the filter container class.`
+- `container: "#container", // Required. Can be a class, id, or an HTMLElement.`
+- `static: false, // Required for static content. Default: false.`
+- `items: 30, // Required for dynamic content. Initial number of items in the container.`
+- `gutter: 30, // Optional. Space between items. Default: 25(px).`
+- `maxColumns: 5, // Optional. Maximum number of columns. Default: Infinite.`
+- `useMin: true, // Optional. Prioritize shorter columns when positioning items? Default: false.`
+- `useTransform: true, // Optional. Position items using CSS transform? Default: True.`
+- `animate: true, // Optional. Animate item positioning? Default: false.`
+- `center: true, //Optional. Center the grid items? Default: true.`
+
+To correctly display the grid, set styles for the post container, for example:
+
+```css
+.data-target-ymc1 .container-posts .post-entry .post-item {
+    width: 250px;
+}
+```
+
+```js
+Usage example:
+
+wp.hooks.addAction('ymc_after_loaded_data_80_1', 'smartfilter', function(class_name, res){
+
+            const magicGrid = new MagicGrid({
+                container: '.' + class_name + ' .post-entry',
+                items: res.post_count,
+                center: false,
+                gutter: 20                
+            });
+            magicGrid.listen();
+        });
 ```
 
 ### Support
