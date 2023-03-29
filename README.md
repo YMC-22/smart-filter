@@ -500,7 +500,7 @@ The MagicGrid object has the following settings:
 - `animate: true, // Optional. Animate item positioning? Default: false.`
 - `center: true, //Optional. Center the grid items? Default: true.`
 
-To correctly display the grid, set styles for the post container, for example:
+To correctly display the grid, set styles for the post item, for example:
 
 ```css
 .data-target-ymc1 .container-posts .post-entry .post-item {
