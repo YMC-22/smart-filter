@@ -438,8 +438,10 @@ Hook works after loading all posts.
 ```js
 Usage example:
 
-wp.hooks.addAction('ymc_after_loaded_data_80_1', 'smartfilter', function(class_name){
-      console.log('After loading all posts:' + class_name);
+wp.hooks.addAction('ymc_after_loaded_data_80_1', 'smartfilter', function(class_name, response){
+      console.log('Container class: ' + class_name);
+      console.log('Post count: ' + response.post_count);
+      console.log('Number of found posts: ' + response.found);
    });
 ```
 
