@@ -488,7 +488,7 @@ Stop loading posts for the selected filter and then load posts for the selected 
 
 ### Masonry Layout.
 
-To build post cards in Masonry form, use the ymc_after_loaded_data_FilterID_LayoutID hooks and the Masonry mini library. To do this, you need to use the following code:
+To build post cards in Masonry form, use the ymc_after_loaded_data_FilterID_LayoutID hooks and the Masonry mini library MagicGrid. To do this, you need to use the following code:
 The MagicGrid object has the following settings:
 
 - `class_name - is the name of the filter container class.`
