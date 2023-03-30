@@ -513,14 +513,15 @@ Usage example:
 
 wp.hooks.addAction('ymc_after_loaded_data_80_1', 'smartfilter', function(class_name, response){
 
-            const magicGrid = new MagicGrid({
-                container: '.' + class_name + ' .post-entry',
-                items: response.post_count,
-                center: false,
-                gutter: 20                
-            });
-            magicGrid.listen();
-        });
+        const magicGrid = new MagicGrid({
+              container: '.' + class_name + ' .post-entry',
+              items: response.post_count,
+              center: false,
+              gutter: 20                
+       });
+        
+       magicGrid.listen();
+   });
 ```
 
 ### Support
