@@ -422,18 +422,18 @@ wp.hooks.addAction('ymc_before_loaded_data_80_1', 'smartfilter', function(class_
 **After loaded all posts.** 
 
 ```js
-wp.hooks.addAction('ymc_after_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name, res)');
+wp.hooks.addAction('ymc_after_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name, response)');
 ```
 
 Hook works after loading all posts.
 
 **Params function callback:**
 - `class_name - is the name of the filter container class.`
-- `res - returned data object, includes the following properties:`
-- `post_count - number of displayed posts per page;`
-- `max_num_pages - maximum number of pages;`
-- `found - number of found posts;`
-- `post_type - post type name;`
+- `response - returned data object, includes the following properties:`
+  - `post_count - number of displayed posts per page;`
+  - `max_num_pages - maximum number of pages;`
+  - `found - number of found posts;`
+  - `post_type - post type name;`
 
 ```js
 Usage example:
@@ -503,19 +503,19 @@ The MagicGrid object has the following settings:
 To correctly display the grid, set styles for the post item, for example:
 
 ```css
-.data-target-ymc1 .container-posts .post-entry .post-item {
-    width: 250px;
-}
+    .data-target-ymc1 .container-posts .post-entry .post-item {
+        width: 250px;
+    }
 ```
 
 ```js
 Usage example:
 
-wp.hooks.addAction('ymc_after_loaded_data_80_1', 'smartfilter', function(class_name, res){
+wp.hooks.addAction('ymc_after_loaded_data_80_1', 'smartfilter', function(class_name, response){
 
             const magicGrid = new MagicGrid({
                 container: '.' + class_name + ' .post-entry',
-                items: res.post_count,
+                items: response.post_count,
                 center: false,
                 gutter: 20                
             });
