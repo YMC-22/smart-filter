@@ -427,190 +427,196 @@ $font-size: 16;
 	// Posts style
 	.container-posts {
 		position: relative;
-		.post-entry {
+
+		// Style for Post Layout 1
+		.post-layout1 {
 			display: grid;
 			grid-gap: 20px;
 			grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
 			margin-bottom: 40px;
-
-			// Style for Post Layout 1
-			&.post-layout1 {
-				.ymc-post-layout1 {
-					position: relative;
-					padding: 20px;
-					border: 1px solid #bbb;
-					.media {
-						margin: 0 0 20px 0;
-						overflow: hidden;
-						img {
-							width: 100%;
-							height: 220px;
-							object-fit: cover;
-						}
-					}
-					.category {
-						margin-bottom: 20px;
-						.cat-inner {
-							font-size: 12px;
-							line-height: 1.3;
-							border: none;
-							display: inline-block;
-							padding: 3px 10px;
-							background: #000;
-							margin-right: 5px;
-							margin-bottom: 5px;
-							color: white;
-						}
-					}
-					.title {
-						font-size: 22px;
-						font-weight: 600;
-						margin-bottom: 10px;
-						line-height: 1.3;
-					}
-					.date {
-						font-size: 14px;
-						margin: 0 15px 10px 0;
-						border-bottom: 1px solid #fff;
-						padding-bottom: 5px;
-						display: inline-block;
-						i {
-							margin-right: 5px;
-						}
-					}
-					.author {
-						font-size: 14px;
-						margin-bottom: 10px;
-						border-bottom: 1px solid #fff;
-						padding-bottom: 5px;
-						display: inline-block;
-					}
-					.excerpt {
-						font-size: 16px;
-						line-height: 1.3;
-						margin-bottom: 10px;
-					}
-					.read-more {
-						text-align: right;
-						.btn {
-							display: inline-block;
-							text-decoration: none;
-							background: #000;
-							color: white;
-							padding: 8px 15px;
-							font-size: 14px;
-							font-weight: 500;
-							letter-spacing: normal;
-							line-height: 1.3;
-							border-radius: 0;
-							border: none;
-						}
-					}
-					&:hover {
-						img {
-							transform: scale(1.2);
-							transition: .3s;
-						}
+			.ymc-post-layout1 {
+				position: relative;
+				padding: 20px;
+				border: 1px solid #bbb;
+				.media {
+					margin: 0 0 20px 0;
+					overflow: hidden;
+					img {
+						width: 100%;
+						height: 220px;
+						object-fit: cover;
 					}
 				}
-			}
-
-			// Style for Post Layout 2
-			&.post-layout2 {
-				.ymc-post-layout2 {
-					position: relative;
-					padding: 20px 20px 40px 20px;
-					border: 1px solid #bbb;
-					.category {
-						margin-bottom: 20px;
-						.cat-inner {
-							font-size: 12px;
-							border-radius: 20px;
-							display: inline-block;
-							padding: 5px 15px;
-							background: #000;
-							margin-right: 5px;
-							margin-bottom: 4px;
-							color: white;
-						}
-					}
-					.title {
-						font-size: 22px;
-						font-weight: 600;
-						margin-bottom: 10px;
+				.category {
+					margin-bottom: 20px;
+					.cat-inner {
+						font-size: 12px;
 						line-height: 1.3;
-					}
-					.date {
-						font-size: 14px;
-						margin-bottom: 10px;
-						border-bottom: 1px solid #fff;
-						padding-bottom: 5px;
-						i {
-							margin-right: 5px;
-						}
-					}
-					.excerpt {
-						font-size: 16px;
-						line-height: 1.4;
-						margin-bottom: 10px;
-					}
-					.read-more {
-						position: absolute;
-						right: 15px;
-						bottom: 10px;
-						.btn {
-							display: inline-block;
-							text-decoration: none;
-							background: #000;
-							color: white;
-							padding: 8px 15px;
-							font-size: 14px;
-							font-weight: 500;
-							letter-spacing: normal;
-							line-height: 1.3;
-							border-radius: 0;
-							border: none;
-						}
+						border: none;
+						display: inline-block;
+						padding: 3px 10px;
+						background: #000;
+						margin-right: 5px;
+						margin-bottom: 5px;
+						color: white;
 					}
 				}
-			}
-
-			// Style for Custom Post Layout 3
-			&.post-custom-layout {
-				.post-item {
-					border: 1px solid #ccc;
-					padding: 20px 10px;
-					font-size: 14px;
+				.title {
+					font-size: 22px;
+					font-weight: 600;
+					margin-bottom: 10px;
 					line-height: 1.3;
-					color: #222;
-					background: #fff;
-					word-break: break-word;
-					.head-post {
-						font-size: 18px;
-						border-bottom: 1px solid #ccc;
-						margin-bottom: 10px;
-						padding-bottom: 5px;
+				}
+				.date {
+					font-size: 14px;
+					margin: 0 15px 10px 0;
+					border-bottom: 1px solid #fff;
+					padding-bottom: 5px;
+					display: inline-block;
+					i {
+						margin-right: 5px;
+					}
+				}
+				.author {
+					font-size: 14px;
+					margin-bottom: 10px;
+					border-bottom: 1px solid #fff;
+					padding-bottom: 5px;
+					display: inline-block;
+				}
+				.excerpt {
+					font-size: 16px;
+					line-height: 1.3;
+					margin-bottom: 10px;
+				}
+				.read-more {
+					text-align: right;
+					.btn {
+						display: inline-block;
+						text-decoration: none;
+						background: #000;
+						color: white;
+						padding: 8px 15px;
+						font-size: 14px;
 						font-weight: 500;
+						letter-spacing: normal;
+						line-height: 1.3;
+						border-radius: 0;
+						border: none;
 					}
-					.inform {
-						color: #949494;
-						line-height: 1.6;
-						.doc-text {
-							font-size: 12px;
-							color: #098ab8;
-							font-weight: 500;
-							border: 0.5px dashed #098ab8;
-							padding: 1px 5px;
-							display: block;
-						}
+				}
+				&:hover {
+					img {
+						transform: scale(1.2);
+						transition: .3s;
 					}
-					a {
-						display: block;
+				}
+			}
+		}
+
+		// Style for Post Layout 2
+		.post-layout2 {
+			display: grid;
+			grid-gap: 20px;
+			grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
+			margin-bottom: 40px;
+			.ymc-post-layout2 {
+				position: relative;
+				padding: 20px 20px 40px 20px;
+				border: 1px solid #bbb;
+				.category {
+					margin-bottom: 20px;
+					.cat-inner {
+						font-size: 12px;
+						border-radius: 20px;
+						display: inline-block;
+						padding: 5px 15px;
+						background: #000;
+						margin-right: 5px;
+						margin-bottom: 4px;
+						color: white;
+					}
+				}
+				.title {
+					font-size: 22px;
+					font-weight: 600;
+					margin-bottom: 10px;
+					line-height: 1.3;
+				}
+				.date {
+					font-size: 14px;
+					margin-bottom: 10px;
+					border-bottom: 1px solid #fff;
+					padding-bottom: 5px;
+					i {
+						margin-right: 5px;
+					}
+				}
+				.excerpt {
+					font-size: 16px;
+					line-height: 1.4;
+					margin-bottom: 10px;
+				}
+				.read-more {
+					position: absolute;
+					right: 15px;
+					bottom: 10px;
+					.btn {
+						display: inline-block;
+						text-decoration: none;
+						background: #000;
+						color: white;
+						padding: 8px 15px;
+						font-size: 14px;
+						font-weight: 500;
+						letter-spacing: normal;
+						line-height: 1.3;
+						border-radius: 0;
+						border: none;
+					}
+				}
+			}
+		}
+
+		// Style for Custom Post Layout 3
+		.post-custom-layout {
+			display: grid;
+			grid-gap: 20px;
+			grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
+			margin-bottom: 40px;
+			.post-item {
+				border: 1px solid #ccc;
+				padding: 20px 10px;
+				font-size: 14px;
+				line-height: 1.3;
+				color: #222;
+				background: #fff;
+				word-break: break-word;
+				.head-post {
+					font-size: 18px;
+					border-bottom: 1px solid #ccc;
+					margin-bottom: 10px;
+					padding-bottom: 5px;
+					font-weight: 500;
+				}
+				.inform {
+					color: #949494;
+					line-height: 1.6;
+					.doc-text {
 						font-size: 12px;
 						color: #098ab8;
-						text-decoration: underline;
-						margin-top: 5px;
+						font-weight: 500;
+						border: 0.5px dashed #098ab8;
+						padding: 1px 5px;
+						display: block;
 					}
+				}
+				a {
+					display: block;
+					font-size: 12px;
+					color: #098ab8;
+					text-decoration: underline;
+					margin-top: 5px;
 				}
 			}
 		}
