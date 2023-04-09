@@ -1,12 +1,12 @@
 ===  Smart Filter ===
 Plugin Name: Smart Filter
 Contributors: YMC
-Version: 2.1.4
+Version: 2.1.5
 Donate link: https://github.com/YMC-22/smart-filter
 Tags: filters, posts, mind, ajax posts, category posts, taxonomy, custom taxonomy, woocommerce
 Requires at least: 4.8
 Tested up to: 6.2
-Stable tag: 2.1.4
+Stable tag: 2.1.5
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -31,6 +31,8 @@ The plugin provides the following functionality:
 - Typography customization.
 - Ability to independently develop templates for filters and post cards and add them to the filter (requires basic knowledge of WordPress, HTML JavaScript, CSS and PHP).
 - Flexible filter management via Javascript API
+- JS hooks. Ability to manage asynchronous filter operations.
+- Support Masonry Layout
 
 == Installation ==
 
@@ -96,6 +98,8 @@ Fixed js
 Added the ability to display posts by masonry grid
 = 2.1.4 =
 Fixed css
+= 2.1.5 =
+Fixed results search
 
 == Video ==
 https://www.youtube.com/watch?v=FIBNE0Ix6Vg

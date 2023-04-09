@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
             <div class="component-input">
                 <input id="field-search" class="search-form__input field-search" type="text" name="search" autocomplete="off" value="" placeholder="<?php esc_attr_e($ymc_search_placeholder,'ymc-smart-filter'); ?>">
-                <ul id="results"></ul>
+                <ul id="results" class="autocomplete-results"></ul>
                 <span class="clear"><i class="fas fa-times"></i></span>
             </div>
 

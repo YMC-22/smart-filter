@@ -74,7 +74,7 @@
                 },
                 success: function (res) {
 
-                    if(params.post_sel !== 'all') {
+                    if(params.post_sel !== 'all' || params.search !== '') {
                         container.find('.filter-layout .posts-found').html(`<span>${res.posts_selected}</span>`);
                     }
                     else {
@@ -526,6 +526,7 @@
                 container.find('.filter-entry .active').each(function () {
                     $(this).removeClass('active');
                 });
+                container.find('.search-form .autocomplete-results').hide();
 
                 getFilterPosts({
                     'paged'      : 1,
@@ -654,7 +655,7 @@
         const _FN = (function () {
 
             const _info = {
-                version: '2.1.0',
+                version: '2.1.5',
                 author: 'YMC'
             }
 
