@@ -2,7 +2,7 @@
 Plugin Name: Smart Filter
 Contributors: YMC
 Version: 2.1.5
-Donate link: https://github.com/YMC-22/smart-filter
+Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
 Tags: filters, posts, mind, ajax posts, category posts, taxonomy, custom taxonomy, woocommerce
 Requires at least: 4.8
 Tested up to: 6.2
