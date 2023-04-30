@@ -254,10 +254,12 @@ $font-size: 16;
 											margin-bottom: 7px;
 											border: 1px solid #dcdcde;
 											padding: 10px;
+											cursor: move;
 											&.all-categories {
 												display: flex;
 												align-items: center;
 												background: #f6f6f6;
+												cursor: pointer;
 												label {
 													font-weight: 600;
 													text-transform: uppercase;
@@ -266,6 +268,10 @@ $font-size: 16;
 											&.notice-error {
 												border: 1px solid #d63638;
 												color: #d63638;
+											}
+											&.selected {
+												background: #098ab8;
+												color: #fff;
 											}
 										}
 									}

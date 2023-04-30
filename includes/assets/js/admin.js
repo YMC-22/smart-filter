@@ -178,7 +178,7 @@
 
                 taxListElement.addEventListener('dragstart', (evt) => {
                     evt.target.classList.add('selected');
-                })
+                });
 
                 taxListElement.addEventListener('dragend', (evt) => {
                     evt.target.classList.remove('selected');
@@ -211,11 +211,9 @@
                 let getNextElement = (cursorPosition, currentElement) => {
                     let currentElementCoord = currentElement.getBoundingClientRect();
                     let currentElementCenter = currentElementCoord.y + currentElementCoord.height / 2;
-                    let nextElement = (cursorPosition < currentElementCenter) ?
+                    return (cursorPosition < currentElementCenter) ?
                         currentElement :
                         currentElement.nextElementSibling;
-
-                    return nextElement;
                 };
 
                 taxListElement.addEventListener('dragover', (evt) => {
@@ -249,6 +247,105 @@
 
         }
         sortTaxonomy();
+
+
+        // Drag & Drop Sort Terms
+        function sortTerms() {
+
+            let termListElement = document.querySelector('#ymc-terms');
+
+            if( termListElement ) {
+
+                let termElements = termListElement.querySelectorAll('.item-inner:not(.all-categories)');
+
+                for (let term of termElements) {
+                    term.draggable = true;
+                }
+
+
+                termListElement.querySelectorAll('.entry-terms').forEach((el) => {
+                    el.addEventListener('dragstart', (evt) => {
+                        evt.target.classList.add('selected');
+                    });
+                });
+
+                termListElement.querySelectorAll('.entry-terms').forEach((el) => {
+
+                    el.addEventListener('dragend', (evt) => {
+                        evt.target.classList.remove('selected');
+
+                        let arrTerms = [];
+
+                        termListElement.querySelectorAll('.item-inner:not(.all-categories)').forEach((el) => {
+                            arrTerms.push(el.children[0].value);
+                        });
+
+                        let data = {
+                            'action': 'ymc_term_sort',
+                            'nonce_code' : _smart_filter_object.nonce,
+                            'term_sort' : JSON.stringify(arrTerms),
+                            'post_id' : termListElement.dataset.postid
+                        };
+
+                        $.ajax({
+                            type: 'POST',
+                            dataType: 'json',
+                            url: _smart_filter_object.ajax_url,
+                            data: data,
+                            success: function (res) {},
+                            error: function (obj, err) {
+                                console.log( obj, err );
+                            }
+                        });
+                    });
+                });
+
+
+
+
+                let getNextElement = (cursorPosition, currentElement) => {
+                    let currentElementCoord = currentElement.getBoundingClientRect();
+                    let currentElementCenter = currentElementCoord.y + currentElementCoord.height / 2;
+                    return (cursorPosition < currentElementCenter) ?
+                        currentElement :
+                        currentElement.nextElementSibling;
+                };
+
+                termListElement.querySelectorAll('.entry-terms').forEach((el) => {
+                    el.addEventListener('dragover', (evt) => {
+                        evt.preventDefault();
+
+                        const activeElement = termListElement.querySelector(`.selected`);
+
+                        const currentElement = evt.target;
+
+                        const isMoveable = activeElement !== currentElement &&
+                            currentElement.classList.contains('item-inner');
+
+                        if (!isMoveable) {
+                            return;
+                        }
+
+                        const nextElement = getNextElement(evt.clientY, currentElement);
+
+                        if (
+                            nextElement &&
+                            activeElement === nextElement.previousElementSibling ||
+                            activeElement === nextElement
+                        ) {
+                            return;
+                        }
+
+                        evt.target.parentNode.insertBefore(activeElement, nextElement);
+                    });
+                });
+
+
+            }
+        }
+
+        sortTerms();
+
 
         // Selected All Terms
         $(document).on('click','.ymc__container-settings #general #ymc-terms .all-categories input[type="checkbox"]',function (e) {

@@ -23,7 +23,11 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 
 		$type_multiple = ( (bool) $ymc_multiple_filter ) ? 'multiple' : '';
 
-        ( $ymc_sort_terms === 'asc' ) ? asort($terms_selected) : arsort($terms_selected); ?>
+		if( $ymc_sort_terms !== 'manual' ) {
+			( $ymc_sort_terms === 'asc' ) ? asort($terms_selected) : arsort($terms_selected);
+		}
+
+		?>
 
         <?php
 

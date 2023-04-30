@@ -32,6 +32,8 @@ class Variables {
 
 	public $tax_sort = null;
 
+	public $term_sort = null;
+
 
 	/**
 	 * Layouts tab used default variables
@@ -173,6 +175,16 @@ class Variables {
 		}
 		return $this->tax_sort;
 	}
+
+
+	public function get_term_sort( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_term_sort' ) ) {
+			return get_post_meta( $post_id, 'ymc_term_sort', true );
+		}
+		return $this->term_sort;
+	}
+
 
 
 	/**

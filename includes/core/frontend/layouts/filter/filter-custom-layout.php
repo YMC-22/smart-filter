@@ -40,6 +40,20 @@ if ( ! defined( 'ABSPATH' ) ) {
                     $result_tax = $tax_selected;
                 }
 
+
+		        if( !is_null($term_sort) && $ymc_sort_terms === 'manual' )  {
+			        $result_terms = [];
+			        foreach( $terms_selected as $termID ) {
+				        $key = array_search($termID, $term_sort);
+				        $result_terms[$key] = $termID;
+			        }
+			        ksort($result_terms);
+		        }
+		        else {
+			        ( $ymc_sort_terms === 'asc' ) ? asort($terms_selected) : arsort($terms_selected);
+			        $result_terms = $terms_selected;
+		        }
+
                 $layout  = '<div class="cf-wrp"><header class="head-filter">'.esc_html__('Add custom filter layout.','ymc-smart-filter').'</header>';
 				$layout .= '<div class="inform">'. esc_html__('Use a filter:','ymc-smart-filter') .' 
                             <span class="doc-text">ymc_filter_custom_layout_'.$id.'_ID</span> 
@@ -49,7 +63,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				$filter_layout = apply_filters('ymc_filter_custom_layout_'.$id.'_'.$c_target,
                                      $layout,
-                                     $terms_selected,
+									 $result_terms,
 					                 $result_tax,
 					                 $multiple,
                                      $target);

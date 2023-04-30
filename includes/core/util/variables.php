@@ -14,6 +14,7 @@ $tax_selected      = $variable->get_tax_sel( $id );
 $terms_selected    = $variable->get_terms_sel( $id );
 $tax_rel           = $variable->get_tax_rel( $id );
 $tax_sort          = $variable->get_tax_sort( $id );
+$term_sort         = $variable->get_term_sort( $id );
 $ymc_pagination_hide = $variable->get_pagination_hide( $id );
 $ymc_filter_status = $variable->get_filter_status( $id );
 $ymc_sort_status   = $variable->get_sort_status( $id );

@@ -9,6 +9,7 @@ $tax_sel     = $variable->get_tax_sel( $post->ID );
 $terms_sel   = $variable->get_terms_sel( $post->ID );
 $tax_rel     = $variable->get_tax_rel( $post->ID );
 $tax_sort    = $variable->get_tax_sort( $post->ID );
+$term_sort   = $variable->get_term_sort( $post->ID );
 
 ?>
 
@@ -110,7 +111,6 @@ $tax_sort    = $variable->get_tax_sort( $post->ID );
         else {
           echo '<span class="notice">'. esc_html__('No data for Post Type / Taxonomy', 'ymc-smart-filter') .'</span>';
         }
-
 	?>
 
     </div>
@@ -123,10 +123,10 @@ $tax_sort    = $variable->get_tax_sort( $post->ID );
 
 	<label for="ymc-terms" class="form-label">
 		<?php echo esc_html__('Terms','ymc-smart-filter'); ?>
-		<span class="information"><?php echo esc_html__('Select terms','ymc-smart-filter'); ?></span>
+		<span class="information"><?php echo esc_html__('Select terms. Sortable with Drag and Drop feature. Set the Sort Filter Terms option to Manual sort in the Appearance section.','ymc-smart-filter'); ?></span>
 	</label>
 
-	<div class="category-list" id="ymc-terms">
+	<div class="category-list" id="ymc-terms" data-postid="<?php echo esc_attr($post->ID); ?>">
 
 		<?php
 
@@ -141,6 +141,18 @@ $tax_sort    = $variable->get_tax_sort( $post->ID );
 
 	            if( $terms ) {
 
+		            if( !is_null($term_sort) ) {
+			            $res_terms = [];
+			            foreach( $terms as $term ) {
+				            $key = array_search($term->term_id, $term_sort);
+				            $res_terms[$key] = $term;
+			            }
+			            ksort($res_terms);
+		            }
+					else {
+						$res_terms = $terms;
+					}
+
                     echo '<article class="group-term item-'. esc_attr($tax) .'">';
 
                     echo '<div class="item-inner all-categories">
@@ -148,7 +160,9 @@ $tax_sort    = $variable->get_tax_sort( $post->ID );
                           <label for="category-all-'.esc_attr($tax).'" class="category-all-label">'. esc_html__('All [ '. get_taxonomy( $tax )->label .']', 'ymc-smart-filter') .'</label>                                                    
                           </div>';
 
-		            foreach( $terms as $term ) :
+					echo '<div class="entry-terms">';
+
+		            foreach( $res_terms as $term ) :
 
 			            $sl1 = '';
 
@@ -164,7 +178,11 @@ $tax_sort    = $variable->get_tax_sort( $post->ID );
                               <input name="ymc-terms[]" class="category-list" id="category-id-'. esc_attr($term->term_id) .'" type="checkbox" value="'. esc_attr($term->term_id) .'" '. esc_attr($sl1) .'>';
 			            echo '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">' . esc_html($term->name) . '</label></div>';
 
-                   endforeach;
+                    endforeach;
+
+		            $res_terms = null;
+
+		            echo '</div>';
 
                    echo '</article>';
 	            }

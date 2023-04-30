@@ -19,6 +19,11 @@ class Ajax {
 		add_action('wp_ajax_ymc_tax_sort',array($this,'ymc_tax_sort'));
 		add_action("wp_ajax_nopriv_ymc_tax_sort", array($this,"ymc_tax_sort"));
 
+		add_action('wp_ajax_ymc_term_sort',array($this,'ymc_term_sort'));
+		add_action("wp_ajax_nopriv_ymc_term_sort", array($this,"ymc_term_sort"));
+
+
+
 	}
 
 	public function ymc_get_taxonomy() {
@@ -90,6 +95,27 @@ class Ajax {
 			$post_id = (int) sanitize_text_field($_POST["post_id"]);
 
 			$id = update_post_meta( $post_id, 'ymc_tax_sort', $clean_data );
+		}
+
+		$data = array(
+			'updated' => $id
+		);
+
+		wp_send_json($data);
+
+	}
+
+	public function ymc_term_sort() {
+
+		if (!wp_verify_nonce($_POST['nonce_code'], 'custom_ajax_nonce')) exit;
+
+		if(isset($_POST["term_sort"])) {
+
+			$temp_data = str_replace("\\", "", sanitize_text_field($_POST["term_sort"]));
+			$clean_data = json_decode($temp_data, true);
+			$post_id = (int) sanitize_text_field($_POST["post_id"]);
+
+			$id = update_post_meta( $post_id, 'ymc_term_sort', $clean_data );
 		}
 
 		$data = array(

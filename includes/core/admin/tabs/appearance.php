@@ -42,6 +42,9 @@ $ymc_order_post_type = $variable->get_order_post_type( $post->ID );
                     <option value="desc" <?php if ($ymc_sort_terms === 'desc') {echo "selected";} ?>>
 			            <?php echo esc_html__('Desc', 'ymc-smart-filter'); ?>
                     </option>
+                    <option value="manual" <?php if ($ymc_sort_terms === 'manual') {echo "selected";} ?>>
+                        <?php echo esc_html__('Manual sort', 'ymc-smart-filter'); ?>
+                    </option>
                 </select>
             </div>
 

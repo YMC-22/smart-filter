@@ -27,7 +27,9 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 
             if ( is_array($terms_selected) ) {
 
-                ( $ymc_sort_terms === 'asc' ) ? asort($terms_selected) : arsort($terms_selected);
+				if( $ymc_sort_terms !== 'manual' ) {
+					( $ymc_sort_terms === 'asc' ) ? asort($terms_selected) : arsort($terms_selected);
+				}
 
 	            $show_all = apply_filters('ymc_button_show_all_'.$id.'_'.$c_target, __('All','ymc-smart-filter'));
 
