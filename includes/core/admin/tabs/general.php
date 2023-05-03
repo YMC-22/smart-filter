@@ -10,7 +10,7 @@ $terms_sel   = $variable->get_terms_sel( $post->ID );
 $tax_rel     = $variable->get_tax_rel( $post->ID );
 $tax_sort    = $variable->get_tax_sort( $post->ID );
 $term_sort   = $variable->get_term_sort( $post->ID );
-
+$ymc_sort_terms  = $variable->get_sort_terms( $post->ID );
 ?>
 
 
@@ -141,7 +141,7 @@ $term_sort   = $variable->get_term_sort( $post->ID );
 
 	            if( $terms ) {
 
-		            if( !is_null($term_sort) ) {
+		            if( !is_null($term_sort) && $ymc_sort_terms === 'manual' ) {
 			            $res_terms = [];
 			            foreach( $terms as $term ) {
 				            $key = array_search($term->term_id, $term_sort);

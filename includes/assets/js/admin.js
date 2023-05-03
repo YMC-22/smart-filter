@@ -133,19 +133,21 @@
                             output += `<article class="group-term item-${val}">
                                        <div class="item-inner all-categories">
                                        <input name='all-select' class='category-all' id='category-all-${val}' type='checkbox'>
-                                       <label for='category-all-${val}' class='category-all-label'>All [ ${$(e.target).siblings('label').text()} ]</label></div>`;
+                                       <label for='category-all-${val}' class='category-all-label'>All [ ${$(e.target).siblings('label').text()} ]</label></div>
+                                       <div class="entry-terms">`;
 
                             res.data.terms.forEach((el) => {
                                 output += `<div class='item-inner'><input name="ymc-terms[]" class="category-list" id="category-id-${el.term_id}" type="checkbox" value="${el.term_id}">
                                 <label for='category-id-${el.term_id}' class='category-list-label'>${el.name}</label></div>`;
                             });
 
-                            output += `</article>`;
+                            output += `</div></article>`;
 
                             termWrp.append(output);
 
                             output = '';
 
+                            sortTerms();
                         }
                         else  {
                             termWrp.append(`<article class="group-term item-${val}">
@@ -343,7 +345,6 @@
 
             }
         }
-
         sortTerms();
 
 

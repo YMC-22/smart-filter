@@ -52,6 +52,7 @@ class Ajax {
 		}
 
 		update_post_meta( (int) $_POST["post_id"], 'ymc_tax_sort', $data_slugs );
+		delete_post_meta( (int) $_POST["post_id"], 'ymc_term_sort' );
 
 		$data = array(
 			'data' => json_encode($arr_result)
