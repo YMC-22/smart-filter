@@ -148,6 +148,8 @@
                             output = '';
 
                             sortTerms();
+
+                            updateSortTerms();
                         }
                         else  {
                             termWrp.append(`<article class="group-term item-${val}">
@@ -252,6 +254,34 @@
 
 
         // Drag & Drop Sort Terms
+        function updateSortTerms() {
+
+            let arrTerms = [];
+
+            document.querySelectorAll('#ymc-terms .item-inner:not(.all-categories)').forEach((el) => {
+                arrTerms.push(el.children[0].value);
+            });
+
+            let data = {
+                'action': 'ymc_term_sort',
+                'nonce_code' : _smart_filter_object.nonce,
+                'term_sort' : JSON.stringify(arrTerms),
+                'post_id' : document.querySelector('#ymc-terms').dataset.postid
+            };
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: _smart_filter_object.ajax_url,
+                data: data,
+                success: function (res) {},
+                error: function (obj, err) {
+                    console.log( obj, err );
+                }
+            });
+        }
+
+
         function sortTerms() {
 
             let termListElement = document.querySelector('#ymc-terms');
@@ -264,46 +294,17 @@
                     term.draggable = true;
                 }
 
-
                 termListElement.querySelectorAll('.entry-terms').forEach((el) => {
+
                     el.addEventListener('dragstart', (evt) => {
                         evt.target.classList.add('selected');
                     });
-                });
-
-                termListElement.querySelectorAll('.entry-terms').forEach((el) => {
 
                     el.addEventListener('dragend', (evt) => {
                         evt.target.classList.remove('selected');
-
-                        let arrTerms = [];
-
-                        termListElement.querySelectorAll('.item-inner:not(.all-categories)').forEach((el) => {
-                            arrTerms.push(el.children[0].value);
-                        });
-
-                        let data = {
-                            'action': 'ymc_term_sort',
-                            'nonce_code' : _smart_filter_object.nonce,
-                            'term_sort' : JSON.stringify(arrTerms),
-                            'post_id' : termListElement.dataset.postid
-                        };
-
-                        $.ajax({
-                            type: 'POST',
-                            dataType: 'json',
-                            url: _smart_filter_object.ajax_url,
-                            data: data,
-                            success: function (res) {},
-                            error: function (obj, err) {
-                                console.log( obj, err );
-                            }
-                        });
+                        updateSortTerms();
                     });
                 });
-
-
-
 
                 let getNextElement = (cursorPosition, currentElement) => {
                     let currentElementCoord = currentElement.getBoundingClientRect();
@@ -341,8 +342,6 @@
                         evt.target.parentNode.insertBefore(activeElement, nextElement);
                     });
                 });
-
-
             }
         }
         sortTerms();
