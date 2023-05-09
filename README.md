@@ -347,6 +347,27 @@ Usage example:
 </script>	 
 ```
 
+**This method allows to search for posts by keyword.**
+
+```js
+YMCTools({target: ".data-target-ymcFilterID-LayoutID", search: 'keyword'}).apiSearchPosts();
+```
+
+**Required params:**
+- `.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.`
+- `search - (String) Phrase for which posts are searched.`
+
+```js
+Usage example:
+
+      YMCTools({
+	    target: '.data-target-ymcFilterID-LayoutID',
+            search: 'keyword'
+      }).apiSearchPosts();
+     
+</script>	 
+```
+
 **This method allows to clear query parameters in the filter by terms.**
 
 ```js

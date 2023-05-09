@@ -655,7 +655,7 @@
         const _FN = (function () {
 
             const _info = {
-                version: '2.1.5',
+                version: '2.2.5',
                 author: 'YMC'
             }
 
@@ -665,7 +665,8 @@
                 terms  : null,
                 taxRel : null,
                 meta   : null,
-                date   : null
+                date   : null,
+                search : null
             }
 
             function YMCTools(settings = _defaults) {
@@ -763,7 +764,7 @@
                 let dataParams = JSON.parse(container.dataset.params);
 
                 dataParams.page = 1;
-                dataParams.search = '';
+                dataParams.search = "";
                 dataParams.terms = this.terms.replace(/<[^>]+>/g, '');
                 dataParams.post_sel = this.taxRel;
 
@@ -779,7 +780,7 @@
                 let dataParams = JSON.parse(container.dataset.params);
 
                 dataParams.page = 1;
-                dataParams.search = '';
+                dataParams.search = "";
                 dataParams.meta_query = ( this.meta !== null ) ? this.meta : '';
 
                 container.dataset.params = JSON.stringify(dataParams);
@@ -794,7 +795,7 @@
                 let dataParams = JSON.parse(container.dataset.params);
 
                 dataParams.page = 1;
-                dataParams.search = '';
+                dataParams.search = "";
                 dataParams.date_query = ( this.date !== null ) ? this.date : '';
 
                 container.dataset.params = JSON.stringify(dataParams);
@@ -808,6 +809,7 @@
 
                 let dataParams = JSON.parse(container.dataset.params);
                 dataParams.terms = "";
+                dataParams.search = "";
                 container.dataset.params = JSON.stringify(dataParams);
 
                 this.getFilterPosts();
@@ -820,6 +822,7 @@
 
                 let dataParams = JSON.parse(container.dataset.params);
                 dataParams.meta_query = "";
+                dataParams.search = "";
                 container.dataset.params = JSON.stringify(dataParams);
 
                 this.getFilterPosts();
@@ -832,8 +835,27 @@
 
                 let dataParams = JSON.parse(container.dataset.params);
                 dataParams.date_query = "";
+                dataParams.search = "";
                 container.dataset.params = JSON.stringify(dataParams);
 
+                this.getFilterPosts();
+            }
+
+            YMCTools.prototype.apiSearchPosts = function () {
+
+                let container = document.querySelector(''+ this.target +'');
+                if( ! container )  throw new Error("API Search: Filter not found");
+                if( this.search === null || typeof this.terms === 'number')  throw new Error("Search is not defined");
+
+                let dataParams = JSON.parse(container.dataset.params);
+
+                dataParams.page = 1;
+                dataParams.search = this.search;
+                dataParams.terms = "";
+                dataParams.meta_query = "";
+                dataParams.date_query = "";
+
+                container.dataset.params = JSON.stringify(dataParams);
                 this.getFilterPosts();
             }
 
