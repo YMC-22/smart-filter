@@ -56,11 +56,15 @@ class Shortcode {
 				$ymc_terms = implode(',', $terms_selected);
 			}
 
+			if(is_array($ymc_choices_posts)) {
+				$ymc_choices_posts = implode(',', $ymc_choices_posts);
+			}
+
 			$css_special = !empty($ymc_special_post_class) ? $ymc_special_post_class : '';
 
 			echo '<div id="ymc-smart-filter-container-'. esc_attr($c_target) .'" 
 				  class="ymc-smart-filter-container ymc-filter-'. esc_attr($id) .' ymc-loaded-filter ymc-'. esc_attr($ymc_filter_layout) .' ymc-'. esc_attr($ymc_post_layout) .' ymc-pagination-'. esc_attr($ymc_pagination_type) .' data-target-ymc'.esc_attr($id).'-'.esc_attr($c_target).' data-target-ymc'. esc_attr($c_target) .' '. $css_special .'" data-loading="true"
-				  data-params=\'{"cpt":"'.esc_attr($ymc_cpt_value).'","tax":"'.esc_attr($ymc_tax).'","terms":"'.esc_attr($ymc_terms).'","type_pg":"'.esc_attr($ymc_pagination_type).'","per_page":"'.esc_attr($ymc_per_page).'","page":"1","post_layout":"'.esc_attr($ymc_post_layout).'","filter_layout":"'.esc_attr($ymc_filter_layout).'","filter_id":"'.esc_attr($id).'","post_sel":"all","search":"","sort_order":"","sort_orderby":"","meta_query":"","date_query":"","data_target":"data-target-ymc'.esc_attr($c_target).'","target_id":"'.esc_attr($c_target).'"}\'>';
+				  data-params=\'{"cpt":"'.esc_attr($ymc_cpt_value).'","tax":"'.esc_attr($ymc_tax).'","terms":"'.esc_attr($ymc_terms).'","choices_posts":"'.$ymc_choices_posts.'","type_pg":"'.esc_attr($ymc_pagination_type).'","per_page":"'.esc_attr($ymc_per_page).'","page":"1","post_layout":"'.esc_attr($ymc_post_layout).'","filter_layout":"'.esc_attr($ymc_filter_layout).'","filter_id":"'.esc_attr($id).'","post_sel":"all","search":"","sort_order":"","sort_orderby":"","meta_query":"","date_query":"","data_target":"data-target-ymc'.esc_attr($c_target).'","target_id":"'.esc_attr($c_target).'"}\'>';
 
 
 			if ( $ymc_filter_search_status === 'on' ) {

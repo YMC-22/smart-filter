@@ -22,7 +22,8 @@ class Ajax {
 		add_action('wp_ajax_ymc_term_sort',array($this,'ymc_term_sort'));
 		add_action("wp_ajax_nopriv_ymc_term_sort", array($this,"ymc_term_sort"));
 
-
+		add_action('wp_ajax_ymc_delete_choices_posts',array($this,'ymc_delete_choices_posts'));
+		add_action("wp_ajax_nopriv_ymc_delete_choices_posts", array($this,"ymc_delete_choices_posts"));
 
 	}
 
@@ -53,9 +54,29 @@ class Ajax {
 
 		update_post_meta( (int) $_POST["post_id"], 'ymc_tax_sort', $data_slugs );
 		delete_post_meta( (int) $_POST["post_id"], 'ymc_term_sort' );
+		delete_post_meta( (int) $_POST["post_id"], 'ymc_choices_posts' );
+
+		// Get posts
+		$query = new \WP_query([
+			'post_type' => $cpt,
+			'orderby' => 'title',
+			'order' => 'ASC'
+		]);
+
+		$arr_posts = [];
+
+		if ( $query->have_posts() ) {
+
+			while ($query->have_posts()) {
+				$query->the_post();
+				$arr_posts[] = '<li><span class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">'.get_the_title(get_the_ID()).'</span></li>';
+			}
+			wp_reset_query();
+		}
 
 		$data = array(
-			'data' => json_encode($arr_result)
+			'data' => json_encode($arr_result),
+			'lists_posts' => json_encode($arr_posts)
 		);
 
 		wp_send_json($data);
@@ -121,6 +142,22 @@ class Ajax {
 
 		$data = array(
 			'updated' => $id
+		);
+
+		wp_send_json($data);
+
+	}
+
+	public function ymc_delete_choices_posts() {
+
+		if (!wp_verify_nonce($_POST['nonce_code'], 'custom_ajax_nonce')) exit;
+
+		if(isset($_POST["post_id"])) {
+			$id = delete_post_meta( (int) $_POST["post_id"], 'ymc_choices_posts' );
+		}
+
+		$data = array(
+			'delete' => $id
 		);
 
 		wp_send_json($data);

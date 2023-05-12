@@ -40,6 +40,8 @@
 
             let taxonomyWrp = $('#ymc-tax-checkboxes');
             let termWrp     = $('#ymc-terms');
+            let choicesList = $('#selection-posts .choices-list');
+            let valuesList  = $('#selection-posts .values-list');
 
             const data = {
                 'action': 'ymc_get_taxonomy',
@@ -81,6 +83,21 @@
 
                         taxonomyWrp.html('').append(`<span class="notice">No data for Post Type / Taxonomy</span>`);
                         termWrp.html('').closest('.wrapper-terms').addClass('hidden');
+                    }
+
+                    // Get posts
+                    let dataPosts = (JSON.parse(res.lists_posts));
+
+                    valuesList.empty();
+                    choicesList.empty();
+
+                    if(Object.keys(dataPosts).length > 0) {
+                        for (let key in dataPosts) {
+                            choicesList.append(dataPosts[key]);
+                        }
+                    }
+                    else {
+                        choicesList.html(`<li class="notice">No posts</li>`);
                     }
                 },
                 error: function (obj, err) {
@@ -345,6 +362,64 @@
             }
         }
         sortTerms();
+
+
+        // Choices Posts
+        $(document).on('click','#selection-posts .choices-list .ymc-rel-item-add', function (e) {
+
+            let postID = e.target.dataset.id;
+            let titlePosts = e.target.innerText;
+            e.target.classList.add('disabled');
+
+            let valuesList = $('#selection-posts .values-list');
+
+            valuesList.append(`<li><input type="hidden" name="ymc-choices-posts[]" value="${postID}">
+					<span  class="ymc-rel-item" data-id="${postID}">${titlePosts}
+                    <a href="#" class="ymc-icon-minus remove_item"></a>
+                    </span></li>`);
+        });
+
+        $(document).on('click','#selection-posts .values-list .remove_item', function (e) {
+            e.preventDefault();
+
+            let postID = $(e.target).closest('.ymc-rel-item').data('id');
+
+            $('#selection-posts .choices-list .ymc-rel-item-add').each(function (){
+                if( postID === $(this).data('id')) {
+                    $(this).removeClass('disabled');
+                }
+            });
+
+            if( $(e.target).closest('.values-list').find('li').length - 1 === 0 ) {
+
+                const data = {
+                    'action': 'ymc_delete_choices_posts',
+                    'nonce_code' : _smart_filter_object.nonce,
+                    'post_id' : $('#ymc-cpt-select').data('postid')
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: _smart_filter_object.ajax_url,
+                    data: data,
+                    beforeSend: function () {
+                        container.addClass('loading').
+                        prepend(`<img class="preloader" src="${pathPreloader}">`);
+                    },
+                    success: function (res) {
+                        container.removeClass('loading').find('.preloader').remove();
+                    },
+                    error: function (obj, err) {
+                        console.log( obj, err );
+                    }
+                });
+
+            }
+
+            $(e.target).closest('li').remove();
+
+        });
 
 
         // Selected All Terms

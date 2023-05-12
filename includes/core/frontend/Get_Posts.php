@@ -44,6 +44,7 @@ class Get_Posts {
 		$meta_params = $clean_data['meta_query'];
 		$date_params = $clean_data['date_query'];
 		$target_id   = $clean_data['target_id'];
+		$choices_posts = $clean_data['choices_posts'];
 
 		$paged = (int) $_POST['paged'];
 		$id = $filter_id;
@@ -118,6 +119,11 @@ class Get_Posts {
 
 			$args['sentence'] = true;
 			$args['s'] = trim($keyword);
+		}
+
+		// Choices posts
+		if( !empty($choices_posts) ) {
+			$args['post__in'] = explode(',', $choices_posts);
 		}
 
 		// API Meta Query

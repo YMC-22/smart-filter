@@ -34,6 +34,8 @@ class Variables {
 
 	public $term_sort = null;
 
+	public $choices_posts = null;
+
 
 	/**
 	 * Layouts tab used default variables
@@ -186,6 +188,13 @@ class Variables {
 	}
 
 
+	public function get_choices_posts( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_choices_posts' ) ) {
+			return get_post_meta( $post_id, 'ymc_choices_posts', true );
+		}
+		return $this->choices_posts;
+	}
 
 	/**
 	 * Layouts tab Layouts

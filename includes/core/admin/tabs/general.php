@@ -11,6 +11,7 @@ $tax_rel     = $variable->get_tax_rel( $post->ID );
 $tax_sort    = $variable->get_tax_sort( $post->ID );
 $term_sort   = $variable->get_term_sort( $post->ID );
 $ymc_sort_terms  = $variable->get_sort_terms( $post->ID );
+$ymc_choices_posts  = $variable->get_choices_posts( $post->ID );
 ?>
 
 
@@ -190,6 +191,86 @@ $ymc_sort_terms  = $variable->get_sort_terms( $post->ID );
             endforeach;
         }
         ?>
+
+	</div>
+
+</div>
+
+<hr/>
+
+<div class="form-group wrapper-selection">
+
+	<label class="form-label">
+		<?php echo esc_html__('Select Posts', 'ymc-smart-filter'); ?>
+		<span class="information">
+        <?php echo esc_html__('Add the posts want to be displayed in the posts grid on the frontend.', 'ymc-smart-filter');?>
+        </span>
+	</label>
+
+	<div class="selection-posts" id="selection-posts">
+
+		<div class="choices">
+			<ul class="list choices-list">
+			<?php
+
+				$tmp_post = $post;
+
+				$query = new \WP_query([
+					'post_type' => $cpt,
+					'orderby' => 'title',
+					'order' => 'ASC'
+				]);
+
+				if ( $query->have_posts() ) {
+
+					$class_disabled = '';
+
+					while ($query->have_posts()) : $query->the_post();
+						if( is_array($ymc_choices_posts) &&  array_search(get_the_ID(), $ymc_choices_posts) !== false) {
+							$class_disabled = 'disabled';
+						}
+						echo '<li><span class="ymc-rel-item ymc-rel-item-add '.$class_disabled.'" data-id="'.get_the_ID().'">'.get_the_title(get_the_ID()).'</span></li>';
+						$class_disabled = null;
+					endwhile;
+
+					wp_reset_postdata();
+				}
+				else {
+					echo '<li class="notice">No posts</li>';
+				}
+			?>
+			</ul>
+		</div>
+
+		<div class="values">
+			<ul class="list values-list">
+			<?php
+
+				if( is_array($ymc_choices_posts) ) :
+
+					$query = new \WP_query([
+						'post_type' => $cpt,
+						'orderby' => 'title',
+						'order' => 'ASC',
+						'post__in'  => $ymc_choices_posts
+					]);
+
+					while ($query->have_posts()) : $query->the_post();
+
+						echo '<li><input type="hidden" name="ymc-choices-posts[]" value="'.get_the_ID().'">
+							  <span  class="ymc-rel-item" data-id="'.get_the_ID().'">'.get_the_title(get_the_ID()).'
+							  <a href="#" class="ymc-icon-minus remove_item"></a></span></li>';
+
+					endwhile;
+
+					wp_reset_postdata();
+
+				endif;
+
+				$post = $tmp_post;
+			?>
+			</ul>
+		</div>
 
 	</div>
 

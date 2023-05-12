@@ -12,6 +12,7 @@ $ymc_post_layout   = $variable->get_post_layout( $id );
 $ymc_filter_layout = $variable->get_filter_layout( $id );
 $tax_selected      = $variable->get_tax_sel( $id );
 $terms_selected    = $variable->get_terms_sel( $id );
+$ymc_choices_posts = $variable->get_choices_posts( $id );
 $tax_rel           = $variable->get_tax_rel( $id );
 $tax_sort          = $variable->get_tax_sort( $id );
 $term_sort         = $variable->get_term_sort( $id );

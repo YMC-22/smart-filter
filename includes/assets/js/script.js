@@ -655,7 +655,7 @@
         const _FN = (function () {
 
             const _info = {
-                version: '2.2.5',
+                version: '2.3.1',
                 author: 'YMC'
             }
 
@@ -666,7 +666,8 @@
                 taxRel : null,
                 meta   : null,
                 date   : null,
-                search : null
+                search : null,
+                choicesPosts : null
             }
 
             function YMCTools(settings = _defaults) {
@@ -755,6 +756,23 @@
             }
 
             //  === API ===
+
+            YMCTools.prototype.apiChoicesPosts = function () {
+
+                let container = document.querySelector(''+ this.target +'');
+                if( ! container )  throw new Error("API Choices Posts: Filter not found");
+                if( this.choicesPosts === null || typeof this.choicesPosts === 'number')  throw new Error("Choices Posts is not defined");
+
+                let dataParams = JSON.parse(container.dataset.params);
+
+                dataParams.page = 1;
+                dataParams.search = "";
+                dataParams.choices_posts = this.choicesPosts;
+
+                container.dataset.params = JSON.stringify(dataParams);
+                this.getFilterPosts();
+            }
+
             YMCTools.prototype.apiTermUpdate = function () {
 
                 let container = document.querySelector(''+ this.target +'');
