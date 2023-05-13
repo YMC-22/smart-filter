@@ -222,7 +222,7 @@ $ymc_exclude_posts  = $variable->get_exclude_posts( $post->ID );
 	<label class="form-label">
 		<?php echo esc_html__('Select Posts', 'ymc-smart-filter'); ?>
 		<span class="information">
-        <?php echo esc_html__('Include / Exclude posts in the post grid on the frontend. To exclude posts, check option "Exclude posts"', 'ymc-smart-filter');?>
+        <?php echo esc_html__('Include / Exclude posts in the post grid on the frontend. To exclude posts, check option "Exclude posts". By default, posts are included in the grid.', 'ymc-smart-filter');?>
         </span>
 	</label>
 
