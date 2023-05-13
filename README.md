@@ -342,9 +342,8 @@ Usage example:
                    { "year" : "2023", "compare" : "=" },
                    { "day" : "10", "compare" : ">=" }
                 ]
-	 }).apiDateUpdate();
-     
-</script>	 
+	 }).apiDateUpdate();     
+	 
 ```
 
 **This method allows to search for posts by keyword.**
@@ -363,9 +362,8 @@ Usage example:
       YMCTools({
 	    target: '.data-target-ymc545-1',
             search: 'keyword'
-      }).apiSearchPosts();
-     
-</script>	 
+      }).apiSearchPosts();     
+	 
 ```
 
 **This method allows to add the selected posts to the posts grid.**
@@ -384,9 +382,29 @@ Usage example:
       YMCTools({
 	    target: '.data-target-ymc545-1',
             choicesPosts: '7,9,11'
-      }).apiChoicesPosts();
-     
-</script>	 
+      }).apiChoicesPosts();     
+	 
+```
+
+**This method allows to sort posts by different criteria.**
+
+```js
+YMCTools({target: ".data-target-ymcFilterID-LayoutID", sortOrder: 'asc', sortOrderBy: 'title'}).apiSortPosts();
+```
+
+**Required params:**
+- `.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.`
+- `sortOrder - (String) asc / desc.`
+- `sortOrderBy - (String) List of fields for sorting posts: ID, author, title, name, date, modified, type, parent, rand, comment_count.`
+
+```js
+Usage example:
+
+        YMCTools({
+          target: '.data-target-ymc545-1',
+          sortOrder: 'asc',
+          sortOrderBy: 'date'
+        }).apiSortPosts(); 	 
 ```
 
 **This method allows to clear query parameters in the filter by terms.**

@@ -655,7 +655,7 @@
         const _FN = (function () {
 
             const _info = {
-                version: '2.3.1',
+                version: '2.3.2',
                 author: 'YMC'
             }
 
@@ -667,7 +667,9 @@
                 meta   : null,
                 date   : null,
                 search : null,
-                choicesPosts : null
+                choicesPosts : null,
+                sortOrder   : null,
+                sortOrderBy : null,
             }
 
             function YMCTools(settings = _defaults) {
@@ -755,7 +757,7 @@
                 });
             }
 
-            //  === API ===
+            //  === API Methods ===
 
             YMCTools.prototype.apiChoicesPosts = function () {
 
@@ -872,6 +874,24 @@
                 dataParams.terms = "";
                 dataParams.meta_query = "";
                 dataParams.date_query = "";
+
+                container.dataset.params = JSON.stringify(dataParams);
+                this.getFilterPosts();
+            }
+
+            YMCTools.prototype.apiSortPosts = function () {
+
+                let container = document.querySelector(''+ this.target +'');
+                if( ! container )  throw new Error("API Sort Order Posts: Filter not found");
+                if( this.sortOrder === null || typeof this.sortOrder === 'number')  throw new Error("Sort Order is not defined");
+                if( this.sortOrderBy === null || typeof this.sortOrderBy === 'number')  throw new Error("Sort OrderBy is not defined");
+
+                let dataParams = JSON.parse(container.dataset.params);
+
+                dataParams.page = 1;
+                dataParams.search = "";
+                dataParams.sort_order = this.sortOrder;
+                dataParams.sort_orderby = this.sortOrderBy;
 
                 container.dataset.params = JSON.stringify(dataParams);
                 this.getFilterPosts();
