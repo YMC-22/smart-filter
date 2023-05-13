@@ -388,6 +388,7 @@ Usage example:
 	 
 ```
 
+
 **This method allows to sort posts by different criteria.**
 
 ```js
