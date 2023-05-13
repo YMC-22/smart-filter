@@ -36,6 +36,8 @@ class Variables {
 
 	public $choices_posts = null;
 
+	public $ymc_exclude_posts = 'off';
+
 
 	/**
 	 * Layouts tab used default variables
@@ -195,6 +197,15 @@ class Variables {
 		}
 		return $this->choices_posts;
 	}
+
+	public function get_exclude_posts( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_exclude_posts' ) ) {
+			return get_post_meta( $post_id, 'ymc_exclude_posts', true );
+		}
+		return $this->ymc_exclude_posts;
+	}
+
 
 	/**
 	 * Layouts tab Layouts

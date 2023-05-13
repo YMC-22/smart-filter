@@ -47,6 +47,12 @@ class Meta_Boxes {
 			update_post_meta( $post_id, 'ymc_choices_posts', $choices_posts );
 		}
 
+		// Exclude Posts
+		if( isset($_POST['ymc-exclude-posts']) ) {
+			$exclude_posts = sanitize_html_class( $_POST['ymc-exclude-posts'] );
+			update_post_meta( $post_id, 'ymc_exclude_posts', $exclude_posts );
+		}
+
 		// Taxonomy Relation
 		if( isset($_POST['ymc-tax-relation']) ) {
 			$tax_relation = sanitize_html_class( $_POST['ymc-tax-relation'] );

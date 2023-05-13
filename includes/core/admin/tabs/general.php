@@ -12,6 +12,8 @@ $tax_sort    = $variable->get_tax_sort( $post->ID );
 $term_sort   = $variable->get_term_sort( $post->ID );
 $ymc_sort_terms  = $variable->get_sort_terms( $post->ID );
 $ymc_choices_posts  = $variable->get_choices_posts( $post->ID );
+$ymc_exclude_posts  = $variable->get_exclude_posts( $post->ID );
+
 ?>
 
 
@@ -190,6 +192,7 @@ $ymc_choices_posts  = $variable->get_choices_posts( $post->ID );
 
             endforeach;
         }
+
         ?>
 
 	</div>
@@ -201,9 +204,25 @@ $ymc_choices_posts  = $variable->get_choices_posts( $post->ID );
 <div class="form-group wrapper-selection">
 
 	<label class="form-label">
+		<?php echo esc_html__('Exclude Posts', 'ymc-smart-filter'); ?>
+		<span class="information">
+        <?php echo esc_html__('Check to exclude the selected posts from the grid. Works on selected posts.', 'ymc-smart-filter');?>
+        </span>
+	</label>
+
+	<div class="group-elements">
+		<?php  $check_exclude_posts = ( $ymc_exclude_posts === 'on' ) ? 'checked' : '';  ?>
+		<input type="hidden" name='ymc-exclude-posts' value="off">
+		<input class="ymc-exclude-posts" type="checkbox" value="on" name="ymc-exclude-posts" id="ymc-exclude-posts" <?php echo esc_attr($check_exclude_posts); ?>>
+		<label for="ymc-exclude-posts"><?php echo esc_html__('Enable', 'ymc-smart-filter'); ?></label>
+	</div>
+
+	<hr/>
+
+	<label class="form-label">
 		<?php echo esc_html__('Select Posts', 'ymc-smart-filter'); ?>
 		<span class="information">
-        <?php echo esc_html__('Add the posts want to be displayed in the posts grid on the frontend.', 'ymc-smart-filter');?>
+        <?php echo esc_html__('Include / Exclude posts in the post grid on the frontend. To exclude posts, check option "Exclude posts"', 'ymc-smart-filter');?>
         </span>
 	</label>
 

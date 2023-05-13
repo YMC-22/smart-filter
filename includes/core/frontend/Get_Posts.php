@@ -45,6 +45,7 @@ class Get_Posts {
 		$date_params = $clean_data['date_query'];
 		$target_id   = $clean_data['target_id'];
 		$choices_posts = $clean_data['choices_posts'];
+		$exclude_posts = $clean_data['exclude_posts'];
 
 		$paged = (int) $_POST['paged'];
 		$id = $filter_id;
@@ -123,7 +124,13 @@ class Get_Posts {
 
 		// Choices posts
 		if( !empty($choices_posts) ) {
-			$args['post__in'] = explode(',', $choices_posts);
+
+			if( $exclude_posts === 'off' ) {
+				$args['post__in'] = explode(',', $choices_posts);
+			}
+			else {
+				$args['post__not_in'] = explode(',', $choices_posts);
+			}
 		}
 
 		// API Meta Query
