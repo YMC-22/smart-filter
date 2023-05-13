@@ -655,7 +655,7 @@
         const _FN = (function () {
 
             const _info = {
-                version: '2.3.2',
+                version: '2.3.3',
                 author: 'YMC'
             }
 
@@ -668,8 +668,9 @@
                 date   : null,
                 search : null,
                 choicesPosts : null,
-                sortOrder   : null,
-                sortOrderBy : null,
+                excludePosts : null,
+                sortOrder    : null,
+                sortOrderBy  : null
             }
 
             function YMCTools(settings = _defaults) {
@@ -770,6 +771,10 @@
                 dataParams.page = 1;
                 dataParams.search = "";
                 dataParams.choices_posts = this.choicesPosts;
+
+                if( this.excludePosts !== null || this.excludePosts === 'on') {
+                    dataParams.exclude_posts = this.excludePosts;
+                }
 
                 container.dataset.params = JSON.stringify(dataParams);
                 this.getFilterPosts();

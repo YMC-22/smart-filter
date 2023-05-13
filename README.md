@@ -366,22 +366,24 @@ Usage example:
 	 
 ```
 
-**This method allows to add the selected posts to the posts grid.**
+**This method allows Include / Exclude posts in the post grid.**
 
 ```js
-YMCTools({target: ".data-target-ymcFilterID-LayoutID", choicesPosts: '7,9,11'}).apiChoicesPosts();
+YMCTools({target: ".data-target-ymcFilterID-LayoutID", choicesPosts: '7,9,11', excludePosts: 'off'}).apiChoicesPosts();
 ```
 
 **Required params:**
 - `.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.`
 - `choicesPosts - (String) ID posts.`
+- `excludePosts - (String) on / off. By default excludePosts is "off"". (Optional)`
 
 ```js
 Usage example:
 
       YMCTools({
 	    target: '.data-target-ymc545-1',
-            choicesPosts: '7,9,11'
+            choicesPosts: '7,9,11',
+            excludePosts: 'off'
       }).apiChoicesPosts();     
 	 
 ```
