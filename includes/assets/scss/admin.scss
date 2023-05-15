@@ -251,6 +251,7 @@ $font-size: 16;
 										height: 300px;
 										overflow: auto;
 										.item-inner {
+											position: relative;
 											margin-bottom: 7px;
 											border: 1px solid #dcdcde;
 											padding: 10px;
@@ -474,8 +475,21 @@ $font-size: 16;
 											}
 										}
 									}
+									&.include-posts {
+										color: #28bc28;
+									}
+									&.exclude-posts {
+										color: #fd6262;
+										text-decoration: line-through;
+									}
 								}
 							}
+						}
+						.settings {
+							position: absolute;
+							right: 20px;
+							cursor: pointer;
+							top: 10px;
 						}
 					}
 
@@ -558,6 +572,39 @@ $font-size: 16;
 	}
 }
 
+// Modal Popup Icons
+#TB_title {
+	height: 70px !important;
+	#TB_ajaxWindowTitle {
+		font-size: 30px !important;
+		padding-top: 20px !important;
+		padding-bottom: 20px !important;
+	}
+	#TB_closeWindowButton {
+		.tb-close-icon {
+			top: 20px !important;
+			right: 15px !important;
+			&:before {
+				font-size: 30px !important;
+			}
+		}
+	}
+}
+
+.ymc-icons-content {
+	font-size: 25px;
+	padding-top: 20px;
+	overflow-y: auto;
+	height: 95%;
+	.far {
+		display: inline-block;
+		margin-right: 10px;
+		margin-bottom: 10px;
+		border: 1px solid #dcdcde;
+		padding: 5px;
+		cursor: pointer;
+	}
+}
 
 
 

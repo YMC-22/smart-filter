@@ -563,7 +563,9 @@
                     'action'     : 'ymc_autocomplete_search',
                     'nonce_code' : _smart_filter_object.nonce,
                     'cpt'        : params.cpt,
-                    'phrase'     : userInput
+                    'phrase'     : userInput,
+                    'choices_posts' : params.choices_posts,
+                    'exclude_posts' : params.exclude_posts
                 };
 
                 $.ajax({

@@ -311,6 +311,9 @@ class Get_Posts {
 		$output  = '';
 		$phrase = trim(mb_strtolower(sanitize_text_field($_POST['phrase'])));
 		$post_type = sanitize_text_field($_POST['cpt']);
+		$choices_posts = sanitize_text_field($_POST['choices_posts']);
+		$exclude_posts = sanitize_text_field($_POST['exclude_posts']);
+
 		$per_page  = -1;
 		$total = 0;
 
@@ -327,6 +330,17 @@ class Get_Posts {
 			'sentence' => true,
 			's' => $phrase
 		];
+
+		// Choices posts
+		if( !empty($choices_posts) ) {
+
+			if( $exclude_posts === 'off' ) {
+				$args['post__in'] = explode(',', $choices_posts);
+			}
+			else {
+				$args['post__not_in'] = explode(',', $choices_posts);
+			}
+		}
 
 
 		$query = new \WP_Query($args);

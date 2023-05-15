@@ -237,7 +237,8 @@ $ymc_exclude_posts  = $variable->get_exclude_posts( $post->ID );
 				$query = new \WP_query([
 					'post_type' => $cpt,
 					'orderby' => 'title',
-					'order' => 'ASC'
+					'order' => 'ASC',
+					'posts_per_page' => -1
 				]);
 
 				if ( $query->have_posts() ) {
@@ -262,7 +263,10 @@ $ymc_exclude_posts  = $variable->get_exclude_posts( $post->ID );
 		</div>
 
 		<div class="values">
-			<ul class="list values-list">
+
+			<?php $class_choices = ( $ymc_exclude_posts === 'on' ) ? 'exclude-posts' : 'include-posts'; ?>
+
+			<ul class="list values-list <?php echo $class_choices; ?>">
 			<?php
 
 				if( is_array($ymc_choices_posts) ) :
@@ -271,7 +275,8 @@ $ymc_exclude_posts  = $variable->get_exclude_posts( $post->ID );
 						'post_type' => $cpt,
 						'orderby' => 'title',
 						'order' => 'ASC',
-						'post__in'  => $ymc_choices_posts
+						'post__in'  => $ymc_choices_posts,
+						'posts_per_page' => -1
 					]);
 
 					while ($query->have_posts()) : $query->the_post();

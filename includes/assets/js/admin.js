@@ -365,6 +365,18 @@
 
 
         // Choices Posts
+        $('.wrapper-selection .ymc-exclude-posts').on('click', function (e) {
+
+            let listItems = $('.selection-posts .values .values-list');
+
+            if($(e.target).prop('checked')) {
+                listItems.removeClass('include-posts').addClass('exclude-posts');
+            }
+            else {
+                listItems.removeClass('exclude-posts').addClass('include-posts');
+            }
+        });
+
         $(document).on('click','#selection-posts .choices-list .ymc-rel-item-add', function (e) {
 
             let postID = e.target.dataset.id;
@@ -372,6 +384,7 @@
             e.target.classList.add('disabled');
 
             let valuesList = $('#selection-posts .values-list');
+            valuesList.addClass('include-posts');
 
             valuesList.append(`<li><input type="hidden" name="ymc-choices-posts[]" value="${postID}">
 					<span  class="ymc-rel-item" data-id="${postID}">${titlePosts}
