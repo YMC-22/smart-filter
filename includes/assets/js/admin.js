@@ -443,7 +443,7 @@
         $(document).on('click','#general #ymc-terms .entry-terms .choice-icon', function (e) {
             $('#ymc-terms .entry-terms .item-inner').removeClass('open-popup');
             $(e.target).closest('.item-inner').addClass('open-popup');
-            tb_show( 'Choose Icon', '/?TB_inline&inlineId=ymc-icons-modal&width=700&height=768' );
+            tb_show( 'Choose Icon', '/?TB_inline&inlineId=ymc-icons-modal&width=740&height=768' );
 
             /*
             setTimeout(() => {
