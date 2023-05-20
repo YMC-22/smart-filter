@@ -99,8 +99,9 @@ $font-size: 16;
 						margin-right: 0;
 					}
 					.filter-link {
-						display: inline-block;
-						padding: 7px 15px;
+						display: inline-flex;
+						align-items: center;
+						padding: 10px 15px;
 						font-size: 16px;
 						text-decoration: none;
 						line-height: normal;
@@ -113,6 +114,17 @@ $font-size: 16;
 						&.active {
 							color: #222;
 							font-weight: 600;
+						}
+						i {
+							font-size: 15px;
+							margin-right: 7px;
+						}
+						&.right-icon {
+							flex-direction: row-reverse;
+							i {
+								margin-right: 0;
+								margin-left: 7px;
+							}
 						}
 					}
 				}
@@ -163,7 +175,8 @@ $font-size: 16;
 						margin-right: 0;
 					}
 					.filter-link {
-						display: inline-block;
+						display: inline-flex;
+						align-items: center;
 						padding: 10px 15px;
 						font-size: 16px;
 						text-decoration: none;
@@ -176,6 +189,17 @@ $font-size: 16;
 						&.active {
 							color: #222;
 							font-weight: 600;
+						}
+						i {
+							font-size: 15px;
+							margin-right: 7px;
+						}
+						&.right-icon {
+							flex-direction: row-reverse;
+							i {
+								margin-right: 0;
+								margin-left: 7px;
+							}
 						}
 					}
 				}
@@ -288,6 +312,10 @@ $font-size: 16;
 
 					&__item {
 						padding: 8px 0;
+						i {
+							font-size: 15px;
+							margin-right: 7px;
+						}
 						.menu-link {
 							color: #fff;
 							position: relative;

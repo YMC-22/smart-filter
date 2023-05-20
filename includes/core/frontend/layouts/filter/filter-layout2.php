@@ -59,12 +59,54 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
                           <header class="name-tax">'. esc_html(get_taxonomy( $tax )->label) .'</header>
                           <ul class="sub-filters">';
 
+	                $terms_icons = null;
+	                $class_terms_align = null;
+
                     foreach ($terms_selected as $term) {
 
                         if( $tax === get_term( $term )->taxonomy ) {
+
+	                        // Choose icons
+	                        if( !empty($ymc_terms_icons) ) {
+
+		                        foreach ( $ymc_terms_icons as $key => $val ) {
+
+			                        if( (int) $term === (int) $key ) {
+				                        $terms_icons = '<i class="'. $val .'"></i>';
+				                        break;
+			                        }
+		                        }
+	                        }
+
+	                        // Set align icons
+	                        if( !empty($ymc_terms_align) ) {
+
+		                        $flag_terms_align = false;
+
+		                        foreach ( $ymc_terms_align as $sub_terms_align ) {
+
+			                        foreach ( $sub_terms_align as $key => $val) {
+
+				                        if ( $key === 'termid' && (int) $term === (int) $val ) {
+					                        $flag_terms_align = true;
+				                        }
+				                        if ( $key === 'alignterm' ) {
+					                        $class_terms_align = $val;
+				                        }
+			                        }
+
+			                        if( $flag_terms_align ) {
+				                        break;
+			                        }
+		                        }
+	                        }
+
                             echo  "<li class='filter-item'>
-                            <a class='filter-link ". esc_attr($type_multiple) ."' href='#' data-selected='" . esc_attr(get_term( $term )->slug) . "' data-termid='" . esc_attr($term) . "'>" . esc_html(get_term( $term )->name) . "</a></li>";
+                            <a class='filter-link ". esc_attr($type_multiple) ." ". esc_attr($class_terms_align) ."' href='#' data-selected='" . esc_attr(get_term( $term )->slug) . "' data-termid='" . esc_attr($term) . "'>" . $terms_icons . '<span class="link-inner">'.esc_html(get_term( $term )->name) .'</span>'."</a></li>";
                         }
+
+	                    $terms_icons = null;
+	                    $class_terms_align = null;
                     }
 
                     echo '</ul></li>';

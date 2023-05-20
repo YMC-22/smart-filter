@@ -13,6 +13,7 @@ $term_sort   = $variable->get_term_sort( $post->ID );
 $ymc_sort_terms  = $variable->get_sort_terms( $post->ID );
 $ymc_choices_posts  = $variable->get_choices_posts( $post->ID );
 $ymc_exclude_posts  = $variable->get_exclude_posts( $post->ID );
+$ymc_terms_icons  = $variable->get_terms_icons( $post->ID );
 
 ?>
 
@@ -144,6 +145,8 @@ $ymc_exclude_posts  = $variable->get_exclude_posts( $post->ID );
 
 	            if( $terms ) {
 
+					$terms_icons = '';
+
 		            if( !is_null($term_sort) && $ymc_sort_terms === 'manual' ) {
 			            $res_terms = [];
 			            foreach( $terms as $term ) {
@@ -177,9 +180,21 @@ $ymc_exclude_posts  = $variable->get_exclude_posts( $post->ID );
                             else{ $sl1 = ''; }
 			            }
 
-			            echo '<div class="item-inner">
+						if( !empty($ymc_terms_icons) ) {
+							foreach ( $ymc_terms_icons as $key => $val ) {
+								if( $term->term_id === (int) $key ) {
+									$terms_icons = '<i class="'. $val .'"></i><input name="ymc-terms-icons['. $key .']" type="hidden" value="'. $val .'">';
+									break;
+								}
+							}
+						}
+
+			            echo '<div class="item-inner" data-termid="'. $term->term_id .'" data-alignterm="left-icon">
                               <input name="ymc-terms[]" class="category-list" id="category-id-'. esc_attr($term->term_id) .'" type="checkbox" value="'. esc_attr($term->term_id) .'" '. esc_attr($sl1) .'>';
-			            echo '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">' . esc_html($term->name) . '</label></div>';
+			            echo '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">' . esc_html($term->name) . '</label>						  						  
+							  <i class="far fa-cog choice-icon" title="Setting term"></i><span class="indicator-icon">'. $terms_icons .'</span></div>';
+
+			            $terms_icons = '';
 
                     endforeach;
 

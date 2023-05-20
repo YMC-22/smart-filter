@@ -66,17 +66,34 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
                 echo '<div class="menu-passive">';
                 echo '<i class="btn-close">x</i>';
 
+	            $terms_icons = null;
+
                 foreach ($terms_selected as $term) {
 
                     if( $tax === get_term( $term )->taxonomy ) {
 
                      $is_disabled = ( get_term( $term )->count === 0 ) ? 'isDisabled' : '';
 
+	                    // Choose icons
+	                    if( !empty($ymc_terms_icons) ) {
+
+		                    foreach ( $ymc_terms_icons as $key => $val ) {
+
+			                    if( (int) $term === (int) $key ) {
+				                    $terms_icons = '<i class="'. $val .'"></i>';
+				                    break;
+			                    }
+		                    }
+	                    }
+
                         echo '<div class="menu-passive__item">
+							  '. $terms_icons .'
                               <a class="menu-link '.  esc_attr($is_disabled) .' '.  esc_attr($type_multiple) .'" 
                               href="#" data-selected="'. esc_attr(get_term( $term )->slug) .'" data-termid="' . esc_attr($term) . '" data-name="'.esc_attr(get_term( $term )->name).'">'.
                               esc_html(get_term( $term )->name) . ' <span class="count">'. esc_html(get_term( $term )->count) .'</span></a></div>';
                     }
+
+	                $terms_icons = null;
                 }
 
                 echo '</div>';

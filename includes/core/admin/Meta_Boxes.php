@@ -41,6 +41,13 @@ class Meta_Boxes {
 			update_post_meta( $post_id, 'ymc_terms', $terms );
 		}
 
+		// Terms Icons
+		if( isset($_POST['ymc-terms-icons']) ) {
+			$terms_icons = $_POST['ymc-terms-icons'];
+			update_post_meta( $post_id, 'ymc_terms_icons', $terms_icons );
+		}
+
+
 		// Choices Posts
 		if( isset($_POST['ymc-choices-posts']) ) {
 			$choices_posts = sanitize_html_class( $_POST['ymc-choices-posts'] );
@@ -293,6 +300,8 @@ class Meta_Boxes {
 				    global $post;
 
                     $variable = Plugin::instance()->variables;
+
+					require_once YMC_SMART_FILTER_DIR . '/includes/core/util/icons.php';
 
                 ?>
 

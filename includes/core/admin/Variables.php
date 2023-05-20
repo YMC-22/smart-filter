@@ -38,6 +38,10 @@ class Variables {
 
 	public $ymc_exclude_posts = 'off';
 
+	public $ymc_terms_icons = null;
+
+	public $ymc_terms_align = null;
+
 
 	/**
 	 * Layouts tab used default variables
@@ -204,6 +208,24 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_exclude_posts', true );
 		}
 		return $this->ymc_exclude_posts;
+	}
+
+
+	public function get_terms_icons( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_terms_icons' ) ) {
+			return get_post_meta( $post_id, 'ymc_terms_icons', true );
+		}
+		return $this->ymc_terms_icons;
+	}
+
+
+	public function get_terms_align( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_terms_align' ) ) {
+			return get_post_meta( $post_id, 'ymc_terms_align', true );
+		}
+		return $this->ymc_terms_align;
 	}
 
 

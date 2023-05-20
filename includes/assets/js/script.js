@@ -657,7 +657,7 @@
         const _FN = (function () {
 
             const _info = {
-                version: '2.3.3',
+                version: '2.3.5',
                 author: 'YMC'
             }
 
