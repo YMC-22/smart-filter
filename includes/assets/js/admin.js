@@ -444,17 +444,6 @@
             $('#ymc-terms .entry-terms .item-inner').removeClass('open-popup');
             $(e.target).closest('.item-inner').addClass('open-popup');
             tb_show( 'Choose Icon', '/?TB_inline&inlineId=ymc-icons-modal&width=740&height=768' );
-
-            /*
-            setTimeout(() => {
-                $('#TB_closeWindowButton, #TB_overlay').on('click', function (e) {
-                    $('#ymc-terms .entry-terms .open-popup').removeClass('open-popup');
-                });
-                jQuery(document).on('keydown.thickbox', function(e){
-                    $('#ymc-terms .entry-terms .open-popup').removeClass('open-popup');
-                });
-            },1);
-            */
         });
 
         // Add Icon
