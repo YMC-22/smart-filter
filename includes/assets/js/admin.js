@@ -446,9 +446,19 @@
 
             $(e.target).closest('.item-inner').addClass('open-popup');
 
-            let alignterm = e.target.closest('.item-inner').dataset.alignterm
+            let alignterm = e.target.closest('.item-inner').dataset.alignterm;
+
+            let newIcon = $(e.target).siblings('.indicator-icon').find('i').clone(true).css('color','red');
 
             tb_show( 'Choose Icon', '/?TB_inline&inlineId=ymc-icons-modal&width=740&height=768' );
+
+            if( newIcon.length > 0 ) {
+                $( '#TB_ajaxContent .ymc-icons-content .panel-setting .remove-link' ).show().find('i').remove();
+                newIcon.insertBefore( '#TB_ajaxContent .ymc-icons-content .panel-setting .remove-link .text' );
+            }
+            else {
+                $( '#TB_ajaxContent .ymc-icons-content .panel-setting .remove-link' ).hide();
+            }
 
             $('#TB_ajaxContent .ymc-icons-content .panel-setting .toggle-align-icon[data-align="'+alignterm+'"]').
                 addClass('selected').siblings().removeClass('selected');

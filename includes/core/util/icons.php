@@ -15,7 +15,9 @@
 					<span class="note">Saved</span>
 				</a>
 			</div>
-			<a class="remove-link" href="#" title="Remove icon"><i class="fas fa-trash icon-trash"></i> <?php esc_html_e('Clear')?></a>
+			<a class="remove-link" href="#" title="Remove icon">
+				<i class="fas fa-trash icon-trash"></i>
+				<span class="text"><?php esc_html_e('Clear')?></span></a>
 		</div>
 		<div class="icons-entry">
 			<i class="far fa-window-restore"></i>
