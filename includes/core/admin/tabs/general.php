@@ -14,6 +14,7 @@ $ymc_sort_terms  = $variable->get_sort_terms( $post->ID );
 $ymc_choices_posts  = $variable->get_choices_posts( $post->ID );
 $ymc_exclude_posts  = $variable->get_exclude_posts( $post->ID );
 $ymc_terms_icons  = $variable->get_terms_icons( $post->ID );
+$ymc_terms_align   = $variable->get_terms_align( $post->ID );
 
 ?>
 
@@ -180,6 +181,7 @@ $ymc_terms_icons  = $variable->get_terms_icons( $post->ID );
                             else{ $sl1 = ''; }
 			            }
 
+			            // Choose icons
 						if( !empty($ymc_terms_icons) ) {
 							foreach ( $ymc_terms_icons as $key => $val ) {
 								if( $term->term_id === (int) $key ) {
@@ -189,7 +191,32 @@ $ymc_terms_icons  = $variable->get_terms_icons( $post->ID );
 							}
 						}
 
-			            echo '<div class="item-inner" data-termid="'. $term->term_id .'" data-alignterm="left-icon">
+			            // Set align icons
+			            if( !empty($ymc_terms_align) ) {
+
+				            $flag_terms_align = false;
+
+				            foreach ( $ymc_terms_align as $sub_terms_align ) {
+
+					            foreach ( $sub_terms_align as $key => $val) {
+
+						            if ( $key === 'termid' && $term->term_id === (int) $val ) {
+							            $flag_terms_align = true;
+						            }
+						            if ( $key === 'alignterm' ) {
+							            $class_terms_align = $val;
+						            }
+					            }
+
+					            if( $flag_terms_align ) {
+						            break;
+					            }
+				            }
+			            }
+
+			            $class_terms_align = ( !empty($class_terms_align) ) ? $class_terms_align : 'left-icon';
+
+			            echo '<div class="item-inner" data-termid="'. $term->term_id .'" data-alignterm="'. $class_terms_align .'">
                               <input name="ymc-terms[]" class="category-list" id="category-id-'. esc_attr($term->term_id) .'" type="checkbox" value="'. esc_attr($term->term_id) .'" '. esc_attr($sl1) .'>';
 			            echo '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">' . esc_html($term->name) . '</label>						  						  
 							  <i class="far fa-cog choice-icon" title="Setting term"></i><span class="indicator-icon">'. $terms_icons .'</span></div>';

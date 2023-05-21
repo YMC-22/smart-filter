@@ -175,11 +175,13 @@ class Ajax {
 		if (!wp_verify_nonce($_POST['nonce_code'], 'custom_ajax_nonce')) exit;
 
 		if(isset($_POST["post_id"])) {
-			$id = delete_post_meta( (int) $_POST["post_id"], 'ymc_terms_icons' );
+			$idIcons = delete_post_meta( (int) $_POST["post_id"], 'ymc_terms_icons' );
+			$idAlign = delete_post_meta( (int) $_POST["post_id"], 'ymc_terms_align' );
 		}
 
 		$data = array(
-			'delete' => $id
+			'deleteIcons' => $idIcons,
+			'deleteAlign' => $idAlign
 		);
 
 		wp_send_json($data);

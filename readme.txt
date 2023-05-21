@@ -1,12 +1,12 @@
 ===  Smart Filter ===
 Plugin Name: Smart Filter
 Contributors: YMC, Roman
-Version: 2.3.5
+Version: 2.3.6
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
 Tags: filters, posts, mind, ajax posts, category posts, taxonomy, custom taxonomy, woocommerce
 Requires at least: 4.8
 Tested up to: 6.2
-Stable tag: 2.3.5
+Stable tag: 2.3.6
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -119,7 +119,8 @@ Include / Exclude posts in the post grid
 Fixed css / js
 = 2.3.5 =
 Added ability to edit terms
-
+= 2.3.6 =
+Fixed css / js
 
 == Video ==
 https://www.youtube.com/watch?v=FIBNE0Ix6Vg

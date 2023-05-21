@@ -647,6 +647,13 @@ $font-size: 16;
 							color: #fff;
 						}
 					}
+					&.selected {
+						background: #0aa018;
+						border: 1px solid #0aa018;
+						i {
+							color: #fff;
+						}
+					}
 					.note {
 						position: absolute;
 						top: -40px;

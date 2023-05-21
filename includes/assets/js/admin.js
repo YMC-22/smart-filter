@@ -441,9 +441,17 @@
 
         // Open Popup for choices icon
         $(document).on('click','#general #ymc-terms .entry-terms .choice-icon', function (e) {
+
             $('#ymc-terms .entry-terms .item-inner').removeClass('open-popup');
+
             $(e.target).closest('.item-inner').addClass('open-popup');
+
+            let alignterm = e.target.closest('.item-inner').dataset.alignterm
+
             tb_show( 'Choose Icon', '/?TB_inline&inlineId=ymc-icons-modal&width=740&height=768' );
+
+            $('#TB_ajaxContent .ymc-icons-content .panel-setting .toggle-align-icon[data-align="'+alignterm+'"]').
+                addClass('selected').siblings().removeClass('selected');
         });
 
         // Add Icon
@@ -468,6 +476,7 @@
 
             $('#ymc-terms .entry-terms .open-popup .indicator-icon').empty().closest('.item-inner').removeClass('open-popup');
 
+            // If no icons for terms
             if ($('#ymc-terms .entry-terms .indicator-icon').find('input').length === 0) {
 
                 const data = {
@@ -539,6 +548,8 @@
 
             let arrAlignTerms = [];
 
+            $(e.target).closest('.toggle-align-icon').addClass('selected').siblings().removeClass('selected');
+
             document.querySelector('#ymc-terms .entry-terms .open-popup').dataset.alignterm = termAlign;
 
             document.querySelectorAll('#ymc-terms .entry-terms .item-inner').forEach((el) => {
@@ -560,13 +571,11 @@
                 url: _smart_filter_object.ajax_url,
                 data: data,
                 beforeSend: function () {
-                    $(e.target).closest('.toggle-align-icon').css({'opacity':'0.5'});
                     container.addClass('loading').
                     prepend(`<img class="preloader" src="${pathPreloader}">`);
                 },
                 success: function (res) {
 
-                    $(e.target).closest('.toggle-align-icon').css({'opacity':'1'});
                     container.removeClass('loading').find('.preloader').remove();
 
                     $(e.target).closest('.toggle-align-icon').find('.note').css({'opacity':'1'});
