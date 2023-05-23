@@ -653,6 +653,12 @@
             document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
 
+        // Set Style Preloader
+        $(document).on('change', '#ymc-preloader-icon', function (e) {
+            let preloaderURL = _smart_filter_object.path + "/includes/assets/images/" + $(this).val() + '.svg';
+            $(this).closest('#ymc-preloader-icon').next('.preview-preloader').find('img').attr('src', preloaderURL);
+        });
+
         // Get Cookie
         function getCookie(cname) {
             let name = cname + "=";

@@ -565,7 +565,14 @@ $font-size: 16;
 
 					#advanced {
 						.tab-entry {
-							.content {}
+							.content {
+								.preview-preloader {
+									width: 60px;
+									height: 60px;
+									border: 1px solid #e0e4e9;
+									margin-top: 10px;
+								}
+							}
 						}
 					}
 

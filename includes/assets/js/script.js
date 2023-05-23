@@ -50,6 +50,8 @@
             let container = $("."+target+"");
             let params = JSON.parse(document.querySelector('.'+target+'').dataset.params);
 
+            let stylePreloader = _smart_filter_object.path+"/includes/assets/images/"+ params.preloader_icon +".svg";
+
             let filterID = params.filter_id;
             let targetID = params.target_id;
 
@@ -67,7 +69,7 @@
                 data: data,
                 beforeSend: function () {
                     container.find('.container-posts').addClass('loading').
-                    prepend(`<img class="preloader" src="${pathPreloader}">`);
+                    prepend(`<img class="preloader" src="${stylePreloader}">`);
 
                     // Add Hook: before loaded posts
                     wp.hooks.doAction('ymc_before_loaded_data_'+filterID+'_'+targetID, target);

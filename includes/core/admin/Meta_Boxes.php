@@ -188,6 +188,13 @@ class Meta_Boxes {
 			update_post_meta($post_id, 'ymc_special_post_class', $ymc_special_post_class);
 		}
 
+		// Preloader Posts
+		if (isset($_POST['ymc-preloader-icon'])) {
+			$ymc_preloader_icon = sanitize_text_field($_POST['ymc-preloader-icon']);
+			update_post_meta($post_id, 'ymc_preloader_icon', $ymc_preloader_icon);
+		}
+
+
 		// Filter Font
 		if (isset($_POST['ymc-filter-font'])) {
 			$ymc_filter_font = sanitize_text_field($_POST['ymc-filter-font']);

@@ -67,7 +67,7 @@ $font-size: 16;
 
 	.preloader {
 		position: absolute;
-		width: 120px;
+		width: 100px;
 		top: 50%;
 		left: 50%;
 		z-index: 9;
@@ -455,6 +455,7 @@ $font-size: 16;
 	// Posts style
 	.container-posts {
 		position: relative;
+		min-height: 180px;
 
 		// Style for Post Layout 1
 		.post-layout1 {

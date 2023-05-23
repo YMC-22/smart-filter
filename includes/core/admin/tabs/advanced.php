@@ -2,6 +2,7 @@
 
 // Set variables
 $ymc_special_post_class = $variable->get_special_post_class( $post->ID );
+$ymc_preloader_icon = $variable->get_ymc_preloader_icon( $post->ID );
 
 ?>
 
@@ -27,3 +28,39 @@ $ymc_special_post_class = $variable->get_special_post_class( $post->ID );
     </div>
 
 </div>
+
+<div class="content" style="margin-top: 40px;">
+
+    <header class="sub-header">
+        <i class="far fa-plus-circle"></i>
+        <?php echo esc_html__('Icon for Preloader', 'ymc-smart-filter'); ?>
+    </header>
+
+    <div class="from-element">
+
+        <label class="form-label">
+            <?php esc_html_e('Choose Icon for Preloader', 'ymc-smart-filter'); ?>
+            <span class="information"><?php esc_html_e('Set icon for preloader while loading posts.', 'ymc-smart-filter'); ?></span>
+        </label>
+
+        <select class="form-select ymc-preloader-icon" id="ymc-preloader-icon" name="ymc-preloader-icon">
+        <?php
+                $selected_preloader = '';
+                for ( $i=1 ; $i<=10; $i++ ) {
+                    if( $ymc_preloader_icon === 'preloader_'.$i ) {
+                        $selected_preloader = 'selected="selected"';
+                    }
+                   echo '<option value="preloader_'.$i.'" '. $selected_preloader .'>'. esc_html('Preloader '.$i, 'ymc-smart-filter') .'</option>';
+                   $selected_preloader = '';
+                }
+            ?>
+        </select>
+
+        <div class="preview-preloader">
+             <img src="<?php echo YMC_SMART_FILTER_URL; ?>/includes/assets/images/<?php echo $ymc_preloader_icon; ?>.svg">
+        </div>
+    </div>
+
+</div>
+
+

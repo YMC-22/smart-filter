@@ -37,6 +37,7 @@ $ymc_sort_terms   = $variable->get_sort_terms( $id );
 $ymc_order_post_by = $variable->get_order_post_by( $id );
 $ymc_order_post_type = $variable->get_order_post_type( $id );
 $ymc_special_post_class = $variable->get_special_post_class( $id );
+$ymc_preloader_icon = $variable->get_ymc_preloader_icon( $id );
 $ymc_filter_font = $variable->get_filter_font( $id );
 $ymc_post_font = $variable->get_post_font( $id );
 $ymc_filter_search_status = $variable->get_filter_search_status( $id );

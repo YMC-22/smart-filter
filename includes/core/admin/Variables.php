@@ -97,6 +97,8 @@ class Variables {
 	 */
 	public $ymc_special_post_class = '';
 
+	public $ymc_preloader_icon = 'preloader';
+
 
 	/**
 	 * Typography tab used default variables
@@ -415,6 +417,14 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_special_post_class', true );
 		}
 		return $this->ymc_special_post_class;
+	}
+
+	public function get_ymc_preloader_icon( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_preloader_icon' ) ) {
+			return get_post_meta( $post_id, 'ymc_preloader_icon', true );
+		}
+		return $this->ymc_preloader_icon;
 	}
 
 
