@@ -66,7 +66,8 @@ class Ajax {
 		$query = new \WP_query([
 			'post_type' => $cpt,
 			'orderby' => 'title',
-			'order' => 'ASC'
+			'order' => 'ASC',
+			'posts_per_page' => -1
 		]);
 
 		$arr_posts = [];
