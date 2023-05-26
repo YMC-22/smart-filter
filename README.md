@@ -311,7 +311,8 @@ Usage example:
         meta : [
                  { "relation" : "OR" },
                  { "key" : "color", "value" : "blue" },
-                 { "key" : "price", "value" : "10", "compare": "LIKE" }
+                 { "key" : "price", "value" : "10", "compare": "LIKE" },
+                 { "key" : "grant_value", "value" : ["100", "200"], "compare": "BETWEEN", "type" : "numeric" }
                ]
 	}).apiMetaUpdate();
 
