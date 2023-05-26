@@ -143,14 +143,13 @@ class Get_Posts {
 				if( array_key_exists('relation', $array) ) {
 					$meta_query['relation'] = $array['relation'];
 				}
-				else {
-					$meta_query[] = [
-						'key' => trim($array['key']),
-						'value' => trim($array['value']),
-						'compare' => array_key_exists('compare', $array) ? trim($array['compare']) : 'IN',
-						'type' => array_key_exists('type', $array) ? trim($array['type']) : 'CHAR'
-					];
-				}
+
+				$meta_query[] = [
+					'key' => $array['key'], // string
+					'value' => $array['value'], // string / array
+					'compare' => array_key_exists('compare', $array) ? $array['compare'] : 'IN',
+					'type' => array_key_exists('type', $array) ? $array['type'] : 'CHAR'
+				];
 			}
 
 			$args['meta_query'] = $meta_query;
