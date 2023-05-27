@@ -414,20 +414,24 @@ Usage example:
 **This method allows to clear query parameters in the filter by terms.**
 
 ```js
-YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiTermClear();
+YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiTermClear( option );
 ```
+- `option - (bool) true / false - parameter allows to control sending of request. Default is true`
 
 **This method allows to clear query parameters in the filter by meta fields.**
 
 ```js
-YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiMetaClear();
+YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiMetaClear( option );
 ```
+- `option - (bool) true / false - parameter allows to control sending of request. Default is true`
 
 **This method allows to clear query parameters in the filter by date.**
 
 ```js
-YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiDateClear();
+YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiDateClear( option );
 ```
+- `option - (bool) true / false - parameter allows to control sending of request. Default is true`
+
 
 ### Hooks JS.
 
