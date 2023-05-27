@@ -46,11 +46,16 @@ $ymc_preloader_icon = $variable->get_ymc_preloader_icon( $post->ID );
         <select class="form-select ymc-preloader-icon" id="ymc-preloader-icon" name="ymc-preloader-icon">
         <?php
                 $selected_preloader = '';
-                for ( $i=1 ; $i<=10; $i++ ) {
+                for ( $i=1 ; $i<=11; $i++ ) {
                     if( $ymc_preloader_icon === 'preloader_'.$i ) {
                         $selected_preloader = 'selected="selected"';
                     }
-                   echo '<option value="preloader_'.$i.'" '. $selected_preloader .'>'. esc_html('Preloader '.$i, 'ymc-smart-filter') .'</option>';
+                    if( $i === 11 ) {
+                        echo '<option value="preloader_'.$i.'" '. $selected_preloader .'>'. esc_html('None', 'ymc-smart-filter') .'</option>';
+                    }
+                    else {
+                        echo '<option value="preloader_'.$i.'" '. $selected_preloader .'>'. esc_html('Preloader '.$i, 'ymc-smart-filter') .'</option>';
+                    }
                    $selected_preloader = '';
                 }
             ?>
