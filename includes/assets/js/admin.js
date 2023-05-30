@@ -645,6 +645,19 @@
 
         });
 
+        // Sort by Meta Fields
+        $('.appearance-section #ymc-order-post-by').change(function(e) {
+            let formElement = $(e.target).closest('.from-element').next('.from-element');
+
+            if( this.value === 'meta_key' ) {
+                formElement.show();
+            }
+            else {
+                formElement.hide().find('input').val('');
+            }
+        });
+
+
         // Set Cookie
         function setCookie(cname, cvalue, exdays) {
             let d = new Date();

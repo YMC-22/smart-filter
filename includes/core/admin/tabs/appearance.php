@@ -9,6 +9,8 @@ $ymc_pagination_hide = $variable->get_pagination_hide( $post->ID );
 $ymc_sort_terms = $variable->get_sort_terms( $post->ID );
 $ymc_order_post_by = $variable->get_order_post_by( $post->ID );
 $ymc_order_post_type = $variable->get_order_post_type( $post->ID );
+$ymc_meta_key = $variable->get_ymc_meta_key( $post->ID );
+$ymc_meta_value = $variable->get_ymc_meta_value( $post->ID );
 
 ?>
 
@@ -89,7 +91,12 @@ $ymc_order_post_type = $variable->get_order_post_type( $post->ID );
                 </label>
                 <select class="form-select"  id="ymc-order-post-by" name="ymc-order-post-by">
                 <?php
+
+                    $order_post_by = null;
+
                     $order_post_by = apply_filters('ymc_order_post_by', $order_post_by);
+
+                    if( !empty($order_post_by) ) :
 
                     foreach ($order_post_by as $key => $value) {
 
@@ -102,8 +109,33 @@ $ymc_order_post_type = $variable->get_order_post_type( $post->ID );
                         }
                         echo '<option value="' . esc_attr($key) . '" ' . esc_attr($selected) . '>' . esc_html($value) . '</option>';
                     }
+
+                    endif;
                 ?>
                 </select>
+            </div>
+
+            <div class="from-element  <?php echo ( $ymc_order_post_by !== 'meta_key') ? 'ymc_hidden' : ''; ?>">
+
+                <label class="form-label">
+                    <?php echo esc_html__('Sorting by custom (meta) field', 'ymc-smart-filter'); ?>
+                    <span class="information">
+                    <?php echo esc_html__('Set value of meta_key parameter (field data key)', 'ymc-smart-filter');?>
+                    </span>
+                </label>
+
+                <input class="input-field" type="text" placeholder="meta_key" name="ymc-meta-key"
+                       value="<?php echo ( !empty($ymc_meta_key) ) ? $ymc_meta_key : ''?>">
+
+                <label class="form-label">
+                    <span class="information">
+                    <?php echo esc_html__('Set options: meta_value or meta_value_num (for numbers) to sort by meta field', 'ymc-smart-filter');?>
+                    </span>
+                </label>
+
+                <input class="input-field" type="text" placeholder="meta_value or meta_value_num" name="ymc-meta-value"
+                       value="<?php echo ( !empty($ymc_meta_value) ) ? $ymc_meta_value : ''?>">
+
             </div>
 
             <div class="from-element">

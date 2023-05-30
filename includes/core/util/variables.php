@@ -36,6 +36,8 @@ $ymc_pagination_type = $variable->get_pagination_type( $id );
 $ymc_sort_terms   = $variable->get_sort_terms( $id );
 $ymc_order_post_by = $variable->get_order_post_by( $id );
 $ymc_order_post_type = $variable->get_order_post_type( $id );
+$ymc_meta_key = $variable->get_ymc_meta_key( $id );
+$ymc_meta_value = $variable->get_ymc_meta_value( $id );
 $ymc_special_post_class = $variable->get_special_post_class( $id );
 $ymc_preloader_icon = $variable->get_ymc_preloader_icon( $id );
 $ymc_filter_font = $variable->get_filter_font( $id );
@@ -43,7 +45,3 @@ $ymc_post_font = $variable->get_post_font( $id );
 $ymc_filter_search_status = $variable->get_filter_search_status( $id );
 $ymc_search_text_button = $variable->get_search_text_button( $id );
 $ymc_search_placeholder = $variable->get_ymc_search_placeholder( $id );
-
-
-
-

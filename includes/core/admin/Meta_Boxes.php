@@ -182,6 +182,18 @@ class Meta_Boxes {
 			update_post_meta($post_id, 'ymc_order_post_type', $ymc_order_post_type);
 		}
 
+		// Meta Key by sort
+		if (isset($_POST['ymc-meta-key'])) {
+			$ymc_meta_key = sanitize_text_field($_POST['ymc-meta-key']);
+			update_post_meta($post_id, 'ymc_meta_key', $ymc_meta_key);
+		}
+
+		// Meta Value by sort
+		if (isset($_POST['ymc-meta-value'])) {
+			$ymc_meta_value = sanitize_text_field($_POST['ymc-meta-value']);
+			update_post_meta($post_id, 'ymc_meta_value', $ymc_meta_value);
+		}
+
 		// Special Post CSS Class
 		if (isset($_POST['ymc-special-post-class'])) {
 			$ymc_special_post_class = sanitize_text_field($_POST['ymc-special-post-class']);

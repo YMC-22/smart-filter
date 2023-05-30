@@ -375,7 +375,9 @@ $font-size: 16;
 									height: 35px;
 									border-radius: 0;
 									width: 100%;
-
+									&::placeholder {
+										color: #999;
+									}
 								}
 
 								label {

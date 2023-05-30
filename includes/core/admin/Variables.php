@@ -91,6 +91,10 @@ class Variables {
 
 	public $ymc_order_post_type = 'asc';
 
+	public $ymc_meta_key = null;
+
+	public $ymc_meta_value = null;
+
 
 	/**
 	 * Advanced tab used default variables
@@ -405,6 +409,24 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_order_post_type', true );
 		}
 		return $this->ymc_order_post_type;
+	}
+
+
+	public function get_ymc_meta_key( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_meta_key' ) ) {
+			return get_post_meta( $post_id, 'ymc_meta_key', true );
+		}
+		return $this->ymc_meta_key;
+	}
+
+
+	public function get_ymc_meta_value( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_meta_value' ) ) {
+			return get_post_meta( $post_id, 'ymc_meta_value', true );
+		}
+		return $this->ymc_meta_value;
 	}
 
 

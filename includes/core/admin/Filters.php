@@ -59,7 +59,8 @@ class Filters {
 			"date" =>  'Date',
 			"ID" =>    'ID',
 			"author" => 'Author',
-			"menu_order" => 'Menu Order'
+			"menu_order" => 'Menu Order',
+			"meta_key" => "Meta Key"
 		];
 
 		return $order;

@@ -53,13 +53,8 @@ class Get_Posts {
 		// Set variables
 		require YMC_SMART_FILTER_DIR . '/includes/core/util/variables.php';
 
-		$default_order_by = apply_filters('ymc_filter_posts_order_by', $ymc_order_post_by);
-		$default_order    = apply_filters('ymc_filter_posts_order', $ymc_order_post_type);
-
-		if( !empty($sort_order) && !empty($sort_orderby) ) :
-			$default_order_by = $sort_orderby;
-			$default_order = $sort_order;
-		endif;
+		$default_order_by = $ymc_order_post_by;
+		$default_order    = $ymc_order_post_type;
 
 		// Convert Taxonomy & Terms to Array
 		$taxonomy = !empty( $taxonomy ) ? explode(',', $taxonomy) : false;
@@ -112,6 +107,12 @@ class Get_Posts {
 			'order' => $default_order,
 		];
 
+		// Meta Kye Sort Posts
+		if( $ymc_order_post_by === 'meta_key' && !empty($ymc_meta_key) && !empty($ymc_meta_value) ) {
+			$args['meta_key'] = $ymc_meta_key;
+			$args['orderby']  = $ymc_meta_value;
+		}
+
 		if( !empty($keyword) ) {
 
 			add_filter( 'posts_join', array($this,'search_join') );
@@ -122,7 +123,7 @@ class Get_Posts {
 			$args['s'] = trim($keyword);
 		}
 
-		// Choices posts
+		// Choices Posts
 		if( !empty($choices_posts) ) {
 
 			if( $exclude_posts === 'off' ) {
@@ -132,6 +133,13 @@ class Get_Posts {
 				$args['post__not_in'] = explode(',', $choices_posts);
 			}
 		}
+
+		// API Sort Posts
+		if( !empty($sort_order) && !empty($sort_orderby) ) :
+			$args['orderby']  = $sort_orderby;
+			$args['order']    = $sort_order;
+			unset($args['meta_key']);
+		endif;
 
 		// API Meta Query
 		if( !empty($meta_params) && is_array($meta_params) ) {
