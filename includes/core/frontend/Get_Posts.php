@@ -46,6 +46,7 @@ class Get_Posts {
 		$target_id   = $clean_data['target_id'];
 		$choices_posts = $clean_data['choices_posts'];
 		$exclude_posts = $clean_data['exclude_posts'];
+		$meta_key = $clean_data['meta_key'];
 
 		$paged = (int) $_POST['paged'];
 		$id = $filter_id;
@@ -136,9 +137,17 @@ class Get_Posts {
 
 		// API Sort Posts
 		if( !empty($sort_order) && !empty($sort_orderby) ) :
+
 			$args['orderby']  = $sort_orderby;
 			$args['order']    = $sort_order;
-			unset($args['meta_key']);
+
+			if( !empty($meta_key) ) {
+				$args['meta_key'] = $meta_key;
+			}
+			else {
+				unset($args['meta_key']);
+			}
+
 		endif;
 
 		// API Meta Query

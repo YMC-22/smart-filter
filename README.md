@@ -399,15 +399,19 @@ YMCTools({target: ".data-target-ymcFilterID-LayoutID", sortOrder: 'asc', sortOrd
 **Required params:**
 - `.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.`
 - `sortOrder - (String) asc / desc.`
-- `sortOrderBy - (String) List of fields for sorting posts: ID, author, title, name, date, modified, type, parent, rand, comment_count.`
+- `sortOrderBy - (String) List of fields for sorting posts: ID, author, title, name, date, modified, type, parent, rand, comment_count. If set meta key set options: meta_value or meta_value_num (for numbers) to sort by meta field`
+  
+**Optional params:**
+- `metaKey - (String) Value of meta_key parameter (field data key).`
 
 ```js
 Usage example:
 
         YMCTools({
           target: '.data-target-ymc545-1',
-          sortOrder: 'asc',
-          sortOrderBy: 'date'
+          sortOrder: 'desc',
+          sortOrderBy: 'meta_value_num',
+          metaKey: 'amount'
         }).apiSortPosts(); 	 
 ```
 
@@ -429,6 +433,13 @@ YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiMetaClear( option );
 
 ```js
 YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiDateClear( option );
+```
+- `option - (bool) true / false - parameter allows to control sending of request. Default is true`
+
+**This method allows to clear sort parameters in the filter by date.**
+
+```js
+YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiSortClear( option );
 ```
 - `option - (bool) true / false - parameter allows to control sending of request. Default is true`
 

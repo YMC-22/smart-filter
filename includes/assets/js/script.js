@@ -659,7 +659,7 @@
         const _FN = (function () {
 
             const _info = {
-                version: '2.3.5',
+                version: '2.3.11',
                 author: 'YMC'
             }
 
@@ -674,7 +674,8 @@
                 choicesPosts : null,
                 excludePosts : null,
                 sortOrder    : null,
-                sortOrderBy  : null
+                sortOrderBy  : null,
+                metaKey      : null
             }
 
             function YMCTools(settings = _defaults) {
@@ -907,11 +908,30 @@
                 dataParams.search = "";
                 dataParams.sort_order = this.sortOrder;
                 dataParams.sort_orderby = this.sortOrderBy;
+                dataParams.meta_key = this.metaKey;
 
                 container.dataset.params = JSON.stringify(dataParams);
                 this.getFilterPosts();
             }
 
+            YMCTools.prototype.apiSortClear = function ( option = true ) {
+
+                let container = document.querySelector(''+ this.target +'');
+                if( ! container )  throw new Error("API Sort Order Posts: Filter not found");
+
+                let dataParams = JSON.parse(container.dataset.params);
+
+                dataParams.search = "";
+                dataParams.sort_order = "";
+                dataParams.sort_orderby = "";
+                dataParams.meta_key = "";
+
+                container.dataset.params = JSON.stringify(dataParams);
+
+                if( option ) {
+                    this.getFilterPosts();
+                }
+            }
 
             return function (settings) {
                 return  new YMCTools(settings);
