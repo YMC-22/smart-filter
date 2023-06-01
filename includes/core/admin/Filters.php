@@ -34,8 +34,9 @@ class Filters {
 	public function ymc_post_layouts($layout) {
 
 		$layout = [
-			"post-layout1" => 'Post Layout 1',
-			"post-layout2" => 'Post Layout 2',
+			"post-layout1" => 'Style Layout 1',
+			"post-layout2" => 'Style Layout 2',
+			"post-layout3" => 'Style Layout 3',
 			"post-custom-layout"  => 'Custom Post Layout'
 		];
 
