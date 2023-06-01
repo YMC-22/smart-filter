@@ -436,7 +436,7 @@ YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiDateClear( option );
 ```
 - `option - (bool) true / false - parameter allows to control sending of request. Default is true`
 
-**This method allows to clear sort parameters in the filter by date.**
+**This method allows to clear sort parameters in the filter by sort posts.**
 
 ```js
 YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiSortClear( option );
