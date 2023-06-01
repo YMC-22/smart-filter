@@ -567,7 +567,8 @@
                     'cpt'        : params.cpt,
                     'phrase'     : userInput,
                     'choices_posts' : params.choices_posts,
-                    'exclude_posts' : params.exclude_posts
+                    'exclude_posts' : params.exclude_posts,
+                    'post_id' : params.filter_id
                 };
 
                 $.ajax({

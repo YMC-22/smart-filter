@@ -116,9 +116,11 @@ class Get_Posts {
 
 		if( !empty($keyword) ) {
 
-			add_filter( 'posts_join', array($this,'search_join') );
-			add_filter( 'posts_where',  array($this,'search_where') );
-			add_filter( 'posts_distinct', array($this,'search_distinct') );
+			if( $ymc_order_post_by !== 'meta_key' ) {
+				add_filter( 'posts_join', array($this,'search_join') );
+				add_filter( 'posts_where',  array($this,'search_where') );
+				add_filter( 'posts_distinct', array($this,'search_distinct') );
+			}
 
 			$args['sentence'] = true;
 			$args['s'] = trim($keyword);
@@ -329,13 +331,19 @@ class Get_Posts {
 		$post_type = sanitize_text_field($_POST['cpt']);
 		$choices_posts = sanitize_text_field($_POST['choices_posts']);
 		$exclude_posts = sanitize_text_field($_POST['exclude_posts']);
+		$id = sanitize_text_field($_POST['post_id']);
 
 		$per_page  = -1;
 		$total = 0;
 
-		add_filter( 'posts_join', array($this,'search_join') );
-		add_filter( 'posts_where',  array($this,'search_where') );
-		add_filter( 'posts_distinct', array($this,'search_distinct') );
+		// Set variables
+		require YMC_SMART_FILTER_DIR . '/includes/core/util/variables.php';
+
+		if( $ymc_order_post_by !== 'meta_key' ) {
+			add_filter( 'posts_join', array($this,'search_join') );
+			add_filter( 'posts_where',  array($this,'search_where') );
+			add_filter( 'posts_distinct', array($this,'search_distinct') );
+		}
 
 		$args = [
 			'post_type' => $post_type,
@@ -357,7 +365,6 @@ class Get_Posts {
 				$args['post__not_in'] = explode(',', $choices_posts);
 			}
 		}
-
 
 		$query = new \WP_Query($args);
 
@@ -401,7 +408,6 @@ class Get_Posts {
 			$total = $query->found_posts;
 
 		endif;
-
 
 		$data = array(
 			'data'   => $output,
