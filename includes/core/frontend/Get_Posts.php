@@ -331,7 +331,7 @@ class Get_Posts {
 		$post_type = sanitize_text_field($_POST['cpt']);
 		$choices_posts = sanitize_text_field($_POST['choices_posts']);
 		$exclude_posts = sanitize_text_field($_POST['exclude_posts']);
-		$id = sanitize_text_field($_POST['post_id']);
+		$id = (int) $_POST['post_id'];
 
 		$per_page  = -1;
 		$total = 0;
