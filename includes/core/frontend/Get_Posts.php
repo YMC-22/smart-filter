@@ -116,11 +116,9 @@ class Get_Posts {
 
 		if( !empty($keyword) ) {
 
-			if( $ymc_order_post_by !== 'meta_key' ) {
-				add_filter( 'posts_join', array($this,'search_join') );
-				add_filter( 'posts_where',  array($this,'search_where') );
-				add_filter( 'posts_distinct', array($this,'search_distinct') );
-			}
+			add_filter( 'posts_join', array($this,'search_join') );
+			add_filter( 'posts_where',  array($this,'search_where') );
+			add_filter( 'posts_distinct', array($this,'search_distinct') );
 
 			$args['sentence'] = true;
 			$args['s'] = trim($keyword);
@@ -300,7 +298,7 @@ class Get_Posts {
 
 		global $wpdb;
 
-		$join .= " LEFT JOIN $wpdb->postmeta ON ID = $wpdb->postmeta.post_id ";
+		$join .= " LEFT JOIN $wpdb->postmeta AS pm ON ID = pm.post_id ";
 
 		return $join;
 	}
@@ -311,8 +309,7 @@ class Get_Posts {
 
 		$where = preg_replace(
 			"/\(\s*$wpdb->posts.post_title\s+LIKE\s*(\'[^\']+\')\s*\)/",
-			"($wpdb->posts.post_title LIKE $1) OR ($wpdb->postmeta.meta_value LIKE $1)", $where );
-
+			"($wpdb->posts.post_title LIKE $1) OR (pm.meta_value LIKE $1)", $where );
 
 		return $where;
 	}
@@ -339,11 +336,9 @@ class Get_Posts {
 		// Set variables
 		require YMC_SMART_FILTER_DIR . '/includes/core/util/variables.php';
 
-		if( $ymc_order_post_by !== 'meta_key' ) {
-			add_filter( 'posts_join', array($this,'search_join') );
-			add_filter( 'posts_where',  array($this,'search_where') );
-			add_filter( 'posts_distinct', array($this,'search_distinct') );
-		}
+		add_filter( 'posts_join', array($this,'search_join') );
+		add_filter( 'posts_where',  array($this,'search_where') );
+		add_filter( 'posts_distinct', array($this,'search_distinct') );
 
 		$args = [
 			'post_type' => $post_type,
