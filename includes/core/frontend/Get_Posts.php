@@ -49,7 +49,7 @@ class Get_Posts {
 		$meta_key = $clean_data['meta_key'];
 
 		$paged = (int) $_POST['paged'];
-		$id = $filter_id;
+		$id = (int) $filter_id;
 
 		// Set variables
 		require YMC_SMART_FILTER_DIR . '/includes/core/util/variables.php';
