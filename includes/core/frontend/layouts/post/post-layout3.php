@@ -46,7 +46,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		echo '<div class="ymc-col ymc-col-2">';
 	    echo '<header class="title">'. esc_html($title) .'</header>';
-	    echo '<div class="category">'. wp_kses_post($list_categories) .'</div>';
+
+	    if( !empty($list_categories) ) :
+		    echo '<div class="category">'. wp_kses_post($list_categories) .'</div>';
+	    endif;
+
 	    echo '<div class="excerpt">'. wp_kses_post($content) .'</div>';
 	    echo '<div class="read-more"><a class="btn btn-read-more" '. esc_attr($target) .' href="'. esc_url($link) .'">'.
 	         esc_html($read_more) .'</a></div>';

@@ -40,7 +40,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
         echo '<article class="ymc-'.esc_attr($post_layout).' post-'.get_the_id().' post-item">';
         echo '<figure class="media">'. wp_kses_post($image_post) .'</figure>';
+
+		if( !empty($list_categories) ) :
 		echo '<div class="category">'. wp_kses_post($list_categories) .'</div>';
+		endif;
+
         echo '<header class="title">'. esc_html($title) .'</header>';
         echo '<span class="date"><i class="far fa-calendar-alt"></i> '. get_the_date($post_date_format) . '</span>';
         echo '<span class="author"><i class="far fa-user"></i> '. get_the_author() . '</span>';

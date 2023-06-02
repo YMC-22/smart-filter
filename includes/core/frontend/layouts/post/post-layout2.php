@@ -32,9 +32,12 @@ if ( ! defined( 'ABSPATH' ) ) {
             $list_categories .= '<span class="cat-inner">'. esc_html($term_single->name) .'</span>';
         }
 
-
         echo '<article class="ymc-'.esc_attr($post_layout).' post-'.get_the_id().' post-item">';
-        echo '<div class="category">'. wp_kses_post($list_categories) .'</div>';
+
+        if( !empty($list_categories) ) :
+            echo '<div class="category">'. wp_kses_post($list_categories) .'</div>';
+        endif;
+
         echo '<header class="title">'. esc_html($title) .'</header>';
         echo '<div class="date"><i class="far fa-calendar-alt"></i> '. get_the_date($post_date_format) . '</div>';
         echo '<div class="excerpt">'. wp_kses_post($content) .'</div>';
