@@ -5,6 +5,7 @@
 $ymc_filter_search_status = $variable->get_filter_search_status( $post->ID );
 $ymc_search_text_button = $variable->get_search_text_button( $post->ID );
 $ymc_search_placeholder = $variable->get_ymc_search_placeholder( $post->ID );
+$ymc_autocomplete_state = $variable->get_ymc_autocomplete_state( $post->ID );
 
 ?>
 
@@ -69,6 +70,29 @@ $ymc_search_placeholder = $variable->get_ymc_search_placeholder( $post->ID );
                 <input class="input-field" type="text" name="ymc-search-text-button" value="<?php echo esc_attr($ymc_search_text_button); ?>">
 
             </div>
+
+            <br/>
+
+            <div class="from-element">
+
+                <label class="form-label">
+                    <?php echo esc_html__('Disable Autocomplete', 'ymc-smart-filter');?>
+                    <span class="information">
+                        <?php echo esc_html__('Disable autocomplete for posts search.', 'ymc-smart-filter');?>
+                    </span>
+                </label>
+
+                <div class="group-elements">
+                    <?php $checked_autocomplete_state =  ( (int) $ymc_autocomplete_state === 1 ) ? 'checked' : '';  ?>
+                    <input type="hidden" name="ymc-autocomplete-state" value="0">
+                    <input class="ymc-autocomplete-state" type="checkbox" value="1" name="ymc-autocomplete-state" id="ymc-autocomplete-state"
+                        <?php echo esc_attr($checked_autocomplete_state); ?>>
+                    <label for="ymc-autocomplete-state"><?php echo esc_html__('Disable','ymc-smart-filter'); ?></label>
+                </div>
+
+
+            </div>
+
 
         </div>
 

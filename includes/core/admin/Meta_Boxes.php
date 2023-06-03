@@ -236,6 +236,13 @@ class Meta_Boxes {
 			$search_placeholder = sanitize_text_field( $_POST['ymc-search-placeholder']);
 			update_post_meta( $post_id, 'ymc_search_placeholder', $search_placeholder );
 		}
+
+		// Disable Autocomplete for Search Posts
+		if( isset($_POST['ymc-autocomplete-state']) ) {
+			$autocomplete_state = sanitize_text_field( $_POST['ymc-autocomplete-state']);
+			update_post_meta( $post_id, 'ymc_autocomplete_state', $autocomplete_state );
+		}
+
 	}
 
 	public function add_post_metabox() {

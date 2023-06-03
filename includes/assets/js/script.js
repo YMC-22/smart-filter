@@ -578,15 +578,18 @@
                     data: data,
                     beforeSend: function () {},
                     success: function (res) {
-                         resultsHTML.show();
 
-                         if(res.total > 0) {
-                             resultsHTML.html(res.data);
-                         }
-                         else {
-                             resultsHTML.html(`<li class="no-result">No results for phrase: <b>${userInput}</b></li>`);
-                         }
+                         if( res.disableAutocomplete === 0 ) {
 
+                             resultsHTML.show();
+
+                             if( res.total > 0 ) {
+                                 resultsHTML.html(res.data);
+                             }
+                             else {
+                                 resultsHTML.html(`<li class="no-result">No results for phrase: <b>${userInput}</b></li>`);
+                             }
+                         }
                     },
                     error: function (obj, err) {
                         console.log( obj, err );
@@ -594,6 +597,21 @@
                 });
             }
         });
+
+        $(document).on('click','.ymc-smart-filter-container .search-form .autocomplete-results a[data-clue]', function (e) {
+            e.preventDefault();
+
+            let clue = e.target.closest('a[data-clue]').dataset.clue;
+            let inputSearch = e.target.closest('.autocomplete-results').previousElementSibling;
+            let btnSearch = inputSearch.closest('.component-input').nextElementSibling;
+
+            inputSearch.value = clue;
+            inputSearch.focus();
+            e.target.closest('.autocomplete-results').style.display = "none";
+            btnSearch.click();
+
+        });
+
 
         // Sort Posts on Frontend
         $(document).on('click','.ymc-smart-filter-container .sort-container .dropdown-filter .menu-active',function (e) {

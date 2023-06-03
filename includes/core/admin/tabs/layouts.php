@@ -55,7 +55,7 @@ $ymc_post_active_color = $variable->get_post_active_color( $post->ID );
 
             <div class="manage-filters__section">
                 <label for="ymc-filter-layout" class="form-label">
-		            <?php echo esc_html__('Select Filter Layout', 'ymc-smart-filter');?>
+		            <?php echo esc_html__('Select Style Filter Layout', 'ymc-smart-filter');?>
                     <span class="information">
                     <?php echo esc_html__('Select design layout of filters.', 'ymc-smart-filter');?>
                 </span>

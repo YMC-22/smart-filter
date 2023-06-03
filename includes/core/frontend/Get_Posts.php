@@ -386,14 +386,12 @@ class Get_Posts {
 					$cut_text = mb_substr($title, $pos_title,  strlen($phrase) + 70);
 				}
 
-
-
 				$pattern = "/((?:^|>)[^<]*)(".preg_quote($phrase).")/is";
 				$replace = '$1<b>$2</b>';
 				$markedText = preg_replace($pattern, $replace, $cut_text);
 
 				$output  .= '<li class="is-result">
-					         <a target="_blank" href="'.get_the_permalink(get_the_ID()).'">' . $markedText . '...</a></li>';
+					         <a href="#" data-clue="'.strip_tags($markedText).'">' . $markedText . '...</a></li>';
 
 				$title = null;
 				$content = null;
@@ -406,7 +404,8 @@ class Get_Posts {
 
 		$data = array(
 			'data'   => $output,
-			'total'  => $total
+			'total'  => $total,
+			'disableAutocomplete' => (int) $ymc_autocomplete_state
 		);
 
 		wp_send_json($data);

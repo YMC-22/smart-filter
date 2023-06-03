@@ -121,6 +121,8 @@ class Variables {
 
 	public $ymc_search_placeholder = 'Search posts...';
 
+	public $ymc_autocomplete_state = 0;
+
 
 
 
@@ -498,6 +500,15 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_search_placeholder', true );
 		}
 		return $this->ymc_search_placeholder;
+	}
+
+
+	public function get_ymc_autocomplete_state( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_autocomplete_state' ) ) {
+			return get_post_meta( $post_id, 'ymc_autocomplete_state', true );
+		}
+		return $this->ymc_autocomplete_state;
 	}
 
 
