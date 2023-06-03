@@ -46,5 +46,6 @@ $ymc_filter_search_status = $variable->get_filter_search_status( $id );
 $ymc_search_text_button = $variable->get_search_text_button( $id );
 $ymc_search_placeholder = $variable->get_ymc_search_placeholder( $id );
 $ymc_autocomplete_state = $variable->get_ymc_autocomplete_state( $id );
+$ymc_scroll_page = $variable->get_ymc_scroll_page( $id );
 
 

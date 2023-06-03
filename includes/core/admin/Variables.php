@@ -123,6 +123,8 @@ class Variables {
 
 	public $ymc_autocomplete_state = 0;
 
+	public $ymc_scroll_page = 1;
+
 
 
 
@@ -449,6 +451,14 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_preloader_icon', true );
 		}
 		return $this->ymc_preloader_icon;
+	}
+
+	public function get_ymc_scroll_page( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_scroll_page' ) ) {
+			return get_post_meta( $post_id, 'ymc_scroll_page', true );
+		}
+		return $this->ymc_scroll_page;
 	}
 
 

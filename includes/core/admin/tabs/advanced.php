@@ -3,6 +3,7 @@
 // Set variables
 $ymc_special_post_class = $variable->get_special_post_class( $post->ID );
 $ymc_preloader_icon = $variable->get_ymc_preloader_icon( $post->ID );
+$ymc_scroll_page = $variable->get_ymc_scroll_page( $post->ID );
 
 ?>
 
@@ -32,7 +33,7 @@ $ymc_preloader_icon = $variable->get_ymc_preloader_icon( $post->ID );
 <div class="content" style="margin-top: 40px;">
 
     <header class="sub-header">
-        <i class="far fa-plus-circle"></i>
+        <i class="far fa-id-badge"></i>
         <?php echo esc_html__('Icon for Preloader', 'ymc-smart-filter'); ?>
     </header>
 
@@ -64,8 +65,34 @@ $ymc_preloader_icon = $variable->get_ymc_preloader_icon( $post->ID );
         <div class="preview-preloader">
              <img src="<?php echo YMC_SMART_FILTER_URL; ?>/includes/assets/images/<?php echo $ymc_preloader_icon; ?>.svg">
         </div>
+
     </div>
 
 </div>
 
 
+<div class="content" style="margin-top: 40px;">
+
+    <header class="sub-header">
+        <i class="fas fa-scroll"></i>
+        <?php echo esc_html__('Scroll Top Page on Pagination', 'ymc-smart-filter'); ?>
+    </header>
+
+    <div class="from-element">
+
+        <label class="form-label">
+            <?php esc_html_e('Disable Page Scroll to Top', 'ymc-smart-filter'); ?>
+            <span class="information"><?php esc_html_e('When you click on numeric pagination, page scroll to top.', 'ymc-smart-filter'); ?></span>
+        </label>
+
+        <div class="group-elements">
+            <?php $checked_scroll_page =  ( (int) $ymc_scroll_page === 0 ) ? 'checked' : '';  ?>
+            <input type="hidden" name="ymc-scroll-page" value="1">
+            <input class="ymc-scroll-page" type="checkbox" value="0" name="ymc-scroll-page" id="ymc-scroll-page"
+                <?php echo esc_attr($checked_scroll_page); ?>>
+            <label for="ymc-scroll-page"><?php echo esc_html__('Disable','ymc-smart-filter'); ?></label>
+        </div>
+
+    </div>
+
+</div>

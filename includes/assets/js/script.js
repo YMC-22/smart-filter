@@ -54,6 +54,7 @@
 
             let filterID = params.filter_id;
             let targetID = params.target_id;
+            let pageScroll = params.page_scroll;
 
             const data = {
                 'action'     : 'ymc_get_posts',
@@ -88,8 +89,8 @@
                         case 'numeric' :
 
                             // Filter is act scroll top
-                            if(!container.hasClass('ymc-loaded-filter') ) {
-                                if(toggle_pg === 1) {
+                            if( !container.hasClass('ymc-loaded-filter') ) {
+                                if( toggle_pg === 1 && parseInt(pageScroll) === 1 ) {
                                     $('html, body').animate({scrollTop: container.offset().top - 100}, 500);
                                 }
                             }

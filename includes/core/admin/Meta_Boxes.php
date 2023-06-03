@@ -243,6 +243,12 @@ class Meta_Boxes {
 			update_post_meta( $post_id, 'ymc_autocomplete_state', $autocomplete_state );
 		}
 
+		// Disable Scroll Page
+		if( isset($_POST['ymc-scroll-page']) ) {
+			$ymc_scroll_page = sanitize_text_field( $_POST['ymc-scroll-page']);
+			update_post_meta( $post_id, 'ymc_scroll_page', $ymc_scroll_page );
+		}
+
 	}
 
 	public function add_post_metabox() {

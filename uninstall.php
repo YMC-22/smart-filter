@@ -50,7 +50,8 @@ $wpdb->get_results('DELETE FROM wp_postmeta WHERE meta_key IN (
                                   "ymc_filter_search_status",  
                                   "ymc_search_text_button",
                                   "ymc_search_placeholder",
-                                  "ymc_autocomplete_state"
+                                  "ymc_autocomplete_state",
+                                  "ymc_scroll_page"
                                 )');
 
 
