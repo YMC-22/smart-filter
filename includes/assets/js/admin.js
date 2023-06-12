@@ -645,15 +645,47 @@
 
         });
 
-        // Sort by Meta Fields
+        // Sort by Fields
         $('.appearance-section #ymc-order-post-by').change(function(e) {
-            let formElement = $(e.target).closest('.from-element').next('.from-element');
+            let metaSort = $(e.target).closest('.from-element').siblings('.from-element--meta-sort');
+            let multipleSort = $(e.target).closest('.from-element').siblings('.from-element--multiple-sort');
+            let orderSort = $(e.target).closest('.from-element').siblings('.from-element--order-sort');
 
-            if( this.value === 'meta_key' ) {
-                formElement.show();
+            metaSort.hide();
+            multipleSort.hide();
+            orderSort.show();
+
+            switch ( this.value ) {
+
+                case 'meta_key' : metaSort.show();  break;
+
+                case 'multiple_fields' : multipleSort.show(); orderSort.hide(); break;
+
             }
-            else {
-                formElement.hide().find('input').val('');
+        });
+
+        // Event handler Add Multiple Fields
+        $('.appearance-section .from-element--multiple-sort .btnAddMultipleSort').click(function (e) {
+            let length = $(e.target).closest('.from-element').find('.rows-options').length;
+            let rowCloneHtml = $($(e.target).closest('.from-element').find('.rows-options')[length - 1]).clone(true);
+            $(e.target).closest('.from-element').find('.ymc-btn').before(rowCloneHtml);
+
+           let newItem = $($(e.target).closest('.from-element').find('.rows-options')[length]);
+           newItem.find('.ymc-multiple-orderby').attr('name','ymc-multiple-sort['+length+'][orderby]');
+           newItem.find('.ymc-multiple-order').attr('name','ymc-multiple-sort['+length+'][order]');
+
+            $(this).siblings('.btnRemoveMultipleSort').show();
+        });
+
+        // Event handler Remove Multiple Fields
+        $('.appearance-section .from-element--multiple-sort .btnRemoveMultipleSort').click(function (e) {
+            let length = $(e.target).closest('.from-element').find('.rows-options').length;
+
+            if( length > 1 ) {
+                $($(e.target).closest('.from-element').find('.rows-options')[length - 1]).remove();
+            }
+            if( length - 1 === 1 ) {
+                $(this).hide();
             }
         });
 

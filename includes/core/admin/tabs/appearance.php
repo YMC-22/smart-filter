@@ -11,6 +11,8 @@ $ymc_order_post_by = $variable->get_order_post_by( $post->ID );
 $ymc_order_post_type = $variable->get_order_post_type( $post->ID );
 $ymc_meta_key = $variable->get_ymc_meta_key( $post->ID );
 $ymc_meta_value = $variable->get_ymc_meta_value( $post->ID );
+$ymc_multiple_sort = $variable->get_ymc_multiple_sort( $post->ID );
+
 
 ?>
 
@@ -115,7 +117,7 @@ $ymc_meta_value = $variable->get_ymc_meta_value( $post->ID );
                 </select>
             </div>
 
-            <div class="from-element  <?php echo ( $ymc_order_post_by !== 'meta_key') ? 'ymc_hidden' : ''; ?>">
+            <div class="from-element from-element--meta-sort  <?php echo ( $ymc_order_post_by !== 'meta_key') ? 'ymc_hidden' : ''; ?>">
 
                 <label class="form-label">
                     <?php echo esc_html__('Sorting by custom (meta) field', 'ymc-smart-filter'); ?>
@@ -138,7 +140,7 @@ $ymc_meta_value = $variable->get_ymc_meta_value( $post->ID );
 
             </div>
 
-            <div class="from-element">
+            <div class="from-element from-element--order-sort <?php echo ( $ymc_order_post_by === 'multiple_fields' || $ymc_order_post_by === 'multiple_meta_fields' ) ? 'ymc_hidden' : ''; ?>">
                 <label class="form-label">
 			        <?php echo esc_html__('Post Order Type', 'ymc-smart-filter'); ?>
                     <span class="information">
@@ -153,6 +155,119 @@ $ymc_meta_value = $variable->get_ymc_meta_value( $post->ID );
 			            <?php echo esc_html__('Desc', 'ymc-smart-filter'); ?>
                     </option>
                 </select>
+            </div>
+
+            <div class="from-element from-element--multiple-sort <?php echo ( $ymc_order_post_by === 'multiple_fields' || $ymc_order_post_by === 'multiple_meta_fields' ) ? '' : 'ymc_hidden'; ?>">
+
+                <?php
+
+                    if( $ymc_multiple_sort ) : $i = 0;
+
+                        foreach ($ymc_multiple_sort as $item) : ?>
+
+                            <div class="rows-options">
+                                <fieldset class="rows-options__col">
+                                    <legend><?php echo esc_html__('Field name', 'ymc-smart-filter'); ?></legend>
+                                    <select class="form-select ymc-multiple-orderby"  name="ymc-multiple-sort[<?php echo $i; ?>][orderby]">
+                                        <option value="title" <?php if ( in_array('title', $item) ) { echo "selected"; } ?>>
+                                            <?php echo esc_html__('Title', 'ymc-smart-filter'); ?>
+                                        </option>
+                                        <option value="name" <?php if ( in_array('name', $item) ) { echo "selected"; } ?>>
+                                            <?php echo esc_html__('Name', 'ymc-smart-filter'); ?>
+                                        </option>
+                                        <option value="date" <?php if ( in_array('date', $item) ) { echo "selected"; } ?>>
+                                            <?php echo esc_html__('Date', 'ymc-smart-filter'); ?>
+                                        </option>
+                                        <option value="ID" <?php if ( in_array('ID', $item) ) { echo "selected"; } ?>>
+                                            <?php echo esc_html__('ID', 'ymc-smart-filter'); ?>
+                                        </option>
+                                        <option value="author" <?php if ( in_array('author', $item) ) { echo "selected"; } ?>>
+                                            <?php echo esc_html__('Author', 'ymc-smart-filter'); ?>
+                                        </option>
+                                        <option value="modified" <?php if ( in_array('modified', $item) ) { echo "selected"; } ?>>
+                                            <?php echo esc_html__('Modified', 'ymc-smart-filter'); ?>
+                                        </option>
+                                        <option value="type" <?php if ( in_array('type', $item) ) { echo "selected"; } ?>>
+                                            <?php echo esc_html__('Type ', 'ymc-smart-filter'); ?>
+                                        </option>
+                                        <option value="parent" <?php if ( in_array('parent', $item) ) { echo "selected"; } ?>>
+                                            <?php echo esc_html__('Parent ', 'ymc-smart-filter'); ?>
+                                        </option>
+                                        <option value="rand" <?php if ( in_array('rand', $item) ) { echo "selected"; } ?>>
+                                            <?php echo esc_html__('Rand ', 'ymc-smart-filter'); ?>
+                                        </option>
+                                    </select>
+                                </fieldset>
+                                <fieldset class="rows-options__col">
+                                    <legend><?php echo esc_html__('Post Order Type', 'ymc-smart-filter'); ?></legend>
+                                    <select class="form-select ymc-multiple-order"  name="ymc-multiple-sort[<?php echo $i; ?>][order]">
+                                        <option value="asc" <?php if ( in_array('asc', $item) ) { echo "selected"; } ?>>
+                                        <?php echo esc_html__('Asc', 'ymc-smart-filter'); ?>
+                                        </option>
+                                        <option value="desc" <?php if ( in_array('desc', $item) ) { echo "selected"; } ?>>
+                                        <?php echo esc_html__('Desc', 'ymc-smart-filter'); ?>
+                                        </option>
+                                    </select>
+                                </fieldset>
+                           </div>
+
+                        <?php $i++; endforeach;
+
+                    else : ?>
+
+                        <div class="rows-options">
+                            <fieldset class="rows-options__col">
+                                <legend><?php echo esc_html__('Field name', 'ymc-smart-filter'); ?></legend>
+                                <select class="form-select ymc-multiple-orderby"  name="ymc-multiple-sort[0][orderby]">
+                                    <option value="title">
+                                        <?php echo esc_html__('Title', 'ymc-smart-filter'); ?>
+                                    </option>
+                                    <option value="name">
+                                        <?php echo esc_html__('Name', 'ymc-smart-filter'); ?>
+                                    </option>
+                                    <option value="date">
+                                        <?php echo esc_html__('Date', 'ymc-smart-filter'); ?>
+                                    </option>
+                                    <option value="ID">
+                                        <?php echo esc_html__('ID', 'ymc-smart-filter'); ?>
+                                    </option>
+                                    <option value="author">
+                                        <?php echo esc_html__('Author', 'ymc-smart-filter'); ?>
+                                    </option>
+                                    <option value="modified">
+                                        <?php echo esc_html__('Modified', 'ymc-smart-filter'); ?>
+                                    </option>
+                                    <option value="type">
+                                        <?php echo esc_html__('Type ', 'ymc-smart-filter'); ?>
+                                    </option>
+                                    <option value="parent">
+                                        <?php echo esc_html__('Parent ', 'ymc-smart-filter'); ?>
+                                    </option>
+                                    <option value="rand">
+                                    <?php echo esc_html__('Rand ', 'ymc-smart-filter'); ?>
+                                    </option>
+                                </select>
+                            </fieldset>
+                            <fieldset class="rows-options__col">
+                                <legend><?php echo esc_html__('Post Order Type', 'ymc-smart-filter'); ?></legend>
+                                <select class="form-select ymc-multiple-order"  name="ymc-multiple-sort[0][order]">
+                                    <option value="asc">
+                                        <?php echo esc_html__('Asc', 'ymc-smart-filter'); ?>
+                                    </option>
+                                    <option value="desc">
+                                        <?php echo esc_html__('Desc', 'ymc-smart-filter'); ?>
+                                    </option>
+                                </select>
+                            </fieldset>
+                        </div>
+
+                <?php  endif;  ?>
+
+                <div class="ymc-btn">
+                    <span class="ymc-btn__inner btnAddMultipleSort" title="Add new option">+</span>
+                    <span class="ymc-btn__inner btnRemoveMultipleSort" title="Remove option">-</span>
+                </div>
+
             </div>
 
             <div class="from-element">
@@ -219,7 +334,7 @@ $ymc_meta_value = $variable->get_ymc_meta_value( $post->ID );
 
             <div class="from-element">
                 <label class="form-label">
-		            <?php echo esc_html__('Disable pagination', 'ymc-smart-filter');?>
+		            <?php echo esc_html__('Disable Pagination', 'ymc-smart-filter');?>
                     <span class="information">
                     <?php echo esc_html__('Hide pagination for filter.', 'ymc-smart-filter');?>
                 </span>

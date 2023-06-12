@@ -54,8 +54,6 @@ class Get_Posts {
 		// Set variables
 		require YMC_SMART_FILTER_DIR . '/includes/core/util/variables.php';
 
-		$default_order_by = $ymc_order_post_by;
-		$default_order    = $ymc_order_post_type;
 
 		// Convert Taxonomy & Terms to Array
 		$taxonomy = !empty( $taxonomy ) ? explode(',', $taxonomy) : false;
@@ -104,14 +102,39 @@ class Get_Posts {
 			'posts_per_page' => $per_page,
 			'tax_query' => $tax_qry,
 			'paged' => $paged,
-			'orderby' => $default_order_by,
-			'order' => $default_order,
+			'orderby' => $ymc_order_post_by,
+			'order' => $ymc_order_post_type,
 		];
 
 		// Meta Kye Sort Posts
 		if( $ymc_order_post_by === 'meta_key' && !empty($ymc_meta_key) && !empty($ymc_meta_value) ) {
 			$args['meta_key'] = $ymc_meta_key;
 			$args['orderby']  = $ymc_meta_value;
+		}
+
+		// Multiple Sort Posts
+		if( $ymc_order_post_by === 'multiple_fields' ) {
+
+			$multiple_orderby = '';
+			$multiple_order = '';
+			$arr_multiple_sort = [];
+
+			foreach($ymc_multiple_sort as $item) {
+
+				foreach( $item as $key => $val ) {
+
+					if($key === 'orderby') {
+						$multiple_orderby = $val;
+					}
+					if($key === 'order') {
+						$multiple_order = $val;
+					}
+					$arr_multiple_sort[$multiple_orderby] = $multiple_order;
+				}
+			}
+
+			$args['orderby']  = $arr_multiple_sort;
+			unset($args['order']);
 		}
 
 		if( !empty($keyword) ) {

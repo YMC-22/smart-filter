@@ -60,8 +60,14 @@ class Filters {
 			"date" =>  'Date',
 			"ID" =>    'ID',
 			"author" => 'Author',
+			"modified" => 'Modified',
+			"type" => 'Type',
+			"parent" => 'Parent',
+			"rand" => 'Rand',
 			"menu_order" => 'Menu Order',
-			"meta_key" => "Meta Key"
+			"meta_key" => "Meta Key",
+			"multiple_fields" => "Multiple sort"
+			//"multiple_meta_fields" => "Multiple Metafields Sort"
 		];
 
 		return $order;

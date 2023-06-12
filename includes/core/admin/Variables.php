@@ -95,6 +95,10 @@ class Variables {
 
 	public $ymc_meta_value = null;
 
+	public $ymc_multiple_sort = null;
+
+	//public $ymc_multiple_meta_sort = null;
+
 
 	/**
 	 * Advanced tab used default variables
@@ -432,6 +436,16 @@ class Variables {
 		}
 		return $this->ymc_meta_value;
 	}
+
+
+	public function get_ymc_multiple_sort( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_multiple_sort' ) ) {
+			return get_post_meta( $post_id, 'ymc_multiple_sort', true );
+		}
+		return $this->ymc_multiple_sort;
+	}
+
 
 
 	/**

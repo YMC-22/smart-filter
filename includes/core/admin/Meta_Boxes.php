@@ -194,6 +194,12 @@ class Meta_Boxes {
 			update_post_meta($post_id, 'ymc_meta_value', $ymc_meta_value);
 		}
 
+		// Multiple Sort
+		if (isset($_POST['ymc-multiple-sort'])) {
+			$ymc_multiple_sort = $_POST['ymc-multiple-sort'];
+			update_post_meta($post_id, 'ymc_multiple_sort', $ymc_multiple_sort);
+		}
+
 		// Special Post CSS Class
 		if (isset($_POST['ymc-special-post-class'])) {
 			$ymc_special_post_class = sanitize_text_field($_POST['ymc-special-post-class']);
