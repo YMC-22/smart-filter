@@ -44,6 +44,7 @@ $wpdb->get_results('DELETE FROM wp_postmeta WHERE meta_key IN (
                                   "ymc_meta_key",
                                   "ymc_meta_value",
                                   "ymc_order_post_type",
+                                  "ymc_post_status",
                                   "ymc_special_post_class",
                                   "ymc_filter_font",
                                   "ymc_post_font",

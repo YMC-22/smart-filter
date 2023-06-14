@@ -98,7 +98,7 @@ class Get_Posts {
 
 		$args = [
 			'post_type' => $post_type,
-			'post_status' => 'publish',
+			'post_status' => $ymc_post_status,
 			'posts_per_page' => $per_page,
 			'tax_query' => $tax_qry,
 			'paged' => $paged,

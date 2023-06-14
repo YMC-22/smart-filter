@@ -12,7 +12,7 @@ $ymc_order_post_type = $variable->get_order_post_type( $post->ID );
 $ymc_meta_key = $variable->get_ymc_meta_key( $post->ID );
 $ymc_meta_value = $variable->get_ymc_meta_value( $post->ID );
 $ymc_multiple_sort = $variable->get_ymc_multiple_sort( $post->ID );
-
+$ymc_post_status = $variable->get_ymc_post_status( $post->ID );
 
 ?>
 
@@ -268,6 +268,41 @@ $ymc_multiple_sort = $variable->get_ymc_multiple_sort( $post->ID );
                     <span class="ymc-btn__inner btnRemoveMultipleSort" title="Remove option">-</span>
                 </div>
 
+            </div>
+
+            <div class="from-element">
+                <label class="form-label">
+                    <?php echo esc_html__('Status Options', 'ymc-smart-filter'); ?>
+                    <span class="information">
+                    <?php echo esc_html__('Set posts with the specified status.', 'ymc-smart-filter');?>
+                </span>
+                </label>
+                <select class="form-select"  id="ymc-post-status" name="ymc-post-status">
+                    <option value="publish" <?php if ($ymc_post_status === 'publish') {echo "selected";} ?>>
+                        <?php echo esc_html__('publish', 'ymc-smart-filter'); ?>
+                    </option>
+                    <option value="pending" <?php if ($ymc_post_status === 'pending') {echo "selected";} ?>>
+                        <?php echo esc_html__('Pending', 'ymc-smart-filter'); ?>
+                    </option>
+                    <option value="draft" <?php if ($ymc_post_status === 'draft') {echo "selected";} ?>>
+                        <?php echo esc_html__('Draft', 'ymc-smart-filter'); ?>
+                    </option>
+                    <option value="future" <?php if ($ymc_post_status === 'future') {echo "selected";} ?>>
+                        <?php echo esc_html__('Future', 'ymc-smart-filter'); ?>
+                    </option>
+                    <option value="private" <?php if ($ymc_post_status === 'private') {echo "selected";} ?>>
+                        <?php echo esc_html__('Private', 'ymc-smart-filter'); ?>
+                    </option>
+                    <option value="inherit" <?php if ($ymc_post_status === 'inherit') {echo "selected";} ?>>
+                        <?php echo esc_html__('Inherit', 'ymc-smart-filter'); ?>
+                    </option>
+                    <option value="trash" <?php if ($ymc_post_status === 'trash') {echo "selected";} ?>>
+                        <?php echo esc_html__('Trash', 'ymc-smart-filter'); ?>
+                    </option>
+                    <option value="any" <?php if ($ymc_post_status === 'any') {echo "selected";} ?>>
+                        <?php echo esc_html__('Any', 'ymc-smart-filter'); ?>
+                    </option>
+                </select>
             </div>
 
             <div class="from-element">

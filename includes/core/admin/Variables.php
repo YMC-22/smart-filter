@@ -69,6 +69,8 @@ class Variables {
 
 	public $ymc_multiple_filter = 0;
 
+	public $ymc_post_status = 'publish';
+
 
 
 	/**
@@ -444,6 +446,15 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_multiple_sort', true );
 		}
 		return $this->ymc_multiple_sort;
+	}
+
+
+	public function get_ymc_post_status( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_post_status' ) ) {
+			return get_post_meta( $post_id, 'ymc_post_status', true );
+		}
+		return $this->ymc_post_status;
 	}
 
 

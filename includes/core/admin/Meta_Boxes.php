@@ -182,6 +182,13 @@ class Meta_Boxes {
 			update_post_meta($post_id, 'ymc_order_post_type', $ymc_order_post_type);
 		}
 
+
+		// Post Status
+		if (isset($_POST['ymc-post-status'])) {
+			$ymc_post_status = sanitize_text_field($_POST['ymc-post-status']);
+			update_post_meta($post_id, 'ymc_post_status', $ymc_post_status);
+		}
+
 		// Meta Key by sort
 		if (isset($_POST['ymc-meta-key'])) {
 			$ymc_meta_key = sanitize_text_field($_POST['ymc-meta-key']);
