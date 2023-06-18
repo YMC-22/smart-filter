@@ -458,7 +458,7 @@ YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiGetPosts();
 ```
 Usage example:
 
-First we change the request parameters, and then we send the data. You should pass the value false to the method parameters.
+First we change the request parameters, and then we send the data. You should pass the value false to the methods parameters.
 
 ```js
 
