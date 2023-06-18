@@ -269,7 +269,7 @@ In some cases, this object is used in handler function callbacks.
 **This method allows to get posts by ID terms of different taxonomies.**
 
 ```js
-YMCTools({target: ".data-target-ymcFilterID-LayoutID", terms: "termID"}).apiTermUpdate();
+YMCTools({target: ".data-target-ymcFilterID-LayoutID", terms: "termID"}).apiTermUpdate( option );
 ```
 **Required params:**
 - `.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.`
@@ -277,6 +277,7 @@ YMCTools({target: ".data-target-ymcFilterID-LayoutID", terms: "termID"}).apiTerm
 
 **Optional params:**
 - `taxRel - define the interaction between different taxonomies in the query. The default is "AND". If set "all" will match the relation "OR". Installed in the admin panel Filter -> Tab Ganeral -> Taxonomy Relation.`
+- `option - (bool) true / false - parameter allows to control sending of request. Default is true`
 
 ```js
 Usage example:
@@ -291,7 +292,7 @@ Usage example:
 **This method allows to get posts by meta fields.**
 
 ```js
-YMCTools({target: ".data-target-ymcFilterID-LayoutID", meta: [params]}).apiTermUpdate();
+YMCTools({target: ".data-target-ymcFilterID-LayoutID", meta: [params]}).apiTermUpdate( option );
 ```
 All parameters correspond to the parameters of the global WP_Query object. 
 To make a correct request, specify all the necessary parameters in JSON format. All parameters in double quotes.
@@ -302,6 +303,7 @@ To make a correct request, specify all the necessary parameters in JSON format. 
 
 **Optional params:**
 - `relation - defines a logical relationship between nested arrays. Default is "AND"`
+- `option - (bool) true / false - parameter allows to control sending of request. Default is true`
 
 ```js
 Usage example:
@@ -321,7 +323,7 @@ Usage example:
 **This method allows to get posts by date.**
 
 ```js
-YMCTools({target: ".data-target-ymcFilterID-LayoutID", date: [params]}).apiDateUpdate();
+YMCTools({target: ".data-target-ymcFilterID-LayoutID", date: [params]}).apiDateUpdate( option );
 ```
 All parameters correspond to the parameters of the global WP_Query object. 
 To make a correct request, specify all the necessary parameters in JSON format. All parameters in double quotes.
@@ -332,6 +334,7 @@ To make a correct request, specify all the necessary parameters in JSON format. 
 
 **Optional params:**
 - `relation - defines a logical relationship between nested arrays. Default is "AND"`
+- `option - (bool) true / false - parameter allows to control sending of request. Default is true` 
 
 ```js
 Usage example:
@@ -350,12 +353,14 @@ Usage example:
 **This method allows to search for posts by keyword.**
 
 ```js
-YMCTools({target: ".data-target-ymcFilterID-LayoutID", search: 'keyword'}).apiSearchPosts();
+YMCTools({target: ".data-target-ymcFilterID-LayoutID", search: 'keyword'}).apiSearchPosts( option );
 ```
 
 **Required params:**
 - `.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.`
 - `search - (String) Phrase for which posts are searched.`
+**Optional params:**
+- `option - (bool) true / false - parameter allows to control sending of request. Default is true`
 
 ```js
 Usage example:
@@ -370,13 +375,15 @@ Usage example:
 **This method allows Include / Exclude posts in the post grid.**
 
 ```js
-YMCTools({target: ".data-target-ymcFilterID-LayoutID", choicesPosts: '7,9,11', excludePosts: 'off'}).apiChoicesPosts();
+YMCTools({target: ".data-target-ymcFilterID-LayoutID", choicesPosts: '7,9,11', excludePosts: 'off'}).apiChoicesPosts( option );
 ```
 
 **Required params:**
 - `.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.`
 - `choicesPosts - (String) ID posts.`
 - `excludePosts - (String) on / off. By default excludePosts is "off"". (Optional)`
+**Optional params:**
+- `option - (bool) true / false - parameter allows to control sending of request. Default is true`
 
 ```js
 Usage example:
@@ -393,7 +400,7 @@ Usage example:
 **This method allows to sort posts by different criteria.**
 
 ```js
-YMCTools({target: ".data-target-ymcFilterID-LayoutID", sortOrder: 'asc', sortOrderBy: 'title'}).apiSortPosts();
+YMCTools({target: ".data-target-ymcFilterID-LayoutID", sortOrder: 'asc', sortOrderBy: 'title'}).apiSortPosts( option );
 ```
 
 **Required params:**
@@ -403,6 +410,7 @@ YMCTools({target: ".data-target-ymcFilterID-LayoutID", sortOrder: 'asc', sortOrd
   
 **Optional params:**
 - `metaKey - (String) Value of meta_key parameter (field data key).`
+- `option - (bool) true / false - parameter allows to control sending of request. Default is true`
 
 ```js
 Usage example:
@@ -442,6 +450,31 @@ YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiDateClear( option );
 YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiSortClear( option );
 ```
 - `option - (bool) true / false - parameter allows to control sending of request. Default is true`
+
+**This method allows you to make a request to receive posts by previously specified parameters.**
+
+```js
+YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiGetPosts();
+```
+Usage example:
+
+First we change the request parameters, and then we send the data. You should pass the value false to the method parameters.
+
+```js
+
+        YMCTools({
+          target: '.data-target-ymc545-1',
+          terms: '5,7,9'
+        }).apiTermUpdate(false);
+
+        YMCTools({
+          target: '.data-target-ymc545-1',
+          meta : [ { "key" : "amount", "value" : "100" } ]
+        }).apiMetaUpdate(false);        
+
+        YMCTools({target: '.data-target-ymc545-1'}).apiGetPosts();	 
+```
+
 
 
 ### Hooks JS.
