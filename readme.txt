@@ -143,7 +143,6 @@ Added ability multiple sort posts
 = 2.3.18 =
 Added ability choose post status
 = 2.3.19 =
-Added ability choose post status
 Added new API JS methods
 
 == Video ==
