@@ -65,8 +65,6 @@ Detailed information can be found on GitHub at this <a target="_blank" href="htt
 
 == Changelog ==
 
-= 1.1.1 =
-* Added ability to filter Products from WooCommerce plugin.
 = 1.2.0 =
 * Added sorting of posts on the frontend
 = 1.2.2 =
