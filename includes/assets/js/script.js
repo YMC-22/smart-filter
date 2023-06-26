@@ -679,7 +679,7 @@
         const _FN = (function () {
 
             const _info = {
-                version: '2.3.11',
+                version: '2.3.20',
                 author: 'YMC'
             }
 
@@ -969,6 +969,24 @@
                 if( option ) {
                     this.getFilterPosts();
                 }
+            }
+
+            YMCTools.prototype.apiPageUpdated = function ( page = 1 ) {
+
+                let container = document.querySelector(''+ this.target +'');
+                if( ! container )  throw new Error("apiPageUpdated: Filter not found");
+
+                let dataParams = JSON.parse(container.dataset.params);
+
+                let data_target = dataParams.data_target;
+                let type_pg     = dataParams.type_pg;
+
+                getFilterPosts({
+                    'paged'     : page,
+                    'toggle_pg' : 1,
+                    'target'    : data_target,
+                    'type_pg'   : type_pg
+                });
             }
 
             YMCTools.prototype.apiGetPosts = function () {

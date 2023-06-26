@@ -310,6 +310,7 @@ class Get_Posts {
 			'post_count' => $query->post_count,
 			'get_current_posts' => ($query->found_posts - $paged * $per_page),
 			'pagin' => !empty($pagin) ? $pagin : '',
+			'paged' => $paged,
 			'meta_query' => $meta_params,
 			'date_query' => $date_params
 		);
