@@ -475,12 +475,12 @@ First we change the request parameters, and then we send the data. You should pa
         YMCTools({target: '.data-target-ymc545-1'}).apiGetPosts();	 
 ```
 
+**This method allows you to move to a specific page of posts in grid.**
+
 ```js
 YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiPageUpdated( page );
 ```
 - `page - (Number) - page number in the grid Default is 1`
-
-**This method allows you to move to a specific page of posts in grid.**
 
 Usage example:
 
