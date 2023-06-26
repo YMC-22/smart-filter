@@ -188,6 +188,11 @@
 
         });
 
+       // Reload Taxonomy
+        $(document).on('click','.ymc__container-settings #general .tax-reload',function (e) {
+            $('.ymc__container-settings #general #ymc-cpt-select').trigger('change')
+        });
+
         // Drag & Drop Sort Taxonomy
         function sortTaxonomy() {
 

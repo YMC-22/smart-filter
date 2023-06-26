@@ -191,7 +191,8 @@ $font-size: 16;
 							.content {
 
 								.form-group {
-									margin-bottom: 25px;
+									margin-bottom: 20px;
+									position: relative;
 								}
 
 								.form-label {
@@ -226,8 +227,8 @@ $font-size: 16;
 									align-items: center;
 
 									.group-elements {
-										margin-right: 15px;
-										margin-bottom: 15px;
+										margin-right: 10px;
+										margin-bottom: 10px;
 										padding: 5px 10px;
 										border: 1px solid #ccc;
 										background: #f6f6f6;
@@ -399,7 +400,6 @@ $font-size: 16;
 									}
 								}
 
-
 								input[type="checkbox"] {
 									margin: 0 5px 0 0;
 									border-radius: 0;
@@ -541,6 +541,18 @@ $font-size: 16;
 							i {
 								transform: translate(0px, 2px);
 								font-size: 15px;
+							}
+						}
+						.ymc-btn-reload {
+							position: absolute;
+							right: 10px;
+							top: 5px;
+							display: inline-block;
+							width: 22px;
+							height: 22px;
+							cursor: pointer;
+							i {
+								font-size: 22px;
 							}
 						}
 					}

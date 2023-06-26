@@ -120,6 +120,8 @@ $ymc_terms_align   = $variable->get_terms_align( $post->ID );
 
     </div>
 
+	<span class="ymc-btn-reload tax-reload" title="Update taxonomy"><i class="fas fa-redo"></i></span>
+
 </div>
 
 <hr/>
