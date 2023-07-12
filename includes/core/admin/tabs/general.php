@@ -1,7 +1,7 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Set variables
-$cpost_types = $variable->display_cpt(['attachment', 'popup', 'product']);
+$cpost_types = $variable->display_cpt(['attachment', 'popup']);
 $output      = $variable->output;
 $cpt         = $variable->get_cpt( $post->ID );
 $tax         = $variable->tax;
