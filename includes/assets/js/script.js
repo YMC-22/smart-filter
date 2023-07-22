@@ -679,7 +679,7 @@
         const _FN = (function () {
 
             const _info = {
-                version: '2.3.20',
+                version: '2.3.22',
                 author: 'YMC'
             }
 
