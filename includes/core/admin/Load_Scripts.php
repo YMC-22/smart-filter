@@ -22,7 +22,6 @@ class Load_Scripts {
 		add_action( 'admin_enqueue_scripts', [ $this, 'backend_embed_scripts' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_embed_css' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_embed_scripts' ],999999 );
-
 	}
 
 	// Backend enqueue scripts & style.

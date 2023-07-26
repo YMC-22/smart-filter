@@ -307,6 +307,63 @@
             });
         }
 
+        // Drag & Drop selected posts
+        function sortSelectedPosts() {
+
+            let postListElement = document.querySelector('#selection-posts .include-posts');
+
+            if( postListElement ) {
+
+                let postElement = postListElement.querySelectorAll('li');
+
+                for (let post of postElement) {
+                    post.draggable = true;
+                }
+
+                postListElement.addEventListener('dragstart', (evt) => {
+                    evt.target.classList.add('selected');
+                });
+                postListElement.addEventListener('dragend', (evt) => {
+                    evt.target.classList.remove('selected');
+                });
+
+                let getNextElement = (cursorPosition, currentElement) => {
+                    let currentElementCoord = currentElement.getBoundingClientRect();
+                    let currentElementCenter = currentElementCoord.y + currentElementCoord.height / 2;
+                    return (cursorPosition < currentElementCenter) ?
+                        currentElement :
+                        currentElement.nextElementSibling;
+                };
+
+                postListElement.addEventListener('dragover', (evt) => {
+                    evt.preventDefault();
+
+                    const activeElement = postListElement.querySelector(`.selected`);
+
+                    const currentElement = evt.target.parentNode;
+
+                    const isMoveable = activeElement !== currentElement;
+
+                    if (!isMoveable) {
+                        return;
+                    }
+
+                    const nextElement = getNextElement(evt.clientY, currentElement);
+
+                    if (
+                        nextElement &&
+                        activeElement === nextElement.previousElementSibling ||
+                        activeElement === nextElement
+                    ) {
+                        return;
+                    }
+
+                    evt.target.parentNode.parentNode.insertBefore(activeElement, nextElement);
+                });
+            }
+        }
+        sortSelectedPosts();
+
 
         function sortTerms() {
 
@@ -399,6 +456,8 @@
 					<span  class="ymc-rel-item" data-id="${postID}">${titlePosts}
                     <a href="#" class="ymc-icon-minus remove_item"></a>
                     </span></li>`);
+
+            sortSelectedPosts();
         });
 
         $(document).on('click','#selection-posts .values-list .remove_item', function (e) {

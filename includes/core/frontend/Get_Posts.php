@@ -152,6 +152,7 @@ class Get_Posts {
 
 			if( $exclude_posts === 'off' ) {
 				$args['post__in'] = explode(',', $choices_posts);
+				$args['orderby'] = 'post__in';
 			}
 			else {
 				$args['post__not_in'] = explode(',', $choices_posts);

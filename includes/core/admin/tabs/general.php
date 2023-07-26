@@ -266,7 +266,7 @@ $ymc_terms_align   = $variable->get_terms_align( $post->ID );
 	<label class="form-label">
 		<?php echo esc_html__('Select Posts', 'ymc-smart-filter'); ?>
 		<span class="information">
-        <?php echo esc_html__('Include / Exclude posts in the post grid on the frontend. To exclude posts, check option "Exclude posts". By default, posts are included in the grid.', 'ymc-smart-filter');?>
+        <?php echo esc_html__('Include / Exclude posts in the post grid on the frontend. To exclude posts, check option "Exclude posts". By default, posts are included in the grid. Drag and Drop posts for custom sorting', 'ymc-smart-filter');?>
         </span>
 	</label>
 
@@ -317,8 +317,7 @@ $ymc_terms_align   = $variable->get_terms_align( $post->ID );
 
 					$query = new \WP_query([
 						'post_type' => $cpt,
-						'orderby' => 'title',
-						'order' => 'ASC',
+						'orderby' => 'post__in',
 						'post__in'  => $ymc_choices_posts,
 						'posts_per_page' => -1
 					]);

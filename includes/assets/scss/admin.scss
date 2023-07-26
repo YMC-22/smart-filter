@@ -462,7 +462,7 @@ $font-size: 16;
 								width: 50%;
 								margin: 0;
 								padding: 5px;
-								height: 180px;
+								height: 200px;
 								overflow: auto;
 								background: #f9f9f9;
 								border: 1px solid #ccc;
@@ -487,7 +487,7 @@ $font-size: 16;
 								background: #fff;
 								margin: 0;
 								padding: 5px;
-								height: 180px;
+								height: 200px;
 								overflow: auto;
 								border: 1px solid #cccccc;
 								.values-list {
@@ -495,6 +495,9 @@ $font-size: 16;
 										margin-bottom: 0;
 										.ymc-rel-item {
 											padding-right: 30px;
+											&:hover {
+												cursor: move;
+											}
 											.ymc-icon-minus {
 												position: absolute;
 												top: 50%;
