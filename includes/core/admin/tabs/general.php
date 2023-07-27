@@ -278,12 +278,53 @@ $ymc_terms_align   = $variable->get_terms_align( $post->ID );
 
 				$tmp_post = $post;
 
-				$query = new \WP_query([
+				$arg = [
 					'post_type' => $cpt,
 					'orderby' => 'title',
 					'order' => 'ASC',
 					'posts_per_page' => -1
-				]);
+				];
+
+				if( is_array($tax_sel) && count($tax_sel) > 0 ) {
+
+					$params_choices = [
+						'relation' => 'OR'
+					];
+
+					foreach ( $tax_sel as $tax ) :
+
+						$terms = get_terms([
+							'taxonomy' => $tax,
+							'hide_empty' => false
+						]);
+
+						if( $terms ) {
+
+							$arr_terms_ids = [];
+
+							foreach( $terms as $term ) :
+
+								if( in_array($term->term_id, $terms_sel) ) {
+									array_push($arr_terms_ids, $term->term_id);
+								}
+
+							endforeach;
+
+							$params_choices[] = [
+								'taxonomy' => $tax,
+								'field'    => 'id',
+								'terms'    => $arr_terms_ids
+							];
+
+							$arr_terms_ids = null;
+						}
+
+					endforeach;
+
+					$arg['tax_query'] = $params_choices;
+				}
+
+				$query = new \WP_query($arg);
 
 				if ( $query->have_posts() ) {
 
@@ -300,7 +341,7 @@ $ymc_terms_align   = $variable->get_terms_align( $post->ID );
 					wp_reset_postdata();
 				}
 				else {
-					echo '<li class="notice">No posts</li>';
+					echo '<li class="notice">'.esc_html__('No posts', 'ymc-smart-filter').'</li>';
 				}
 			?>
 			</ul>
