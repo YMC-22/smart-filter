@@ -246,11 +246,26 @@ $font-size: 16;
 								#ymc-terms {
 									display: grid;
 									grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
-									grid-gap: 20px;
+									grid-gap: 30px;
 									margin-top: 10px;
 									.group-term {
 										height: 300px;
 										overflow: auto;
+										border: 1px solid #dcdcdc;
+										padding: 10px;
+										&::-webkit-scrollbar {
+											width: 5px;
+											//background: none;
+										}
+										&::-webkit-scrollbar-thumb {
+											border-radius: 10px;
+											background: #8e8e8e;
+											//background: none;
+										}
+										&::-webkit-scrollbar-track {
+											border-radius: 5px;
+											//background: none;
+										}
 										.item-inner {
 											position: relative;
 											margin-bottom: 7px;
