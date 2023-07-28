@@ -270,6 +270,10 @@ $ymc_terms_align   = $variable->get_terms_align( $post->ID );
         </span>
 	</label>
 
+	<div class="search-posts">
+		<input class="input-field" type="search" placeholder="Search..." />
+	</div>
+
 	<div class="selection-posts" id="selection-posts">
 
 		<div class="choices">

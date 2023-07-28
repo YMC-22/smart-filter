@@ -558,6 +558,14 @@ $font-size: 16;
 								font-size: 22px;
 							}
 						}
+						.search-posts {
+							input[type="search"] {
+								border: 1px solid #e0e4e9;
+								height: 35px;
+								border-radius: 0;
+								width: 100%;
+							}
+						}
 					}
 
 					#layouts {

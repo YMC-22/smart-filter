@@ -1,12 +1,12 @@
 ===  Smart Filter ===
 Plugin Name: Smart Filter
 Contributors: YMC, Roman
-Version: 2.4.2
+Version: 2.4.3
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
 Tags: filters, posts, mind, ajax posts, category posts, taxonomy, custom taxonomy, woocommerce
 Requires at least: 4.8
 Tested up to: 6.2
-Stable tag: 2.4.2
+Stable tag: 2.4.3
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -146,6 +146,9 @@ Added new API JS methods
 Added new API JS methods & add button reload taxonomy
 = 2.4.1 =
 Added the ability to drag selected posts in the grid
+= 2.4.3 =
+Added the ability to search selected posts in admin panel
+
 
 == Video ==
 https://www.youtube.com/watch?v=FIBNE0Ix6Vg

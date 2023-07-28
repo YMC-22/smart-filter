@@ -502,6 +502,39 @@
 
         });
 
+        // Search Posts in Choices Box
+        $(document).on('input','#general .search-posts input[type="search"]', function (e) {
+
+            let keyword = e.target.value.toLowerCase();
+
+            let arrWords = [];
+
+            if( keyword.length >= 3 ) {
+
+                document.querySelectorAll('.selection-posts .choices-list li').forEach((el) => {
+
+                    let text = $(el).find('.ymc-rel-item').text().toLowerCase();
+
+                    if( text.includes(keyword) ) {
+                        arrWords.push(el);
+                    }
+
+                    if( arrWords.length > 0 ) {
+                        arrWords.forEach((elem) => {
+                            elem.classList.add('result');
+                        });
+                        $('.selection-posts .choices-list li:not(.result)').hide();
+                        $('.selection-posts .choices-list li.result').show();
+                    }
+                    else {
+                        $('.selection-posts .choices-list li').hide();
+                    }
+                });
+            }
+            else {
+                $('.selection-posts .choices-list li').removeClass('result').show();
+            }
+        });
 
         // Open Popup for choices icon
         $(document).on('click','#general #ymc-terms .entry-terms .choice-icon', function (e) {
