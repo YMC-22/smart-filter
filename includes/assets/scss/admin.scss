@@ -255,16 +255,13 @@ $font-size: 16;
 										padding: 10px;
 										&::-webkit-scrollbar {
 											width: 5px;
-											//background: none;
 										}
 										&::-webkit-scrollbar-thumb {
 											border-radius: 10px;
 											background: #8e8e8e;
-											//background: none;
 										}
 										&::-webkit-scrollbar-track {
 											border-radius: 5px;
-											//background: none;
 										}
 										.item-inner {
 											position: relative;
@@ -481,6 +478,16 @@ $font-size: 16;
 								overflow: auto;
 								background: #f9f9f9;
 								border: 1px solid #ccc;
+								&::-webkit-scrollbar {
+									width: 5px;
+								}
+								&::-webkit-scrollbar-thumb {
+									border-radius: 10px;
+									background: #8e8e8e;
+								}
+								&::-webkit-scrollbar-track {
+									border-radius: 5px;
+								}
 								.choices-list {
 									li {
 										margin-bottom: 0;
@@ -505,6 +512,16 @@ $font-size: 16;
 								height: 200px;
 								overflow: auto;
 								border: 1px solid #cccccc;
+								&::-webkit-scrollbar {
+									width: 5px;
+								}
+								&::-webkit-scrollbar-thumb {
+									border-radius: 10px;
+									background: #8e8e8e;
+								}
+								&::-webkit-scrollbar-track {
+									border-radius: 5px;
+								}
 								.values-list {
 									li {
 										margin-bottom: 0;
