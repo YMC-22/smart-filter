@@ -31,6 +31,9 @@ class Ajax {
 		add_action('wp_ajax_ymc_terms_align',array($this,'ymc_terms_align'));
 		add_action("wp_ajax_nopriv_ymc_terms_align", array($this,"ymc_terms_align"));
 
+		add_action('wp_ajax_ymc_updated_posts',array($this,'ymc_updated_posts'));
+		add_action("wp_ajax_nopriv_ymc_updated_posts", array($this,"ymc_updated_posts"));
+
 	}
 
 	public function ymc_get_taxonomy() {
@@ -208,6 +211,83 @@ class Ajax {
 		wp_send_json($data);
 	}
 
+	public function ymc_updated_posts() {
+
+		$cpt = $_POST['cpt'];
+		$tax = $_POST['tax'];
+		$terms = $_POST['terms'];
+		$output = '';
+
+		$taxData   = str_replace("\\", "",$tax);
+		$termsData   = str_replace("\\", "",$terms);
+
+		$taxChecked  = json_decode($taxData, true);
+		$termsChecked  = json_decode($termsData, true);
+
+		$arg = [
+			'post_type' => $cpt,
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1
+		];
+
+		if ( is_array($taxChecked) && is_array($termsChecked) && count($termsChecked) > 0 ) {
+
+			$params_choices = [
+				'relation' => 'OR'
+			];
+
+			foreach ( $taxChecked as $tax ) {
+
+				$terms = get_terms([
+					'taxonomy' => $tax,
+					'hide_empty' => false
+				]);
+
+				if( $terms ) {
+
+					$arr_terms_ids = [];
+
+					foreach( $terms as $term ) {
+
+						if( in_array($term->term_id, $termsChecked) ) {
+							array_push($arr_terms_ids, $term->term_id);
+						}
+					}
+
+					$params_choices[] = [
+						'taxonomy' => $tax,
+						'field'    => 'id',
+						'terms'    => $arr_terms_ids
+					];
+
+					$arr_terms_ids = null;
+				}
+			}
+
+			$arg['tax_query'] = $params_choices;
+		}
+
+		$query = new \WP_query($arg);
+
+		if ( $query->have_posts() ) {
+
+			while ($query->have_posts()) {
+
+				$query->the_post();
+
+				$output .= '<li><span class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">'.get_the_title(get_the_ID()).'</span></li>';
+			}
+		}
+
+		$data = array(
+			'output' => $output,
+			'found' => $query->found_posts
+		);
+
+		wp_send_json($data);
+
+	}
 
 
 }

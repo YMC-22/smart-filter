@@ -719,6 +719,64 @@
             }
         });
 
+        // Updated list posts in choices box
+        $(document).on('click','.ymc__container-settings #general #ymc-terms input[type="checkbox"]',function (e) {
+
+            let cpt = document.querySelector('#ymc-cpt-select').value;
+            let arrTax = [];
+            let arrTerms = [];
+            let choicesPosts = document.querySelector('#selection-posts .list');
+
+            // Terms
+            document.querySelectorAll('#ymc-terms .item-inner:not(.all-categories)').forEach((el) => {
+                let chbox = el.children[0];
+                if( chbox.checked ) {
+                    arrTerms.push(chbox.value);
+                }
+            });
+
+            // Tax
+            document.querySelectorAll('.wrapper-taxonomy .ymc-tax-checkboxes .group-elements').forEach((el) => {
+                let chbox = el.children[0];
+                if( chbox.checked ) {
+                    arrTax.push(chbox.value);
+                }
+            });
+
+            const data = {
+                'action': 'ymc_updated_posts',
+                'nonce_code' : _smart_filter_object.nonce,
+                'cpt' : cpt,
+                'tax' : JSON.stringify(arrTax),
+                'terms' : JSON.stringify(arrTerms),
+            };
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: _smart_filter_object.ajax_url,
+                data: data,
+                beforeSend: function () {
+                    container.addClass('loading').
+                    prepend(`<img class="preloader" src="${pathPreloader}">`);
+                },
+                success: function (res) {
+
+                    container.removeClass('loading').find('.preloader').remove();
+
+                    if( res.output ) {
+                        choicesPosts.innerHTML = res.output;
+                    }
+                    else {
+                        choicesPosts.innerHTML = '';
+                    }
+                },
+                error: function (obj, err) {
+                    console.log( obj, err );
+                }
+            });
+        });
+
         // Set checkbox All marked
         $('#general #ymc-terms .group-term').each(function () {
             let total = $(this).find('input[type="checkbox"]').length - 1;
