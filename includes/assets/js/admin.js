@@ -325,6 +325,11 @@
                 });
                 postListElement.addEventListener('dragend', (evt) => {
                     evt.target.classList.remove('selected');
+                    $('.include-posts li:not(.selected)').removeClass('over');
+                });
+
+                postListElement.addEventListener('drag', (evt) => {
+                    $('.include-posts li:not(.selected)').addClass('over');
                 });
 
                 let getNextElement = (cursorPosition, currentElement) => {
@@ -350,11 +355,8 @@
 
                     const nextElement = getNextElement(evt.clientY, currentElement);
 
-                    if (
-                        nextElement &&
-                        activeElement === nextElement.previousElementSibling ||
-                        activeElement === nextElement
-                    ) {
+                    if ( nextElement && activeElement === nextElement.previousElementSibling || activeElement === nextElement )
+                    {
                         return;
                     }
 

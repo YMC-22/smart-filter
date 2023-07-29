@@ -40,6 +40,9 @@ class Meta_Boxes {
 			$terms = sanitize_html_class( $_POST['ymc-terms'] );
 			update_post_meta( $post_id, 'ymc_terms', $terms );
 		}
+		else {
+			update_post_meta( $post_id, 'ymc_terms', '' );
+		}
 
 		// Terms Icons
 		if( isset($_POST['ymc-terms-icons']) ) {

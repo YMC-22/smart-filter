@@ -264,7 +264,7 @@ $ymc_terms_align   = $variable->get_terms_align( $post->ID );
 	<hr/>
 
 	<label class="form-label">
-		<?php echo esc_html__('Select Posts', 'ymc-smart-filter'); ?>
+		<?php echo esc_html__('Add posts', 'ymc-smart-filter'); ?>
 		<span class="information">
         <?php echo esc_html__('Include / Exclude posts in the post grid on the frontend. To exclude posts, check option "Exclude posts". By default, posts are included in the grid. Drag and Drop posts for custom sorting', 'ymc-smart-filter');?>
         </span>
@@ -289,7 +289,7 @@ $ymc_terms_align   = $variable->get_terms_align( $post->ID );
 					'posts_per_page' => -1
 				];
 
-				if( is_array($tax_sel) && count($tax_sel) > 0 ) {
+				if( is_array($tax_sel) && count($tax_sel) > 0 && !empty($terms_sel) ) {
 
 					$params_choices = [
 						'relation' => 'OR'

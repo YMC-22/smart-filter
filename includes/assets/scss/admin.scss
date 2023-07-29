@@ -463,11 +463,8 @@ $font-size: 16;
 								min-height: 18px;
 								cursor: pointer;
 								&:hover {
-									background: #3875d7;
+									background: #098ab8;
 									color: #fff;
-									.ymc-icon-minus {
-										display: inline-flex !important;
-									}
 								}
 							}
 							.choices {
@@ -527,9 +524,6 @@ $font-size: 16;
 										margin-bottom: 0;
 										.ymc-rel-item {
 											padding-right: 30px;
-											&:hover {
-												cursor: move;
-											}
 											.ymc-icon-minus {
 												position: absolute;
 												top: 50%;
@@ -550,6 +544,30 @@ $font-size: 16;
 													left: 50%;
 													top: 50%;
 													transform: translate(-50%, -50%);
+												}
+											}
+											&:hover {
+												cursor: move;
+												.ymc-icon-minus {
+													display: inline-flex;
+												}
+											}
+										}
+										&.selected {
+											background: #098ab8;
+											color: #fff;
+											.ymc-rel-item {
+												.ymc-icon-minus {
+													display: none;
+												}
+											}
+										}
+										&.over {
+											.ymc-rel-item {
+												background: none;
+												color: #28bc28;
+												.ymc-icon-minus {
+													display: none;
 												}
 											}
 										}
@@ -573,6 +591,9 @@ $font-size: 16;
 						}
 						.indicator-icon {
 							margin-left: 3px;
+							&:empty {
+								margin-left: 0;
+							}
 							i {
 								transform: translate(0px, 2px);
 								font-size: 15px;
