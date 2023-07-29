@@ -220,7 +220,7 @@ $ymc_terms_align   = $variable->get_terms_align( $post->ID );
 
 			            echo '<div class="item-inner" data-termid="'. $term->term_id .'" data-alignterm="'. $class_terms_align .'">
                               <input name="ymc-terms[]" class="category-list" id="category-id-'. esc_attr($term->term_id) .'" type="checkbox" value="'. esc_attr($term->term_id) .'" '. esc_attr($sl1) .'>';
-			            echo '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">' . esc_html($term->name) . '</label>						  						  
+			            echo '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">' . esc_html($term->name) . ' ('. esc_attr($term->count) .')</label>						  						  
 							  <i class="far fa-cog choice-icon" title="Setting term"></i><span class="indicator-icon">'. $terms_icons .'</span></div>';
 
 			            $terms_icons = '';

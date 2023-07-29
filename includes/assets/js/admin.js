@@ -156,7 +156,7 @@
                             res.data.terms.forEach((el) => {
                                 output += `<div class='item-inner' data-termid='${el.term_id}'>
                                 <input name="ymc-terms[]" class="category-list" id="category-id-${el.term_id}" type="checkbox" value="${el.term_id}">
-                                <label for='category-id-${el.term_id}' class='category-list-label'>${el.name}</label>
+                                <label for='category-id-${el.term_id}' class='category-list-label'>${el.name} (${el.count})</label>
                                 <i class="far fa-cog choice-icon" title="Setting term"></i>
                                 <span class="indicator-icon"></span>                                
                                 </div>`;
