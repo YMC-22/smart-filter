@@ -725,6 +725,7 @@
             let cpt = document.querySelector('#ymc-cpt-select').value;
             let arrTax = [];
             let arrTerms = [];
+            let numberPosts = document.querySelector('#selection-posts .number-posts');
             let choicesPosts = document.querySelector('#selection-posts .list');
 
             // Terms
@@ -766,6 +767,7 @@
 
                     if( res.output ) {
                         choicesPosts.innerHTML = res.output;
+                        numberPosts.innerHTML = res.found;
                     }
                     else {
                         choicesPosts.innerHTML = '';

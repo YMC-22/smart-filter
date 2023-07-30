@@ -342,13 +342,16 @@ $ymc_terms_align   = $variable->get_terms_align( $post->ID );
 						$class_disabled = null;
 					endwhile;
 
-					wp_reset_postdata();
 				}
 				else {
 					echo '<li class="notice">'.esc_html__('No posts', 'ymc-smart-filter').'</li>';
 				}
 			?>
 			</ul>
+			<?php
+				echo '<span class="number-posts">'. $query->found_posts .'</span>';
+				wp_reset_postdata();
+			?>
 		</div>
 
 		<div class="values">

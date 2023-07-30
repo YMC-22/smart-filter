@@ -479,23 +479,34 @@ $font-size: 16;
 								width: 50%;
 								margin: 0;
 								padding: 5px;
-								height: 200px;
-								overflow: auto;
 								background: #f9f9f9;
 								border: 1px solid #ccc;
-								&::-webkit-scrollbar {
-									width: 5px;
-								}
-								&::-webkit-scrollbar-thumb {
-									border-radius: 10px;
-									background: #8e8e8e;
-								}
-								&::-webkit-scrollbar-track {
-									border-radius: 5px;
+								position: relative;
+								.number-posts {
+									position: absolute;
+									right: 7px;
+									top: 2px;
+									font-size: 14px;
+									color: #999;
+									font-style: italic;
 								}
 								.choices-list {
+									&::-webkit-scrollbar {
+										width: 5px;
+									}
+									&::-webkit-scrollbar-thumb {
+										border-radius: 10px;
+										background: #8e8e8e;
+									}
+									&::-webkit-scrollbar-track {
+										border-radius: 5px;
+									}
+									overflow: auto;
+									height: 185px;
+									margin: 15px 0 0 0;
 									li {
 										margin-bottom: 0;
+										padding-right: 10px;
 										.ymc-rel-item-add {
 											&.disabled {
 												pointer-events: none;
@@ -517,6 +528,7 @@ $font-size: 16;
 								height: 200px;
 								overflow: auto;
 								border: 1px solid #cccccc;
+								position: relative;
 								&::-webkit-scrollbar {
 									width: 5px;
 								}
