@@ -233,12 +233,16 @@ $font-size: 16;
 										border: 1px solid #ccc;
 										background: #f6f6f6;
 										cursor: move;
+										transition: .3s;
 										label {
 											text-transform: capitalize;
 										}
 										&.selected {
 											background: #098ab8;
 											color: #fff;
+										}
+										&:hover {
+											background: #e1e1e1;
 										}
 									}
 								}
@@ -269,6 +273,7 @@ $font-size: 16;
 											border: 1px solid #dcdcde;
 											padding: 10px;
 											cursor: move;
+											transition: .3s;
 											&.all-categories {
 												display: flex;
 												align-items: center;
@@ -286,6 +291,9 @@ $font-size: 16;
 											&.selected {
 												background: #098ab8;
 												color: #fff;
+											}
+											&:hover {
+												background: #e1e1e1;
 											}
 										}
 									}
@@ -607,8 +615,19 @@ $font-size: 16;
 							width: 22px;
 							height: 22px;
 							cursor: pointer;
+							border: 1px solid #ccc;
+							padding: 7px;
+							background: #f6f6f6;
+							border-radius: 50%;
+							transition: .3s;
 							i {
 								font-size: 22px;
+							}
+							&:hover {
+								background: #e1e1e1;
+								i {
+									color: #000;
+								}
 							}
 						}
 						.search-posts {
