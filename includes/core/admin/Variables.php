@@ -109,6 +109,12 @@ class Variables {
 
 	public $ymc_preloader_icon = 'preloader';
 
+	public $ymc_preloader_filters = 'none';
+
+	public $ymc_preloader_filters_rate = '0.5';
+
+	public $ymc_preloader_filters_custom = '';
+
 
 	/**
 	 * Typography tab used default variables
@@ -476,6 +482,30 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_preloader_icon', true );
 		}
 		return $this->ymc_preloader_icon;
+	}
+
+	public function get_ymc_preloader_filters( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_preloader_filters' ) ) {
+			return get_post_meta( $post_id, 'ymc_preloader_filters', true );
+		}
+		return $this->ymc_preloader_filters;
+	}
+
+	public function get_ymc_preloader_filters_rate( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_preloader_filters_rate' ) ) {
+			return get_post_meta( $post_id, 'ymc_preloader_filters_rate', true );
+		}
+		return $this->ymc_preloader_filters_rate;
+	}
+
+	public function get_ymc_preloader_filters_custom( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_preloader_filters_custom' ) ) {
+			return get_post_meta( $post_id, 'ymc_preloader_filters_custom', true );
+		}
+		return $this->ymc_preloader_filters_custom;
 	}
 
 	public function get_ymc_scroll_page( $post_id ) {

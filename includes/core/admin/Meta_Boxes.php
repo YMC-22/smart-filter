@@ -265,6 +265,24 @@ class Meta_Boxes {
 			update_post_meta( $post_id, 'ymc_scroll_page', $ymc_scroll_page );
 		}
 
+		// Preloader Filters
+		if( isset($_POST['ymc-preloader-filters']) ) {
+			$ymc_preloader_filters = sanitize_text_field( $_POST['ymc-preloader-filters']);
+			update_post_meta( $post_id, 'ymc_preloader_filters', $ymc_preloader_filters );
+		}
+
+		// Preloader Filters Rate
+		if( isset($_POST['ymc-preloader-filters-rate']) ) {
+			$ymc_preloader_filters_rate = sanitize_text_field( $_POST['ymc-preloader-filters-rate']);
+			update_post_meta( $post_id, 'ymc_preloader_filters_rate', $ymc_preloader_filters_rate );
+		}
+
+		// Preloader Filters Custom
+		if( isset($_POST['ymc-preloader-filters-custom']) ) {
+			$ymc_preloader_filters_custom = sanitize_text_field( $_POST['ymc-preloader-filters-custom']);
+			update_post_meta( $post_id, 'ymc_preloader_filters_custom', $ymc_preloader_filters_custom );
+		}
+
 	}
 
 	public function add_post_metabox() {

@@ -49,5 +49,8 @@ $ymc_autocomplete_state = $variable->get_ymc_autocomplete_state( $id );
 $ymc_scroll_page = $variable->get_ymc_scroll_page( $id );
 $ymc_multiple_sort = $variable->get_ymc_multiple_sort( $id );
 $ymc_post_status = $variable->get_ymc_post_status( $id );
+$ymc_preloader_filters = $variable->get_ymc_preloader_filters( $id );
+$ymc_preloader_filters_rate = $variable->get_ymc_preloader_filters_rate( $id );
+$ymc_preloader_filters_custom = $variable->get_ymc_preloader_filters_custom( $id );
 
 

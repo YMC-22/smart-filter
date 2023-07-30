@@ -208,6 +208,9 @@ $font-size: 16;
 										font-weight: 400;
 										color: #999;
 									}
+									a {
+										color: #1fc4ff;
+									}
 								}
 
 								.form-select {
@@ -722,6 +725,12 @@ $font-size: 16;
 									height: 60px;
 									border: 1px solid #e0e4e9;
 									margin-top: 10px;
+									margin-bottom: 10px;
+								}
+								.range-wrapper {
+									input[type="range"] {
+										width: 30%;
+									}
 								}
 							}
 						}

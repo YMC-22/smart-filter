@@ -858,10 +858,50 @@
         }
 
         // Set Style Preloader
-        $(document).on('change', '#ymc-preloader-icon', function (e) {
+        $(document).on('change', '#advanced #ymc-preloader-icon', function (e) {
             let preloaderURL = _smart_filter_object.path + "/includes/assets/images/" + $(this).val() + '.svg';
             $(this).closest('#ymc-preloader-icon').next('.preview-preloader').find('img').attr('src', preloaderURL);
         });
+
+        // Apply Filters for Preloader Icon
+        $(document).on('change', '#advanced #ymc-filter-preloader', function (e) {
+
+            let filter = e.target.value;
+            let filterRate = document.querySelector('#advanced .filter-rate');
+            let filterCustom = document.querySelector('#advanced .filters-custom');
+            let preview = document.querySelector('#advanced .preview-preloader img');
+            let rate = document.querySelector('#advanced .range-wrapper input[type="range"]');
+
+            if( filter !== 'custom_filters' && filter !== 'none' ) {
+                preview.setAttribute('style', `filter: ${filter}(${rate.value})`);
+                filterRate.classList.remove('ymc_hidden');
+                filterCustom.classList.add('ymc_hidden');
+            }
+            else if( filter === 'none' ) {
+                filterRate.classList.add('ymc_hidden');
+                filterCustom.classList.add('ymc_hidden');
+            }
+            else {
+                filterRate.classList.add('ymc_hidden');
+                filterCustom.classList.remove('ymc_hidden');
+            }
+        });
+
+        // Change Coefficient for Preloader Icon
+        $(document).on('input', '#advanced #ymc-filter-rate', function (e) {
+            let rate = e.target.value;
+            let filter = document.querySelector('#advanced #ymc-filter-preloader');
+            let preview = document.querySelector('#advanced .preview-preloader img');
+            preview.setAttribute('style', `filter: ${filter.value}(${rate})`);
+        });
+
+        // Add custom filters for Preloader Icon
+        $(document).on('input', '#advanced #ymc-filters-custom', function (e) {
+            let filters = e.target.value;
+            let preview = document.querySelector('#advanced .preview-preloader img');
+            preview.setAttribute('style', filters);
+        });
+
 
         // Get Cookie
         function getCookie(cname) {

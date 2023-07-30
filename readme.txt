@@ -1,12 +1,12 @@
 ===  Smart Filter ===
 Plugin Name: Smart Filter
 Contributors: YMC, Roman
-Version: 2.4.8
+Version: 2.4.9
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
 Tags: filters, posts, mind, ajax posts, category posts, taxonomy, custom taxonomy, woocommerce
 Requires at least: 4.8
 Tested up to: 6.2
-Stable tag: 2.4.8
+Stable tag: 2.4.9
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -152,8 +152,8 @@ Added the ability to search selected posts in admin panel
 Fixed js & css
 = 2.4.6 =
 Update selected posts depending on the selected taxonomy terms in the admin panel
-
-
+= 2.4.9 =
+Added the ability to customize the preloader icon
 
 == Video ==
 https://www.youtube.com/watch?v=FIBNE0Ix6Vg

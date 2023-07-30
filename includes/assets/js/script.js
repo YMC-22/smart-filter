@@ -38,6 +38,25 @@
 
         }, optionsInfinityScroll);
 
+        function filterPreloader( params ) {
+
+            let filter = params.preloader_filters;
+            let rate   = params.preloader_filters_rate;
+            let filterCustom = params.preloader_filters_custom;
+            let output = '';
+
+            if( filter !== 'custom_filters' && filter !== 'none' ) {
+                output = `filter: ${filter}(${rate})`;
+            }
+            else if( filter === 'none' ) {
+                output = `filter: none`;
+            }
+            else {
+                output = `${filterCustom}`;
+            }
+
+            return output;
+        }
 
         // Main Request
         function getFilterPosts( options ) {
@@ -51,6 +70,7 @@
             let params = JSON.parse(document.querySelector('.'+target+'').dataset.params);
 
             let stylePreloader = _smart_filter_object.path+"/includes/assets/images/"+ params.preloader_icon +".svg";
+            let preloaderFilter = filterPreloader( params );
 
             let filterID = params.filter_id;
             let targetID = params.target_id;
@@ -60,7 +80,7 @@
                 'action'     : 'ymc_get_posts',
                 'nonce_code' : _smart_filter_object.nonce,
                 'params'     : JSON.stringify(params),
-                'paged'      : paged,
+                'paged'      : paged
             };
 
             $.ajax({
@@ -70,7 +90,7 @@
                 data: data,
                 beforeSend: function () {
                     container.find('.container-posts').addClass('loading').
-                    prepend(`<img class="preloader" src="${stylePreloader}">`);
+                    prepend(`<img class="preloader" src="${stylePreloader}" style="${preloaderFilter}">`);
 
                     // Add Hook: before loaded posts
                     wp.hooks.doAction('ymc_before_loaded_data_'+filterID+'_'+targetID, target);
