@@ -206,9 +206,18 @@ Use, for example, following WordPress functions to get the required data: get_ta
  * @param {array} taxonomy - list sorted slugs taxonomies
  * @param {int} multiple - multiple or single selection of posts (0/1)
  * @param {string} target - name class target element
+ * @param {array} options - array of objects of term settings:
+     - optionsTerms['termid'] - term ID
+     - optionsTerms['bg'] - background term. Hex Color Codes (ex: #dd3333)
+     - optionsTerms['color'] - color term. Hex Color Codes (ex: #dd3333)
+     - optionsTerms['class'] - custom name class of the term
+     - optionsTerms['alignterm'] - align icon in term (left, right)
+     - optionsTerms['coloricon'] - color icon
+     - optionsTerms['classicon'] - name class icon (Font Awesome Icons)
+     - optionsTerms['status'] - term status (selected or not)
  * @returns {string} HTML markup filter bar
  */
-function my_custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target ) { ?>
+function my_custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target, $options ) { ?>
 
 <script type="application/javascript">   
    window.addEventListener('DOMContentLoaded', () => {
@@ -228,30 +237,39 @@ function my_custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target
 </script>
    
 <?php
-  if( count($terms) > 0 ) {
-  $multiple = ( $multiple ) ? 'multiple' : '';
-  $terms_list = implode(",", $terms);
-  $layout = '<ul>';
-  $layout .= '<li><a class="all active" href="#" data-selected="all" data-termid="'. esc_attr($terms_list) .'">'.esc_html__('ALL','theme').'</a></li>';
-
-  foreach ($taxonomy as $tax) {
-    $layout .= '<li>';
-    $layout .= '<header>'.get_taxonomy( $tax )->label.'</header>';
-    $layout .= '<ul>';
-    foreach ( $terms as $term ) {
-	if( $tax === get_term( $term )->taxonomy ) {
-	   $layout .= '<li><a class="'. $multiple .'" href="#" data-selected="'. esc_attr(get_term($term)->slug).'" data-termid="'.esc_attr($term).'">'.esc_html(get_term($term)->name).'</a></li>';
-	}
+  if( count($terms) ) {
+  
+      $multiple = ( $multiple ) ? 'multiple' : '';
+      $terms_list = implode(",", $terms);
+      $layout = '<ul>';
+      $layout .= '<li><a class="all active" href="#" data-selected="all" data-termid="'. esc_attr($terms_list) .'">'.esc_html__('ALL','theme').'</a></li>';
+    
+    foreach ($taxonomy as $tax) {
+      $layout .= '<li>';
+      $layout .= '<header>'.get_taxonomy( $tax )->label.'</header>';
+      $layout .= '<ul>';
+      foreach ( $terms as $term ) {
+      if( $tax === get_term( $term )->taxonomy ) {      
+        $class_icon = '';
+        foreach ( $options as $obj ) {
+            if( (int) $obj->termid === (int) $term ) {
+                  $class_icon = $obj->classicon;
+                  break;
+                }
+             }     
+             $layout .= '<li><a class="'. $multiple .'" href="#" data-selected="'. esc_attr(get_term($term)->slug).'" data-termid="'. esc_attr($term) .'">'.
+             '<i class="'. $class_icon .'"></i>'. esc_html(get_term($term)->name) .'</a></li>';
+         }
+     }
+     $layout .= '</ul></li>';   
    }
-    $layout .= '</ul></li>';   
- }
     $layout .= '</ul>';
-	 $layout .= '<div class="posts-found"></div>';
+    $layout .= '<div class="posts-found"></div>';
  }
  return $layout;
 }
 
-add_filter('ymc_filter_custom_layout_545_1', 'my_custom_filter_layout', 10, 5);
+add_filter('ymc_filter_custom_layout_545_1', 'my_custom_filter_layout', 10, 6);
 ```
 
 
