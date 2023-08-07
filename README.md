@@ -206,7 +206,7 @@ Use, for example, following WordPress functions to get the required data: get_ta
  * @param {array} taxonomy - list sorted slugs taxonomies
  * @param {int} multiple - multiple or single selection of posts (0/1)
  * @param {string} target - name class target element
- * @param {array} options - array of objects of term settings:
+ * @param {array} options - array of objects of term settings. Default empty array.
      - optionsTerms['termid'] - term ID
      - optionsTerms['bg'] - background term. Hex Color Codes (ex: #dd3333)
      - optionsTerms['color'] - color term. Hex Color Codes (ex: #dd3333)
