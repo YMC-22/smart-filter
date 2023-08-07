@@ -5,8 +5,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Custom Post Layout
-$term_settings = arrayToObject( generalArrayMerging( $ymc_terms_options, $ymc_terms_align ) );
-
 
 $layouts = '';
 $arrOptions = [];
@@ -14,7 +12,7 @@ $increment_post = ( $paged === 1 ) ? 1 : ($per_page * ( $paged - 1)) + 1;
 $arrOptions['paged'] = $paged;
 $arrOptions['per_page'] = $per_page;
 $arrOptions['total'] = $query->found_posts;
-$arrOptions['terms_settings'] = $term_settings;
+$arrOptions['terms_settings'] = arrayToObject( generalArrayMerging( $ymc_terms_options, $ymc_terms_align ) );
 
 
 while ($query->have_posts()) : $query->the_post();
