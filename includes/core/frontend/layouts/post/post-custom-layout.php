@@ -41,6 +41,7 @@ while ($query->have_posts()) : $query->the_post();
 	- arrOptions['paged'] - page number
 	- arrOptions['per_page'] - number of posts per page
 	- arrOptions['total'] - number of all posts
+	- arrOptions['terms_settings'] - (array) array terms settings. Default empty array
 	 * @returns {string} HTML markup card post
 	 */
 
