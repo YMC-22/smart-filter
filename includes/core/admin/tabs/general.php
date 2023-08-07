@@ -15,6 +15,7 @@ $ymc_choices_posts  = $variable->get_choices_posts( $post->ID );
 $ymc_exclude_posts  = $variable->get_exclude_posts( $post->ID );
 $ymc_terms_icons  = $variable->get_terms_icons( $post->ID );
 $ymc_terms_align   = $variable->get_terms_align( $post->ID );
+$ymc_terms_options   = $variable->get_terms_options( $post->ID );
 
 ?>
 
@@ -149,6 +150,11 @@ $ymc_terms_align   = $variable->get_terms_align( $post->ID );
 	            if( $terms ) {
 
 					$terms_icons = '';
+		            $bg_term = '';
+		            $color_term = '';
+		            $class_term = '';
+		            $color_icon = '';
+		            $class_icon = '';
 
 		            if( !is_null($term_sort) && $ymc_sort_terms === 'manual' ) {
 			            $res_terms = [];
@@ -183,16 +189,6 @@ $ymc_terms_align   = $variable->get_terms_align( $post->ID );
                             else{ $sl1 = ''; }
 			            }
 
-			            // Choose icons
-						if( !empty($ymc_terms_icons) ) {
-							foreach ( $ymc_terms_icons as $key => $val ) {
-								if( $term->term_id === (int) $key ) {
-									$terms_icons = '<i class="'. $val .'"></i><input name="ymc-terms-icons['. $key .']" type="hidden" value="'. $val .'">';
-									break;
-								}
-							}
-						}
-
 			            // Set align icons
 			            if( !empty($ymc_terms_align) ) {
 
@@ -205,25 +201,82 @@ $ymc_terms_align   = $variable->get_terms_align( $post->ID );
 						            if ( $key === 'termid' && $term->term_id === (int) $val ) {
 							            $flag_terms_align = true;
 						            }
-						            if ( $key === 'alignterm' ) {
+						            if ( $key === 'alignterm' && $flag_terms_align ) {
 							            $class_terms_align = $val;
+						            }
+						            if ( $key === 'coloricon' && $flag_terms_align ) {
+							            $color_icon = $val;
+						            }
+						            if ( $key === 'classicon' && $flag_terms_align ) {
+							            $class_icon = $val;
 						            }
 					            }
 
-					            if( $flag_terms_align ) {
+					            if( $flag_terms_align ) break;
+				            }
+			            }
+
+			            // Set options term
+						if( !empty($ymc_terms_options) ) {
+
+							$flag_terms_option = false;
+
+							foreach ( $ymc_terms_options as $terms_opt ) {
+
+								foreach ( $terms_opt as $key => $val) {
+
+									if ( $key === 'termid' && $term->term_id === (int) $val ) {
+										$flag_terms_option = true;
+									}
+									if ( $key === 'bg' && $flag_terms_option ) {
+										$bg_term = $val;
+									}
+									if ( $key === 'color' && $flag_terms_option ) {
+										$color_term =  $val;
+									}
+									if ( $key === 'class' && $flag_terms_option ) {
+										$class_term = $val;
+									}
+								}
+
+								if( $flag_terms_option ) break;
+							}
+						}
+
+			            // Choose icons
+			            if( !empty($ymc_terms_icons) ) {
+				            foreach ( $ymc_terms_icons as $key => $val ) {
+					            if( $term->term_id === (int) $key ) {
+									$style_color_icon = ( !empty($color_icon) ) ? 'style="color: '.$color_icon.'"' : '';
+						            $terms_icons = '<i class="'. $val .'" '. $style_color_icon .'"></i><input name="ymc-terms-icons['. $key .']" type="hidden" value="'. $val .'">';
 						            break;
 					            }
 				            }
 			            }
 
-			            $class_terms_align = ( !empty($class_terms_align) ) ? $class_terms_align : 'left-icon';
+			            $class_terms_align = ( !empty($class_terms_align ) ) ? $class_terms_align : 'left-icon';
 
-			            echo '<div class="item-inner" data-termid="'. $term->term_id .'" data-alignterm="'. $class_terms_align .'">
+			            $style_bg_term = ( !empty($bg_term) ) ? 'background-color:'.$bg_term.';' : '';
+			            $style_color_term = ( !empty($color_term) ) ? 'color:'.$color_term.';' : '';
+
+			            echo '<div class="item-inner" style="'. esc_attr($style_bg_term) . esc_attr($style_color_term) .'" 
+			                  data-termid="'. esc_attr($term->term_id) .'" 
+			                  data-alignterm="'. esc_attr($class_terms_align) .'" 
+			                  data-bg-term="'. esc_attr($bg_term) .'" 
+			                  data-color-term="'. esc_attr($color_term) .'" 
+			                  data-custom-class="'. esc_attr($class_term) .'" 
+			                  data-color-icon="'. esc_attr($color_icon) .'"
+			                  data-class-icon="'. esc_attr($class_icon) .'"
+			                  data-status-term="'. esc_attr($sl1) .'">
                               <input name="ymc-terms[]" class="category-list" id="category-id-'. esc_attr($term->term_id) .'" type="checkbox" value="'. esc_attr($term->term_id) .'" '. esc_attr($sl1) .'>';
-			            echo '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">' . esc_html($term->name) . ' ('. esc_attr($term->count) .')</label>						  						  
+
+						echo '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">
+							  <span class="name-term">' . esc_html($term->name) .'</span>'. ' ('. esc_attr($term->count) .')</label>						  						  
 							  <i class="far fa-cog choice-icon" title="Setting term"></i><span class="indicator-icon">'. $terms_icons .'</span></div>';
 
+
 			            $terms_icons = '';
+			            $class_icon = '';
 
                     endforeach;
 
@@ -338,7 +391,7 @@ $ymc_terms_align   = $variable->get_terms_align( $post->ID );
 						if( is_array($ymc_choices_posts) &&  array_search(get_the_ID(), $ymc_choices_posts) !== false) {
 							$class_disabled = 'disabled';
 						}
-						echo '<li><span class="ymc-rel-item ymc-rel-item-add '.$class_disabled.'" data-id="'.get_the_ID().'">'.get_the_title(get_the_ID()).'</span></li>';
+						echo '<li><span class="ymc-rel-item ymc-rel-item-add '.$class_disabled.'" data-id="'.get_the_ID().'">ID: '.get_the_ID().'<br>'.get_the_title(get_the_ID()).'</span></li>';
 						$class_disabled = null;
 					endwhile;
 
@@ -373,7 +426,7 @@ $ymc_terms_align   = $variable->get_terms_align( $post->ID );
 					while ($query->have_posts()) : $query->the_post();
 
 						echo '<li><input type="hidden" name="ymc-choices-posts[]" value="'.get_the_ID().'">
-							  <span  class="ymc-rel-item" data-id="'.get_the_ID().'">'.get_the_title(get_the_ID()).'
+							  <span  class="ymc-rel-item" data-id="'.get_the_ID().'">ID: '.get_the_ID().'<br>'.get_the_title(get_the_ID()).'
 							  <a href="#" class="ymc-icon-minus remove_item"></a></span></li>';
 
 					endwhile;

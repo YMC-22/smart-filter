@@ -154,9 +154,17 @@
                                        <div class="entry-terms">`;
 
                             res.data.terms.forEach((el) => {
-                                output += `<div class='item-inner' data-termid='${el.term_id}'>
+                                output += `<div class='item-inner' 
+                                data-termid='${el.term_id}' 
+                                data-alignterm 
+                                data-bg-term 
+                                data-color-term 
+                                data-custom-class 
+                                data-color-icon 
+                                data-class-icon 
+                                data-status-term >
                                 <input name="ymc-terms[]" class="category-list" id="category-id-${el.term_id}" type="checkbox" value="${el.term_id}">
-                                <label for='category-id-${el.term_id}' class='category-list-label'>${el.name} (${el.count})</label>
+                                <label for='category-id-${el.term_id}' class='category-list-label'><span class="name-term">${el.name}</span> (${el.count})</label>
                                 <i class="far fa-cog choice-icon" title="Setting term"></i>
                                 <span class="indicator-icon"></span>                                
                                 </div>`;
@@ -192,6 +200,31 @@
         $(document).on('click','.ymc__container-settings #general .tax-reload',function (e) {
             $('.ymc__container-settings #general #ymc-cpt-select').trigger('change')
         });
+
+        // Set Cookie
+        function setCookie(cname, cvalue, exdays) {
+            let d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            let expires = "expires="+ d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        // Get Cookie
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) === 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
 
         // Drag & Drop Sort Taxonomy
         function sortTaxonomy() {
@@ -431,6 +464,125 @@
         }
         sortTerms();
 
+        // Updated settings Icons
+        function updatedOptionsIcons(e) {
+
+            let arrOptionsIcons = [];
+
+            // If click on button Align (popup)
+            if( e ) {
+                let termAlign = $(e.target).closest('.toggle-align-icon').data('align');
+                $(e.target).closest('.toggle-align-icon').addClass('selected').siblings().removeClass('selected');
+                document.querySelector('#ymc-terms .entry-terms .open-popup').dataset.alignterm = termAlign;
+            }
+
+            document.querySelectorAll('#ymc-terms .entry-terms .item-inner').forEach((el) => {
+                let termId = el.dataset.termid;
+                let termAlign = el.dataset.alignterm;
+                let colorIcon =  el.dataset.colorIcon;
+                let classIcon = el.dataset.classIcon;
+                arrOptionsIcons.push({
+                    "termid" : termId,
+                    "alignterm" : termAlign,
+                    "coloricon" : colorIcon,
+                    "classicon" : classIcon
+                });
+            });
+
+            const data = {
+                'action' : 'ymc_options_icons',
+                'nonce_code' : _smart_filter_object.nonce,
+                'post_id' : $('#ymc-cpt-select').data('postid'),
+                'params'  : JSON.stringify(arrOptionsIcons)
+            };
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: _smart_filter_object.ajax_url,
+                data: data,
+                beforeSend: function () {
+                    container.addClass('loading').
+                    prepend(`<img class="preloader" src="${pathPreloader}">`);
+                },
+                success: function (res) {
+
+                    container.removeClass('loading').find('.preloader').remove();
+
+                    // If click on button Align (popup)
+                    if( e ) {
+                        $(e.target).closest('.toggle-align-icon').find('.note').css({'opacity':'1'});
+                        setTimeout(() => {
+                            $(e.target).closest('.toggle-align-icon').find('.note').css({'opacity':'0'});
+                        },1000);
+                    }
+                },
+                error: function (obj, err) {
+                    console.log( obj, err );
+                }
+            });
+        }
+
+        // Updated settings Terms
+        function updatedOptionsTerms() {
+
+            let optionsTerms = [];
+
+            document.querySelectorAll('#ymc-terms .entry-terms .item-inner').forEach((el) => {
+                optionsTerms.push({
+                    "termid"  : el.dataset.termid,
+                    "bg"      : el.dataset.bgTerm,
+                    "color"   : el.dataset.colorTerm,
+                    "class"   : el.dataset.customClass,
+                    "status"  : el.dataset.statusTerm
+                });
+            });
+
+            const data = {
+                'action' : 'ymc_options_terms',
+                'nonce_code' : _smart_filter_object.nonce,
+                'post_id' : $('#ymc-cpt-select').data('postid'),
+                'params'  : JSON.stringify(optionsTerms)
+            };
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: _smart_filter_object.ajax_url,
+                data: data,
+                beforeSend: function () {
+                    container.addClass('loading').
+                    prepend(`<img class="preloader" src="${pathPreloader}">`);
+                },
+                success: function (res) {
+                    container.removeClass('loading').find('.preloader').remove();
+
+                    $('#ymc-terms .entry-terms .open-popup').removeClass('open-popup');
+
+                    tb_remove();
+                },
+                error: function (obj, err) {
+                    console.log( obj, err );
+                }
+            });
+
+        }
+        
+        // Checked Selected Term
+        function checkedSelectedTerm(e) {
+
+            let elem = $(e.target);
+
+            if( elem.is(':checked') ) {
+                elem.attr('checked','checked').closest('.item-inner').attr('data-status-term','checked');
+            }
+            else {
+                elem.removeAttr('checked').closest('.item-inner').attr('data-status-term','');
+            }
+
+            updatedOptionsTerms();
+        }
+
 
         // Choices Posts
         $('.wrapper-selection .ymc-exclude-posts').on('click', function (e) {
@@ -538,55 +690,96 @@
             }
         });
 
-        // Open Popup for choices icon
+        // Open Popup for Settings Term & Icons
         $(document).on('click','#general #ymc-terms .entry-terms .choice-icon', function (e) {
 
             $('#ymc-terms .entry-terms .item-inner').removeClass('open-popup');
 
             $(e.target).closest('.item-inner').addClass('open-popup');
 
+            let nameTerm = $(e.target).siblings('.category-list-label').find('.name-term').text();
             let alignterm = e.target.closest('.item-inner').dataset.alignterm;
+            let bgTerm = e.target.closest('.item-inner').dataset.bgTerm;
+            let colorTerm = e.target.closest('.item-inner').dataset.colorTerm;
+            let customClass = e.target.closest('.item-inner').dataset.customClass || '';
+            let colorIcon = e.target.closest('.item-inner').dataset.colorIcon || '#3c434a';
+            let newIcon = $(e.target).siblings('.indicator-icon').find('i').clone(true).css('color',colorIcon);
 
-            let newIcon = $(e.target).siblings('.indicator-icon').find('i').clone(true).css('color','red');
+            // Run popup
+            tb_show( '&#9998; &#91;'+nameTerm+'&#93;', '/?TB_inline&inlineId=ymc-icons-modal&width=740&height=768' );
 
-            tb_show( 'Choose Icon', '/?TB_inline&inlineId=ymc-icons-modal&width=740&height=768' );
+            // Get elements in popup
+            let iconCurrentColor = $('#TB_ajaxContent .ymc-icons-content .ymc-icon-color');
+            let iconCurrentClass = $('#TB_ajaxContent .ymc-terms-content .terms-entry .ymc-term-class');
+            let termCurrentBg = $('#TB_ajaxContent .ymc-terms-content .terms-entry .ymc-term-bg');
+            let termCurrentColor = $('#TB_ajaxContent .ymc-terms-content .terms-entry .ymc-term-color');
+
 
             if( newIcon.length > 0 ) {
-                $( '#TB_ajaxContent .ymc-icons-content .panel-setting .remove-link' ).show().find('i').remove();
-                newIcon.insertBefore( '#TB_ajaxContent .ymc-icons-content .panel-setting .remove-link .text' );
+                $( '#TB_ajaxContent .ymc-icons-content .panel-setting .remove-link' ).show();
+                $( '#TB_ajaxContent .ymc-icons-content .panel-setting .preview-icon' ).html(newIcon);
             }
             else {
                 $( '#TB_ajaxContent .ymc-icons-content .panel-setting .remove-link' ).hide();
+                $( '#TB_ajaxContent .ymc-icons-content .panel-setting .preview-icon' ).empty();
             }
 
             $('#TB_ajaxContent .ymc-icons-content .panel-setting .toggle-align-icon[data-align="'+alignterm+'"]').
                 addClass('selected').siblings().removeClass('selected');
+
+            // Set current settins
+            termCurrentBg.wpColorPicker('color', bgTerm);
+            termCurrentColor.wpColorPicker('color', colorTerm);
+            iconCurrentColor.wpColorPicker('color', colorIcon);
+            iconCurrentClass.val(customClass);
+
+            // Change color icon
+            let options = {
+                change: function(event, ui){
+                    // automattic.github.io/Iris
+                    let previewIcon = $('#TB_ajaxContent .ymc-icons-content .panel-setting .preview-icon i');
+                    previewIcon.css({'color':`${ui.color.toString()}`});
+                },
+            }
+            iconCurrentColor.wpColorPicker(options);
         });
 
         // Add Icon
         $(document).on('click','#TB_ajaxContent .ymc-icons-content .icons-entry i', function (e) {
 
+            let classIcon = $(e.target).attr('class');
+            let selectedTerm = $('#ymc-terms .entry-terms .open-popup');
+            let colorIcon = $('#TB_ajaxContent .ymc-icons-content .panel-setting .ymc-icon-color').val() || '#3c434a';
+            let previewIcon = $('#TB_ajaxContent .ymc-icons-content .panel-setting .preview-icon');
+            let removeBtn = $('#TB_ajaxContent .ymc-icons-content .panel-setting .remove-link');
+            let termId = selectedTerm.data('termid');
+            let iconHtml = `<i class="${classIcon}" style="color: ${colorIcon};"></i>
+                                  <input name="ymc-terms-icons[${termId}]" type="hidden" value="${classIcon}">`;
+
+
+            selectedTerm.attr('data-class-icon', classIcon)
+            selectedTerm.find('.indicator-icon').html(iconHtml);
+
+            previewIcon.html(`<i class="${classIcon}" style="color: ${colorIcon};"></i>`);
+
+            removeBtn.show();
+
             $('#TB_ajaxContent .ymc-icons-content .icons-entry i').removeClass('result').show();
             $('#TB_ajaxContent .ymc-icons-content .panel-setting input[type="search"]').val('');
 
-            let classIcon = $(e.target).attr('class');
-
-            let termId = $('#ymc-terms .entry-terms .open-popup').data('termid');
-
-            let iconHtml = `<i class="${classIcon}"></i><input name="ymc-terms-icons[${termId}]" type="hidden" value="${classIcon}">`;
-
-            $('#ymc-terms .entry-terms .open-popup .indicator-icon').html(iconHtml).closest('.item-inner').removeClass('open-popup');
-
-            tb_remove();
+            //tb_remove();
         });
 
         // Remove icon
         $(document).on('click','#TB_ajaxContent .ymc-icons-content .remove-link', function (e) {
 
-            $('#ymc-terms .entry-terms .open-popup .indicator-icon').empty().closest('.item-inner').removeClass('open-popup');
+            $('#ymc-terms .entry-terms .open-popup .indicator-icon').
+               empty().closest('.item-inner').attr('data-color-icon','').attr('data-class-icon','').removeClass('open-popup');
+
+            updatedOptionsIcons();
 
             // If no icons for terms
-            if ($('#ymc-terms .entry-terms .indicator-icon').find('input').length === 0) {
+            if ( $('#ymc-terms .entry-terms .indicator-icon').find('input').length === 0 ) {
 
                 const data = {
                     'action': 'ymc_delete_choices_icons',
@@ -652,53 +845,59 @@
         // Set align icon for Terms
         $(document).on('click','#TB_ajaxContent .ymc-icons-content .panel-setting .align-icon .toggle-align-icon', function (e) {
             e.preventDefault();
+            updatedOptionsIcons(e);
+        });
 
-            let termAlign = $(e.target).closest('.toggle-align-icon').data('align');
+        // Tabs popup settings Terms
+        $(document).on('click','#TB_ajaxContent .tabs .tab .tab-inner', function (e) {
 
-            let arrAlignTerms = [];
+            let _self = $(e.target);
+            let content = e.target.dataset.content;
+            let iconContent = $('#TB_ajaxContent .ymc-icons-content');
+            let termContent = $('#TB_ajaxContent .ymc-terms-content');
 
-            $(e.target).closest('.toggle-align-icon').addClass('selected').siblings().removeClass('selected');
+            _self.closest('.tab').addClass('active').siblings().removeClass('active');
 
-            document.querySelector('#ymc-terms .entry-terms .open-popup').dataset.alignterm = termAlign;
+            if( content === 'icon' ) {
+                iconContent.addClass('ymc-visible').removeClass('ymc-hidden');
+                termContent.addClass('ymc-hidden').removeClass('ymc-visible');
+            }
+            else {
+                iconContent.addClass('ymc-hidden').removeClass('ymc-visible');
+                termContent.addClass('ymc-visible').removeClass('ymc-hidden');
+            }
 
-            document.querySelectorAll('#ymc-terms .entry-terms .item-inner').forEach((el) => {
-                let termId = el.dataset.termid;
-                let termAlign = el.dataset.alignterm;
-                arrAlignTerms.push({ "termid" : termId, "alignterm" : termAlign });
-            });
+        });
 
-            const data = {
-                'action' : 'ymc_terms_align',
-                'nonce_code' : _smart_filter_object.nonce,
-                'post_id' : $('#ymc-cpt-select').data('postid'),
-                'params'  : JSON.stringify(arrAlignTerms)
-            };
+        // Save Settings Terms & Icons
+        $(document).on('click','#TB_ajaxContent .btn-apply', function (e) {
+            e.preventDefault();
 
-            $.ajax({
-                type: 'POST',
-                dataType: 'json',
-                url: _smart_filter_object.ajax_url,
-                data: data,
-                beforeSend: function () {
-                    container.addClass('loading').
-                    prepend(`<img class="preloader" src="${pathPreloader}">`);
-                },
-                success: function (res) {
 
-                    container.removeClass('loading').find('.preloader').remove();
 
-                    $(e.target).closest('.toggle-align-icon').find('.note').css({'opacity':'1'});
+            let postId = $('#ymc-cpt-select').data('postid');
+            let bgTerm = $('#TB_ajaxContent .ymc-terms-content .ymc-term-bg').val();
+            let colorTerm = $('#TB_ajaxContent .ymc-terms-content .ymc-term-color').val();
+            let customClass = $('#TB_ajaxContent .ymc-terms-content .ymc-term-class').val();
+            let colorIcon = $('#TB_ajaxContent .ymc-icons-content .panel-setting .ymc-icon-color').val();
+            let selectedTerm = document.querySelector('#ymc-terms .entry-terms .open-popup');
 
-                    setTimeout(() => {
-                        $(e.target).closest('.toggle-align-icon').find('.note').css({'opacity':'0'});
-                        //tb_remove();
-                    },1000);
+            selectedTerm.dataset.bgTerm = bgTerm;
+            selectedTerm.dataset.colorTerm = colorTerm;
+            selectedTerm.dataset.customClass = customClass;
+            selectedTerm.dataset.colorIcon = colorIcon;
 
-                },
-                error: function (obj, err) {
-                    console.log( obj, err );
-                }
-            });
+            ( bgTerm || colorTerm ) ?
+                selectedTerm.setAttribute('style',`background-color: ${bgTerm}; color: ${colorTerm}`) :
+                selectedTerm.removeAttribute('style');
+
+
+            document.querySelector('#ymc-terms .entry-terms .open-popup').dataset.colorIcon = colorIcon;
+            $(selectedTerm).find('.indicator-icon i').attr('style',`color: ${colorIcon}`);
+
+            updatedOptionsIcons();
+            updatedOptionsTerms();
+
         });
 
         // Selected All Terms
@@ -721,6 +920,9 @@
 
         // Updated list posts in choices box
         $(document).on('click','.ymc__container-settings #general #ymc-terms input[type="checkbox"]',function (e) {
+
+            // Run updated terms options
+            checkedSelectedTerm(e);
 
             let cpt = document.querySelector('#ymc-cpt-select').value;
             let arrTax = [];
@@ -848,15 +1050,6 @@
             }
         });
 
-
-        // Set Cookie
-        function setCookie(cname, cvalue, exdays) {
-            let d = new Date();
-            d.setTime(d.getTime() + (exdays*24*60*60*1000));
-            let expires = "expires="+ d.toUTCString();
-            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-        }
-
         // Set Style Preloader
         $(document).on('change', '#advanced #ymc-preloader-icon', function (e) {
             let preloaderURL = _smart_filter_object.path + "/includes/assets/images/" + $(this).val() + '.svg';
@@ -901,24 +1094,6 @@
             let preview = document.querySelector('#advanced .preview-preloader img');
             preview.setAttribute('style', filters);
         });
-
-
-        // Get Cookie
-        function getCookie(cname) {
-            let name = cname + "=";
-            let decodedCookie = decodeURIComponent(document.cookie);
-            let ca = decodedCookie.split(';');
-            for(let i = 0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) === ' ') {
-                    c = c.substring(1);
-                }
-                if (c.indexOf(name) === 0) {
-                    return c.substring(name.length, c.length);
-                }
-            }
-            return "";
-        }
 
         // Set Cookie for Tab
         $(".ymc__container-settings #ymcTab a").click(function(e) {

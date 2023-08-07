@@ -490,8 +490,7 @@ $font-size: 16;
 									right: 7px;
 									top: 2px;
 									font-size: 14px;
-									color: #999;
-									font-style: italic;
+									color: #f90000;
 								}
 								.choices-list {
 									&::-webkit-scrollbar {
@@ -751,9 +750,11 @@ $font-size: 16;
 #TB_title {
 	height: 70px !important;
 	#TB_ajaxWindowTitle {
-		font-size: 30px !important;
-		padding-top: 20px !important;
-		padding-bottom: 20px !important;
+		font-size: 28px;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		padding-left: 20px;
+		width: calc( 100% - 50px );
 	}
 	#TB_closeWindowButton {
 		.tb-close-icon {
@@ -768,21 +769,96 @@ $font-size: 16;
 
 #TB_ajaxContent {
 
+	.ymc-hidden {
+		display: none;
+	}
+
+	.ymc-visible {
+		display: block;
+	}
+
+	.form-label {
+		display: block;
+		font-weight: 600;
+		margin: 2px 0 5px;
+		color: #000;
+		font-size: 14px;
+		.information {
+			display: block;
+			font-size: 12px;
+			font-style: italic;
+			font-weight: 400;
+			color: #999;
+		}
+		a {
+			color: #1fc4ff;
+		}
+	}
+
+	.info {
+		margin-bottom: 20px;
+		margin-top: 15px;
+		display: block;
+		font-size: 16px;
+	}
+
+	.tabs {
+		display: flex;
+		margin-top: 10px;
+		.tab {
+			display: inline-block;
+			padding: 10px 15px;
+			border: 1px solid #dcdcde;
+			background: #f6f6f6;
+			color: #3c434a;
+			margin-right: 10px;
+			transition: .3s;
+			.tab-inner {
+				font-size: 18px;
+				color: currentColor;
+				cursor: pointer;
+			}
+		}
+		.active {
+			background: #098ab8;
+			color: #fff;
+			border: 1px solid #098ab8;
+			&:hover {
+				background: #046c91;
+			}
+		}
+	}
+
+	.btn-setting-wrp {
+		position: absolute;
+		top: 82px;
+		right: 20px;
+		.btn-apply {
+			display: inline-block;
+			font-size: 16px;
+			padding: 13px 25px;
+			background: #098ab8;
+			color: #fff;
+			line-height: 1;
+			text-decoration: none;
+			transition: .3s;
+			&:hover {
+				background: #046c91;
+			}
+		}
+	}
+
 	.ymc-icons-content {
 		font-size: 25px;
 		padding-top: 20px;
-		overflow-y: auto;
-		height: 95%;
-
 		.panel-setting {
 			display: flex;
-			justify-content: space-between;
+			justify-content: flex-start;
 			align-items: center;
 			margin-bottom: 20px;
 			position: sticky;
 			top: -20px;
-			background: #ffffff;
-			padding-top: 40px;
+			background: #fff;
 			padding-bottom: 20px;
 			border-bottom: 1px solid #ccc;
 			.search-icon {
@@ -795,6 +871,7 @@ $font-size: 16;
 			.align-icon {
 				width: 30%;
 				text-align: center;
+				transform: translate(-50px, 0px);
 				.toggle-align-icon {
 					position: relative;
 					border: 1px solid #8c8f94;
@@ -808,15 +885,15 @@ $font-size: 16;
 						box-shadow: none;
 					}
 					&:hover {
-						background: #0aa018;
-						border: 1px solid #0aa018;
+						background: #098ab8;
+						border: 1px solid #098ab8;
 						i {
 							color: #fff;
 						}
 					}
 					&.selected {
-						background: #0aa018;
-						border: 1px solid #0aa018;
+						background: #098ab8;
+						border: 1px solid #098ab8;
 						i {
 							color: #fff;
 						}
@@ -859,6 +936,23 @@ $font-size: 16;
 					}
 				}
 			}
+			.preview-icon {
+				width: 40px;
+				height: 36px;
+				text-align: center;
+				transform: translate(70px, 2px);
+				display: flex;
+				align-items: center;
+				i {
+					margin: 0;
+					padding: 0;
+					font-size: 28px;
+					cursor: default;
+					width: inherit;
+					display: inline-block;
+					border: 1px solid #ccc;
+				}
+			}
 			.remove-link {
 				width: 17%;
 				text-align: right;
@@ -867,6 +961,10 @@ $font-size: 16;
 				color: red;
 				text-decoration: none;
 				margin-right: 20px;
+				transition: .3s;
+				&:hover {
+					color: #8f0404;
+				}
 				.icon-trash {
 					border: none;
 					margin: 0;
@@ -879,6 +977,31 @@ $font-size: 16;
 					font-size: 24px;
 				}
 			}
+			.color-icon {
+				position: absolute;
+				right: 120px;
+				top: -7px;
+				z-index: 10;
+				background: #fff;
+				padding: 15px;
+				.wp-picker-container {
+					.button {}
+				}
+			}
+		}
+		.icons-entry {
+			overflow-y: auto;
+			height: 500px;
+			&::-webkit-scrollbar {
+				width: 5px;
+			}
+			&::-webkit-scrollbar-thumb {
+				border-radius: 10px;
+				background: #8e8e8e;
+			}
+			&::-webkit-scrollbar-track {
+				border-radius: 5px;
+			}
 		}
 		.far, .fas {
 			display: inline-block;
@@ -888,6 +1011,31 @@ $font-size: 16;
 			padding: 5px;
 			cursor: pointer;
 			font-size: 18px;
+		}
+	}
+
+	.ymc-terms-content {
+		font-size: 16px;
+		padding-top: 20px;
+		.terms-entry {
+			border: 1px solid #ccc;
+			padding: 15px;
+			display: flex;
+			margin-bottom: 20px;
+			.form-element {
+				width: 23%;
+				margin-right: 20px;
+				flex-grow: 1;
+				&:last-of-type {
+					margin-right: 0;
+				}
+				input {
+					border: 1px solid #e0e4e9;
+					height: 35px;
+					border-radius: 0;
+					width: 100%;
+				}
+			}
 		}
 	}
 }

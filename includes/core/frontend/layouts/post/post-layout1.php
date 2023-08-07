@@ -54,5 +54,3 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     endwhile;
 
-?>
-

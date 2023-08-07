@@ -59,6 +59,3 @@ if ( ! defined( 'ABSPATH' ) ) {
         echo '</article>';
 
     endwhile;
-
-?>
-

@@ -28,11 +28,14 @@ class Ajax {
 		add_action('wp_ajax_ymc_delete_choices_icons',array($this,'ymc_delete_choices_icons'));
 		add_action("wp_ajax_nopriv_ymc_delete_choices_icons", array($this,"ymc_delete_choices_icons"));
 
-		add_action('wp_ajax_ymc_terms_align',array($this,'ymc_terms_align'));
-		add_action("wp_ajax_nopriv_ymc_terms_align", array($this,"ymc_terms_align"));
+		add_action('wp_ajax_ymc_options_icons',array($this,'ymc_options_icons'));
+		add_action("wp_ajax_nopriv_ymc_options_icons", array($this,"ymc_options_icons"));
 
 		add_action('wp_ajax_ymc_updated_posts',array($this,'ymc_updated_posts'));
 		add_action("wp_ajax_nopriv_ymc_updated_posts", array($this,"ymc_updated_posts"));
+
+		add_action('wp_ajax_ymc_options_terms',array($this,'ymc_options_terms'));
+		add_action("wp_ajax_nopriv_ymc_options_terms", array($this,"ymc_options_terms"));
 
 	}
 
@@ -64,6 +67,9 @@ class Ajax {
 		update_post_meta( (int) $_POST["post_id"], 'ymc_tax_sort', $data_slugs );
 		delete_post_meta( (int) $_POST["post_id"], 'ymc_term_sort' );
 		delete_post_meta( (int) $_POST["post_id"], 'ymc_choices_posts' );
+		delete_post_meta( (int) $_POST["post_id"], 'ymc_terms_options' );
+		delete_post_meta( (int) $_POST["post_id"], 'ymc_terms_icons' );
+		delete_post_meta( (int) $_POST["post_id"], 'ymc_terms_align' );
 
 		// Get posts
 		$query = new \WP_query([
@@ -79,7 +85,7 @@ class Ajax {
 
 			while ($query->have_posts()) {
 				$query->the_post();
-				$arr_posts[] = '<li><span class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">'.get_the_title(get_the_ID()).'</span></li>';
+				$arr_posts[] = '<li><span class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">ID: '.get_the_ID().'<br>'. get_the_title(get_the_ID()).'</span></li>';
 			}
 			wp_reset_query();
 		}
@@ -180,7 +186,7 @@ class Ajax {
 
 		if(isset($_POST["post_id"])) {
 			$idIcons = delete_post_meta( (int) $_POST["post_id"], 'ymc_terms_icons' );
-			$idAlign = delete_post_meta( (int) $_POST["post_id"], 'ymc_terms_align' );
+			//$idAlign = delete_post_meta( (int) $_POST["post_id"], 'ymc_terms_align' );
 		}
 
 		$data = array(
@@ -192,7 +198,7 @@ class Ajax {
 
 	}
 
-	public function ymc_terms_align() {
+	public function ymc_options_icons() {
 
 		if (!wp_verify_nonce($_POST['nonce_code'], 'custom_ajax_nonce')) exit;
 
@@ -276,13 +282,33 @@ class Ajax {
 
 				$query->the_post();
 
-				$output .= '<li><span class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">'.get_the_title(get_the_ID()).'</span></li>';
+				$output .= '<li><span class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">ID: '.get_the_ID().'<br>'.get_the_title(get_the_ID()).'</span></li>';
 			}
 		}
 
 		$data = array(
 			'output' => $output,
 			'found' => $query->found_posts
+		);
+
+		wp_send_json($data);
+
+	}
+
+	public function ymc_options_terms() {
+
+		if (!wp_verify_nonce($_POST['nonce_code'], 'custom_ajax_nonce')) exit;
+
+		$postedData = $_POST['params'];
+		$tempData   = str_replace("\\", "",$postedData);
+		$cleanData  = json_decode($tempData, true);
+
+		if(isset($_POST["post_id"])) {
+			$id = update_post_meta( (int) $_POST["post_id"], 'ymc_terms_options', $cleanData);
+		}
+
+		$data = array(
+			'update' => $id
 		);
 
 		wp_send_json($data);

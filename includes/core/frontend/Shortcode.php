@@ -52,11 +52,11 @@ class Shortcode {
 				$ymc_tax = implode(",", $tax_selected);
 			}
 
-			if(is_array($terms_selected)) {
+			if (is_array($terms_selected)) {
 				$ymc_terms = implode(',', $terms_selected);
 			}
 
-			if(is_array($ymc_choices_posts)) {
+			if (is_array($ymc_choices_posts)) {
 				$ymc_choices_posts = implode(',', $ymc_choices_posts);
 			}
 

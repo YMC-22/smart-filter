@@ -22,10 +22,10 @@ class Filters {
 	public function ymc_filter_layouts($layout) {
 
 		$layout = [
-			"filter-layout1" => 'Simple Posts Filter (merged taxonomies)',
-			"filter-layout2" => 'Grouped Taxonomies Filter',
-			"filter-layout3" => 'Dropdown Filter',
-			"filter-custom-layout" => 'Custom Filter Layout',
+			"filter-layout1" => __('Default Filter','ymc-smart-filter'),
+			"filter-layout2" => __('Grouped Filter','ymc-smart-filter'),
+			"filter-layout3" => __('Dropdown Filter','ymc-smart-filter'),
+			"filter-custom-layout" => __('Custom Filter Layout','ymc-smart-filter')
 		];
 
 		return $layout;
@@ -34,9 +34,10 @@ class Filters {
 	public function ymc_post_layouts($layout) {
 
 		$layout = [
-			"post-layout1" => 'Style Layout 1',
-			"post-layout2" => 'Style Layout 2',
-			"post-layout3" => 'Style Layout 3',
+			"post-layout1" => __('Simple Layout','ymc-smart-filter'),
+			"post-layout2" => __('Simple Layout 2','ymc-smart-filter'),
+			//"post-layout4" => __('Masonry Layout (Dev)','ymc-smart-filter'), // Dev now ===>
+			"post-layout3" => __('Simple Full Width','ymc-smart-filter'),
 			"post-custom-layout"  => 'Custom Post Layout'
 		];
 

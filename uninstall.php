@@ -55,7 +55,9 @@ $wpdb->get_results('DELETE FROM wp_postmeta WHERE meta_key IN (
                                   "ymc_scroll_page",
                                   "ymc_preloader_filters",
                                   "ymc_preloader_filters_rate",
-                                  "ymc_preloader_filters_custom" 
+                                  "ymc_preloader_filters_custom",
+                                  "ymc_terms_options",
+                                  "ymc_terms_icons"
                                 )');
 
 

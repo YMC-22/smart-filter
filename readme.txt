@@ -1,12 +1,12 @@
 ===  Smart Filter ===
 Plugin Name: Smart Filter
 Contributors: YMC, Roman
-Version: 2.4.9
+Version: 2.5.1
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
 Tags: filters, posts, mind, ajax posts, category posts, taxonomy, custom taxonomy, woocommerce
 Requires at least: 4.8
-Tested up to: 6.2
-Stable tag: 2.4.9
+Tested up to: 6.3
+Stable tag: 2.5.1
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -27,16 +27,18 @@ The plugin provides the following functionality:
 - Choice of different templates for filters and post cards.
 - Sorting posts on the frontend
 - Manual sorting of terms
+- Fine tuning of each term (background, color, icons, etc.)
 - Adding featured posts to the post grid
-- Editing terms: adding icons
+- Editing terms: adding icons and customizing them
 - Choose icon for preloader
 - Customization of the color palette.
 - Adding a post search bar.
 - Typography customization.
-- Ability to independently develop templates for filters and post cards and add them to the filter (requires basic knowledge of WordPress, HTML JavaScript, CSS and PHP).
+- Ability to develop and customize filter and post templates..
 - Flexible filter management via Javascript API
 - JS hooks. Ability to manage asynchronous filter operations.
 - Support Masonry Layout
+- Convenient API for interacting and managing post filtering
 
 == Installation ==
 
@@ -154,6 +156,8 @@ Fixed js & css
 Update selected posts depending on the selected taxonomy terms in the admin panel
 = 2.4.9 =
 Added the ability to customize the preloader icon
+= 2.5.1 =
+Added the ability to more accurately manage terms
 
 == Video ==
 https://www.youtube.com/watch?v=FIBNE0Ix6Vg

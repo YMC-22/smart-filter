@@ -24,7 +24,7 @@ class Variables {
 
 	public $tax = 'category';
 
-	public $tax_sel = array('category');
+	public $tax_sel = array();
 
 	public $terms_sel = array();
 
@@ -41,6 +41,8 @@ class Variables {
 	public $ymc_terms_icons = null;
 
 	public $ymc_terms_align = null;
+
+	public $ymc_terms_options = null;
 
 
 	/**
@@ -248,6 +250,15 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_terms_align', true );
 		}
 		return $this->ymc_terms_align;
+	}
+
+
+	public function get_terms_options( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_terms_options' ) ) {
+			return get_post_meta( $post_id, 'ymc_terms_options', true );
+		}
+		return $this->ymc_terms_options;
 	}
 
 
