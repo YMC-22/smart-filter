@@ -51,8 +51,9 @@ class Get_Posts {
 		$paged = (int) $_POST['paged'];
 		$id = (int) $filter_id;
 
-		// Set variables
+		// Set variables & helpers
 		require YMC_SMART_FILTER_DIR . '/includes/core/util/variables.php';
+		require YMC_SMART_FILTER_DIR . '/includes/core/util/helper.php';
 
 
 		// Convert Taxonomy & Terms to Array

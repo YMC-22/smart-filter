@@ -134,6 +134,7 @@ Important! Keep HTML structure with all attributes as in the example below.
      - arrOptions['paged'] - page number
      - arrOptions['per_page'] - number of posts per page
      - arrOptions['total'] - number of all posts
+     - arrOptions['terms_settings'] - (array) array terms settings. Default empty array
  * @returns {string} HTML markup card post
  */
 function my_custom_post_layout($layout, $post_id, $filter_id, $increment_post, $arrOptions) {  

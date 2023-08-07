@@ -5,6 +5,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Custom Post Layout
+$term_settings = arrayToObject( generalArrayMerging( $ymc_terms_options, $ymc_terms_align ) );
+
 
 $layouts = '';
 $arrOptions = [];
@@ -12,6 +14,7 @@ $increment_post = ( $paged === 1 ) ? 1 : ($per_page * ( $paged - 1)) + 1;
 $arrOptions['paged'] = $paged;
 $arrOptions['per_page'] = $per_page;
 $arrOptions['total'] = $query->found_posts;
+$arrOptions['terms_settings'] = $term_settings;
 
 
 while ($query->have_posts()) : $query->the_post();
@@ -29,7 +32,27 @@ while ($query->have_posts()) : $query->the_post();
                  </div>';
 
 
-	echo apply_filters('ymc_post_custom_layout_'.$filter_id.'_'.$target_id, $layouts, get_the_ID(), $filter_id, $increment_post, $arrOptions );
+
+	/**
+	 * Creating a custom post template
+	 * @param {string} layout - HTML markup
+	 * @param {int} post_id - Post ID
+	 * @param {int} filter_id - Filter ID
+	 * @param {int} increment_post - post counter
+	 * @param {array} arrOptions - array of additional post parameters. It includes:
+	- arrOptions['paged'] - page number
+	- arrOptions['per_page'] - number of posts per page
+	- arrOptions['total'] - number of all posts
+	 * @returns {string} HTML markup card post
+	 */
+
+	echo apply_filters('ymc_post_custom_layout_'.$filter_id.'_'.$target_id,
+			$layouts,
+			get_the_ID(),
+			$filter_id,
+			$increment_post,
+			$arrOptions
+		 );
 
 	$layouts = null;
 
