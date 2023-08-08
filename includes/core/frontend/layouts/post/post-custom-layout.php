@@ -41,7 +41,16 @@ while ($query->have_posts()) : $query->the_post();
 	- arrOptions['paged'] - page number
 	- arrOptions['per_page'] - number of posts per page
 	- arrOptions['total'] - number of all posts
-	- arrOptions['terms_settings'] - (array) array terms settings. Default empty array
+	- arrOptions['terms_settings'] - (array) array terms settings. Default empty array. List of object properties:
+		- termid - ID term
+		- bg - background term. Hex Color Codes (ex: #dd3333)
+		- color - color term. Hex Color Codes (ex: #dd3333)
+		- class - custom name class of the term
+		- status - checked term
+		- alignterm - align icon in term
+		- coloricon - color icon
+		- classicon - name class icon (Font Awesome Icons. ex. far fa-arrow-alt-circle-down)
+		- status - term status (checked)
 	 * @returns {string} HTML markup card post
 	 */
 

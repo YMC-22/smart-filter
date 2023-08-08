@@ -136,13 +136,14 @@ Important! Keep HTML structure with all attributes as in the example below.
      - arrOptions['total'] - number of all posts
      - arrOptions['terms_settings'] - array objects terms settings. Default empty array. List of object properties:            
         - termid - ID term
-        - bg - background term
-        - color - color term
-        - class - custom name class term 
+        - bg - background term. Hex Color Codes (ex: #dd3333)
+        - color - color term. Hex Color Codes (ex: #dd3333)
+        - class - custom name class of the term
         - status - checked term
-        - alignterm - align term
+        - alignterm - align icon in term
         - coloricon - color icon
-        - classicon - => class icon (font awesome icons: ex. far fa-arrow-alt-circle-down) 
+        - classicon - name class icon (Font Awesome Icons. ex. far fa-arrow-alt-circle-down) 
+        - status - term status (checked)
  * @returns {string} HTML markup card post
  */
 function my_custom_post_layout($layout, $post_id, $filter_id, $increment_post, $arrOptions) {  
@@ -173,6 +174,7 @@ It will be possible to insert any content in the place you need (before or after
      - arrOptions['paged'] - page number
      - arrOptions['per_page'] - number of posts per page
      - arrOptions['total'] - number of all posts
+     - arrOptions['terms_settings'] - array objects terms settings. Default empty array. See options in filter ymc_post_custom_layout.
  * @returns {string} HTML markup card post
  */
  function ymc_after_custom_layout( $increment, $arrOptions ) {
@@ -215,20 +217,21 @@ Use, for example, following WordPress functions to get the required data: get_ta
  * @param {array} taxonomy - list sorted slugs taxonomies
  * @param {int} multiple - multiple or single selection of posts (0/1)
  * @param {string} target - name class target element
- * @param {array} options - array of objects of term settings. Default empty array.
-     - optionsTerms['termid'] - term ID
-     - optionsTerms['bg'] - background term. Hex Color Codes (ex: #dd3333)
-     - optionsTerms['color'] - color term. Hex Color Codes (ex: #dd3333)
-     - optionsTerms['class'] - custom name class of the term
-     - optionsTerms['alignterm'] - align icon in term (left, right)
-     - optionsTerms['coloricon'] - color icon
-     - optionsTerms['classicon'] - name class icon (Font Awesome Icons)
-     - optionsTerms['status'] - term status (selected or not)
+ * @param {array} options - array objects terms settings. Default empty array. List of object properties:
+      - termid - ID term
+      - bg - background term. Hex Color Codes (ex: #dd3333)
+      - color - color term. Hex Color Codes (ex: #dd3333)
+      - class - custom name class of the term
+      - status - checked term
+      - alignterm - align icon in term
+      - coloricon - color icon
+      - classicon - name class icon (Font Awesome Icons. ex. far fa-arrow-alt-circle-down) 
+      - status - term status (checked)
  * @returns {string} HTML markup filter bar
  */
 function my_custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target, $options ) { ?>
 
-<script type="application/javascript">   
+<script>   
    window.addEventListener('DOMContentLoaded', () => {
          let _target = "<?php echo $target; ?>";
          document.querySelectorAll( _target + ' .filter-custom-layout [data-termid]' ).forEach((el) => {
@@ -260,14 +263,16 @@ function my_custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target
       foreach ( $terms as $term ) {
       if( $tax === get_term( $term )->taxonomy ) {      
         $class_icon = '';
+        $color_icon = '';
         foreach ( $options as $obj ) {
             if( (int) $obj->termid === (int) $term ) {
                   $class_icon = $obj->classicon;
+                  $color_icon = $obj->coloricon;
                   break;
                 }
              }     
              $layout .= '<li><a class="'. $multiple .'" href="#" data-selected="'. esc_attr(get_term($term)->slug).'" data-termid="'. esc_attr($term) .'">'.
-             '<i class="'. $class_icon .'"></i>'. esc_html(get_term($term)->name) .'</a></li>';
+             '<i class="'. esc_attr($class_icon) .'" style="color:'. esc_attr($color_icon) .'"></i>'. esc_html(get_term($term)->name) .'</a></li>';
          }
      }
      $layout .= '</ul></li>';   
