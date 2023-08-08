@@ -139,7 +139,7 @@ Important! Keep HTML structure with all attributes as in the example below.
         - bg - background term. Hex Color Codes (ex: #dd3333)
         - color - color term. Hex Color Codes (ex: #dd3333)
         - class - custom name class of the term
-        - status - checked term
+        - status - selected term. Value: checked or empty
         - alignterm - align icon in term
         - coloricon - color icon
         - classicon - name class icon (Font Awesome Icons. ex. far fa-arrow-alt-circle-down) 
@@ -222,7 +222,7 @@ Use, for example, following WordPress functions to get the required data: get_ta
       - bg - background term. Hex Color Codes (ex: #dd3333)
       - color - color term. Hex Color Codes (ex: #dd3333)
       - class - custom name class of the term
-      - status - checked term
+      - status - selected term. Value: checked or empty
       - alignterm - align icon in term
       - coloricon - color icon
       - classicon - name class icon (Font Awesome Icons. ex. far fa-arrow-alt-circle-down) 
