@@ -134,7 +134,15 @@ Important! Keep HTML structure with all attributes as in the example below.
      - arrOptions['paged'] - page number
      - arrOptions['per_page'] - number of posts per page
      - arrOptions['total'] - number of all posts
-     - arrOptions['terms_settings'] - array terms settings. Default empty array
+     - arrOptions['terms_settings'] - array objects terms settings. Default empty array. List of object properties:            
+        - termid - ID term
+        - bg - background term
+        - color - color term
+        - class - custom name class term 
+        - status - checked term
+        - alignterm - align term
+        - coloricon - color icon
+        - classicon - => class icon (font awesome icons: ex. far fa-arrow-alt-circle-down) 
  * @returns {string} HTML markup card post
  */
 function my_custom_post_layout($layout, $post_id, $filter_id, $increment_post, $arrOptions) {  
