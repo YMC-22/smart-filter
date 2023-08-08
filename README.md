@@ -134,7 +134,7 @@ Important! Keep HTML structure with all attributes as in the example below.
      - arrOptions['paged'] - page number
      - arrOptions['per_page'] - number of posts per page
      - arrOptions['total'] - number of all posts
-     - arrOptions['terms_settings'] - array objects terms settings. Default empty array. List of object properties:            
+     - arrOptions['terms_settings'] - array of all terms with their settings. Value: object with the following properties. Default empty array.            
         - termid - ID term
         - bg - background term. Hex Color Codes (ex: #dd3333)
         - color - color term. Hex Color Codes (ex: #dd3333)
@@ -174,7 +174,7 @@ It will be possible to insert any content in the place you need (before or after
      - arrOptions['paged'] - page number
      - arrOptions['per_page'] - number of posts per page
      - arrOptions['total'] - number of all posts
-     - arrOptions['terms_settings'] - array objects terms settings. Default empty array. See options in filter ymc_post_custom_layout.
+     - arrOptions['terms_settings'] - array of all terms with their settings. See options in filter ymc_post_custom_layout.
  * @returns {string} HTML markup card post
  */
  function ymc_after_custom_layout( $increment, $arrOptions ) {
@@ -217,7 +217,7 @@ Use, for example, following WordPress functions to get the required data: get_ta
  * @param {array} taxonomy - list sorted slugs taxonomies
  * @param {int} multiple - multiple or single selection of posts (0/1)
  * @param {string} target - name class target element
- * @param {array} options - array objects terms settings. Default empty array. List of object properties:
+ * @param {array} options - array of all terms with their settings. Value: object with the following properties. Default empty array.
       - termid - ID term
       - bg - background term. Hex Color Codes (ex: #dd3333)
       - color - color term. Hex Color Codes (ex: #dd3333)
