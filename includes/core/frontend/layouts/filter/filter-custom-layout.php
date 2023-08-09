@@ -33,7 +33,6 @@ $term_settings = arrayToObject( generalArrayMerging( $ymc_terms_options, $ymc_te
                 $result_tax = $tax_selected;
             }
 
-
 	        if( !is_null($term_sort) && $ymc_sort_terms === 'manual' )  {
 		        $result_terms = [];
 		        foreach( $terms_selected as $termID ) {
@@ -63,14 +62,16 @@ $term_settings = arrayToObject( generalArrayMerging( $ymc_terms_options, $ymc_te
 	         * @param {int} multiple - multiple or single selection of posts (0/1)
 	         * @param {string} target - name class target element
 	         * @param {array} optionsTerms - array of objects of term settings. Default empty array.
-	        - optionsTerms['termid'] - term ID
-	        - optionsTerms['bg'] - background term. Hex Color Codes (ex: #dd3333)
-	        - optionsTerms['color'] - color term. Hex Color Codes (ex: #dd3333)
-	        - optionsTerms['class'] - custom name class of the term
-	        - optionsTerms['alignterm'] - align icon in term (left, right)
-	        - optionsTerms['coloricon'] - color icon
-	        - optionsTerms['classicon'] - name class icon (Font Awesome Icons)
-	        - optionsTerms['status'] - term status (selected or not)
+		        - optionsTerms['termid'] - term ID
+		        - termid - ID term
+		        - bg - background term. Hex Color Codes (ex: #dd3333)
+		        - color - color term. Hex Color Codes (ex: #dd3333)
+		        - class - custom name class of the term
+		        - status - checked term
+		        - alignterm - align icon in term
+		        - coloricon - color icon
+		        - classicon - name class icon (Font Awesome Icons. ex. far fa-arrow-alt-circle-down)
+		        - status - term status (checked)
 	         * @returns {string} HTML markup filter bar
 	         */
 

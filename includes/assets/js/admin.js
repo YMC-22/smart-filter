@@ -727,7 +727,7 @@
             $('#TB_ajaxContent .ymc-icons-content .panel-setting .toggle-align-icon[data-align="'+alignterm+'"]').
                 addClass('selected').siblings().removeClass('selected');
 
-            // Set current settins
+            // Set current settings
             termCurrentBg.wpColorPicker('color', bgTerm);
             termCurrentColor.wpColorPicker('color', colorTerm);
             iconCurrentColor.wpColorPicker('color', colorIcon);

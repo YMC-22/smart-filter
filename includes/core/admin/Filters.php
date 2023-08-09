@@ -36,9 +36,10 @@ class Filters {
 		$layout = [
 			"post-layout1" => __('Simple Layout','ymc-smart-filter'),
 			"post-layout2" => __('Simple Layout 2','ymc-smart-filter'),
-			//"post-layout4" => __('Masonry Layout (Dev)','ymc-smart-filter'), // Dev now ===>
+			"post-masonry" => __('Masonry Layout','ymc-smart-filter'),
 			"post-layout3" => __('Simple Full Width','ymc-smart-filter'),
-			"post-custom-layout"  => 'Custom Post Layout'
+			"post-custom-layout"  => 'Custom Layout',
+			"post-custom-masonry" => 'Custom Masonry Layout'
 		];
 
 		return $layout;
@@ -90,7 +91,7 @@ class Filters {
 			"inherit" => 'Default',
 			"OpenSans" =>  'OpenSans',
 			"Roboto" =>  'Roboto',
-			"PlayfairDisplay" =>    'Playfair Display'
+			"PlayfairDisplay" =>  'Playfair Display'
 		];
 
 		return $font;

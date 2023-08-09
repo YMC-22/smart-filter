@@ -21,7 +21,7 @@ while ($query->have_posts()) : $query->the_post();
 
 	echo '<article class="ymc-'.esc_attr($post_layout).' post-'.get_the_id().' post-item">';
 
-	$layouts .= '<header class="head-post">'.esc_html__('Add your custom post layout.','ymc-smart-filter').'</header>';
+	$layouts .= '<header class="head-post">'.esc_html__('Add Custom Layout.','ymc-smart-filter').'</header>';
 	$layouts .= '<div class="inform">'.esc_html__('Use a filter:','ymc-smart-filter').' 
                  <span class="doc-text">ymc_post_custom_layout_'.$filter_id.'_ID</span> 
                  '.esc_html__('to override post template.','ymc-smart-filter').' <br>'.esc_html__('Example:','ymc-smart-filter').'

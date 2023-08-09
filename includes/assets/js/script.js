@@ -38,6 +38,7 @@
 
         }, optionsInfinityScroll);
 
+        // Set Preloader
         function filterPreloader( params ) {
 
             let filter = params.preloader_filters;
@@ -56,6 +57,24 @@
             }
 
             return output;
+        }
+
+        // Masonry Layouts
+        function masonryGrid( el, f, c ) {
+
+            if( el.classList.contains("ymc-post-masonry") || el.classList.contains("ymc-post-custom-masonry") ) {
+
+                wp.hooks.addAction('ymc_after_loaded_data_'+f+'_'+c, 'smartfilter', function(class_name, response){
+
+                    let magicGrid = new MagicGrid({
+                        container: `.${class_name} .post-entry`,
+                        items: response.post_count,
+                        gutter: 15
+                    });
+                    magicGrid.listen();
+                    magicGrid.positionItems();
+                });
+            }
         }
 
         // Main Request
@@ -204,8 +223,10 @@
             let params      = JSON.parse(el.dataset.params);
             let data_target = params.data_target;
             let type_pg     = params.type_pg;
+            let filter_id = params.filter_id;
+            let target_id = params.target_id;
 
-            if( loadingPosts === 'true' ) {
+            if( loadingPosts ) {
                 // Init Load Posts
                 getFilterPosts({
                     'paged'     : 1,
@@ -213,6 +234,8 @@
                     'target'    : data_target,
                     'type_pg'   : type_pg
                 });
+                // Run Masonry Grid
+                masonryGrid(el, filter_id, target_id);
             }
         });
 

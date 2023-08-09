@@ -229,37 +229,37 @@ class Get_Posts {
 			$file_layout = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/post/" . $post_layout . ".php";
 
 			// Add Layouts posts
-			if ( file_exists($file_layout) ) :
+			if ( file_exists($file_layout) || $post_layout === 'post-custom-masonry' ) :
 
 				switch ( $post_layout ) :
 
 					case  "post-layout1" :
-
 						include_once $file_layout;
-
 						break;
 
 					case  "post-layout2" :
-
 						include_once $file_layout;
-
 						break;
 
 					case  "post-layout3" :
-
 						include_once $file_layout;
+						break;
 
+					case  "post-masonry" :
+						include_once $file_layout;
+						break;
+
+					case  "post-custom-masonry" :
+						include_once YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/post/post-custom-layout.php";;
 						break;
 
 					case  "post-custom-layout" :
-
 						include_once $file_layout;
-
 						break;
 
 				endswitch;
 
-				$message = 'OK';
+				$message = 'Layout is OK';
 
 			else :
 
