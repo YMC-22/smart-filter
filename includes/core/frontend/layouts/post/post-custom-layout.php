@@ -23,9 +23,9 @@ while ($query->have_posts()) : $query->the_post();
 
 	$layouts .= '<header class="head-post">'.esc_html__('Add Custom Layout.','ymc-smart-filter').'</header>';
 	$layouts .= '<div class="inform">'.esc_html__('Use a filter:','ymc-smart-filter').' 
-                 <span class="doc-text">ymc_post_custom_layout_'.$filter_id.'_ID</span> 
+                 <span class="doc-text">ymc_post_custom_layout_'.$filter_id.'_'.$target_id.'</span> 
                  '.esc_html__('to override post template.','ymc-smart-filter').' <br>'.esc_html__('Example:','ymc-smart-filter').'
-                 <span class="doc-text">add_filter("ymc_post_custom_layout_'.$filter_id.'_ID", "func_custom_layout", 10, 5);</span>
+                 <span class="doc-text">add_filter("ymc_post_custom_layout_'.$filter_id.'_'.$target_id.'", "func_custom_layout", 10, 5);</span>
                  <a target="_blank" href="https://github.com/YMC-22/smart-filter">'.esc_html__('See documentation.','ymc-smart-filter').'</a>
                  </div>';
 
