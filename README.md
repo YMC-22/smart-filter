@@ -218,15 +218,15 @@ Use, for example, following WordPress functions to get the required data: get_ta
  * @param {int} multiple - multiple or single selection of posts (0/1)
  * @param {string} target - name class target element
  * @param {array} options - array of all terms with their settings. Value: object with the following properties. Default empty array.
-      - termid - ID term
-      - bg - background term. Hex Color Codes (ex: #dd3333)
-      - color - color term. Hex Color Codes (ex: #dd3333)
-      - class - custom name class of the term
-      - status - selected term. Value: checked or empty
-      - alignterm - align icon in term
-      - coloricon - color icon
-      - classicon - name class icon (Font Awesome Icons. ex. far fa-arrow-alt-circle-down) 
-      - status - term status (checked)
+      - termid - (string) ID term
+      - bg - (string) background term. Hex Color Codes (ex: #dd3333)
+      - color - (string) color term. Hex Color Codes (ex: #dd3333)
+      - class - (string) custom name class of the term
+      - status - (string) selected term. Value: checked or empty
+      - alignterm - (string) align icon in term
+      - coloricon - (string) color icon
+      - classicon - (string) name class icon (Font Awesome Icons. ex. far fa-arrow-alt-circle-down) 
+      - status - (string) term status (checked)
  * @returns {string} HTML markup filter bar
  */
 function my_custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target, $options ) { ?>
@@ -265,7 +265,7 @@ function my_custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target
         $class_icon = '';
         $color_icon = '';
         foreach ( $options as $obj ) {
-            if( (int) $obj->termid === (int) $term ) {
+            if( $obj->termid === $term ) {
                   $class_icon = $obj->classicon;
                   $color_icon = $obj->coloricon;
                   break;

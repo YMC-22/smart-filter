@@ -121,7 +121,7 @@ $ymc_terms_options   = $variable->get_terms_options( $post->ID );
 
     </div>
 
-	<span class="ymc-btn-reload tax-reload" title="Reset taxonomy"><i class="fas fa-redo"></i></span>
+	<span class="ymc-btn-reload tax-reload" title="Reload Taxonomy"><i class="fas fa-redo"></i></span>
 
 </div>
 
