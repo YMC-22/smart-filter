@@ -53,5 +53,6 @@ $ymc_preloader_filters = $variable->get_ymc_preloader_filters( $id );
 $ymc_preloader_filters_rate = $variable->get_ymc_preloader_filters_rate( $id );
 $ymc_preloader_filters_custom = $variable->get_ymc_preloader_filters_custom( $id );
 $ymc_terms_options   = $variable->get_terms_options( $id );
+$ymc_post_animation  = $variable->get_ymc_post_animation( $id );
 
 

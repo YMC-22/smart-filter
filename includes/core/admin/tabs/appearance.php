@@ -13,6 +13,7 @@ $ymc_meta_key = $variable->get_ymc_meta_key( $post->ID );
 $ymc_meta_value = $variable->get_ymc_meta_value( $post->ID );
 $ymc_multiple_sort = $variable->get_ymc_multiple_sort( $post->ID );
 $ymc_post_status = $variable->get_ymc_post_status( $post->ID );
+$ymc_post_animation  = $variable->get_ymc_post_animation( $post->ID );
 
 ?>
 
@@ -320,6 +321,54 @@ $ymc_post_status = $variable->get_ymc_post_status( $post->ID );
                         <span class="slider"></span>
                     </label>
                 </div>
+
+            </div>
+
+
+            <div class="from-element">
+
+                <label class="form-label">
+                    <?php echo esc_html__('Post Animation', 'ymc-smart-filter'); ?>
+                    <span class="information">
+                    <?php echo esc_html__('Set animation for posts. Animations are not applied to post Masonry Layouts', 'ymc-smart-filter');?>
+                    </span>
+                </label>
+
+                <select class="form-select"  id="ymc-post-animation" name="ymc-post-animation">
+                    <option value="" <?php echo ( $ymc_post_animation === '') ? 'selected' : ''; ?>>
+                        <?php echo esc_html__('None', 'ymc-smart-filter'); ?>
+                    </option>
+                    <option value="bounce" <?php echo ( $ymc_post_animation === 'bounce') ? 'selected' : ''; ?>>
+                        <?php echo esc_html__('Bounce', 'ymc-smart-filter'); ?>
+                    </option>
+                    <option value="bounce-in" <?php echo ( $ymc_post_animation === 'bounce-in') ? 'selected' : ''; ?>>
+                        <?php echo esc_html__('Bounce in', 'ymc-smart-filter'); ?>
+                    </option>
+                    <option value="fade-in" <?php echo ( $ymc_post_animation === 'fade-in') ? 'selected' : ''; ?>>
+                        <?php echo esc_html__('Fade in', 'ymc-smart-filter'); ?>
+                    </option>
+                    <option value="fade-in-down" <?php echo ( $ymc_post_animation === 'fade-in-down') ? 'selected' : ''; ?>>
+                        <?php echo esc_html__('Fade in down', 'ymc-smart-filter'); ?>
+                    </option>
+                    <option value="grow" <?php echo ( $ymc_post_animation === 'grow') ? 'selected' : ''; ?>>
+                        <?php echo esc_html__('Grow', 'ymc-smart-filter'); ?>
+                    </option>
+                    <option value="hithere" <?php echo ( $ymc_post_animation === 'hithere') ? 'selected' : ''; ?>>
+                        <?php echo esc_html__('Hithere', 'ymc-smart-filter'); ?>
+                    </option>
+                    <option value="swing" <?php echo ( $ymc_post_animation === 'swing') ? 'selected' : ''; ?>>
+                        <?php echo esc_html__('Swing', 'ymc-smart-filter'); ?>
+                    </option>
+                    <option value="shake" <?php echo ( $ymc_post_animation === 'shake') ? 'selected' : ''; ?>>
+                        <?php echo esc_html__('Shake', 'ymc-smart-filter'); ?>
+                    </option>
+                    <option value="wobble" <?php echo ( $ymc_post_animation === 'wobble') ? 'selected' : ''; ?>>
+                        <?php echo esc_html__('Wobble', 'ymc-smart-filter'); ?>
+                    </option>
+                    <option value="zoom-in-out" <?php echo ( $ymc_post_animation === 'zoom-in-out') ? 'selected' : ''; ?>>
+                        <?php echo esc_html__('Zoom', 'ymc-smart-filter'); ?>
+                    </option>
+                </select>
 
             </div>
 

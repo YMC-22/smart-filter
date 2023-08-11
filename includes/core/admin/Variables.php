@@ -101,7 +101,7 @@ class Variables {
 
 	public $ymc_multiple_sort = null;
 
-	//public $ymc_multiple_meta_sort = null;
+	public $ymc_post_animation = null;
 
 
 	/**
@@ -474,6 +474,14 @@ class Variables {
 		return $this->ymc_post_status;
 	}
 
+
+	public function get_ymc_post_animation( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_post_animation' ) ) {
+			return get_post_meta( $post_id, 'ymc_post_animation', true );
+		}
+		return $this->ymc_post_animation;
+	}
 
 
 	/**

@@ -32,7 +32,7 @@ while ($query->have_posts()) : $query->the_post();
 	$target = "target=" . $ymc_link_target . "";
 
 
-	echo '<article class="ymc-'.esc_attr($post_layout).' post-'.get_the_id().' post-item">';
+	echo '<article class="ymc-'.esc_attr($post_layout).' post-'.get_the_id().' post-item fade-in">';
 	echo '<figure class="media">'. wp_kses_post($image_post) .'</figure>';
 
 	echo '<header class="title">'. esc_html($title) .'</header>';

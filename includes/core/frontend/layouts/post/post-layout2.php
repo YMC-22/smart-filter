@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             $list_categories .= '<span class="cat-inner">'. esc_html($term_single->name) .'</span>';
         }
 
-        echo '<article class="ymc-'.esc_attr($post_layout).' post-'.get_the_id().' post-item">';
+        echo '<article class="ymc-'.esc_attr($post_layout).' post-'.get_the_id().' post-item '.esc_attr($class_animation).'">';
 
         echo '<header class="title">'. esc_html($title) .'</header>';
         echo '<div class="excerpt">'. wp_kses_post($content) .'</div>';

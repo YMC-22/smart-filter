@@ -38,7 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	    }
 
 
-        echo '<article class="ymc-'.esc_attr($post_layout).' post-'.$post_id.' post-item">';
+        echo '<article class="ymc-'.esc_attr($post_layout).' post-'.$post_id.' post-item '.esc_attr($class_animation).'">';
 
 		echo '<div class="ymc-col ymc-col-1">';
 	    echo '<figure class="media">'. wp_kses_post($image_post) .'</figure>';

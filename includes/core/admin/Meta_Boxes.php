@@ -185,7 +185,6 @@ class Meta_Boxes {
 			update_post_meta($post_id, 'ymc_order_post_type', $ymc_order_post_type);
 		}
 
-
 		// Post Status
 		if (isset($_POST['ymc-post-status'])) {
 			$ymc_post_status = sanitize_text_field($_POST['ymc-post-status']);
@@ -281,6 +280,12 @@ class Meta_Boxes {
 		if( isset($_POST['ymc-preloader-filters-custom']) ) {
 			$ymc_preloader_filters_custom = sanitize_text_field( $_POST['ymc-preloader-filters-custom']);
 			update_post_meta( $post_id, 'ymc_preloader_filters_custom', $ymc_preloader_filters_custom );
+		}
+
+		// Post Animation
+		if( isset($_POST['ymc-post-animation']) ) {
+			$ymc_post_animation = sanitize_text_field( $_POST['ymc-post-animation']);
+			update_post_meta( $post_id, 'ymc_post_animation', $ymc_post_animation );
 		}
 
 	}

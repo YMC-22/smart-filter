@@ -47,6 +47,7 @@ class Get_Posts {
 		$choices_posts = $clean_data['choices_posts'];
 		$exclude_posts = $clean_data['exclude_posts'];
 		$meta_key = $clean_data['meta_key'];
+		$class_animation = $clean_data['post_animation'];
 
 		$paged = (int) $_POST['paged'];
 		$id = (int) $filter_id;
