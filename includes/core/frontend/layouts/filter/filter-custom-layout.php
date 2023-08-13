@@ -49,7 +49,7 @@ $term_settings = arrayToObject( generalArrayMerging( $ymc_terms_options, $ymc_te
 			$layout .= '<div class="inform">'. esc_html__('Use a filter:','ymc-smart-filter') .' 
                         <span class="doc-text">ymc_filter_custom_layout_'.$id.'_'.$c_target.'</span> 
                         '. esc_html__('Example:','ymc-smart-filter') .' 
-                        <span class="doc-text">add_filter("ymc_filter_custom_layout_"'.$id.'_'.$c_target.', "func_custom_layout", 10, 5);</span>
+                        <span class="doc-text">add_filter("ymc_filter_custom_layout_"'.$id.'_'.$c_target.', "func_custom_layout", 10, 6);</span>
                         <a target="_blank" href="https://github.com/YMC-22/smart-filter">'.esc_html__('See documentation.','ymc-smart-filter').'</a></div></div>';
 
 
