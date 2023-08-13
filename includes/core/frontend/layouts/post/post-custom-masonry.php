@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// Custom Post Layout
+// Masonry Custom Post Layout
 
 $layouts = '';
 $arrOptions = [];
@@ -19,7 +19,7 @@ while ($query->have_posts()) : $query->the_post();
 
 	do_action( "ymc_before_custom_layout_".$filter_id.'_'.$target_id, $increment_post, $arrOptions );
 
-	echo '<article class="ymc-'.esc_attr($post_layout).' post-'.get_the_id().' post-item '.esc_attr($class_animation).'">';
+	echo '<article class="ymc-'.esc_attr($post_layout).' post-'.get_the_id().' post-item fade-in">';
 
 	$layouts .= '<header class="head-post">'.esc_html__('Add Custom Layout.','ymc-smart-filter').'</header>';
 	$layouts .= '<div class="inform">'.esc_html__('Use a filter:','ymc-smart-filter').' 
@@ -42,25 +42,25 @@ while ($query->have_posts()) : $query->the_post();
 	- arrOptions['per_page'] - number of posts per page
 	- arrOptions['total'] - number of all posts
 	- arrOptions['terms_settings'] - (array) array terms settings. Default empty array. List of object properties:
-		- termid - ID term
-		- bg - background term. Hex Color Codes (ex: #dd3333)
-		- color - color term. Hex Color Codes (ex: #dd3333)
-		- class - custom name class of the term
-		- status - checked term
-		- alignterm - align icon in term
-		- coloricon - color icon
-		- classicon - name class icon (Font Awesome Icons. ex. far fa-arrow-alt-circle-down)
-		- status - term status (checked)
+	- termid - ID term
+	- bg - background term. Hex Color Codes (ex: #dd3333)
+	- color - color term. Hex Color Codes (ex: #dd3333)
+	- class - custom name class of the term
+	- status - checked term
+	- alignterm - align icon in term
+	- coloricon - color icon
+	- classicon - name class icon (Font Awesome Icons. ex. far fa-arrow-alt-circle-down)
+	- status - term status (checked)
 	 * @returns {string} HTML markup card post
 	 */
 
 	echo apply_filters('ymc_post_custom_layout_'.$filter_id.'_'.$target_id,
-			$layouts,
-			get_the_ID(),
-			$filter_id,
-			$increment_post,
-			$arrOptions
-		 );
+		$layouts,
+		get_the_ID(),
+		$filter_id,
+		$increment_post,
+		$arrOptions
+	);
 
 	$layouts = null;
 
@@ -71,6 +71,7 @@ while ($query->have_posts()) : $query->the_post();
 	$increment_post++;
 
 endwhile;
+
 
 
 

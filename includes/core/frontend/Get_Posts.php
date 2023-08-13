@@ -229,47 +229,16 @@ class Get_Posts {
 
 			$file_layout = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/post/" . $post_layout . ".php";
 
-			// Add Layouts posts
-			if ( file_exists($file_layout) || $post_layout === 'post-custom-masonry' ) :
-
-				switch ( $post_layout ) :
-
-					case  "post-layout1" :
-						include_once $file_layout;
-						break;
-
-					case  "post-layout2" :
-						include_once $file_layout;
-						break;
-
-					case  "post-layout3" :
-						include_once $file_layout;
-						break;
-
-					case  "post-masonry" :
-						include_once $file_layout;
-						break;
-
-					case  "post-custom-masonry" :
-						include_once YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/post/post-custom-layout.php";;
-						break;
-
-					case  "post-custom-layout" :
-						include_once $file_layout;
-						break;
-
-				endswitch;
-
+			// Layouts Posts
+			if ( file_exists($file_layout) ) :
+				include_once $file_layout;
 				$message = 'Layout is OK';
-
 			else :
-
 				echo "<div class='ymc-error'>" . esc_html('Filter layout is not available.', 'ymc-smart-filter') . "</div>";
 				$message = 'Filter layout is not available';
-
 			endif;
 
-			// Add Pagination
+			// Pagination
 			if( $ymc_pagination_hide === "off" ) :
 
 				switch ( $type_pagination ) :
@@ -287,10 +256,8 @@ class Get_Posts {
 			endif;
 
 		else :
-
 			echo "<div class='ymc-notification'>" . esc_html($ymc_empty_post_result, 'ymc-smart-filter') . "</div>";
 			$message = 'No posts found';
-
 		endif;
 
 		$output .= ob_get_contents();
