@@ -4,7 +4,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-require YMC_SMART_FILTER_DIR . '/includes/core/util/helper.php';
 
 $term_settings = arrayToObject( generalArrayMerging( $ymc_terms_options, $ymc_terms_align ) );
 
