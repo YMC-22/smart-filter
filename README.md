@@ -190,7 +190,7 @@ add_action( 'ymc_after_custom_layout_545_1', 'ymc_after_custom_layout', 10, 2 );
 
 **This filter allows you to change the filter template**
 ```php
-add_filter('ymc_filter_custom_layout_FilterID_LayoutID', 'custom_filter_layout', 10, 3);
+add_filter('ymc_filter_custom_layout_FilterID_LayoutID', 'custom_filter_layout', 10, 6);
 ```
 If you need to create your custom filter bar, you can use the filter which will allow you to create your filter bar. This requires a basic understanding of HTML JavaScript, CSS and PHP languages. In the example, it is indicated how you can use the settings and output of a custom filter. ***For your filter to work correctly, follow the following class and attribute names in your HTML markup:***
 
