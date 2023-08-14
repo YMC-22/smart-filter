@@ -501,6 +501,34 @@
             });
         });
 
+        // Filter: Alphabetical Navigation
+        $(document).on('click','.ymc-smart-filter-container .alphabetical-layout .filter-link',function (e) {
+            e.preventDefault();
+
+            let link = $(this);
+            let letter = link.data('letter');
+
+            link.addClass('active').closest('.filter-item').siblings().find('.filter-link').removeClass('active');
+
+            let params = JSON.parse( this.closest('.ymc-smart-filter-container').dataset.params);
+
+            let dataTarget = params.data_target;
+            let typePg = params.type_pg;
+
+            params.page = 1;
+            params.search = '';
+            params.letter = letter;
+
+            this.closest('.ymc-smart-filter-container').dataset.params = JSON.stringify(params);
+
+            getFilterPosts({
+                'paged'      : 1,
+                'toggle_pg'  : 1,
+                'target'     : dataTarget,
+                'type_pg'    : typePg
+            });
+        });
+
         /*** PAGINATION TYPES ***/
 
         // Pagination / Type: Default (Numeric)
@@ -563,6 +591,7 @@
                 params.search = phrase;
                 params.terms = allTerms;
                 params.post_sel = 'all';
+                params.letter = '';
                 this.closest('.ymc-smart-filter-container').dataset.params = JSON.stringify(params);
 
                 let container =  $('.'+params.data_target+'');

@@ -48,6 +48,7 @@ class Get_Posts {
 		$exclude_posts = $clean_data['exclude_posts'];
 		$meta_key = $clean_data['meta_key'];
 		$class_animation = $clean_data['post_animation'];
+		$letter = $clean_data['letter'];
 
 		$paged = (int) $_POST['paged'];
 		$id = (int) $filter_id;
@@ -221,6 +222,12 @@ class Get_Posts {
 			$args['date_query'] = $date_query;
 		}
 
+		// Alphabetical Filter
+		if( !empty($letter) && $letter !== 'all' ) {
+			$args['starts_with'] = $letter;
+			add_filter( 'posts_where',  array($this,'alphabetical_where'),10,2 );
+		}
+
 		$query = new \WP_query($args);
 
 		ob_start();
@@ -257,7 +264,7 @@ class Get_Posts {
 
 		else :
 			echo "<div class='ymc-notification'>" . esc_html($ymc_empty_post_result, 'ymc-smart-filter') . "</div>";
-			$message = 'No posts found';
+			$message = esc_html('No posts found','ymc-smart-filter');
 		endif;
 
 		$output .= ob_get_contents();
@@ -404,6 +411,18 @@ class Get_Posts {
 
 		wp_send_json($data);
 
+	}
+
+	public function alphabetical_where( $where, $query ) {
+
+		global $wpdb;
+
+		$starts_with = $query->get( 'starts_with' );
+
+	    if ( $starts_with ) {
+		    $where .= ' AND ' . $wpdb->posts . '.post_title LIKE \'' . esc_sql( $wpdb->esc_like( $starts_with ) ) . '%\'';
+	    }
+	    return $where;
 	}
 
 }
