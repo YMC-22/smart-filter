@@ -60,6 +60,23 @@ $ymc_post_animation  = $variable->get_ymc_post_animation( $post->ID );
 
             <div class="from-element">
                 <label class="form-label">
+                    <?php echo esc_html__('Post Sorting', 'ymc-smart-filter'); ?>
+                    <span class="information">
+                    <?php echo esc_html__('Enable sorting posts on frontend.', 'ymc-smart-filter');?>
+                </span>
+                </label>
+
+                <div class="ymc-toggle-group">
+                    <label class="switch">
+                        <input type="checkbox" <?php echo ($ymc_sort_status === "off") ? "checked" : ""; ?>>
+                        <input type="hidden" name="ymc-sort-status" value='<?php echo esc_attr($ymc_sort_status); ?>'>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="from-element">
+                <label class="form-label">
 		            <?php echo esc_html__('Empty Results', 'ymc-smart-filter');?>
                     <span class="information">
                     <?php echo esc_html__('Enter text to show while empty result posts.', 'ymc-smart-filter');?>
@@ -305,25 +322,6 @@ $ymc_post_animation  = $variable->get_ymc_post_animation( $post->ID );
                     </option>
                 </select>
             </div>
-
-            <div class="from-element">
-                <label class="form-label">
-		            <?php echo esc_html__('Post Sorting', 'ymc-smart-filter'); ?>
-                    <span class="information">
-                    <?php echo esc_html__('Enable sorting posts on frontend.', 'ymc-smart-filter');?>
-                </span>
-                </label>
-
-                <div class="ymc-toggle-group">
-                    <label class="switch">
-                        <input type="checkbox" <?php echo ($ymc_sort_status === "off") ? "checked" : ""; ?>>
-                        <input type="hidden" name="ymc-sort-status" value='<?php echo esc_attr($ymc_sort_status); ?>'>
-                        <span class="slider"></span>
-                    </label>
-                </div>
-
-            </div>
-
 
             <div class="from-element">
 
