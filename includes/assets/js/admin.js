@@ -604,12 +604,15 @@
             e.target.classList.add('disabled');
 
             let valuesList = $('#selection-posts .values-list');
+            let numberPosts = $('#selection-posts .number-selected-posts');
             valuesList.addClass('include-posts');
 
             valuesList.append(`<li><input type="hidden" name="ymc-choices-posts[]" value="${postID}">
 					<span  class="ymc-rel-item" data-id="${postID}">${titlePosts}
                     <a href="#" class="ymc-icon-minus remove_item"></a>
                     </span></li>`);
+
+            numberPosts.html(valuesList.find('li').length);
 
             sortSelectedPosts();
         });
@@ -618,6 +621,8 @@
             e.preventDefault();
 
             let postID = $(e.target).closest('.ymc-rel-item').data('id');
+            let numberPosts = $('#selection-posts .number-selected-posts');
+            let valuesList = $('#selection-posts .values-list');
 
             $('#selection-posts .choices-list .ymc-rel-item-add').each(function (){
                 if( postID === $(this).data('id')) {
@@ -653,6 +658,8 @@
             }
 
             $(e.target).closest('li').remove();
+
+            numberPosts.html(valuesList.find('li').length);
 
         });
 

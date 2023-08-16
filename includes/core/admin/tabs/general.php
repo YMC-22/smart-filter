@@ -428,16 +428,20 @@ $ymc_terms_options   = $variable->get_terms_options( $post->ID );
 						echo '<li><input type="hidden" name="ymc-choices-posts[]" value="'.get_the_ID().'">
 							  <span  class="ymc-rel-item" data-id="'.get_the_ID().'">ID: '.get_the_ID().'<br>'.get_the_title(get_the_ID()).'
 							  <a href="#" class="ymc-icon-minus remove_item"></a></span></li>';
-
 					endwhile;
 
-					wp_reset_postdata();
+					echo '<span class="number-selected-posts">'. $query->found_posts .'</span>';
+
+				else :
+
+					echo '<span class="number-selected-posts">0</span>';
 
 				endif;
 
 				$post = $tmp_post;
 			?>
 			</ul>
+			<?php wp_reset_postdata(); ?>
 		</div>
 
 	</div>

@@ -490,7 +490,6 @@ $font-size: 16;
 									right: 7px;
 									top: 2px;
 									font-size: 14px;
-									color: #f90000;
 								}
 								.choices-list {
 									&::-webkit-scrollbar {
@@ -527,21 +526,29 @@ $font-size: 16;
 								background: #fff;
 								margin: 0;
 								padding: 5px;
-								height: 200px;
-								overflow: auto;
 								border: 1px solid #cccccc;
 								position: relative;
-								&::-webkit-scrollbar {
-									width: 5px;
-								}
-								&::-webkit-scrollbar-thumb {
-									border-radius: 10px;
-									background: #8e8e8e;
-								}
-								&::-webkit-scrollbar-track {
-									border-radius: 5px;
+								.number-selected-posts {
+									position: absolute;
+									right: 7px;
+									top: 2px;
+									font-size: 14px;
+									color: #000000;
 								}
 								.values-list {
+									&::-webkit-scrollbar {
+										width: 5px;
+									}
+									&::-webkit-scrollbar-thumb {
+										border-radius: 10px;
+										background: #8e8e8e;
+									}
+									&::-webkit-scrollbar-track {
+										border-radius: 5px;
+									}
+									overflow: auto;
+									height: 185px;
+									margin: 15px 0 0 0;
 									li {
 										margin-bottom: 0;
 										.ymc-rel-item {
