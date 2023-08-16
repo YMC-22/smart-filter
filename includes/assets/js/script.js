@@ -226,7 +226,7 @@
             let filter_id = params.filter_id;
             let target_id = params.target_id;
 
-            if( loadingPosts ) {
+            if( loadingPosts === 'true' ) {
                 // Init Load Posts
                 getFilterPosts({
                     'paged'     : 1,

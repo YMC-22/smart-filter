@@ -1,12 +1,12 @@
 ===  Smart Filter ===
 Plugin Name: Smart Filter
 Contributors: YMC, Roman
-Version: 2.5.7
+Version: 2.5.8
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
 Tags: filters, search, posts, masonry, ajax posts, ajax filter, category posts, taxonomy, custom taxonomy, woocommerce
 Requires at least: 4.8
 Tested up to: 6.3
-Stable tag: 2.5.7
+Stable tag: 2.5.8
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -164,7 +164,8 @@ Added masonry templates for post grid
 Added animation post items
 = 2.5.6 =
 Added Alphabetical Navigation filter template
-
+= 2.5.8 =
+Fixed JS
 
 == Video ==
 https://www.youtube.com/watch?v=FIBNE0Ix6Vg
