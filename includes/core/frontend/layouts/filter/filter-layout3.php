@@ -86,7 +86,7 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 		                    }
 	                    }
 
-                        echo '<div class="menu-passive__item">
+                        echo '<div class="menu-passive__item item-'. esc_attr(get_term( $term )->slug) .'">
 							  '. $terms_icons .'
                               <a class="menu-link '.  esc_attr($is_disabled) .' '.  esc_attr($type_multiple) .'" 
                               href="#" data-selected="'. esc_attr(get_term( $term )->slug) .'" data-termid="' . esc_attr($term) . '" data-name="'.esc_attr(get_term( $term )->name).'">'.

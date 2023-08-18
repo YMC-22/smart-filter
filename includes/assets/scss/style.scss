@@ -179,7 +179,6 @@ $font-size: 16;
 			margin: 0 0 20px 0;
 			padding: 0;
 			.filter-item {
-				margin: 0 10px 10px 0;
 				&:last-child {
 					margin-right: 0;
 				}
@@ -193,6 +192,7 @@ $font-size: 16;
 					color: #fff;
 					background-color: #098ab8;
 					font-weight: 100;
+					margin: 0 10px 10px 0;
 					&:hover {
 						text-decoration: none;
 					}
@@ -228,7 +228,6 @@ $font-size: 16;
 			list-style: none;
 			margin: 0 0 20px 0;
 			padding: 0;
-
 			.group-filters {
 				margin: 0;
 				.name-tax {
@@ -249,10 +248,7 @@ $font-size: 16;
 					padding: 0;
 				}
 			}
-
 			.filter-item {
-				margin: 10px 5px;
-				height: 40px;
 				&:first-child {
 					margin-left: 0;
 				}
@@ -268,6 +264,7 @@ $font-size: 16;
 					line-height: normal;
 					color: #fff;
 					background-color: #098ab8;
+					margin: 10px 5px;
 					&:hover {
 						text-decoration: none;
 					}
