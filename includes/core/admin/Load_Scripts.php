@@ -28,6 +28,9 @@ class Load_Scripts {
 	public function backend_embed_scripts() {
 
 		wp_enqueue_style( 'smart-filter-' . $this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/css/admin.css', array(), YMC_SMART_FILTER_VERSION);
+		wp_enqueue_style('thickbox');
+
+		wp_enqueue_script('thickbox');
 		wp_enqueue_script( 'wp-color-picker');
 		wp_enqueue_script( 'smart-filter-'.$this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/js/admin.min.js', array( 'jquery' ), YMC_SMART_FILTER_VERSION, true );
 		wp_localize_script( 'smart-filter-'.$this->generate_handle(), '_smart_filter_object',
