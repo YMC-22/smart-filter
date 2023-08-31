@@ -617,22 +617,17 @@
 
             let _self = $(this);
 
-            let resultsHTML = _self.siblings("#results");
+            let resultsHTML = _self.siblings(".results");
 
             let userInput = _self.val().trim();
+
+            let params = JSON.parse(this.closest('.ymc-smart-filter-container').dataset.params);
 
             resultsHTML.innerHTML = "";
 
             resultsHTML.next('.clear').show();
 
-            resultsHTML.next('.clear').on('click', function (e) {
-                _self.val('');
-                $(this).hide().prev('#results').empty().hide();
-            });
-
             if (userInput.length > 2) {
-
-                let params = JSON.parse(this.closest('.ymc-smart-filter-container').dataset.params);
 
                 const data = {
                     'action'     : 'ymc_autocomplete_search',
@@ -669,6 +664,29 @@
                     }
                 });
             }
+        });
+
+        /*** Clear Field Search ***/
+        $(document).on('click','.ymc-smart-filter-container .search-form .component-input .clear',function (e) {
+
+            let _self = $(e.target).closest('.clear');
+
+            console.log(_self.siblings('input[name="search"]'));
+
+            _self.siblings('input[name="search"]').val('');
+            _self.siblings('.results').empty().hide();
+           _self.hide();
+
+            let params = JSON.parse(e.target.closest('.ymc-smart-filter-container').dataset.params);
+            params.search = "";
+            e.target.closest('.ymc-smart-filter-container').dataset.params = JSON.stringify(params);
+
+            getFilterPosts({
+                'paged'     : 1,
+                'toggle_pg' : params.type_pg,
+                'target'    : params.data_target,
+                'type_pg'   : params.type_pg
+            });
         });
 
         $(document).on('click','.ymc-smart-filter-container .search-form .autocomplete-results a[data-clue]', function (e) {
