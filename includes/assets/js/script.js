@@ -671,8 +671,6 @@
 
             let _self = $(e.target).closest('.clear');
 
-            console.log(_self.siblings('input[name="search"]'));
-
             _self.siblings('input[name="search"]').val('');
             _self.siblings('.results').empty().hide();
            _self.hide();
