@@ -11,7 +11,7 @@
         const optionsInfinityScroll = {
             root: null,
             rootMargin: '0px',
-            threshold: 0.7
+            threshold: 0.8
         }
 
         // Object Observer
@@ -108,8 +108,16 @@
                 url: _smart_filter_object.ajax_url,
                 data: data,
                 beforeSend: function () {
-                    container.find('.container-posts').addClass('loading').
-                    prepend(`<img class="preloader" src="${stylePreloader}" style="${preloaderFilter}">`);
+
+                    // Load-more && Scroll-infinity
+                    if(toggle_pg === 0) {
+                        container.find('.container-posts').addClass('loading').find('.post-entry').
+                        append(`<img class="preloader preloader--load" src="${stylePreloader}" style="${preloaderFilter}">`);
+                    }
+                    else {
+                        container.find('.container-posts').addClass('loading').
+                        prepend(`<img class="preloader preloader--numeric" src="${stylePreloader}" style="${preloaderFilter}">`);
+                    }
 
                     // Add Hook: before loaded posts
                     wp.hooks.doAction('ymc_before_loaded_data_'+filterID+'_'+targetID, target);
@@ -134,12 +142,18 @@
                                 }
                             }
 
-
-                            container.find('.container-posts').
+                            container.
+                            find('.container-posts').
                             removeClass('loading').
-                            find('.preloader').remove().end().
-                            find('.post-entry').html(res.data).end().
-                            find('.ymc-pagination').remove().end().
+                            find('.preloader').
+                            remove().
+                            end().
+                            find('.post-entry').
+                            html(res.data).
+                            end().
+                            find('.ymc-pagination').
+                            remove().
+                            end().
                             append(res.pagin);
 
                             break;
@@ -147,19 +161,33 @@
                         case 'load-more' :
 
                             if(toggle_pg === 0) {
-                                container.find('.container-posts').
+                                container.
+                                find('.container-posts').
                                 removeClass('loading').
-                                find('.preloader').remove().end().
-                                find('.post-entry').append(res.data).end().
-                                find('.ymc-pagination').remove().end().
+                                find('.preloader').
+                                remove().
+                                end().
+                                find('.post-entry').
+                                append(res.data).
+                                end().
+                                find('.ymc-pagination').
+                                remove().
+                                end().
                                 append(res.pagin);
                             }
                             else  {
-                                container.find('.container-posts').
+                                container.
+                                find('.container-posts').
                                 removeClass('loading').
-                                find('.preloader').remove().end().
-                                find('.post-entry').html(res.data).end().
-                                find('.ymc-pagination').remove().end().
+                                find('.preloader').
+                                remove().
+                                end().
+                                find('.post-entry').
+                                html(res.data).
+                                end().
+                                find('.ymc-pagination').
+                                remove().
+                                end().
                                 append(res.pagin);
                             }
 
@@ -172,20 +200,30 @@
                         case 'scroll-infinity' :
 
                             if(toggle_pg === 0) {
-                                container.find('.container-posts').
+                                container.
+                                find('.container-posts').
                                 removeClass('loading').
-                                find('.preloader').remove().end().
-                                find('.post-entry').append(res.data).end().
+                                find('.preloader').
+                                remove().
+                                end().
+                                find('.post-entry').
+                                append(res.data).
+                                end().
                                 append(res.pagin);
                             }
                             else  {
                                 // Filter is act scroll top
                                 //$('html, body').animate({scrollTop: container.offset().top}, 300);
 
-                                container.find('.container-posts').
+                                container.
+                                find('.container-posts').
                                 removeClass('loading').
-                                find('.preloader').remove().end().
-                                find('.post-entry').html(res.data).end().
+                                find('.preloader').
+                                remove().
+                                end().
+                                find('.post-entry').
+                                html(res.data).
+                                end().
                                 append(res.pagin);
                             }
 
@@ -196,7 +234,7 @@
                             break;
                     }
 
-                    // updated attr data-loading
+                    // Updated attr data-loading
                     document.querySelector('.'+target).dataset.loading = 'true';
 
                     // Add Hook: after loaded posts
@@ -677,14 +715,23 @@
 
             let params = JSON.parse(e.target.closest('.ymc-smart-filter-container').dataset.params);
             params.search = "";
+            params.page = 1;
             e.target.closest('.ymc-smart-filter-container').dataset.params = JSON.stringify(params);
 
             getFilterPosts({
                 'paged'     : 1,
-                'toggle_pg' : params.type_pg,
+                'toggle_pg' : 1,
                 'target'    : params.data_target,
                 'type_pg'   : params.type_pg
             });
+        });
+
+        /*** Close dropdown autocomplete results outside area ***/
+        $('body').on('click', function (e) {
+            if( !e.target.closest('.autocomplete-results') ) {
+                $('.ymc-smart-filter-container .search-form .component-input .autocomplete-results').
+                empty().hide();
+            }
         });
 
         $(document).on('click','.ymc-smart-filter-container .search-form .autocomplete-results a[data-clue]', function (e) {
