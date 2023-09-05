@@ -158,7 +158,7 @@ $font-size: 16;
 		left: 50%;
 		z-index: 9;
 		&--load {
-			bottom: 5%;
+			bottom: 200px;
 			transform: translateX(-50%);
 		}
 		&--numeric {
