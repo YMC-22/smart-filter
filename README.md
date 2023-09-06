@@ -134,6 +134,7 @@ Important! Keep HTML structure with all attributes as in the example below.
      - arrOptions['paged'] - page number
      - arrOptions['per_page'] - number of posts per page
      - arrOptions['total'] - number of all posts
+     - arrOptions['class_popup'] - class btn popup. Set for btn post. Value: string or empty
      - arrOptions['terms_settings'] - array of all terms with their settings. Value: object with the following properties. Default empty array.            
         - termid - ID term
         - bg - background term. Hex Color Codes (ex: #dd3333)
@@ -149,7 +150,8 @@ Important! Keep HTML structure with all attributes as in the example below.
 function my_custom_post_layout($layout, $post_id, $filter_id, $increment_post, $arrOptions) {  
    $layout  = '<h2>'.get_the_title($post_id).'</h2>';
    $layout .= '<p>'.wp_trim_words(get_the_content($post_id), 30).'</p>';
-   $layout .= '<a href="'.get_the_permalink($post_id).'">Read More</a>';   
+   $layout .= '<a href="'.get_the_permalink($post_id).'">Read More</a>'; 
+   // $layout .= '<a class="'.esc_attr($arrOptions['class_popup']).'" data-postid="'.esc_attr($post_id).'" href="#">Open Popup</a>';  
    return $layout;
 }
 add_filter('ymc_post_custom_layout_545_1', 'my_custom_post_layout', 10, 5);
@@ -286,6 +288,22 @@ function my_custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target
 add_filter('ymc_filter_custom_layout_545_1', 'my_custom_filter_layout', 10, 6);
 ```
 
+**This filter allows you to change the popup custom layout**
+```php
+add_filter('ymc_popup_custom_layout_FilterID_LayoutID', 'func_custom', 10, 2);
+
+Usage example:
+/**
+ * @param {string} layout - HTML markup
+ * @param {int} post_id - Post ID
+ */
+add_filter('ymc_popup_custom_layout_545_1', function ( $layout, $post_id ) {
+
+    $layout = '<h2>Custom Text: '. get_the_title($post_id) .'</h2>';
+	return $output;
+	
+}, 10, 2);
+```
 
 
 
