@@ -29,7 +29,7 @@ class Cpt {
 				'show_ui'             => current_user_can( 'manage_options' ) ? true : false,
 				'show_in_admin_bar'   => false,
 				'menu_position'       => 7,
-				'menu_icon'           => 'dashicons-schedule',
+				'menu_icon'           => 'dashicons-screenoptions',
 				'rewrite'             => false,
 				'query_var'           => false,
 				'supports'            => array(
