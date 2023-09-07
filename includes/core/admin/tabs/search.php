@@ -25,7 +25,7 @@ $ymc_autocomplete_state = $variable->get_ymc_autocomplete_state( $post->ID );
     <div class="form-group wrapper-search">
 
         <label for="ymc-filter-layout" class="form-label">
-		    <?php echo esc_html__('Enable / Disable Post Search', 'ymc-smart-filter');?>
+		    <?php echo esc_html__('Enable / Disable Search', 'ymc-smart-filter');?>
             <span class="information">
                 <?php echo esc_html__('Enable / Disable Panel Search.', 'ymc-smart-filter'); ?>
             </span>

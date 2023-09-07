@@ -149,6 +149,10 @@ $font-size: 16;
 					flex: 1 1 70%;
 					background: #fff;
 
+					.mb {
+						margin-bottom: 20px;
+					}
+
 					.tab-panel {
 						position: relative;
 						display: none;
@@ -380,6 +384,7 @@ $font-size: 16;
 									border-bottom: 3px solid #1fc4ff;
 									color: #1fc4ff;
 									margin-bottom: 30px;
+									text-transform: uppercase;
 								}
 
 								.rows-options {

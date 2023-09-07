@@ -288,6 +288,12 @@ class Meta_Boxes {
 			update_post_meta( $post_id, 'ymc_post_animation', $ymc_post_animation );
 		}
 
+		// Popup Status
+		if( isset($_POST['ymc-popup-status']) ) {
+			$ymc_popup_status = sanitize_text_field( $_POST['ymc-popup-status']);
+			update_post_meta( $post_id, 'ymc_popup_status', $ymc_popup_status );
+		}
+
 	}
 
 	public function add_post_metabox() {
@@ -329,7 +335,7 @@ class Meta_Boxes {
 					<li class="nav-item">
 						<a class="link" id="appearance-tab" href="#appearance">
 							<span class="text"><?php echo esc_html__('Appearance','ymc-smart-filter');?></span>
-							<span class="info"><?php echo esc_html__('Post Layout, Filter Layout','ymc-smart-filter'); ?></span>
+							<span class="info"><?php echo esc_html__('Post, Filter, Popup, Pagination Options','ymc-smart-filter'); ?></span>
 							<span class="dashicons dashicons-visibility"></span>
 						</a>
 					</li>

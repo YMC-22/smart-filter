@@ -11,7 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
         // Get data
 	    $post_id = get_the_ID();
 	    $title   = get_the_title($post_id);
-	    $link    = get_the_permalink($post_id);
+	    $link    = ( $ymc_popup_status === 'off' ) ? get_the_permalink($post_id) : '#';
+		$class_popup = ( $ymc_popup_status === 'off' ) ? '' : 'ymc-popup';
 	    $post_date_format = apply_filters('ymc_post_date_format_'.$filter_id.'_'.$target_id, 'd, M Y');
 		$image_post = '<img class="dummy-image" src="'. YMC_SMART_FILTER_URL . '/includes/assets/images/dummy-Image.svg" alt="Dummy image">';
 
@@ -49,8 +50,9 @@ if ( ! defined( 'ABSPATH' ) ) {
         echo '<span class="date"><i class="far fa-calendar-alt"></i> '. get_the_date($post_date_format) . '</span>';
         echo '<span class="author"><i class="far fa-user"></i> '. get_the_author() . '</span>';
         echo '<div class="excerpt">'. wp_kses_post($content) .'</div>';
-        echo '<div class="read-more"><a class="btn btn-read-more" '. esc_attr($target) .' href="'. esc_url($link) .'">'. esc_html($read_more) .'</a></div>';
+        echo '<div class="read-more"><a class="btn btn-read-more '.esc_attr($class_popup).'" data-postid="'.esc_attr($post_id).'" '. esc_attr($target) .' href="'. esc_url($link) .'">'. esc_html($read_more) .'</a></div>';
         echo '</article>';
 
     endwhile;
+
 

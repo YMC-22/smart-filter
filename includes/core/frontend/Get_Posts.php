@@ -16,6 +16,10 @@ class Get_Posts {
 
 		add_action('wp_ajax_ymc_autocomplete_search', array($this, 'autocomplete_search'));
 		add_action('wp_ajax_nopriv_ymc_autocomplete_search', array($this, 'autocomplete_search'));
+
+		add_action('wp_ajax_get_post_popup', array($this, 'get_post_popup'));
+		add_action('wp_ajax_nopriv_get_post_popup', array($this, 'get_post_popup'));
+
 	}
 
 	public function get_filter_posts() {
@@ -423,6 +427,36 @@ class Get_Posts {
 		    $where .= ' AND ' . $wpdb->posts . '.post_title LIKE \'' . esc_sql( $wpdb->esc_like( $starts_with ) ) . '%\'';
 	    }
 	    return $where;
+	}
+
+	public function get_post_popup() {
+
+		if (!wp_verify_nonce($_POST['nonce_code'], 'custom_ajax_nonce')) exit;
+
+		$output = '';
+		$post_id = (int) $_POST['post_id'];
+		$filter_id = $_POST['filter_id'];
+		$target_id = $_POST['target_id'];
+
+		$thumb_url = get_the_post_thumbnail_url( $post_id, 'full' );
+		$title = get_the_title($post_id);
+
+		$post = get_post( $post_id );
+		$content = apply_filters('the_content', $post->post_content);
+
+		$output .= '<article class="popup-content">';
+		$output .=  '<img src="'.$thumb_url.'">';
+		$output .= '<header class="title">'.$title.'</header>';
+		$output .= '<div class="content">'.$content.'</div>';
+		$output .= '</article>';
+
+		$output = apply_filters('ymc_popup_custom_layout_'.$filter_id.'_'.$target_id, $output, $post_id);
+
+		$data = array(
+			'data'   => $output
+		);
+
+		wp_send_json($data);
 	}
 
 }

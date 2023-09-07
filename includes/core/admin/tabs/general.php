@@ -44,7 +44,7 @@ $ymc_terms_options   = $variable->get_terms_options( $post->ID );
                 } else {
                     $sel = '';
                 }
-                echo "<option value='" . esc_attr($cpost_type) ."' ". esc_attr($sel) .">" . esc_html($cpost_type) . "</option>";
+                echo "<option value='" . esc_attr($cpost_type) ."' ". esc_attr($sel) .">" . esc_html( str_replace(['-','_'],' ', $cpost_type) ) . "</option>";
             }
 		?>
 	</select>

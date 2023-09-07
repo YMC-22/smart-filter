@@ -14,6 +14,7 @@ $ymc_meta_value = $variable->get_ymc_meta_value( $post->ID );
 $ymc_multiple_sort = $variable->get_ymc_multiple_sort( $post->ID );
 $ymc_post_status = $variable->get_ymc_post_status( $post->ID );
 $ymc_post_animation  = $variable->get_ymc_post_animation( $post->ID );
+$ymc_popup_status  = $variable->get_ymc_popup_status( $post->ID );
 
 ?>
 
@@ -35,7 +36,7 @@ $ymc_post_animation  = $variable->get_ymc_post_animation( $post->ID );
 
             <div class="from-element">
                 <label class="form-label">
-			        <?php echo esc_html__('Sort Filter Terms', 'ymc-smart-filter');?>
+			        <?php echo esc_html__('Sort Terms', 'ymc-smart-filter');?>
                     <span class="information">
                     <?php echo esc_html__('Set sorting by filter terms.', 'ymc-smart-filter');?>
                 </span>
@@ -60,7 +61,7 @@ $ymc_post_animation  = $variable->get_ymc_post_animation( $post->ID );
 
             <div class="from-element">
                 <label class="form-label">
-                    <?php echo esc_html__('Post Sorting', 'ymc-smart-filter'); ?>
+                    <?php echo esc_html__('Enable / Disable Sorting', 'ymc-smart-filter'); ?>
                     <span class="information">
                     <?php echo esc_html__('Enable sorting posts on frontend.', 'ymc-smart-filter');?>
                 </span>
@@ -371,8 +372,31 @@ $ymc_post_animation  = $variable->get_ymc_post_animation( $post->ID );
             </div>
 
             <header class="sub-header">
-                <i class="far fa-sort-numeric-asc left" aria-hidden="true"></i>
-		        <?php echo esc_html__('Pagination Options', 'ymc-smart-filter'); ?>
+                <i class="fas fa-window-restore"></i>
+                <?php echo esc_html__('Popup', 'ymc-smart-filter'); ?>
+            </header>
+
+            <div class="from-element">
+                <label class="form-label">
+                    <?php echo esc_html__('Enable / Disable Popup', 'ymc-smart-filter'); ?>
+                    <span class="information">
+                    <?php echo esc_html__('Enable popup in frontend. 
+                    The content of the post will be displayed inside the popup.', 'ymc-smart-filter'); ?>
+                </span>
+                </label>
+
+                <div class="ymc-toggle-group">
+                    <label class="switch">
+                        <input type="checkbox" <?php echo ($ymc_popup_status === "off") ? "checked" : ""; ?>>
+                        <input type="hidden" name="ymc-popup-status" value='<?php echo esc_attr($ymc_popup_status); ?>'>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <header class="sub-header">
+                <i class="fas fa-sort-numeric-down-alt"></i>
+		        <?php echo esc_html__('Pagination', 'ymc-smart-filter'); ?>
             </header>
 
             <div class="from-element">
@@ -416,7 +440,7 @@ $ymc_post_animation  = $variable->get_ymc_post_animation( $post->ID );
 
             <div class="from-element">
                 <label class="form-label">
-		            <?php echo esc_html__('Disable Pagination', 'ymc-smart-filter');?>
+		            <?php echo esc_html__('Hide Pagination', 'ymc-smart-filter');?>
                     <span class="information">
                     <?php echo esc_html__('Hide pagination for filter.', 'ymc-smart-filter');?>
                 </span>

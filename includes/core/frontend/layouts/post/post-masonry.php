@@ -13,6 +13,7 @@ while ($query->have_posts()) : $query->the_post();
 	$post_id = get_the_ID();
 	$title   = get_the_title($post_id);
 	$link    = get_the_permalink($post_id);
+	$class_popup = ( $ymc_popup_status === 'off' ) ? '' : 'ymc-popup';
 	$image_post = '';
 
 	if( !empty(get_the_post_thumbnail($post_id, 'full')) ) {
@@ -37,7 +38,7 @@ while ($query->have_posts()) : $query->the_post();
 
 	echo '<header class="title">'. esc_html($title) .'</header>';
 	echo '<div class="excerpt">'. wp_kses_post($content) .'</div>';
-	echo '<div class="read-more"><a class="btn btn-read-more" '. esc_attr($target) .' href="'. esc_url($link) .'">'. esc_html($read_more) .'</a></div>';
+	echo '<div class="read-more"><a class="btn btn-read-more '.esc_attr($class_popup).'" '. esc_attr($target) .' data-postid="'.esc_attr($post_id).'" href="'. esc_url($link) .'">'. esc_html($read_more) .'</a></div>';
 	echo '</article>';
 
 endwhile;

@@ -77,6 +77,64 @@
             }
         }
 
+        // Popup
+        function popupPost(e) {
+            e.preventDefault();
+            let _self = $(e.target);
+            let postId = _self.data('postid');
+            let popupOverlay = _self.closest('.ymc-smart-filter-container').find('.ymc-popup-overlay');
+            let popupContainer = _self.closest('.ymc-smart-filter-container').find('.popup-entry');
+            let body = $('body');
+            let postContainer = _self.closest('.post-item');
+            let target = e.target.closest('.ymc-smart-filter-container');
+            let params = JSON.parse(target.dataset.params);
+            let stylePreloader = _smart_filter_object.path+"/includes/assets/images/"+ params.preloader_icon +".svg";
+            let preloaderFilter = filterPreloader( params );
+
+            const data = {
+                'action'     : 'get_post_popup',
+                'nonce_code' : _smart_filter_object.nonce,
+                'post_id'    : postId,
+                'filter_id'  : params.filter_id,
+                'target_id'  : params.target_id
+            };
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: _smart_filter_object.ajax_url,
+                data: data,
+                beforeSend: function () {
+                    postContainer.addClass('loading').
+                    prepend(`<img class="preloader preloader--popup" src="${stylePreloader}" style="${preloaderFilter}">`);
+                },
+                success: function (res) {
+                    postContainer.
+                    removeClass('loading').
+                    find('.preloader').
+                    remove();
+
+                    if(res.data !== '') {
+                        popupContainer.html(res.data);
+                        popupOverlay.show();
+                        body.css({'overflow' : 'hidden'});
+                    }
+                },
+                error: function (obj, err) {
+                    console.log( obj, err );
+                }
+            });
+        }
+
+        function popupClose(e) {
+            e.preventDefault();
+            let _self = $(e.target);
+            let popup = _self.closest('.ymc-smart-filter-container').find('.ymc-popup-overlay');
+            let body = $('body');
+            popup.hide();
+            body.css({'overflow' : 'auto'});
+        }
+
         // Main Request
         function getFilterPosts( options ) {
 
@@ -749,7 +807,7 @@
         });
 
 
-        // Sort Posts on Frontend
+        /*** Sort Posts ***/
         $(document).on('click','.ymc-smart-filter-container .sort-container .dropdown-filter .menu-active',function (e) {
             e.preventDefault();
             let $el = $(this);
@@ -807,6 +865,19 @@
                 'type_pg'   : params.type_pg
             });
 
+        });
+
+
+        /*** Popup ***/
+        $(document).on('click','.ymc-smart-filter-container .container-posts .post-entry .post-item .ymc-popup', popupPost);
+
+        $(document).on('click','.ymc-smart-filter-container .ymc-popup-wrp .btn-close', popupClose);
+
+        $(document).on('click','.ymc-smart-filter-container .ymc-popup-overlay', function (e) {
+            if( !e.target.closest('.ymc-popup-wrp') ) {
+               $(e.target).hide();
+               $('body').css({'overflow' : 'auto'});
+            }
         });
 
 

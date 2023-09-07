@@ -104,6 +104,9 @@ class Variables {
 	public $ymc_post_animation = null;
 
 
+	public $ymc_popup_status = 'off';
+
+
 	/**
 	 * Advanced tab used default variables
 	 */
@@ -481,6 +484,15 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_post_animation', true );
 		}
 		return $this->ymc_post_animation;
+	}
+
+
+	public function get_ymc_popup_status( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_popup_status' ) ) {
+			return get_post_meta( $post_id, 'ymc_popup_status', true );
+		}
+		return $this->ymc_popup_status;
 	}
 
 

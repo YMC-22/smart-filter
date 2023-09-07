@@ -12,6 +12,7 @@ $increment_post = ( $paged === 1 ) ? 1 : ($per_page * ( $paged - 1)) + 1;
 $arrOptions['paged'] = $paged;
 $arrOptions['per_page'] = $per_page;
 $arrOptions['total'] = $query->found_posts;
+$arrOptions['class_popup'] = ( $ymc_popup_status === 'off' ) ? '' : 'ymc-popup';
 $arrOptions['terms_settings'] = arrayToObject( generalArrayMerging( $ymc_terms_options, $ymc_terms_align ) );
 
 
@@ -41,6 +42,7 @@ while ($query->have_posts()) : $query->the_post();
 	- arrOptions['paged'] - page number
 	- arrOptions['per_page'] - number of posts per page
 	- arrOptions['total'] - number of all posts
+	- arrOptions['class_popup'] - string class btn popup
 	- arrOptions['terms_settings'] - (array) array terms settings. Default empty array. List of object properties:
 		- termid - ID term
 		- bg - background term. Hex Color Codes (ex: #dd3333)

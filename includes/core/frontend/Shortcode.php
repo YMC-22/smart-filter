@@ -109,6 +109,15 @@ class Shortcode {
 
 			echo '<div class="container-posts container-'. esc_attr($ymc_post_layout) .'"><div class="post-entry '. esc_attr($ymc_post_layout) .' '. esc_attr($ymc_post_layout) .'-'.$id.' '.esc_attr($ymc_post_layout).'-'.$id.'-'.$c_target.'"></div></div>';
 
+			if ( $ymc_popup_status === 'on' ) {
+
+				$filepath_popup = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/popup/popup-layout.php";
+
+				if ( file_exists($filepath_popup) ) {
+					require $filepath_popup;
+				}
+			}
+
 			echo '</div>';
 		}
 		else {
