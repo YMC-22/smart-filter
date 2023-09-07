@@ -29,6 +29,7 @@ The plugin provides the following functionality:
 - Manual sorting of terms
 - Fine tuning of each term (background, color, icons, etc.)
 - Adding featured posts to the post grid
+- View post content in a popup
 - Editing terms: adding icons and customizing them
 - Choose icon for preloader
 - Customization of the color palette.
