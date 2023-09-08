@@ -2,22 +2,23 @@
 
 /**
  *
- * Plugin Name:       Smart Filter
- * Description:       Filter posts or custom post types by category / taxonomies without page reload. Easy to use.
+ * Plugin Name:       Filter & Grids
+ * Description:       Filter posts by categories without reloading the page. Create posts grids.
  * Version:           2.6.1
- * Author:            YMC Cor
+ * Author:            YMC
  * Author URI:        https://github.com/YMC-22/smart-filter
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       ymc-smart-filter
- * Domain Path:       /languages
  *
- * YMC Smart Filter is free software: you can redistribute it and/or modify
+ * Copyright 2022-2023 YMC (email : wss.office21@gmail.com)
+ *
+ * Filter & Grids is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2 of the License, or
  * any later version.
  *
- * YMC Smart Filter is distributed in the hope that it will be useful,
+ * Filter & Grids is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.

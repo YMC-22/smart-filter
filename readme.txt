@@ -1,9 +1,9 @@
-===  Smart Filter ===
-Plugin Name: Smart Filter
+===  Filter & Grids ===
+Plugin Name: Filter & Grids
 Contributors: YMC, Roman
 Version: 2.6.1
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
-Tags: filters, search, posts, masonry, ajax posts, ajax filter, category posts, taxonomy, custom taxonomy, woocommerce
+Tags: filter, grids, ajax posts, search, posts, masonry, ajax filter, category posts, taxonomy, custom taxonomy, woocommerce
 Requires at least: 4.8
 Tested up to: 6.3
 Stable tag: 2.6.1
@@ -11,14 +11,14 @@ Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Filter posts or custom post types by custom taxonomy / category without page reload with different pagination types.
+Filter posts by categories / taxonomies without reloading the page. Create posts grids.
 
 == Description ==
 
-Filter posts or custom post types by custom taxonomy / category without page reload with different pagination types. Plugin allows to solve a variety of tasks for displaying posts on site pages. For advanced developers, there is an opportunity to independently develop layouts for filters and post cards, which makes the plugin universal.
+Filter posts or custom post types by custom taxonomy / category without page reload with different pagination types. Create different posts grids. Plugin allows to solve a variety of tasks for displaying posts on site pages. It is possible to develop custom filter and grid layouts for posts, which makes the plugin versatile.
 
 == Custom Post Type & Taxonomies Support ==
-The plugin supports custom post types. You can filter custom post types with the AJAX filter. You can select specific custom taxonomies and their terms to showcase. If you need to create your custom filter bar or custom post card, you can use the filters which will allow you to create your templates. This requires a basic understanding of HTML JavaScript, CSS and PHP languages. You can find more details <a href='https://github.com/YMC-22/smart-filter' target='_blank'>here.</a>
+The plugin supports custom post types. You can filter custom post types with the AJAX filter. You can select specific custom taxonomies and their terms to showcase. If you need to create custom filter bar or custom post card, you can use the filters which will allow you to create your templates. You can find more details <a href='https://github.com/YMC-22/smart-filter' target='_blank'>here.</a>
 
 == Plugin Features ==
 The plugin provides the following functionality:

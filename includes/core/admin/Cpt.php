@@ -20,8 +20,8 @@ class Cpt {
 		register_post_type( self::post_type,
 			array(
 				'labels'              => array(
-					'name'          => __( 'Smart Filter', 'ymc-smart-filter' ),
-					'singular_name' => __( 'Smart Filter', 'ymc-smart-filter' ),
+					'name'          => __( 'Filter & Grids', 'ymc-smart-filter' ),
+					'singular_name' => __( 'Filter & Grids', 'ymc-smart-filter' ),
 				),
 				'public'              => false,
 				'hierarchical'        => false,
