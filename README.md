@@ -543,6 +543,8 @@ YMCTools({ target: '.data-target-ymc545-1'}).apiPageUpdated(3);
 ```js
 YMCTools({ target: '.data-target-ymcFilterID-LayoutID' }).apiPopup( postID );
 ```
+**Required params:**
+- `postID - (Number) - post ID`
 
 Usage example:
 
