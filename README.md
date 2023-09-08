@@ -538,6 +538,18 @@ Usage example:
 YMCTools({ target: '.data-target-ymc545-1'}).apiPageUpdated(3); 
 ```
 
+**This method allows you to open a popup post and load content into it.**
+
+```js
+YMCTools({ target: '.data-target-ymcFilterID-LayoutID' }).apiPopup( postID );
+```
+
+Usage example:
+
+```js
+YMCTools({ target: '.data-target-ymc545-1'}).apiPopup(15); 
+```
+
 
 ### Hooks JS.
 

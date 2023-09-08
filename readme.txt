@@ -1,12 +1,12 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.6.1
+Version: 2.6.2
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
 Tags: filter, grids, ajax posts, search, posts, masonry, ajax filter, category posts, taxonomy, custom taxonomy, woocommerce
 Requires at least: 4.8
 Tested up to: 6.3
-Stable tag: 2.6.1
+Stable tag: 2.6.2
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -175,7 +175,8 @@ Fixed PHP files
 Fixed clear result search
 = 2.6.1 =
 Add Popup to view posts
-
+= 2.6.2 =
+Add Method API JS open popup post
 
 
 == Video ==

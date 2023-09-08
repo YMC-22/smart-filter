@@ -126,6 +126,7 @@
             });
         }
 
+        // Close popup
         function popupClose(e) {
             e.preventDefault();
             let _self = $(e.target);
@@ -134,6 +135,49 @@
             popup.hide();
             body.css({'overflow' : 'auto'});
         }
+
+        // Popup API
+        function popupApiPost( options ) {
+
+            let postID = options.postid;
+            let target = options.target;
+            let body = $('body');
+            let popupContainer = $(target).find('.popup-entry');
+            let popupOverlay = $(target).find('.ymc-popup-overlay');
+
+            let params = JSON.parse(document.querySelector(target).dataset.params);
+            let filterID = params.filter_id;
+            let targetID = params.target_id;
+
+            const data = {
+                'action'     : 'get_post_popup',
+                'nonce_code' : _smart_filter_object.nonce,
+                'post_id'    : postID,
+                'filter_id'  : filterID,
+                'target_id'  : targetID
+            };
+
+            if ( popupContainer.length ) {
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: _smart_filter_object.ajax_url,
+                    data: data,
+                    beforeSend: function () {},
+                    success: function (res) {
+                        if(res.data !== '') {
+                            popupContainer.html(res.data);
+                            popupOverlay.show();
+                            body.css({'overflow' : 'hidden'});
+                        }
+                    },
+                    error: function (obj, err) {
+                        console.log( obj, err );
+                    }
+                });
+            }
+        }
+
 
         // Main Request
         function getFilterPosts( options ) {
@@ -1032,6 +1076,19 @@
                 if( option ) {
                     this.getFilterPosts();
                 }
+            }
+
+            YMCTools.prototype.apiPopup = function ( postID ) {
+
+                let container = document.querySelector(''+ this.target +'');
+                if( ! container )  throw new Error("ApiPopup: Target not found");
+                if( ! postID ) throw new Error("ApiPopup: Post ID not defined");
+
+                const options = {
+                    'postid' : postID,
+                    'target' : this.target
+                };
+                popupApiPost( options );
             }
 
             YMCTools.prototype.apiMetaUpdate = function ( option = true ) {
