@@ -1293,7 +1293,7 @@ $font-size: 16;
 		z-index: 999999;
 		display: none;
 		.ymc-popup-wrp {
-			position: absolute;
+			position: fixed;
 			width: 50%;
 			height: 550px;
 			left: 50%;
