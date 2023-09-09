@@ -294,13 +294,30 @@ class Meta_Boxes {
 			update_post_meta( $post_id, 'ymc_popup_status', $ymc_popup_status );
 		}
 
+		// Popup Animation
+		if( isset($_POST['ymc-popup-animation']) ) {
+			$ymc_popup_animation = sanitize_text_field( $_POST['ymc-popup-animation']);
+			update_post_meta( $post_id, 'ymc_popup_animation', $ymc_popup_animation );
+		}
+
+		// Popup Animation Origin
+		if( isset($_POST['ymc-popup-animation-origin']) ) {
+			$ymc_popup_animation_origin = sanitize_text_field( $_POST['ymc-popup-animation-origin']);
+			update_post_meta( $post_id, 'ymc_popup_animation_origin', $ymc_popup_animation_origin );
+		}
+		// Popup Settings
+		if( isset($_POST['ymc_popup_settings']) ) {
+			$ymc_popup_settings = $_POST['ymc_popup_settings'];
+			update_post_meta( $post_id, 'ymc_popup_settings', $ymc_popup_settings );
+		}
+
 	}
 
 	public function add_post_metabox() {
 
 		add_meta_box( 'ymc_top_meta_box' , __('Settings','ymc-smart-filter'), array($this,'ymc_top_meta_box'), 'ymc_filters', 'normal', 'core');
 
-		add_meta_box( 'ymc_side_meta_box' , __('YMC SF Features','ymc-smart-filter'), array($this,'ymc_side_meta_box'), 'ymc_filters', 'side', 'core');
+		add_meta_box( 'ymc_side_meta_box' , __('Filter & Grids','ymc-smart-filter'), array($this,'ymc_side_meta_box'), 'ymc_filters', 'side', 'core');
 
 	}
 
@@ -335,7 +352,7 @@ class Meta_Boxes {
 					<li class="nav-item">
 						<a class="link" id="appearance-tab" href="#appearance">
 							<span class="text"><?php echo esc_html__('Appearance','ymc-smart-filter');?></span>
-							<span class="info"><?php echo esc_html__('Post, Filter, Popup, Pagination Options','ymc-smart-filter'); ?></span>
+							<span class="info"><?php echo esc_html__('Post, Filter, Popup, Pagination Settings','ymc-smart-filter'); ?></span>
 							<span class="dashicons dashicons-visibility"></span>
 						</a>
 					</li>
@@ -433,10 +450,13 @@ class Meta_Boxes {
 	public function ymc_side_meta_box() { ?>
 		<article>
 			<img style="width:70px;float:left;margin:0 10px 0 0;" class="ymc-logo" src="<?php esc_attr_e(YMC_SMART_FILTER_URL . '/includes/assets/images/logo.png'); ?>">
-			Smart Filter posts/custom post types by category allows to solve
+			Filter & Grids posts/custom post types by category allows to solve
 			a variety of tasks for displaying posts on site pages. Easy to use.
 			Customization of card templates and filters templates will allow you to fine-tune the display of posts. For more detailed
-			information, please see the <a target="_blank" href="https://github.com/YMC-22/smart-filter">documentation</a>  for using the plugin.
+			information, please see the <a target="_blank" href="https://github.com/YMC-22/smart-filter">documentation</a>  for using the plugin.<br/>
+			<hr/>
+			<strong style="color: #000; font-weight: 700; line-height: 1.2; font-size: 16px; background: #098ab821; display: block; padding: 7px 5px;">
+				Did you like or find our plugin helpful? To support the plugin, you can make a <a target="_blank" href="https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW">Donation</a></strong>.
 		</article>
 	<?php }
 

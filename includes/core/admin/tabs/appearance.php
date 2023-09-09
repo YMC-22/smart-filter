@@ -15,6 +15,9 @@ $ymc_multiple_sort = $variable->get_ymc_multiple_sort( $post->ID );
 $ymc_post_status = $variable->get_ymc_post_status( $post->ID );
 $ymc_post_animation  = $variable->get_ymc_post_animation( $post->ID );
 $ymc_popup_status  = $variable->get_ymc_popup_status( $post->ID );
+$ymc_popup_animation  = $variable->get_ymc_popup_animation( $post->ID );
+$ymc_popup_animation_origin  = $variable->get_ymc_popup_animation_origin( $post->ID );
+$ymc_popup_settings  = $variable->get_ymc_popup_settings( $post->ID );
 
 ?>
 
@@ -293,7 +296,7 @@ $ymc_popup_status  = $variable->get_ymc_popup_status( $post->ID );
                 <label class="form-label">
                     <?php echo esc_html__('Status Options', 'ymc-smart-filter'); ?>
                     <span class="information">
-                    <?php echo esc_html__('Set posts with the specified status.', 'ymc-smart-filter');?>
+                    <?php echo esc_html__('Set posts with specified status.', 'ymc-smart-filter');?>
                 </span>
                 </label>
                 <select class="form-select"  id="ymc-post-status" name="ymc-post-status">
@@ -327,9 +330,9 @@ $ymc_popup_status  = $variable->get_ymc_popup_status( $post->ID );
             <div class="from-element">
 
                 <label class="form-label">
-                    <?php echo esc_html__('Post Animation', 'ymc-smart-filter'); ?>
+                    <?php echo esc_html__('Animation Type', 'ymc-smart-filter'); ?>
                     <span class="information">
-                    <?php echo esc_html__('Set animation for posts. Animations are not applied to post Masonry Layouts', 'ymc-smart-filter');?>
+                    <?php echo esc_html__('Select an animation type for your post. Animations are not applied to post Masonry Layouts', 'ymc-smart-filter');?>
                     </span>
                 </label>
 
@@ -381,7 +384,7 @@ $ymc_popup_status  = $variable->get_ymc_popup_status( $post->ID );
                     <?php echo esc_html__('Enable / Disable Popup', 'ymc-smart-filter'); ?>
                     <span class="information">
                     <?php echo esc_html__('Enable popup in frontend. 
-                    The content of the post will be displayed inside the popup.', 'ymc-smart-filter'); ?>
+                    Content of a post will be displayed inside popup.', 'ymc-smart-filter'); ?>
                 </span>
                 </label>
 
@@ -393,6 +396,174 @@ $ymc_popup_status  = $variable->get_ymc_popup_status( $post->ID );
                     </label>
                 </div>
             </div>
+
+            <?php $ymc_hide = ($ymc_popup_status === 'on') ? '' : 'ymc_hidden'; ?>
+
+            <div class="manage-filters <?php echo esc_attr($ymc_hide); ?>">
+
+                <div class="from-element">
+                    <label class="form-label">
+                        <?php echo esc_html__('Animation Type', 'ymc-smart-filter'); ?>
+                        <span class="information">
+                        <?php echo esc_html__('Select an animation type for your popup.', 'ymc-smart-filter');?>
+                        </span>
+                    </label>
+
+                    <select class="form-select"  id="ymc-popup-animation" name="ymc-popup-animation">
+                        <option value="normal" <?php echo ( $ymc_popup_animation === 'normal') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('None', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="fade-in" <?php echo ( $ymc_popup_animation === 'fade-in') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('Fade in', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="rotate" <?php echo ( $ymc_popup_animation === 'rotate') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('Rotate', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="zoom-in" <?php echo ( $ymc_popup_animation === 'zoom-in') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('Zoom', 'ymc-smart-filter'); ?>
+                        </option>
+                    </select>
+                </div>
+
+                <div class="from-element">
+                    <label class="form-label">
+                        <?php echo esc_html__('Location', 'ymc-smart-filter'); ?>
+                        <span class="information">
+                        <?php echo esc_html__('Choose where the popup will be displayed.', 'ymc-smart-filter');?>
+                        </span>
+                    </label>
+
+                    <select class="form-select" name="ymc_popup_settings[custom_location]">
+                        <option value="center" <?php echo ( $ymc_popup_settings['custom_location'] === 'center') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('Middle Center', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="left center" <?php echo ( $ymc_popup_settings['custom_location'] === 'left center') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('Middle Left', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="right center" <?php echo ( $ymc_popup_settings['custom_location'] === 'right center') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('Middle Right', 'ymc-smart-filter'); ?>
+                        </option>
+                    </select>
+
+                </div>
+
+                <div class="from-element">
+                    <label class="form-label">
+                        <?php echo esc_html__('Animation Origin', 'ymc-smart-filter'); ?>
+                        <span class="information">
+                        <?php echo esc_html__('Set the animation speed for the popup.', 'ymc-smart-filter');?>
+                        </span>
+                    </label>
+
+                    <select class="form-select"  id="ymc-popup-animation-origin" name="ymc-popup-animation-origin">
+                        <option value="top" <?php echo ( $ymc_popup_animation_origin === 'top') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('Top', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="left" <?php echo ( $ymc_popup_animation_origin === 'left') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('Left', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="bottom" <?php echo ( $ymc_popup_animation_origin === 'bottom') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('Bottom', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="right" <?php echo ( $ymc_popup_animation_origin === 'right') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('Right', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="left top" <?php echo ( $ymc_popup_animation_origin === 'left top') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('Top Left', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="center top" <?php echo ( $ymc_popup_animation_origin === 'center top') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('Top Center', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="right top" <?php echo ( $ymc_popup_animation_origin === 'right top') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('Top Right', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="left center" <?php echo ( $ymc_popup_animation_origin === 'left center') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('Middle Left', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="center center" <?php echo ( $ymc_popup_animation_origin === 'center center') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('Middle Center', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="right center" <?php echo ( $ymc_popup_animation_origin === 'right center') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('Middle Right', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="left bottom" <?php echo ( $ymc_popup_animation_origin === 'left bottom') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('Bottom Left', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="center bottom" <?php echo ( $ymc_popup_animation_origin === 'center bottom') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('Bottom Center', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="right bottom" <?php echo ( $ymc_popup_animation_origin === 'right bottom') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('Bottom Right', 'ymc-smart-filter'); ?>
+                        </option>
+                    </select>
+                </div>
+
+                <div class="from-element">
+                    <label class="form-label">
+                        <?php echo esc_html__('Width', 'ymc-smart-filter'); ?>
+                        <span class="information">
+                        <?php echo esc_html__('Set a custom width for the popup.', 'ymc-smart-filter');?>
+                        </span>
+                    </label>
+
+                    <input class="input-field w-20" type="number" name="ymc_popup_settings[custom_width]" value="<?php echo esc_attr($ymc_popup_settings['custom_width']); ?>" size="5">
+
+                    <select class="form-select w-10" name="ymc_popup_settings[custom_width_unit]">
+                        <option value="px" <?php echo ( $ymc_popup_settings['custom_width_unit'] === 'px') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('px', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="%" <?php echo ( $ymc_popup_settings['custom_width_unit'] === '%') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('%', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="em" <?php echo ( $ymc_popup_settings['custom_width_unit'] === 'em') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('em', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="rem" <?php echo ( $ymc_popup_settings['custom_width_unit'] === 'rem') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('rem', 'ymc-smart-filter'); ?>
+                        </option>
+                    </select>
+                </div>
+
+                <div class="from-element">
+                    <label class="form-label">
+                        <?php echo esc_html__('Height', 'ymc-smart-filter'); ?>
+                        <span class="information">
+                        <?php echo esc_html__('Set a custom height for the popup.', 'ymc-smart-filter');?>
+                        </span>
+                    </label>
+
+                    <input class="input-field w-20" type="number" name="ymc_popup_settings[custom_height]" value="<?php echo esc_attr($ymc_popup_settings['custom_height']); ?>" size="5">
+
+                    <select class="form-select w-10" name="ymc_popup_settings[custom_height_unit]">
+                        <option value="px" <?php echo ( $ymc_popup_settings['custom_height_unit'] === 'px') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('px', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="%" <?php echo ( $ymc_popup_settings['custom_height_unit'] === '%') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('%', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="em" <?php echo ( $ymc_popup_settings['custom_height_unit'] === 'em') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('em', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="rem" <?php echo ( $ymc_popup_settings['custom_height_unit'] === 'rem') ? 'selected' : ''; ?>>
+                            <?php echo esc_html__('rem', 'ymc-smart-filter'); ?>
+                        </option>
+                    </select>
+                </div>
+
+                <div class="from-element">
+                    <label class="form-label">
+                        <?php echo esc_html__('Background Overlay', 'ymc-smart-filter'); ?>
+                        <span class="information">
+                        <?php echo __('Set a custom background overlay for the popup. Use <a target="_blank" href="https://rgbacolorpicker.com/rgba-to-hex">RGBA to Hex Converter</a>', 'ymc-smart-filter');?>
+                        </span>
+                    </label>
+
+                    <input class="ymc-custom-color" type="text" name="ymc_popup_settings[custom_bg_overlay]" value="<?php echo esc_attr($ymc_popup_settings['custom_bg_overlay']); ?>" />
+
+                </div>
+
+            </div>
+
 
             <header class="sub-header">
                 <i class="fas fa-sort-numeric-down-alt"></i>

@@ -90,6 +90,7 @@
             let params = JSON.parse(target.dataset.params);
             let stylePreloader = _smart_filter_object.path+"/includes/assets/images/"+ params.preloader_icon +".svg";
             let preloaderFilter = filterPreloader( params );
+            let classAnimation = params.popup_animation;
 
             const data = {
                 'action'     : 'get_post_popup',
@@ -118,6 +119,7 @@
                         popupContainer.html(res.data);
                         popupOverlay.show();
                         body.css({'overflow' : 'hidden'});
+                        popupContainer.closest('.ymc-popup-wrp').addClass(classAnimation);
                     }
                 },
                 error: function (obj, err) {
@@ -129,10 +131,15 @@
         // Close popup
         function popupClose(e) {
             e.preventDefault();
-            let _self = $(e.target);
-            let popup = _self.closest('.ymc-smart-filter-container').find('.ymc-popup-overlay');
+
+            let popup = $(e.target).closest('.ymc-smart-filter-container').find('.ymc-popup-overlay');
             let body = $('body');
+            let target = e.target.closest('.ymc-smart-filter-container');
+            let params = JSON.parse(target.dataset.params);
+            let classAnimation = params.popup_animation;
+
             popup.hide();
+            popup.find('.ymc-popup-wrp').removeClass(classAnimation);
             body.css({'overflow' : 'auto'});
         }
 
@@ -919,7 +926,13 @@
 
         $(document).on('click','.ymc-smart-filter-container .ymc-popup-overlay', function (e) {
             if( !e.target.closest('.ymc-popup-wrp') ) {
+
+                let target = e.target.closest('.ymc-smart-filter-container');
+                let params = JSON.parse(target.dataset.params);
+                let classAnimation = params.popup_animation;
+
                $(e.target).hide();
+               $(e.target).find('.ymc-popup-wrp').removeClass(classAnimation);
                $('body').css({'overflow' : 'auto'});
             }
         });

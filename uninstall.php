@@ -59,7 +59,10 @@ $wpdb->get_results('DELETE FROM wp_postmeta WHERE meta_key IN (
                                   "ymc_terms_options",
                                   "ymc_post_animation",
                                   "ymc_terms_icons",
-                                  "ymc_popup_status"                                                                        
+                                  "ymc_popup_status",                                                                        
+                                  "ymc_popup_animation",                                                                        
+                                  "ymc_popup_animation_origin",                                                                        
+                                  "ymc_popup_settings"                                                                        
                                 )');
 
 

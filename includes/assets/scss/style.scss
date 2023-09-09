@@ -1295,18 +1295,13 @@ $font-size: 16;
 		.ymc-popup-wrp {
 			position: absolute;
 			width: 50%;
-			height: 50%;
+			height: 550px;
 			left: 50%;
 			top: 50%;
 			transform: translate(-50%,-50%);
 			background-color: #fff;
 			padding: 50px 20px 20px 20px;
-			max-width: 900px;
-			max-height: 550px;
-			@media screen and (max-width: 1024px) {
-				width: 80%;
-				max-height: 400px;
-			}
+			transition: .5s;
 			hr {
 				width: 100%;
 				margin: 5px 0 20px;
@@ -1324,7 +1319,7 @@ $font-size: 16;
 			.popup-entry {
 				overflow: hidden;
 				overflow-y: auto;
-				max-height: 380px;
+				max-height: 90%;
 				height: 100%;
 				&::-webkit-scrollbar {
 					width: 5px;
@@ -1351,6 +1346,47 @@ $font-size: 16;
 					font-size: 16px;
 					line-height: 1.35;
 					padding-right: 10px;
+				}
+			}
+			&.normal {
+				transform: translate(-50%, -50%);
+			}
+			&.zoom-in {
+				animation: popup-zoom-in .5s ease-out;
+			}
+			&.rotate {
+				animation: popup-rotate .5s ease-out;
+			}
+			&.fade-in {
+				animation: popup-fade-in .5s linear;
+			}
+
+			@keyframes popup-zoom-in {
+				0% {
+					transform: translate(-50%,-50%) scale(.3, .3);
+					opacity: .5;
+				}
+				100% {
+					transform: translate(-50%,-50%) scale(1, 1);
+					opacity: 1;
+				}
+			}
+			@keyframes popup-rotate {
+				0% {
+					transform: translate(-50%,-50%) scale(.3, .3) rotate(0deg);
+					opacity: .5;
+				}
+				100% {
+					transform: translate(-50%,-50%) scale(1, 1) rotate(360deg);
+					opacity: 1;
+				}
+			}
+			@keyframes popup-fade-in {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
 				}
 			}
 		}

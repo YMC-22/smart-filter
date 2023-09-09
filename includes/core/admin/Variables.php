@@ -106,6 +106,19 @@ class Variables {
 
 	public $ymc_popup_status = 'off';
 
+	public $ymc_popup_animation = null;
+
+	public $ymc_popup_animation_origin = 'center center';
+
+	public $ymc_popup_settings = [
+		"custom_width" => "50",
+		"custom_width_unit" => "%",
+		"custom_height" => "550",
+		"custom_height_unit" => "px",
+		"custom_location" => "center",
+		"custom_bg_overlay" => "#14151899"
+	];
+
 
 	/**
 	 * Advanced tab used default variables
@@ -493,6 +506,30 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_popup_status', true );
 		}
 		return $this->ymc_popup_status;
+	}
+
+	public function get_ymc_popup_animation( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_popup_animation' ) ) {
+			return get_post_meta( $post_id, 'ymc_popup_animation', true );
+		}
+		return $this->ymc_popup_animation;
+	}
+
+	public function get_ymc_popup_animation_origin( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_popup_animation_origin' ) ) {
+			return get_post_meta( $post_id, 'ymc_popup_animation_origin', true );
+		}
+		return $this->ymc_popup_animation_origin;
+	}
+
+	public function get_ymc_popup_settings( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_popup_settings' ) ) {
+			return get_post_meta( $post_id, 'ymc_popup_settings', true );
+		}
+		return $this->ymc_popup_settings;
 	}
 
 

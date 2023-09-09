@@ -200,7 +200,7 @@ $font-size: 16;
 								}
 
 								.form-label {
-									display: inline-block;
+									display: block;
 									font-weight: 600;
 									margin: 2px 0;
 									color: #000;
@@ -440,7 +440,8 @@ $font-size: 16;
 									}
 								}
 
-								input[type="text"] {
+								input[type="text"],
+								input[type="number"] {
 									border: 1px solid #e0e4e9;
 									height: 35px;
 									border-radius: 0;
@@ -448,6 +449,13 @@ $font-size: 16;
 									&::placeholder {
 										color: #999;
 									}
+								}
+
+								.w-20 {
+									width: 20% !important;
+								}
+								.w-10 {
+									width: 10% !important;
 								}
 
 								label {

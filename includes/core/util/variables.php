@@ -55,5 +55,7 @@ $ymc_preloader_filters_custom = $variable->get_ymc_preloader_filters_custom( $id
 $ymc_terms_options   = $variable->get_terms_options( $id );
 $ymc_post_animation  = $variable->get_ymc_post_animation( $id );
 $ymc_popup_status  = $variable->get_ymc_popup_status( $id );
-
+$ymc_popup_animation  = $variable->get_ymc_popup_animation( $id );
+$ymc_popup_animation_origin  = $variable->get_ymc_popup_animation_origin( $id );
+$ymc_popup_settings  = $variable->get_ymc_popup_settings( $id );
 
