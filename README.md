@@ -5,7 +5,7 @@
 
 ### Usage
 - Activate Plugin or upload the entire 'ymc-smart-filters' folder to the '/wp-content/plugins/' directory.
-- Add new YMC Smart Filter
+- Add new Filter & Grids
 - Copy Filter & Grids shortcode and paste to any page or post
 - Set setting for each post 
 
