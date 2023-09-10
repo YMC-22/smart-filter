@@ -1,18 +1,18 @@
 ![This is an image](/includes/assets/images/YMC-logos.png)
 
-#  Documentation for SMART FILTER
-> Plugin Smart Filters - Filter posts/custom post types by custom taxonomy/category without page reload and with pagination too. It has a different filter and post layouts. The plugin allows you to create multiple filters on one page. To use custom templates for the filter bar and plugin postcards, you need a basic understanding of technologies: HTML JavaScript, CSS and PHP. This plugin allows you to customize your post and filter templates, giving you total freedom in your presentation. JS API interface allows you to interact with the filter from the outside. This allows you to develop all sorts of complex post filtering interfaces.
+#  Documentation for Filter & Grids
+> Plugin Filter & Grids - Filter posts/custom post types by custom taxonomy/category without page reload and with pagination too. It has a different filter and post layouts. The plugin allows you to create multiple filters on one page. To use custom templates for the filter bar and plugin postcards, you need a basic understanding of technologies: HTML JavaScript, CSS and PHP. This plugin allows you to customize your post and filter templates, giving you total freedom in your presentation. JS API interface allows you to interact with the filter from the outside. This allows you to develop all sorts of complex post filtering interfaces.
 
 ### Usage
 - Activate Plugin or upload the entire 'ymc-smart-filters' folder to the '/wp-content/plugins/' directory.
 - Add new YMC Smart Filter
-- Copy YMC Smart Filter shortcode and paste to any page or post
+- Copy Filter & Grids shortcode and paste to any page or post
 - Set setting for each post 
 
 ### List Filters
 Add code to `function.php` to your theme
 
-`FilterID` is ID of the filter inside Smart Filter Admin Panel Shortcode tab [ymc_filter id='165']
+`FilterID` is ID of the filter inside Filter & Grids Admin Panel Shortcode tab [ymc_filter id='545']
 
 `LayoutID` is serial number of the custom filter layout on the page. Can be find by inspecting the filter css class like: data-target-ymc545-1
 
