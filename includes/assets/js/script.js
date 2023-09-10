@@ -84,7 +84,7 @@
             let postId = _self.data('postid');
             let popupOverlay = _self.closest('.ymc-smart-filter-container').find('.ymc-popup-overlay');
             let popupContainer = _self.closest('.ymc-smart-filter-container').find('.popup-entry');
-            let body = $('body');
+            let bodyHtml = $('body, html');
             let postContainer = _self.closest('.post-item');
             let target = e.target.closest('.ymc-smart-filter-container');
             let params = JSON.parse(target.dataset.params);
@@ -117,8 +117,8 @@
 
                     if(res.data !== '') {
                         popupContainer.html(res.data);
-                        popupOverlay.show();
-                        body.css({'overflow' : 'hidden'});
+                        popupOverlay.css({'display':'block','opacity':'1'});
+                        bodyHtml.css({'overflow' : 'hidden'});
                         popupContainer.closest('.ymc-popup-wrp').addClass(classAnimation);
                     }
                 },
@@ -132,15 +132,15 @@
         function popupClose(e) {
             e.preventDefault();
 
-            let popup = $(e.target).closest('.ymc-smart-filter-container').find('.ymc-popup-overlay');
-            let body = $('body');
+            let popupOverlay = $(e.target).closest('.ymc-smart-filter-container').find('.ymc-popup-overlay');
+            let bodyHtml = $('body, html');
             let target = e.target.closest('.ymc-smart-filter-container');
             let params = JSON.parse(target.dataset.params);
             let classAnimation = params.popup_animation;
 
-            popup.hide();
-            popup.find('.ymc-popup-wrp').removeClass(classAnimation);
-            body.css({'overflow' : 'auto'});
+            popupOverlay.css({'display':'none','opacity':'0'});
+            popupOverlay.find('.ymc-popup-wrp').removeClass(classAnimation);
+            bodyHtml.css({'overflow' : 'auto'});
         }
 
         // Popup API
@@ -931,9 +931,9 @@
                 let params = JSON.parse(target.dataset.params);
                 let classAnimation = params.popup_animation;
 
-               $(e.target).hide();
+               $(e.target).css({'display':'none','opacity':'0'});
                $(e.target).find('.ymc-popup-wrp').removeClass(classAnimation);
-               $('body').css({'overflow' : 'auto'});
+               $('body, html').css({'overflow' : 'auto'});
             }
         });
 
