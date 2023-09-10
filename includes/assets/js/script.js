@@ -148,7 +148,7 @@
 
             let postID = options.postid;
             let target = options.target;
-            let body = $('body');
+            let bodyHtml = $('body, html');
             let popupContainer = $(target).find('.popup-entry');
             let popupOverlay = $(target).find('.ymc-popup-overlay');
 
@@ -174,8 +174,8 @@
                     success: function (res) {
                         if(res.data !== '') {
                             popupContainer.html(res.data);
-                            popupOverlay.show();
-                            body.css({'overflow' : 'hidden'});
+                            popupOverlay.css({'display':'block','opacity':'1'});
+                            bodyHtml.css({'overflow' : 'hidden'});
                         }
                     },
                     error: function (obj, err) {
