@@ -115,7 +115,7 @@ $ymc_terms_options   = $variable->get_terms_options( $post->ID );
             unset($result_tax);
         }
         else {
-          echo '<span class="notice">'. esc_html__('No data for Post Type / Taxonomy', 'ymc-smart-filter') .'</span>';
+          echo '<span class="notice">'. esc_html__('No data for taxonomies', 'ymc-smart-filter') .'</span>';
         }
 	?>
 
@@ -138,16 +138,17 @@ $ymc_terms_options   = $variable->get_terms_options( $post->ID );
 
 		<?php
 
-        if( is_array($tax_sel) && count($tax_sel) > 0 ) {
+		if( in_array($cpt, $cpost_types) ) {
+            if( is_array($tax_sel) && count($tax_sel) > 0 ) {
 
-            foreach ( $tax_sel as $tax ) :
+                foreach ( $tax_sel as $tax ) :
 
 	            $terms = get_terms([
 		            'taxonomy' => $tax,
 		            'hide_empty' => false,
 	            ]);
 
-	            if( $terms ) {
+	            if( is_array($terms) ) {
 
 					$terms_icons = '';
 		            $bg_term = '';
@@ -212,7 +213,7 @@ $ymc_terms_options   = $variable->get_terms_options( $post->ID );
 						            }
 					            }
 
-					            if( $flag_terms_align ) break;
+					            if( $flag_terms_align ) {break;}
 				            }
 			            }
 
@@ -239,7 +240,7 @@ $ymc_terms_options   = $variable->get_terms_options( $post->ID );
 									}
 								}
 
-								if( $flag_terms_option ) break;
+								if( $flag_terms_option ) {break;}
 							}
 						}
 
@@ -288,8 +289,11 @@ $ymc_terms_options   = $variable->get_terms_options( $post->ID );
 	            }
 
             endforeach;
-        }
-
+            }
+		}
+		else {
+			echo '<span class="notice">'. esc_html__('No data for terms', 'ymc-smart-filter') .'</span>';
+		}
         ?>
 
 	</div>
@@ -300,151 +304,155 @@ $ymc_terms_options   = $variable->get_terms_options( $post->ID );
 
 <div class="form-group wrapper-selection">
 
-	<label class="form-label">
-		<?php echo esc_html__('Exclude Posts', 'ymc-smart-filter'); ?>
-		<span class="information">
+	<?php if( in_array($cpt, $cpost_types) ) : ?>
+
+		<label class="form-label">
+			<?php echo esc_html__('Exclude Posts', 'ymc-smart-filter'); ?>
+			<span class="information">
         <?php echo esc_html__('Check to exclude the selected posts from the grid. Works on selected posts.', 'ymc-smart-filter');?>
         </span>
-	</label>
+		</label>
 
-	<div class="group-elements">
-		<?php  $check_exclude_posts = ( $ymc_exclude_posts === 'on' ) ? 'checked' : '';  ?>
-		<input type="hidden" name='ymc-exclude-posts' value="off">
-		<input class="ymc-exclude-posts" type="checkbox" value="on" name="ymc-exclude-posts" id="ymc-exclude-posts" <?php echo esc_attr($check_exclude_posts); ?>>
-		<label for="ymc-exclude-posts"><?php echo esc_html__('Enable', 'ymc-smart-filter'); ?></label>
-	</div>
+		<div class="group-elements">
+			<?php  $check_exclude_posts = ( $ymc_exclude_posts === 'on' ) ? 'checked' : '';  ?>
+			<input type="hidden" name='ymc-exclude-posts' value="off">
+			<input class="ymc-exclude-posts" type="checkbox" value="on" name="ymc-exclude-posts" id="ymc-exclude-posts" <?php echo esc_attr($check_exclude_posts); ?>>
+			<label for="ymc-exclude-posts"><?php echo esc_html__('Enable', 'ymc-smart-filter'); ?></label>
+		</div>
 
-	<hr/>
+		<hr/>
 
-	<label class="form-label">
-		<?php echo esc_html__('Add posts', 'ymc-smart-filter'); ?>
-		<span class="information">
+		<label class="form-label">
+			<?php echo esc_html__('Add posts', 'ymc-smart-filter'); ?>
+			<span class="information">
         <?php echo esc_html__('Include / Exclude posts in the post grid on the frontend. To exclude posts, check option "Exclude posts". By default, posts are included in the grid. Drag and Drop posts for custom sorting', 'ymc-smart-filter');?>
         </span>
-	</label>
+		</label>
 
-	<div class="search-posts">
-		<input class="input-field" type="search" placeholder="Search..." />
-	</div>
+		<div class="search-posts">
+			<input class="input-field" type="search" placeholder="Search..." />
+		</div>
 
-	<div class="selection-posts" id="selection-posts">
+		<div class="selection-posts" id="selection-posts">
 
-		<div class="choices">
-			<ul class="list choices-list">
-			<?php
+			<div class="choices">
+				<ul class="list choices-list">
+					<?php
 
-				$tmp_post = $post;
+					$tmp_post = $post;
 
-				$arg = [
-					'post_type' => $cpt,
-					'orderby' => 'title',
-					'order' => 'ASC',
-					'posts_per_page' => -1
-				];
-
-				if( is_array($tax_sel) && count($tax_sel) > 0 && !empty($terms_sel) ) {
-
-					$params_choices = [
-						'relation' => 'OR'
+					$arg = [
+						'post_type' => $cpt,
+						'orderby' => 'title',
+						'order' => 'ASC',
+						'posts_per_page' => -1
 					];
 
-					foreach ( $tax_sel as $tax ) :
+					if( is_array($tax_sel) && count($tax_sel) > 0 && !empty($terms_sel) ) {
 
-						$terms = get_terms([
-							'taxonomy' => $tax,
-							'hide_empty' => false
-						]);
+						$params_choices = [
+							'relation' => 'OR'
+						];
 
-						if( $terms ) {
+						foreach ( $tax_sel as $tax ) :
 
-							$arr_terms_ids = [];
-
-							foreach( $terms as $term ) :
-
-								if( in_array($term->term_id, $terms_sel) ) {
-									array_push($arr_terms_ids, $term->term_id);
-								}
-
-							endforeach;
-
-							$params_choices[] = [
+							$terms = get_terms([
 								'taxonomy' => $tax,
-								'field'    => 'id',
-								'terms'    => $arr_terms_ids
-							];
+								'hide_empty' => false
+							]);
 
-							$arr_terms_ids = null;
-						}
+							if( $terms ) {
 
-					endforeach;
+								$arr_terms_ids = [];
 
-					$arg['tax_query'] = $params_choices;
-				}
+								foreach( $terms as $term ) :
 
-				$query = new \WP_query($arg);
+									if( in_array($term->term_id, $terms_sel) ) {
+										array_push($arr_terms_ids, $term->term_id);
+									}
 
-				if ( $query->have_posts() ) {
+								endforeach;
 
-					$class_disabled = '';
+								$params_choices[] = [
+									'taxonomy' => $tax,
+									'field'    => 'id',
+									'terms'    => $arr_terms_ids
+								];
 
-					while ($query->have_posts()) : $query->the_post();
-						if( is_array($ymc_choices_posts) &&  array_search(get_the_ID(), $ymc_choices_posts) !== false) {
-							$class_disabled = 'disabled';
-						}
-						echo '<li><span class="ymc-rel-item ymc-rel-item-add '.$class_disabled.'" data-id="'.get_the_ID().'">ID: '.get_the_ID().'<br>'.get_the_title(get_the_ID()).'</span></li>';
-						$class_disabled = null;
-					endwhile;
+								$arr_terms_ids = null;
+							}
 
-				}
-				else {
-					echo '<li class="notice">'.esc_html__('No posts', 'ymc-smart-filter').'</li>';
-				}
-			?>
-			</ul>
-			<?php
+						endforeach;
+
+						$arg['tax_query'] = $params_choices;
+					}
+
+					$query = new \WP_query($arg);
+
+					if ( $query->have_posts() ) {
+
+						$class_disabled = '';
+
+						while ($query->have_posts()) : $query->the_post();
+							if( is_array($ymc_choices_posts) &&  array_search(get_the_ID(), $ymc_choices_posts) !== false) {
+								$class_disabled = 'disabled';
+							}
+							echo '<li><span class="ymc-rel-item ymc-rel-item-add '.$class_disabled.'" data-id="'.get_the_ID().'">ID: '.get_the_ID().'<br>'.get_the_title(get_the_ID()).'</span></li>';
+							$class_disabled = null;
+						endwhile;
+
+					}
+					else {
+						echo '<li class="notice">'.esc_html__('No posts', 'ymc-smart-filter').'</li>';
+					}
+					?>
+				</ul>
+				<?php
 				echo '<span class="number-posts">'. $query->found_posts .'</span>';
 				wp_reset_postdata();
-			?>
-		</div>
+				?>
+			</div>
 
-		<div class="values">
+			<div class="values">
 
-			<?php $class_choices = ( $ymc_exclude_posts === 'on' ) ? 'exclude-posts' : 'include-posts'; ?>
+				<?php $class_choices = ( $ymc_exclude_posts === 'on' ) ? 'exclude-posts' : 'include-posts'; ?>
 
-			<ul class="list values-list <?php echo $class_choices; ?>">
-			<?php
+				<ul class="list values-list <?php echo $class_choices; ?>">
+					<?php
 
-				if( is_array($ymc_choices_posts) ) :
+					if( is_array($ymc_choices_posts) ) :
 
-					$query = new \WP_query([
-						'post_type' => $cpt,
-						'orderby' => 'post__in',
-						'post__in'  => $ymc_choices_posts,
-						'posts_per_page' => -1
-					]);
+						$query = new \WP_query([
+							'post_type' => $cpt,
+							'orderby' => 'post__in',
+							'post__in'  => $ymc_choices_posts,
+							'posts_per_page' => -1
+						]);
 
-					while ($query->have_posts()) : $query->the_post();
+						while ($query->have_posts()) : $query->the_post();
 
-						echo '<li><input type="hidden" name="ymc-choices-posts[]" value="'.get_the_ID().'">
+							echo '<li><input type="hidden" name="ymc-choices-posts[]" value="'.get_the_ID().'">
 							  <span  class="ymc-rel-item" data-id="'.get_the_ID().'">ID: '.get_the_ID().'<br>'.get_the_title(get_the_ID()).'
 							  <a href="#" class="ymc-icon-minus remove_item"></a></span></li>';
-					endwhile;
+						endwhile;
 
-					echo '<span class="number-selected-posts">'. $query->found_posts .'</span>';
+						echo '<span class="number-selected-posts">'. $query->found_posts .'</span>';
 
-				else :
+					else :
 
-					echo '<span class="number-selected-posts">0</span>';
+						echo '<span class="number-selected-posts">0</span>';
 
-				endif;
+					endif;
 
-				$post = $tmp_post;
-			?>
-			</ul>
-			<?php wp_reset_postdata(); ?>
+					$post = $tmp_post;
+					?>
+				</ul>
+				<?php wp_reset_postdata(); ?>
+			</div>
+
 		</div>
 
-	</div>
+	<?php endif; ?>
 
 </div>
 
