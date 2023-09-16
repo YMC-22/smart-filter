@@ -12,7 +12,7 @@ $ymc_autocomplete_state = $variable->get_ymc_autocomplete_state( $post->ID );
 
 
 <div class="header">
-	<?php echo esc_html__('Search Options', 'ymc-smart-filter'); ?>
+	<?php echo esc_html__('Search', 'ymc-smart-filter'); ?>
 </div>
 
 <div class="content">

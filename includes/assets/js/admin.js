@@ -17,9 +17,8 @@
 
                 let hash = this.hash;
 
-                let text = $(this).find('.text').text();
-
-                $('.ymc__header .manage-dash .title').text(text);
+                //let text = $(this).find('.text').text();
+                //$('.ymc__header .manage-dash .title').text(text);
 
                 $(el).addClass('active').closest('.nav-item').siblings().find('.link').removeClass('active');
 
@@ -311,7 +310,6 @@
         }
         sortTaxonomy();
 
-
         // Drag & Drop Sort Terms
         function updateSortTerms() {
 
@@ -398,7 +396,6 @@
             }
         }
         sortSelectedPosts();
-
 
         function sortTerms() {
 
@@ -583,6 +580,121 @@
             updatedOptionsTerms();
         }
 
+        // Export Settings
+        function exportSettings() {
+
+            const data = {
+                'action': 'ymc_export_settings',
+                'nonce_code' : _smart_filter_object.nonce,
+                'post_id' : $('#ymc-cpt-select').data('postid')
+            };
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'binary',
+                xhrFields: {
+                    'responseType': 'blob'
+                },
+                url: _smart_filter_object.ajax_url,
+                data: data,
+                beforeSend: function () {
+                    container.addClass('loading').
+                    prepend(`<img class="preloader" src="${pathPreloader}">`);
+                },
+                success: function (res) {
+
+                    container.removeClass('loading').find('.preloader').remove();
+
+                    let fullYear = new Date().getFullYear();
+                    let day = new Date().getDate();
+                    let month = new Date().getMonth();
+                    let hour = new Date().getHours();
+                    let minutes = new Date().getMinutes();
+                    let seconds = new Date().getSeconds();
+
+                    let link = document.createElement('a');
+                    let filename = 'ymc-export-'+day+'-'+month+'-'+fullYear+'-'+hour+':'+minutes+':'+seconds+'.json';
+
+                    let url = window.URL.createObjectURL(res);
+                    link.href = url;
+                    link.download = filename;
+                    link.click();
+                    link.remove();
+                    window.URL.revokeObjectURL(url);
+
+                },
+                error: function (obj, err) {
+                    console.log( obj, err );
+                }
+            });
+        }
+
+        // Import Settings
+        function importSettings() {
+
+            let input = document.querySelector('.ymc__container-settings #tools input[type="file"]');
+            let infoUploaded =  document.querySelector('.ymc__container-settings #tools .info-uploaded');
+            let file = input.files[0];
+
+            $(infoUploaded).empty();
+
+            if( input.files.length > 0 ) {
+
+                if( file.type === "application/json" && file.name.indexOf('ymc-export-') === 0 ) {
+
+                    let reader = new FileReader();
+
+                    reader.readAsText(file);
+
+                    reader.onload = function() {
+
+                        let data = {
+                            'action': 'ymc_import_settings',
+                            'nonce_code' : _smart_filter_object.nonce,
+                            'post_id' : $('#ymc-cpt-select').data('postid'),
+                            'params' : reader.result
+                        };
+
+                        $.ajax({
+                            type: 'POST',
+                            dataType: 'json',
+                            url: _smart_filter_object.ajax_url,
+                            data: data,
+                            beforeSend: function () {
+                                container.addClass('loading').
+                                prepend(`<img class="preloader" src="${pathPreloader}">`);
+                            },
+                            success: function (res) {
+                                container.removeClass('loading').find('.preloader').remove();
+                                $(infoUploaded).html(res.mesg + ' <a href="javascript:;" onclick="location.reload();">Reload page</a>');
+
+                                if( res.status === 1 ) {
+                                    $(infoUploaded).addClass('info-uploaded--seccess').removeClass('info-uploaded--error');
+                                    input.value = '';
+                                }
+                                else {
+                                    $(infoUploaded).removeClass('info-uploaded--seccess').addClass('info-uploaded--error');
+                                }
+                            },
+                            error: function (obj, err) {
+                                console.log( obj, err );
+                            }
+                        })
+                    };
+
+                    reader.onerror = function() {
+                        console.error(reader.error);
+                    };
+                }
+                else {
+                    $(infoUploaded).html('Incorrect type file');
+                    $(infoUploaded).removeClass('info-uploaded--seccess').addClass('info-uploaded--error');
+                    throw new Error("Incorrect type file");
+                }
+            }
+
+
+        }
 
         // Choices Posts
         $('.wrapper-selection .ymc-exclude-posts').on('click', function (e) {
@@ -880,8 +992,6 @@
         $(document).on('click','#TB_ajaxContent .btn-apply', function (e) {
             e.preventDefault();
 
-
-
             let postId = $('#ymc-cpt-select').data('postid');
             let bgTerm = $('#TB_ajaxContent .ymc-terms-content .ymc-term-bg').val();
             let colorTerm = $('#TB_ajaxContent .ymc-terms-content .ymc-term-color').val();
@@ -1101,6 +1211,12 @@
             let preview = document.querySelector('#advanced .preview-preloader img');
             preview.setAttribute('style', filters);
         });
+
+        // Export As JSON
+        $(document).on('click', '.ymc__container-settings #tools .button-export', exportSettings);
+
+        // Import JSON
+        $(document).on('click', '.ymc__container-settings #tools .button-import', importSettings);
 
         // Set Cookie for Tab
         $(".ymc__container-settings #ymcTab a").click(function(e) {

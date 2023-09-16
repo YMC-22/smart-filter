@@ -2,7 +2,7 @@
 
 
 <div class="header">
-	<?php echo esc_html__('Shortcode Options', 'ymc-smart-filter'); ?>
+	<?php echo esc_html__('Shortcode', 'ymc-smart-filter'); ?>
 </div>
 
 <div class="content">

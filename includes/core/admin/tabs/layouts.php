@@ -16,7 +16,7 @@ $ymc_post_active_color = $variable->get_post_active_color( $post->ID );
 ?>
 
 <div class="header">
-	<?php echo esc_html__('Layouts Options', 'ymc-smart-filter'); ?>
+	<?php echo esc_html__('Layouts', 'ymc-smart-filter'); ?>
 </div>
 
 <div class="content">

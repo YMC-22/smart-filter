@@ -759,6 +759,76 @@ $font-size: 16;
 							.content {}
 						}
 					}
+
+					#tools {
+
+						.ymc-btn-ei {
+							font-family: "Poppins";
+							padding: 7px 15px;
+							font-size: 14px;
+							font-weight: 300;
+							display: inline-block;
+							border: none;
+							border-radius: 0;
+							cursor: pointer;
+							transition: .3s;
+							&--primary {
+								background: #098ab8;
+								color: #fff;
+								&:hover {
+									background: #0fade9;
+								}
+							}
+							&--secondary {
+								border: 1px solid #098ab8;
+							}
+						}
+
+						.ymc-actions {
+							margin: 20px 0;
+						}
+
+						.info-uploaded {
+							font-size: 14px;
+							&--seccess {
+								color: #28bc28;
+							}
+							&--error {
+								color: #fd6262;
+							}
+							a {
+								color: #1fc4ff;
+								&:hover {
+									text-decoration: none;
+								}
+							}
+							&:empty {
+								display: none;
+							}
+						}
+
+						input[type=file] {
+							padding: 0;
+							font-family: "Poppins";
+						}
+
+						input[type=file]::file-selector-button {
+							margin-right: 20px;
+							border: none;
+							background: #098ab8;
+							padding: 10px 15px;
+							min-width: 130px;
+							text-align: left;
+							border-radius: 0;
+							color: #fff;
+							cursor: pointer;
+							transition: background .2s ease-in-out;
+						}
+
+						input[type=file]::file-selector-button:hover {
+							background: #098ab8;
+						}
+					}
 				}
 			}
 		}

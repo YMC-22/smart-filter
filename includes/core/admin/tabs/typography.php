@@ -9,7 +9,7 @@ $ymc_post_font = $variable->get_post_font( $post->ID );
 
 
 <div class="header">
-	<?php echo esc_html__('Typography Options', 'ymc-smart-filter'); ?>
+	<?php echo esc_html__('Typography', 'ymc-smart-filter'); ?>
 </div>
 
 <div class="content">

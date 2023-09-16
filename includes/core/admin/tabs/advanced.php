@@ -11,7 +11,7 @@ $ymc_preloader_filters_custom = $variable->get_ymc_preloader_filters_custom( $po
 ?>
 
 <div class="header">
-	<?php echo esc_html__('Advanced Options', 'ymc-smart-filter'); ?>
+	<?php echo esc_html__('Advanced', 'ymc-smart-filter'); ?>
 </div>
 
 <div class="content">

@@ -23,7 +23,7 @@ $ymc_popup_settings  = $variable->get_ymc_popup_settings( $post->ID );
 
 
 <div class="header">
-	<?php echo esc_html__('Appearance Options', 'ymc-smart-filter'); ?>
+	<?php echo esc_html__('Appearance', 'ymc-smart-filter'); ?>
 </div>
 
 <div class="content">

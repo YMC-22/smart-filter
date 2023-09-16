@@ -326,8 +326,8 @@ class Meta_Boxes {
 		<header class="ymc__header">
 			<div class="logo"><img src="<?php echo YMC_SMART_FILTER_URL . 'includes/assets/images/YMC-logos.png'; ?>"></div>
 			<div class="manage-dash">
-				<span class="dashicons dashicons-admin-generic"></span>
-				<span class="title"><?php echo esc_html__('General Settings','ymc-smart-filter'); ?></span>
+				<span class="dashicons dashicons-admin-tools"></span>
+				<span class="title"><?php echo esc_html__('Settings','ymc-smart-filter'); ?></span>
 			</div>
 		</header>
 
@@ -382,6 +382,13 @@ class Meta_Boxes {
 							<span class="text"><?php echo esc_html__('Shortcode','category-ajax-filter'); ?></span>
 							<span class="info"><?php echo esc_html__('Get Your shortcode','ymc-smart-filter'); ?></span>
 							<span class="dashicons dashicons-shortcode"></span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="link" id="tools-tab" href="#tools">
+							<span class="text"><?php echo esc_html__('Tools','category-ajax-filter'); ?></span>
+							<span class="info"><?php echo esc_html__('Export / Import Settings','ymc-smart-filter'); ?></span>
+							<span class="dashicons dashicons-controls-repeat"></span>
 						</a>
 					</li>
 				</ul>
@@ -441,6 +448,12 @@ class Meta_Boxes {
 					</div>
 				</div>
 
+				<div class="tab-panel" id="tools">
+					<div class="tab-entry">
+						<?php require_once YMC_SMART_FILTER_DIR . '/includes/core/admin/tabs/tools.php'; ?>
+					</div>
+				</div>
+
 			</div>
 
 		</div>
@@ -455,8 +468,8 @@ class Meta_Boxes {
 			Customization of card templates and filters templates will allow you to fine-tune the display of posts. For more detailed
 			information, please see the <a target="_blank" href="https://github.com/YMC-22/smart-filter">documentation</a>  for using the plugin.<br/>
 			<hr/>
-			<strong style="color: #000; font-weight: 700; line-height: 1.2; font-size: 16px; background: #098ab821; display: block; padding: 7px 5px;">
-				Did you like or find our plugin helpful? To support the plugin, you can make a <a target="_blank" href="https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW">Donation</a></strong>.
+			<strong style="font-weight: 500;line-height: 1.5;font-size: 16px;background: #098ab8;display: block;padding: 7px 15px;color: #fff;">
+				Did you like or find our plugin helpful? To support the plugin, you can make a <a style="color: #ffee5d;font-size: 18px;text-decoration-thickness: 1px;text-underline-offset: 2px;text-transform: uppercase;}" target="_blank" href="https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW">Donation</a></strong>.
 		</article>
 	<?php }
 

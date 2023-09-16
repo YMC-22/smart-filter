@@ -21,7 +21,7 @@ $ymc_terms_options   = $variable->get_terms_options( $post->ID );
 
 
 <div class="header">
-	<?php echo esc_html__('General Options', 'ymc-smart-filter'); ?>
+	<?php echo esc_html__('General', 'ymc-smart-filter'); ?>
 </div>
 
 <div class="content">
