@@ -42,7 +42,7 @@
         </label>
 
         <p class="ymc-actions">
-            <input type="file" name="ymc_import_file" id="ymc_import_file">
+            <input type="file" name="ymc_import_file" id="ymc_import_file" accept="application/json">
         </p>
 
         <p class="ymc-actions">
