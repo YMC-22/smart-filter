@@ -14,7 +14,7 @@
 
     <div class="from-element">
         <label class="form-label">
-            <?php echo esc_html__('Export Settings', 'ymc-smart-filter'); ?>
+            <?php echo esc_html__('Export', 'ymc-smart-filter'); ?>
             <span class="information">
                  <?php echo esc_html__('Export settings to a file in format JSON.', 'ymc-smart-filter');?>
             </span>
@@ -35,7 +35,7 @@
 
     <div class="from-element">
         <label class="form-label">
-            <?php echo esc_html__('Import Settings', 'ymc-smart-filter');?>
+            <?php echo esc_html__('Import', 'ymc-smart-filter');?>
             <span class="information">
                <?php echo esc_html__('Select a file JSON to import settings.', 'ymc-smart-filter');?>
             </span>
