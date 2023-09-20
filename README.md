@@ -662,13 +662,11 @@ Stop loading posts for the selected filter and then load posts for the selected 
     wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(el){
         if( el.classList.contains('data-target-ymc545-1') ) {
             el.dataset.loading = 'false';
-
-            setTimeout(()=> {
-                YMCTools({
-                   target: '.data-target-ymc545-1',
-                   terms: '7'
-                }).apiTermUpdate();
-            },1);
+           
+            YMCTools({
+               target: '.data-target-ymc545-1',
+               terms: '7'
+            }).apiTermUpdate();           
         }
     });    
 
