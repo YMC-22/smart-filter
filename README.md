@@ -403,7 +403,7 @@ Usage example:
 **This method allows to search for posts by keyword.**
 
 ```js
-YMCTools({target: ".data-target-ymcFilterID-LayoutID", search: 'keyword'}).apiSearchPosts( option );
+YMCTools({target: ".data-target-ymcFilterID-LayoutID", search: 'keyword'}).apiSearchPosts( option, terms );
 ```
 
 **Required params:**
@@ -411,14 +411,15 @@ YMCTools({target: ".data-target-ymcFilterID-LayoutID", search: 'keyword'}).apiSe
 - `search - (String) Phrase for which posts are searched.`
 **Optional params:**
 - `option - (bool) true / false - parameter allows to control sending of request. Default is true`
+- `terms - (array)  list ids terms. Default is empty`
 
 ```js
 Usage example:
 
       YMCTools({
 	    target: '.data-target-ymc545-1',
-            search: 'keyword'
-      }).apiSearchPosts();     
+            search: 'keyword',
+      }).apiSearchPosts(true, [7,11,15]);     
 	 
 ```
 

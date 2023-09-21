@@ -42,7 +42,6 @@ class Get_Posts {
 		$filter_id   = $clean_data['filter_id'];
 		$type_pagination = $clean_data['type_pg'];
 		$keyword     = $clean_data['search'];
-		$post_sel    = $clean_data['post_sel'];
 		$sort_order  = $clean_data['sort_order'];
 		$sort_orderby = $clean_data['sort_orderby'];
 		$meta_params = $clean_data['meta_query'];
@@ -69,12 +68,7 @@ class Get_Posts {
 
 		if ( is_array($taxonomy) && is_array($terms) ) :
 
-			if( $post_sel === 'all' ) {
-				$tax_qry = [ 'relation' => 'OR', ];
-			}
-			else {
-				$tax_qry = [ 'relation' => $tax_rel, ];
-			}
+			$tax_qry = [ 'relation' => $tax_rel, ];
 
 			foreach ($taxonomy as $tax) :
 

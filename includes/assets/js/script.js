@@ -53,7 +53,6 @@
                 let dataParams = JSON.parse(container.dataset.params);
 
                 let termIds  = link.data('termid');
-                let termSelected = link.data('selected');
 
                 if( link.hasClass('multiple') ) {
                     link.toggleClass('active').closest('.filter-layout').find('.all').removeClass('active');
@@ -88,7 +87,6 @@
                 dataParams.terms = termIds;
                 dataParams.page = 1;
                 dataParams.search = '';
-                dataParams.post_sel = termSelected;
 
                 container.dataset.params = JSON.stringify(dataParams);
             }
@@ -148,7 +146,6 @@
                 dataParams.page = 1;
                 dataParams.search = "";
                 dataParams.terms = this.terms.replace(/<[^>]+>/g, '');
-                dataParams.post_sel = this.taxRel;
 
                 container.dataset.params = JSON.stringify(dataParams);
 
@@ -251,7 +248,7 @@
                 }
             }
 
-            YMCTools.prototype.apiSearchPosts = function ( option = true ) {
+            YMCTools.prototype.apiSearchPosts = function ( option = true, terms = [] ) {
 
                 let container = document.querySelector(''+ this.target +'');
                 if( ! container )  throw new Error("ApiSearchPosts: Filter not found");
@@ -261,13 +258,13 @@
 
                 dataParams.page = 1;
                 dataParams.search = this.search;
-                dataParams.terms = "";
+                dataParams.terms = ( Array.isArray(terms) && terms.length > 0 ) ? terms.join(',') : "";
                 dataParams.meta_query = "";
                 dataParams.date_query = "";
 
                 container.dataset.params = JSON.stringify(dataParams);
 
-                if( option ) {
+                if( typeof option === 'boolean' ) {
                     this.getFilterPosts();
                 }
             }
@@ -572,7 +569,7 @@
                 },
                 success: function (res) {
 
-                    if(params.post_sel !== 'all' || params.search !== '') {
+                    if( params.search !== '' ) {
                         container.find('.filter-layout .posts-found').html(`<span>${res.posts_selected}</span>`);
                     }
                     else {
@@ -734,7 +731,7 @@
 
             let link = $(this);
             let term_id = link.data('termid');
-            let term_sel = link.data('selected');
+            //let term_sel = link.data('selected');
 
             if(link.hasClass('multiple')) {
                 link.toggleClass('active').closest('.filter-item').siblings().find('.all').removeClass('active');
@@ -774,7 +771,7 @@
             params.terms = term_id;
             params.page = 1;
             params.search = '';
-            params.post_sel = term_sel;
+
             this.closest('.ymc-smart-filter-container').dataset.params = JSON.stringify(params);
 
             getFilterPosts({
@@ -791,7 +788,7 @@
 
             let link = $(this);
             let term_id = link.data('termid');
-            let term_sel = link.data('selected');
+            //let term_sel = link.data('selected');
 
             if(link.hasClass('multiple')) {
                 link.toggleClass('active').closest('.filter-entry').find('.all').removeClass('active');
@@ -828,7 +825,7 @@
             params.terms = term_id;
             params.page = 1;
             params.search = '';
-            params.post_sel = term_sel;
+
             this.closest('.ymc-smart-filter-container').dataset.params = JSON.stringify(params);
 
             getFilterPosts({
@@ -856,7 +853,7 @@
             e.preventDefault();
             let link = $(this);
             let term_id = '';
-            let term_sel = link.data('selected');
+            //let term_sel = link.data('selected');
 
             link.toggleClass('active');
 
@@ -906,7 +903,7 @@
             params.terms = term_id;
             params.page = 1;
             params.search = '';
-            params.post_sel = term_sel;
+
             this.closest('.ymc-smart-filter-container').dataset.params = JSON.stringify(params);
 
             getFilterPosts({
@@ -926,7 +923,7 @@
 
             let isItems = _self.closest('.selected-items').find('.item').length - 1;
 
-            let term_sel = (isItems > 0 ) ? isItems : 'all';
+            //let term_sel = (isItems > 0 ) ? isItems : 'all';
 
             let params = JSON.parse( this.closest('.ymc-smart-filter-container').dataset.params);
             let arrTerms = params.terms.split(',');
@@ -941,7 +938,7 @@
             params.terms = newTerms;
             params.page = 1;
             params.search = '';
-            params.post_sel = term_sel;
+
             this.closest('.ymc-smart-filter-container').dataset.params = JSON.stringify(params);
 
             _self.closest('.filter-entry').find('.active').each(function () {
@@ -966,13 +963,13 @@
 
             let _self = $(this);
             let terms = _self.data('terms');
-            let term_sel = _self.data('selected');
+            //let term_sel = _self.data('selected');
 
             let params = JSON.parse( this.closest('.ymc-smart-filter-container').dataset.params);
             params.terms = terms;
             params.page = 1;
             params.search = '';
-            params.post_sel = term_sel;
+
             this.closest('.ymc-smart-filter-container').dataset.params = JSON.stringify(params);
 
             _self.siblings('.selected-items').empty();
@@ -1076,8 +1073,8 @@
                 let params = JSON.parse( this.closest('.ymc-smart-filter-container').dataset.params);
                 params.search = phrase;
                 params.terms = allTerms;
-                params.post_sel = 'all';
                 params.letter = '';
+
                 this.closest('.ymc-smart-filter-container').dataset.params = JSON.stringify(params);
 
                 let container =  $('.'+params.data_target+'');
