@@ -13,6 +13,7 @@ class Meta_Boxes {
 	public function __construct() {
 		add_action( 'add_meta_boxes', array($this, 'add_post_metabox'));
 		add_action( 'save_post', array($this, 'save_meta_box'), 10, 2);
+		add_action( 'wp_dashboard_setup', array($this, 'register_filter_grids_widget'));
 		// Run popup
 		//add_thickbox();
 	}
@@ -321,6 +322,11 @@ class Meta_Boxes {
 
 	}
 
+	public function register_filter_grids_widget() {
+
+		add_meta_box( 'ymc_filter_grids_display',  __('Filter & Grids','ymc-smart-filter'), array($this,'ymc_filter_grids_display'), 'dashboard', 'side', 'high' );
+	}
+
 	public function ymc_top_meta_box() { ?>
 
 		<header class="ymc__header">
@@ -472,5 +478,12 @@ class Meta_Boxes {
 				Did you like or find our plugin helpful? To support the plugin, you can make a <a style="color: #ffee5d;font-size: 18px;text-decoration-thickness: 1px;text-underline-offset: 2px;text-transform: uppercase;}" target="_blank" href="https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW">Donation</a></strong>.
 		</article>
 	<?php }
+
+	public function ymc_filter_grids_display() {
+		_e('<b>Welcome to Filter & Grids.</b> <br/>
+		<p>This plugin will allow you to easily and quickly create all kinds of post grids with their filters.</p> 
+		<p>Create your first grid of posts: <a href="'. site_url().'/wp-admin/post-new.php?post_type=ymc_filters">Create</a></p>
+		<p>For more detailed information see <a target="_blank" href="https://github.com/YMC-22/smart-filter">documentation <span style="text-decoration: none;" class="dashicons dashicons-external"></span></a> on using this plugin.</p>','ymc-smart-filter');
+	}
 
 }
