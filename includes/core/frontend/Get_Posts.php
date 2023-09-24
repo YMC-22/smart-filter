@@ -320,11 +320,10 @@ class Get_Posts {
 
 	public function autocomplete_search() {
 
-		if (!wp_verify_nonce($_POST['nonce_code'], 'custom_ajax_nonce')) exit;
+		if ( !wp_verify_nonce($_POST['nonce_code'], 'custom_ajax_nonce') ) exit;
 
 		$output  = '';
 		$phrase = trim(mb_strtolower(sanitize_text_field($_POST['phrase'])));
-		$post_type = sanitize_text_field($_POST['cpt']);
 		$choices_posts = sanitize_text_field($_POST['choices_posts']);
 		$exclude_posts = sanitize_text_field($_POST['exclude_posts']);
 		$id = (int) $_POST['post_id'];
@@ -340,7 +339,7 @@ class Get_Posts {
 		add_filter( 'posts_distinct', array($this,'search_distinct') );
 
 		$args = [
-			'post_type' => $post_type,
+			'post_type' => $ymc_cpt_value,
 			'post_status' => 'publish',
 			'posts_per_page' => $per_page,
 			'orderby' => 'title',
@@ -348,6 +347,39 @@ class Get_Posts {
 			'sentence' => true,
 			's' => $phrase
 		];
+
+		// Taxonomy + Terms
+		if ( is_array($tax_selected) && is_array($terms_selected) ) :
+
+			$tax_qry = [ 'relation' => $tax_rel, ];
+
+			foreach ($tax_selected as $tax) :
+
+				foreach ($terms_selected as $term) :
+
+					if($tax === get_term( $term )->taxonomy) :
+						$term_id[] = (int) $term;
+					endif;
+
+				endforeach;
+
+				if( !empty($term_id) ) :
+
+					$tax_qry[] = [
+						'taxonomy' => $tax,
+						'field' => 'term_id',
+						'terms' => $term_id
+					];
+
+				endif;
+
+				$term_id = [];
+
+			endforeach;
+
+			$args['tax_query'] = $tax_qry;
+
+		endif;
 
 		// Choices posts
 		if( !empty($choices_posts) ) {

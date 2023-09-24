@@ -1064,17 +1064,28 @@
 
             if( phrase.trim() !== '' ) {
 
-                let allTerms = $(this).
+                let filterLayout = $(this).closest('.ymc-smart-filter-container').find('.filter-layout');
+                let allTerms = '';
+
+                // Filter Layout 3
+                if( filterLayout.hasClass('filter-layout3') ) {
+                    allTerms = $(this).
+                    closest('.ymc-smart-filter-container').
+                    find('.filter-layout .filter-entry').
+                    data('terms');
+                }
+                // Filter Layouts 1, 2
+                else {
+                    allTerms = $(this).
                     closest('.ymc-smart-filter-container').
                     find('.filter-layout .filter-link.all').
                     data('termid');
-
+                }
 
                 let params = JSON.parse( this.closest('.ymc-smart-filter-container').dataset.params);
                 params.search = phrase;
                 params.terms = allTerms;
                 params.letter = '';
-
                 this.closest('.ymc-smart-filter-container').dataset.params = JSON.stringify(params);
 
                 let container =  $('.'+params.data_target+'');
@@ -1115,7 +1126,6 @@
                 const data = {
                     'action'     : 'ymc_autocomplete_search',
                     'nonce_code' : _smart_filter_object.nonce,
-                    'cpt'        : params.cpt,
                     'phrase'     : userInput,
                     'choices_posts' : params.choices_posts,
                     'exclude_posts' : params.exclude_posts,
