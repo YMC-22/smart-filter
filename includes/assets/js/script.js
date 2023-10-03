@@ -1181,8 +1181,11 @@
             });
         });
 
-        /*** Close dropdown autocomplete results outside area ***/
+        /*** Close dropdown filters & autocomplete results outside area ***/
         $('body').on('click', function (e) {
+            if( !e.target.closest('.dropdown-filter') ) {
+                $('.dropdown-filter').find('.down').removeClass('open').end().find('.menu-passive').hide();
+            }
             if( !e.target.closest('.autocomplete-results') ) {
                 $('.ymc-smart-filter-container .search-form .component-input .autocomplete-results').
                 empty().hide();
