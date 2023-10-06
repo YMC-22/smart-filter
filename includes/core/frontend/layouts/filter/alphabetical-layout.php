@@ -43,6 +43,8 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 
 	</ul>
 
+	<div class="posts-found"></div>
+
 	<?php do_action("ymc_after_filter_layout_".$id.'_'.$c_target); ?>
 
 </div>

@@ -1005,6 +1005,7 @@
             params.page = 1;
             params.search = '';
             params.letter = letter;
+            params.posts_selected = letter;
 
             this.closest('.ymc-smart-filter-container').dataset.params = JSON.stringify(params);
 
