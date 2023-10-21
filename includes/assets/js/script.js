@@ -726,7 +726,7 @@
         /*** FILTERS LAYOUTS ***/
 
         // Filter Posts / Layout1 / Simple Posts Filter
-        $(document).on('click','.ymc-smart-filter-container .filter-layout1 .filter-link',function (e) {
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .filter-layout1 .filter-link',function (e) {
             e.preventDefault();
 
             let link = $(this);
@@ -784,7 +784,7 @@
         });
 
         // Filter Posts / Layout2 / Taxonomy Filter
-        $(document).on('click','.ymc-smart-filter-container .filter-layout2 .filter-link',function (e) {
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .filter-layout2 .filter-link',function (e) {
             e.preventDefault();
 
             let link = $(this);
@@ -839,19 +839,19 @@
         });
 
         // Filter Post / Layout3 (Dropdown) / Dropdown Filter
-        $(document).on('click','.ymc-smart-filter-container .filter-layout3 .dropdown-filter .menu-active',function (e) {
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .filter-layout3 .dropdown-filter .menu-active',function (e) {
             e.preventDefault();
             let $el = $(this);
             $el.find('.arrow').toggleClass('open').end().next().toggle();
             $el.closest('.dropdown-filter').siblings().find('.menu-passive').hide().end().find('.arrow').removeClass('open');
         });
 
-        $(document).on('click','.ymc-smart-filter-container .filter-layout3 .dropdown-filter .menu-passive .btn-close',function (e) {
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .filter-layout3 .dropdown-filter .menu-passive .btn-close',function (e) {
             e.preventDefault();
             $(this).closest('.dropdown-filter').find('.down').removeClass('open').end().find('.menu-passive').hide();
         });
 
-        $(document).on('click','.ymc-smart-filter-container .filter-layout3 .dropdown-filter .menu-passive .menu-link',function (e) {
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .filter-layout3 .dropdown-filter .menu-passive .menu-link',function (e) {
             e.preventDefault();
             let link = $(this);
             let term_id = '';
@@ -917,7 +917,7 @@
             });
         });
 
-        $(document).on('click','.ymc-smart-filter-container .filter-layout3 .filter-entry .selected-items small',function (e) {
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .filter-layout3 .filter-entry .selected-items small',function (e) {
             e.preventDefault();
 
             let _self = $(this);
@@ -961,7 +961,7 @@
 
         });
 
-        $(document).on('click','.ymc-smart-filter-container .filter-layout3 .filter-entry .btn-all',function (e) {
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .filter-layout3 .filter-entry .btn-all',function (e) {
             e.preventDefault();
 
             let _self = $(this);
@@ -989,7 +989,7 @@
         });
 
         // Filter: Alphabetical Navigation
-        $(document).on('click','.ymc-smart-filter-container .alphabetical-layout .filter-link',function (e) {
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .alphabetical-layout .filter-link',function (e) {
             e.preventDefault();
 
             let link = $(this);
@@ -1020,7 +1020,7 @@
         /*** PAGINATION TYPES ***/
 
         // Pagination / Type: Default (Numeric)
-        $(document).on('click','.ymc-smart-filter-container .pagination-numeric li a',function (e) {
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .pagination-numeric li a',function (e) {
             e.preventDefault();
 
             this.closest('.ymc-smart-filter-container').classList.remove('ymc-loaded-filter');
@@ -1040,7 +1040,7 @@
         });
 
         // Pagination / Type: Load More
-        $(document).on('click','.ymc-smart-filter-container .pagination-load-more .btn-load',function (e) {
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .pagination-load-more .btn-load',function (e) {
             e.preventDefault();
 
             let params = JSON.parse(this.closest('.ymc-smart-filter-container').dataset.params);
@@ -1062,7 +1062,7 @@
 
 
         /*** SEARCH POSTS ***/
-        $(document).on('click','.ymc-smart-filter-container .search-form .btn-submit',function (e) {
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .search-form .btn-submit',function (e) {
             e.preventDefault();
 
             let phrase = $(this).siblings('.component-input').find('.field-search').val();
@@ -1112,7 +1112,7 @@
         });
 
         /*** Autocomplete Search ***/
-        $(document).on('input','.ymc-smart-filter-container .search-form .field-search',function (e) {
+        $(document).on('input.ymc_smart_filter','.ymc-smart-filter-container .search-form .field-search',function (e) {
 
             let _self = $(this);
 
@@ -1165,7 +1165,7 @@
         });
 
         /*** Clear Field Search ***/
-        $(document).on('click','.ymc-smart-filter-container .search-form .component-input .clear',function (e) {
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .search-form .component-input .clear',function (e) {
 
             let _self = $(e.target).closest('.clear');
 
@@ -1188,7 +1188,7 @@
         });
 
         /*** Close dropdown filters & autocomplete results outside area ***/
-        $('body').on('click', function (e) {
+        $('body').on('click.ymc_smart_filter', function (e) {
             if( !e.target.closest('.dropdown-filter') ) {
                 $('.dropdown-filter').find('.down').removeClass('open').end().find('.menu-passive').hide();
             }
@@ -1198,7 +1198,7 @@
             }
         });
 
-        $(document).on('click','.ymc-smart-filter-container .search-form .autocomplete-results a[data-clue]', function (e) {
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .search-form .autocomplete-results a[data-clue]', function (e) {
             e.preventDefault();
 
             let clue = e.target.closest('a[data-clue]').dataset.clue;
@@ -1214,19 +1214,19 @@
 
 
         /*** Sort Posts ***/
-        $(document).on('click','.ymc-smart-filter-container .sort-container .dropdown-filter .menu-active',function (e) {
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .sort-container .dropdown-filter .menu-active',function (e) {
             e.preventDefault();
             let $el = $(this);
             $el.find('.arrow').toggleClass('open').end().next().toggle();
             $el.closest('.dropdown-filter').siblings().find('.menu-passive').hide().end().find('.arrow').removeClass('open');
         });
 
-        $(document).on('click','.ymc-smart-filter-container .sort-container .dropdown-filter .menu-passive .btn-close',function (e) {
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .sort-container .dropdown-filter .menu-passive .btn-close',function (e) {
             e.preventDefault();
             $(this).closest('.dropdown-filter').find('.down').removeClass('open').end().find('.menu-passive').hide();
         });
 
-        $(document).on('click','.ymc-smart-filter-container .sort-container .dropdown-filter .menu-passive .menu-link',function (e) {
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .sort-container .dropdown-filter .menu-passive .menu-link',function (e) {
             e.preventDefault();
 
             let link = $(this);
@@ -1275,11 +1275,11 @@
 
 
         /*** Popup ***/
-        $(document).on('click','.ymc-smart-filter-container .container-posts .post-entry .post-item .ymc-popup', popupPost);
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .container-posts .post-entry .post-item .ymc-popup', popupPost);
 
-        $(document).on('click','.ymc-smart-filter-container .ymc-popup-wrp .btn-close', popupClose);
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .ymc-popup-wrp .btn-close', popupClose);
 
-        $(document).on('click','.ymc-smart-filter-container .ymc-popup-overlay', function (e) {
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .ymc-popup-overlay', function (e) {
             if( !e.target.closest('.ymc-popup-wrp') ) {
 
                 let target = e.target.closest('.ymc-smart-filter-container');
