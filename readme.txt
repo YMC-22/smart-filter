@@ -1,13 +1,13 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.6.14
+Version: 2.6.15
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
 Tags: filter, grids, ajax posts, search, posts, masonry, ajax filter, category posts, taxonomy, custom taxonomy, woocommerce
 Requires at least: 4.8
-Tested up to: 6.3
-Stable tag: 2.6.14
-Requires PHP: 7.2
+Tested up to: 6.4
+Stable tag: 2.6.15
+Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,9 +59,9 @@ The plugin provides the following functionality:
 
 == Frequently Asked Questions ==
 
-=  Is YMC Smart Filter free? =
+=  Is Filter & Grids free? =
 
-Yes, YMC Smart Filter is a free WordPress plugin.
+Yes, Filter & Grids is a free WordPress plugin.
 
 = Where can I find the Documentation for the plugin? =
 
