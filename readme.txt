@@ -7,7 +7,7 @@ Tags: filter, grids, ajax posts, search, posts, masonry, ajax filter, category p
 Requires at least: 4.8
 Tested up to: 6.4
 Stable tag: 2.6.15
-Requires PHP: 7.3
+Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
