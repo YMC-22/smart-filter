@@ -312,6 +312,12 @@ class Meta_Boxes {
 			update_post_meta( $post_id, 'ymc_popup_settings', $ymc_popup_settings );
 		}
 
+		// Search by Filtered Posts
+		if( isset($_POST['ymc-search-filtered-posts']) ) {
+			$ymc_search_filtered_posts = $_POST['ymc-search-filtered-posts'];
+			update_post_meta( $post_id, 'ymc_search_filtered_posts', $ymc_search_filtered_posts );
+		}
+
 	}
 
 	public function add_post_metabox() {

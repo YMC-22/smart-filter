@@ -327,6 +327,7 @@ class Get_Posts {
 		$choices_posts = sanitize_text_field($_POST['choices_posts']);
 		$exclude_posts = sanitize_text_field($_POST['exclude_posts']);
 		$id = (int) $_POST['post_id'];
+		$term_ids = !empty($_POST['terms_ids']) ? explode(',', sanitize_text_field($_POST['terms_ids'])) : "";
 
 		$per_page  = -1;
 		$total = 0;
@@ -349,13 +350,46 @@ class Get_Posts {
 		];
 
 		// Taxonomy + Terms
-		if ( is_array($tax_selected) && is_array($terms_selected) ) :
+		if ( is_array($tax_selected) && is_array($terms_selected) && $ymc_search_filtered_posts === "0" ) :
 
 			$tax_qry = [ 'relation' => $tax_rel, ];
 
 			foreach ($tax_selected as $tax) :
 
 				foreach ($terms_selected as $term) :
+
+					if($tax === get_term( $term )->taxonomy) :
+						$term_id[] = (int) $term;
+					endif;
+
+				endforeach;
+
+				if( !empty($term_id) ) :
+
+					$tax_qry[] = [
+						'taxonomy' => $tax,
+						'field' => 'term_id',
+						'terms' => $term_id
+					];
+
+				endif;
+
+				$term_id = [];
+
+			endforeach;
+
+			$args['tax_query'] = $tax_qry;
+
+		endif;
+
+		// Taxonomy + Selected Terms + Search Filtered by Posts
+		if( is_array($tax_selected) && is_array($term_ids) && $ymc_search_filtered_posts === "1" ) :
+
+			$tax_qry = [ 'relation' => $tax_rel, ];
+
+			foreach ($tax_selected as $tax) :
+
+				foreach ($term_ids as $term) :
 
 					if($tax === get_term( $term )->taxonomy) :
 						$term_id[] = (int) $term;

@@ -6,6 +6,7 @@ $ymc_filter_search_status = $variable->get_filter_search_status( $post->ID );
 $ymc_search_text_button = $variable->get_search_text_button( $post->ID );
 $ymc_search_placeholder = $variable->get_ymc_search_placeholder( $post->ID );
 $ymc_autocomplete_state = $variable->get_ymc_autocomplete_state( $post->ID );
+$ymc_search_filtered_posts = $variable->get_search_filtered_posts( $post->ID );
 
 ?>
 
@@ -90,9 +91,28 @@ $ymc_autocomplete_state = $variable->get_ymc_autocomplete_state( $post->ID );
                     <label for="ymc-autocomplete-state"><?php echo esc_html__('Disable','ymc-smart-filter'); ?></label>
                 </div>
 
-
             </div>
 
+            <br/>
+
+            <div class="from-element">
+
+                <label class="form-label">
+                    <?php echo esc_html__('Search by Filtered Posts', 'ymc-smart-filter');?>
+                    <span class="information">
+                        <?php echo esc_html__('Allows to search through already filtered posts (only for standard filter layouts).', 'ymc-smart-filter');?>
+                    </span>
+                </label>
+
+                <div class="group-elements">
+                    <?php $search_filtered_posts_state =  ( (int) $ymc_search_filtered_posts === 1 ) ? 'checked' : '';  ?>
+                    <input type="hidden" name="ymc-search-filtered-posts" value="0">
+                    <input class="ymc-search-filtered-posts" type="checkbox" value="1" name="ymc-search-filtered-posts" id="ymc-search-filtered-posts"
+                        <?php echo esc_attr($search_filtered_posts_state); ?>>
+                    <label for="ymc-search-filtered-posts"><?php echo esc_html__('Enable','ymc-smart-filter'); ?></label>
+                </div>
+
+            </div>
 
         </div>
 

@@ -155,6 +155,8 @@ class Variables {
 
 	public $ymc_scroll_page = 1;
 
+	public $ymc_search_filtered_posts  = 0;
+
 
 
 
@@ -644,5 +646,13 @@ class Variables {
 		return $this->ymc_autocomplete_state;
 	}
 
+
+	public function get_search_filtered_posts( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_search_filtered_posts' ) ) {
+			return get_post_meta( $post_id, 'ymc_search_filtered_posts', true );
+		}
+		return $this->ymc_search_filtered_posts;
+	}
 
 }

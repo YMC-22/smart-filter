@@ -1089,7 +1089,10 @@
 
                 let params = JSON.parse( this.closest('.ymc-smart-filter-container').dataset.params);
                 params.search = phrase;
-                params.terms = allTerms;
+
+                if( params.search_filtered_posts === '0') {
+                    params.terms = allTerms;
+                }
                 params.letter = '';
                 this.closest('.ymc-smart-filter-container').dataset.params = JSON.stringify(params);
 
@@ -1122,11 +1125,38 @@
 
             let params = JSON.parse(this.closest('.ymc-smart-filter-container').dataset.params);
 
+            let termIDs = "";
+
             resultsHTML.innerHTML = "";
 
             resultsHTML.next('.clear').show();
 
-            if (userInput.length > 2) {
+            if( params.search_filtered_posts === '1') {
+
+                let listActiveItems = [];
+
+                let container = $(e.target).closest('.ymc-smart-filter-container');
+
+                let filterLayout = container.find('.filter-layout');
+
+                if( filterLayout.hasClass('filter-layout1') || filterLayout.hasClass('filter-layout2') ) {
+                    listActiveItems = filterLayout.find('.filter-entry .active:not(.all)');
+                }
+                if( filterLayout.hasClass('filter-layout3') ) {
+                    listActiveItems = filterLayout.find('.filter-entry .active');
+                }
+
+                if( listActiveItems.length > 0 ) {
+
+                    listActiveItems.each(function () {
+                        termIDs += $(this).data('termid')+',';
+                    });
+
+                    termIDs = termIDs.replace(/,\s*$/, "");
+                }
+            }
+
+            if ( userInput.length > 2 ) {
 
                 const data = {
                     'action'     : 'ymc_autocomplete_search',
@@ -1134,7 +1164,8 @@
                     'phrase'     : userInput,
                     'choices_posts' : params.choices_posts,
                     'exclude_posts' : params.exclude_posts,
-                    'post_id' : params.filter_id
+                    'post_id' : params.filter_id,
+                    'terms_ids' : termIDs
                 };
 
                 $.ajax({
@@ -1168,6 +1199,23 @@
         $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .search-form .component-input .clear',function (e) {
 
             let _self = $(e.target).closest('.clear');
+            let filterLayout = $(this).closest('.ymc-smart-filter-container').find('.filter-layout');
+            let allTerms = "";
+
+            // Filter Layout 3
+            if( filterLayout.hasClass('filter-layout3') ) {
+                allTerms = $(this).
+                closest('.ymc-smart-filter-container').
+                find('.filter-layout .filter-entry').
+                data('terms');
+            }
+            // Filter Layouts 1, 2
+            else {
+                allTerms = $(this).
+                closest('.ymc-smart-filter-container').
+                find('.filter-layout .filter-link.all').
+                data('termid');
+            }
 
             _self.siblings('input[name="search"]').val('');
             _self.siblings('.results').empty().hide();
@@ -1176,6 +1224,7 @@
             let params = JSON.parse(e.target.closest('.ymc-smart-filter-container').dataset.params);
             params.search = "";
             params.page = 1;
+            params.terms = allTerms;
             params.posts_selected = 'all';
             e.target.closest('.ymc-smart-filter-container').dataset.params = JSON.stringify(params);
 

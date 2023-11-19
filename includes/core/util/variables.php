@@ -58,4 +58,5 @@ $ymc_popup_status  = $variable->get_ymc_popup_status( $id );
 $ymc_popup_animation  = $variable->get_ymc_popup_animation( $id );
 $ymc_popup_animation_origin  = $variable->get_ymc_popup_animation_origin( $id );
 $ymc_popup_settings  = $variable->get_ymc_popup_settings( $id );
+$ymc_search_filtered_posts  = $variable->get_search_filtered_posts( $id );
 
