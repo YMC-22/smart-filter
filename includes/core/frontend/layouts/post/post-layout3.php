@@ -32,10 +32,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 	    $read_more = apply_filters('ymc_post_read_more_'.$filter_id.'_'.$target_id, __('Read More','ymc-smart-filter'));
 	    $target = "target=" . $ymc_link_target . "";
 
-	    $term_list = get_the_terms($post_id, $taxonomy);
 	    $list_categories = '';
-	    foreach($term_list as $term_single) {
-		    $list_categories .= '<span class="cat-inner">'. esc_html($term_single->name) .'</span>';
+
+	    if( is_array($taxonomy) && count($taxonomy) > 0 ) {
+
+		    foreach ( $taxonomy as $tax ) {
+
+			    $term_list = get_the_terms($post_id, $tax);
+
+			    if( $term_list ) {
+				    foreach($term_list as $term_single) {
+					    $list_categories .= '<span class="cat-inner">'. esc_html($term_single->name) .'</span>';
+				    }
+			    }
+		    }
 	    }
 
 

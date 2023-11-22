@@ -60,6 +60,15 @@ class Get_Posts {
 		require YMC_SMART_FILTER_DIR . '/includes/core/util/variables.php';
 		require YMC_SMART_FILTER_DIR . '/includes/core/util/helper.php';
 
+		$args = [
+			'post_type' => $post_type,
+			'post_status' => $ymc_post_status,
+			'posts_per_page' => $per_page,
+			'paged' => $paged,
+			'orderby' => $ymc_order_post_by,
+			'order' => $ymc_order_post_type,
+		];
+
 
 		// Convert Taxonomy & Terms to Array
 		$taxonomy = !empty( $taxonomy ) ? explode(',', $taxonomy) : false;
@@ -94,18 +103,10 @@ class Get_Posts {
 
 			endforeach;
 
+			$args['tax_query'] = $tax_qry;
+
 		endif;
 
-
-		$args = [
-			'post_type' => $post_type,
-			'post_status' => $ymc_post_status,
-			'posts_per_page' => $per_page,
-			'tax_query' => $tax_qry,
-			'paged' => $paged,
-			'orderby' => $ymc_order_post_by,
-			'order' => $ymc_order_post_type,
-		];
 
 		// Meta Kye Sort Posts
 		if( $ymc_order_post_by === 'meta_key' && !empty($ymc_meta_key) && !empty($ymc_meta_value) ) {
