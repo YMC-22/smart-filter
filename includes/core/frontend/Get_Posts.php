@@ -55,6 +55,7 @@ class Get_Posts {
 
 		$paged = (int) $_POST['paged'];
 		$id = (int) $filter_id;
+		$tax_qry = null;
 
 		// Set variables & helpers
 		require YMC_SMART_FILTER_DIR . '/includes/core/util/variables.php';
