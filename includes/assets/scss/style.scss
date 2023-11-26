@@ -1068,7 +1068,6 @@ $font-size: 16;
 				margin-bottom: 20px;
 				width: 100%;
 				.component-input {
-					max-width: 50%;
 					width: 100%;
 					position: relative;
 					.results {
@@ -1080,9 +1079,9 @@ $font-size: 16;
 						border: 1px solid #d0d0d0;
 						border-top: none;
 						min-height: 50px;
+						padding: 15px;
 						z-index: 9;
 						background: #fff;
-						padding: 20px;
 						margin: 0;
 						list-style: none;
 						max-height: 250px;
@@ -1090,7 +1089,17 @@ $font-size: 16;
 						font-size: 14px;
 						li {
 							margin-bottom: 5px;
+							padding: 10px 20px 10px 40px;
+							background-size: 20px;
+							background-repeat: no-repeat;
+							background-position: 8px center;
+							background-image: url("data:image/svg+xml,%3Csvg fill='%23000000' height='100px' width='100px' version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 488.4 488.4' xml:space='preserve'%3E%3Cg%3E%3Cg%3E%3Cpath d='M0,203.25c0,112.1,91.2,203.2,203.2,203.2c51.6,0,98.8-19.4,134.7-51.2l129.5,129.5c2.4,2.4,5.5,3.6,8.7,3.6 s6.3-1.2,8.7-3.6c4.8-4.8,4.8-12.5,0-17.3l-129.6-129.5c31.8-35.9,51.2-83,51.2-134.7c0-112.1-91.2-203.2-203.2-203.2 S0,91.15,0,203.25z M381.9,203.25c0,98.5-80.2,178.7-178.7,178.7s-178.7-80.2-178.7-178.7s80.2-178.7,178.7-178.7 S381.9,104.65,381.9,203.25z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+							&.selected {
+								background-color: rgba(179, 173, 214, 0.204);
+
+							}
 							a {
+								display: block;
 								text-decoration: none;
 								font-size: 14px;
 								line-height: 1.3;

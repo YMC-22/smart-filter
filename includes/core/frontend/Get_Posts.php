@@ -70,11 +70,9 @@ class Get_Posts {
 			'order' => $ymc_order_post_type,
 		];
 
-
 		// Convert Taxonomy & Terms to Array
 		$taxonomy = !empty( $taxonomy ) ? explode(',', $taxonomy) : false;
 		$terms    = !empty( $terms )    ? explode(',', $terms)    : false;
-
 
 		if ( is_array($taxonomy) && is_array($terms) ) :
 
@@ -108,7 +106,6 @@ class Get_Posts {
 
 		endif;
 
-
 		// Meta Kye Sort Posts
 		if( $ymc_order_post_by === 'meta_key' && !empty($ymc_meta_key) && !empty($ymc_meta_value) ) {
 			$args['meta_key'] = $ymc_meta_key;
@@ -140,6 +137,7 @@ class Get_Posts {
 			unset($args['order']);
 		}
 
+		// Search Posts
 		if( !empty($keyword) ) {
 
 			add_filter( 'posts_join', array($this,'search_join') );
@@ -391,6 +389,12 @@ class Get_Posts {
 
 			foreach ($tax_selected as $tax) :
 
+				if( empty($term_ids) ) :
+
+					$term_ids = $terms_selected;
+
+				endif;
+
 				foreach ($term_ids as $term) :
 
 					if($tax === get_term( $term )->taxonomy) :
@@ -457,8 +461,8 @@ class Get_Posts {
 				$replace = '$1<b>$2</b>';
 				$markedText = preg_replace($pattern, $replace, $cut_text);
 
-				$output  .= '<li class="is-result">
-					         <a href="#" data-clue="'.strip_tags($markedText).'">' . $markedText . '...</a></li>';
+				$output  .= '<li class="result is-result">
+					         <a href="#" data-clue="'.strip_tags($markedText).'">' . $markedText . '</a></li>';
 
 				$title = null;
 				$content = null;
@@ -476,7 +480,6 @@ class Get_Posts {
 		);
 
 		wp_send_json($data);
-
 	}
 
 	public function alphabetical_where( $where, $query ) {

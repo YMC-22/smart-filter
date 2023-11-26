@@ -1115,7 +1115,7 @@
         });
 
         /*** Autocomplete Search ***/
-        $(document).on('input.ymc_smart_filter','.ymc-smart-filter-container .search-form .field-search',function (e) {
+        $(document).on('input.ymc_smart_filter keydown.ymc_smart_filter','.ymc-smart-filter-container .search-form .field-search',function (e) {
 
             let _self = $(this);
 
@@ -1156,42 +1156,118 @@
                 }
             }
 
-            if ( userInput.length > 2 ) {
+            if ( userInput.length > 2 )
+            {
+                if( e.type === 'keydown' && e.key !== undefined && (e.key === "ArrowDown" || e.key === "ArrowUp"))
+                {
+                    let isChildElems = [ ...this.nextElementSibling.childNodes ];
 
-                const data = {
-                    'action'     : 'ymc_autocomplete_search',
-                    'nonce_code' : _smart_filter_object.nonce,
-                    'phrase'     : userInput,
-                    'choices_posts' : params.choices_posts,
-                    'exclude_posts' : params.exclude_posts,
-                    'post_id' : params.filter_id,
-                    'terms_ids' : termIDs
-                };
+                    let isClassSelected = false;
 
-                $.ajax({
-                    type: 'POST',
-                    dataType: 'json',
-                    url: _smart_filter_object.ajax_url,
-                    data: data,
-                    beforeSend: function () {},
-                    success: function (res) {
+                    let position = 0;
 
-                         if( res.disableAutocomplete === 0 ) {
+                    isChildElems.forEach((el) => {
 
-                             resultsHTML.show();
+                        if(el.classList.contains('selected'))
+                        {
+                            isClassSelected = true;
+                        }
+                    });
 
-                             if( res.total > 0 ) {
-                                 resultsHTML.html(res.data);
-                             }
-                             else {
-                                 resultsHTML.html(`<li class="no-result">No results for phrase: <b>${userInput}</b></li>`);
-                             }
-                         }
-                    },
-                    error: function (obj, err) {
-                        console.log( obj, err );
+                    if( !isClassSelected )
+                    {
+                        isChildElems.forEach((el, n) => {
+                            if( n === 0 ) {
+                                el.classList.add('selected');
+                                _self.val(el.children[0].innerText);
+                            }
+                        });
                     }
-                });
+
+                    if( isClassSelected )
+                    {
+                        if( e.key === "ArrowDown" )
+                        {
+                            isChildElems.forEach((el, n) => {
+
+                                if(el.classList.contains('selected'))
+                                {
+                                    position = n;
+                                }
+                            });
+
+                            if( position < isChildElems.length )
+                            {
+                                if( isChildElems[position+1] !== undefined )
+                                {
+                                    isChildElems[position].classList.remove('selected');
+                                    isChildElems[position+1].classList.add('selected');
+                                    isChildElems[position+1].scrollIntoView({ block: "end" });
+                                    _self.val(isChildElems[position+1].children[0].innerText);
+                                }
+                            }
+                        }
+
+                        if( e.key === "ArrowUp" )
+                        {
+                            isChildElems.forEach((el, n) => {
+
+                                if(el.classList.contains('selected'))
+                                {
+                                    position = n;
+                                }
+                            });
+
+                            if( position < isChildElems.length )
+                            {
+                                if( isChildElems[position-1] !== undefined ) {
+                                    isChildElems[position-1].classList.add('selected');
+                                    isChildElems[position].classList.remove('selected');
+                                    isChildElems[position].scrollIntoView({ block: "end" });
+                                    _self.val(isChildElems[position-1].children[0].innerText);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if( e.type === 'input')
+                {
+                    const data = {
+                        'action'     : 'ymc_autocomplete_search',
+                        'nonce_code' : _smart_filter_object.nonce,
+                        'phrase'     : userInput,
+                        'choices_posts' : params.choices_posts,
+                        'exclude_posts' : params.exclude_posts,
+                        'post_id' : params.filter_id,
+                        'terms_ids' : termIDs
+                    };
+
+                    $.ajax({
+                        type: 'POST',
+                        dataType: 'json',
+                        url: _smart_filter_object.ajax_url,
+                        data: data,
+                        beforeSend: function () {},
+                        success: function (res) {
+
+                            if( res.disableAutocomplete === 0 ) {
+
+                                resultsHTML.show();
+
+                                if( res.total > 0 ) {
+                                    resultsHTML.html(res.data);
+                                }
+                                else {
+                                    resultsHTML.html(`<li class="result no-result">No results for phrase: <b>${userInput}</b></li>`);
+                                }
+                            }
+                        },
+                        error: function (obj, err) {
+                            console.log( obj, err );
+                        }
+                    });
+                }
             }
         });
 
