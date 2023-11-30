@@ -384,21 +384,21 @@ class Meta_Boxes {
 					</li>
 					<li class="nav-item">
 						<a class="link" id="advanced-tab" href="#advanced">
-							<span class="text"><?php echo esc_html__('Advanced','category-ajax-filter'); ?></span>
+							<span class="text"><?php echo esc_html__('Advanced','ymc-smart-filter'); ?></span>
 							<span class="info"><?php echo esc_html__('Add Extra Classes to Post','ymc-smart-filter'); ?></span>
 							<span class="dashicons dashicons-tag"></span>
 						</a>
 					</li>
 					<li class="nav-item">
 						<a class="link" id="shortcode-tab" href="#shortcode">
-							<span class="text"><?php echo esc_html__('Shortcode','category-ajax-filter'); ?></span>
+							<span class="text"><?php echo esc_html__('Shortcode','ymc-smart-filter'); ?></span>
 							<span class="info"><?php echo esc_html__('Get Your shortcode','ymc-smart-filter'); ?></span>
 							<span class="dashicons dashicons-shortcode"></span>
 						</a>
 					</li>
 					<li class="nav-item">
 						<a class="link" id="tools-tab" href="#tools">
-							<span class="text"><?php echo esc_html__('Tools','category-ajax-filter'); ?></span>
+							<span class="text"><?php echo esc_html__('Tools','ymc-smart-filter'); ?></span>
 							<span class="info"><?php echo esc_html__('Export / Import Settings','ymc-smart-filter'); ?></span>
 							<span class="dashicons dashicons-controls-repeat"></span>
 						</a>
