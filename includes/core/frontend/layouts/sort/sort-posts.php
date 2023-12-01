@@ -1,9 +1,11 @@
 <?php
 
+$sort_text = apply_filters('ymc_sort_text_'.$id.'_'.$c_target, __('Sort','ymc-smart-filter'));
+
 echo '<div class="sort-container">';
 echo '<div class="dropdown-filter">';
 echo '<div class="menu-active">';
-echo '<span class="name-sort">'.esc_html__('Sort', 'ymc-smart-filter').'</span> <b class="arrow-orderby"></b> <i class="arrow down"></i>';
+echo '<span class="name-sort">'.esc_html__($sort_text, 'ymc-smart-filter').'</span> <b class="arrow-orderby"></b> <i class="arrow down"></i>';
 echo '</div>';
 echo '<div class="menu-passive">';
 echo '<i class="btn-close">x</i>';

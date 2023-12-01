@@ -106,6 +106,16 @@ add_filter('ymc_button_show_all_545_1', function () {
     return 'My All';
 }, 10, 1);
 ```
+
+**Change the text of the “Sort” button on the filter panel**
+```php
+add_filter('ymc_sort_text_FilterID_LayoutID', $ymc_button_show_all, 10, 1);
+
+Usage example:
+add_filter('ymc_sort_text_545_1', function () {
+    return 'My Sort';
+}, 10, 1);
+```
 **Add your content before or after the filter bar**
 ```php
 add_action("ymc_before_filter_layout_FilterID_LayoutID");
