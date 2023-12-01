@@ -107,7 +107,7 @@ add_filter('ymc_button_show_all_545_1', function () {
 }, 10, 1);
 ```
 
-**Change the text of the “Sort” button on the filter panel**
+**Change the text of the “Sort” button on the sort panel**
 ```php
 add_filter('ymc_sort_text_FilterID_LayoutID', $ymc_button_show_all, 10, 1);
 
