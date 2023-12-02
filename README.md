@@ -116,6 +116,18 @@ add_filter('ymc_sort_text_545_1', function () {
     return 'My Sort';
 }, 10, 1);
 ```
+
+**Change the name of the category (taxonomy) in the dropdown list button filters on the filter panel.**
+```php
+add_filter('ymc_tax_name_FilterID_LayoutID_slugTax', $ymc_button_show_all, 10, 1);
+- slugTax - category (taxonomy) slug
+
+Usage example:
+add_filter('ymc_tax_name_545_1_category', function () {
+    return 'My Tax Name';
+}, 10, 1);
+```
+
 **Add your content before or after the filter bar**
 ```php
 add_action("ymc_before_filter_layout_FilterID_LayoutID");

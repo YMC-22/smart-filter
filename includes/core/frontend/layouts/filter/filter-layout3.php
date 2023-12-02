@@ -58,10 +58,11 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
             foreach ($result_tax as $tax) {
 
 	            $select_term = apply_filters('ymc_select_term_dropdown', $tax);
+	            $tax_name = apply_filters('ymc_tax_name_'.$id.'_'.$c_target.'_'.$tax, get_taxonomy( $select_term )->label);
 
                 echo '<div class="dropdown-filter">';
                 echo '<div class="menu-active">';
-                echo '<span>' . get_taxonomy( $select_term )->label .'</span> <i class="arrow down"></i>';
+                echo '<span>' . $tax_name .'</span> <i class="arrow down"></i>';
                 echo '</div>';
                 echo '<div class="menu-passive">';
                 echo '<i class="btn-close">x</i>';

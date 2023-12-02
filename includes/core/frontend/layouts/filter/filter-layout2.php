@@ -55,8 +55,10 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 
                 foreach ($result_tax as $tax) {
 
+	                $tax_name = apply_filters('ymc_tax_name_'.$id.'_'.$c_target.'_'.$tax, get_taxonomy( $tax )->label);
+
                     echo '<li class="group-filters">
-                          <header class="name-tax">'. esc_html(get_taxonomy( $tax )->label) .'</header>
+                          <header class="name-tax">'. esc_html($tax_name) .'</header>
                           <ul class="sub-filters">';
 
 	                $terms_icons = null;
