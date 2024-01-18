@@ -321,7 +321,7 @@ Usage example:
  */
 add_filter('ymc_popup_custom_layout_545_1', function ( $layout, $post_id ) {
 
-    $layout = '<h2>Custom Text: '. get_the_title($post_id) .'</h2>';
+    $output = '<h2>Custom Text: '. get_the_title($post_id) .'</h2>';
 	return $output;
 	
 }, 10, 2);
