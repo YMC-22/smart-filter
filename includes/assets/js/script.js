@@ -457,6 +457,9 @@
                         bodyHtml.css({'overflow' : 'hidden'});
                         popupContainer.closest('.ymc-popup-wrp').addClass(classAnimation);
                     }
+
+                    // Add Hook: after open popup
+                    wp.hooks.doAction('ymc_after_popup_open_'+params.filter_id+'_'+params.target_id, res.data);
                 },
                 error: function (obj, err) {
                     console.log( obj, err );
@@ -513,6 +516,9 @@
                             popupOverlay.css({'display':'block','opacity':'1'});
                             bodyHtml.css({'overflow' : 'hidden'});
                         }
+
+                        // Add Hook: after open popup
+                        wp.hooks.doAction('ymc_after_popup_open_'+params.filter_id+'_'+params.target_id, res.data);
                     },
                     error: function (obj, err) {
                         console.log( obj, err );

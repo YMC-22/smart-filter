@@ -681,7 +681,9 @@ wp.hooks.addAction('ymc_complete_loaded_data_545_1', 'smartfilter', function(cla
 
 Stop loading posts for the selected filter and then load posts for the selected term
 
-```js       
+```js 
+Usage example: 
+
     wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(el){
         if( el.classList.contains('data-target-ymc545-1') ) {
             el.dataset.loading = 'false';
@@ -691,6 +693,25 @@ Stop loading posts for the selected filter and then load posts for the selected 
                terms: '7'
             }).apiTermUpdate();           
         }
+    });    
+
+```
+
+**Calling a script point after opening a popup and loading content into it.**
+
+This hook allows you to run any desired script after opening a popup for each post
+
+```js
+wp.hooks.addAction('ymc_after_popup_open_FilterID_LayoutID', 'smartfilter', 'callback(data)');
+```
+**Params function callback:**
+- `data - data that is loaded into the popup container.`
+
+```js       
+Usage example:
+
+    wp.hooks.addAction('ymc_after_popup_open_545_1', 'smartfilter', function(data){
+        console.log('Loaded data: '  + data);
     });    
 
 ```

@@ -1,12 +1,12 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.6.21
+Version: 2.6.22
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
 Tags: filter, grids, ajax posts, search, posts, masonry, ajax filter, category posts, taxonomy, custom taxonomy, woocommerce
 Requires at least: 4.8
 Tested up to: 6.4
-Stable tag: 2.6.21
+Stable tag: 2.6.22
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -196,6 +196,10 @@ Fixed posts layouts
 Add new filter ymc_sort_text_FilterID_LayoutID
 = 2.6.20 =
 Add new filter ymc_tax_name_FilterID_LayoutID_slugTax
+= 2.6.22 =
+Add new hook ymc_after_popup_open_FilterID_LayoutID (see documentation)
+
+
 
 == Video ==
 https://www.youtube.com/watch?v=FIBNE0Ix6Vg
