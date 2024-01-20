@@ -994,6 +994,67 @@
             });
         });
 
+        // Filter Posts / Layout4 / Sidebar Filter
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .filter-layout4 .name-tax',function (e) {
+            let _self = $(this);
+            _self.toggleClass('open').next().slideToggle(300);
+        });
+
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .filter-layout4 .filter-link',function (e) {
+            e.preventDefault();
+
+            let link = $(this);
+            let term_id = link.data('termid');
+            let posts_selected = link.data('selected');
+
+            if(link.hasClass('multiple')) {
+                link.toggleClass('active').closest('.filter-entry').find('.all').removeClass('active');
+            }
+            else {
+                link.addClass('active').
+                closest('.filter-item').
+                siblings().find('.filter-link').
+                removeClass('active').
+                closest('.filter-entry').find('.all').removeClass('active');
+            }
+
+            let listActiveItems = link.closest('.filter-entry').find('.active');
+
+            if(listActiveItems.length > 0) {
+
+                term_id = '';
+
+                link.closest('.filter-entry').find('.active').each(function (){
+                    term_id += $(this).data('termid')+',';
+                });
+
+                term_id = term_id.replace(/,\s*$/, "");
+            }
+            else {
+                term_id = link.closest('.filter-entry').find('.all').data('termid');
+            }
+
+            if(link.hasClass('all')) {
+                link.addClass('active').closest('.filter-item').siblings().find('.filter-link').removeClass('active');
+            }
+
+            let params = JSON.parse( this.closest('.ymc-smart-filter-container').dataset.params);
+            params.terms = term_id;
+            params.page = 1;
+            params.search = '';
+            params.posts_selected = posts_selected;
+
+            this.closest('.ymc-smart-filter-container').dataset.params = JSON.stringify(params);
+
+            getFilterPosts({
+                'paged'     : 1,
+                'toggle_pg' : 1,
+                'target'    : params.data_target,
+                'type_pg'   : params.type_pg
+            });
+        });
+
+
         // Filter: Alphabetical Navigation
         $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .alphabetical-layout .filter-link',function (e) {
             e.preventDefault();
