@@ -61,8 +61,10 @@ class Get_Posts {
 		require YMC_SMART_FILTER_DIR . '/includes/core/util/variables.php';
 		require YMC_SMART_FILTER_DIR . '/includes/core/util/helper.php';
 
+		$arr_post_types = !empty( $post_type ) ? explode(',', $post_type) : 'post';
+
 		$args = [
-			'post_type' => $post_type,
+			'post_type' => $arr_post_types,
 			'post_status' => $ymc_post_status,
 			'posts_per_page' => $per_page,
 			'paged' => $paged,

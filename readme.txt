@@ -1,12 +1,12 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.7.1
+Version: 2.7.2
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
 Tags: filter, grids, ajax posts, search, posts, masonry, ajax filter, category posts, taxonomy, custom taxonomy, woocommerce
 Requires at least: 4.8
 Tested up to: 6.4
-Stable tag: 2.7.1
+Stable tag: 2.7.2
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -175,31 +175,33 @@ Fixed PHP files
 = 2.5.11 =
 Fixed clear result search
 = 2.6.1 =
-Add Popup to view posts
+Added Popup to view posts
 = 2.6.2 =
-Add Method API JS open popup post
+Added Method API JS open popup post
 = 2.6.3 =
-Add Support Popup
+Added Support Popup
 = 2.6.4 =
-Add Export / Import Settings
+Added Export / Import Settings
 = 2.6.10 =
 Fixed JS
 = 2.6.13 =
 Fixed JS
 = 2.6.14 =
-Add Namespaced Events JS
+Added Namespaced Events JS
 = 2.6.16 =
 Search for posts by already filtered posts
 = 2.6.17 =
 Fixed posts layouts
 = 2.6.19 =
-Add new filter ymc_sort_text_FilterID_LayoutID
+Added new filter ymc_sort_text_FilterID_LayoutID
 = 2.6.20 =
-Add new filter ymc_tax_name_FilterID_LayoutID_slugTax
+Added new filter ymc_tax_name_FilterID_LayoutID_slugTax
 = 2.6.22 =
-Add new hook ymc_after_popup_open_FilterID_LayoutID (see documentation)
+Added new hook ymc_after_popup_open_FilterID_LayoutID (see documentation)
 = 2.7.1 =
-Add new layout filter Sidebar
+Added new layout filter Sidebar
+= 2.7.2 =
+Added JS API Filter: apiMultiplePosts, to display different types of posts with different taxonomies (see documentation)
 
 
 == Video ==

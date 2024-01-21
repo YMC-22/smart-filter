@@ -8,7 +8,7 @@
         const _FN = (function () {
 
             const _info = {
-                version: '2.6.6',
+                version: '2.7.2',
                 author: 'YMC'
             }
 
@@ -330,6 +330,29 @@
 
             YMCTools.prototype.apiGetPosts = function () {
                 this.getFilterPosts();
+            }
+
+            YMCTools.prototype.apiMultiplePosts = function ( option = true, cpt = '', tax = '', terms = '' ) {
+
+                let container = document.querySelector(''+ this.target +'');
+                if( ! container )  throw new Error("ApiMultiplePosts: Filter not found");
+
+                let dataParams = JSON.parse(container.dataset.params);
+
+                dataParams.page = 1;
+                dataParams.search = "";
+
+                dataParams.cpt = ( cpt !== '' ) ? cpt.replaceAll(' ', '') : dataParams.cpt;
+
+                dataParams.tax = ( tax !== '' ) ? tax.replaceAll(' ', '') : dataParams.tax;
+
+                dataParams.terms = ( terms !== '' ) ? terms.replaceAll(' ', '') : dataParams.terms;
+
+                container.dataset.params = JSON.stringify(dataParams);
+
+                if( option ) {
+                    this.getFilterPosts();
+                }
             }
 
             return function (settings) {

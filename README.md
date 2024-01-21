@@ -575,6 +575,39 @@ Usage example:
 YMCTools({ target: '.data-target-ymc545-1'}).apiPopup(15); 
 ```
 
+**This method allows you to display different post types with their different taxonomies in a grid.**
+
+**Required params:**
+```js
+YMCTools({ target: '.data-target-ymcFilterID-LayoutID' }).apiMultiplePosts( option, cpt = '', tax = '', terms = '' );
+```
+- `option - (bool) true / false - parameter allows to control sending of request. Default is true`
+- `cpt - name post type (String). Can set several post types separated by commas, for example: "post,books"`
+- `tax - name taxonomies (String). Can set several taxonomies separated by commas, for example: "post,books"`
+- `terms - ID term (String). Create a list of all terms related to all specified taxonomies, separated by commas, for example: “11,35,47,55,77”.`
+- `IMPORTANT! Define the relationship between different taxonomies in a query. The default is "AND".
+   Set the option to "OR" to display all posts in the grid. This can be configured in the admin panel Filter -> General Tab -> Taxonomy. `
+
+Usage example:
+`Let's override the global filter settings. To do this, stop loading posts and run the filter with new updated parameters:`
+
+```js
+        wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(el) {
+           if( el.classList.contains('data-target-ymc545-1') ) {
+           el.dataset.loading = 'false';
+
+           YMCTools({
+              target: '.data-target-ymc545-1'
+           }).apiMultiplePosts( 
+                  true,
+                  cpt = 'post,books',
+                  tax = 'category,post_tag,author_book,book_types',
+                  terms = '5,6,19,15,20,7'
+           );
+       }
+});
+```
+
 
 ### Hooks JS.
 
