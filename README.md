@@ -582,9 +582,9 @@ YMCTools({ target: '.data-target-ymc545-1'}).apiPopup(15);
 YMCTools({ target: '.data-target-ymcFilterID-LayoutID' }).apiMultiplePosts( option, cpt = '', tax = '', terms = '' );
 ```
 - `option - (bool) true / false - parameter allows to control sending of request. Default is true`
-- `cpt - name post type (String). Can set several post types separated by commas, for example: "post,books"`
-- `tax - name taxonomies (String). Can set several taxonomies separated by commas, for example: "people,science"`
-- `terms - ID term (String). Create a list of all terms related to all specified taxonomies, separated by commas, for example: “11,35,47,55,77”.`
+- `cpt - name of post types (String). Can set several post types separated by commas, for example: "blogs,books"`
+- `tax - name of taxonomies (String). Can set several taxonomies separated by commas, for example: "people,science"`
+- `terms - ID terms (String). Create a list of all terms related to all specified taxonomies, separated by commas, for example: “11,35,47,55,77,95”.`
 - `IMPORTANT! Define the relationship between different taxonomies in a query. The default is "AND".
    Set the option to "OR" to display all posts in the grid. This can be configured in the admin panel Filter -> General Tab -> Taxonomy. `
 
@@ -602,7 +602,7 @@ Usage example:
                   true,
                   cpt = 'post,books',
                   tax = 'category,post_tag,author_book,book_types',
-                  terms = '5,6,19,15,20,7'
+                  terms = '5,6,19,15,20,7,55'
            );
        }
 });
