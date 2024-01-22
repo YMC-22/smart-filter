@@ -601,7 +601,7 @@ Usage example:
            }).apiMultiplePosts( 
                   true,
                   cpt = 'post,books',
-                  tax = 'category,post_tag,author_book,book_types',
+                  tax = 'category,people,science',
                   terms = '5,6,19,15,20,7,55'
            );
        }
