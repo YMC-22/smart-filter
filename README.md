@@ -583,7 +583,7 @@ YMCTools({ target: '.data-target-ymcFilterID-LayoutID' }).apiMultiplePosts( opti
 ```
 - `option - (bool) true / false - parameter allows to control sending of request. Default is true`
 - `cpt - name post type (String). Can set several post types separated by commas, for example: "post,books"`
-- `tax - name taxonomies (String). Can set several taxonomies separated by commas, for example: "post,books"`
+- `tax - name taxonomies (String). Can set several taxonomies separated by commas, for example: "people,science"`
 - `terms - ID term (String). Create a list of all terms related to all specified taxonomies, separated by commas, for example: “11,35,47,55,77”.`
 - `IMPORTANT! Define the relationship between different taxonomies in a query. The default is "AND".
    Set the option to "OR" to display all posts in the grid. This can be configured in the admin panel Filter -> General Tab -> Taxonomy. `
