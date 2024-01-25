@@ -20,7 +20,7 @@ $term_settings = arrayToObject( generalArrayMerging( $ymc_terms_options, $ymc_te
             $target = '.data-target-ymc'.$c_target;
             $multiple = (int) $ymc_multiple_filter;
 
-            if( !is_null($tax_sort)) {
+            if( !is_null($tax_sort) && is_array($tax_sort) ) {
                 $result_tax = [];
                 foreach($tax_sort as $val) {
                     if(array_search($val, $tax_selected) !== false) {

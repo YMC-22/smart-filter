@@ -3,7 +3,7 @@
 // Set variables
 $cpost_types = $variable->display_cpt(['attachment', 'popup']);
 $output      = $variable->output;
-$cpt         = $variable->get_cpt( $post->ID );
+$cpt         = explode(',', $variable->get_cpt( $post->ID ));
 $tax         = $variable->tax;
 $tax_sel     = $variable->get_tax_sel( $post->ID );
 $terms_sel   = $variable->get_terms_sel( $post->ID );
@@ -29,21 +29,20 @@ $ymc_terms_options   = $variable->get_terms_options( $post->ID );
 <div class="form-group wrapper-cpt">
 
 	<label for="ymc-cpt-select" class="form-label">
-		<?php echo esc_html__('Custom Post Type','ymc-smart-filter'); ?>
-		<span class="information">
-        <?php echo esc_html__('Select post type.','ymc-smart-filter'); ?>
+		<?php echo esc_html__('Post Types','ymc-smart-filter'); ?>
+		<span class="information" style="margin-bottom: 10px;">
+        <?php echo esc_html__('Select one ore more posts. To select multiple posts, hold down the key Ctrl.
+                                   For a more complete display of posts in the grid, set the "Taxonomy Relation" option to OR.','ymc-smart-filter'); ?>
         </span>
 	</label>
 
-	<select class="form-select" id="ymc-cpt-select" name="ymc-cpt-select" data-postid="<?php echo esc_attr($post->ID); ?>">
-		<option value="post"><?php echo esc_html__('Post','ymc-smart-filter'); ?></option>
+	<select class="form-select" multiple id="ymc-cpt-select" name="ymc-cpt-select[]" data-postid="<?php echo esc_attr($post->ID); ?>">
+		<!--<option value="post"><?php /*echo esc_html__('Post','ymc-smart-filter'); */?></option>-->
 		<?php
             foreach( $cpost_types as $cpost_type ) {
-                if( $cpt === $cpost_type ) {
-                    $sel = 'selected';
-                } else {
-                    $sel = '';
-                }
+
+	            $sel = ( array_search($cpost_type, $cpt) !== false ) ? 'selected' : '';
+
                 echo "<option value='" . esc_attr($cpost_type) ."' ". esc_attr($sel) .">" . esc_html( str_replace(['-','_'],' ', $cpost_type) ) . "</option>";
             }
 		?>
@@ -78,7 +77,7 @@ $ymc_terms_options   = $variable->get_terms_options( $post->ID );
 
         if( $taxo ) {
 
-            if( !is_null($tax_sort) ) {
+            if( !is_null($tax_sort) && is_array($tax_sort) ) {
 
                 $result_tax = [];
                 foreach($tax_sort as $val) {
@@ -136,131 +135,140 @@ $ymc_terms_options   = $variable->get_terms_options( $post->ID );
 
 	<div class="category-list" id="ymc-terms" data-postid="<?php echo esc_attr($post->ID); ?>">
 
-		<?php
+	<?php
+		if( is_array($cpt) ) {
 
-		if( in_array($cpt, $cpost_types) ) {
-            if( is_array($tax_sel) && count($tax_sel) > 0 ) {
+			$is_cpt = true;
 
-                foreach ( $tax_sel as $tax ) :
+		    foreach ($cpt as $pt) {
+			    if( !in_array($pt, $cpost_types) ) {
+				    $is_cpt = false;
+			    }
+		    }
 
-	            $terms = get_terms([
-		            'taxonomy' => $tax,
-		            'hide_empty' => false,
-	            ]);
+			if( $is_cpt ) {
+				if( is_array($tax_sel) && count($tax_sel) > 0 ) {
 
-	            if( is_array($terms) ) {
+					foreach ( $tax_sel as $tax ) :
 
-					$terms_icons = '';
-		            $bg_term = '';
-		            $color_term = '';
-		            $class_term = '';
-		            $color_icon = '';
-		            $class_icon = '';
+						$terms = get_terms([
+							'taxonomy' => $tax,
+							'hide_empty' => false,
+						]);
 
-		            if( !is_null($term_sort) && $ymc_sort_terms === 'manual' ) {
-			            $res_terms = [];
-			            foreach( $terms as $term ) {
-				            $key = array_search($term->term_id, $term_sort);
-				            $res_terms[$key] = $term;
-			            }
-			            ksort($res_terms);
-		            }
-					else {
-						$res_terms = $terms;
-					}
+						if( is_array($terms) ) {
 
-                    echo '<article class="group-term item-'. esc_attr($tax) .'">';
+							$terms_icons = '';
+							$bg_term = '';
+							$color_term = '';
+							$class_term = '';
+							$color_icon = '';
+							$class_icon = '';
 
-                    echo '<div class="item-inner all-categories">
+							if( !is_null($term_sort) && $ymc_sort_terms === 'manual' ) {
+								$res_terms = [];
+								foreach( $terms as $term ) {
+									$key = array_search($term->term_id, $term_sort);
+									$res_terms[$key] = $term;
+								}
+								ksort($res_terms);
+							}
+							else {
+								$res_terms = $terms;
+							}
+
+							echo '<article class="group-term item-'. esc_attr($tax) .'">';
+
+							echo '<div class="item-inner all-categories">
                           <input name="all-select" class="category-all" id="category-all-'.esc_attr($tax).'" type="checkbox">
                           <label for="category-all-'.esc_attr($tax).'" class="category-all-label">'. esc_html__('All [ '. get_taxonomy( $tax )->label .']', 'ymc-smart-filter') .'</label>                                                    
                           </div>';
 
-					echo '<div class="entry-terms">';
+							echo '<div class="entry-terms">';
 
-		            foreach( $res_terms as $term ) :
+							foreach( $res_terms as $term ) :
 
-			            $sl1 = '';
+								$sl1 = '';
 
-			            if(is_array($terms_sel) && count($terms_sel) > 0) {
+								if(is_array($terms_sel) && count($terms_sel) > 0) {
 
-                            if (in_array($term->term_id, $terms_sel)) {
-                                $sl1 = 'checked';
-                            }
-                            else{ $sl1 = ''; }
-			            }
-
-			            // Set align icons
-			            if( !empty($ymc_terms_align) ) {
-
-				            $flag_terms_align = false;
-
-				            foreach ( $ymc_terms_align as $sub_terms_align ) {
-
-					            foreach ( $sub_terms_align as $key => $val) {
-
-						            if ( $key === 'termid' && $term->term_id === (int) $val ) {
-							            $flag_terms_align = true;
-						            }
-						            if ( $key === 'alignterm' && $flag_terms_align ) {
-							            $class_terms_align = $val;
-						            }
-						            if ( $key === 'coloricon' && $flag_terms_align ) {
-							            $color_icon = $val;
-						            }
-						            if ( $key === 'classicon' && $flag_terms_align ) {
-							            $class_icon = $val;
-						            }
-					            }
-
-					            if( $flag_terms_align ) {break;}
-				            }
-			            }
-
-			            // Set options term
-						if( !empty($ymc_terms_options) ) {
-
-							$flag_terms_option = false;
-
-							foreach ( $ymc_terms_options as $terms_opt ) {
-
-								foreach ( $terms_opt as $key => $val) {
-
-									if ( $key === 'termid' && $term->term_id === (int) $val ) {
-										$flag_terms_option = true;
+									if (in_array($term->term_id, $terms_sel)) {
+										$sl1 = 'checked';
 									}
-									if ( $key === 'bg' && $flag_terms_option ) {
-										$bg_term = $val;
-									}
-									if ( $key === 'color' && $flag_terms_option ) {
-										$color_term =  $val;
-									}
-									if ( $key === 'class' && $flag_terms_option ) {
-										$class_term = $val;
+									else{ $sl1 = ''; }
+								}
+
+								// Set align icons
+								if( !empty($ymc_terms_align) ) {
+
+									$flag_terms_align = false;
+
+									foreach ( $ymc_terms_align as $sub_terms_align ) {
+
+										foreach ( $sub_terms_align as $key => $val) {
+
+											if ( $key === 'termid' && $term->term_id === (int) $val ) {
+												$flag_terms_align = true;
+											}
+											if ( $key === 'alignterm' && $flag_terms_align ) {
+												$class_terms_align = $val;
+											}
+											if ( $key === 'coloricon' && $flag_terms_align ) {
+												$color_icon = $val;
+											}
+											if ( $key === 'classicon' && $flag_terms_align ) {
+												$class_icon = $val;
+											}
+										}
+
+										if( $flag_terms_align ) {break;}
 									}
 								}
 
-								if( $flag_terms_option ) {break;}
-							}
-						}
+								// Set options term
+								if( !empty($ymc_terms_options) ) {
 
-			            // Choose icons
-			            if( !empty($ymc_terms_icons) ) {
-				            foreach ( $ymc_terms_icons as $key => $val ) {
-					            if( $term->term_id === (int) $key ) {
-									$style_color_icon = ( !empty($color_icon) ) ? 'style="color: '.$color_icon.'"' : '';
-						            $terms_icons = '<i class="'. $val .'" '. $style_color_icon .'"></i><input name="ymc-terms-icons['. $key .']" type="hidden" value="'. $val .'">';
-						            break;
-					            }
-				            }
-			            }
+									$flag_terms_option = false;
 
-			            $class_terms_align = ( !empty($class_terms_align ) ) ? $class_terms_align : 'left-icon';
+									foreach ( $ymc_terms_options as $terms_opt ) {
 
-			            $style_bg_term = ( !empty($bg_term) ) ? 'background-color:'.$bg_term.';' : '';
-			            $style_color_term = ( !empty($color_term) ) ? 'color:'.$color_term.';' : '';
+										foreach ( $terms_opt as $key => $val) {
 
-			            echo '<div class="item-inner" style="'. esc_attr($style_bg_term) . esc_attr($style_color_term) .'" 
+											if ( $key === 'termid' && $term->term_id === (int) $val ) {
+												$flag_terms_option = true;
+											}
+											if ( $key === 'bg' && $flag_terms_option ) {
+												$bg_term = $val;
+											}
+											if ( $key === 'color' && $flag_terms_option ) {
+												$color_term =  $val;
+											}
+											if ( $key === 'class' && $flag_terms_option ) {
+												$class_term = $val;
+											}
+										}
+
+										if( $flag_terms_option ) {break;}
+									}
+								}
+
+								// Choose icons
+								if( !empty($ymc_terms_icons) ) {
+									foreach ( $ymc_terms_icons as $key => $val ) {
+										if( $term->term_id === (int) $key ) {
+											$style_color_icon = ( !empty($color_icon) ) ? 'style="color: '.$color_icon.'"' : '';
+											$terms_icons = '<i class="'. $val .'" '. $style_color_icon .'"></i><input name="ymc-terms-icons['. $key .']" type="hidden" value="'. $val .'">';
+											break;
+										}
+									}
+								}
+
+								$class_terms_align = ( !empty($class_terms_align ) ) ? $class_terms_align : 'left-icon';
+
+								$style_bg_term = ( !empty($bg_term) ) ? 'background-color:'.$bg_term.';' : '';
+								$style_color_term = ( !empty($color_term) ) ? 'color:'.$color_term.';' : '';
+
+								echo '<div class="item-inner" style="'. esc_attr($style_bg_term) . esc_attr($style_color_term) .'" 
 			                  data-termid="'. esc_attr($term->term_id) .'" 
 			                  data-alignterm="'. esc_attr($class_terms_align) .'" 
 			                  data-bg-term="'. esc_attr($bg_term) .'" 
@@ -271,30 +279,31 @@ $ymc_terms_options   = $variable->get_terms_options( $post->ID );
 			                  data-status-term="'. esc_attr($sl1) .'">
                               <input name="ymc-terms[]" class="category-list" id="category-id-'. esc_attr($term->term_id) .'" type="checkbox" value="'. esc_attr($term->term_id) .'" '. esc_attr($sl1) .'>';
 
-						echo '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">
+								echo '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">
 							  <span class="name-term">' . esc_html($term->name) .'</span>'. ' ('. esc_attr($term->count) .')</label>						  						  
 							  <i class="far fa-cog choice-icon" title="Setting term"></i><span class="indicator-icon">'. $terms_icons .'</span></div>';
 
 
-			            $terms_icons = '';
-			            $class_icon = '';
+								$terms_icons = '';
+								$class_icon = '';
 
-                    endforeach;
+							endforeach;
 
-		            $res_terms = null;
+							$res_terms = null;
 
-		            echo '</div>';
+							echo '</div>';
 
-                   echo '</article>';
-	            }
+							echo '</article>';
+						}
 
-            endforeach;
-            }
+					endforeach;
+				}
+			}
 		}
 		else {
 			echo '<span class="notice">'. esc_html__('No data for terms', 'ymc-smart-filter') .'</span>';
 		}
-        ?>
+    ?>
 
 	</div>
 
@@ -304,7 +313,7 @@ $ymc_terms_options   = $variable->get_terms_options( $post->ID );
 
 <div class="form-group wrapper-selection">
 
-	<?php if( in_array($cpt, $cpost_types) ) : ?>
+	<?php if( $is_cpt ) : ?>
 
 		<label class="form-label">
 			<?php echo esc_html__('Exclude Posts', 'ymc-smart-filter'); ?>

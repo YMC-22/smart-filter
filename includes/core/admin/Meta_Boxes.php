@@ -26,8 +26,13 @@ class Meta_Boxes {
 
 		// CPT
 		if( isset($_POST['ymc-cpt-select']) ) {
-			$cpt_val = sanitize_text_field( $_POST['ymc-cpt-select'] );
-			update_post_meta( $post_id, 'ymc_cpt_value', $cpt_val );
+			$cpt_values = $_POST['ymc-cpt-select'];
+			$str_cpts = '';
+			foreach ($cpt_values as $cpt) {
+				$str_cpts .= $cpt.',';
+			}
+			$str_cpts = rtrim($str_cpts, ',');
+			update_post_meta( $post_id, 'ymc_cpt_value', $str_cpts );
 		}
 
 		// Taxonomy

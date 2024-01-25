@@ -1,12 +1,12 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.7.2
+Version: 2.7.3
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
 Tags: filter, grids, ajax posts, search, posts, masonry, ajax filter, category posts, taxonomy, custom taxonomy, woocommerce
 Requires at least: 4.8
 Tested up to: 6.4
-Stable tag: 2.7.2
+Stable tag: 2.7.3
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -22,6 +22,7 @@ The plugin supports custom post types. You can filter custom post types with the
 
 == Plugin Features ==
 The plugin provides the following functionality:
+- Selecting one or more post types to display different posts in a grid
 - Sorting taxonomies and terms.
 - Installation of different types of pagination (Numeric, Load more, Scroll infinity).
 - Choice of different templates for filters and post cards.
@@ -202,7 +203,8 @@ Added new hook ymc_after_popup_open_FilterID_LayoutID (see documentation)
 Added new layout filter Sidebar
 = 2.7.2 =
 Added JS API Filter: apiMultiplePosts, to display different types of posts with different taxonomies (see documentation)
-
+= 2.7.3 =
+Selecting one or more post types to display different posts in a grid
 
 == Video ==
 https://www.youtube.com/watch?v=FIBNE0Ix6Vg

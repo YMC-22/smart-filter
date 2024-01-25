@@ -43,7 +43,7 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 
             echo '<a class="btn-all" href="#" data-selected="all" data-terms="' . esc_attr($all_terms) . '">'. esc_html($show_all) .'</a>';
 
-            if( !is_null($tax_sort)) {
+            if( !is_null($tax_sort) && is_array($tax_sort) ) {
                 $result_tax = [];
                 foreach($tax_sort as $val) {
                     if(array_search($val, $arr_taxonomies) !== false) {

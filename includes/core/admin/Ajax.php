@@ -49,27 +49,35 @@ class Ajax {
 		if (!wp_verify_nonce($_POST['nonce_code'], 'custom_ajax_nonce')) exit;
 
 		if(isset($_POST["cpt"])) {
-			$cpt = sanitize_text_field($_POST["cpt"]);
+			$post_types = sanitize_text_field($_POST["cpt"]);
+			$cpts = !empty( $post_types ) ? explode(',', $post_types) : false;
 		}
 		if(isset($_POST["post_id"])) {
 			update_post_meta( (int) $_POST["post_id"], 'ymc_taxonomy', '' );
 			update_post_meta( (int) $_POST["post_id"], 'ymc_terms', '' );
 		}
 
-		$data_slugs  = get_object_taxonomies($cpt);
-		$data_object = get_object_taxonomies($cpt, $output = 'objects');
 
-		$arr_result = [];
-		// Exclude Taxonomies WooCommerce
-		$arr_exclude_slugs = ['product_type','product_visibility','product_shipping_class'];
+		if( is_array($cpts) ) {
 
-		foreach ($data_object as $val) {
-			if(array_search($val->name, $arr_exclude_slugs) === false ) {
-				$arr_result[$val->name] = $val->label;
+			$arr_tax_result = [];
+
+			// Exclude Taxonomies WooCommerce
+			$arr_exclude_slugs = ['product_type','product_visibility','product_shipping_class'];
+
+			foreach ( $cpts as $cpt ) {
+
+				$data_object = get_object_taxonomies($cpt, $output = 'objects');
+
+				foreach ($data_object as $val) {
+					if(array_search($val->name, $arr_exclude_slugs) === false ) {
+						$arr_tax_result[$val->name] = $val->label;
+					}
+				}
 			}
 		}
 
-		update_post_meta( (int) $_POST["post_id"], 'ymc_tax_sort', $data_slugs );
+		update_post_meta( (int) $_POST["post_id"], 'ymc_tax_sort', '' );
 		delete_post_meta( (int) $_POST["post_id"], 'ymc_term_sort' );
 		delete_post_meta( (int) $_POST["post_id"], 'ymc_choices_posts' );
 		delete_post_meta( (int) $_POST["post_id"], 'ymc_terms_options' );
@@ -96,7 +104,7 @@ class Ajax {
 		}
 
 		$data = array(
-			'data' => json_encode($arr_result),
+			'data' => json_encode($arr_tax_result),
 			'lists_posts' => json_encode($arr_posts)
 		);
 

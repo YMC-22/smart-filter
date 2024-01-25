@@ -41,7 +41,7 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
                 }
                 $arr_taxonomies = array_unique($arr_taxonomies);
 
-                if( !is_null($tax_sort) ) {
+                if( !is_null($tax_sort) && is_array($tax_sort) ) {
 	                $result_tax = [];
 	                foreach($tax_sort as $val) {
                         if(array_search($val, $arr_taxonomies) !== false) {

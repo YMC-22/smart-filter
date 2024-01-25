@@ -671,6 +671,12 @@ $font-size: 16;
 								width: 100%;
 							}
 						}
+						#ymc-cpt-select {
+							height: 100px;
+							option:checked {
+								background-color: rgba(9, 138, 184, 0.5);
+							}
+						}
 					}
 
 					#layouts {

@@ -41,11 +41,16 @@
             let termWrp     = $('#ymc-terms');
             let choicesList = $('#selection-posts .choices-list');
             let valuesList  = $('#selection-posts .values-list');
+            let cpts = '';
+
+            $("#ymc-cpt-select :selected").map(function(i, el) {
+                cpts +=$(el).val()+',';
+            });
 
             const data = {
                 'action': 'ymc_get_taxonomy',
                 'nonce_code' : _smart_filter_object.nonce,
-                'cpt' : $(this).val(),
+                'cpt' : cpts.replace(/,\s*$/, ""),
                 'post_id' : $(this).data('postid')
             };
 
