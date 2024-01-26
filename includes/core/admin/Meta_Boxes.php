@@ -499,7 +499,9 @@ class Meta_Boxes {
 
 	public function ymc_is_shortcode( $content, $id ) {
 
-		if ( strpos( $content, "[ymc_filter id='".$id."']" ) ) {
+		if ( strpos( $content, "[ymc_filter id='".$id."']" ) ||
+		     strpos( $content, "[ymc_filter id=\"".$id."\"]" )
+		) {
 			return true;
 		}
 		return false;
