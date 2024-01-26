@@ -762,7 +762,23 @@ $font-size: 16;
 
 					#shortcode {
 						.tab-entry {
-							.content {}
+							.content {
+								.list-pages {
+									list-style: disc;
+									margin: 15px 0 0 15px;
+									li {
+										a {
+											font-size: 13px;
+											color: #666;
+											transition: .3s;
+											&:hover {
+												color: #8c8f94;
+												text-decoration: none;
+											}
+										}
+									}
+								}
+							}
 						}
 					}
 

@@ -497,4 +497,12 @@ class Meta_Boxes {
 		<p>For more detailed information see <a target="_blank" href="https://github.com/YMC-22/smart-filter">documentation <span style="text-decoration: none;" class="dashicons dashicons-external"></span></a> on using this plugin.</p>','ymc-smart-filter');
 	}
 
+	public function ymc_is_shortcode( $content, $id ) {
+
+		if ( strpos( $content, "[ymc_filter id='".$id."']" ) ) {
+			return true;
+		}
+		return false;
+	}
+
 }
