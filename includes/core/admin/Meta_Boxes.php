@@ -81,8 +81,6 @@ class Meta_Boxes {
 
 	public function ymc_attached_filters_callback( $post, $metabox_args ) {
 
-		global $post;
-
 		echo '<ul class="ymc-filter-items">';
 
 		foreach ( $metabox_args[ 'args' ][ 'filter_ids' ] as $id )
