@@ -1,12 +1,12 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.7.4
+Version: 2.7.5
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
 Tags: filter, grids, ajax posts, search, posts, masonry, ajax filter, category posts, taxonomy, custom taxonomy, woocommerce
 Requires at least: 4.8
 Tested up to: 6.4
-Stable tag: 2.7.4
+Stable tag: 2.7.5
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -207,6 +207,8 @@ Added JS API Filter: apiMultiplePosts, to display different types of posts with 
 Selecting one or more post types to display different posts in a grid
 = 2.7.4 =
 Added an indicator for the location of the shortcode on pages or posts
+= 2.7.5 =
+Added linking on pages/posts for the presence of attached filters
 
 == Video ==
 https://www.youtube.com/watch?v=FIBNE0Ix6Vg

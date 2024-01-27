@@ -12,10 +12,85 @@ class Meta_Boxes {
 
 	public function __construct() {
 		add_action( 'add_meta_boxes', array($this, 'add_post_metabox'));
+		add_action( 'add_meta_boxes', array($this, 'ymc_attached_filters'));
 		add_action( 'save_post', array($this, 'save_meta_box'), 10, 2);
 		add_action( 'wp_dashboard_setup', array($this, 'register_filter_grids_widget'));
 		// Run popup
 		//add_thickbox();
+	}
+
+
+	public function ymc_attached_filters() {
+
+		global $post;
+
+		$filters_ids = [];
+		$is_filters_ids = [];
+		$is_shortcode = false;
+
+		$posts_array = get_posts([
+			'posts_per_page' => -1,
+			'post_status'    => 'any',
+			'post_type'      => 'any',
+			'orderby'        => 'title',
+			'order'          => 'ASC'
+		]);
+
+		$filters_array = get_posts([
+			'posts_per_page' => -1,
+			'post_type'      => 'ymc_filters',
+			'post_status'    => 'any'
+		]);
+
+		if( !empty($posts_array) && !empty($filters_array))
+		{
+			foreach ( $filters_array as $filter )
+			{
+				$filters_ids[] = $filter->ID;
+			}
+
+			foreach( $posts_array as $post_single )
+			{
+				if ($post->ID === $post_single->ID)
+				{
+					foreach ($filters_ids as $id)
+					{
+						if($this->ymc_is_shortcode($post_single->post_content, $id))
+						{
+							$is_filters_ids[] = $id;
+							$is_shortcode = true;
+						}
+					}
+				}
+			}
+
+			if( $is_shortcode )
+			{
+				add_meta_box(
+					'ymc_filters_attached' ,
+					__('Attached YMC Filters','ymc-smart-filter'),
+					array($this,'ymc_attached_filters_callback'),
+					Plugin::instance()->variables->display_cpt(['attachment', 'popup']),
+					'side',
+					'core',
+					array( 'filter_ids' => $is_filters_ids )
+				);
+			}
+		}
+	}
+
+	public function ymc_attached_filters_callback( $post, $metabox_args ) {
+
+		global $post;
+
+		echo '<ul class="ymc-filter-items">';
+
+		foreach ( $metabox_args[ 'args' ][ 'filter_ids' ] as $id )
+		{
+			echo '<li><span class="dashicons dashicons-sticky"></span> <a href="'.get_edit_post_link( $id ).'" target="_blank" title="Edit Filter">'.
+			           get_the_title( $id ) . ' (<i>ID: '.$id.'</i>) <span class="dashicons dashicons-edit"></span></a></li>';
+		}
+		echo '</ul>';
 	}
 
 	public function save_meta_box( $post_id, $post ) {

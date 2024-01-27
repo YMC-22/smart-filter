@@ -764,16 +764,16 @@ $font-size: 16;
 						.tab-entry {
 							.content {
 								.list-pages {
-									list-style: disc;
-									margin: 15px 0 0 15px;
+									list-style: none;
+									margin: 15px 0 0 0;
 									li {
 										a {
-											font-size: 13px;
+											font-size: 14px;
 											color: #666;
 											transition: .3s;
+											text-decoration: none;
 											&:hover {
 												color: #8c8f94;
-												text-decoration: none;
 											}
 										}
 									}
@@ -783,7 +783,6 @@ $font-size: 16;
 					}
 
 					#tools {
-
 						.ymc-btn-ei {
 							font-family: "Poppins";
 							padding: 7px 15px;
@@ -1145,6 +1144,25 @@ $font-size: 16;
 					height: 35px;
 					border-radius: 0;
 					width: 100%;
+				}
+			}
+		}
+	}
+}
+
+#ymc_filters_attached {
+	.inside {
+		.ymc-filter-items {
+			li {
+				margin-bottom: 10px;
+				a {
+					font-size: 14px;
+					color: #666;
+					transition: .3s;
+					text-decoration: none;
+					&:hover {
+						color: #8c8f94;
+					}
 				}
 			}
 		}

@@ -33,7 +33,8 @@
         <label for="ymc-shortcode" class="form-label">
             <?php echo esc_html__('Shortcode Location','ymc-smart-filter'); ?>
             <span class="information">
-            <?php echo esc_html__('List of pages and posts where the current shortcode is installed','ymc-smart-filter'); ?>
+            <?php echo esc_html__('List of pages or posts where the current shortcode is installed. 
+             Post types are (publicly_queryable) public or not are also will displayed here.','ymc-smart-filter'); ?>
             </span>
         </label>
 
@@ -56,7 +57,8 @@
 
                     if( $this->ymc_is_shortcode($post_single->post_content, $post->ID) ) {
 
-                        echo '<li><a href="' . get_the_permalink( $post_single->ID ) . '"  target="_blank">' . $post_single->post_title . '</a></li>';
+                        echo '<li><span class="dashicons dashicons-sticky"></span> <a title="View Post/Page" href="' . get_the_permalink( $post_single->ID ) . '"  target="_blank">' .
+                        $post_single->post_title . ' (<i>ID: '.$post_single->ID.'</i>) <span class="dashicons dashicons-visibility"></span></a></li>';
 
                         $placeholderText = true;
                     }
