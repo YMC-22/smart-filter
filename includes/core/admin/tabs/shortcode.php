@@ -41,7 +41,7 @@
         <?php
             $posts_array = get_posts([
                 'posts_per_page' => -1,
-                'post_status'    => 'any',
+                'post_status'    => 'publish',
                 'post_type'      => 'any',
                 'orderby'        => 'title',
                 'order'          => 'ASC',
@@ -49,23 +49,23 @@
 
             if( !empty($posts_array) ) :
 
-                $placeholderText = false;
+                $is_shortcode = false;
 
                 echo '<ul class="list-pages">';
 
                 foreach( $posts_array as $post_single ) :
 
-                    if( $this->ymc_is_shortcode($post_single->post_content, $post->ID) ) {
-
-                        echo '<li><span class="dashicons dashicons-sticky"></span> <a title="View Post/Page" href="' . get_the_permalink( $post_single->ID ) . '"  target="_blank">' .
+                    if( $this->ymc_is_shortcode($post_single->post_content, $post->ID) )
+                    {
+                        echo '<li></span> <a title="View Post/Page" href="' . get_the_permalink( $post_single->ID ) . '"  target="_blank">' .
                         $post_single->post_title . ' (<i>ID: '.$post_single->ID.'</i>) <span class="dashicons dashicons-visibility"></span></a></li>';
 
-                        $placeholderText = true;
+                        $is_shortcode = true;
                     }
 
                 endforeach;
 
-                 if( !$placeholderText )  {
+                 if( !$is_shortcode )  {
 
                      echo __('<li style="color: #b32d2e;">Shortcode is not used anywhere</li>','ymc-smart-filter');
                  }
@@ -78,4 +78,3 @@
     </div>
 
 </div>
-
