@@ -789,6 +789,55 @@ wp.hooks.addAction('ymc_after_loaded_data_545_1', 'smartfilter', function(class_
    });
 ```
 
+
+### Advanced Query.
+When using a plugin that displays different posts based on different criteria, there are built-in settings to control which posts are displayed, so you can choose how many to display, include or exclude terms, change the order, etc. However, if you need more complex queries, The plugin offers an "Advanced" query type that allows you to return exactly the arguments you need for your query.
+To do this, you will need to enable the ability to use your own query based on the global WP_query object. Go to the Advanced -> Advanced Query tab and turn the slider to "ON".
+Once this setting is enabled, you will see a new field called Query Type. From the drop-down list, select one of two ways to build a query:
+- Advanced (custom arguments)
+- Callback (theme function)
+
+### Query String (custom arguments)
+A <a href="https://www.php.net/manual/en/function.http-build-query.php" target="_blank">query string</a> is a string that contains parameters which looks something like this:
+```php
+posts_per_page=-1&post_type=portfolio&post_status=publish&orderby=title&tax_query[0][taxonomy]=portfolio_category&tax_query[0][field]=slug&tax_query[0][terms][]=inspiration
+```
+### Callback Function
+To use a callback for your query arguments simply enter your function name in the field and then add this function to your child theme's functions.php file. Your function should have a unique name and return an array of the arguments to pass onto WP_Query.
+Whitelisting Callbacks - **Important!** Your callback functions must be whitelisted in order for them to work. This is an important security measure.
+How to Whitelist Callback Functions for Elements? 
+In order to white list functions you need to define the “YMC_CALLBACK_FUNCTION_WHITELIST” constant via your child theme
+```php
+/*
+ * White list functions for use in Theme Core functions.php shortcodes.
+ */
+define( 'YMC_CALLBACK_FUNCTION_WHITELIST', array(
+    'my_custom_function_name_1',
+    'my_custom_function_name_2',
+    'my_custom_function_name_3',
+) );
+```
+Once you have defined the YMC_CALLBACK_FUNCTION_WHITELIST constant, you can register (define) a function from an existing list in an array, for example:
+
+```php
+function my_custom_function_name_1() {
+	return [
+		'post_type' => ['post'],
+		'posts_per_page' => 9,
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'category',
+				'field' => 'id',
+				'terms' => [6, 7, 15]
+			)
+		)
+	];
+}
+```
+After that, in the plugin settings, add the new function you registered to the list.
+Building your queries: Check out the <a href="https://developer.wordpress.org/reference/classes/wp_query/" target="_blank">**WordPress WP_Query Codex**</a> for all the different parameters you can use in the your query.
+
+
 ### Support
 For support questions, please write to: wss.office21@gmail.com
 
