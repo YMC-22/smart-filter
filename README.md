@@ -799,7 +799,7 @@ Once this setting is enabled, you will see a new field called Query Type. From t
 
 ##### **Query String (custom arguments)**
 
-A <a href="https://www.php.net/manual/en/function.http-build-query.php" target="_blank">query string</a> is a string that contains parameters which looks something like this:
+A [query string](https://www.php.net/manual/en/function.http-build-query.php) is a string that contains parameters which looks something like this:
 ```php
 posts_per_page=-1&post_type=portfolio&post_status=publish&orderby=title&tax_query[0][taxonomy]=portfolio_category&tax_query[0][field]=slug&tax_query[0][terms][]=inspiration
 ```
