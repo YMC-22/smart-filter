@@ -838,7 +838,7 @@ function my_custom_function_name_1() {
 ```
 
 After that, in the plugin settings, add the new function you registered to the list.
-Building your queries: Check out the <a href="https://developer.wordpress.org/reference/classes/wp_query/" target="_blank">**WordPress WP_Query Codex**</a> for all the different parameters you can use in the your query.
+Building your queries: Check out the **[WordPress WP_Query Codex](https://developer.wordpress.org/reference/classes/wp_query/)** for all the different parameters you can use in the your query.
 
 
 ### Support
