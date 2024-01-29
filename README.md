@@ -813,11 +813,17 @@ In order to white list functions you need to define the “YMC_CALLBACK_FUNCTION
 /*
  * White list functions for use in Theme Core functions.php shortcodes.
  */
-define( 'YMC_CALLBACK_FUNCTION_WHITELIST', array(
-    'my_custom_function_name_1',
-    'my_custom_function_name_2',
-    'my_custom_function_name_3',
-) );
+ 
+ if ( ! defined( 'YMC_CALLBACK_FUNCTION_WHITELIST' ) ) { 
+ 
+     define( 'YMC_CALLBACK_FUNCTION_WHITELIST', array(
+        'my_custom_function_name_1',
+        'my_custom_function_name_2',
+        'my_custom_function_name_3',
+    ) ); 
+ }
+ 
+
 ```
 Once you have defined the YMC_CALLBACK_FUNCTION_WHITELIST constant, you can register (define) a function from an existing list in an array, for example:
 
