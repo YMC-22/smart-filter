@@ -52,6 +52,7 @@ class Get_Posts {
 		$meta_key = $clean_data['meta_key'];
 		$class_animation = $clean_data['post_animation'];
 		$letter = $clean_data['letter'];
+		$custom_args = null;
 
 		$paged = (int) $_POST['paged'];
 		$id = (int) $filter_id;
@@ -228,6 +229,47 @@ class Get_Posts {
 			add_filter( 'posts_where',  array($this,'alphabetical_where'),10,2 );
 		}
 
+
+		// Custom WP Query
+		if( $ymc_advanced_query_status === 'on' )
+		{
+			if( $ymc_query_type === 'query_custom' )
+			{
+				$args = null;
+
+				$str_args = sanitize_text_field(urldecode($ymc_query_type_custom));
+
+				parse_str($str_args, $output_array);
+
+				$custom_args = $output_array;
+
+				$args = $output_array;
+
+				$args['paged'] = $paged;
+			}
+
+			if( $ymc_query_type === 'query_callback' )
+			{
+				if( function_exists(''. $ymc_query_type_callback .'' ) )
+				{
+					$custom_args =  $ymc_query_type_callback();
+
+					$intersect_keys_array = array_intersect_key($custom_args, $args);
+
+					foreach ( $intersect_keys_array as $key => $val )
+					{
+						$args[$key] = $val;
+					}
+
+					$args['paged'] = $paged;
+				}
+				else
+				{
+					$custom_args = 'Function \'' . $ymc_query_type_callback . '\' not exist';
+				}
+			}
+		}
+
 		$query = new \WP_query($args);
 
 		ob_start();
@@ -289,7 +331,8 @@ class Get_Posts {
 			'pagin' => !empty($pagin) ? $pagin : '',
 			'paged' => $paged,
 			'meta_query' => $meta_params,
-			'date_query' => $date_params
+			'date_query' => $date_params,
+			'custom_wp_query' => $custom_args
 		);
 
 		wp_send_json($data);

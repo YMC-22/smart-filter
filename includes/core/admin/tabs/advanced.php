@@ -7,6 +7,10 @@ $ymc_scroll_page = $variable->get_ymc_scroll_page( $post->ID );
 $ymc_preloader_filters = $variable->get_ymc_preloader_filters( $post->ID );
 $ymc_preloader_filters_rate = $variable->get_ymc_preloader_filters_rate( $post->ID );
 $ymc_preloader_filters_custom = $variable->get_ymc_preloader_filters_custom( $post->ID );
+$ymc_advanced_query_status = $variable->get_ymc_advanced_query_status( $post->ID );
+$ymc_query_type = $variable->get_ymc_query_type( $post->ID );
+$ymc_query_type_custom = $variable->get_ymc_query_type_custom( $post->ID );
+$ymc_query_type_callback = $variable->get_ymc_query_type_callback( $post->ID );
 
 ?>
 
@@ -15,6 +19,97 @@ $ymc_preloader_filters_custom = $variable->get_ymc_preloader_filters_custom( $po
 </div>
 
 <div class="content">
+
+    <header class="sub-header">
+        <i class="far fa-database"></i>
+        <?php echo esc_html__('Query', 'ymc-smart-filter'); ?>
+    </header>
+
+    <div class="form-group">
+
+        <label class="form-label">
+            <?php echo esc_html__('Advanced Query', 'ymc-smart-filter');?>
+            <span class="information">
+                    <?php echo esc_html__('Enable to build a custom query using your own parameters.', 'ymc-smart-filter');?>
+                </span>
+        </label>
+
+        <div class="ymc-toggle-group">
+            <label class="switch">
+                <input type="checkbox" <?php echo ($ymc_advanced_query_status === "off") ? "checked" : ""; ?>>
+                <input type="hidden" name="ymc-advanced-query-status" value='<?php echo esc_attr($ymc_advanced_query_status); ?>'>
+                <span class="slider slider"></span>
+            </label>
+        </div>
+
+        <?php $ymc_hide = ($ymc_advanced_query_status === 'on') ? '' : 'ymc_hidden'; ?>
+
+        <div class="manage-filters <?php echo esc_attr($ymc_hide); ?>">
+
+            <div class="type-query">
+
+                <label class="form-label">
+                    <?php echo esc_html__('Query Type', 'ymc-smart-filter'); ?>
+                    <span class="information">
+                    <?php _e('Select the type of query construction', 'ymc-smart-filter'); ?>
+                </span>
+                </label>
+
+                <select class="form-select ymc-query-type" name="ymc-query-type" id="ymc-query-type">
+                    <option value="query_custom" <?php echo ( $ymc_query_type === 'query_custom') ? 'selected' : ''; ?>>
+                        <?php _e('Advanced (custom arguments)','ymc-smart-filter'); ?></option>
+                    <option value="query_callback" <?php echo ( $ymc_query_type === 'query_callback') ? 'selected' : ''; ?>>
+                        <?php _e('Callback (theme function)','ymc-smart-filter'); ?></option>
+                </select>
+            </div>
+            
+            <div class="type-query-content query_custom <?php echo ( $ymc_query_type === 'query_callback') ? 'ymc_hidden' : ''; ?>">
+                 <label class="form-label">
+                    <?php echo esc_html__('Query Parameter String', 'ymc-smart-filter'); ?>
+                    <span class="information">
+                    <?php _e('Build a query according to the WordPress Codex in string format or enter a 
+                    custom callback function name that will return an array of query arguments.
+                    <a href="https://developer.wordpress.org/reference/classes/wp_query/" target="_blank">
+                    view docs <img draggable="false" role="img" class="emoji" alt="↗" src="https://s.w.org/images/core/emoji/14.0.0/svg/2197.svg"></a>
+                    ', 'ymc-smart-filter'); ?>
+                </span>
+                </label>
+
+                 <textarea class="form-textarea custom_query_args" name="ymc-query-type-custom" id="ymc-custom-query-args"
+                 placeholder="posts_per_page=-1&post_type=portfolio&post_status=publish"><?php echo (!empty($ymc_query_type_custom)) ? $ymc_query_type_custom : ''; ?></textarea>
+            </div>
+
+            <div class="type-query-content query_callback <?php echo ( $ymc_query_type === 'query_custom') ? 'ymc_hidden' : ''; ?>">
+                <label class="form-label">
+                    <?php echo esc_html__('Callback Function Name', 'ymc-smart-filter'); ?>
+                    <span class="information">
+                    <?php _e('Callback functions must be <a href="https://github.com/YMC-22/smart-filter?tab=readme-ov-file#callback-function" target="_blank">whitelisted</a> for security reasons 
+                                  (<a href="https://github.com/YMC-22/smart-filter?tab=readme-ov-file#advanced-query" target="_blank">see docs</a>).', 'ymc-smart-filter'); ?>
+                </span>
+                </label>
+
+                <select class="form-select ymc-query-type-callback" name="ymc-query-type-callback" id="ymc-query-type-callback">
+                    <?php
+                        if( defined( 'YMC_CALLBACK_FUNCTION_WHITELIST' ) && is_array( YMC_CALLBACK_FUNCTION_WHITELIST ))
+                        {
+                            foreach ( YMC_CALLBACK_FUNCTION_WHITELIST as $func_name ) : ?>
+                                <option value="<?php echo $func_name; ?>" <?php echo ( $ymc_query_type_callback === $func_name) ? "selected" : ""; ?>><?php echo $func_name; ?></option>
+                            <?php endforeach;
+                        }
+                        else {
+                            echo '<option value="">'. __('No callback functions','ymc-smart-filter') .'</option>';
+                        }
+                    ?>
+                </select>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="content" style="margin-bottom: 40px;">
 
     <header class="sub-header">
         <i class="far fa-plus-circle"></i>
@@ -33,7 +128,7 @@ $ymc_preloader_filters_custom = $variable->get_ymc_preloader_filters_custom( $po
 
 </div>
 
-<div class="content" style="margin-top: 40px;">
+<div class="content" style="margin-bottom: 40px;">
 
     <header class="sub-header">
         <i class="far fa-id-badge"></i>
@@ -123,8 +218,7 @@ $ymc_preloader_filters_custom = $variable->get_ymc_preloader_filters_custom( $po
 
 </div>
 
-
-<div class="content" style="margin-top: 40px;">
+<div class="content" style="margin-bottom: 40px;">
 
     <header class="sub-header">
         <i class="fas fa-scroll"></i>

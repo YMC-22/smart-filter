@@ -324,6 +324,30 @@ class Meta_Boxes {
 			update_post_meta( $post_id, 'ymc_search_filtered_posts', $ymc_search_filtered_posts );
 		}
 
+		// Advanced Custom Query Status
+		if( isset($_POST['ymc-advanced-query-status']) ) {
+			$ymc_advanced_query_status = sanitize_text_field( $_POST['ymc-advanced-query-status']);
+			update_post_meta( $post_id, 'ymc_advanced_query_status', $ymc_advanced_query_status );
+		}
+
+		// Query Type
+		if( isset($_POST['ymc-query-type']) ) {
+			$ymc_query_type = sanitize_text_field( $_POST['ymc-query-type']);
+			update_post_meta( $post_id, 'ymc_query_type', $ymc_query_type );
+		}
+
+		// Query Type Content Custom
+		if( isset($_POST['ymc-query-type-custom']) ) {
+			$ymc_query_type_custom = sanitize_text_field( $_POST['ymc-query-type-custom']);
+			update_post_meta( $post_id, 'ymc_query_type_custom', $ymc_query_type_custom );
+		}
+
+		// Query Type Content Callback
+		if( isset($_POST['ymc-query-type-callback']) ) {
+			$ymc_query_type_callback = sanitize_text_field( $_POST['ymc-query-type-callback']);
+			update_post_meta( $post_id, 'ymc_query_type_callback', $ymc_query_type_callback );
+		}
+
 	}
 
 	public function ymc_attached_filters() {
@@ -535,10 +559,7 @@ class Meta_Boxes {
 			Filter & Grids posts/custom post types by category allows to solve
 			a variety of tasks for displaying posts on site pages. Easy to use.
 			Customization of card templates and filters templates will allow you to fine-tune the display of posts. For more detailed
-			information, please see the <a target="_blank" href="https://github.com/YMC-22/smart-filter">documentation</a>  for using the plugin.<br/>
-			<hr/>
-			<strong style="font-weight: 500;line-height: 1.5;font-size: 16px;background: #098ab8;display: block;padding: 7px 15px;color: #fff;">
-				Did you like or find our plugin helpful? To support the plugin, you can make a <a style="color: #ffee5d;font-size: 18px;text-decoration-thickness: 1px;text-underline-offset: 2px;text-transform: uppercase;}" target="_blank" href="https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW">Donation</a></strong>.
+			information, please see the <a target="_blank" href="https://github.com/YMC-22/smart-filter">documentation</a>  for using the plugin.
 		</article>
 	<?php }
 

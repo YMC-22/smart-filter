@@ -59,4 +59,7 @@ $ymc_popup_animation  = $variable->get_ymc_popup_animation( $id );
 $ymc_popup_animation_origin  = $variable->get_ymc_popup_animation_origin( $id );
 $ymc_popup_settings  = $variable->get_ymc_popup_settings( $id );
 $ymc_search_filtered_posts  = $variable->get_search_filtered_posts( $id );
-
+$ymc_advanced_query_status = $variable->get_ymc_advanced_query_status( $id );
+$ymc_query_type = $variable->get_ymc_query_type( $id );
+$ymc_query_type_custom = $variable->get_ymc_query_type_custom( $id );
+$ymc_query_type_callback = $variable->get_ymc_query_type_callback( $id );

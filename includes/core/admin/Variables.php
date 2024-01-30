@@ -133,6 +133,14 @@ class Variables {
 
 	public $ymc_preloader_filters_custom = '';
 
+	public $ymc_advanced_query_status = 'off';
+
+	public $ymc_query_type = 'query_custom';
+
+	public $ymc_query_type_custom = '';
+
+	public $ymc_query_type_callback = '';
+
 
 	/**
 	 * Typography tab used default variables
@@ -584,6 +592,38 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_scroll_page', true );
 		}
 		return $this->ymc_scroll_page;
+	}
+
+	public function get_ymc_advanced_query_status( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_advanced_query_status' ) ) {
+			return get_post_meta( $post_id, 'ymc_advanced_query_status', true );
+		}
+		return $this->ymc_advanced_query_status;
+	}
+
+	public function get_ymc_query_type( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_query_type' ) ) {
+			return get_post_meta( $post_id, 'ymc_query_type', true );
+		}
+		return $this->ymc_query_type;
+	}
+
+	public function get_ymc_query_type_custom( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_query_type_custom' ) ) {
+			return get_post_meta( $post_id, 'ymc_query_type_custom', true );
+		}
+		return $this->ymc_query_type_custom;
+	}
+
+	public function get_ymc_query_type_callback( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_query_type_callback' ) ) {
+			return get_post_meta( $post_id, 'ymc_query_type_callback', true );
+		}
+		return $this->ymc_query_type_callback;
 	}
 
 

@@ -1223,6 +1223,18 @@
         // Import JSON
         $(document).on('click', '.ymc__container-settings #tools .button-import', importSettings);
 
+        // Custom Type Query
+        $(document).on('change', '.ymc__container-settings #advanced .type-query .ymc-query-type', function (e) {
+
+            let className = e.target.value;
+
+            document.querySelectorAll('.ymc__container-settings #advanced .type-query-content').forEach((el) => {
+
+                let _elem = $(el);
+                ( _elem.hasClass(className) ) ? _elem.show() : _elem.hide();
+            });
+        });
+
         // Set Cookie for Tab
         $(".ymc__container-settings #ymcTab a").click(function(e) {
             let hashUrl = $(this).attr('href');

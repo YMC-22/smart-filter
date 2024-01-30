@@ -137,8 +137,8 @@ $font-size: 16;
 								}
 								&.active, &:hover {
 									background: #fff;
-									border-left-color: $color;
-									color: $color;
+									border-left-color: #098ab8;
+									color: #098ab8;
 								}
 							}
 						}
@@ -225,6 +225,14 @@ $font-size: 16;
 									font-size: 13px;
 									height: 35px;
 									border-radius: 0;
+								}
+
+								.form-textarea {
+									width: 100%;
+									border: 1px solid #e0e4e9;
+									color: $text_color;
+									font-size: 13px;
+									height: 100px;
 								}
 
 								.ymc-tax-checkboxes {
@@ -381,8 +389,8 @@ $font-size: 16;
 
 								.sub-header {
 									font-size: 16px;
-									border-bottom: 3px solid #1fc4ff;
-									color: #1fc4ff;
+									border-bottom: 3px solid #098ab8;
+									color: #098ab8;
 									margin-bottom: 30px;
 									text-transform: uppercase;
 								}
@@ -744,6 +752,9 @@ $font-size: 16;
 					#advanced {
 						.tab-entry {
 							.content {
+								.manage-filters {
+									margin-top: 20px;
+								}
 								.preview-preloader {
 									width: 60px;
 									height: 60px;
@@ -755,6 +766,20 @@ $font-size: 16;
 									input[type="range"] {
 										width: 30%;
 									}
+								}
+
+								.type-query {
+									margin-bottom: 20px;
+								}
+
+								.type-query-content {
+									.custom_query_args {
+
+									}
+								}
+
+								.ymc-query-type-callback {
+									text-transform: unset;
 								}
 							}
 						}
