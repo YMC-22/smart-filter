@@ -28,6 +28,7 @@ The plugin provides the following functionality:
 - Choice of different templates for filters and post cards.
 - Sorting posts on the frontend
 - Manual sorting of terms
+- Creating custom queries (WP Query)
 - Fine tuning of each term (background, color, icons, etc.)
 - Adding featured posts to the post grid
 - View post content in a popup
