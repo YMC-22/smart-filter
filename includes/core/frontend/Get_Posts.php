@@ -235,17 +235,23 @@ class Get_Posts {
 		{
 			if( $ymc_query_type === 'query_custom' )
 			{
-				$args = null;
+				if( !empty($ymc_query_type_custom) )
+				{
+					$args = null;
 
-				$str_args = sanitize_text_field(urldecode($ymc_query_type_custom));
+					$str_args = sanitize_text_field(urldecode($ymc_query_type_custom));
 
-				parse_str($str_args, $output_array);
+					parse_str($str_args, $output_array);
 
-				$custom_args = $output_array;
+					$custom_args = $output_array;
 
-				$args = $output_array;
+					$args = $output_array;
 
-				$args['paged'] = $paged;
+					$args['paged'] = $paged;
+				}
+				else {
+					$custom_args = 'Arguments not exist';
+				}
 			}
 
 			if( $ymc_query_type === 'query_callback' )
