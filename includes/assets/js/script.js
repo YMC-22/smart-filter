@@ -248,6 +248,40 @@
                 }
             }
 
+            YMCTools.prototype.apiSortClear = function ( option = true ) {
+
+                let container = document.querySelector(''+ this.target +'');
+                if( ! container )  throw new Error("ApiSortClear: Filter not found");
+
+                let dataParams = JSON.parse(container.dataset.params);
+
+                dataParams.search = "";
+                dataParams.sort_order = "";
+                dataParams.sort_orderby = "";
+                dataParams.meta_key = "";
+
+                container.dataset.params = JSON.stringify(dataParams);
+
+                if( option ) {
+                    this.getFilterPosts();
+                }
+            }
+
+            YMCTools.prototype.apiLetterAlphabetClear = function ( option = true ) {
+
+                let container = document.querySelector(''+ this.target +'');
+                if( ! container )  throw new Error("apiLetterAlphabetClear: Filter not found");
+
+                let dataParams = JSON.parse(container.dataset.params);
+                dataParams.search = "";
+                dataParams.letter = "";
+                container.dataset.params = JSON.stringify(dataParams);
+
+                if( option ) {
+                    this.getFilterPosts();
+                }
+            }
+
             YMCTools.prototype.apiSearchPosts = function ( option = true, terms = [] ) {
 
                 let container = document.querySelector(''+ this.target +'');
@@ -283,25 +317,6 @@
                 dataParams.sort_order = this.sortOrder;
                 dataParams.sort_orderby = this.sortOrderBy;
                 dataParams.meta_key = this.metaKey;
-
-                container.dataset.params = JSON.stringify(dataParams);
-
-                if( option ) {
-                    this.getFilterPosts();
-                }
-            }
-
-            YMCTools.prototype.apiSortClear = function ( option = true ) {
-
-                let container = document.querySelector(''+ this.target +'');
-                if( ! container )  throw new Error("ApiSortClear: Filter not found");
-
-                let dataParams = JSON.parse(container.dataset.params);
-
-                dataParams.search = "";
-                dataParams.sort_order = "";
-                dataParams.sort_orderby = "";
-                dataParams.meta_key = "";
 
                 container.dataset.params = JSON.stringify(dataParams);
 

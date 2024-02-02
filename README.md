@@ -524,6 +524,12 @@ YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiSortClear( option );
 ```
 - `option - (bool) true / false - parameter allows to control sending of request. Default is true`
 
+**This method allows you to clear the query parameters in the filter by the first letter of the alphabet.**
+```js
+YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiLetterAlphabetClear( option );
+```
+- `option - (bool) true / false - parameter allows to control sending of request. Default is true`
+
 **This method allows you to make a request to receive posts by previously specified parameters.**
 
 ```js
