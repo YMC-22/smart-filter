@@ -1,12 +1,12 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.8.2
+Version: 2.8.3
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
 Tags: filter, grids, ajax posts, search, posts, masonry, ajax filter, category posts, taxonomy, custom taxonomy, woocommerce
 Requires at least: 4.8
 Tested up to: 6.4
-Stable tag: 2.8.2
+Stable tag: 2.8.3
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -22,27 +22,27 @@ The plugin supports custom post types. You can filter custom post types with the
 
 == Plugin Features ==
 The plugin provides the following functionality:
-- Selecting one or more post types to display different posts in a grid
+- Selecting one or more post types to display different posts in a grid.
 - Sorting taxonomies and terms.
 - Installation of different types of pagination (Numeric, Load more, Scroll infinity).
 - Choice of different templates for filters and post cards.
-- Sorting posts on the frontend
-- Manual sorting of terms
+- Sorting posts on the frontend.
+- Manual sorting of terms.
 - Creating custom queries (WP Query)
-- Fine tuning of each term (background, color, icons, etc.)
-- Adding featured posts to the post grid
-- View post content in a popup
-- Editing terms: adding icons and customizing them
-- Choose icon for preloader
+- Fine tuning of each term (background, color, icons, etc.).
+- Adding featured posts to the post grid.
+- View post content in a popup.
+- Editing terms: adding icons and customizing them.
+- Choose icon for preloader.
 - Customization of the color palette.
 - Adding a post search bar.
 - Typography customization.
-- Ability to develop and customize filter and post templates..
-- Flexible filter management via Javascript API
+- Ability to develop and customize filter and post templates.
+- Flexible filter management via Javascript API.
 - JS hooks. Ability to manage asynchronous filter operations.
-- Support Masonry Layout
-- Convenient API for interacting and managing post filtering
-- Export / Import settings
+- Support Masonry Layout.
+- Convenient API for interacting and managing post filtering.
+- Export / Import settings.
 
 == Installation ==
 

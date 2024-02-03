@@ -410,7 +410,7 @@ class Meta_Boxes {
 
 		add_meta_box( 'ymc_top_meta_box' , __('Settings','ymc-smart-filter'), array($this,'ymc_top_meta_box'), 'ymc_filters', 'normal', 'core');
 
-		add_meta_box( 'ymc_side_meta_box' , __('Filter & Grids','ymc-smart-filter'), array($this,'ymc_side_meta_box'), 'ymc_filters', 'side', 'core');
+		add_meta_box( 'ymc_side_meta_box' , __('Filter & Grids Features','ymc-smart-filter'), array($this,'ymc_side_meta_box'), 'ymc_filters', 'side', 'core');
 
 	}
 
@@ -554,12 +554,34 @@ class Meta_Boxes {
 	<?php }
 
 	public function ymc_side_meta_box() { ?>
-		<article>
-			<img style="width:70px;float:left;margin:0 10px 0 0;" class="ymc-logo" src="<?php esc_attr_e(YMC_SMART_FILTER_URL . '/includes/assets/images/logo.png'); ?>">
-			Filter & Grids posts/custom post types by category allows to solve
-			a variety of tasks for displaying posts on site pages. Easy to use.
-			Customization of card templates and filters templates will allow you to fine-tune the display of posts. For more detailed
-			information, please see the <a target="_blank" href="https://github.com/YMC-22/smart-filter">documentation</a>  for using the plugin.
+		<article class="fg-plugin-features">
+			<ol class="fg-list-features">
+				<li><?php echo esc_html__('Selecting one or more post types to display different posts in a grid.','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('Sorting taxonomies and terms.','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('Installation of different types of pagination (Numeric, Load more, Scroll infinity).','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('Choice of different templates for filters and post cards.','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('Sorting posts on the frontend.','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('Manual sorting of terms.','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('Creating custom queries (WP Query).','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('Fine tuning of each term (background, color, icons, etc.).','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('Adding featured posts to the post grid.','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('View post content in a popup.','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('Editing terms: adding icons and customizing them.','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('Choose icon for preloader.','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('Customization of the color palette.','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('Adding a post search bar.','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('Typography customization.','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('Ability to develop and customize filter and post templates.','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('Flexible filter management via Javascript API.','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('JS hooks. Ability to manage asynchronous filter operations.','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('Support Masonry Layout.','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('Convenient API for interacting and managing post filtering.','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('Export / Import settings.','ymc-smart-filter'); ?></li>
+				<li class="button">
+					<a href="https://github.com/YMC-22/smart-filter" target="_blank">
+						<span class="dashicons dashicons-visibility"></span>View Documentation</a>
+				</li>
+			</ol>
 		</article>
 	<?php }
 

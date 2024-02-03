@@ -881,6 +881,64 @@ $font-size: 16;
 	}
 }
 
+#ymc_side_meta_box {
+	background: rgb(3,74,99);
+	background: linear-gradient(194deg, rgba(3,74,99,1) 0%, rgba(9,138,184,1) 62%, rgba(67,224,255,1) 100%);
+	.handle-actions {
+		display: none;
+	}
+	.postbox-header {
+		border: none;
+	}
+	h2.hndle.ui-sortable-handle {
+		font-size: 18px;
+		background: #032f3f;
+		color: #fff;
+	}
+	.inside {
+		margin: 0;
+		padding: 0;
+		.fg-plugin-features {
+			color: #fff;
+			padding: 20px 15px;
+			.fg-list-features {
+				margin: 0 0 0 10px;
+				li {
+					font-size: 12px;
+					font-weight: 500;
+					margin-bottom: 7px;
+					&.button {
+						padding: 0;
+						margin: 10px 0 0 0;
+						background: none;
+						border: none;
+						a {
+							display: inline-flex;
+							align-items: center;
+							justify-content: center;
+							border: 1px solid #333;
+							padding: 0 12px;
+							font-size: 14px;
+							background: #045774;
+							color: #fff;
+							outline: none;
+							text-decoration: none;
+							transition: .3s;
+							.dashicons {
+								margin-right: 5px;
+							}
+							&:hover {
+								background: #09769e;
+								border: 1px solid #09769e;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 // Modal Popup Icons
 #TB_title {
 	height: 70px !important;
