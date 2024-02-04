@@ -182,39 +182,39 @@ $ymc_mobile_xs = $variable->get_post_mobile_xs( $post->ID );
                 <div class="row">
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-desktop"></i></span>
+                            <span class="input-group-text" title="≥1400px"><i class="fa fa-desktop"></i></span>
                         </div>
-                        <input type="number" class="form-control"  placeholder="4" min="1" max="12" name="ymc_desktop_xxl" value="<?php echo $ymc_desktop_xxl; ?>" title="≥1400px">
+                        <input type="number" class="form-control"  placeholder="4" min="1" max="12" name="ymc_desktop_xxl" value="<?php echo $ymc_desktop_xxl; ?>">
                    </div>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-desktop"></i></span>
+                            <span class="input-group-text" title="≥1200px"><i class="fa fa-desktop"></i></span>
                         </div>
-                        <input type="number" class="form-control"  placeholder="4" min="1" max="12" name="ymc_desktop_xl" value="<?php echo $ymc_desktop_xl; ?>" title="≥1200px">
+                        <input type="number" class="form-control"  placeholder="4" min="1" max="12" name="ymc_desktop_xl" value="<?php echo $ymc_desktop_xl; ?>">
                     </div>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-tablet"></i></span>
+                            <span class="input-group-text" title="≥992px"><i class="fa fa-tablet"></i></span>
                         </div>
-                        <input type="number" class="form-control"  placeholder="4" min="1" max="12" name="ymc_desktop_lg" value="<?php echo $ymc_desktop_lg; ?>" title="≥992px">
+                        <input type="number" class="form-control"  placeholder="4" min="1" max="12" name="ymc_desktop_lg" value="<?php echo $ymc_desktop_lg; ?>">
                     </div>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-tablet"></i></span>
+                            <span class="input-group-text" title="≥768px"><i class="fa fa-tablet"></i></span>
                         </div>
-                        <input type="number" class="form-control"  placeholder="3" min="1" max="6" name="ymc_tablet_md" value="<?php echo $ymc_tablet_md; ?>" title="≥768px">
+                        <input type="number" class="form-control"  placeholder="3" min="1" max="6" name="ymc_tablet_md" value="<?php echo $ymc_tablet_md; ?>">
                     </div>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-mobile"></i></span>
+                            <span class="input-group-text" title="≥576px"><i class="fa fa-mobile"></i></span>
                         </div>
-                        <input type="number" class="form-control"  placeholder="2" min="1" max="4" name="ymc_tablet_sm" value="<?php echo $ymc_tablet_sm; ?>" title="≥576px">
+                        <input type="number" class="form-control"  placeholder="2" min="1" max="4" name="ymc_tablet_sm" value="<?php echo $ymc_tablet_sm; ?>">
                     </div>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-mobile"></i></span>
+                            <span class="input-group-text" title="<576px"><i class="fa fa-mobile"></i></span>
                         </div>
-                        <input type="number" class="form-control"  placeholder="1" min="1" max="4" name="ymc_mobile_xs" value="<?php echo $ymc_mobile_xs; ?>" title="<576px">
+                        <input type="number" class="form-control"  placeholder="1" min="1" max="4" name="ymc_mobile_xs" value="<?php echo $ymc_mobile_xs; ?>">
                     </div>
                 </div>
             </div>
