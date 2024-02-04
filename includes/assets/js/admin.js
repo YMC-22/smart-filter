@@ -1235,6 +1235,17 @@
             });
         });
 
+        // Select Post Layout
+        $(document).on('change', '.ymc__container-settings #layouts #ymc-post-layout', function (e) {
+
+            let postLayout = e.target.value;
+            let columnLayoutSection = $('.ymc__container-settings #layouts .column-layout__section');
+
+            ( postLayout === 'post-layout3' || postLayout === 'post-masonry' || postLayout === 'post-custom-masonry' ) ?
+                columnLayoutSection.hide()  :  columnLayoutSection.show();
+
+        });
+
         // Set Cookie for Tab
         $(".ymc__container-settings #ymcTab a").click(function(e) {
             let hashUrl = $(this).attr('href');

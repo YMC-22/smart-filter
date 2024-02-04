@@ -1,12 +1,12 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.8.3
+Version: 2.8.4
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
 Tags: filter, grids, ajax posts, search, posts, masonry, ajax filter, category posts, taxonomy, custom taxonomy, woocommerce
 Requires at least: 4.8
 Tested up to: 6.4
-Stable tag: 2.8.3
+Stable tag: 2.8.4
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -34,6 +34,7 @@ The plugin provides the following functionality:
 - View post content in a popup.
 - Editing terms: adding icons and customizing them.
 - Choose icon for preloader.
+- Setting up a grid of posts.
 - Customization of the color palette.
 - Adding a post search bar.
 - Typography customization.
@@ -72,147 +73,148 @@ Detailed information can be found on GitHub at this <a target="_blank" href="htt
 == Changelog ==
 
 = 1.2.0 =
-* Added sorting of posts on the frontend
+* Added sorting of posts on the frontend.
 = 1.2.2 =
-* Add filter ymc_posts_selected_ID
+* Add filter ymc_posts_selected_ID.
 = 1.2.3 =
-* Add filter ymc_sort_posts_by_ID
+* Add filter ymc_sort_posts_by_ID.
 = 1.2.4 =
-* Fixed file js (frontend)
+* Fixed file js (frontend).
 = 1.2.5 =
-* Added criteria for filtering posts by the criterion Menu Order (backeend)
+* Added criteria for filtering posts by the criterion Menu Order (backeend).
 = 1.2.6 =
-* Added the ability to customize posts (filter: ymc_post_custom_layout_ID)
+* Added the ability to customize posts (filter: ymc_post_custom_layout_ID).
 = 1.2.7 =
 Fixed all filters on the plugin. Changed numbering in filter names. See documentation.
 = 1.2.8 =
 Added the ability to interact with the filter through javascript. Implemented API methods of YMCTools object for filtering posts by criteria:
-- meta fields
-- date fields
-- taxonomy terms
+- meta fields.
+- date fields.
+- taxonomy terms.
 = 1.2.9 =
 Added the ability to hide / show the pagination panel in the admin panel
 = 1.3.0 =
-Javascript hooks added
+Javascript hooks added.
 = 1.3.1 =
-Fixed css in layouts posts
+Fixed css in layouts posts.
 = 2.1.0 =
 Plugin core updated. Before updating. Create a backup copy of website.
 = 2.1.1 =
-Fixed css
+Fixed css.
 = 2.1.2 =
 Fixed js
 = 2.1.3 =
-Added the ability to display posts by masonry grid
+Added the ability to display posts by masonry grid.
 = 2.1.4 =
 Fixed css
 = 2.1.5 =
-Fixed results search
+Fixed results search.
 = 2.2.1 =
-Implemented the ability to manually sort terms in the context of taxonomy
+Implemented the ability to manually sort terms in the context of taxonomy.
 = 2.2.4 =
-Fixed js
+Fixed js.
 = 2.2.5 =
-Add API JS search posts
+Add API JS search posts.
 = 2.3.1 =
-Adding featured posts to the post grid
+Adding featured posts to the post grid.
 = 2.3.2 =
-Add API JS sort posts and add featured posts to the post grid
+Add API JS sort posts and add featured posts to the post grid.
 = 2.3.3 =
-Include / Exclude posts in the post grid
+Include / Exclude posts in the post grid.
 = 2.3.4 =
-Fixed css / js
+Fixed css/js.
 = 2.3.5 =
-Added ability to edit terms
+Added ability to edit terms.
 = 2.3.6 =
-Fixed css / js
+Fixed css/js.
 = 2.3.7 =
-Add choose icon for preloader
+Add choose icon for preloader.
 = 2.3.8 =
-Fixed js
+Fixed js.
 = 2.3.9 =
-Fixed js/css
+Fixed js/css.
 = 2.3.10 =
-Sorting by custom field
+Sorting by custom field.
 = 2.3.11 =
-Add JS hooks for sort posts
+Add JS hooks for sort posts.
 = 2.3.13 =
-Add new posts layouts
+Add new posts layouts.
 = 2.3.15 =
-Added ability to manage autocomplete to search for posts
+Added ability to manage autocomplete to search for posts.
 = 2.3.16 =
 Added ability disable page scroll to top on numeric pagination.
 = 2.3.17 =
-Added ability multiple sort posts
+Added ability multiple sort posts.
 = 2.3.18 =
-Added ability choose post status
+Added ability choose post status.
 = 2.3.19 =
-Added new API JS methods
+Added new API JS methods.
 = 2.3.21 =
-Added new API JS methods & add button reload taxonomy
+Added new API JS methods & add button reload taxonomy.
 = 2.4.1 =
-Added the ability to drag selected posts in the grid
+Added the ability to drag selected posts in the grid.
 = 2.4.3 =
-Added the ability to search selected posts in admin panel
+Added the ability to search selected posts in admin panel.
 = 2.4.5 =
-Fixed js & css
+Fixed js & css.
 = 2.4.6 =
-Update selected posts depending on the selected taxonomy terms in the admin panel
+Update selected posts depending on the selected taxonomy terms in the admin panel.
 = 2.4.9 =
-Added the ability to customize the preloader icon
+Added the ability to customize the preloader icon.
 = 2.5.1 =
-Added the ability to more accurately manage terms
+Added the ability to more accurately manage terms.
 = 2.5.3 =
-Added masonry templates for post grid
+Added masonry templates for post grid.
 = 2.5.4 =
-Added animation post items
+Added animation post items.
 = 2.5.6 =
-Added Alphabetical Navigation filter template
+Added Alphabetical Navigation filter template.
 = 2.5.8 =
 Fixed JS
 = 2.5.9 =
-Fixed CSS
+Fixed CSS.
 = 2.5.10 =
-Fixed PHP files
+Fixed PHP files.
 = 2.5.11 =
-Fixed clear result search
+Fixed clear result search.
 = 2.6.1 =
-Added Popup to view posts
+Added Popup to view posts.
 = 2.6.2 =
-Added Method API JS open popup post
+Added Method API JS open popup post.
 = 2.6.3 =
 Added Support Popup
 = 2.6.4 =
-Added Export / Import Settings
+Added Export / Import Settings.
 = 2.6.10 =
 Fixed JS
 = 2.6.13 =
 Fixed JS
 = 2.6.14 =
-Added Namespaced Events JS
+Added Namespaced Events JS.
 = 2.6.16 =
-Search for posts by already filtered posts
+Search for posts by already filtered posts.
 = 2.6.17 =
-Fixed posts layouts
+Fixed posts layouts.
 = 2.6.19 =
-Added new filter ymc_sort_text_FilterID_LayoutID
+Added new filter ymc_sort_text_FilterID_LayoutID.
 = 2.6.20 =
-Added new filter ymc_tax_name_FilterID_LayoutID_slugTax
+Added new filter ymc_tax_name_FilterID_LayoutID_slugTax.
 = 2.6.22 =
-Added new hook ymc_after_popup_open_FilterID_LayoutID (see documentation)
+Added new hook ymc_after_popup_open_FilterID_LayoutID (see documentation).
 = 2.7.1 =
-Added new layout filter Sidebar
+Added new layout filter Sidebar.
 = 2.7.2 =
-Added JS API Filter: apiMultiplePosts, to display different types of posts with different taxonomies (see documentation)
+Added JS API Filter: apiMultiplePosts, to display different types of posts with different taxonomies (see documentation).
 = 2.7.3 =
-Selecting one or more post types to display different posts in a grid
+Selecting one or more post types to display different posts in a grid.
 = 2.7.4 =
-Added an indicator for the location of the shortcode on pages or posts
+Added an indicator for the location of the shortcode on pages or posts.
 = 2.7.5 =
-Added linking on pages/posts for the presence of attached filters
+Added linking on pages/posts for the presence of attached filters.
 = 2.8.1 =
 Added the ability to create a custom WP Query. See documentation.
-
+= 2.8.4 =
+Added the ability to customize the post grid.
 
 == Video ==
 https://www.youtube.com/watch?v=FIBNE0Ix6Vg

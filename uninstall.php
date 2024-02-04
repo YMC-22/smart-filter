@@ -67,7 +67,13 @@ $wpdb->get_results('DELETE FROM wp_postmeta WHERE meta_key IN (
                                   "ymc_advanced_query_status",
                                   "ymc_query_type",
                                   "ymc_query_type_custom",
-                                  "ymc_query_type_callback"   
+                                  "ymc_query_type_callback",
+                                  "ymc_desktop_xxl",
+                                  "ymc_desktop_xl",
+                                  "ymc_desktop_lg",
+                                  "ymc_tablet_md",
+                                  "ymc_tablet_sm",
+                                  "ymc_mobile_xs"                                           
                                 )');
 
 

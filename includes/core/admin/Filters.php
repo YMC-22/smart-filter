@@ -39,7 +39,7 @@ class Filters {
 			"post-layout1" => __('Simple Layout','ymc-smart-filter'),
 			"post-layout2" => __('Simple Layout 2','ymc-smart-filter'),
 			"post-masonry" => __('Masonry Layout','ymc-smart-filter'),
-			"post-layout3" => __('Simple Full Width','ymc-smart-filter'),
+			"post-layout3" => __('Full Width','ymc-smart-filter'),
 			"post-custom-layout"  => 'Custom Layout',
 			"post-custom-masonry" => 'Custom Masonry Layout'
 		];

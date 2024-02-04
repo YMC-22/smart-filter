@@ -73,6 +73,18 @@ class Variables {
 
 	public $ymc_post_status = 'publish';
 
+	public $ymc_desktop_xxl = 4;
+
+	public $ymc_desktop_xl = 4;
+
+	public $ymc_desktop_lg = 4;
+
+	public $ymc_tablet_md = 3;
+
+	public $ymc_tablet_sm = 2;
+
+	public $ymc_mobile_xs = 1;
+
 
 
 	/**
@@ -387,6 +399,54 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_post_active_color', true );
 		}
 		return $this->ymc_post_active_color;
+	}
+
+	public function get_post_desktop_xxl( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_desktop_xxl' ) ) {
+			return get_post_meta( $post_id, 'ymc_desktop_xxl', true );
+		}
+		return $this->ymc_desktop_xxl;
+	}
+
+	public function get_post_desktop_xl( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_desktop_xl' ) ) {
+			return get_post_meta( $post_id, 'ymc_desktop_xl', true );
+		}
+		return $this->ymc_desktop_xl;
+	}
+
+	public function get_post_desktop_lg( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_desktop_lg' ) ) {
+			return get_post_meta( $post_id, 'ymc_desktop_lg', true );
+		}
+		return $this->ymc_desktop_lg;
+	}
+
+	public function get_post_tablet_md( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_tablet_md' ) ) {
+			return get_post_meta( $post_id, 'ymc_tablet_md', true );
+		}
+		return $this->ymc_tablet_md;
+	}
+
+	public function get_post_tablet_sm( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_tablet_sm' ) ) {
+			return get_post_meta( $post_id, 'ymc_tablet_sm', true );
+		}
+		return $this->ymc_tablet_sm;
+	}
+
+	public function get_post_mobile_xs( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_mobile_xs' ) ) {
+			return get_post_meta( $post_id, 'ymc_mobile_xs', true );
+		}
+		return $this->ymc_mobile_xs;
 	}
 
 

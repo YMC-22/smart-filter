@@ -348,6 +348,42 @@ class Meta_Boxes {
 			update_post_meta( $post_id, 'ymc_query_type_callback', $ymc_query_type_callback );
 		}
 
+		// XXL Breakpoints
+		if( isset($_POST['ymc_desktop_xxl']) ) {
+			$ymc_desktop_xxl = ( !empty($_POST['ymc_desktop_xxl']) ) ? sanitize_text_field( $_POST['ymc_desktop_xxl']) : 4;
+			update_post_meta( $post_id, 'ymc_desktop_xxl', $ymc_desktop_xxl );
+		}
+
+		// XL Breakpoints
+		if( isset($_POST['ymc_desktop_xl']) ) {
+			$ymc_desktop_xl = ( !empty($_POST['ymc_desktop_xl']) ) ? sanitize_text_field( $_POST['ymc_desktop_xl']) : 4;
+			update_post_meta( $post_id, 'ymc_desktop_xl', $ymc_desktop_xl );
+		}
+
+		// LG Breakpoints
+		if( isset($_POST['ymc_desktop_lg']) ) {
+			$ymc_desktop_lg = ( !empty($_POST['ymc_desktop_lg']) ) ? sanitize_text_field( $_POST['ymc_desktop_lg']) : 4;
+			update_post_meta( $post_id, 'ymc_desktop_lg', $ymc_desktop_lg );
+		}
+
+		// MD Breakpoints
+		if( isset($_POST['ymc_tablet_md']) ) {
+			$ymc_tablet_md = ( !empty($_POST['ymc_tablet_md']) ) ? sanitize_text_field( $_POST['ymc_tablet_md']) : 3;
+			update_post_meta( $post_id, 'ymc_tablet_md', $ymc_tablet_md );
+		}
+
+		// SM Breakpoints
+		if( isset($_POST['ymc_tablet_sm']) ) {
+			$ymc_tablet_sm = ( !empty($_POST['ymc_tablet_sm']) ) ? sanitize_text_field( $_POST['ymc_tablet_sm']) : 2;
+			update_post_meta( $post_id, 'ymc_tablet_sm', $ymc_tablet_sm );
+		}
+
+		// XS Breakpoints
+		if( isset($_POST['ymc_mobile_xs']) ) {
+			$ymc_mobile_xs = ( !empty($_POST['ymc_mobile_xs']) ) ? sanitize_text_field( $_POST['ymc_mobile_xs']) : 1;
+			update_post_meta( $post_id, 'ymc_mobile_xs', $ymc_mobile_xs );
+		}
+
 	}
 
 	public function ymc_attached_filters() {
@@ -566,6 +602,7 @@ class Meta_Boxes {
 				<li><?php echo esc_html__('Fine tuning of each term (background, color, icons, etc.).','ymc-smart-filter'); ?></li>
 				<li><?php echo esc_html__('Adding featured posts to the post grid.','ymc-smart-filter'); ?></li>
 				<li><?php echo esc_html__('View post content in a popup.','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('Setting up a grid of posts.','ymc-smart-filter'); ?></li>
 				<li><?php echo esc_html__('Editing terms: adding icons and customizing them.','ymc-smart-filter'); ?></li>
 				<li><?php echo esc_html__('Choose icon for preloader.','ymc-smart-filter'); ?></li>
 				<li><?php echo esc_html__('Customization of the color palette.','ymc-smart-filter'); ?></li>

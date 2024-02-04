@@ -693,7 +693,7 @@ $font-size: 16;
 								.manage-filters {
 									margin-top: 40px;
 									&__section {
-										margin-bottom: 20px;
+										margin-bottom: 25px;
 									}
 
 									.color-setting {
@@ -702,7 +702,6 @@ $font-size: 16;
 										grid-gap: 20px;
 									}
 								}
-
 								.manage-post {
 									margin-top: 40px;
 
@@ -714,6 +713,41 @@ $font-size: 16;
 										display: grid;
 										grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
 										grid-gap: 20px;
+									}
+								}
+								.row {
+									display: flex;
+									flex-wrap: wrap;
+									.input-group {
+										display: flex;
+										align-items: center;
+										flex: 0 0 140px;
+										margin-right: 10px;
+										margin-bottom: 10px;
+										position: relative;
+										.input-group-prepend {
+											display: flex;
+											.input-group-text {
+												display: flex;
+												align-items: center;
+												padding: 12px 12px;
+												margin-bottom: 0;
+												font-size: 16px;
+												font-weight: 400;
+												line-height: 1.5;
+												color: #495057;
+												text-align: center;
+												white-space: nowrap;
+												background-color: #e9ecef;
+												border: 1px solid #ced4da;
+												border-radius: 1px;
+											}
+										}
+										input[type="number"] {
+											border: 1px solid #e0e4e9;
+											color: #32373c;
+											height: 100%;
+										}
 									}
 								}
 							}

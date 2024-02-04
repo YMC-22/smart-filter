@@ -38,6 +38,7 @@ class Shortcode {
 
 		$handle_filter = 'filter-inline-css-' . $c_target;
 		$handle_post   = 'post-inline-css-' .  $c_target;
+		$breakpoints_classes = '';
 
 		$output = '';
 
@@ -107,7 +108,14 @@ class Shortcode {
 
 			endif;
 
-			echo '<div class="container-posts container-'. esc_attr($ymc_post_layout) .'"><div class="post-entry '. esc_attr($ymc_post_layout) .' '. esc_attr($ymc_post_layout) .'-'.$id.' '.esc_attr($ymc_post_layout).'-'.$id.'-'.$c_target.'"></div></div>';
+			if( $ymc_post_layout !== 'post-layout3' &&
+			    $ymc_post_layout !== 'post-masonry' &&
+			    $ymc_post_layout !== 'post-custom-masonry' )
+			{
+				$breakpoints_classes = 'ymc-xs-col-'.esc_attr($ymc_mobile_xs).' ymc-sm-col-'.esc_attr($ymc_tablet_sm).' ymc-md-col-'.esc_attr($ymc_tablet_md).' ymc-lg-col-'.esc_attr($ymc_desktop_lg).' ymc-xl-col-'.esc_attr($ymc_desktop_xl).' ymc-xxl-col-'.esc_attr($ymc_desktop_xxl);
+			}
+
+			echo '<div class="container-posts container-'. esc_attr($ymc_post_layout) .'"><div class="post-entry '. $breakpoints_classes .' '. esc_attr($ymc_post_layout) .' '. esc_attr($ymc_post_layout) .'-'.$id.' '.esc_attr($ymc_post_layout).'-'.$id.'-'.$c_target.'"></div></div>';
 
 			if ( $ymc_popup_status === 'on' ) {
 

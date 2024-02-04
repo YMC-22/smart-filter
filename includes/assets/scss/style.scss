@@ -707,12 +707,11 @@ $font-size: 16;
 			animation: wobble 1s ease;
 		}
 
-
-		// Post Layout 1
+		// Post Layout 1 (Simple Layout 1) +++
 		.post-layout1 {
 			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 			grid-gap: 20px;
-			grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
 			margin-bottom: 40px;
 			.ymc-post-layout1 {
 				position: relative;
@@ -796,11 +795,11 @@ $font-size: 16;
 			}
 		}
 
-		// Post Layout 2
+		// Post Layout 2 (Simple Layout 2) +++
 		.post-layout2 {
 			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 			grid-gap: 20px;
-			grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
 			margin-bottom: 40px;
 			.ymc-post-layout2 {
 				position: relative;
@@ -842,9 +841,9 @@ $font-size: 16;
 			}
 		}
 
-		// Post Layout 3
+		// Post Layout 3 (Full Width) ---
 		.post-layout3 {
-			font-family: Poppins;
+			font-family: inherit;
 			.post-item {
 				display: flex;
 				flex-wrap: wrap;
@@ -921,22 +920,25 @@ $font-size: 16;
 			}
 		}
 
-		// Post Masonry Layout
+		// Masonry Layout (Masonry Layout) ---
 		.post-masonry {
 			font: inherit;
-			display: grid;
-			grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
 			margin-bottom: 40px;
 			.post-item {
 				position: relative;
 				padding: 15px;
 				border: 1px solid #bbb;
-				width: 23%;
+				@media screen and (min-width: 1399.98px) {
+					width: 18.5%;
+				}
+				@media screen and (max-width: 1399px) {
+					width: 23.5%;
+				}
 				@media screen and (max-width: 1023.97px) {
-					width: 28%;
+					width: 28.5%;
 				}
 				@media screen and (max-width: 767.97px) {
-					width: 40%;
+					width: 45%;
 				}
 				@media screen and (max-width: 539.97px) {
 					width: 100%;
@@ -992,27 +994,30 @@ $font-size: 16;
 			}
 		}
 
-		// Custom Masonry Layout
+		// Custom Masonry Layout (Custom Masonry Layout) ---
 		.post-custom-masonry {
 			font: inherit;
-			display: grid;
-			grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
 			margin-bottom: 40px;
 			.post-item {
 				position: relative;
 				padding: 15px;
-				width: 23%;
 				font-size: 14px;
 				line-height: 1.3;
 				color: #222;
 				border: 1px solid #ccc;
 				background: none;
 				word-break: break-word;
+				@media screen and (min-width: 1399.98px) {
+					width: 18.5%;
+				}
+				@media screen and (max-width: 1399px) {
+					width: 23.5%;
+				}
 				@media screen and (max-width: 1023.97px) {
-					width: 28%;
+					width: 28.5%;
 				}
 				@media screen and (max-width: 767.97px) {
-					width: 40%;
+					width: 45%;
 				}
 				@media screen and (max-width: 539.97px) {
 					width: 100%;
@@ -1052,11 +1057,11 @@ $font-size: 16;
 			}
 		}
 
-		// Custom Post Layout
+		// Custom Layout (Custom Layout) +++
 		.post-custom-layout {
 			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 			grid-gap: 20px;
-			grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
 			margin-bottom: 40px;
 			.post-item {
 				padding: 20px 10px;
@@ -1092,6 +1097,280 @@ $font-size: 16;
 					text-decoration: underline;
 					margin-top: 5px;
 				}
+			}
+		}
+
+		// X-Small devices (portrait phones, less than 576px)
+		@media (min-width: 320px) {
+			.ymc-xs-col-4 {
+				grid-template-columns: 23.875% 23.875% 23.875% 23.875%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xs-col-3 {
+				grid-template-columns: 32.333% 32.333% 32.333%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xs-col-2 {
+				grid-template-columns: 49.25% 49.25%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xs-col-1 {
+				grid-template-columns: 100%;
+				row-gap: 5vw;
+				column-gap: 0;
+			}
+		}
+
+		// Small devices (landscape phones, 576px and up)
+		@media (min-width: 575.98px) {
+			.ymc-sm-col-4 {
+				grid-template-columns: 23.875% 23.875% 23.875% 23.875%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-sm-col-3 {
+				grid-template-columns: 32.333% 32.333% 32.333%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-sm-col-2 {
+				grid-template-columns: 49.25% 49.25%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-sm-col-1 {
+				grid-template-columns: 100%;
+				row-gap: 1vw;
+				column-gap: 0;
+			}
+		}
+
+		// Medium devices (tablets, 768px and up)
+		@media (min-width: 767.98px) {
+			.ymc-md-col-6 {
+				grid-template-columns: 15.417% 15.417% 15.417% 15.417% 15.417% 15.417%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-md-col-5 {
+				grid-template-columns: 18.8% 18.8% 18.8% 18.8% 18.8%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-md-col-4 {
+				grid-template-columns: 23.875% 23.875% 23.875% 23.875%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-md-col-3 {
+				grid-template-columns: 32.333% 32.333% 32.333%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-md-col-2 {
+				grid-template-columns: 49.25% 49.25%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-md-col-1 {
+				grid-template-columns: 100%;
+				row-gap: 1vw;
+				column-gap: 0;
+			}
+		}
+
+		// Large devices (desktops, 992px and up)
+		@media (min-width: 991.98px) {
+			.ymc-lg-col-12 {
+				grid-template-columns: 6.958% 6.958% 6.958% 6.958% 6.958% 6.958% 6.958% 6.958% 6.958% 6.958% 6.958% 6.958%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-lg-col-11 {
+				grid-template-columns: 7.727% 7.727% 7.727% 7.727% 7.727% 7.727% 7.727% 7.727% 7.727% 7.727% 7.727%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-lg-col-10 {
+				grid-template-columns: 8.65% 8.65% 8.65% 8.65% 8.65% 8.65% 8.65% 8.65% 8.65% 8.65%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-lg-col-9 {
+				grid-template-columns: 9.777% 9.777% 9.777% 9.777% 9.777% 9.777% 9.777% 9.777% 9.777%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-lg-col-8 {
+				grid-template-columns: 11.187% 11.187% 11.187% 11.187% 11.187% 11.187% 11.187% 11.187%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-lg-col-7 {
+				grid-template-columns: 13% 13% 13% 13% 13% 13% 13%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-lg-col-6 {
+				grid-template-columns: 15.417% 15.417% 15.417% 15.417% 15.417% 15.417%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-lg-col-5 {
+				grid-template-columns: 18.8% 18.8% 18.8% 18.8% 18.8%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-lg-col-4 {
+				grid-template-columns: 23.875% 23.875% 23.875% 23.875%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-lg-col-3 {
+				grid-template-columns: 32.333% 32.333% 32.333%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-lg-col-2 {
+				grid-template-columns: 49.25% 49.25%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-lg-col-1 {
+				grid-template-columns: 100%;
+				row-gap: 1vw;
+				column-gap: 0;
+			}
+		}
+
+		// X-Large devices (large desktops, 1200px and up)
+		@media (min-width: 1199.98px) {
+			.ymc-xl-col-12 {
+				grid-template-columns: 6.958% 6.958% 6.958% 6.958% 6.958% 6.958% 6.958% 6.958% 6.958% 6.958% 6.958% 6.958%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xl-col-11 {
+				grid-template-columns: 7.727% 7.727% 7.727% 7.727% 7.727% 7.727% 7.727% 7.727% 7.727% 7.727% 7.727%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xl-col-10 {
+				grid-template-columns: 8.65% 8.65% 8.65% 8.65% 8.65% 8.65% 8.65% 8.65% 8.65% 8.65%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xl-col-9 {
+				grid-template-columns: 9.777% 9.777% 9.777% 9.777% 9.777% 9.777% 9.777% 9.777% 9.777%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xl-col-8 {
+				grid-template-columns: 11.187% 11.187% 11.187% 11.187% 11.187% 11.187% 11.187% 11.187%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xl-col-7 {
+				grid-template-columns: 13% 13% 13% 13% 13% 13% 13%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xl-col-6 {
+				grid-template-columns: 15.417% 15.417% 15.417% 15.417% 15.417% 15.417%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xl-col-5 {
+				grid-template-columns: 18.8% 18.8% 18.8% 18.8% 18.8%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xl-col-4 {
+				grid-template-columns: 23.875% 23.875% 23.875% 23.875%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xl-col-3 {
+				grid-template-columns: 32.333% 32.333% 32.333%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xl-col-2 {
+				grid-template-columns: 49.25% 49.25%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xl-col-1 {
+				grid-template-columns: 100%;
+				row-gap: 1vw;
+				column-gap: 0;
+			}
+		}
+
+		// XX-Large devices (larger desktops, 1400px and up)
+		@media (min-width: 1399.98px) {
+			.ymc-xxl-col-12 {
+				grid-template-columns: 6.958% 6.958% 6.958% 6.958% 6.958% 6.958% 6.958% 6.958% 6.958% 6.958% 6.958% 6.958%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xxl-col-11 {
+				grid-template-columns: 7.727% 7.727% 7.727% 7.727% 7.727% 7.727% 7.727% 7.727% 7.727% 7.727% 7.727%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xxl-col-10 {
+				grid-template-columns: 8.65% 8.65% 8.65% 8.65% 8.65% 8.65% 8.65% 8.65% 8.65% 8.65%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xxl-col-9 {
+				grid-template-columns: 9.777% 9.777% 9.777% 9.777% 9.777% 9.777% 9.777% 9.777% 9.777%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xxl-col-8 {
+				grid-template-columns: 11.187% 11.187% 11.187% 11.187% 11.187% 11.187% 11.187% 11.187%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xxl-col-7 {
+				grid-template-columns: 13% 13% 13% 13% 13% 13% 13%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xxl-col-6 {
+				grid-template-columns: 15.417% 15.417% 15.417% 15.417% 15.417% 15.417%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xxl-col-5 {
+				grid-template-columns: 18.8% 18.8% 18.8% 18.8% 18.8%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xxl-col-4 {
+				grid-template-columns: 23.875% 23.875% 23.875% 23.875%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xxl-col-3 {
+				grid-template-columns: 32.333% 32.333% 32.333%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xxl-col-2 {
+				grid-template-columns: 49.25% 49.25%;
+				row-gap: 1vw;
+				column-gap: 1.5%;
+			}
+			.ymc-xxl-col-1 {
+				grid-template-columns: 100%;
+				row-gap: 1vw;
+				column-gap: 0;
 			}
 		}
 	}

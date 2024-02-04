@@ -12,6 +12,12 @@ $ymc_post_layout = $variable->get_post_layout( $post->ID );
 $ymc_post_text_color = $variable->get_post_text_color( $post->ID );
 $ymc_post_bg_color = $variable->get_post_bg_color( $post->ID );
 $ymc_post_active_color = $variable->get_post_active_color( $post->ID );
+$ymc_desktop_xxl = $variable->get_post_desktop_xxl( $post->ID );
+$ymc_desktop_xl = $variable->get_post_desktop_xl( $post->ID );
+$ymc_desktop_lg = $variable->get_post_desktop_lg( $post->ID );
+$ymc_tablet_md = $variable->get_post_tablet_md( $post->ID );
+$ymc_tablet_sm = $variable->get_post_tablet_sm( $post->ID );
+$ymc_mobile_xs = $variable->get_post_mobile_xs( $post->ID );
 
 ?>
 
@@ -146,7 +152,7 @@ $ymc_post_active_color = $variable->get_post_active_color( $post->ID );
                     <?php echo esc_html__('Select style design layout for posts.', 'ymc-smart-filter');?>
                 </span>
                 </label>
-                <select class="form-select" id="ymc-filter-layout" name="ymc-post-layout">
+                <select class="form-select" id="ymc-post-layout" name="ymc-post-layout">
 		            <?php
                         $post_layouts = apply_filters('ymc_post_layouts', $layouts);
 
@@ -164,6 +170,55 @@ $ymc_post_active_color = $variable->get_post_active_color( $post->ID );
 		            ?>
                 </select>
             </div>
+
+            <?php if( $ymc_post_layout !== 'post-layout3' && $ymc_post_layout !== 'post-masonry' && $ymc_post_layout !== 'post-custom-masonry' ) : ?>
+            <div class="manage-filters__section column-layout__section">
+                <label for="ymc-filter-layout" class="form-label">
+                    <?php echo esc_html__('Select Column Layout', 'ymc-smart-filter');?>
+                    <span class="information">
+                    <?php echo esc_html__('Select column layout of posts for different screens.', 'ymc-smart-filter');?>
+                </span>
+                </label>
+                <div class="row">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-desktop"></i></span>
+                        </div>
+                        <input type="number" class="form-control"  placeholder="4" min="1" max="12" name="ymc_desktop_xxl" value="<?php echo $ymc_desktop_xxl; ?>" title="≥1400px">
+                   </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-desktop"></i></span>
+                        </div>
+                        <input type="number" class="form-control"  placeholder="4" min="1" max="12" name="ymc_desktop_xl" value="<?php echo $ymc_desktop_xl; ?>" title="≥1200px">
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-tablet"></i></span>
+                        </div>
+                        <input type="number" class="form-control"  placeholder="4" min="1" max="12" name="ymc_desktop_lg" value="<?php echo $ymc_desktop_lg; ?>" title="≥992px">
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-tablet"></i></span>
+                        </div>
+                        <input type="number" class="form-control"  placeholder="3" min="1" max="6" name="ymc_tablet_md" value="<?php echo $ymc_tablet_md; ?>" title="≥768px">
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-mobile"></i></span>
+                        </div>
+                        <input type="number" class="form-control"  placeholder="2" min="1" max="4" name="ymc_tablet_sm" value="<?php echo $ymc_tablet_sm; ?>" title="≥576px">
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-mobile"></i></span>
+                        </div>
+                        <input type="number" class="form-control"  placeholder="1" min="1" max="4" name="ymc_mobile_xs" value="<?php echo $ymc_mobile_xs; ?>" title="<576px">
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
 
             <div class="manage-filters__section">
 
