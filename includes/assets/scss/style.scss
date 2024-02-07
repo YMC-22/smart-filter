@@ -129,6 +129,30 @@ $font-size: 16;
 		@media screen and (max-width: 1024px) {
 			display: block;
 		}
+
+		.search-layout {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			max-width: 22.5%;
+			@media screen and (max-width: 1024px) {
+				position: static;
+				max-width: 100%;
+			}
+		}
+
+		.sort-container {
+			position: absolute;
+			top: 50px;
+			left: 0;
+			width: 100%;
+			max-width: 22.5%;
+			@media screen and (max-width: 1024px) {
+				position: static;
+				max-width: 100%;
+			}
+		}
 	}
 
 	* {
@@ -523,8 +547,11 @@ $font-size: 16;
 	.filter-layout4 {
 		.filter-entry {
 			list-style: none;
-			margin: 0 0 20px 0;
+			margin: 110px 0 20px 0;
 			padding: 0;
+			@media screen and (max-width: 1024px) {
+				margin: 0 0 20px 0;
+			}
 			.group-filters {
 				margin: 0;
 				background-color: #efefef;
