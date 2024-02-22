@@ -1,12 +1,12 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.8.5
+Version: 2.8.6
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
-Tags: filter, grids, ajax posts, search, posts, masonry, ajax filter, category posts, taxonomy, custom taxonomy, woocommerce
+Tags: filter, grids, ajax posts, search, posts
 Requires at least: 4.8
 Tested up to: 6.4
-Stable tag: 2.8.5
+Stable tag: 2.8.6
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -215,6 +215,8 @@ Added linking on pages/posts for the presence of attached filters.
 Added the ability to create a custom WP Query. See documentation.
 = 2.8.4 =
 Added the ability to customize the post grid.
+= 2.8.6 =
+Fixed Custom WP_Query
 
 == Video ==
 https://www.youtube.com/watch?v=FIBNE0Ix6Vg

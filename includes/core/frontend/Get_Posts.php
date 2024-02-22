@@ -260,9 +260,16 @@ class Get_Posts {
 				{
 					$custom_args =  $ymc_query_type_callback();
 
-					$intersect_keys_array = array_intersect_key($custom_args, $args);
+					$intersect_keys_array = array_intersect_key($custom_args, $args); // intersection of array keys
+
+					$diff_keys_array = array_diff_key($custom_args, $args); // difference between array keys
 
 					foreach ( $intersect_keys_array as $key => $val )
+					{
+						$args[$key] = $val;
+					}
+
+					foreach ( $diff_keys_array as $key => $val )
 					{
 						$args[$key] = $val;
 					}
@@ -338,7 +345,8 @@ class Get_Posts {
 			'paged' => $paged,
 			'meta_query' => $meta_params,
 			'date_query' => $date_params,
-			'custom_wp_query' => $custom_args
+			'custom_wp_query' => $custom_args,
+			'args' => $args
 		);
 
 		wp_send_json($data);
