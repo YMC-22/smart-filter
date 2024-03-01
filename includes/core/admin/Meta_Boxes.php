@@ -419,7 +419,7 @@ class Meta_Boxes {
 			{
 				add_meta_box(
 					'ymc_filters_attached' ,
-					__('Attached Filters','ymc-smart-filter'),
+					__('Attached Filter & Grids','ymc-smart-filter'),
 					array($this,'ymc_attached_filters_callback'),
 					Plugin::instance()->variables->display_cpt(['attachment', 'popup']),
 					'side',
