@@ -171,8 +171,11 @@ $ymc_mobile_xs = $variable->get_post_mobile_xs( $post->ID );
                 </select>
             </div>
 
-            <?php if( $ymc_post_layout !== 'post-layout3' && $ymc_post_layout !== 'post-masonry' && $ymc_post_layout !== 'post-custom-masonry' ) : ?>
-            <div class="manage-filters__section column-layout__section">
+            <?php $col_layout_hide = ( $ymc_post_layout !== 'post-layout3' &&
+                                       $ymc_post_layout !== 'post-masonry' &&
+                                       $ymc_post_layout !== 'post-custom-masonry' ) ? '' : 'ymc_hidden'; ?>
+
+            <div class="manage-filters__section column-layout__section <?php echo esc_attr($col_layout_hide); ?>">
                 <label for="ymc-filter-layout" class="form-label">
                     <?php echo esc_html__('Select Column Layout', 'ymc-smart-filter');?>
                     <span class="information">
@@ -218,7 +221,6 @@ $ymc_mobile_xs = $variable->get_post_mobile_xs( $post->ID );
                     </div>
                 </div>
             </div>
-            <?php endif; ?>
 
             <div class="manage-filters__section">
 
