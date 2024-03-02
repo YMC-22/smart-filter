@@ -15,6 +15,7 @@ class Meta_Boxes {
 		add_action( 'add_meta_boxes', array($this, 'ymc_attached_filters'));
 		add_action( 'save_post', array($this, 'ymc_save_meta_box'), 10, 2);
 		add_action( 'wp_dashboard_setup', array($this, 'ymc_filter_grids_widget'));
+		add_action( 'admin_bar_menu', array($this, 'ymc_admin_bar_menu'), 120);
 		// Run popup
 		//add_thickbox();
 	}
@@ -408,7 +409,7 @@ class Meta_Boxes {
 			}
 			foreach ($filters_ids as $id)
 			{
-				if($this->ymc_is_shortcode($post->post_content, $id))
+				if( !empty($post->post_content) && $this->ymc_is_shortcode($post->post_content, $id) )
 				{
 					$is_filters_ids[] = $id;
 					$is_shortcode = true;
@@ -642,6 +643,64 @@ class Meta_Boxes {
 			return true;
 		}
 		return false;
+	}
+
+	public function ymc_admin_bar_menu( $wp_admin_bar ) {
+
+		global $post;
+		$is_filters_ids = [];
+		$is_shortcode = false;
+
+		$filters_array = get_posts([
+			'posts_per_page' => -1,
+			'post_type'      => 'ymc_filters',
+			'post_status'    => 'publish'
+		]);
+
+		$wp_admin_bar->add_menu( array(
+			'id' => 'ymc-filter-grids',
+			'title' => __('Filter & Grids','ymc-smart-filter') . ' <span class="counter">0</span>',
+			'href' => admin_url('edit.php?post_type=ymc_filters'),
+			'meta'   => array( 'target' => '_blank' )
+		) );
+
+		if( !empty($filters_array))
+		{
+			foreach ( $filters_array as $filter )
+			{
+				if( !empty($post->post_content) && $this->ymc_is_shortcode($post->post_content, $filter->ID) )
+				{
+					$is_filters_ids[] = $filter->ID;
+					$is_shortcode = true;
+				}
+			}
+
+			if( $is_shortcode )
+			{
+				$wp_admin_bar->add_menu( array(
+					'id' => 'ymc-filter-grids',
+					'title' => __('Filter & Grids','ymc-smart-filter') . ' <span class="counter">'. count($is_filters_ids) .'</span>',
+					'href' => admin_url('edit.php?post_type=ymc_filters'),
+					'meta'   => array( 'target' => '_blank' )
+				) );
+
+				foreach ( $is_filters_ids as $id )
+				{
+					// Sub menu to open Filter & Grids
+					$wp_admin_bar->add_menu( array(
+						'id' => 'ymc-filter-grids-'.$id,
+						'parent' => 'ymc-filter-grids',
+						'title'  => get_the_title( $id ),
+						'href'   => get_edit_post_link( $id ),
+						'meta'   => array( 'target' => '_blank' )
+					) );
+				}
+			}
+		}
+
+		if( is_admin() ) {
+			$wp_admin_bar->remove_node('ymc-filter-grids');
+		}
 	}
 
 }
