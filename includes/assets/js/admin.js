@@ -1240,9 +1240,14 @@
 
             let postLayout = e.target.value;
             let columnLayoutSection = $('.ymc__container-settings #layouts .column-layout__section');
+            // Array Post Layouts for Breakpoints
+            let arr_layouts_posts = [
+                'post-layout1',
+                'post-layout2',
+                'post-custom-layout'
+            ];
 
-            ( postLayout === 'post-layout3' || postLayout === 'post-masonry' || postLayout === 'post-custom-masonry' ) ?
-                columnLayoutSection.hide()  :  columnLayoutSection.show();
+            ( arr_layouts_posts.includes(postLayout) ) ? columnLayoutSection.show()  :  columnLayoutSection.hide();
 
         });
 

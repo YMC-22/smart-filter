@@ -291,13 +291,13 @@ class Get_Posts {
 
 			$file_layout = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/post/" . $post_layout . ".php";
 
-			// Layouts Posts
+			// Post Layout
 			if ( file_exists($file_layout) ) :
 				include_once $file_layout;
-				$message = 'Layout is OK';
+				$message = 'Post Layout is available';
 			else :
-				echo "<div class='ymc-error'>" . esc_html('Filter layout is not available.', 'ymc-smart-filter') . "</div>";
-				$message = 'Filter layout is not available';
+				echo "<div class='ymc-error'>" . esc_html('Post Layout is not available.', 'ymc-smart-filter') . "</div>";
+				$message = 'Post Layout is not available';
 			endif;
 
 			// Pagination

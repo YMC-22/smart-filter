@@ -171,9 +171,15 @@ $ymc_mobile_xs = $variable->get_post_mobile_xs( $post->ID );
                 </select>
             </div>
 
-            <?php $col_layout_hide = ( $ymc_post_layout !== 'post-layout3' &&
-                                       $ymc_post_layout !== 'post-masonry' &&
-                                       $ymc_post_layout !== 'post-custom-masonry' ) ? '' : 'ymc_hidden'; ?>
+            <?php
+                // Array Post Layouts for Breakpoints
+                $arr_layouts_posts = [
+                    'post-layout1',
+                    'post-layout2',
+                    'post-custom-layout'
+                ];
+                $col_layout_hide = ( in_array($ymc_post_layout, $arr_layouts_posts) ) ? '' : 'ymc_hidden';
+            ?>
 
             <div class="manage-filters__section column-layout__section <?php echo esc_attr($col_layout_hide); ?>">
                 <label for="ymc-filter-layout" class="form-label">

@@ -14,9 +14,9 @@ while ($query->have_posts()) : $query->the_post();
 	$title   = get_the_title($post_id);
 	$link    = get_the_permalink($post_id);
 	$class_popup = ( $ymc_popup_status === 'off' ) ? '' : 'ymc-popup';
-	$image_post = '';
+	$image_post = null;
 
-	if( !empty(get_the_post_thumbnail($post_id, 'full')) ) {
+	if( has_post_thumbnail($post_id) ) {
 		$image_post = get_the_post_thumbnail($post_id, 'full');
 	}
 
@@ -34,8 +34,9 @@ while ($query->have_posts()) : $query->the_post();
 
 
 	echo '<article class="ymc-'.esc_attr($post_layout).' post-'.get_the_id().' post-item fade-in">';
+	if( !empty($image_post) ) :
 	echo '<figure class="media">'. wp_kses_post($image_post) .'</figure>';
-
+	endif;
 	echo '<header class="title">'. esc_html($title) .'</header>';
 	echo '<div class="excerpt">'. wp_kses_post($content) .'</div>';
 	echo '<div class="read-more"><a class="btn btn-read-more '.esc_attr($class_popup).'" '. esc_attr($target) .' data-postid="'.esc_attr($post_id).'" href="'. esc_url($link) .'">'. esc_html($read_more) .'</a></div>';

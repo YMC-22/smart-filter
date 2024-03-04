@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	    $post_date_format = apply_filters('ymc_post_date_format_'.$filter_id.'_'.$target_id, 'd, M Y');
 		$image_post = '<img class="dummy-image" src="'. YMC_SMART_FILTER_URL . '/includes/assets/images/dummy-Image.svg" alt="Dummy image">';
 
-	    if( !empty(get_the_post_thumbnail($post_id, 'full')) ) {
+	    if( has_post_thumbnail($post_id) ) {
 		    $image_post = get_the_post_thumbnail($post_id, 'full');
         }
 

@@ -14,9 +14,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	    $link    = get_the_permalink($post_id);
 	    $class_popup = ( $ymc_popup_status === 'off' ) ? '' : 'ymc-popup';
 	    $post_date_format = apply_filters('ymc_post_date_format_'.$filter_id.'_'.$target_id, 'd, M Y');
-		$image_post = '<img class="dummy-image" src="'. YMC_SMART_FILTER_URL . '/includes/assets/images/dummy-Image.svg" alt="Dummy image">';
+		//$image_post = '<img class="dummy-image" src="'. YMC_SMART_FILTER_URL . '/includes/assets/images/dummy-Image.svg" alt="Dummy image">';
+	    $image_post = null;
 
-	    if( !empty(get_the_post_thumbnail($post_id, 'full')) ) {
+	    if( has_post_thumbnail($post_id) ) {
 		    $image_post = get_the_post_thumbnail($post_id, 'full');
         }
 
@@ -52,7 +53,9 @@ if ( ! defined( 'ABSPATH' ) ) {
         echo '<article class="ymc-'.esc_attr($post_layout).' post-'.$post_id.' post-item '.esc_attr($class_animation).'">';
 
 		echo '<div class="ymc-col ymc-col-1">';
+	    if( !empty($image_post) ) :
 	    echo '<figure class="media">'. wp_kses_post($image_post) .'</figure>';
+	    endif;
 		echo '</div>';
 
 		echo '<div class="ymc-col ymc-col-2">';

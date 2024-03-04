@@ -38,7 +38,14 @@ class Shortcode {
 
 		$handle_filter = 'filter-inline-css-' . $c_target;
 		$handle_post   = 'post-inline-css-' .  $c_target;
+		// List classes for breakpoints
 		$breakpoints_classes = '';
+		// Array Post Layouts for Breakpoints
+		$arr_layouts_posts = [
+			'post-layout1',
+			'post-layout2',
+			'post-custom-layout'
+		];
 
 		$output = '';
 
@@ -49,19 +56,21 @@ class Shortcode {
 		if ( !empty($id) && $ymc_post_type === 'ymc_filters' && $post_status === 'publish' )
 		{
 
-			if (is_array($tax_selected)) {
+			if ( is_array($tax_selected) ) {
 				$ymc_tax = implode(",", $tax_selected);
 			}
 
-			if (is_array($terms_selected)) {
+			if ( is_array($terms_selected) ) {
 				$ymc_terms = implode(',', $terms_selected);
 			}
 
-			if (is_array($ymc_choices_posts)) {
+			if ( is_array($ymc_choices_posts) ) {
 				$ymc_choices_posts = implode(',', $ymc_choices_posts);
 			}
 
 			$css_special = !empty($ymc_special_post_class) ? $ymc_special_post_class : '';
+
+			$ymc_filter_layout = ( $ymc_filter_status === 'on' ) ? $ymc_filter_layout : 'no-filter-layout';
 
 			echo '<div id="ymc-smart-filter-container-'. esc_attr($c_target) .'" 
 				  class="ymc-smart-filter-container ymc-filter-'. esc_attr($id) .' ymc-loaded-filter ymc-'. esc_attr($ymc_filter_layout) .' ymc-'. esc_attr($ymc_post_layout) .' ymc-pagination-'. esc_attr($ymc_pagination_type) .' data-target-ymc'.esc_attr($id).'-'.esc_attr($c_target).' data-target-ymc'. esc_attr($c_target) .' '. $css_special .'" data-loading="true"
@@ -98,19 +107,16 @@ class Shortcode {
 				}
 			}
 
-			if( $ymc_post_layout !== 'post-custom-layout') :
+			if ( $ymc_post_layout !== 'post-custom-layout') {
 
 				$filepath_post_css = YMC_SMART_FILTER_DIR . '/includes/core/frontend/layouts/post-css/'. $ymc_post_layout .'-css.php';
 
 				if ( file_exists($filepath_post_css) ) {
 					require $filepath_post_css;
 				}
+			}
 
-			endif;
-
-			if( $ymc_post_layout !== 'post-layout3' &&
-			    $ymc_post_layout !== 'post-masonry' &&
-			    $ymc_post_layout !== 'post-custom-masonry' )
+			if ( in_array($ymc_post_layout, $arr_layouts_posts) )
 			{
 				$breakpoints_classes = 'ymc-xs-col-'.esc_attr($ymc_mobile_xs).' ymc-sm-col-'.esc_attr($ymc_tablet_sm).' ymc-md-col-'.esc_attr($ymc_tablet_md).' ymc-lg-col-'.esc_attr($ymc_desktop_lg).' ymc-xl-col-'.esc_attr($ymc_desktop_xl).' ymc-xxl-col-'.esc_attr($ymc_desktop_xxl);
 			}
