@@ -1,12 +1,12 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.8.9
+Version: 2.8.10
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
 Tags: filter, grids, ajax posts, search, posts
 Requires at least: 4.8
 Tested up to: 6.4
-Stable tag: 2.8.9
+Stable tag: 2.8.10
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -221,6 +221,8 @@ Fixed Custom WP_Query
 Added Link to Admin Bar Menu
 = 2.8.9 =
 Added new Post Template Vertical Timeline
+= 2.8.10 =
+Added options suppress_filters to WP_Query
 
 
 == Video ==

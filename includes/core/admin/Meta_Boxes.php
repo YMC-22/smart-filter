@@ -385,6 +385,12 @@ class Meta_Boxes {
 			update_post_meta( $post_id, 'ymc_mobile_xs', $ymc_mobile_xs );
 		}
 
+		// Suppress Filters
+		if( isset($_POST['ymc-suppress-filters']) ) {
+			$ymc_suppress_filters = sanitize_text_field( $_POST['ymc-suppress-filters']);
+			update_post_meta( $post_id, 'ymc_suppress_filters', $ymc_suppress_filters );
+		}
+
 	}
 
 	public function ymc_attached_filters() {

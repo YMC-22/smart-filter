@@ -11,6 +11,7 @@ $ymc_advanced_query_status = $variable->get_ymc_advanced_query_status( $post->ID
 $ymc_query_type = $variable->get_ymc_query_type( $post->ID );
 $ymc_query_type_custom = $variable->get_ymc_query_type_custom( $post->ID );
 $ymc_query_type_callback = $variable->get_ymc_query_type_callback( $post->ID );
+$ymc_suppress_filters = $variable->get_ymc_suppress_filters( $post->ID );
 
 ?>
 
@@ -107,13 +108,32 @@ $ymc_query_type_callback = $variable->get_ymc_query_type_callback( $post->ID );
 
     </div>
 
+    <div class="form-group">
+        <label class="form-label">
+            <?php echo esc_html__('Filters Parameters', 'ymc-smart-filter');?>
+            <span class="information">
+                    <?php echo esc_html__('Disable Filters ( suppress_filters ) in the WP_Query. Important: Enabling this option will change how some of the plugin filters work.', 'ymc-smart-filter');?>
+                </span>
+        </label>
+
+        <div class="group-elements">
+            <?php $checked_suppress_filters =  ( (int) $ymc_suppress_filters === 1 ) ? 'checked' : '';  ?>
+            <input type="hidden" name="ymc-suppress-filters" value="0">
+            <input class="ymc-suppress-filters" id="ymc-suppress-filters" type="checkbox" value="1" name="ymc-suppress-filters"
+                <?php echo esc_attr($checked_suppress_filters); ?>>
+            <label for="ymc-suppress-filters"><?php echo esc_html__('Disable Filters','ymc-smart-filter'); ?></label>
+        </div>
+
+    </div>
+
+
 </div>
 
 <div class="content" style="margin-bottom: 40px;">
 
     <header class="sub-header">
         <i class="far fa-plus-circle"></i>
-		<?php echo esc_html__('Add Extra Classes', 'ymc-smart-filter'); ?>
+		<?php echo esc_html__('Extra Class', 'ymc-smart-filter'); ?>
     </header>
 
     <div class="from-element">
@@ -132,7 +152,7 @@ $ymc_query_type_callback = $variable->get_ymc_query_type_callback( $post->ID );
 
     <header class="sub-header">
         <i class="far fa-id-badge"></i>
-        <?php echo esc_html__('Icon for Preloader', 'ymc-smart-filter'); ?>
+        <?php echo esc_html__('Preloader', 'ymc-smart-filter'); ?>
     </header>
 
     <div class="form-group">
@@ -237,7 +257,7 @@ $ymc_query_type_callback = $variable->get_ymc_query_type_callback( $post->ID );
             <input type="hidden" name="ymc-scroll-page" value="1">
             <input class="ymc-scroll-page" type="checkbox" value="0" name="ymc-scroll-page" id="ymc-scroll-page"
                 <?php echo esc_attr($checked_scroll_page); ?>>
-            <label for="ymc-scroll-page"><?php echo esc_html__('Disable','ymc-smart-filter'); ?></label>
+            <label for="ymc-scroll-page"><?php echo esc_html__('Disable Scroll','ymc-smart-filter'); ?></label>
         </div>
 
     </div>

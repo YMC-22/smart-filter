@@ -223,6 +223,11 @@ class Get_Posts {
 			$args['date_query'] = $date_query;
 		}
 
+		// Suppress Filters
+		if( (int) $ymc_suppress_filters === 1 ) {
+			$args['suppress_filters'] = true;
+		}
+
 		// Alphabetical Filter
 		if( !empty($letter) && $letter !== 'all' ) {
 			$args['starts_with'] = $letter;

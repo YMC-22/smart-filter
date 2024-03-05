@@ -153,6 +153,8 @@ class Variables {
 
 	public $ymc_query_type_callback = '';
 
+	public $ymc_suppress_filters = 0;
+
 
 	/**
 	 * Typography tab used default variables
@@ -684,6 +686,14 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_query_type_callback', true );
 		}
 		return $this->ymc_query_type_callback;
+	}
+
+	public function get_ymc_suppress_filters( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_suppress_filters' ) ) {
+			return get_post_meta( $post_id, 'ymc_suppress_filters', true );
+		}
+		return $this->ymc_suppress_filters;
 	}
 
 

@@ -69,3 +69,4 @@ $ymc_desktop_lg = $variable->get_post_desktop_lg( $id );
 $ymc_tablet_md = $variable->get_post_tablet_md( $id );
 $ymc_tablet_sm = $variable->get_post_tablet_sm( $id );
 $ymc_mobile_xs = $variable->get_post_mobile_xs( $id );
+$ymc_suppress_filters = $variable->get_ymc_suppress_filters( $id );
