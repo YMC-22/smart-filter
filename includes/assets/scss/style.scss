@@ -436,6 +436,8 @@ $font-size: 16;
 				}
 
 				&__item {
+					display: flex;
+					align-items: center;
 					padding: 8px 0;
 					i {
 						font-size: 15px;
@@ -506,6 +508,13 @@ $font-size: 16;
 								right: 0;
 								top: 0;
 							}
+						}
+					}
+					&.right-icon {
+						flex-direction: row-reverse;
+						justify-content: flex-end;
+						.menu-link {
+							margin-right: 10px;
 						}
 					}
 				}

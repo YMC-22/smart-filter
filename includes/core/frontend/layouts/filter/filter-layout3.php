@@ -68,12 +68,70 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
                 echo '<i class="btn-close">x</i>';
 
 	            $terms_icons = null;
+	            $class_terms_align = null;
+	            $bg_term = null;
+	            $color_term = null;
+	            $class_term = null;
+	            $color_icon = null;
 
                 foreach ($terms_selected as $term) {
 
                     if( $tax === get_term( $term )->taxonomy ) {
 
                      $is_disabled = ( get_term( $term )->count === 0 ) ? 'isDisabled' : '';
+
+	                    // Set align icons
+	                    if( !empty($ymc_terms_align) ) {
+
+		                    $flag_terms_align = false;
+
+		                    foreach ( $ymc_terms_align as $sub_terms_align ) {
+
+			                    foreach ( $sub_terms_align as $key => $val) {
+
+				                    if ( $key === 'termid' && (int) $term === (int) $val ) {
+					                    $flag_terms_align = true;
+				                    }
+				                    if ( $key === 'alignterm' ) {
+					                    $class_terms_align = $val;
+				                    }
+				                    if ( $key === 'coloricon' ) {
+					                    $color_icon = $val;
+				                    }
+			                    }
+
+			                    if( $flag_terms_align ) {
+				                    break;
+			                    }
+		                    }
+	                    }
+
+					    // Set options term
+	                    if( !empty($ymc_terms_options) ) {
+
+		                    $flag_terms_option = false;
+
+		                    foreach ( $ymc_terms_options as $terms_opt ) {
+
+			                    foreach ( $terms_opt as $key => $val) {
+
+				                    if ( $key === 'termid' && (int) $term === (int) $val ) {
+					                    $flag_terms_option = true;
+				                    }
+				                    if ( $key === 'bg' && $flag_terms_option ) {
+					                    $bg_term = $val;
+				                    }
+				                    if ( $key === 'color' && $flag_terms_option ) {
+					                    $color_term = $val;
+				                    }
+				                    if ( $key === 'class' && $flag_terms_option ) {
+					                    $class_term = $val;
+				                    }
+			                    }
+
+			                    if( $flag_terms_option ) break;
+		                    }
+	                    }
 
 	                    // Choose icons
 	                    if( !empty($ymc_terms_icons) ) {
@@ -87,9 +145,15 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 		                    }
 	                    }
 
-                        echo '<div class="menu-passive__item item-'. esc_attr(get_term( $term )->slug) .'">
+	                    $bg_term = ( !empty($bg_term) ) ? 'background-color:'.$bg_term.';' : '';
+	                    $color_term = ( !empty($color_term) ) ? 'color:'.$color_term.';' : '';
+
+                        echo '<div class="menu-passive__item item-'. esc_attr(get_term( $term )->slug) .' '.esc_attr($class_terms_align).'">
 							  '. $terms_icons .'
-                              <a class="menu-link '.  esc_attr($is_disabled) .' '.  esc_attr($type_multiple) .'" 
+                              <a class="menu-link '.
+                              esc_attr($is_disabled) .' '.
+                              esc_attr($type_multiple) .' '.
+                              esc_attr($class_term) .'" style="'.esc_attr($bg_term) . esc_attr($color_term).'" 
                               href="#" data-selected="'. esc_attr(get_term( $term )->slug) .'" data-termid="' . esc_attr($term) . '" data-name="'.esc_attr(get_term( $term )->name).'">'.
                               esc_html(get_term( $term )->name) . ' <span class="count">'. esc_html(get_term( $term )->count) .'</span></a></div>';
                     }
