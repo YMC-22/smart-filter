@@ -139,7 +139,9 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 		                    foreach ( $ymc_terms_icons as $key => $val ) {
 
 			                    if( (int) $term === (int) $key ) {
-				                    $terms_icons = '<i class="'. $val .'"></i>';
+
+				                    $colorIconTerm = ( !empty($color_icon) ) ? 'color:'.$color_icon.';' : '';
+				                    $terms_icons = '<i class="'. $val .'" style="'.$colorIconTerm.'"></i>';
 				                    break;
 			                    }
 		                    }
