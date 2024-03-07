@@ -455,7 +455,7 @@
         function popupPost(e) {
             e.preventDefault();
             let _self = $(e.target);
-            let postId = _self.data('postid');
+            let postId = _self.closest('.ymc-popup').data('postid');
             let popupOverlay = _self.closest('.ymc-smart-filter-container').find('.ymc-popup-overlay');
             let popupContainer = _self.closest('.ymc-smart-filter-container').find('.popup-entry');
             let bodyHtml = $('body, html');
