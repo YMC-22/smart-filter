@@ -57,7 +57,7 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 
 	                $tax_name = apply_filters('ymc_tax_name_'.$id.'_'.$c_target.'_'.$tax, get_taxonomy( $tax )->label);
 
-                    echo '<li class="group-filters">
+                    echo '<li class="group-filters tax-'.$tax.'">
                           <header class="name-tax">'. esc_html($tax_name) .'</header>
                           <ul class="sub-filters">';
 
