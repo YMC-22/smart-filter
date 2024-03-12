@@ -8,7 +8,7 @@
         const _FN = (function () {
 
             const _info = {
-                version: '2.7.2',
+                version: '2.8.13',
                 author: 'YMC'
             }
 
@@ -292,13 +292,16 @@
 
                 dataParams.page = 1;
                 dataParams.search = this.search;
-                dataParams.terms = ( Array.isArray(terms) && terms.length > 0 ) ? terms.join(',') : "";
+
+                dataParams.terms = ( Array.isArray(terms) && terms.length > 0 ) ? terms.join(',') :
+                    ( dataParams.search_filtered_posts === "1" ) ? dataParams.terms : "";
+
                 dataParams.meta_query = "";
                 dataParams.date_query = "";
 
                 container.dataset.params = JSON.stringify(dataParams);
 
-                if( typeof option === 'boolean' ) {
+                if( option ) {
                     this.getFilterPosts();
                 }
             }
@@ -1184,7 +1187,7 @@
                     find('.filter-layout .filter-entry').
                     data('terms');
                 }
-                // Filter Layouts 1, 2
+                // Filter Layouts 1, 2, 4
                 else {
                     allTerms = $(this).
                     closest('.ymc-smart-filter-container').
@@ -1202,13 +1205,15 @@
                 this.closest('.ymc-smart-filter-container').dataset.params = JSON.stringify(params);
 
                 let container =  $('.'+params.data_target+'');
-                container.find('.filter-layout .filter-link').removeClass('active');
 
-                container.find('.filter-layout3').find('.selected-items').empty();
-                container.find('.filter-entry .active').each(function () {
-                    $(this).removeClass('active');
-                });
-                container.find('.search-form .autocomplete-results').hide();
+                if( params.search_filtered_posts === '0') {
+                    container.find('.filter-layout .filter-link').removeClass('active');
+                    container.find('.filter-layout3').find('.selected-items').empty();
+                    container.find('.filter-entry .active').each(function () {
+                        $(this).removeClass('active');
+                    });
+                    container.find('.search-form .autocomplete-results').hide();
+                }
 
                 getFilterPosts({
                     'paged'      : 1,
@@ -1390,7 +1395,7 @@
                 find('.filter-layout .filter-entry').
                 data('terms');
             }
-            // Filter Layouts 1, 2
+            // Filter Layouts 1, 2, 4
             else {
                 allTerms = $(this).
                 closest('.ymc-smart-filter-container').
@@ -1405,7 +1410,11 @@
             let params = JSON.parse(e.target.closest('.ymc-smart-filter-container').dataset.params);
             params.search = "";
             params.page = 1;
-            params.terms = allTerms;
+
+            if( params.search_filtered_posts === '0') {
+                params.terms = allTerms;
+            }
+
             params.posts_selected = 'all';
             e.target.closest('.ymc-smart-filter-container').dataset.params = JSON.stringify(params);
 

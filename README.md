@@ -431,6 +431,7 @@ YMCTools({target: ".data-target-ymcFilterID-LayoutID", search: 'keyword'}).apiSe
 **Required params:**
 - `.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.`
 - `search - (String) Phrase for which posts are searched.`
+
 **Optional params:**
 - `option - (bool) true / false - parameter allows to control sending of request. Default is true`
 - `terms - (array)  list ids terms. Default is empty`
