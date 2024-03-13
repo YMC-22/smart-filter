@@ -36,6 +36,39 @@ class Cpt {
 					'title',
 				),
 			) );
+
+		remove_post_type_support('ymc_filters', 'thumbnail');
+
+		add_filter( 'manage_edit-ymc_filters_columns', function ( $columns ) {
+
+			$columns = array(
+				'cb' => '&lt;input type="checkbox" />',
+				'title' => __( 'Title','ymc-smart-filter' ),
+				'shortcode' => __( 'Shortcode', 'ymc-smart-filter' ),
+				'id' => __( 'ID', 'ymc-smart-filter' ),
+				'date' => __( 'Date', 'ymc-smart-filter' )
+			);
+
+			return $columns;
+		});
+
+		add_action( 'manage_ymc_filters_posts_custom_column', function ($column, $post_id) {
+
+			switch( $column ) {
+
+				case 'shortcode' :
+					echo '<input type="text" onclick="this.select();" value="[ymc_filter id=&quot;'.$post_id.'&quot;]" readonly="">';
+					break;
+
+				case 'id' :
+					echo $post_id;
+					break;
+
+				default :
+					break;
+			}
+
+		}, 10, 2);
 	}
 
 }
