@@ -86,6 +86,7 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
                          '<span class="link-inner">'. esc_html($name_term) . '</span>'."</a></li>";
 
 	                $terms_icons = null;
+					$name_term = '';
 
 				}
             }

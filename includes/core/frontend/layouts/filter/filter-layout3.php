@@ -133,6 +133,7 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
                     }
 
 	                $terms_icons = null;
+					$name_term = '';
                 }
 
                 echo '</div>';
