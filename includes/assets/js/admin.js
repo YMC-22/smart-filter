@@ -166,10 +166,12 @@
                                 data-custom-class 
                                 data-color-icon 
                                 data-class-icon 
-                                data-status-term >
+                                data-status-term 
+                                data-default-term 
+                                data-name-term >
                                 <input name="ymc-terms[]" class="category-list" id="category-id-${el.term_id}" type="checkbox" value="${el.term_id}">
                                 <label for='category-id-${el.term_id}' class='category-list-label'><span class="name-term">${el.name}</span> (${el.count})</label>
-                                <i class="far fa-cog choice-icon" title="Setting term"></i>
+                                <i class="far fa-cog choice-icon" title="Setting Term"></i>
                                 <span class="indicator-icon"></span>                                
                                 </div>`;
                             });
@@ -536,7 +538,9 @@
                     "bg"      : el.dataset.bgTerm,
                     "color"   : el.dataset.colorTerm,
                     "class"   : el.dataset.customClass,
-                    "status"  : el.dataset.statusTerm
+                    "status"  : el.dataset.statusTerm,
+                    "default" : el.dataset.defaultTerm,
+                    "name"    : el.dataset.nameTerm
                 });
             });
 
@@ -821,23 +825,27 @@
 
             $(e.target).closest('.item-inner').addClass('open-popup');
 
+            // Get values data attributes terms
             let nameTerm = $(e.target).siblings('.category-list-label').find('.name-term').text();
             let alignterm = e.target.closest('.item-inner').dataset.alignterm;
             let bgTerm = e.target.closest('.item-inner').dataset.bgTerm;
             let colorTerm = e.target.closest('.item-inner').dataset.colorTerm;
             let customClass = e.target.closest('.item-inner').dataset.customClass || '';
+            let defaultTerm = e.target.closest('.item-inner').dataset.defaultTerm || '';
+            let customNameTerm = e.target.closest('.item-inner').dataset.nameTerm || '';
             let colorIcon = e.target.closest('.item-inner').dataset.colorIcon || '#3c434a';
             let newIcon = $(e.target).siblings('.indicator-icon').find('i').clone(true).css('color',colorIcon);
 
             // Run popup
-            tb_show( '&#9998; &#91;'+nameTerm+'&#93;', '/?TB_inline&inlineId=ymc-icons-modal&width=740&height=768' );
+            tb_show( '&#9998; &#91; '+nameTerm+' &#93;', '/?TB_inline&inlineId=ymc-icons-modal&width=740&height=768' );
 
             // Get elements in popup
-            let iconCurrentColor = $('#TB_ajaxContent .ymc-icons-content .ymc-icon-color');
-            let iconCurrentClass = $('#TB_ajaxContent .ymc-terms-content .terms-entry .ymc-term-class');
-            let termCurrentBg = $('#TB_ajaxContent .ymc-terms-content .terms-entry .ymc-term-bg');
-            let termCurrentColor = $('#TB_ajaxContent .ymc-terms-content .terms-entry .ymc-term-color');
-
+            let iconCurrentColor   = $('#TB_ajaxContent .ymc-icons-content .ymc-icon-color');
+            let iconCurrentClass   = $('#TB_ajaxContent .ymc-terms-content .terms-entry .ymc-term-class');
+            let termCurrentBg      = $('#TB_ajaxContent .ymc-terms-content .terms-entry .ymc-term-bg');
+            let termCurrentColor   = $('#TB_ajaxContent .ymc-terms-content .terms-entry .ymc-term-color');
+            let termCurrentDefault = $('#TB_ajaxContent .ymc-terms-content .terms-entry .ymc-term-default');
+            let termCustomName     = $('#TB_ajaxContent .ymc-terms-content .terms-entry .ymc-term-custom-name');
 
             if( newIcon.length > 0 ) {
                 $( '#TB_ajaxContent .ymc-icons-content .panel-setting .remove-link' ).show();
@@ -854,8 +862,11 @@
             // Set current settings
             termCurrentBg.wpColorPicker('color', bgTerm);
             termCurrentColor.wpColorPicker('color', colorTerm);
+            ( defaultTerm !== '' ) ? termCurrentDefault.attr('checked', defaultTerm).prop('checked', true) :
+                                     termCurrentDefault.removeAttr('checked');
             iconCurrentColor.wpColorPicker('color', colorIcon);
             iconCurrentClass.val(customClass);
+            termCustomName.val(customNameTerm);
 
             // Change color icon
             let options = {
@@ -1001,13 +1012,17 @@
             let bgTerm = $('#TB_ajaxContent .ymc-terms-content .ymc-term-bg').val();
             let colorTerm = $('#TB_ajaxContent .ymc-terms-content .ymc-term-color').val();
             let customClass = $('#TB_ajaxContent .ymc-terms-content .ymc-term-class').val();
+            let defaultTerm = $('#TB_ajaxContent .ymc-terms-content .ymc-term-default:checked').val();
+            let nameTerm = $('#TB_ajaxContent .ymc-terms-content .ymc-term-custom-name').val();
             let colorIcon = $('#TB_ajaxContent .ymc-icons-content .panel-setting .ymc-icon-color').val();
             let selectedTerm = document.querySelector('#ymc-terms .entry-terms .open-popup');
 
             selectedTerm.dataset.bgTerm = bgTerm;
             selectedTerm.dataset.colorTerm = colorTerm;
             selectedTerm.dataset.customClass = customClass;
+            selectedTerm.dataset.defaultTerm = (undefined !== defaultTerm) ? defaultTerm : '';
             selectedTerm.dataset.colorIcon = colorIcon;
+            selectedTerm.dataset.nameTerm = nameTerm;
 
             ( bgTerm || colorTerm ) ?
                 selectedTerm.setAttribute('style',`background-color: ${bgTerm}; color: ${colorTerm}`) :

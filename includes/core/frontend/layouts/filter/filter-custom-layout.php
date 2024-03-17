@@ -71,6 +71,8 @@ $term_settings = arrayToObject( generalArrayMerging( $ymc_terms_options, $ymc_te
 		        - coloricon - color icon
 		        - classicon - name class icon (Font Awesome Icons. ex. far fa-arrow-alt-circle-down)
 		        - status - term status (checked)
+	            - default - default term (checked)
+	            - name - custom term name
 	         * @returns {string} HTML markup filter bar
 	         */
 

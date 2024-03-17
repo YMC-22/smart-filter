@@ -1,12 +1,12 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.8.14
+Version: 2.8.15
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
 Tags: filter, grids, ajax posts, search, posts
 Requires at least: 4.8
 Tested up to: 6.4
-Stable tag: 2.8.14
+Stable tag: 2.8.15
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -34,6 +34,7 @@ The plugin provides the following functionality:
 - View post content in a popup.
 - Editing terms: adding icons and customizing them.
 - Choose icon for preloader.
+- Default Term.
 - Setting up a grid of posts.
 - Customization of the color palette.
 - Adding a post search bar.
@@ -225,6 +226,8 @@ Added new Post Template Vertical Timeline
 Added options suppress_filters to WP_Query
 = 2.8.13 =
 Fixed JS
+= 2.8.15 =
+Added Default Term
 
 == Video ==
 https://www.youtube.com/watch?v=FIBNE0Ix6Vg

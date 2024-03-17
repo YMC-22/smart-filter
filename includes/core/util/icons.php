@@ -844,16 +844,16 @@
 					<label class="form-label">
 						<?php esc_html_e('Background Term', 'ymc-smart-filter'); ?>
 						<span class="information">
-                            <?php echo esc_html__('Set background for term', 'ymc-smart-filter');?>
+                            <?php echo esc_html__('Set background for term.', 'ymc-smart-filter');?>
                         </span>
 					</label>
 					<input class="ymc-custom-color ymc-term-bg" type="text" name='ymc-term-bg' value=""/>
 				</div>
 				<div class="form-element">
 					<label class="form-label">
-						<?php esc_html_e('Color Term', 'ymc-smart-filter'); ?>
+						<?php esc_html_e('Color term', 'ymc-smart-filter'); ?>
 						<span class="information">
-                            <?php echo esc_html__('Set color for term', 'ymc-smart-filter');?>
+                            <?php echo esc_html__('Set color for term.', 'ymc-smart-filter');?>
                         </span>
 					</label>
 					<input class="ymc-custom-color ymc-term-color" type="text"  name='ymc-term-color' value=""/>
@@ -862,10 +862,29 @@
 					<label class="form-label">
 						<?php esc_html_e('Custom Class Term', 'ymc-smart-filter'); ?>
 						<span class="information">
-                            <?php echo esc_html__('Set custom class for term', 'ymc-smart-filter');?>
+                            <?php echo esc_html__('Set custom class for term.', 'ymc-smart-filter');?>
                         </span>
 					</label>
-					<input class="input-field ymc-term-class" type="text" name="ymc-term-class" placeholder="Custom name class" value="" />
+					<input class="input-field ymc-term-class" type="text" name="ymc-term-class" placeholder="Custom class for term" value="" />
+				</div>
+				<div class="form-element">
+					<label class="form-label">
+						<?php esc_html_e('Default Term', 'ymc-smart-filter'); ?>
+						<span class="information">
+                            <?php echo esc_html__('Set the term to default while posts load on frontend. For standard plugin Filter Layouts except for the Alphabetical Layout.', 'ymc-smart-filter');?>
+                        </span>
+					</label>
+					<input class="input-field ymc-term-default" id="ymc-term-default" type="checkbox" name="ymc-term-default" value="checked" />
+					<label for="ymc-term-default"><?php esc_html_e('Enable', 'ymc-smart-filter'); ?></label>
+				</div>
+				<div class="form-element">
+					<label class="form-label">
+						<?php esc_html_e('Change Term Name', 'ymc-smart-filter'); ?>
+						<span class="information">
+                            <?php echo esc_html__('Set a custom name for term. To restore the default term name, clear the field.', 'ymc-smart-filter');?>
+                        </span>
+					</label>
+					<input class="input-field ymc-term-custom-name" type="text" name="ymc-term-custom-name" placeholder="Term custom name" value="" />
 				</div>
 			</div>
 		</div>

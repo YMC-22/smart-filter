@@ -25,15 +25,17 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 
             $type_multiple = ( (bool) $ymc_multiple_filter ) ? 'multiple' : '';
 
-            if ( is_array($terms_selected) ) {
+            if ( is_array($terms_selected) )
+			{
 
 				if( $ymc_sort_terms !== 'manual' ) {
 					( $ymc_sort_terms === 'asc' ) ? asort($terms_selected) : arsort($terms_selected);
 				}
 
 	            $show_all = apply_filters('ymc_button_show_all_'.$id.'_'.$c_target, __('All','ymc-smart-filter'));
+	            $all_class_active = ( empty($default_terms) ) ? 'active' : '';
 
-                echo '<li class="filter-item"><a class="filter-link all active" href="#" data-selected="all" data-termid="' . esc_attr($ymc_terms) . '">'. esc_html__($show_all) .'</a></li>';
+                echo '<li class="filter-item"><a class="filter-link all '. $all_class_active .'" href="#" data-selected="all" data-termid="' . esc_attr($ymc_terms) . '">'. esc_html__($show_all) .'</a></li>';
 
                 $arr_taxonomies = [];
                 foreach ($terms_selected as $term) {
@@ -53,103 +55,62 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 	                $result_tax = $arr_taxonomies;
                 }
 
-                foreach ($result_tax as $tax) {
-
+                foreach ($result_tax as $tax)
+				{
 	                $tax_name = apply_filters('ymc_tax_name_'.$id.'_'.$c_target.'_'.$tax, get_taxonomy( $tax )->label);
 
                     echo '<li class="group-filters tax-'.$tax.'">
                           <header class="name-tax">'. esc_html($tax_name) .'</header>
                           <ul class="sub-filters">';
 
-	                $terms_icons = null;
-	                $class_terms_align = null;
-	                $bg_term = null;
-	                $color_term = null;
-	                $class_term = null;
-	                $color_icon = null;
+					// Variables: Options Term
+					$bg_term             = null;
+					$color_term          = null;
+					$class_term          = null;
+					$default_term_active = null;
+					$name_term           = null;
 
-                    foreach ($terms_selected as $term) {
+					// Variables: Options Icon
+					$class_terms_align   = null;
+					$color_icon          = null;
+
+					// Variables: Set Selected Icon
+					$terms_icons         = null;
+
+                    foreach ($terms_selected as $term)
+					{
 
                         if( $tax === get_term( $term )->taxonomy ) {
 
-	                        // Set align icons
-	                        if( !empty($ymc_terms_align) ) {
+	                        // Set Options for Icon
+	                        setOptionsIcon($ymc_terms_align, $term, $class_terms_align, $color_icon);
 
-		                        $flag_terms_align = false;
+	                        // Set Options for Term
+	                        setOptionsTerm($ymc_terms_options,
+		                                   $term,
+		                                $bg_term,
+		                                $color_term,
+		                                $class_term,
+		                                $default_term_active,
+		                                $name_term);
 
-		                        foreach ( $ymc_terms_align as $sub_terms_align ) {
-
-			                        foreach ( $sub_terms_align as $key => $val) {
-
-				                        if ( $key === 'termid' && (int) $term === (int) $val ) {
-					                        $flag_terms_align = true;
-				                        }
-				                        if ( $key === 'alignterm' ) {
-					                        $class_terms_align = $val;
-				                        }
-				                        if ( $key === 'coloricon' ) {
-					                        $color_icon = $val;
-				                        }
-			                        }
-
-			                        if( $flag_terms_align ) {
-				                        break;
-			                        }
-		                        }
-	                        }
-
-	                        // Set options term
-	                        if( !empty($ymc_terms_options) ) {
-
-		                        $flag_terms_option = false;
-
-		                        foreach ( $ymc_terms_options as $terms_opt ) {
-
-			                        foreach ( $terms_opt as $key => $val) {
-
-				                        if ( $key === 'termid' && (int) $term === (int) $val ) {
-					                        $flag_terms_option = true;
-				                        }
-				                        if ( $key === 'bg' && $flag_terms_option ) {
-					                        $bg_term = $val;
-				                        }
-				                        if ( $key === 'color' && $flag_terms_option ) {
-					                        $color_term = $val;
-				                        }
-				                        if ( $key === 'class' && $flag_terms_option ) {
-					                        $class_term = $val;
-				                        }
-			                        }
-
-			                        if( $flag_terms_option ) break;
-		                        }
-	                        }
-
-	                        // Choose icons
-	                        if( !empty($ymc_terms_icons) ) {
-
-		                        foreach ( $ymc_terms_icons as $key => $val ) {
-
-			                        if( (int) $term === (int) $key ) {
-				                        //$terms_icons = '<i class="'. $val .'"></i>';
-				                        $terms_icons = '<i class="'. $val .'" style="color: '. $color_icon .';"></i>';
-				                        break;
-			                        }
-		                        }
-	                        }
+	                        // Selected Icon for Term
+	                        setSelectedIcon($ymc_terms_icons, $term, $terms_icons, $color_icon,);
 
 	                        $bg_term = ( !empty($bg_term) ) ? 'background-color:'.$bg_term.';' : '';
 	                        $color_term = ( !empty($color_term) ) ? 'color:'.$color_term.';' : '';
+	                        $default_term_active = ( $default_term_active === 'checked' ) ? 'active': '';
+	                        $name_term = ( !empty($name_term) ) ? $name_term : get_term( $term )->name;
 
                             echo  "<li class='filter-item'>
                                    <a class='filter-link ".
                                    esc_attr($type_multiple) ." ".
                                    esc_attr($class_terms_align) ." ".
-                                   esc_attr($class_term) . "' style='".
+                                   esc_attr($class_term) . " ". esc_attr($default_term_active) . "' style='".
                                    esc_attr($bg_term) . esc_attr($color_term) ."' href='#' data-selected='" .
                                    esc_attr(get_term( $term )->slug) . "' data-termid='" .
                                    esc_attr($term) . "'>" . $terms_icons .
-                                   '<span class="link-inner">'.esc_html(get_term( $term )->name) .'</span>'."</a></li>";
+                                   '<span class="link-inner">'.esc_html($name_term) .'</span>'."</a></li>";
                         }
 
 	                    $terms_icons = null;

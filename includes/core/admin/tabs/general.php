@@ -156,14 +156,22 @@ $ymc_terms_options   = $variable->get_terms_options( $post->ID );
 							'hide_empty' => false,
 						]);
 
-						if( is_array($terms) ) {
+						if( is_array($terms) )
+						{
 
-							$terms_icons = '';
-							$bg_term = '';
-							$color_term = '';
-							$class_term = '';
-							$color_icon = '';
-							$class_icon = '';
+							// Variables: Options Term
+							$bg_term          = '';
+							$color_term       = '';
+							$class_term       = '';
+							$default_term     = '';
+							$name_term        = '';
+
+							// Variables: Options Icon
+							$color_icon   = '';
+							$class_icon   = '';
+
+							// Variables: Set Selected Icon
+							$terms_icons  = '';
 
 							if( !is_null($term_sort) && $ymc_sort_terms === 'manual' ) {
 								$res_terms = [];
@@ -180,9 +188,9 @@ $ymc_terms_options   = $variable->get_terms_options( $post->ID );
 							echo '<article class="group-term item-'. esc_attr($tax) .'">';
 
 							echo '<div class="item-inner all-categories">
-                          <input name="all-select" class="category-all" id="category-all-'.esc_attr($tax).'" type="checkbox">
-                          <label for="category-all-'.esc_attr($tax).'" class="category-all-label">'. esc_html__('All [ '. get_taxonomy( $tax )->label .']', 'ymc-smart-filter') .'</label>                                                    
-                          </div>';
+                            <input name="all-select" class="category-all" id="category-all-'.esc_attr($tax).'" type="checkbox">
+                            <label for="category-all-'.esc_attr($tax).'" class="category-all-label">'. esc_html__('All [ '. get_taxonomy( $tax )->label .']', 'ymc-smart-filter') .'</label>                                                    
+                            </div>';
 
 							echo '<div class="entry-terms">';
 
@@ -198,7 +206,7 @@ $ymc_terms_options   = $variable->get_terms_options( $post->ID );
 									else{ $sl1 = ''; }
 								}
 
-								// Set align icons
+								// Set Options Icon
 								if( !empty($ymc_terms_align) ) {
 
 									$flag_terms_align = false;
@@ -225,7 +233,7 @@ $ymc_terms_options   = $variable->get_terms_options( $post->ID );
 									}
 								}
 
-								// Set options term
+								// Set Options Term
 								if( !empty($ymc_terms_options) ) {
 
 									$flag_terms_option = false;
@@ -246,13 +254,19 @@ $ymc_terms_options   = $variable->get_terms_options( $post->ID );
 											if ( $key === 'class' && $flag_terms_option ) {
 												$class_term = $val;
 											}
+											if ( $key === 'default' && $flag_terms_option ) {
+												$default_term = $val;
+											}
+											if ( $key === 'name' && $flag_terms_option ) {
+												$name_term = $val;
+											}
 										}
 
 										if( $flag_terms_option ) {break;}
 									}
 								}
 
-								// Choose icons
+								// Set Selected Icon
 								if( !empty($ymc_terms_icons) ) {
 									foreach ( $ymc_terms_icons as $key => $val ) {
 										if( $term->term_id === (int) $key ) {
@@ -267,8 +281,10 @@ $ymc_terms_options   = $variable->get_terms_options( $post->ID );
 
 								$style_bg_term = ( !empty($bg_term) ) ? 'background-color:'.$bg_term.';' : '';
 								$style_color_term = ( !empty($color_term) ) ? 'color:'.$color_term.';' : '';
+								$name_term = ( !empty($name_term) ) ? $name_term : $term->name;
 
-								echo '<div class="item-inner" style="'. esc_attr($style_bg_term) . esc_attr($style_color_term) .'" 
+
+							  echo '<div class="item-inner" style="'. esc_attr($style_bg_term) . esc_attr($style_color_term) .'" 
 			                  data-termid="'. esc_attr($term->term_id) .'" 
 			                  data-alignterm="'. esc_attr($class_terms_align) .'" 
 			                  data-bg-term="'. esc_attr($bg_term) .'" 
@@ -276,16 +292,19 @@ $ymc_terms_options   = $variable->get_terms_options( $post->ID );
 			                  data-custom-class="'. esc_attr($class_term) .'" 
 			                  data-color-icon="'. esc_attr($color_icon) .'"
 			                  data-class-icon="'. esc_attr($class_icon) .'"
-			                  data-status-term="'. esc_attr($sl1) .'">
+			                  data-status-term="'. esc_attr($sl1) .'"  
+			                  data-name-term="'. esc_attr($name_term) .'"  
+			                  data-default-term="'. esc_attr($default_term) .'">
                               <input name="ymc-terms[]" class="category-list" id="category-id-'. esc_attr($term->term_id) .'" type="checkbox" value="'. esc_attr($term->term_id) .'" '. esc_attr($sl1) .'>';
 
-								echo '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">
-							  <span class="name-term">' . esc_html($term->name) .'</span>'. ' ('. esc_attr($term->count) .')</label>						  						  
-							  <i class="far fa-cog choice-icon" title="Setting term"></i><span class="indicator-icon">'. $terms_icons .'</span></div>';
+							  echo '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">
+							  <span class="name-term">' . esc_html($name_term) .'</span>'. ' ('. esc_attr($term->count) .')</label>						  						  
+							  <i class="far fa-cog choice-icon" title="Setting Term"></i><span class="indicator-icon">'. $terms_icons .'</span></div>';
 
 
 								$terms_icons = '';
 								$class_icon = '';
+								$name_term = '';
 
 							endforeach;
 

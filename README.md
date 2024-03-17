@@ -167,6 +167,8 @@ Important! Keep HTML structure with all attributes as in the example below.
         - coloricon - color icon
         - classicon - name class icon (Font Awesome Icons. ex. far fa-arrow-alt-circle-down) 
         - status - term status (checked)
+        - default - (string) default term (checked)
+        - name - (string) custom term name
  * @returns {string} HTML markup card post
  */
 function my_custom_post_layout($layout, $post_id, $filter_id, $increment_post, $arrOptions) {  
@@ -251,6 +253,8 @@ Use, for example, following WordPress functions to get the required data: get_ta
       - coloricon - (string) color icon
       - classicon - (string) name class icon (Font Awesome Icons. ex. far fa-arrow-alt-circle-down) 
       - status - (string) term status (checked)
+      - default - (string) default term (checked)
+      - name - (string) custom term name
  * @returns {string} HTML markup filter bar
  */
 function my_custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target, $options ) { ?>

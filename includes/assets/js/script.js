@@ -756,7 +756,15 @@
             let filter_id = params.filter_id;
             let target_id = params.target_id;
 
-            if( loadingPosts === 'true' ) {
+            if( loadingPosts === 'true' )
+            {
+                // Set Default Terms
+                if( params.default_terms !== '' )
+                {
+                    params.terms = params.default_terms;
+                    el.dataset.params = JSON.stringify(params);
+                }
+
                 // Init Load Posts
                 getFilterPosts({
                     'paged'     : 1,

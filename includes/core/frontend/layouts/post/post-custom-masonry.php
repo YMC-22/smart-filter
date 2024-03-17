@@ -53,6 +53,8 @@ while ($query->have_posts()) : $query->the_post();
 	- coloricon - color icon
 	- classicon - name class icon (Font Awesome Icons. ex. far fa-arrow-alt-circle-down)
 	- status - term status (checked)
+	- default - (string) default term (checked)
+	- name - (string) custom term name
 	 * @returns {string} HTML markup card post
 	 */
 

@@ -286,7 +286,7 @@ $font-size: 16;
 											position: relative;
 											margin-bottom: 7px;
 											border: 1px solid #dcdcde;
-											padding: 10px 40px 10px 10px;
+											padding: 10px 50px 10px 10px;
 											cursor: move;
 											transition: .3s;
 											&.all-categories {
@@ -309,6 +309,19 @@ $font-size: 16;
 											}
 											&:hover {
 												background: #e1e1e1;
+											}
+											&[data-default-term="checked"] {
+												&:after {
+													content: '';
+													position: absolute;
+													width: 16px;
+													height: 16px;
+													right: 32px;
+													top: 12px;
+													display: block;
+													background: url("../images/checked.png") no-repeat center/contain;
+													z-index: 3;
+												}
 											}
 										}
 									}
@@ -437,7 +450,8 @@ $font-size: 16;
 								}
 
 								input[type="checkbox"] {
-									margin: 0 5px 0 0;
+									float: left;
+									margin: 0 7px 0 0;
 									border-radius: 0;
 									border: 1px solid #999;
 									&:checked {
@@ -469,7 +483,6 @@ $font-size: 16;
 								label {
 									font-weight: 400;
 									font-size: 13px;
-									margin-right: 5px;
 									&:last-child {
 										margin-right: 0;
 									}
@@ -634,7 +647,7 @@ $font-size: 16;
 						}
 						.choice-icon {
 							position: absolute;
-							right: 20px;
+							right: 12px;
 							cursor: pointer;
 							top: 13px;
 							font-size: 16px;
@@ -681,6 +694,16 @@ $font-size: 16;
 						}
 						#ymc-cpt-select {
 							height: 100px;
+							&::-webkit-scrollbar {
+								width: 5px;
+							}
+							&::-webkit-scrollbar-thumb {
+								border-radius: 10px;
+								background: #8e8e8e;
+							}
+							&::-webkit-scrollbar-track {
+								border-radius: 5px;
+							}
 							option:checked {
 								background-color: rgba(9, 138, 184, 0.5);
 							}
@@ -844,7 +867,7 @@ $font-size: 16;
 
 					#tools {
 						.ymc-btn-ei {
-							font-family: "Poppins";
+							font-family: "Poppins", sans-serif;
 							padding: 7px 15px;
 							font-size: 14px;
 							font-weight: 300;
@@ -890,7 +913,7 @@ $font-size: 16;
 
 						input[type=file] {
 							padding: 0;
-							font-family: "Poppins";
+							font-family: "Poppins", sans-serif;
 						}
 
 						input[type=file]::file-selector-button {
@@ -1249,19 +1272,36 @@ $font-size: 16;
 			border: 1px solid #ccc;
 			padding: 15px;
 			display: flex;
+			flex-wrap: wrap;
 			margin-bottom: 20px;
+			background-color: #f6f6f6;
 			.form-element {
-				width: 23%;
-				margin-right: 20px;
-				flex-grow: 1;
-				&:last-of-type {
+				width: 31%;
+				margin-right: 3%;
+				margin-bottom: 20px;
+				&:nth-child(3n+3) {
 					margin-right: 0;
 				}
 				input {
-					border: 1px solid #e0e4e9;
+					border: 1px solid #ababab;
 					height: 35px;
 					border-radius: 0;
 					width: 100%;
+				}
+				input[type="checkbox"] {
+					width: 25px;
+					height: 25px;
+					position: relative;
+					&:checked::before {
+						content: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M14.83%204.89l1.34.94-5.81%208.38H9.02L5.78%209.67l1.34-1.25%202.57%202.4z%27%20fill%3D%27%233582c4%27%2F%3E%3C%2Fsvg%3E");
+						position: absolute;
+						left: 50%;
+						top: 50%;
+						transform: translate(-50%, -50%);
+						width: 100%;
+						height: 100%;
+						margin: 0;
+					}
 				}
 			}
 		}
