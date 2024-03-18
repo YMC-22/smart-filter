@@ -55,7 +55,7 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
                 foreach ($terms_selected as $term)
 				{
 					// Set Options for Icon
-	                setOptionsIcon($ymc_terms_align, $term, $class_terms_align, $color_icon);
+	                setOptionsIcon( $ymc_terms_align, $term, $class_terms_align, $color_icon );
 
 	                // Set Options Term
 	                setOptionsTerm( $ymc_terms_options,

@@ -82,16 +82,16 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
                         if( $tax === get_term( $term )->taxonomy )
 						{
 	                        // Set Options for Icon
-	                        setOptionsIcon($ymc_terms_align, $term, $class_terms_align, $color_icon);
+	                        setOptionsIcon( $ymc_terms_align, $term, $class_terms_align, $color_icon );
 
 	                        // Set Options for Term
-	                        setOptionsTerm($ymc_terms_options,
+	                        setOptionsTerm( $ymc_terms_options,
 		                                   $term,
 		                                $bg_term,
 		                                $color_term,
 		                                $class_term,
 		                                $default_term_active,
-		                                $name_term);
+		                                $name_term );
 
 	                        // Selected Icon for Term
 	                        setSelectedIcon( $ymc_terms_icons, $term, $terms_icons, $color_icon );
