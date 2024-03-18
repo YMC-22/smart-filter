@@ -115,7 +115,7 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 									$name_term);
 
 						// Selected Icon for Term
-						setSelectedIcon($ymc_terms_icons, $term, $terms_icons, $color_icon,);
+						setSelectedIcon( $ymc_terms_icons, $term, $terms_icons, $color_icon );
 
 	                    $bg_term = ( !empty($bg_term) ) ? 'background-color:'.$bg_term.';' : '';
 	                    $color_term = ( !empty($color_term) ) ? 'color:'.$color_term.';' : '';
