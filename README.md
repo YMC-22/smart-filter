@@ -134,6 +134,24 @@ add_action("ymc_before_filter_layout_FilterID_LayoutID");
 add_action("ymc_after_filter_layout_FilterID_LayoutID");
 ```
 
+### Shortcodes
+**The plugin provides a list of shortcodes to display different components of the plugin. This allows you to separately place plugin components in different places on the page without being tied to the current grid of posts, which makes the plugin more flexible and compact.**
+
+**The plugin has the following shortcodes:**
+
+#### `[ymc_extra_filter id="545"]`
+
+**Shortcode for displaying the "Filter" component. It includes all standard plugin layouts (Default Filter, Grouped Filter, Dropdown Filter, Sidebar Filter, Alphabetical Navigation). To select the filter layout type use: Advanced -> Extra Filter Layout**
+
+#### `[ymc_extra_search id='545']`
+
+**Shortcode for displaying the "Search" component.**
+
+#### `[ymc_extra_sort id='545']`
+
+**Shortcode for displaying the "Sorting" component.**
+
+
 ### Layouts
 **This filter allows you to change the post template**
 ```php
