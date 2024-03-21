@@ -135,7 +135,7 @@ add_action("ymc_after_filter_layout_FilterID_LayoutID");
 ```
 
 ### Shortcodes
-**The plugin provides a list of shortcodes to display different components of the plugin. This allows you to separately place plugin components in different places on the page without being tied to the current grid of posts, which makes the plugin more flexible and compact.**
+**The plugin provides a list of shortcodes to display different components of the plugin. This allows you to separately place plugin components in different places on the page without being tied to the current grid of posts, which makes the plugin more flexible and compact. The entire list of shortcodes can be found in the Shortcodes section.**
 
 **The plugin has the following shortcodes:**
 
