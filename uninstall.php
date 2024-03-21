@@ -74,7 +74,8 @@ $wpdb->get_results('DELETE FROM wp_postmeta WHERE meta_key IN (
                                   "ymc_tablet_md",
                                   "ymc_tablet_sm",
                                   "ymc_mobile_xs",                                           
-                                  "ymc_suppress_filters"                                         
+                                  "ymc_suppress_filters",                                         
+                                  "ymc_filter_extra_layout"                                         
                                 )');
 
 

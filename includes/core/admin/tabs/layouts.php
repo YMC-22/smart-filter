@@ -54,7 +54,7 @@ $ymc_mobile_xs = $variable->get_post_mobile_xs( $post->ID );
 
             <div class="manage-filters__section">
                 <header class="sub-header">
-                    <i class="far fa-filter"></i>
+                    <span class="dashicons dashicons-layout"></span>
                     <?php echo esc_html__('Filter layout', 'ymc-smart-filter'); ?>
                 </header>
             </div>

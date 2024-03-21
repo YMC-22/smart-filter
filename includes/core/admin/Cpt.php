@@ -44,7 +44,10 @@ class Cpt {
 			$columns = array(
 				'cb' => '&lt;input type="checkbox" />',
 				'title' => __( 'Title','ymc-smart-filter' ),
-				'shortcode' => __( 'Shortcode', 'ymc-smart-filter' ),
+				'shortcode' => __( 'Shortcode Grid Posts', 'ymc-smart-filter' ),
+				//'extra_filter' => __( 'Shortcode Extra Filter', 'ymc-smart-filter' ),
+				//'extra_search' => __( 'Shortcode Extra Search', 'ymc-smart-filter' ),
+				//'extra_sort' => __( 'Shortcode Extra Sort', 'ymc-smart-filter' ),
 				'id' => __( 'ID', 'ymc-smart-filter' ),
 				'date' => __( 'Date', 'ymc-smart-filter' )
 			);
@@ -58,6 +61,18 @@ class Cpt {
 
 				case 'shortcode' :
 					echo '<input type="text" onclick="this.select();" value="[ymc_filter id=&quot;'.$post_id.'&quot;]" readonly="">';
+					break;
+
+				case 'extra_filter' :
+					echo '<input type="text" onclick="this.select();" value="[ymc_extra_filter id=&quot;'.$post_id.'&quot;]" readonly="">';
+					break;
+
+				case 'extra_search' :
+					echo '<input type="text" onclick="this.select();" value="[ymc_extra_search id=&quot;'.$post_id.'&quot;]" readonly="">';
+					break;
+
+				case 'extra_sort' :
+					echo '<input type="text" onclick="this.select();" value="[ymc_extra_sort id=&quot;'.$post_id.'&quot;]" readonly="">';
 					break;
 
 				case 'id' :

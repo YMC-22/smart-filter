@@ -112,13 +112,15 @@ $font-size: 16;
 	100% { transform: translateX(0%); }
 }
 
-.ymc-smart-filter-container {
+.ymc-smart-filter-container,
+.ymc-extra-filter,
+.ymc-extra-search,
+.ymc-extra-sort {
 	font-family: inherit;
 	font-weight: inherit;
 	box-sizing: border-box;
-	min-height: 200px;
 	position: relative;
-	max-width: 1200px;
+	max-width: 1280px;
 	width: 100%;
 	margin: 0 auto;
 

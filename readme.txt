@@ -1,12 +1,12 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.8.17
+Version: 2.8.18
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
-Tags: filter, grids, ajax posts, search, posts
+Tags: filter, grid, ajax, search, sort
 Requires at least: 4.8
 Tested up to: 6.4
-Stable tag: 2.8.17
+Stable tag: 2.8.18
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -26,6 +26,7 @@ The plugin provides the following functionality:
 - Sorting taxonomies and terms.
 - Installation of different types of pagination (Numeric, Load more, Scroll infinity).
 - Choice of different templates for filters and post cards.
+- Separating components (Filter Layout, Search Bar, Sort Panel): using shortcodes anywhere on the page.
 - Sorting posts on the frontend.
 - Manual sorting of terms.
 - Creating custom queries (WP Query)
@@ -228,6 +229,9 @@ Added options suppress_filters to WP_Query
 Fixed JS
 = 2.8.15 =
 Added Default Term
+= 2.8.18 =
+Added shortcodes for displaying components: Filter, Search and Sort.
+
 
 == Video ==
 https://www.youtube.com/watch?v=FIBNE0Ix6Vg

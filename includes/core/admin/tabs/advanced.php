@@ -12,6 +12,7 @@ $ymc_query_type = $variable->get_ymc_query_type( $post->ID );
 $ymc_query_type_custom = $variable->get_ymc_query_type_custom( $post->ID );
 $ymc_query_type_callback = $variable->get_ymc_query_type_callback( $post->ID );
 $ymc_suppress_filters = $variable->get_ymc_suppress_filters( $post->ID );
+$ymc_filter_extra_layout = $variable->get_filter_extra_layout( $post->ID );
 
 ?>
 
@@ -126,6 +127,49 @@ $ymc_suppress_filters = $variable->get_ymc_suppress_filters( $post->ID );
 
     </div>
 
+
+</div>
+
+<div class="content" style="margin-bottom: 40px;">
+
+    <header class="sub-header">
+        <span class="dashicons dashicons-layout"></span>
+        <?php echo esc_html__('Extra Filter', 'ymc-smart-filter'); ?>
+    </header>
+
+    <div class="from-element">
+
+        <label class="form-label">
+            <?php echo esc_html__('Select Extra Filter Layout', 'ymc-smart-filter');?>
+            <span class="information">
+                    <?php echo esc_html__('Select design extra layout of filters. This filter will be located outside the current post grid filter anywhere on the page', 'ymc-smart-filter');?>
+                </span>
+        </label>
+
+        <select class="form-select" id="ymc-filter-extra-layout" name="ymc-filter-extra-layout">
+
+        <?php
+            $filter_layouts = apply_filters('ymc_filter_layouts', $layouts=[]);
+
+            if( $filter_layouts ) :
+
+                foreach ($filter_layouts as $key => $layout) :
+
+                    if( $key !== 'filter-custom-layout' )
+                    {
+                        $selected = ( $ymc_filter_extra_layout === $key ) ? 'selected' : '';
+
+                        echo '<option value="' . esc_attr($key) . '" ' . esc_attr($selected) . '>' . esc_html__($layout, 'ymc-smart-filter') . '</option>';
+                    }
+
+                endforeach;
+
+            endif;
+        ?>
+
+        </select>
+
+    </div>
 
 </div>
 

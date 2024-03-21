@@ -6,6 +6,11 @@
 
 <div class="content">
 
+    <header class="sub-header">
+        <i class="dashicons dashicons-shortcode"></i>
+		<?php echo esc_html__('Shortcode for Grid Posts', 'ymc-smart-filter'); ?>
+    </header>
+
     <div class="form-group">
         <label for="ymc-shortcode" class="form-label">
 			<?php echo esc_html__('Shortcode For Page / Post','ymc-smart-filter'); ?>
@@ -28,6 +33,49 @@
 		<?php $sh_code = "&lt;?php echo do_shortcode('[ymc_filter id=&quot;". esc_attr($post->ID) ."&quot;]'); ?&gt;"; ?>
         <input type="text" readonly value="<?php echo esc_attr($sh_code); ?>" onfocus="this.select()" class="random-shortcode">
     </div>
+
+    <header class="sub-header">
+        <i class="dashicons dashicons-shortcode"></i>
+		<?php echo esc_html__('Shortcode Extra Components', 'ymc-smart-filter'); ?>
+    </header>
+
+    <div class="form-group">
+        <label for="ymc-shortcode" class="form-label">
+            <?php echo esc_html__('Shortcode Extra Filter','ymc-smart-filter'); ?>
+            <span class="information">
+            <?php echo esc_html__('Place shortcode filter posts anywhere on your page to filter posts in a grid.','ymc-smart-filter'); ?>
+            </span>
+        </label>
+
+        <input type="text" readonly value="[ymc_extra_filter id='<?php echo esc_attr($post->ID); ?>']" onfocus="this.select()" class="random-shortcode">
+    </div>
+
+    <div class="form-group">
+        <label for="ymc-shortcode" class="form-label">
+            <?php echo esc_html__('Shortcode Extra Search','ymc-smart-filter'); ?>
+            <span class="information">
+            <?php echo esc_html__('Place shortcode search posts anywhere on your page to filter posts in a grid.','ymc-smart-filter'); ?>
+            </span>
+        </label>
+
+        <input type="text" readonly value="[ymc_extra_search id='<?php echo esc_attr($post->ID); ?>']" onfocus="this.select()" class="random-shortcode">
+    </div>
+
+    <div class="form-group">
+        <label for="ymc-shortcode" class="form-label">
+            <?php echo esc_html__('Shortcode Extra Sort','ymc-smart-filter'); ?>
+            <span class="information">
+            <?php echo esc_html__('Place shortcode sort posts anywhere on your page to filter posts in a grid.','ymc-smart-filter'); ?>
+            </span>
+        </label>
+
+        <input type="text" readonly value="[ymc_extra_sort id='<?php echo esc_attr($post->ID); ?>']" onfocus="this.select()" class="random-shortcode">
+    </div>
+
+    <header class="sub-header">
+        <i class="dashicons dashicons-location"></i>
+		<?php echo esc_html__('Filters Location ', 'ymc-smart-filter'); ?>
+    </header>
 
     <div class="form-group">
         <label for="ymc-shortcode" class="form-label">

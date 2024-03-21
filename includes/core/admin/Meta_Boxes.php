@@ -89,11 +89,16 @@ class Meta_Boxes {
 			update_post_meta( $post_id, 'ymc_sort_status', $sort_status );
 		}
 
-
 		// Filter Layout
 		if ( isset($_POST['ymc-filter-layout']) ) {
 			$filter_layout = sanitize_text_field($_POST['ymc-filter-layout']);
 			update_post_meta($post_id, 'ymc_filter_layout', $filter_layout);
+		}
+
+        // Filter Extra Layout
+		if ( isset($_POST['ymc-filter-extra-layout']) ) {
+			$filter_extra_layout = sanitize_text_field($_POST['ymc-filter-extra-layout']);
+			update_post_meta($post_id, 'ymc_filter_extra_layout', $filter_extra_layout);
 		}
 
 		// Filter Text Color

@@ -15,12 +15,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Shortcode {
 
-	public function __construct() {
-
+	public function __construct()
+	{
 		add_shortcode("ymc_filter", array($this, "ymc_filter_apply"));
+		add_shortcode("ymc_extra_filter", array($this, "ymc_extra_filter"));
+		add_shortcode("ymc_extra_search", array($this, "ymc_extra_search"));
+		add_shortcode("ymc_extra_sort", array($this, "ymc_extra_sort"));
 	}
 
-	public function ymc_filter_apply( $atts ) {
+	/**
+	 * @param $atts
+	 * Display Grid Posts with Filter
+	 *
+	 * @return string
+	 */
+	public function ymc_filter_apply( $atts )
+	{
 
 		ob_start();
 
@@ -168,6 +178,184 @@ class Shortcode {
 
 		$output .= ob_get_contents();
 		ob_end_clean();
+
+		$c_target++;
+
+		return $output;
+
+	}
+
+	/**
+	 * @param $atts
+	 * Display Extra Filter Layout in external place page
+	 *
+	 * @return string
+	 */
+	public function ymc_extra_filter( $atts )
+	{
+
+		$atts = shortcode_atts( [
+			'id' => '',
+		], $atts );
+
+		$output = '';
+
+		$id = $atts['id'];
+
+		static $c_target = 1;
+
+		$post_status = get_post_status($id);
+
+		$ymc_post_type = get_post_type($id);
+
+		$handle_filter = 'filter-inline-css-' . $c_target;
+		$handle_post   = 'post-inline-css-' .  $c_target;
+
+		require YMC_SMART_FILTER_DIR . '/includes/core/util/variables.php';
+		require YMC_SMART_FILTER_DIR . '/includes/core/util/helper.php';
+
+		if ( !empty($id) && $ymc_post_type === 'ymc_filters' && $post_status === 'publish' )
+		{
+			ob_start();
+
+			// Replace Layout
+			$ymc_filter_layout = $ymc_filter_extra_layout;
+
+			echo '<div id="ymc-extra-filter-'. esc_attr($c_target) .'" data-extra-filter-id="'. esc_attr($id) .'" class="ymc-extra-filter ymc-'. esc_attr($ymc_filter_layout) .' ymc-'. esc_attr($ymc_filter_layout) .'-'.esc_attr($id).' ymc-'. esc_attr($ymc_filter_layout) .'-'.esc_attr($id).'-'.esc_attr($c_target).'">';
+
+			if ( $ymc_filter_layout )
+			{
+				$filepath_filter = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/filter/" . $ymc_filter_layout . ".php";
+
+				if ( file_exists($filepath_filter) )
+				{
+					require $filepath_filter;
+				}
+			}
+
+			echo "</div>";
+
+			$output .= ob_get_contents();
+			ob_end_clean();
+		}
+		else
+		{
+			echo '<div class="ymc-extra-filter">
+				  <div class="notice">' . esc_html__('ID parameter is missing or invalid.', 'ymc-smart-filter') .'</div></div>';
+		}
+
+		$c_target++;
+
+		return $output;
+
+	}
+
+
+	/**
+	 * @param $atts
+	 * Display Extra Search in external place page
+	 *
+	 * @return string
+	 */
+	public function ymc_extra_search( $atts )
+	{
+		$atts = shortcode_atts( [
+			'id' => '',
+		], $atts );
+
+		$output = '';
+
+		$id = $atts['id'];
+
+		static $c_target = 1;
+
+		$post_status = get_post_status($id);
+
+		$ymc_post_type = get_post_type($id);
+
+		require YMC_SMART_FILTER_DIR . '/includes/core/util/variables.php';
+		require YMC_SMART_FILTER_DIR . '/includes/core/util/helper.php';
+
+		if ( !empty($id) && $ymc_post_type === 'ymc_filters' && $post_status === 'publish' )
+		{
+			ob_start();
+
+			echo '<div id="ymc-extra-search-'. esc_attr($c_target) .'" data-extra-search-id="'. esc_attr($id) .'" class="ymc-extra-search ymc-extra-search-'. esc_attr($id) .'  ymc-extra-search-'. esc_attr($id) .'-'. esc_attr($c_target).'">';
+
+			$filepath_search = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/search/search-layout.php";
+
+			if ( file_exists($filepath_search) )
+			{
+				require $filepath_search;
+			}
+
+			echo "</div>";
+
+			$output .= ob_get_contents();
+			ob_end_clean();
+
+		}
+		else
+		{
+			echo '<div class="ymc-extra-filter">
+				  <div class="notice">' . esc_html__('ID parameter is missing or invalid.', 'ymc-smart-filter') .'</div></div>';
+		}
+
+		$c_target++;
+
+		return $output;
+	}
+
+	/**
+	 * @param $atts
+	 * Display Extra Sort in external place page
+	 *
+	 * @return string
+	 */
+
+	public function ymc_extra_sort( $atts )
+	{
+
+		$atts = shortcode_atts( [
+			'id' => '',
+		], $atts );
+
+		$output = '';
+
+		$id = $atts['id'];
+
+		static $c_target = 1;
+
+		$post_status = get_post_status($id);
+
+		$ymc_post_type = get_post_type($id);
+
+		require YMC_SMART_FILTER_DIR . '/includes/core/util/variables.php';
+		require YMC_SMART_FILTER_DIR . '/includes/core/util/helper.php';
+
+		if ( !empty($id) && $ymc_post_type === 'ymc_filters' && $post_status === 'publish' )
+		{
+			ob_start();
+
+			echo '<div id="ymc-extra-sort-'. esc_attr($c_target) .'" data-extra-sort-id="'. esc_attr($id) .'" class="ymc-extra-sort ymc-extra-sort-'. esc_attr($id) .' ymc-extra-sort-'. esc_attr($id) .'-'. esc_attr($c_target).'">';
+
+			$filepath_sort = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/sort/sort-posts.php";
+
+			if ( file_exists($filepath_sort) )
+			{
+				require $filepath_sort;
+			}
+
+			echo "</div>";
+
+			$output .= ob_get_contents();
+			ob_end_clean();
+		}
+		else
+		{
+			echo '<div class="ymc-extra-filter">
+				  <div class="notice">' . esc_html__('ID parameter is missing or invalid.', 'ymc-smart-filter') .'</div></div>';
+		}
 
 		$c_target++;
 

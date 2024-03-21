@@ -55,6 +55,8 @@ class Variables {
 
 	public $filter_layout = 'filter-layout1';
 
+	public $filter_extra_layout = 'filter-layout1';
+
 	public $filter_text_color = '';
 
 	public $filter_bg_color = '';
@@ -329,6 +331,15 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_filter_layout', true );
 		}
 		return $this->filter_layout;
+	}
+
+
+	public function get_filter_extra_layout( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_filter_extra_layout' ) ) {
+			return get_post_meta( $post_id, 'ymc_filter_extra_layout', true );
+		}
+		return $this->filter_extra_layout;
 	}
 
 

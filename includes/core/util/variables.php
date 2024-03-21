@@ -10,6 +10,7 @@ $ymc_tax           = $variable->tax;
 $ymc_terms         = '';
 $ymc_post_layout   = $variable->get_post_layout( $id );
 $ymc_filter_layout = $variable->get_filter_layout( $id );
+$ymc_filter_extra_layout = $variable->get_filter_extra_layout( $id );
 $tax_selected      = $variable->get_tax_sel( $id );
 $terms_selected    = $variable->get_terms_sel( $id );
 $ymc_exclude_posts = $variable->get_exclude_posts( $id );
