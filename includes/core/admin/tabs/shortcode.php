@@ -74,7 +74,7 @@
 
     <header class="sub-header">
         <i class="dashicons dashicons-location"></i>
-		<?php echo esc_html__('Filters Location ', 'ymc-smart-filter'); ?>
+		<?php echo esc_html__('Filter Location ', 'ymc-smart-filter'); ?>
     </header>
 
     <div class="form-group">
