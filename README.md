@@ -141,7 +141,7 @@ add_action("ymc_after_filter_layout_FilterID_LayoutID");
 
 #### `[ymc_extra_filter id="545"]`
 
-**Shortcode for displaying the "Filter" component. It includes all standard plugin layouts (Default Filter, Grouped Filter, Dropdown Filter, Sidebar Filter, Alphabetical Navigation). To select the filter layout type use: Advanced -> Extra Filter Layout**
+**Shortcode for displaying the "Filter" component. It includes all standard plugin layouts (Default Filter, Grouped Filter, Dropdown Filter, Sidebar Filter, Alphabetical Navigation, Custom Filter Extra Layout). To select the filter layout type use: Advanced  ->  Extra Filter Layout**
 
 #### `[ymc_extra_search id='545']`
 

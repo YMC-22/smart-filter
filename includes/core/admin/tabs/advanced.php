@@ -142,7 +142,11 @@ $ymc_filter_extra_layout = $variable->get_filter_extra_layout( $post->ID );
         <label class="form-label">
             <?php echo esc_html__('Select Extra Filter Layout', 'ymc-smart-filter');?>
             <span class="information">
-                    <?php echo esc_html__('Select design extra layout of filters. This filter will be located outside the current post grid filter anywhere on the page', 'ymc-smart-filter');?>
+                    <?php _e('Select extra layout of filters. 
+                    This filter will be located outside the current post grid filter anywhere on the page
+                    <a href="https://github.com/YMC-22/smart-filter#shortcodes" target="_blank">
+                    view docs <img draggable="false" role="img" class="emoji" alt="↗" src="https://s.w.org/images/core/emoji/14.0.0/svg/2197.svg"></a>
+                    ', 'ymc-smart-filter');?>
                 </span>
         </label>
 
