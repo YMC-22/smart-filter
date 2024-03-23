@@ -69,14 +69,20 @@ $ymc_mobile_xs = $variable->get_post_mobile_xs( $post->ID );
                 <select class="form-select" id="ymc-filter-layout" name="ymc-filter-layout">
 		            <?php
                         $filter_layouts = apply_filters('ymc_filter_layouts', $layouts=[]);
+
                         if( $filter_layouts ) :
+
                             foreach ($filter_layouts as $key => $layout) :
 
-                                $selected = ( $ymc_filter_layout === $key ) ? 'selected' : '';
+                                if( $key !== 'filter-custom-extra-layout' )
+                                {
+                                    $selected = ( $ymc_filter_layout === $key ) ? 'selected' : '';
 
-                                echo '<option value="' . esc_attr($key) . '" ' . esc_attr($selected) . '>' . esc_html__($layout, 'ymc-smart-filter') . '</option>';
+                                    echo '<option value="' . esc_attr($key) . '" ' . esc_attr($selected) . '>' . esc_html__($layout, 'ymc-smart-filter') . '</option>';
+                                }
 
                             endforeach;
+
                         endif;
 		            ?>
                 </select>

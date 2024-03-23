@@ -232,17 +232,18 @@ It will be possible to insert any content in the place you need (before or after
 add_action( 'ymc_after_custom_layout_545_1', 'ymc_after_custom_layout', 10, 2 ); 
 ```
 
-**This filter allows you to change the filter template**
+**This filter allows you to change the Filter Custom Layout**
 ```php
 add_filter('ymc_filter_custom_layout_FilterID_LayoutID', 'custom_filter_layout', 10, 6);
 ```
-If you need to create your custom filter bar, you can use the filter which will allow you to create your filter bar. This requires a basic understanding of HTML JavaScript, CSS and PHP languages. In the example, it is indicated how you can use the settings and output of a custom filter. ***For your filter to work correctly, follow the following class and attribute names in your HTML markup:***
+If you need to create your custom filter bar, you can use the filter which will allow you to create your filter bar. In the example, it is indicated how you can use the settings and output of a custom filter. 
+***For your filter to work correctly, follow the following class and attribute names in your HTML markup:***
 
 Important! Keep HTML structure with all attributes as in the example below.
-Use, for example, following WordPress functions to get the required data: get_taxonomy(), get_term().
+Use, for example, following WordPress functions to get the required data: get_taxonomy(), get_term() and etc.
 
 **Required ID:**
-- `FilterID & LayoutID (Number)`
+- `FilterID & LayoutID - Filter ID and Filter Counter`
 
 **Required Classes:**
 - `all`
@@ -252,11 +253,12 @@ Use, for example, following WordPress functions to get the required data: get_ta
 - `data-selected`
 - `data-termid`
 
-**Example Custom Filter Layout**
 ```php
+// Usage example:
+
 /**
- * Creating a custom filter template
- * @param {string} layout - HTML markup
+ * Creating a Custom Filter Layout
+ * @param {string} layout - HTML markup filter
  * @param {array} terms - list ids terms
  * @param {array} taxonomy - list sorted slugs taxonomies
  * @param {int} multiple - multiple or single selection of posts (0/1)
@@ -275,14 +277,17 @@ Use, for example, following WordPress functions to get the required data: get_ta
       - name - (string) custom term name
  * @returns {string} HTML markup filter bar
  */
+ 
 function my_custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target, $options ) { ?>
 
 <script>   
-   window.addEventListener('DOMContentLoaded', () => {
+   window.addEventListener('DOMContentLoaded', () => {   
          let _target = "<?php echo $target; ?>";
-         document.querySelectorAll( _target + ' .filter-custom-layout [data-termid]' ).forEach((el) => {
+         
+         document.querySelectorAll( _target + ' [data-termid]' ).forEach((el) => {         
                el.addEventListener('click', function (e) {
                e.preventDefault();
+               
                let ymc = YMCTools({
                    target: _target,
                    self: this
@@ -295,11 +300,11 @@ function my_custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target
 </script>
    
 <?php
-  if( count($terms) ) {
+  if( !empty($terms) ) {
   
       $multiple = ( $multiple ) ? 'multiple' : '';
       $terms_list = implode(",", $terms);
-      $layout = '<ul>';
+      $layout  = '<ul>';
       $layout .= '<li><a class="all active" href="#" data-selected="all" data-termid="'. esc_attr($terms_list) .'">'.esc_html__('ALL','theme').'</a></li>';
     
     foreach ($taxonomy as $tax) {
@@ -310,6 +315,8 @@ function my_custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target
       if( $tax === get_term( $term )->taxonomy ) {      
         $class_icon = '';
         $color_icon = '';
+        
+        // Optional
         foreach ( $options as $obj ) {
             if( $obj->termid === $term ) {
                   $class_icon = $obj->classicon;
@@ -331,6 +338,89 @@ function my_custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target
 
 add_filter('ymc_filter_custom_layout_545_1', 'my_custom_filter_layout', 10, 6);
 ```
+
+**This filter allows you to change the Extra Filter Custom Layout**
+```php
+add_filter('ymc_filter_custom_extra_layout_FilterID_LayoutID', 'custom_extra_filter_layout', 10, 6);
+```
+This filter allows you to change the layout of an extra filter outside of the main filter. All parameters for extra filter are the same as for the custom filter layout.
+
+```php
+
+// Usage example:
+
+function custom_filter_extra_layout( $layout, $terms, $taxonomy, $multiple, $target, $options ) { ?>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+        
+            let extraFilter = "<?php echo $target; ?>";
+            let extraFilterCounter = document.querySelector(extraFilter).dataset.extraFilterCounter;
+            let _target = `.data-target-ymc${extraFilterCounter}`;
+
+            document.querySelectorAll( extraFilter + ' [data-termid]' ).forEach((el) => {            
+                el.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    let ymc = YMCTools({
+                        target: _target,
+                        self: this
+                    });
+                    ymc.updateParams();
+                    ymc.getFilterPosts();
+                });
+            });
+        });
+
+    </script>
+
+	<?php
+
+	if( !empty($terms) ) {
+		$multiple = ( $multiple ) ? 'multiple' : '';
+		$terms_list = implode(",", $terms);
+
+		$layout = '<ul>';
+		$layout .= '<li><a class="all active" href="#" data-selected="all" data-termid="'. esc_attr($terms_list) .'">'.esc_html__('ALL','theme').'</a></li>';
+
+		foreach ($taxonomy as $tax) {
+			$layout .= '<li>';
+			$layout .= '<header>'.get_taxonomy( $tax )->label.'</header>';
+			$layout .= '<ul>';
+
+			foreach ( $terms as $term ) {
+				if( $tax === get_term( $term )->taxonomy ) {
+				$class_icon = '';
+				$color_icon = '';
+				
+				// Optional               
+				foreach ( $options as $obj ) {
+				    if( $obj->termid === $term ) {
+				        $class_icon = $obj->classicon;
+				        $color_icon = $obj->coloricon;
+				        break;
+				    }
+			    }
+			$layout .= '<li><a class="'. $multiple .'" href="#" data-selected="'. esc_attr(get_term($term)->slug).'" data-termid="'.esc_attr($term).'">' .
+			           '<i class="'. esc_attr($class_icon) . '" style="color: '. esc_attr($color_icon) .';"></i>' . esc_html(get_term($term)->name).'</a></li>';
+				}
+			}
+			$layout .= '</ul>';
+			$layout .= '</li>';
+		}
+
+		$layout .= '</ul>';
+	}
+
+	return $layout;
+}
+
+add_filter('ymc_filter_custom_extra_layout_545_1', 'custom_filter_extra_layout', 10, 6);
+
+```
+
+
+
 
 **This filter allows you to change the popup custom layout**
 ```php

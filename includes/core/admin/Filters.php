@@ -27,7 +27,8 @@ class Filters {
 			"filter-layout3" => __('Dropdown Filter','ymc-smart-filter'),
 			"filter-layout4" => __('Sidebar Filter','ymc-smart-filter'),
 			"alphabetical-layout" => __('Alphabetical Navigation','ymc-smart-filter'),
-			"filter-custom-layout" => __('Custom Filter Layout','ymc-smart-filter')
+			"filter-custom-layout" => __('Custom Filter Layout','ymc-smart-filter'),
+			"filter-custom-extra-layout" => __('Custom Filter Extra Layout','ymc-smart-filter')
 		];
 
 		return $layout;

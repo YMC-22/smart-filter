@@ -1,4 +1,4 @@
-<?php // Custom Filter Layout
+<?php // Custom Extra Filter Layout
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -9,15 +9,13 @@ $term_settings = arrayToObject( generalArrayMerging( $ymc_terms_options, $ymc_te
 
 ?>
 
-<div id="<?php echo esc_attr($ymc_filter_layout) . esc_attr($c_target); ?>" class="filter-layout <?php echo esc_attr($ymc_filter_layout); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?>-<?php echo $c_target; ?> ">
+<div id="<?php echo esc_attr($ymc_filter_layout) .'-'. esc_attr($c_target); ?>" class="filter-layout <?php echo esc_attr($ymc_filter_layout); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?>-<?php echo $c_target; ?> ">
 
 	<?php
 
-        do_action("ymc_before_filter_layout_".$id.'_'.$c_target."");
-
         if ( is_array($terms_selected) && is_array($tax_selected) ) {
 
-            $target = '.data-target-ymc'.$c_target;
+            $target = '.ymc-extra-filter-' . $c_target;
             $multiple = (int) $ymc_multiple_filter;
 
             if( !is_null($tax_sort) && is_array($tax_sort) ) {
@@ -45,11 +43,11 @@ $term_settings = arrayToObject( generalArrayMerging( $ymc_terms_options, $ymc_te
 		        $result_terms = $terms_selected;
 	        }
 
-            $layout  = '<div class="cf-wrp"><header class="head-filter">'.esc_html__('Add Custom Filter Layout.','ymc-smart-filter').'</header>';
+            $layout  = '<div class="cf-wrp"><header class="head-filter">'.esc_html__('Add Custom Extra Filter Layout.','ymc-smart-filter').'</header>';
 			$layout .= '<div class="inform">'. esc_html__('Use a filter:','ymc-smart-filter') .' 
-                        <span class="doc-text">ymc_filter_custom_layout_'.$id.'_'.$c_target.'</span> 
+                        <span class="doc-text">ymc_filter_custom_extra_layout_'.$id.'_'.$c_target.'</span> 
                         '. esc_html__('Example:','ymc-smart-filter') .' 
-                        <span class="doc-text">add_filter("ymc_filter_custom_layout_"'.$id.'_'.$c_target.', "callback_function", 10, 6);</span>
+                        <span class="doc-text">add_filter("ymc_filter_custom_extra_layout_"'.$id.'_'.$c_target.', "callback_function", 10, 6);</span>
                         <a target="_blank" href="https://github.com/YMC-22/smart-filter">'.esc_html__('See documentation.','ymc-smart-filter').'</a></div></div>';
 
 
@@ -76,21 +74,17 @@ $term_settings = arrayToObject( generalArrayMerging( $ymc_terms_options, $ymc_te
 	         * @returns {string} HTML markup filter bar
 	         */
 
-			$filter_layout = apply_filters('ymc_filter_custom_layout_'.$id.'_'.$c_target,
+			$filter_layout = apply_filters('ymc_filter_custom_extra_layout_'.$id.'_'.$c_target,
                                  $layout,
 								 $result_terms,
 				                 $result_tax,
 				                 $multiple,
                                  $target,
-								 $term_settings
-								);
+								 $term_settings );
 
 			echo $filter_layout;
 
 		}
-
-		do_action("ymc_after_filter_layout_".$id.'_'.$c_target."");
-
    ?>
 
 </div>

@@ -221,7 +221,7 @@ class Shortcode {
 			// Replace Layout
 			$ymc_filter_layout = $ymc_filter_extra_layout;
 
-			echo '<div id="ymc-extra-filter-'. esc_attr($c_target) .'" data-extra-filter-id="'. esc_attr($id) .'" class="ymc-extra-filter ymc-'. esc_attr($ymc_filter_layout) .' ymc-'. esc_attr($ymc_filter_layout) .'-'.esc_attr($id).' ymc-'. esc_attr($ymc_filter_layout) .'-'.esc_attr($id).'-'.esc_attr($c_target).'">';
+			echo '<div id="ymc-extra-filter-'. esc_attr($c_target) .'" data-extra-filter-id="'. esc_attr($id) .'"  data-extra-filter-counter="'. esc_attr($c_target) .'" class="ymc-extra-filter ymc-extra-filter-'.esc_attr($c_target).'">';
 
 			if ( $ymc_filter_layout )
 			{
