@@ -38,6 +38,17 @@
                 </select>
             </div>
 
+            <div class="from-element">
+                <label class="form-label">
+                    <?php echo esc_html__('Button Text ALL', 'ymc-smart-filter'); ?>
+                    <span class="information">
+                    <?php echo esc_html__('Change the text of the ALL button on filter bar.', 'ymc-smart-filter');?>
+                    </span>
+                </label>
+                <input class="input-field" type="text" name="ymc-post-elements[button_text_all]"
+                       value="<?php echo !empty($ymc_post_elements['button_text_all']) ? esc_attr($ymc_post_elements['button_text_all']) : 'All'; ?>">
+            </div>
+
             <header class="sub-header">
                 <i class="far fa-address-card"></i>
 			    <?php echo esc_html__('Post Settings', 'ymc-smart-filter'); ?>

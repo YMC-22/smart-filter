@@ -142,7 +142,8 @@ class Variables {
 		'excerpt'  => 'show',
 		'button'  => 'show',
 		'button_text'  => 'Read More',
-		'length_excerpt'  => 30
+		'length_excerpt'  => 30,
+		'button_text_all'  => 'All'
 	];
 
 	public $ymc_pagination_elements = [

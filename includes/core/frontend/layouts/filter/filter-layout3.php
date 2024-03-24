@@ -55,7 +55,7 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
             }
             $arr_taxonomies = array_unique($arr_taxonomies);
 
-            $show_all = apply_filters('ymc_button_show_all_'.$id.'_'.$c_target, __('All','ymc-smart-filter'));
+            $show_all = apply_filters('ymc_button_show_all_'.$id.'_'.$c_target, __($ymc_post_elements['button_text_all'],'ymc-smart-filter'));
 
             echo '<a class="btn-all" href="#" data-selected="all" data-terms="' . esc_attr($all_terms) . '">'. esc_html($show_all) .'</a>';
 

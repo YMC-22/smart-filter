@@ -48,7 +48,7 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 					( $ymc_sort_terms === 'asc' ) ? asort($terms_selected) : arsort($terms_selected);
 				}
 
-	            $show_all = apply_filters('ymc_button_show_all_'.$id.'_'.$c_target, __('All','ymc-smart-filter'));
+	            $show_all = apply_filters('ymc_button_show_all_'.$id.'_'.$c_target, __($ymc_post_elements['button_text_all'],'ymc-smart-filter'));
 
                 $all_class_active = ( empty($default_terms) ) ? 'active' : '';
 

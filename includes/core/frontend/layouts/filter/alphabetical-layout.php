@@ -30,7 +30,7 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 	<ul class="filter-entry">
 
 		<li class="filter-item">
-			<a class="filter-link active" href="#" data-letter="all"><?php esc_html_e('All','ymc-smart-filter'); ?></a>
+			<a class="filter-link active" href="#" data-letter="all"><?php esc_html_e($ymc_post_elements['button_text_all'],'ymc-smart-filter'); ?></a>
 		</li>
 
 		<?php
