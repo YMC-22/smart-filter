@@ -1,19 +1,5 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-// Set variables
-$ymc_special_post_class = $variable->get_special_post_class( $post->ID );
-$ymc_preloader_icon = $variable->get_ymc_preloader_icon( $post->ID );
-$ymc_scroll_page = $variable->get_ymc_scroll_page( $post->ID );
-$ymc_preloader_filters = $variable->get_ymc_preloader_filters( $post->ID );
-$ymc_preloader_filters_rate = $variable->get_ymc_preloader_filters_rate( $post->ID );
-$ymc_preloader_filters_custom = $variable->get_ymc_preloader_filters_custom( $post->ID );
-$ymc_advanced_query_status = $variable->get_ymc_advanced_query_status( $post->ID );
-$ymc_query_type = $variable->get_ymc_query_type( $post->ID );
-$ymc_query_type_custom = $variable->get_ymc_query_type_custom( $post->ID );
-$ymc_query_type_callback = $variable->get_ymc_query_type_callback( $post->ID );
-$ymc_suppress_filters = $variable->get_ymc_suppress_filters( $post->ID );
-$ymc_filter_extra_layout = $variable->get_filter_extra_layout( $post->ID );
-
 ?>
 
 <div class="header">
@@ -127,6 +113,31 @@ $ymc_filter_extra_layout = $variable->get_filter_extra_layout( $post->ID );
 
     </div>
 
+</div>
+
+<div class="content" style="margin-bottom: 40px;">
+
+    <header class="sub-header">
+        <span class="dashicons dashicons-excerpt-view"></span>
+        <?php echo esc_html__('Sorting', 'ymc-smart-filter'); ?>
+    </header>
+
+    <div class="from-element">
+        <label class="form-label">
+            <?php echo esc_html__('Enable / Disable Sorting', 'ymc-smart-filter'); ?>
+            <span class="information">
+                    <?php echo esc_html__('Enable sorting posts on frontend.', 'ymc-smart-filter');?>
+                </span>
+        </label>
+
+        <div class="ymc-toggle-group">
+            <label class="switch">
+                <input type="checkbox" <?php echo ($ymc_sort_status === "off") ? "checked" : ""; ?>>
+                <input type="hidden" name="ymc-sort-status" value='<?php echo esc_attr($ymc_sort_status); ?>'>
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
 
 </div>
 

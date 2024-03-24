@@ -701,8 +701,6 @@
                     throw new Error("Incorrect type file");
                 }
             }
-
-
         }
 
         // Choices Posts

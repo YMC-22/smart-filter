@@ -1,9 +1,5 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-// Set variables
-$ymc_filter_font = $variable->get_filter_font( $post->ID );
-$ymc_post_font = $variable->get_post_font( $post->ID );
-
 ?>
 
 

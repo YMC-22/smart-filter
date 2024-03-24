@@ -1,24 +1,5 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-// Set variables
-$ymc_empty_post_result = $variable->get_empty_post_result( $post->ID );
-$ymc_link_target = $variable->get_link_target( $post->ID );
-$ymc_per_page = $variable->get_per_page( $post->ID );
-$ymc_pagination_type = $variable->get_pagination_type( $post->ID );
-$ymc_pagination_hide = $variable->get_pagination_hide( $post->ID );
-$ymc_sort_terms = $variable->get_sort_terms( $post->ID );
-$ymc_order_post_by = $variable->get_order_post_by( $post->ID );
-$ymc_order_post_type = $variable->get_order_post_type( $post->ID );
-$ymc_meta_key = $variable->get_ymc_meta_key( $post->ID );
-$ymc_meta_value = $variable->get_ymc_meta_value( $post->ID );
-$ymc_multiple_sort = $variable->get_ymc_multiple_sort( $post->ID );
-$ymc_post_status = $variable->get_ymc_post_status( $post->ID );
-$ymc_post_animation  = $variable->get_ymc_post_animation( $post->ID );
-$ymc_popup_status  = $variable->get_ymc_popup_status( $post->ID );
-$ymc_popup_animation  = $variable->get_ymc_popup_animation( $post->ID );
-$ymc_popup_animation_origin  = $variable->get_ymc_popup_animation_origin( $post->ID );
-$ymc_popup_settings  = $variable->get_ymc_popup_settings( $post->ID );
-
 ?>
 
 
@@ -34,7 +15,7 @@ $ymc_popup_settings  = $variable->get_ymc_popup_settings( $post->ID );
 
             <header class="sub-header">
                 <i class="far fa-filter"></i>
-		        <?php echo esc_html__('Filter Options', 'ymc-smart-filter'); ?>
+		        <?php echo esc_html__('Filter Settings', 'ymc-smart-filter'); ?>
             </header>
 
             <div class="from-element">
@@ -59,24 +40,114 @@ $ymc_popup_settings  = $variable->get_ymc_popup_settings( $post->ID );
 
             <header class="sub-header">
                 <i class="far fa-address-card"></i>
-			    <?php echo esc_html__('Post Options', 'ymc-smart-filter'); ?>
+			    <?php echo esc_html__('Post Settings', 'ymc-smart-filter'); ?>
             </header>
 
             <div class="from-element">
                 <label class="form-label">
-                    <?php echo esc_html__('Enable / Disable Sorting', 'ymc-smart-filter'); ?>
+                    <?php echo esc_html__('Meta Info', 'ymc-smart-filter'); ?>
                     <span class="information">
-                    <?php echo esc_html__('Enable sorting posts on frontend.', 'ymc-smart-filter');?>
-                </span>
+                    <?php echo esc_html__('Show / Hide post elements: Author, Date, Tags, Title, Image, Excerpt, Button. 
+                         For each post layout there will be a different number of elements.', 'ymc-smart-filter'); ?>
+                    </span>
                 </label>
+                <fieldset class="form-fieldset">
+                    <legend class="form-legend"><?php echo esc_html__('Post Elements', 'ymc-smart-filter'); ?></legend>
+                    <div class="meta-info">
+                        <div class="col post-author">
+                            <label><?php echo esc_html__('Post Author', 'ymc-smart-filter'); ?></label>
+                            <select class="form-select" name="ymc-post-elements[author]">
+                                <option value="show" <?php echo ( $ymc_post_elements['author'] === 'show' ) ? 'selected' : ''; ?>>
+                                    <?php esc_html_e('Show', 'ymc-smart-filter'); ?></option>
+                                <option value="hide" <?php echo ( $ymc_post_elements['author'] === 'hide' ) ? 'selected' : ''; ?>>
+                                    <?php esc_html_e('Hide', 'ymc-smart-filter'); ?></option>
+                            </select>
+                        </div>
 
-                <div class="ymc-toggle-group">
-                    <label class="switch">
-                        <input type="checkbox" <?php echo ($ymc_sort_status === "off") ? "checked" : ""; ?>>
-                        <input type="hidden" name="ymc-sort-status" value='<?php echo esc_attr($ymc_sort_status); ?>'>
-                        <span class="slider"></span>
-                    </label>
-                </div>
+                        <div class="col post-date">
+                            <label><?php echo esc_html__('Post Date', 'ymc-smart-filter'); ?></label>
+                            <select class="form-select" name="ymc-post-elements[date]">
+                                <option value="show" <?php echo ( $ymc_post_elements['date'] === 'show' ) ? 'selected' : ''; ?>>
+                                    <?php esc_html_e('Show', 'ymc-smart-filter'); ?></option>
+                                <option value="hide" <?php echo ( $ymc_post_elements['date'] === 'hide' ) ? 'selected' : ''; ?>>
+                                    <?php esc_html_e('Hide', 'ymc-smart-filter'); ?></option>
+                            </select>
+                        </div>
+
+                        <div class="col post-tags">
+                            <label><?php echo esc_html__('Post Tags', 'ymc-smart-filter'); ?></label>
+                            <select class="form-select"  name="ymc-post-elements[tag]">
+                                <option value="show" <?php echo ( $ymc_post_elements['tag'] === 'show' ) ? 'selected' : ''; ?>>
+                                    <?php esc_html_e('Show', 'ymc-smart-filter'); ?></option>
+                                <option value="hide" <?php echo ( $ymc_post_elements['tag'] === 'hide' ) ? 'selected' : ''; ?>>
+                                    <?php esc_html_e('Hide', 'ymc-smart-filter'); ?></option>
+                            </select>
+                        </div>
+
+                        <div class="col post-title">
+                            <label><?php echo esc_html__('Post Title', 'ymc-smart-filter'); ?></label>
+                            <select class="form-select" name="ymc-post-elements[title]">
+                                <option value="show" <?php echo ( $ymc_post_elements['title'] === 'show' ) ? 'selected' : ''; ?>>
+                                    <?php esc_html_e('Show', 'ymc-smart-filter'); ?></option>
+                                <option value="hide" <?php echo ( $ymc_post_elements['title'] === 'hide' ) ? 'selected' : ''; ?>>
+                                    <?php esc_html_e('Hide', 'ymc-smart-filter'); ?></option>
+                            </select>
+                        </div>
+
+                        <div class="col post-image">
+                            <label><?php echo esc_html__('Post Image', 'ymc-smart-filter'); ?></label>
+                            <select class="form-select" name="ymc-post-elements[image]">
+                                <option value="show" <?php echo ( $ymc_post_elements['image'] === 'show' ) ? 'selected' : ''; ?>>
+                                    <?php esc_html_e('Show', 'ymc-smart-filter'); ?></option>
+                                <option value="hide" <?php echo ( $ymc_post_elements['image'] === 'hide' ) ? 'selected' : ''; ?>>
+                                    <?php esc_html_e('Hide', 'ymc-smart-filter'); ?></option>
+                            </select>
+                        </div>
+
+                        <div class="col post-excerpt">
+                            <label><?php echo esc_html__('Post Excerpt', 'ymc-smart-filter'); ?></label>
+                            <select class="form-select" name="ymc-post-elements[excerpt]">
+                                <option value="show" <?php echo ( $ymc_post_elements['excerpt'] === 'show' ) ? 'selected' : ''; ?>>
+                                    <?php esc_html_e('Show', 'ymc-smart-filter'); ?></option>
+                                <option value="hide" <?php echo ( $ymc_post_elements['excerpt'] === 'hide' ) ? 'selected' : ''; ?>>
+                                    <?php esc_html_e('Hide', 'ymc-smart-filter'); ?></option>
+                            </select>
+                        </div>
+
+                        <div class="col post-button">
+                            <label><?php echo esc_html__('Post Button', 'ymc-smart-filter'); ?></label>
+                            <select class="form-select" name="ymc-post-elements[button]">
+                                <option value="show" <?php echo ( $ymc_post_elements['button'] === 'show' ) ? 'selected' : ''; ?>>
+                                    <?php esc_html_e('Show', 'ymc-smart-filter'); ?></option>
+                                <option value="hide" <?php echo ( $ymc_post_elements['button'] === 'hide' ) ? 'selected' : ''; ?>>
+                                    <?php esc_html_e('Hide', 'ymc-smart-filter'); ?></option>
+                            </select>
+                        </div>
+
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="from-element">
+                <label class="form-label">
+                    <?php echo esc_html__('Button Text', 'ymc-smart-filter'); ?>
+                    <span class="information">
+                    <?php echo esc_html__('Change the text of the Read More button.', 'ymc-smart-filter');?>
+                    </span>
+                </label>
+                <input class="input-field" type="text" name="ymc-post-elements[button_text]"
+                       value="<?php echo !empty($ymc_post_elements['button_text']) ? esc_attr($ymc_post_elements['button_text']) : 'Read More'; ?>">
+            </div>
+
+            <div class="from-element">
+                <label class="form-label">
+                    <?php echo esc_html__('Length Excerpt ', 'ymc-smart-filter'); ?>
+                    <span class="information">
+                    <?php echo esc_html__('Set the excerpt length of the post. By default 30 words.', 'ymc-smart-filter');?>
+                    </span>
+                </label>
+                <input class="input-field" type="text" name="ymc-post-elements[length_excerpt]"
+                       value="<?php echo !empty($ymc_post_elements['length_excerpt']) ? esc_attr($ymc_post_elements['length_excerpt']) : 30; ?>">
             </div>
 
             <div class="from-element">
@@ -94,7 +165,7 @@ $ymc_popup_settings  = $variable->get_ymc_popup_settings( $post->ID );
 	                <?php echo esc_html__('Post Link', 'ymc-smart-filter'); ?>
                     <span class="information">
                     <?php echo esc_html__('Select link target post.', 'ymc-smart-filter');?>
-                </span>
+                    </span>
                 </label>
                 <select class="form-select"  id="ymc-link-target" name="ymc-link-target">
                     <option value="_self" <?php if ($ymc_link_target === '_self') {echo "selected";} ?>>
@@ -294,7 +365,7 @@ $ymc_popup_settings  = $variable->get_ymc_popup_settings( $post->ID );
 
             <div class="from-element">
                 <label class="form-label">
-                    <?php echo esc_html__('Status Options', 'ymc-smart-filter'); ?>
+                    <?php echo esc_html__('Post Status', 'ymc-smart-filter'); ?>
                     <span class="information">
                     <?php echo esc_html__('Set posts with specified status.', 'ymc-smart-filter');?>
                 </span>
@@ -564,11 +635,43 @@ $ymc_popup_settings  = $variable->get_ymc_popup_settings( $post->ID );
 
             </div>
 
-
             <header class="sub-header">
                 <i class="fas fa-sort-numeric-down-alt"></i>
 		        <?php echo esc_html__('Pagination', 'ymc-smart-filter'); ?>
             </header>
+
+            <div class="from-element">
+                <label class="form-label">
+                    <?php echo esc_html__('Prevision Button Text', 'ymc-smart-filter'); ?>
+                    <span class="information">
+                    <?php echo esc_html__('Prev button will show in Pagination.', 'ymc-smart-filter');?>
+                    </span>
+                </label>
+                <input class="input-field" type="text" name="ymc-pagination-elements[prev_btn_text]"
+                       value="<?php echo !empty($ymc_pagination_elements['prev_btn_text']) ? esc_attr($ymc_pagination_elements['prev_btn_text']) : 'Prev'; ?>">
+            </div>
+
+            <div class="from-element">
+                <label class="form-label">
+                    <?php echo esc_html__('Next Button Text', 'ymc-smart-filter'); ?>
+                    <span class="information">
+                    <?php echo esc_html__('Next button will show in Pagination.', 'ymc-smart-filter');?>
+                    </span>
+                </label>
+                <input class="input-field" type="text" name="ymc-pagination-elements[next_btn_text]"
+                       value="<?php echo !empty($ymc_pagination_elements['next_btn_text']) ? esc_attr($ymc_pagination_elements['next_btn_text']) : 'Next'; ?>">
+            </div>
+
+            <div class="from-element">
+                <label class="form-label">
+                    <?php echo esc_html__('Load More Button Text', 'ymc-smart-filter'); ?>
+                    <span class="information">
+                    <?php echo esc_html__('Load More button will show in Pagination.', 'ymc-smart-filter');?>
+                    </span>
+                </label>
+                <input class="input-field" type="text" name="ymc-pagination-elements[load_btn_text]"
+                       value="<?php echo !empty($ymc_pagination_elements['load_btn_text']) ? esc_attr($ymc_pagination_elements['load_btn_text']) : 'Load More'; ?>">
+            </div>
 
             <div class="from-element">
                 <label class="form-label">
@@ -611,7 +714,7 @@ $ymc_popup_settings  = $variable->get_ymc_popup_settings( $post->ID );
 
             <div class="from-element">
                 <label class="form-label">
-		            <?php echo esc_html__('Hide Pagination', 'ymc-smart-filter');?>
+		            <?php echo esc_html__('Pagination Hide', 'ymc-smart-filter');?>
                     <span class="information">
                     <?php echo esc_html__('Hide pagination for filter.', 'ymc-smart-filter');?>
                 </span>

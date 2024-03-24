@@ -8,7 +8,7 @@
 
     <header class="sub-header">
         <i class="dashicons dashicons-shortcode"></i>
-		<?php echo esc_html__('Shortcode for Grid Posts', 'ymc-smart-filter'); ?>
+		<?php echo esc_html__('Shortcode Grid Posts', 'ymc-smart-filter'); ?>
     </header>
 
     <div class="form-group">

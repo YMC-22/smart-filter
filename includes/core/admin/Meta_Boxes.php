@@ -396,6 +396,18 @@ class Meta_Boxes {
 			update_post_meta( $post_id, 'ymc_suppress_filters', $ymc_suppress_filters );
 		}
 
+		// Post Elements
+		if( isset($_POST['ymc-post-elements']) ) {
+			$ymc_post_elements =  $_POST['ymc-post-elements'];
+			update_post_meta( $post_id, 'ymc_post_elements', $ymc_post_elements );
+		}
+
+		// Pagination Elements
+		if( isset($_POST['ymc-pagination-elements']) ) {
+			$ymc_pagination_elements =  $_POST['ymc-pagination-elements'];
+			update_post_meta( $post_id, 'ymc_pagination_elements', $ymc_pagination_elements );
+		}
+
 	}
 
 	public function ymc_attached_filters() {
@@ -543,6 +555,8 @@ class Meta_Boxes {
 
                     $variable = Plugin::instance()->variables;
 
+					$id = $post->ID;
+					require_once YMC_SMART_FILTER_DIR . '/includes/core/util/variables.php';
 					require_once YMC_SMART_FILTER_DIR . '/includes/core/util/icons.php';
 
                 ?>

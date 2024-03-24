@@ -1,24 +1,5 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-// Set variables
-$ymc_filter_status = $variable->get_filter_status( $post->ID );
-$ymc_sort_status   = $variable->get_sort_status( $post->ID );
-$ymc_filter_layout = $variable->get_filter_layout( $post->ID );
-$ymc_filter_text_color = $variable->get_filter_text_color( $post->ID );
-$ymc_filter_bg_color = $variable->get_filter_bg_color( $post->ID );
-$ymc_filter_active_color = $variable->get_filter_active_color( $post->ID );
-$ymc_multiple_filter = $variable->get_multiple_filter( $post->ID );
-$ymc_post_layout = $variable->get_post_layout( $post->ID );
-$ymc_post_text_color = $variable->get_post_text_color( $post->ID );
-$ymc_post_bg_color = $variable->get_post_bg_color( $post->ID );
-$ymc_post_active_color = $variable->get_post_active_color( $post->ID );
-$ymc_desktop_xxl = $variable->get_post_desktop_xxl( $post->ID );
-$ymc_desktop_xl = $variable->get_post_desktop_xl( $post->ID );
-$ymc_desktop_lg = $variable->get_post_desktop_lg( $post->ID );
-$ymc_tablet_md = $variable->get_post_tablet_md( $post->ID );
-$ymc_tablet_sm = $variable->get_post_tablet_sm( $post->ID );
-$ymc_mobile_xs = $variable->get_post_mobile_xs( $post->ID );
-
 ?>
 
 <div class="header">

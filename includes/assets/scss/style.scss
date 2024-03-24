@@ -755,7 +755,7 @@ $font-size: 16;
 			.ymc-post-layout1 {
 				position: relative;
 				padding: 20px;
-				border: 1px solid #bbb;
+				border: 1px solid #e0e4e9;
 				.media {
 					margin: 0 0 20px 0;
 					overflow: hidden;
@@ -843,7 +843,7 @@ $font-size: 16;
 			.ymc-post-layout2 {
 				position: relative;
 				padding: 20px 20px 40px 20px;
-				border: 1px solid #bbb;
+				border: 1px solid #e0e4e9;
 				.title {
 					font-size: 22px;
 					font-weight: 600;
@@ -937,6 +937,23 @@ $font-size: 16;
 					margin: 0 5px 20px 0;
 				}
 			}
+			.date {
+				font-size: 14px;
+				margin: 0 15px 10px 0;
+				border-bottom: 1px solid #fff;
+				padding-bottom: 5px;
+				display: inline-block;
+				i {
+					margin-right: 5px;
+				}
+			}
+			.author {
+				font-size: 14px;
+				margin-bottom: 10px;
+				border-bottom: 1px solid #fff;
+				padding-bottom: 5px;
+				display: inline-block;
+			}
 			.excerpt {
 				font-size: 16px;
 				line-height: 1.35;
@@ -1023,23 +1040,6 @@ $font-size: 16;
 						text-align: left;
 					}
 				}
-				&:nth-child(even) {}
-				&:nth-child(odd) {
-					flex-direction: row-reverse;
-					.col {
-						&:first-of-type {
-							padding-left: 7%;
-							padding-right: unset;
-							text-align: left;
-						}
-						&:last-of-type {
-							padding-right: 7%;
-							padding-left: unset;
-							text-align: right;
-						}
-					}
-
-				}
 				.date {
 					font-size: 36px;
 					font-weight: 700;
@@ -1056,6 +1056,16 @@ $font-size: 16;
 						margin-bottom: 10px;
 					}
 				}
+				.category {
+					display: flex;
+					.cat-inner {
+						padding: 5px 10px;
+						color: #fff;
+						background-color: #141518;
+						font-size: 12px;
+						margin: 0 5px 20px 0;
+					}
+				}
 				.title {
 					font-size: 26px;
 					font-weight: 700;
@@ -1064,6 +1074,13 @@ $font-size: 16;
 					@media screen and (max-width: 1023.97px) {
 						font-size: 24px;
 					}
+				}
+				.author {
+					font-size: 14px;
+					margin-bottom: 10px;
+					border-bottom: 1px solid #fff;
+					padding-bottom: 5px;
+					display: inline-block;
 				}
 				.excerpt {
 					font-size: 18px;
@@ -1088,6 +1105,25 @@ $font-size: 16;
 						}
 					}
 				}
+				&:nth-child(even) {}
+				&:nth-child(odd) {
+					flex-direction: row-reverse;
+					.col {
+						&:first-of-type {
+							padding-left: 7%;
+							padding-right: unset;
+							text-align: left;
+						}
+						&:last-of-type {
+							padding-right: 7%;
+							padding-left: unset;
+							text-align: right;
+						}
+					}
+					.category {
+						justify-content: end;
+					}
+				}
 			}
 		}
 
@@ -1098,7 +1134,7 @@ $font-size: 16;
 			.post-item {
 				position: relative;
 				padding: 15px;
-				border: 1px solid #bbb;
+				border: 1px solid #e0e4e9;
 				@media screen and (min-width: 1399.98px) {
 					width: 18.5%;
 				}
@@ -1123,11 +1159,42 @@ $font-size: 16;
 						object-fit: cover;
 					}
 				}
+				.category {
+					margin-bottom: 20px;
+					.cat-inner {
+						font-size: 12px;
+						line-height: 1.3;
+						border: none;
+						display: inline-block;
+						padding: 3px 10px;
+						background: #000;
+						margin-right: 5px;
+						margin-bottom: 5px;
+						color: white;
+					}
+				}
 				.title {
 					font-size: 22px;
 					font-weight: 600;
 					margin-bottom: 10px;
 					line-height: 1.3;
+				}
+				.date {
+					font-size: 14px;
+					margin: 0 15px 10px 0;
+					border-bottom: 1px solid #fff;
+					padding-bottom: 5px;
+					display: inline-block;
+					i {
+						margin-right: 5px;
+					}
+				}
+				.author {
+					font-size: 14px;
+					margin-bottom: 10px;
+					border-bottom: 1px solid #fff;
+					padding-bottom: 5px;
+					display: inline-block;
 				}
 				.excerpt {
 					font-size: 16px;
@@ -1175,7 +1242,7 @@ $font-size: 16;
 				font-size: 14px;
 				line-height: 1.3;
 				color: #222;
-				border: 1px solid #ccc;
+				border: 1px solid #e0e4e9;
 				background: none;
 				word-break: break-word;
 				@media screen and (min-width: 1399.98px) {
@@ -1239,7 +1306,7 @@ $font-size: 16;
 				font-size: 14px;
 				line-height: 1.3;
 				color: #222;
-				border: 1px solid #ccc;
+				border: 1px solid #e0e4e9;
 				background: none;
 				word-break: break-word;
 				.head-post {
@@ -1568,18 +1635,19 @@ $font-size: 16;
 				padding: 10px 10px;
 				text-decoration: none;
 				text-align: center;
-				border: 1px solid #ccc;
+				border: 1px solid #e0e4e9;
 				border-radius: 0;
 				min-width: 30px;
 				font-size: 14px;
 				line-height: 1;
+				color: #000;
 				&:hover {
 					text-decoration: none;
 				}
 			}
 			.current {
 				color: #098ab8;
-				font-weight: 600;
+				font-weight: 700;
 				font-size: 16px;
 				width: 30px;
 				height: 15px;

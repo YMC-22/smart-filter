@@ -1,13 +1,5 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-
-// Set variables
-$ymc_filter_search_status = $variable->get_filter_search_status( $post->ID );
-$ymc_search_text_button = $variable->get_search_text_button( $post->ID );
-$ymc_search_placeholder = $variable->get_ymc_search_placeholder( $post->ID );
-$ymc_autocomplete_state = $variable->get_ymc_autocomplete_state( $post->ID );
-$ymc_search_filtered_posts = $variable->get_search_filtered_posts( $post->ID );
-
 ?>
 
 

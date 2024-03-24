@@ -133,6 +133,24 @@ class Variables {
 		"custom_bg_overlay" => "#14151899"
 	];
 
+	public $ymc_post_elements = [
+		'author' => 'show',
+		'date'   => 'show',
+		'tag'    => 'show',
+		'title'  => 'show',
+		'image'  => 'show',
+		'excerpt'  => 'show',
+		'button'  => 'show',
+		'button_text'  => 'Read More',
+		'length_excerpt'  => 30
+	];
+
+	public $ymc_pagination_elements = [
+		'prev_btn_text' => 'Prev',
+		'next_btn_text' => 'Next',
+		'load_btn_text' => 'Load More'
+	];
+
 
 	/**
 	 * Advanced tab used default variables
@@ -614,6 +632,24 @@ class Variables {
 		}
 		return $this->ymc_popup_settings;
 	}
+
+	public function get_ymc_post_elements( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_post_elements' ) ) {
+			return get_post_meta( $post_id, 'ymc_post_elements', true );
+		}
+		return $this->ymc_post_elements;
+	}
+
+
+	public function get_ymc_pagination_elements( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_pagination_elements' ) ) {
+			return get_post_meta( $post_id, 'ymc_pagination_elements', true );
+		}
+		return $this->ymc_pagination_elements;
+	}
+
 
 
 	/**

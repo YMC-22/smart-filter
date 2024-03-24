@@ -311,11 +311,11 @@ class Get_Posts {
 				switch ( $type_pagination ) :
 
 					case 'numeric' :
-						$pagin = Plugin::instance()->pagination->number($query, $paged, $type_pagination, $filter_id, $target_id);
+						$pagin = Plugin::instance()->pagination->number( $query, $paged, $type_pagination, $filter_id, $target_id, $ymc_pagination_elements );
 						break;
 
 					case 'load-more' :
-						$pagin = Plugin::instance()->pagination->load_more($query, $paged, $type_pagination, $filter_id, $target_id);
+						$pagin = Plugin::instance()->pagination->load_more( $query, $paged, $type_pagination, $filter_id, $target_id, $ymc_pagination_elements );
 						break;
 
 				endswitch;

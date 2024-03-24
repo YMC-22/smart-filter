@@ -3,19 +3,10 @@
 // Set variables
 $cpost_types = $variable->display_cpt(['attachment', 'popup']);
 $output      = $variable->output;
-$cpt         = explode(',', $variable->get_cpt( $post->ID ));
+$cpt         = explode(',', $ymc_cpt_value);
 $tax         = $variable->tax;
-$tax_sel     = $variable->get_tax_sel( $post->ID );
-$terms_sel   = $variable->get_terms_sel( $post->ID );
-$tax_rel     = $variable->get_tax_rel( $post->ID );
-$tax_sort    = $variable->get_tax_sort( $post->ID );
-$term_sort   = $variable->get_term_sort( $post->ID );
-$ymc_sort_terms  = $variable->get_sort_terms( $post->ID );
-$ymc_choices_posts  = $variable->get_choices_posts( $post->ID );
-$ymc_exclude_posts  = $variable->get_exclude_posts( $post->ID );
-$ymc_terms_icons  = $variable->get_terms_icons( $post->ID );
-$ymc_terms_align   = $variable->get_terms_align( $post->ID );
-$ymc_terms_options   = $variable->get_terms_options( $post->ID );
+$tax_sel     = $tax_selected;
+$terms_sel   = $terms_selected;
 
 ?>
 

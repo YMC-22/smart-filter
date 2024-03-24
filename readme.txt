@@ -1,12 +1,12 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.8.19
+Version: 2.8.20
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
 Tags: filter, grid, ajax, search, sort
 Requires at least: 4.8
 Tested up to: 6.4
-Stable tag: 2.8.19
+Stable tag: 2.8.20
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -233,6 +233,9 @@ Added Default Term
 Added shortcodes for displaying components: Filter, Search and Sort.
 = 2.8.19 =
 Added Custom Extra Filter Layout
+= 2.8.20 =
+Added internal interface for managing filter elements
+
 
 == Video ==
 https://www.youtube.com/watch?v=FIBNE0Ix6Vg
