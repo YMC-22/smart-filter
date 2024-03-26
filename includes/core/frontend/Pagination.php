@@ -10,8 +10,8 @@ class Pagination {
 
 	public function __construct() {}
 
-	public function number( $query, $paged, $type_pagination, $filter_id, $target_id, $pagination_elements = [] ) {
-
+	public function number( $query, $paged, $type_pagination, $filter_id, $target_id, $pagination_elements = [] )
+	{
 		if ( ! $query ) return;
 
 		$output = '';
@@ -31,18 +31,38 @@ class Pagination {
 			'next_text' => $next_text,
 		]);
 
-		if ($query->max_num_pages > 1):
+		if ($query->max_num_pages > 1) :
+
 			$output .= "<ul id='ymc-layout-pagination' class='ymc-pagination pagination-" . esc_attr($type_pagination) ."'>";
-			foreach ($paginate as $page):
-				$output .= "<li>" . $page ."</li>";
+
+			foreach ($paginate as $page) :
+
+				if( preg_match('/<span[^>]*>(.*)<\/span>/', $page, $matches) ) {
+					$output .= "<li class='list-item current-item'>" . $page ."</li>";
+				}
+				elseif( preg_match('/<[^>]*class="[^"]*\bprev\b[^"]*"[^>]*>/i', $page, $matches) )
+				{
+					$output .= "<li class='list-item prev-item'>" . $page ."</li>";
+				}
+				elseif( preg_match('/<[^>]*class="[^"]*\bnext\b[^"]*"[^>]*>/i', $page, $matches) )
+				{
+					$output .= "<li class='list-item next-item'>" . $page ."</li>";
+				}
+				else {
+					$output .= "<li class='list-item'>" . $page ."</li>";
+				}
+
 			endforeach;
+
 			$output .= "</ul>";
+
 		endif;
 
 		return $output;
 	}
 
-	public function load_more( $query, $paged, $type_pagination, $filter_id, $target_id, $pagination_elements = [] ) {
+	public function load_more( $query, $paged, $type_pagination, $filter_id, $target_id, $pagination_elements = [] )
+	{
 
 		if ( ! $query ) return;
 
