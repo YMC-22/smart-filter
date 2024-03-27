@@ -485,6 +485,9 @@
                 beforeSend: function () {
                     postContainer.addClass('loading').
                     prepend(`<img class="preloader preloader--popup" src="${stylePreloader}" style="${preloaderFilter}">`);
+
+                    // Add Hook: before open popup
+                    wp.hooks.doAction('ymc_before_popup_open_'+params.filter_id+'_'+params.target_id);
                 },
                 success: function (res) {
                     postContainer.

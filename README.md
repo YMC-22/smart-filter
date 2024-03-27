@@ -849,11 +849,12 @@ Usage example:
 
 ```
 
-**Calling a script point after opening a popup and loading content into it.**
+**Calling a script point before / after opening a popup and loading content into it.**
 
 This hook allows you to run any desired script after opening a popup for each post
 
 ```js
+wp.hooks.addAction('ymc_before_popup_open_FilterID_LayoutID', 'smartfilter', 'callback');
 wp.hooks.addAction('ymc_after_popup_open_FilterID_LayoutID', 'smartfilter', 'callback(data)');
 ```
 **Params function callback:**
