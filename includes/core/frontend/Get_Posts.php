@@ -567,14 +567,17 @@ class Get_Posts {
 		$filter_id = $_POST['filter_id'];
 		$target_id = $_POST['target_id'];
 
-		$thumb_url = get_the_post_thumbnail_url( $post_id, 'full' );
 		$title = get_the_title($post_id);
 
 		$post = get_post( $post_id );
 		$content = apply_filters('the_content', $post->post_content);
 
 		$output .= '<article class="popup-content">';
-		$output .=  '<img src="'.$thumb_url.'">';
+
+		if( has_post_thumbnail($post_id) ) :
+			$output .=  '<figure class="image-inner"><img src="'. get_the_post_thumbnail_url( $post_id, 'full' ) .'"></figure>';
+		endif;
+
 		$output .= '<header class="title">'.$title.'</header>';
 		$output .= '<div class="content">'.$content.'</div>';
 		$output .= '</article>';
