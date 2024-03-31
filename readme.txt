@@ -1,12 +1,12 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.8.22
+Version: 2.8.23
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
 Tags: filter, grid, ajax, search, sort
 Requires at least: 4.8
 Tested up to: 6.5
-Stable tag: 2.8.22
+Stable tag: 2.8.23
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -218,23 +218,25 @@ Added the ability to create a custom WP Query. See documentation.
 = 2.8.4 =
 Added the ability to customize the post grid.
 = 2.8.6 =
-Fixed Custom WP_Query
+Fixed Custom WP_Query.
 = 2.8.8 =
-Added Link to Admin Bar Menu
+Added Link to Admin Bar Menu.
 = 2.8.9 =
-Added new Post Template Vertical Timeline
+Added new Post Template Vertical Timeline.
 = 2.8.10 =
-Added options suppress_filters to WP_Query
+Added options suppress_filters to WP_Query.
 = 2.8.13 =
-Fixed JS
+Fixed JS.
 = 2.8.15 =
-Added Default Term
+Added Default Term.
 = 2.8.18 =
 Added shortcodes for displaying components: Filter, Search and Sort.
 = 2.8.19 =
-Added Custom Extra Filter Layout
+Added Custom Extra Filter Layout.
 = 2.8.20 =
-Added internal interface for managing filter elements
+Added internal interface for managing filter elements.
+= 2.8.23 =
+Changed the interface in the admin panel.
 
 
 == Video ==

@@ -1264,6 +1264,20 @@
 
         });
 
+        // Show / Hide Form Sections
+        $('.tab-content .tab-panel .content .sub-header').on('click', function (e) {
+            let className = $(this).data('className');
+            $(this).siblings(`.${className}`).slideToggle();
+            $(this).find('.fa-chevron-down').toggleClass('fa-chevron-up');
+            setCookie("formClassName", className,30);
+        });
+
+        if(getCookie("formClassName") !== '') {
+            let className = getCookie("formClassName");
+            $(`.tab-content .tab-panel .content .${className}`).show();
+            $(`.tab-content .tab-panel .content .sub-header[data-class-name="${className}"]`).find('.form-arrow').addClass('fa-chevron-up');
+        }
+
         // Set Cookie for Tab
         $(".ymc__container-settings #ymcTab a").click(function(e) {
             let hashUrl = $(this).attr('href');

@@ -431,11 +431,25 @@ $font-size: 16;
 								}
 
 								.sub-header {
+									position: relative;
 									font-size: 16px;
-									border-bottom: 3px solid #098ab8;
+									border-bottom: 2px solid #098ab8;
 									color: #098ab8;
-									margin-bottom: 30px;
+									padding: 20px 0;
 									text-transform: uppercase;
+									cursor: pointer;
+									.form-arrow {
+										position: absolute;
+										right: 5px;
+										top: 50%;
+										transform: translateY(-50%);
+									}
+								}
+
+								.form-wrapper {
+									display: none;
+									margin-bottom: 20px;
+									padding-top: 20px;
 								}
 
 								.rows-options {
@@ -746,7 +760,7 @@ $font-size: 16;
 								.manage-filters {
 									margin-top: 40px;
 									&__section {
-										margin-bottom: 25px;
+										margin-bottom: 20px;
 									}
 
 									.color-setting {
@@ -756,8 +770,6 @@ $font-size: 16;
 									}
 								}
 								.manage-post {
-									margin-top: 40px;
-
 									&__section {
 										margin-bottom: 30px;
 									}
