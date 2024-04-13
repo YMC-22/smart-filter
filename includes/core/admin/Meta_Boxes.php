@@ -253,7 +253,7 @@ class Meta_Boxes {
 			update_post_meta( $post_id, 'ymc_filter_search_status', $search_status );
 		}
 
-		// Text Search Button
+		// Button Text Search
 		if( isset($_POST['ymc-search-text-button']) ) {
 			$search_text_button = sanitize_text_field( $_POST['ymc-search-text-button']);
 			update_post_meta( $post_id, 'ymc_search_text_button', $search_text_button );
@@ -269,6 +269,12 @@ class Meta_Boxes {
 		if( isset($_POST['ymc-autocomplete-state']) ) {
 			$autocomplete_state = sanitize_text_field( $_POST['ymc-autocomplete-state']);
 			update_post_meta( $post_id, 'ymc_autocomplete_state', $autocomplete_state );
+		}
+
+		// Find a post exactly the specified phrase
+		if( isset($_POST['ymc-exact-phrase']) ) {
+			$ymc_exact_phrase = sanitize_text_field( $_POST['ymc-exact-phrase']);
+			update_post_meta( $post_id, 'ymc_exact_phrase', $ymc_exact_phrase );
 		}
 
 		// Disable Scroll Page

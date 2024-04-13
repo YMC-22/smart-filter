@@ -200,6 +200,8 @@ class Variables {
 
 	public $ymc_search_filtered_posts  = 0;
 
+	public $ymc_exact_phrase = false;
+
 
 
 
@@ -811,6 +813,15 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_search_filtered_posts', true );
 		}
 		return $this->ymc_search_filtered_posts;
+	}
+
+
+	public function get_ymc_exact_phrase( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_exact_phrase' ) ) {
+			return (bool) get_post_meta( $post_id, 'ymc_exact_phrase', true );
+		}
+		return $this->ymc_exact_phrase;
 	}
 
 }

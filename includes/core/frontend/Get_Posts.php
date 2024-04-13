@@ -122,14 +122,14 @@ class Get_Posts {
 			$multiple_order = '';
 			$arr_multiple_sort = [];
 
-			foreach($ymc_multiple_sort as $item) {
+			foreach( $ymc_multiple_sort as $item ) {
 
 				foreach( $item as $key => $val ) {
 
-					if($key === 'orderby') {
+					if( $key === 'orderby' ) {
 						$multiple_orderby = $val;
 					}
-					if($key === 'order') {
+					if( $key === 'order' ) {
 						$multiple_order = $val;
 					}
 					$arr_multiple_sort[$multiple_orderby] = $multiple_order;
@@ -148,6 +148,9 @@ class Get_Posts {
 			add_filter( 'posts_distinct', array($this,'search_distinct') );
 
 			$args['sentence'] = true;
+
+			$args['exact'] = $ymc_exact_phrase;
+
 			$args['s'] = trim($keyword);
 		}
 
@@ -410,6 +413,7 @@ class Get_Posts {
 			'orderby' => 'title',
 			'order' => 'asc',
 			'sentence' => true,
+			'exact' => $ymc_exact_phrase,
 			's' => $phrase
 		];
 

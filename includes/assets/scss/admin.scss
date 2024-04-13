@@ -199,6 +199,10 @@ $font-size: 16;
 									position: relative;
 								}
 
+								.from-element {
+									margin-bottom: 20px;
+								}
+
 								.form-label {
 									display: block;
 									font-weight: 600;
@@ -758,7 +762,7 @@ $font-size: 16;
 						.tab-entry {
 							.content {
 								.manage-filters {
-									margin-top: 40px;
+									margin-top: 20px;
 									&__section {
 										margin-bottom: 20px;
 									}
@@ -825,9 +829,6 @@ $font-size: 16;
 							.content {
 								.appearance-section {
 									margin-bottom: 30px;
-									.from-element {
-										margin-bottom: 20px;
-									}
 								}
 							}
 						}
@@ -836,8 +837,13 @@ $font-size: 16;
 					#search {
 						.tab-entry {
 							.content {
-								.manage-filters {
-									margin-top: 20px;
+								.search-settings {
+									.ymc-toggle-group {
+										margin-bottom: 20px;
+									}
+									input[type="checkbox"] {
+										float: none;
+									}
 								}
 							}
 						}

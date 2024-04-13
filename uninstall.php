@@ -77,7 +77,8 @@ $wpdb->get_results('DELETE FROM wp_postmeta WHERE meta_key IN (
                                   "ymc_suppress_filters",                                         
                                   "ymc_filter_extra_layout",
                                   "ymc_post_elements",
-                                  "ymc_pagination_elements"
+                                  "ymc_pagination_elements",
+                                  "ymc_exact_phrase"
                                 )');
 
 

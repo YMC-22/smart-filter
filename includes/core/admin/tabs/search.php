@@ -39,9 +39,9 @@
                 <div class="from-element">
 
                     <label class="form-label">
-                        <?php echo esc_html__('Placeholder Field Search', 'ymc-smart-filter');?>
+                        <?php echo esc_html__('Placeholder Field', 'ymc-smart-filter');?>
                         <span class="information">
-                        <?php echo esc_html__('Change placeholder field search.', 'ymc-smart-filter');?>
+                        <?php echo esc_html__('Change placeholder field.', 'ymc-smart-filter');?>
                     </span>
                     </label>
 
@@ -49,14 +49,12 @@
 
                 </div>
 
-                <br/>
-
                 <div class="from-element">
 
                     <label class="form-label">
-                        <?php echo esc_html__('Text Button Search', 'ymc-smart-filter');?>
+                        <?php echo esc_html__('Button Text', 'ymc-smart-filter');?>
                         <span class="information">
-                        <?php echo esc_html__('Change name of Search button.', 'ymc-smart-filter');?>
+                        <?php echo esc_html__('Change name of Button Text.', 'ymc-smart-filter');?>
                     </span>
                     </label>
 
@@ -64,12 +62,30 @@
 
                 </div>
 
-                <br/>
+                <div class="from-element">
+
+                    <?php $ymc_exact_phrase_sel = ( $ymc_exact_phrase ) ? 'checked' : '';  ?>
+
+                    <label class="form-label">
+                        <?php echo esc_html__('Exact Phrase', 'ymc-smart-filter');?>
+                        <span class="information">
+                        <?php echo esc_html__('Find a post in the title/content/description of which contains exactly the specified phrase and nothing else.', 'ymc-smart-filter');?>
+                    </span>
+                    </label>
+
+                    <div class="group-elements">
+                        <input type="hidden" name="ymc-exact-phrase" value="0">
+                        <input class="input-field" type="checkbox" id="ymc-exact-phrase" name="ymc-exact-phrase" value="1"
+                            <?php echo esc_attr($ymc_exact_phrase_sel); ?>>
+                        <label for="ymc-exact-phrase"><?php echo esc_html__('Enable','ymc-smart-filter'); ?></label>
+                    </div>
+
+                </div>
 
                 <div class="from-element">
 
                     <label class="form-label">
-                        <?php echo esc_html__('Disable Autocomplete', 'ymc-smart-filter');?>
+                        <?php echo esc_html__('Autocomplete', 'ymc-smart-filter');?>
                         <span class="information">
                         <?php echo esc_html__('Disable autocomplete for posts search.', 'ymc-smart-filter');?>
                     </span>
@@ -84,8 +100,6 @@
                     </div>
 
                 </div>
-
-                <br/>
 
                 <div class="from-element">
 
