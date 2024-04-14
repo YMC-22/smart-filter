@@ -7,19 +7,19 @@ $custom_height_unit = $ymc_popup_settings['custom_height_unit'];
 $custom_bg_overlay  = !empty($ymc_popup_settings['custom_bg_overlay']) ? $ymc_popup_settings['custom_bg_overlay'] : 'rgba(20, 21, 24, 0.6)';
 $custom_location    = !empty($ymc_popup_settings['custom_location']) ? $ymc_popup_settings['custom_location'] : 'center';
 
-$style_location = '';
+$class_popup_location = '';
 
 if( $custom_location === 'right center' ) {
-	$style_location = 'left: 100%;transform: translate(-100%, -50%);';
+	$class_popup_location = 'popup-right';
 }
 if( $custom_location === 'left center' ) {
-	$style_location = 'left: 0;transform: translate(0%, -50%);';
+	$class_popup_location = 'popup-left';
 }
 
-$style_popup = 'style="transform-origin:'.esc_attr($ymc_popup_animation_origin).'; width:'.esc_attr($custom_width).esc_attr($custom_width_unit).';height:'.esc_attr($custom_height).esc_attr($custom_height_unit).';'.esc_attr($style_location).'"';
+$style_popup = 'style="transform-origin:'.esc_attr($ymc_popup_animation_origin).'; width:'.esc_attr($custom_width).esc_attr($custom_width_unit).';height:'.esc_attr($custom_height).esc_attr($custom_height_unit).';"';
 
 echo '<div class="ymc-popup-overlay" style="background: '.esc_attr($custom_bg_overlay).'">';
-echo '<div class="ymc-popup-wrp popup-'. esc_attr($id).' popup-'. esc_attr($id).'-'.esc_attr($c_target).'" '.$style_popup.'>';
+echo '<div class="ymc-popup-wrp popup-'. esc_attr($id).' popup-'. esc_attr($id).'-'.esc_attr($c_target).' '. $class_popup_location .'" '.$style_popup.'>';
 
 echo '<span class="btn-close" title="Close"><i class="fas fa-times"></i></span>';
 echo '<hr/>';

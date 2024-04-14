@@ -517,6 +517,9 @@
                             <option value="zoom-in" <?php echo ( $ymc_popup_animation === 'zoom-in') ? 'selected' : ''; ?>>
                                 <?php echo esc_html__('Zoom', 'ymc-smart-filter'); ?>
                             </option>
+                            <option value="slide" <?php echo ( $ymc_popup_animation === 'slide') ? 'selected' : ''; ?>>
+                                <?php echo esc_html__('Slide', 'ymc-smart-filter'); ?>
+                            </option>
                         </select>
                     </div>
 
