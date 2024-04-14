@@ -65,7 +65,7 @@ $terms_sel   = $terms_selected;
 				// Exclude Taxonomies WooCommerce
 				$arr_exclude_slugs = ['product_type','product_visibility','product_shipping_class'];
 
-				foreach ($data_object as $val) {
+				foreach ( $data_object as $val ) {
 					$taxo[$val->label] = $val->name;
 				}
 
@@ -82,28 +82,27 @@ $terms_sel   = $terms_selected;
 						$result_tax = $taxo;
 					}
 
-					foreach($result_tax as $label => $slug) :
+					foreach( $result_tax as $label => $slug ) {
 
 						$sl0 = '';
 
-						if(array_search($slug, $arr_exclude_slugs) === false ) {
+						if( array_search($slug, $arr_exclude_slugs) === false ) {
 
-							if(is_array($tax_sel) && count($tax_sel) > 0) {
+							if( is_array($tax_sel) && count($tax_sel) > 0 ) {
 
 								if (in_array($slug, $tax_sel)) {
 									$sl0 = 'checked';
 								}
 								else{
-									$sl0 ='';
+									$sl0 = '';
 								}
 							}
 
 							echo '<div id="'. esc_attr($slug) .'" class="group-elements">
-                    <input id="id-'. esc_attr($slug) .'" type="checkbox" name="ymc-taxonomy[]" value="'. esc_attr($slug) .'" '. esc_attr($sl0) .'>
-                    <label for="id-'. esc_attr($slug) .'">'.  esc_html($label) . '</label></div>';
+                            <input id="id-'. esc_attr($slug) .'" type="checkbox" name="ymc-taxonomy[]" value="'. esc_attr($slug) .'" '. esc_attr($sl0) .'>
+                            <label for="id-'. esc_attr($slug) .'">'.  esc_html($label) . '</label></div>';
 						}
-
-					endforeach;
+					}
 
 					unset($result_tax);
 				}
