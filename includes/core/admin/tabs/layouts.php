@@ -43,7 +43,7 @@
 
                 <div class="manage-filters__section">
                     <label for="ymc-filter-layout" class="form-label">
-                        <?php echo esc_html__('Select Filter Layout', 'ymc-smart-filter');?>
+                        <?php echo esc_html__('Filter Layout', 'ymc-smart-filter');?>
                         <span class="information">
                     <?php echo esc_html__('Select design layout of filters.', 'ymc-smart-filter');?>
                 </span>
@@ -107,7 +107,7 @@
                 <div class="manage-filters__section multiple-section">
 
                     <label  class="form-label">
-                        <?php echo esc_html__('Multiple Taxonomy Filter', 'ymc-smart-filter');?>
+                        <?php echo esc_html__('Multiple Taxonomy', 'ymc-smart-filter');?>
                         <span class="information">
                     <?php echo esc_html__('Set Multiple Filter of Posts.', 'ymc-smart-filter');?>
                     </span>
@@ -137,7 +137,7 @@
 
                 <div class="manage-filters__section">
                     <label for="ymc-filter-layout" class="form-label">
-                        <?php echo esc_html__('Select Post Layout', 'ymc-smart-filter');?>
+                        <?php echo esc_html__('Post Layout', 'ymc-smart-filter');?>
                         <span class="information">
                     <?php echo esc_html__('Select style design layout for posts.', 'ymc-smart-filter');?>
                 </span>
@@ -173,7 +173,7 @@
 
                 <div class="manage-filters__section column-layout__section <?php echo esc_attr($col_layout_hide); ?>">
                     <label for="ymc-filter-layout" class="form-label">
-                        <?php echo esc_html__('Select Column Layout', 'ymc-smart-filter');?>
+                        <?php echo esc_html__('Column Layout', 'ymc-smart-filter');?>
                         <span class="information">
                     <?php echo esc_html__('Select column layout of posts for different screens.', 'ymc-smart-filter');?>
                 </span>

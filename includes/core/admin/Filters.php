@@ -37,8 +37,8 @@ class Filters {
 	public function ymc_post_layouts($layout) {
 
 		$layout = [
-			"post-layout1" => __('Grid Layout 1','ymc-smart-filter'),
-			"post-layout2" => __('Grid Layout 2','ymc-smart-filter'),
+			"post-layout1" => __('Grid Layout Standard','ymc-smart-filter'),
+			"post-layout2" => __('Grid Layout Mini','ymc-smart-filter'),
 			"post-masonry" => __('Masonry Layout','ymc-smart-filter'),
 			"post-layout3" => __('Full Width','ymc-smart-filter'),
 			"post-vi-timeline" => __('Vertical Timeline','ymc-smart-filter'),

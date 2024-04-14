@@ -111,7 +111,7 @@
                 <input type="hidden" name="ymc-suppress-filters" value="0">
                 <input class="ymc-suppress-filters" id="ymc-suppress-filters" type="checkbox" value="1" name="ymc-suppress-filters"
                     <?php echo esc_attr($checked_suppress_filters); ?>>
-                <label for="ymc-suppress-filters"><?php echo esc_html__('Disable Filters','ymc-smart-filter'); ?></label>
+                <label for="ymc-suppress-filters"><?php echo esc_html__('Disable','ymc-smart-filter'); ?></label>
             </div>
 
         </div>
@@ -156,7 +156,7 @@
         <div class="from-element">
 
             <label class="form-label">
-                <?php echo esc_html__('Select Extra Filter Layout', 'ymc-smart-filter');?>
+                <?php echo esc_html__('Extra Filter Layout', 'ymc-smart-filter');?>
                 <span class="information">
                     <?php _e('Select extra layout of filters. 
                     This filter will be located outside the current post grid filter anywhere on the page
@@ -203,7 +203,7 @@
 
         <div class="from-element">
             <label class="form-label">
-                <?php echo esc_html__('Add Custom Class', 'ymc-smart-filter');?>
+                <?php echo esc_html__('Custom Class', 'ymc-smart-filter');?>
                 <span class="information">
                     <?php echo esc_html__('This class will be added to the filter container.', 'ymc-smart-filter');?>
                 </span>
@@ -224,7 +224,7 @@
         <div class="form-group">
 
             <label class="form-label">
-                <?php esc_html_e('Choose Icon for Preloader', 'ymc-smart-filter'); ?>
+                <?php esc_html_e('Icon for Preloader', 'ymc-smart-filter'); ?>
                 <span class="information"><?php esc_html_e('Set icon for preloader while loading posts.', 'ymc-smart-filter'); ?></span>
             </label>
 
@@ -256,7 +256,7 @@
 
         <div class="form-group filter-list">
             <label class="form-label">
-                <?php esc_html_e('Apply a Filter CSS for Preloader Icon', 'ymc-smart-filter'); ?>
+                <?php esc_html_e('Filter CSS for Preloader Icon', 'ymc-smart-filter'); ?>
                 <span class="information"><?php esc_html_e('Choose a filter CSS to change the color of the icon.', 'ymc-smart-filter'); ?></span>
             </label>
             <select class="form-select ymc-filter-preloader" id="ymc-filter-preloader" name="ymc-preloader-filters">
@@ -315,7 +315,7 @@
         <div class="form-group">
 
             <label class="form-label">
-                <?php esc_html_e('Disable Page Scroll to Top', 'ymc-smart-filter'); ?>
+                <?php esc_html_e('Page Scroll to Top', 'ymc-smart-filter'); ?>
                 <span class="information"><?php esc_html_e('When you click on numeric pagination, page scroll to top.', 'ymc-smart-filter'); ?></span>
             </label>
 
@@ -324,7 +324,7 @@
                 <input type="hidden" name="ymc-scroll-page" value="1">
                 <input class="ymc-scroll-page" type="checkbox" value="0" name="ymc-scroll-page" id="ymc-scroll-page"
                     <?php echo esc_attr($checked_scroll_page); ?>>
-                <label for="ymc-scroll-page"><?php echo esc_html__('Disable Scroll','ymc-smart-filter'); ?></label>
+                <label for="ymc-scroll-page"><?php echo esc_html__('Disable','ymc-smart-filter'); ?></label>
             </div>
 
         </div>
