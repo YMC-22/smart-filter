@@ -36,15 +36,14 @@ $terms_sel   = $terms_selected;
 			</label>
 
 			<select class="form-select" multiple id="ymc-cpt-select" name="ymc-cpt-select[]" data-postid="<?php echo esc_attr($post->ID); ?>">
-				<!--<option value="post"><?php /*echo esc_html__('Post','ymc-smart-filter'); */?></option>-->
-				<?php
+			<?php
 				foreach( $cpost_types as $cpost_type ) {
 
 					$sel = ( array_search($cpost_type, $cpt) !== false ) ? 'selected' : '';
 
 					echo "<option value='" . esc_attr($cpost_type) ."' ". esc_attr($sel) .">" . esc_html( str_replace(['-','_'],' ', $cpost_type) ) . "</option>";
 				}
-				?>
+			?>
 			</select>
 
 		</div>
@@ -54,14 +53,12 @@ $terms_sel   = $terms_selected;
 			<label for="ymc-tax-checkboxes" class="form-label">
 				<?php echo esc_html__('Taxonomy','ymc-smart-filter'); ?>
 				<span class="information">
-        <?php echo esc_html__('Select taxonomy. Sortable with Drag & Drop feature.','ymc-smart-filter'); ?>
-        </span>
+                <?php echo esc_html__('Select taxonomy. Sortable with Drag & Drop feature.','ymc-smart-filter'); ?>
+                </span>
 			</label>
 
 			<div id="ymc-tax-checkboxes" class="ymc-tax-checkboxes" data-postid="<?php echo esc_attr($post->ID); ?>">
-
-				<?php
-
+			<?php
 				$data_object = get_object_taxonomies($cpt, $output = 'objects');
 				$taxo = [];
 
@@ -113,11 +110,9 @@ $terms_sel   = $terms_selected;
 				else {
 					echo '<span class="notice">'. esc_html__('No data for taxonomies', 'ymc-smart-filter') .'</span>';
 				}
-				?>
-
+			?>
 			</div>
-
-			<span class="ymc-btn-reload tax-reload" title="Reload Taxonomy"><i class="fas fa-redo"></i></span>
+			<span class="ymc-btn-reload tax-reload" title="Update taxonomies. The current texonomies and terms settings will be reset."><i class="fas fa-redo"></i></span>
 
 		</div>
 

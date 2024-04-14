@@ -105,11 +105,11 @@ class Ajax {
 
 		$data = array(
 			'data' => json_encode($arr_tax_result),
-			'lists_posts' => json_encode($arr_posts)
+			'lists_posts' => json_encode($arr_posts),
+			'found_posts' => $query->found_posts
 		);
 
 		wp_send_json($data);
-
 	}
 
 	public function ymc_get_terms() {

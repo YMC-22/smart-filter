@@ -41,6 +41,7 @@
             let termWrp     = $('#ymc-terms');
             let choicesList = $('#selection-posts .choices-list');
             let valuesList  = $('#selection-posts .values-list');
+            let foundPosts = $('#selection-posts .choices .number-posts');
             let cpts = '';
 
             $("#ymc-cpt-select :selected").map(function(i, el) {
@@ -94,6 +95,7 @@
 
                     valuesList.empty();
                     choicesList.empty();
+                    foundPosts.html(res.found_posts);
 
                     if(Object.keys(dataPosts).length > 0) {
                         for (let key in dataPosts) {
