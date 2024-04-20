@@ -704,6 +704,23 @@ class Meta_Boxes {
 					$is_filters_ids[] = $filter->ID;
 					$is_shortcode = true;
 				}
+
+				if( is_single() )
+				{
+					$url  = get_the_permalink( get_the_ID() );
+					$data = file_get_contents( $url );
+
+					if( $data !== false )
+					{
+						$pos  = strpos( $data, "ymc-filter-".$filter->ID );
+
+						if( $pos !== false )
+						{
+							$is_filters_ids[] = $filter->ID;
+							$is_shortcode = true;
+						}
+					}
+				}
 			}
 
 			if( $is_shortcode )
@@ -729,7 +746,8 @@ class Meta_Boxes {
 			}
 		}
 
-		if( is_admin() ) {
+		if( is_admin() )
+		{
 			$wp_admin_bar->remove_node('ymc-filter-grids');
 		}
 	}
