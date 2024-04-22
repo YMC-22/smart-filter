@@ -708,7 +708,7 @@ class Meta_Boxes {
 				if( is_single() )
 				{
 					$url  = get_the_permalink( get_the_ID() );
-					$data = file_get_contents( $url );
+					$data = $this->ymc_get_content( $url );
 
 					if( $data !== false )
 					{
@@ -750,6 +750,17 @@ class Meta_Boxes {
 		{
 			$wp_admin_bar->remove_node('ymc-filter-grids');
 		}
+	}
+
+
+	public function ymc_get_content( $url )
+	{
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_URL, $url);
+		$data = curl_exec($ch);
+		curl_close($ch);
+		return $data;
 	}
 
 }
