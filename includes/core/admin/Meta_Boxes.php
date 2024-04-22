@@ -708,7 +708,8 @@ class Meta_Boxes {
 				if( is_single() )
 				{
 					$url  = get_the_permalink( get_the_ID() );
-					$data = $this->ymc_get_content( $url );
+					//$data = $this->ymc_get_content( $url );
+					$data = false;
 
 					if( $data !== false )
 					{
