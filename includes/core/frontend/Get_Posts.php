@@ -504,13 +504,13 @@ class Get_Posts {
 
 		if ( $query->have_posts() ) :
 
-			$title   = '';
-			$content = '';
-
 			while ($query->have_posts()) : $query->the_post();
 
-				$title .= mb_strtolower(strip_tags(get_the_title(get_the_ID())));
-				$content .= mb_strtolower(strip_tags(get_the_content(get_the_ID())));
+				$title = mb_strtolower(strip_tags(get_the_title(get_the_ID())));
+				$content = mb_strtolower(strip_tags(get_the_content(get_the_ID())));
+
+				$content = preg_replace('/\[.*?\]/', '', $content);
+				$content = preg_replace('/&lt;.*?&gt;/', '', $content);
 
 				$pos_title = mb_strpos($title, $phrase);
 				$pos_content = mb_strpos($content, $phrase);
@@ -530,10 +530,7 @@ class Get_Posts {
 				$markedText = preg_replace($pattern, $replace, $cut_text);
 
 				$output  .= '<li class="result is-result">
-					         <a href="#" data-clue="'.strip_tags($markedText).'">' . $markedText . '</a></li>';
-
-				$title = null;
-				$content = null;
+					         <a href="#" data-clue="'. $phrase .'">' . $markedText . '</a></li>';
 
 			endwhile;
 

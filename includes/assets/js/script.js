@@ -1378,7 +1378,7 @@
                             isChildElems.forEach((el, n) => {
                                 if( n === 0 ) {
                                     el.classList.add('selected');
-                                    _self.val(el.children[0].innerText);
+                                    //_self.val(el.children[0].innerText);
                                 }
                             });
                         }
@@ -1402,7 +1402,7 @@
                                         isChildElems[position].classList.remove('selected');
                                         isChildElems[position+1].classList.add('selected');
                                         isChildElems[position+1].scrollIntoView({ block: "end" });
-                                        _self.val(isChildElems[position+1].children[0].innerText);
+                                        //_self.val(isChildElems[position+1].children[0].innerText);
                                     }
                                 }
                             }
@@ -1423,7 +1423,7 @@
                                         isChildElems[position-1].classList.add('selected');
                                         isChildElems[position].classList.remove('selected');
                                         isChildElems[position].scrollIntoView({ block: "end" });
-                                        _self.val(isChildElems[position-1].children[0].innerText);
+                                        //_self.val(isChildElems[position-1].children[0].innerText);
                                     }
                                 }
                             }
