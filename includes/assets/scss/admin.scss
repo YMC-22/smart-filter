@@ -987,6 +987,32 @@ $font-size: 16;
 	}
 }
 
+#ymc_side_meta_box_advertising {
+	background: #FFC107;
+	background: linear-gradient(194deg, #FFC107 0%, #FFC107 62%, #FFC107 100%);
+	.handle-actions {
+		display: none;
+	}
+	.postbox-header {
+		border: none;
+	}
+	h2.hndle.ui-sortable-handle {
+		font-size: 18px;
+		background: #032f3f;
+		color: #fff;
+	}
+	.inside {
+		margin: 0;
+		padding: 0;
+		.fg-plugin-banner {
+			color: #032f3f;
+			padding: 20px 15px;
+			font-weight: 600;
+			font-size: 16px;
+		}
+	}
+}
+
 #ymc_side_meta_box {
 	background: rgb(3,74,99);
 	background: linear-gradient(194deg, rgba(3,74,99,1) 0%, rgba(9,138,184,1) 62%, rgba(67,224,255,1) 100%);

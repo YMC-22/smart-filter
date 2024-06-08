@@ -476,9 +476,21 @@ class Meta_Boxes {
 
 		add_meta_box( 'ymc_top_meta_box' , __('Settings','ymc-smart-filter'), array($this,'ymc_top_meta_box'), 'ymc_filters', 'normal', 'core');
 
+		add_meta_box( 'ymc_side_meta_box_advertising' , __('Advanced Functionality','ymc-smart-filter'), array($this,'ymc_side_meta_box_advertising'), 'ymc_filters', 'side', 'core');
+
 		add_meta_box( 'ymc_side_meta_box' , __('Filter & Grids Features','ymc-smart-filter'), array($this,'ymc_side_meta_box'), 'ymc_filters', 'side', 'core');
 
 	}
+
+	public function ymc_side_meta_box_advertising() { ?>
+
+		<article class="fg-plugin-features">
+			<div class="fg-plugin-banner">
+				<?php esc_html_e('Our Team accepts orders for the development of custom Filters of any complexity for your design. Please, email us:','ymc-smart-filter');?> <a href="mailto:wss.office21@gmail.com">wss.office21@gmail.com</a>
+			</div>
+		</article>
+
+	<?php }
 
 	public function ymc_top_meta_box() { ?>
 
@@ -646,6 +658,7 @@ class Meta_Boxes {
 				<li><?php echo esc_html__('Support Masonry Layout.','ymc-smart-filter'); ?></li>
 				<li><?php echo esc_html__('Convenient API for interacting and managing post filtering.','ymc-smart-filter'); ?></li>
 				<li><?php echo esc_html__('Export / Import settings.','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('Compatible with multilingual WPML plugin','ymc-smart-filter'); ?></li>
 				<li class="button">
 					<a href="https://github.com/YMC-22/smart-filter" target="_blank">
 						<span class="dashicons dashicons-visibility"></span>View Documentation</a>

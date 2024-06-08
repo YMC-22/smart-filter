@@ -1,12 +1,12 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.8.30
+Version: 2.8.31
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
 Tags: filter, grid, ajax, search, sort
 Requires at least: 4.8
 Tested up to: 6.5
-Stable tag: 2.8.30
+Stable tag: 2.8.31
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -22,6 +22,7 @@ The plugin supports custom post types. You can filter custom post types with the
 
 == Plugin Features ==
 The plugin provides the following functionality:
+- Development of custom Filters for your design.
 - Selecting one or more post types to display different posts in a grid.
 - Sorting taxonomies and terms.
 - Installation of different types of pagination (Numeric, Load more, Scroll infinity).
@@ -46,6 +47,7 @@ The plugin provides the following functionality:
 - Support Masonry Layout.
 - Convenient API for interacting and managing post filtering.
 - Export / Import settings.
+- Compatible with multilingual WPML plugin
 
 == Installation ==
 
@@ -74,7 +76,8 @@ Detailed information can be found on GitHub at this <a target="_blank" href="htt
 
 == Changelog ==
 
-
+= 2.8.31 =
+Fixed JS & CSS grid posts
 = 2.8.29 =
 Fixed Autocomplete Search
 = 2.8.25 =
