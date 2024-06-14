@@ -304,7 +304,7 @@ class Get_Posts {
 				include_once $file_layout;
 				$message = 'Post Layout is available';
 			else :
-				echo "<div class='ymc-error'>" . esc_html('Post Layout is not available.', 'ymc-smart-filter') . "</div>";
+				echo "<div class='ymc-error'>" . esc_html__('Post Layout is not available.', 'ymc-smart-filter') . "</div>";
 				$message = 'Post Layout is not available';
 			endif;
 
@@ -327,7 +327,7 @@ class Get_Posts {
 
 		else :
 			echo "<div class='ymc-notification'>" . esc_html($ymc_empty_post_result, 'ymc-smart-filter') . "</div>";
-			$message = esc_html('No posts found','ymc-smart-filter');
+			$message = esc_html__('No posts found','ymc-smart-filter');
 		endif;
 
 		$output .= ob_get_contents();
