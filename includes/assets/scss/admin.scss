@@ -710,28 +710,37 @@ $font-size: 16;
 								font-size: 15px;
 							}
 						}
-						.ymc-btn-reload {
-							position: absolute;
-							right: 10px;
-							top: 5px;
-							display: inline-block;
-							width: 22px;
-							height: 22px;
-							cursor: pointer;
-							border: 1px solid #ccc;
-							padding: 7px;
-							background: #f6f6f6;
-							transition: .3s;
-							i {
-								font-size: 22px;
-							}
-							&:hover {
-								background: #e1e1e1;
+
+						.multi-buttons {
+							text-align: right;
+							.ymc-btn-reload,
+							.ymc-btn-delete	{
+								position: relative;
+								right: 10px;
+								top: 0;
+								display: inline-block;
+								width: 22px;
+								height: 22px;
+								cursor: pointer;
+								border: 1px solid #ccc;
+								padding: 7px;
+								background: #f6f6f6;
+								transition: .3s;
 								i {
-									color: #000;
+									font-size: 22px;
+								}
+								&:hover {
+									background: #e1e1e1;
+									i {
+										color: #000;
+									}
 								}
 							}
+							.ymc-btn-reload {
+								right: 15px;
+							}
 						}
+
 						.search-posts {
 							input[type="search"] {
 								border: 1px solid #e0e4e9;

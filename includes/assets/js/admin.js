@@ -204,9 +204,15 @@
 
         });
 
-       // Reload Taxonomy
+
+        // Delete Taxonomies
+        $(document).on('click','.ymc__container-settings #general .tax-delete',function (e) {
+            $('.ymc__container-settings #general #ymc-cpt-select').trigger('change');
+        });
+
+        // UpdatedTaxonomies
         $(document).on('click','.ymc__container-settings #general .tax-reload',function (e) {
-            $('.ymc__container-settings #general #ymc-cpt-select').trigger('change')
+            location.reload();
         });
 
         // Set Cookie
