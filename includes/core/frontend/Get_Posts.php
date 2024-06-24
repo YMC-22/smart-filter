@@ -300,7 +300,7 @@ class Get_Posts {
 			$file_layout = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/post/" . $post_layout . ".php";
 
 			// Post Layout
-			if ( file_exists($file_layout) ) :
+			if ( file_exists($file_layout) && in_array($post_layout, whitelist_post_layouts()) ) :
 				include_once $file_layout;
 				$message = 'Post Layout is available';
 			else :

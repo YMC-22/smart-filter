@@ -189,6 +189,30 @@ if( !function_exists('setSelectedIcon') )
 	}
 }
 
+/**
+ * Whitelist Post Layouts Function
+ * This function returns an array of allowed post layouts.
+ * @return array List of allowed post layouts
+ */
+if( !function_exists('whitelist_post_layouts') )
+{
+	function whitelist_post_layouts()
+	{
+		$allowed_layouts = [
+			'post-layout1',
+			'post-layout2',
+			'post-layout3',
+			'post-masonry',
+			'post-vi-timeline',
+			'post-custom-masonry',
+			'post-custom-layout'
+		];
+
+		return $allowed_layouts;
+	}
+}
+
+
 
 
 
