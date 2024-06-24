@@ -36,7 +36,7 @@ class Load_Scripts {
 		wp_localize_script( 'smart-filter-'.$this->generate_handle(), '_smart_filter_object',
 			array(
 				'ajax_url' => admin_url('admin-ajax.php'),
-				'nonce'    => wp_create_nonce('custom_ajax_nonce'),
+				'nonce'    => wp_create_nonce('save-settings-filter-grids'),
 				'current_page' => 1,
 				'path' => YMC_SMART_FILTER_URL
 			));
