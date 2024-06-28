@@ -3,6 +3,7 @@
 namespace YMC_Smart_Filters\Core\Frontend;
 
 use YMC_Smart_Filters\Plugin;
+use YMC_Smart_Filters\Core\Admin\Filters;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -24,7 +25,7 @@ class Get_Posts {
 
 	public function get_filter_posts() {
 
-		if (!wp_verify_nonce($_POST['nonce_code'], 'custom_ajax_nonce')) exit;
+		if ( !wp_verify_nonce($_POST['nonce_code'], Plugin::$instance->token_f) ) exit;
 
 		$output  = '';
 		$message = '';
@@ -300,7 +301,7 @@ class Get_Posts {
 			$file_layout = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/post/" . $post_layout . ".php";
 
 			// Post Layout
-			if ( file_exists($file_layout) && in_array($post_layout, whitelist_post_layouts()) ) :
+			if ( file_exists($file_layout) && in_array($post_layout, $this->whitelist_post_layouts($post_layout)) ) :
 				include_once $file_layout;
 				$message = 'Post Layout is available';
 			else :
@@ -360,6 +361,13 @@ class Get_Posts {
 		wp_send_json($data);
 	}
 
+	public function whitelist_post_layouts($post_layout) {
+
+		$filters = new Filters();
+
+		return array_keys( $filters->ymc_post_layouts($post_layout) );
+	}
+
 	public function search_join( $join ) {
 
 		global $wpdb;
@@ -387,7 +395,7 @@ class Get_Posts {
 
 	public function autocomplete_search() {
 
-		if ( !wp_verify_nonce($_POST['nonce_code'], 'custom_ajax_nonce') ) exit;
+		if ( !wp_verify_nonce($_POST['nonce_code'], Plugin::$instance->token_f) ) exit;
 
 		$output  = '';
 		$phrase = trim(mb_strtolower(sanitize_text_field($_POST['phrase'])));
@@ -561,7 +569,7 @@ class Get_Posts {
 
 	public function get_post_popup() {
 
-		if (!wp_verify_nonce($_POST['nonce_code'], 'custom_ajax_nonce')) exit;
+		if ( !wp_verify_nonce($_POST['nonce_code'], Plugin::$instance->token_f) ) exit;
 
 		$output = '';
 		$post_id = (int) $_POST['post_id'];

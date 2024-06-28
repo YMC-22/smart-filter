@@ -42,8 +42,8 @@ class Filters {
 			"post-masonry" => __('Masonry Layout','ymc-smart-filter'),
 			"post-layout3" => __('Full Width','ymc-smart-filter'),
 			"post-vi-timeline" => __('Vertical Timeline','ymc-smart-filter'),
-			"post-custom-layout"  => 'Custom Layout',
-			"post-custom-masonry" => 'Custom Masonry Layout'
+			"post-custom-layout"  =>  __('Custom Layout','ymc-smart-filter'),
+			"post-custom-masonry" => __('Custom Masonry Layout','ymc-smart-filter')
 		];
 
 		return $layout;
@@ -51,9 +51,9 @@ class Filters {
 
 	public function ymc_pagination_type($type) {
 		$type = [
-			"numeric" => 'Numeric',
-			"load-more" => 'Load more',
-			"scroll-infinity" => 'Scroll infinity'
+			"numeric" => __('Numeric', 'ymc-smart-filter'),
+			"load-more" => __('Load more', 'ymc-smart-filter'),
+			"scroll-infinity" => __('Scroll infinity', 'ymc-smart-filter')
 		];
 
 		return $type;
@@ -61,18 +61,18 @@ class Filters {
 
 	public function ymc_order_post_by($order) {
 		$order = [
-			"title" => 'Title',
-			"name" =>  'Name',
-			"date" =>  'Date',
-			"ID" =>    'ID',
-			"author" => 'Author',
-			"modified" => 'Modified',
-			"type" => 'Type',
-			"parent" => 'Parent',
-			"rand" => 'Rand',
-			"menu_order" => 'Menu Order',
-			"meta_key" => "Meta Key",
-			"multiple_fields" => "Multiple sort"
+			"title" => __('Title', 'ymc-smart-filter'),
+			"name" =>  __('Name', 'ymc-smart-filter'),
+			"date" =>  __('Date', 'ymc-smart-filter'),
+			"ID" =>    __('ID', 'ymc-smart-filter'),
+			"author" => __('Author', 'ymc-smart-filter'),
+			"modified" => __('Modified', 'ymc-smart-filter'),
+			"type" => __('Type','ymc-smart-filter'),
+			"parent" => __('Parent','ymc-smart-filter'),
+			"rand" => __('Rand','ymc-smart-filter'),
+			"menu_order" => __('Menu Order','ymc-smart-filter'),
+			"meta_key" => __("Meta Key",'ymc-smart-filter'),
+			"multiple_fields" => __("Multiple sort",'ymc-smart-filter'),
 			//"multiple_meta_fields" => "Multiple Metafields Sort"
 		];
 
@@ -81,10 +81,10 @@ class Filters {
 
 	public function ymc_filter_font($font) {
 		$font = [
-			"inherit" => 'Default',
-			"OpenSans" =>  'OpenSans',
-			"Roboto" =>  'Roboto',
-			"PlayfairDisplay" =>    'Playfair Display'
+			"inherit" => __('Default','ymc-smart-filter'),
+			"OpenSans" =>  __('OpenSans','ymc-smart-filter'),
+			"Roboto" =>  __('Roboto','ymc-smart-filter'),
+			"PlayfairDisplay" =>  __('Playfair Display','ymc-smart-filter')
 		];
 
 		return $font;
@@ -92,10 +92,10 @@ class Filters {
 
 	public function ymc_post_font($font) {
 		$font = [
-			"inherit" => 'Default',
-			"OpenSans" =>  'OpenSans',
-			"Roboto" =>  'Roboto',
-			"PlayfairDisplay" =>  'Playfair Display'
+			"inherit" => __('Default','ymc-smart-filter'),
+			"OpenSans" =>  __('OpenSans', 'ymc-smart-filter'),
+			"Roboto" =>  __('Roboto', 'ymc-smart-filter'),
+			"PlayfairDisplay" =>  __('Playfair Display', 'ymc-smart-filter')
 		];
 
 		return $font;
