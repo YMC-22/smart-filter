@@ -572,7 +572,11 @@
         }
 
 
-        // Main Request
+        /**
+         * Main Request function to get filter posts based on options provided.
+         *
+         * @param {Object} options - The options object containing paged, toggle_pg, target, and type_pg.
+         */
         function getFilterPosts( options ) {
 
             let paged     = options.paged;
@@ -627,31 +631,6 @@
                     }
 
                     switch ( type_pg ) {
-
-                        case 'numeric' :
-
-                            // Filter is act scroll top
-                            if( !container.hasClass('ymc-loaded-filter') ) {
-                                if( toggle_pg === 1 && parseInt(pageScroll) === 1 ) {
-                                    $('html, body').animate({scrollTop: container.offset().top - 100}, 500);
-                                }
-                            }
-
-                            container.
-                            find('.container-posts').
-                            removeClass('loading').
-                            find('.preloader').
-                            remove().
-                            end().
-                            find('.post-entry').
-                            html(res.data).
-                            end().
-                            find('.ymc-pagination').
-                            remove().
-                            end().
-                            append(res.pagin);
-
-                            break;
 
                         case 'load-more' :
 
@@ -727,6 +706,28 @@
                             }
 
                             break;
+
+                        default :
+                            // Filter is act scroll top
+                            if( ! container.hasClass('ymc-loaded-filter') ) {
+                                if( toggle_pg === 1 && parseInt(pageScroll) === 1 ) {
+                                    $('html, body').animate({scrollTop: container.offset().top - 100}, 500);
+                                }
+                            }
+
+                            container.
+                            find('.container-posts').
+                            removeClass('loading').
+                            find('.preloader').
+                            remove().
+                            end().
+                            find('.post-entry').
+                            html(res.data).
+                            end().
+                            find('.ymc-pagination').
+                            remove().
+                            end().
+                            append(res.pagin);
                     }
 
                     // Updated attr data-loading

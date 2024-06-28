@@ -314,13 +314,12 @@ class Get_Posts {
 
 				switch ( $type_pagination ) :
 
-					case 'numeric' :
-						$pagin = Plugin::instance()->pagination->number( $query, $paged, $type_pagination, $filter_id, $target_id, $ymc_pagination_elements );
-						break;
-
 					case 'load-more' :
 						$pagin = Plugin::instance()->pagination->load_more( $query, $paged, $type_pagination, $filter_id, $target_id, $ymc_pagination_elements );
 						break;
+
+					default :
+						$pagin = Plugin::instance()->pagination->number( $query, $paged, 'numeric', $filter_id, $target_id, $ymc_pagination_elements );
 
 				endswitch;
 
@@ -350,7 +349,7 @@ class Get_Posts {
 			'max_num_pages' => $query->max_num_pages,
 			'post_count' => $query->post_count,
 			'get_current_posts' => ($query->found_posts - $paged * $per_page),
-			'pagin' => !empty($pagin) ? $pagin : '',
+			'pagin' => $pagin,
 			'paged' => $paged,
 			'meta_query' => $meta_params,
 			'date_query' => $date_params,
