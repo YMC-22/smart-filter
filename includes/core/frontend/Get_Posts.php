@@ -25,7 +25,7 @@ class Get_Posts {
 
 	public function get_filter_posts() {
 
-		if ( !wp_verify_nonce($_POST['nonce_code'], Plugin::$instance->token_f) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], Plugin::$instance->token_f) ) exit;
 
 		$output  = '';
 		$message = '';
@@ -394,7 +394,7 @@ class Get_Posts {
 
 	public function autocomplete_search() {
 
-		if ( !wp_verify_nonce($_POST['nonce_code'], Plugin::$instance->token_f) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], Plugin::$instance->token_f) ) exit;
 
 		$output  = '';
 		$phrase = trim(mb_strtolower(sanitize_text_field($_POST['phrase'])));
@@ -568,7 +568,7 @@ class Get_Posts {
 
 	public function get_post_popup() {
 
-		if ( !wp_verify_nonce($_POST['nonce_code'], Plugin::$instance->token_f) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], Plugin::$instance->token_f) ) exit;
 
 		$output = '';
 		$post_id = (int) $_POST['post_id'];

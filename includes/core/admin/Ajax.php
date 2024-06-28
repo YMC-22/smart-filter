@@ -17,42 +17,31 @@ class Ajax {
 		$this->token = Plugin::$instance->token_b;
 
 		add_action('wp_ajax_ymc_get_taxonomy',array($this, 'ymc_get_taxonomy'));
-		add_action("wp_ajax_nopriv_ymc_get_taxonomy",array($this, 'ymc_get_taxonomy'));
 
 		add_action('wp_ajax_ymc_get_terms',array($this, 'ymc_get_terms'));
-		add_action("wp_ajax_nopriv_ymc_get_terms", array($this, 'ymc_get_terms'));
 
 		add_action('wp_ajax_ymc_tax_sort',array($this, 'ymc_tax_sort'));
-		add_action("wp_ajax_nopriv_ymc_tax_sort", array($this, 'ymc_tax_sort'));
 
 		add_action('wp_ajax_ymc_term_sort',array($this, 'ymc_term_sort'));
-		add_action("wp_ajax_nopriv_ymc_term_sort", array($this, 'ymc_term_sort'));
 
 		add_action('wp_ajax_ymc_delete_choices_posts',array($this, 'ymc_delete_choices_posts'));
-		add_action("wp_ajax_nopriv_ymc_delete_choices_posts", array($this, 'ymc_delete_choices_posts'));
 
 		add_action('wp_ajax_ymc_delete_choices_icons',array($this, 'ymc_delete_choices_icons'));
-		add_action("wp_ajax_nopriv_ymc_delete_choices_icons", array($this, 'ymc_delete_choices_icons'));
 
 		add_action('wp_ajax_ymc_options_icons',array($this, 'ymc_options_icons'));
-		add_action("wp_ajax_nopriv_ymc_options_icons", array($this, 'ymc_options_icons'));
 
 		add_action('wp_ajax_ymc_updated_posts',array($this, 'ymc_updated_posts'));
-		add_action("wp_ajax_nopriv_ymc_updated_posts", array($this, 'ymc_updated_posts'));
 
 		add_action('wp_ajax_ymc_options_terms',array($this, 'ymc_options_terms'));
-		add_action("wp_ajax_nopriv_ymc_options_terms", array($this, 'ymc_options_terms'));
 
 		add_action( 'wp_ajax_ymc_export_settings', array( $this, 'ymc_export_settings'));
-		add_action( 'wp_ajax_nopriv_ymc_export_settings', array( $this, 'ymc_export_settings'));
 
 		add_action( 'wp_ajax_ymc_import_settings', array( $this, 'ymc_import_settings'));
-		add_action( 'wp_ajax_nopriv_ymc_import_settings', array( $this, 'ymc_import_settings'));
 	}
 
 	public function ymc_get_taxonomy() {
 
-		if ( !wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
 
 		if(isset($_POST["cpt"])) {
 			$post_types = sanitize_text_field($_POST["cpt"]);
@@ -119,7 +108,7 @@ class Ajax {
 
 	public function ymc_get_terms() {
 
-		if ( !wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
 
 		if(isset($_POST["taxonomy"])) {
 			$taxonomy = sanitize_text_field($_POST["taxonomy"]);
@@ -142,7 +131,7 @@ class Ajax {
 
 	public function ymc_tax_sort() {
 
-		if ( !wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
 
 		if(isset($_POST["tax_sort"])) {
 
@@ -162,7 +151,7 @@ class Ajax {
 
 	public function ymc_term_sort() {
 
-		if ( !wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
 
 		if(isset($_POST["term_sort"])) {
 
@@ -182,7 +171,7 @@ class Ajax {
 
 	public function ymc_delete_choices_posts() {
 
-		if ( !wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
 
 		if(isset($_POST["post_id"])) {
 			$id = delete_post_meta( (int) $_POST["post_id"], 'ymc_choices_posts' );
@@ -197,7 +186,7 @@ class Ajax {
 
 	public function ymc_delete_choices_icons() {
 
-		if ( !wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
 
 		if(isset($_POST["post_id"])) {
 			$idIcons = delete_post_meta( (int) $_POST["post_id"], 'ymc_terms_icons' );
@@ -212,7 +201,7 @@ class Ajax {
 
 	public function ymc_options_icons() {
 
-		if ( !wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
 
 		$postedData = $_POST['params'];
 		$tempData   = str_replace("\\", "",$postedData);
@@ -231,7 +220,7 @@ class Ajax {
 
 	public function ymc_updated_posts() {
 
-		if ( !wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
 
 		$cpt = $_POST['cpt'];
 		$tax = $_POST['tax'];
@@ -310,7 +299,7 @@ class Ajax {
 
 	public function ymc_options_terms() {
 
-		if ( !wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
 
 		$postedData = $_POST['params'];
 		$tempData   = str_replace("\\", "",$postedData);
@@ -329,7 +318,7 @@ class Ajax {
 
 	public function ymc_export_settings() {
 
-		if ( !wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
 
 		$post_id = sanitize_text_field($_POST["post_id"]);
 
@@ -352,7 +341,7 @@ class Ajax {
 
 	public function ymc_import_settings() {
 
-		if ( !wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
 
 		$post_id = sanitize_text_field($_POST["post_id"]);
 		$posted_data = $_POST['params'];
