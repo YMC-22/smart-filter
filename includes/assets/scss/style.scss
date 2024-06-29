@@ -1635,7 +1635,6 @@ $font-size: 16;
 				padding: 10px 10px;
 				text-decoration: none;
 				text-align: center;
-				border: 1px solid #e0e4e9;
 				border-radius: 0;
 				min-width: 30px;
 				font-size: 14px;
@@ -1666,7 +1665,8 @@ $font-size: 16;
 			padding: 5px 10px;
 			text-decoration: none;
 			transition: .3s;
-			color: #098ab8;
+			background-color: #098ab8;
+			color: #fff;
 			border: 1px solid #098ab8;
 			font-size: 14px;
 		}

@@ -414,6 +414,12 @@ class Meta_Boxes {
 			update_post_meta( $post_id, 'ymc_pagination_elements', $ymc_pagination_elements );
 		}
 
+		// Enable Debug
+		if( isset($_POST['ymc-debug-code']) ) {
+			$ymc_debug_code = sanitize_text_field( $_POST['ymc-debug-code']);
+			update_post_meta( $post_id, 'ymc_debug_code', $ymc_debug_code );
+		}
+
 	}
 
 	public function ymc_attached_filters() {

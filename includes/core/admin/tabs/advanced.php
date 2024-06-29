@@ -331,4 +331,35 @@
 
     </div>
 
+    <header class="sub-header" data-class-name="debug-code">
+        <i class="fas fa-code"></i>
+        <?php echo esc_html__('Debug', 'ymc-smart-filter'); ?>
+        <i class="fas fa-chevron-down form-arrow"></i>
+    </header>
+
+    <div class="form-wrapper debug-code">
+
+        <div class="form-group">
+
+            <label class="form-label">
+                <?php esc_html_e('Response Parameters', 'ymc-smart-filter'); ?>
+                <span class="information"><?php esc_html_e('Use Chrome DevTools or other tools in other browsers to 
+                analyze and view the response from the server when sending requests. To do this, select the Network tab, 
+                then select the current request and in the Preview tab you will see additional response parameters. 
+                The response will display a Debug section with additional information. This is useful for debugging requests 
+                using the JS-hooks plugin and development of custom scripts. For production, disable this option for security!', 'ymc-smart-filter'); ?></span>
+            </label>
+
+            <div class="group-elements">
+                <?php $checked_debug_code =  ( (int) $ymc_debug_code === 1 ) ? 'checked' : ''; ?>
+                <input type="hidden" name="ymc-debug-code" value="0">
+                <input class="ymc-debug-code" type="checkbox" value="1" name="ymc-debug-code" id="ymc-debug-code"
+                    <?php echo esc_attr($checked_debug_code); ?>>
+                <label for="ymc-debug-code"><?php echo esc_html__('Enable','ymc-smart-filter'); ?></label>
+            </div>
+
+        </div>
+
+    </div>
+
 </div>

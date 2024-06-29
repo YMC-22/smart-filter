@@ -13,7 +13,6 @@ if( ! defined('WP_UNINSTALL_PLUGIN') ) exit;
 
 global $wpdb;
 
-// Delete data from table wp_postmeta
 $wpdb->get_results('DELETE FROM wp_postmeta WHERE meta_key IN (
                                   "ymc_cpt_value", 
                                   "ymc_taxonomy", 
@@ -78,11 +77,11 @@ $wpdb->get_results('DELETE FROM wp_postmeta WHERE meta_key IN (
                                   "ymc_filter_extra_layout",
                                   "ymc_post_elements",
                                   "ymc_pagination_elements",
-                                  "ymc_exact_phrase"
+                                  "ymc_exact_phrase",
+                                  "ymc_debug_code"
                                 )');
 
 
-// Delete data from table wp_posts
 $wpdb->get_results('DELETE FROM wp_posts WHERE post_type IN ("ymc_filters")');
 
 
