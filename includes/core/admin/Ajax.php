@@ -324,11 +324,17 @@ class Ajax {
 
 		$need_options = [];
 		$options = get_post_meta( $post_id );
-		foreach ( $options as $key => $value ) {
-			if( $key !== '_edit_lock' && $key !== '_edit_last' ) {
-				foreach ( $value as $item ) {
-					$val = maybe_unserialize($item);
-					$need_options[$key] = $val;
+
+		if( is_array($options) && !empty($options) )
+		{
+			foreach ( $options as $key => $value )
+			{
+				if( substr($key, 0, 4) === 'ymc_' )
+				{
+					foreach ( $value as $item ) {
+						$val = maybe_unserialize($item);
+						$need_options[$key] = $val;
+					}
 				}
 			}
 		}
@@ -349,16 +355,18 @@ class Ajax {
 		$clean_data = json_decode($temp_data, true);
 		$status = 0;
 
-		if( is_array($clean_data) && count($clean_data) > 0 ) {
-
-			foreach ( $clean_data as $meta_key => $meta_value ) {
+		if( is_array($clean_data) && count($clean_data) > 0 )
+		{
+			foreach ( $clean_data as $meta_key => $meta_value )
+			{
 				update_post_meta( $post_id, $meta_key, $meta_value );
 			}
-			$mesg = __('Imported settings successfully.','ymc-smart-filter');
+
+			$mesg = __('Imported settings successfully','ymc-smart-filter');
 			$status = 1;
 		}
 		else {
-			$mesg = __('Import of settings unsuccessful.','ymc-smart-filter');
+			$mesg = __('Import of settings unsuccessful. Try again.','ymc-smart-filter');
 		}
 
 		$data = array(

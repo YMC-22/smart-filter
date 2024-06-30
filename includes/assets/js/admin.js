@@ -683,14 +683,17 @@
                             },
                             success: function (res) {
                                 container.removeClass('loading').find('.preloader').remove();
-                                $(infoUploaded).html(res.mesg + ' <a href="javascript:;" onclick="location.reload();">Reload page</a>');
 
                                 if( res.status === 1 ) {
                                     $(infoUploaded).addClass('info-uploaded--seccess').removeClass('info-uploaded--error');
                                     input.value = '';
+                                    $(infoUploaded).html(res.mesg + `, wait... <img class="import-img" src="${_smart_filter_object.path+"/includes/assets/images/preloader_3.svg"}">`);
+                                    location.reload();
+                                    // document.querySelector('#major-publishing-actions input[type="submit"]').click();
                                 }
                                 else {
                                     $(infoUploaded).removeClass('info-uploaded--seccess').addClass('info-uploaded--error');
+                                    $(infoUploaded).html(res.mesg);
                                 }
                             },
                             error: function (obj, err) {

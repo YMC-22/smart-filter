@@ -950,6 +950,8 @@ $font-size: 16;
 						}
 
 						.info-uploaded {
+							display: flex;
+							align-items: center;
 							font-size: 14px;
 							&--seccess {
 								color: #28bc28;
@@ -965,6 +967,10 @@ $font-size: 16;
 							}
 							&:empty {
 								display: none;
+							}
+							.import-img {
+								width: 50px;
+								margin-left: 20px;
 							}
 						}
 

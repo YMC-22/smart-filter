@@ -51,7 +51,7 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 
             foreach ($terms_selected as $term) {
 
-                $arr_taxonomies[] = get_term( $term )->taxonomy;
+	            $arr_taxonomies[] = ( ! is_wp_error( get_term( $term ) ) && ! is_null( get_term( $term ) ) ) ? get_term( $term )->taxonomy : null;
             }
             $arr_taxonomies = array_unique($arr_taxonomies);
 
@@ -113,10 +113,14 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 
                 foreach ($terms_selected as $term)
 				{
-                    if( $tax === get_term( $term )->taxonomy )
-					{
 
-                     $is_disabled = ( get_term( $term )->count === 0 ) ? 'isDisabled' : '';
+					$object_term = get_term( $term );
+
+					if( is_wp_error( $object_term ) || is_null( $object_term ) ) continue;
+
+                    if( $tax === $object_term->taxonomy )
+					{
+                        $is_disabled = ( $object_term->count === 0 ) ? 'isDisabled' : '';
 
 						// Set Options for Icon
 						setOptionsIcon( $ymc_terms_align, $term, $class_terms_align, $color_icon );
@@ -136,16 +140,16 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 	                    $bg_term = ( !empty($bg_term) ) ? 'background-color:'.$bg_term.';' : '';
 	                    $color_term = ( !empty($color_term) ) ? 'color:'.$color_term.';' : '';
 	                    $default_term_active = ( $default_term_active === 'checked' ) ? 'active': '';
-						$name_term = ( !empty($name_term) ) ? $name_term : get_term( $term )->name;
+						$name_term = ( !empty($name_term) ) ? $name_term : $object_term->name;
 
-                        echo '<div class="menu-passive__item item-'. esc_attr(get_term( $term )->slug) .' '.esc_attr($class_terms_align).'">
+                        echo '<div class="menu-passive__item item-'. esc_attr($object_term->slug) .' '.esc_attr($class_terms_align).'">
 							  '. $terms_icons .'
                               <a class="menu-link '.
                               esc_attr($is_disabled) .' '.
                               esc_attr($type_multiple) .' '.
                               esc_attr($class_term) . " ". esc_attr($default_term_active) .'" style="'.esc_attr($bg_term) . esc_attr($color_term).'" 
-                              href="#" data-selected="'. esc_attr(get_term( $term )->slug) .'" data-termid="' . esc_attr($term) . '" data-name="'.esc_attr(get_term( $term )->name).'">'.
-                              esc_html($name_term) . ' <span class="count">'. esc_html(get_term( $term )->count) .'</span></a></div>';
+                              href="#" data-selected="'. esc_attr($object_term->slug) .'" data-termid="' . esc_attr($term) . '" data-name="'.esc_attr($object_term->name).'">'.
+                              esc_html($name_term) . ' <span class="count">'. esc_html($object_term->count) .'</span></a></div>';
                     }
 
 	                $terms_icons = null;
