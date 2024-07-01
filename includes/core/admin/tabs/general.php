@@ -51,8 +51,8 @@ $terms_sel   = $terms_selected;
 		<div class="form-group wrapper-taxonomy">
 
 			<div class="multi-buttons">
-				<span class="ymc-btn-reload tax-reload" title="Update taxonomy(s)."><i class="fas fa-redo"></i></span>
-				<span class="ymc-btn-delete tax-delete" title="Delete taxonomy(s)."><i class="far fa-trash-alt"></i></span>
+				<span class="ymc-btn-reload tax-reload" title="<?php esc_attr_e('Update taxonomy(s).','ymc-smart-filter'); ?>"><i class="fas fa-redo"></i></span>
+				<span class="ymc-btn-delete tax-delete" title="<?php esc_attr_e('Delete taxonomy(s).','ymc-smart-filter'); ?>"><i class="far fa-trash-alt"></i></span>
 			</div>
 
 			<label for="ymc-tax-checkboxes" class="form-label">
