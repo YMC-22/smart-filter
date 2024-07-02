@@ -28,7 +28,7 @@ $terms_sel   = $terms_selected;
 		<div class="form-group wrapper-cpt">
 
 			<label for="ymc-cpt-select" class="form-label">
-				<?php echo esc_html__('Post Types','ymc-smart-filter'); ?>
+				<?php echo esc_html__('Post Type(s)','ymc-smart-filter'); ?>
 				<span class="information" style="margin-bottom: 10px;">
         <?php echo esc_html__('Select one ore more posts. To select multiple posts, hold down the key Ctrl.
                                    For a more complete display of posts in the grid, set the "Taxonomy Relation" option to OR.','ymc-smart-filter'); ?>
@@ -117,7 +117,7 @@ $terms_sel   = $terms_selected;
 		<div class="form-group wrapper-terms <?php echo empty($tax_sel) ? 'hidden' : ''; ?>">
 
 			<label for="ymc-terms" class="form-label">
-				<?php echo esc_html__('Terms','ymc-smart-filter'); ?>
+				<?php echo esc_html__('Term(s)','ymc-smart-filter'); ?>
 				<span class="information"><?php echo esc_html__('Select terms. Sortable with Drag and Drop feature. Set the Sort Filter Terms option to Manual sort in the Appearance section.','ymc-smart-filter'); ?></span>
 			</label>
 
@@ -321,7 +321,7 @@ $terms_sel   = $terms_selected;
 			<?php if( $is_cpt ) : ?>
 
 				<label class="form-label">
-					<?php echo esc_html__('Exclude Posts', 'ymc-smart-filter'); ?>
+					<?php echo esc_html__('Exclude Post(s)', 'ymc-smart-filter'); ?>
 					<span class="information">
         <?php echo esc_html__('Check to exclude the selected posts from the grid. Works on selected posts.', 'ymc-smart-filter');?>
         </span>
@@ -337,7 +337,7 @@ $terms_sel   = $terms_selected;
 				<br/>
 
 				<label class="form-label">
-					<?php echo esc_html__('Add posts', 'ymc-smart-filter'); ?>
+					<?php echo esc_html__('Add post(s)', 'ymc-smart-filter'); ?>
 					<span class="information">
         <?php echo esc_html__('Include / Exclude posts in the post grid on the frontend. To exclude posts, check option "Exclude posts". By default, posts are included in the grid. Drag and Drop posts for custom sorting', 'ymc-smart-filter');?>
         </span>
