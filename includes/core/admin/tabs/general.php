@@ -52,7 +52,7 @@ $terms_sel   = $terms_selected;
 
 			<div class="multi-buttons">
 				<span class="ymc-btn-reload tax-reload" title="Update taxonomy(s)."><i class="fas fa-redo"></i></span>
-				<span class="ymc-btn-delete tax-delete" title="Delete taxonomy(s)."><i class="far fa-trash-alt"></i></span>
+				<span class="ymc-btn-delete tax-delete" title="Remove taxonomy(s) terms."><i class="far fa-trash-alt"></i></span>
 			</div>
 
 			<label for="ymc-tax-checkboxes" class="form-label">
@@ -66,9 +66,6 @@ $terms_sel   = $terms_selected;
 			<?php
 				$data_object = get_object_taxonomies($cpt, $output = 'objects');
 				$taxo = [];
-
-				// Exclude Taxonomies WooCommerce
-				$arr_exclude_slugs = ['product_type','product_visibility','product_shipping_class'];
 
 				foreach ( $data_object as $val ) {
 					$taxo[$val->label] = $val->name;
@@ -91,22 +88,20 @@ $terms_sel   = $terms_selected;
 
 						$sl0 = '';
 
-						if( array_search($slug, $arr_exclude_slugs) === false ) {
+						if( is_array($tax_sel) && count($tax_sel) > 0 ) {
 
-							if( is_array($tax_sel) && count($tax_sel) > 0 ) {
-
-								if (in_array($slug, $tax_sel)) {
-									$sl0 = 'checked';
-								}
-								else{
-									$sl0 = '';
-								}
+							if (in_array($slug, $tax_sel)) {
+								$sl0 = 'checked';
 							}
-
-							echo '<div id="'. esc_attr($slug) .'" class="group-elements">
-                            <input id="id-'. esc_attr($slug) .'" type="checkbox" name="ymc-taxonomy[]" value="'. esc_attr($slug) .'" '. esc_attr($sl0) .'>
-                            <label for="id-'. esc_attr($slug) .'">'.  esc_html($label) . '</label></div>';
+							else{
+								$sl0 = '';
+							}
 						}
+
+						echo '<div id="'. esc_attr($slug) .'" class="group-elements">
+                        <input id="id-'. esc_attr($slug) .'" type="checkbox" name="ymc-taxonomy[]" value="'. esc_attr($slug) .'" '. esc_attr($sl0) .'>
+                        <label for="id-'. esc_attr($slug) .'">'.  esc_html($label) . '</label></div>';
+
 					}
 
 					unset($result_tax);

@@ -207,12 +207,92 @@
 
         // Delete Taxonomies
         $(document).on('click','.ymc__container-settings #general .tax-delete',function (e) {
-            $('.ymc__container-settings #general #ymc-cpt-select').trigger('change');
+
+            let isDelete = confirm("Are you sure you want to delete all taxonomy terms? Deleting will remove all settings for each term.");
+
+            if( isDelete ) {
+                $('.ymc__container-settings #general #ymc-cpt-select').trigger('change');
+            }
         });
 
-        // UpdatedTaxonomies
+        // Update Taxonomies
         $(document).on('click','.ymc__container-settings #general .tax-reload',function (e) {
-            location.reload();
+
+            let postId = document.querySelector('#ymc-cpt-select').dataset.postid;
+            let cpts = '';
+            let taxonomyWrp = $('#ymc-tax-checkboxes');
+            let termWrp     = $('#ymc-terms');
+            let taxExist = []; // Current Taxonomies
+
+            $("#ymc-cpt-select :selected").map(function(i, el) {
+                cpts +=$(el).val()+',';
+            });
+
+            cpts = cpts.replace(/,\s*$/, "");
+
+            taxonomyWrp.find('input[type="checkbox"]').each(function () {
+                taxExist.push($(this).val());
+            });
+
+            const data = {
+                'action': 'ymc_updated_taxonomy',
+                'nonce_code' : _smart_filter_object.nonce,
+                'cpt' : cpts,
+                'post_id' :postId
+            };
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: _smart_filter_object.ajax_url,
+                data: data,
+                beforeSend: function () {
+                    container.addClass('loading').
+                    prepend(`<img class="preloader" src="${pathPreloader}">`);
+                },
+                success: function (res) {
+                    container.removeClass('loading').find('.preloader').remove();
+                    let dataTax = res.data; // Updated Taxonomies
+
+                    // Get Taxonomies
+                    if(Object.keys(dataTax).length > 0) {
+                        // Add new taxonomy
+                        if( Object.keys(dataTax).length > taxExist.length ) {
+
+                            for (let key in dataTax) {
+
+                                if( ! taxExist.includes(key) ) {
+
+                                    taxonomyWrp.append(`<div id="${key}" class="group-elements" draggable="true">
+                                    <input id="id-${key}" type="checkbox" name="ymc-taxonomy[]" value="${key}">
+                                    <label for="id-${key}">${dataTax[key]}</label>
+                                    </div>`);
+                                }
+                            }
+                        }
+
+                        // Delete taxonomy
+                        if( Object.keys(dataTax).length < taxExist.length ) {
+
+                            for (let key in taxExist) {
+
+                                if( ! Object.keys(dataTax).includes(taxExist[key]) ) {
+                                    taxonomyWrp.find(`#${taxExist[key]}`).remove();
+                                    termWrp.find(`.item-${taxExist[key]}`).remove();
+                                }
+                            }
+                        }
+                    }
+                    else  {
+                        taxonomyWrp.html('').append(`<span class="notice">No data for Post Type / Taxonomy</span>`);
+                        termWrp.html('').closest('.wrapper-terms').addClass('hidden');
+                    }
+                },
+                error: function (obj, err) {
+                    console.log( obj, err );
+                }
+            });
+
         });
 
         // Set Cookie

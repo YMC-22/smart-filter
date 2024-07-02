@@ -736,6 +736,11 @@ $font-size: 16;
 									}
 								}
 							}
+							.ymc-btn-delete	{
+								i {
+									filter: brightness(0) saturate(100%) invert(36%) sepia(72%) saturate(6590%) hue-rotate(343deg) brightness(91%) contrast(82%);
+								}
+							}
 							.ymc-btn-reload {
 								right: 15px;
 							}

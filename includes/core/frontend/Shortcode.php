@@ -38,7 +38,7 @@ class Shortcode {
 			'id' => '',
 		], $atts );
 
-		$id = $atts['id'];
+		$id = (int) $atts['id'];
 
 		static $c_target = 1;
 

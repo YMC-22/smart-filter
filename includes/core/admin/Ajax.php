@@ -37,6 +37,8 @@ class Ajax {
 		add_action( 'wp_ajax_ymc_export_settings', array( $this, 'ymc_export_settings'));
 
 		add_action( 'wp_ajax_ymc_import_settings', array( $this, 'ymc_import_settings'));
+
+		add_action( 'wp_ajax_ymc_updated_taxonomy', array( $this, 'ymc_updated_taxonomy'));
 	}
 
 	public function ymc_get_taxonomy() {
@@ -56,17 +58,14 @@ class Ajax {
 
 			$arr_tax_result = [];
 
-			// Exclude Taxonomies WooCommerce
-			$arr_exclude_slugs = ['product_type','product_visibility','product_shipping_class'];
-
 			foreach ( $cpts as $cpt ) {
 
 				$data_object = get_object_taxonomies($cpt, $output = 'objects');
 
 				foreach ($data_object as $val) {
-					if(array_search($val->name, $arr_exclude_slugs) === false ) {
-						$arr_tax_result[$val->name] = $val->label;
-					}
+
+					$arr_tax_result[$val->name] = $val->label;
+
 				}
 			}
 		}
@@ -127,6 +126,40 @@ class Ajax {
 
 		wp_send_json($data);
 
+	}
+
+	public function ymc_updated_taxonomy() {
+
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+
+		$arr_tax_result = [];
+
+		if( isset($_POST["cpt"]) ) {
+
+			$post_types = sanitize_text_field($_POST["cpt"]);
+			$cpts = !empty( $post_types ) ? explode(',', $post_types) : false;
+		}
+
+		if( is_array($cpts) ) {
+
+			foreach ( $cpts as $cpt ) {
+
+				$data_object = get_object_taxonomies($cpt, $output = 'objects');
+
+				foreach ($data_object as $val) {
+
+					$arr_tax_result[$val->name] = $val->label;
+				}
+			}
+
+			update_post_meta( (int) $_POST["post_id"], 'ymc_tax_sort', '' );
+		}
+
+		$data = array(
+			'data' => $arr_tax_result,
+		);
+
+		wp_send_json($data);
 	}
 
 	public function ymc_tax_sort() {
