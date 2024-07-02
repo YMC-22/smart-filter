@@ -56,7 +56,7 @@ $terms_sel   = $terms_selected;
 			</div>
 
 			<label for="ymc-tax-checkboxes" class="form-label">
-				<?php echo esc_html__('Taxonomy','ymc-smart-filter'); ?>
+				<?php echo esc_html__('Taxonomy(s)','ymc-smart-filter'); ?>
 				<span class="information">
                 <?php echo esc_html__('Select taxonomy. Sortable with Drag & Drop feature.','ymc-smart-filter'); ?>
                 </span>
