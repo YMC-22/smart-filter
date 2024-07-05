@@ -107,6 +107,30 @@ add_filter('ymc_button_show_all_545_1', function () {
 }, 10, 1);
 ```
 
+**Change the placeholder "All" for the filter named Dropdown Filter Compact**
+```php
+add_filter('ymc_placeholder_dropdown_FilterID_LayoutID', $ymc_placeholder_all, 10, 1);
+
+Usage example:
+add_filter('ymc_placeholder_dropdown_545_1', function () {
+    return 'My Taxonomy';
+}, 10, 1);
+```
+
+**Change the "All" placeholder for the filter named "Compact Dropdown Filter" individually for each taxonomy**
+```php
+add_filter('ymc_placeholder_dropdown_FilterID_LayoutID_tax-slug', $ymc_placeholder_all, 10, 1);
+
+Usage example:
+add_filter('ymc_placeholder_dropdown_72_1_post_tag', function () {
+	return 'My Tags';
+}, 10, 1);
+
+add_filter('ymc_placeholder_dropdown_72_1_category', function () {
+	return 'My Category';
+}, 10, 1);
+```
+
 **Change the text of the “Sort” button on the sort panel**
 ```php
 add_filter('ymc_sort_text_FilterID_LayoutID', $ymc_button_show_all, 10, 1);
