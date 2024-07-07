@@ -108,7 +108,7 @@ class Shortcode {
 			$ymc_filter_layout = ( $ymc_filter_status === 'on' ) ? $ymc_filter_layout : 'no-filter-layout';
 
 			if( ! empty($ymc_custom_css) ) :
-				echo '<style id="ymc-filter-grids-'.$id .'-'. $c_target.'">'. sanitize_text_field($ymc_custom_css) .'</style>';
+				echo '<style id="filter-grids-css-'.$id .'-'. $c_target.'">'. sanitize_text_field($ymc_custom_css) .'</style>';
 			endif;
 
 			echo '<div id="ymc-smart-filter-container-'. esc_attr($c_target) .'" 
