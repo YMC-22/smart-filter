@@ -420,6 +420,12 @@ class Meta_Boxes {
 			update_post_meta( $post_id, 'ymc_debug_code', $ymc_debug_code );
 		}
 
+		// Custom CSS
+		if( isset($_POST['ymc-custom-css']) ) {
+			$ymc_custom_css = wp_strip_all_tags($_POST['ymc-custom-css']);
+			update_post_meta( $post_id, 'ymc_custom_css', $ymc_custom_css );
+		}
+
 	}
 
 	public function ymc_attached_filters() {

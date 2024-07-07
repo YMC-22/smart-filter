@@ -178,6 +178,8 @@ class Variables {
 
 	public $ymc_debug_code = 0;
 
+	public $ymc_custom_css   = '';
+
 
 	/**
 	 * Typography tab used default variables
@@ -754,6 +756,14 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_debug_code', true );
 		}
 		return $this->ymc_debug_code;
+	}
+
+	public function get_ymc_custom_css( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_custom_css' ) ) {
+			return get_post_meta( $post_id, 'ymc_custom_css', true );
+		}
+		return $this->ymc_custom_css;
 	}
 
 

@@ -794,6 +794,37 @@
             }
         }
 
+        // CodeMirror Custom CSS
+        function codeMirrorCSS() {
+
+            let editorSource = document.querySelector("#advanced #ymc-custom-css");
+
+            let editor = CodeMirror.fromTextArea( editorSource, {
+                //value: "",
+                lineNumbers: true,
+                mode:  "css",
+                theme: "eclipse",
+                styleActiveLine: true,
+                autoCloseTags:true,
+                lineWrapping: true,
+                tabSize: 2,
+                autofocus: true,
+                smartIndent: false,
+                autoRefresh: true,
+                placeholder: "/*** Here your code CSS... ***/",
+                extraKeys: {"Ctrl-Space": "autocomplete"}
+            });
+
+            editor.setSize(null, "400");
+
+            editor.on('change', (args) => {
+                editorSource.innerHTML = args.getValue().replace(/(\r\n|\n|\r)/gm, "");
+            });
+
+            // editor.toTextArea();
+            // editor.refresh();
+        }
+
         // Choices Posts
         $('.wrapper-selection .ymc-exclude-posts').on('click', function (e) {
 
@@ -1396,6 +1427,8 @@
 
         // Add Color Picker for all inputs
         $('.ymc-custom-color').wpColorPicker();
+
+        codeMirrorCSS();
 
     });
 
