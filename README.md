@@ -163,13 +163,6 @@ add_action("ymc_before_post_layout_FilterID_LayoutID");
 add_action("ymc_after_post_layout_FilterID_LayoutID");
 ```
 
-
-**Add your content before or after the post grid layout**
-```php
-add_action("ymc_before_post_layout_FilterID_LayoutID");
-add_action("ymc_after_post_layout_FilterID_LayoutID");
-```
-
 ### Shortcodes
 **The plugin provides a list of shortcodes to display different components of the plugin. This allows you to separately place plugin components in different places on the page without being tied to the current grid of posts, which makes the plugin more flexible and compact. The entire list of shortcodes can be found in the Shortcodes section.**
 
