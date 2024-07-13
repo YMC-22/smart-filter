@@ -223,9 +223,10 @@
 
         <div class="from-element">
             <label class="form-label">
-                <?php echo esc_html__('Custom CSS', 'ymc-smart-filter');?>
+                <?php echo esc_html__('Custom CSS', 'ymc-smart-filter'); ?>
                 <span class="information">
-                    <?php echo esc_html__('Set your custom CSS. Use the parent container ID named: "#ymc-smart-filter-container-{ID}" to override the base filter styles. Press Ctrl + Space to get a hint inside the editor.', 'ymc-smart-filter');?>
+                    <?php _e('Add your custom CSS. Use the parent container ID named: <b>"#ymc-smart-filter-container-{ID}"</b> 
+                    if you want to override the base filter styles. Example: <b>#ymc-smart-filter-container-1</b>. Press Ctrl + Space to get a hint inside the editor.', 'ymc-smart-filter');?>
                 </span>
             </label>
             <hr/>
@@ -235,6 +236,33 @@
             <hr/>
         </div>
 
+    </div>
+
+    <header class="sub-header" data-class-name="custom-js">
+        <i class="far fa-edit"></i>
+        <?php echo esc_html__('Custom Actions', 'ymc-smart-filter'); ?>
+        <i class="fas fa-chevron-down form-arrow"></i>
+    </header>
+
+    <div class="form-wrapper custom-js">
+        <div class="from-element">
+            <label class="form-label">
+                <?php echo esc_html__('Code', 'ymc-smart-filter'); ?>
+                <span class="information">
+                    <?php  _e('Add your custom JS. Press Ctrl + Space to get a hint inside the editor. <br>Note: The call to the global <b>YMCTools()</b> object should be used 
+                    when the document is fully loaded, for example using the notation:: <b>$(document).on("ready", function () { });</b> or 
+                    <b>$(window).on(load", function() { });</b>. <a href="https://github.com/YMC-22/smart-filter" target="_blank">
+                    see docs <img draggable="false" role="img" class="emoji" alt="↗" src="https://s.w.org/images/core/emoji/14.0.0/svg/2197.svg"></a>',
+                        'ymc-smart-filter'); ?>
+                </span>
+            </label>
+            <hr/>
+            <textarea class="form-textarea" name="ymc-custom-after-js" id="ymc-custom-after-js">
+                <?php echo esc_textarea($ymc_custom_after_js); ?>
+            </textarea>
+            <hr/>
+
+        </div>
     </div>
 
     <header class="sub-header" data-class-name="preloader-settings">

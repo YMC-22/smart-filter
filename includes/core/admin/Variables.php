@@ -180,6 +180,8 @@ class Variables {
 
 	public $ymc_custom_css   = '';
 
+	public $ymc_custom_after_js  = '';
+
 
 	/**
 	 * Typography tab used default variables
@@ -764,6 +766,14 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_custom_css', true );
 		}
 		return $this->ymc_custom_css;
+	}
+
+	public function get_ymc_custom_after_js( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_custom_after_js' ) ) {
+			return get_post_meta( $post_id, 'ymc_custom_after_js', true );
+		}
+		return $this->ymc_custom_after_js;
 	}
 
 

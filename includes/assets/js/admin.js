@@ -825,6 +825,35 @@
             // editor.refresh();
         }
 
+        // Custom Actions
+        function codeMirrorAfterJS() {
+
+            let editorSource = document.querySelector("#advanced #ymc-custom-after-js");
+
+            let editor = CodeMirror.fromTextArea( editorSource, {
+                //value: "",
+                lineNumbers: true,
+                mode:  "javascript",
+                theme: "eclipse",
+                styleActiveLine: true,
+                autoCloseTags:true,
+                lineWrapping: true,
+                tabSize: 2,
+                autofocus: true,
+                smartIndent: false,
+                autoRefresh: true,
+                placeholder: "/*** Enter your custom action here… ***/",
+                extraKeys: {"Ctrl-Space": "autocomplete"}
+            });
+
+            editor.setSize(null, "400");
+
+            editor.on('change', (args) => {
+                editorSource.innerHTML = args.getValue().replace(/(\r\n|\n|\r)/gm, "");
+            });
+
+        }
+
         // Choices Posts
         $('.wrapper-selection .ymc-exclude-posts').on('click', function (e) {
 
@@ -1428,7 +1457,10 @@
         // Add Color Picker for all inputs
         $('.ymc-custom-color').wpColorPicker();
 
+        // Run CodeMirror for Custom CSS
         codeMirrorCSS();
+        // Run CodeMirror for Custom Actions
+        codeMirrorAfterJS();
 
     });
 

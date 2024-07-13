@@ -45,6 +45,8 @@ class Load_Scripts {
 		wp_enqueue_script( 'codemirror-css-hint-'.$this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/js/codemirror/css-hint.js', array( 'jquery' ), YMC_SMART_FILTER_VERSION, true );
 		wp_enqueue_script( 'codemirror-autorefresh-'.$this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/js/codemirror/autorefresh.js', array( 'jquery' ), YMC_SMART_FILTER_VERSION, true );
 		wp_enqueue_script( 'codemirror-placeholder-'.$this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/js/codemirror/placeholder.js', array( 'jquery' ), YMC_SMART_FILTER_VERSION, true );
+		wp_enqueue_script( 'codemirror-javascript-'.$this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/js/codemirror/javascript.js', array( 'jquery' ), YMC_SMART_FILTER_VERSION, true );
+		wp_enqueue_script( 'codemirror-javascript-hint-'.$this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/js/codemirror/javascript-hint.js', array( 'jquery' ), YMC_SMART_FILTER_VERSION, true );
 
 		wp_enqueue_script( 'filter-grids-'.$this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/js/admin.min.js', array( 'jquery' ), YMC_SMART_FILTER_VERSION, true );
 		wp_localize_script( 'filter-grids-'.$this->generate_handle(), '_smart_filter_object',

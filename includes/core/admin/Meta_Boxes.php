@@ -426,6 +426,12 @@ class Meta_Boxes {
 			update_post_meta( $post_id, 'ymc_custom_css', $ymc_custom_css );
 		}
 
+		// Custom JS
+		if( isset($_POST['ymc-custom-after-js']) ) {
+			$ymc_custom_after_js = wp_strip_all_tags($_POST['ymc-custom-after-js']);
+			update_post_meta( $post_id, 'ymc_custom_after_js', $ymc_custom_after_js );
+		}
+
 	}
 
 	public function ymc_attached_filters() {
