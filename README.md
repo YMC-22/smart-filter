@@ -157,6 +157,12 @@ add_filter('ymc_tax_name_545_1_category', function () {
 add_action("ymc_before_filter_layout_FilterID_LayoutID");
 add_action("ymc_after_filter_layout_FilterID_LayoutID");
 ```
+**Add your content before or after the post grid layout**
+```php
+add_action("ymc_before_post_layout_FilterID_LayoutID");
+add_action("ymc_after_post_layout_FilterID_LayoutID");
+```
+
 
 **Add your content before or after the post grid layout**
 ```php
@@ -506,7 +512,7 @@ Usage example:
 **This method allows to get posts by meta fields.**
 
 ```js
-YMCTools({target: ".data-target-ymcFilterID-LayoutID", meta: [params]}).apiTermUpdate( option );
+YMCTools({target: ".data-target-ymcFilterID-LayoutID", meta: [params]}).apiMetaUpdate( option );
 ```
 All parameters correspond to the parameters of the global WP_Query object. 
 To make a correct request, specify all the necessary parameters in JSON format. All parameters in double quotes.
