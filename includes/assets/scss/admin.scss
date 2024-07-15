@@ -201,6 +201,7 @@ $font-size: 16;
 
 								.from-element {
 									margin-bottom: 20px;
+									position: relative;
 								}
 
 								.form-label {
@@ -875,6 +876,7 @@ $font-size: 16;
 								.manage-filters {
 									margin-top: 20px;
 								}
+
 								.preview-preloader {
 									width: 60px;
 									height: 60px;
@@ -882,6 +884,7 @@ $font-size: 16;
 									margin-top: 10px;
 									margin-bottom: 10px;
 								}
+
 								.range-wrapper {
 									input[type="range"] {
 										width: 30%;
@@ -900,6 +903,160 @@ $font-size: 16;
 
 								.ymc-query-type-callback {
 									text-transform: unset;
+								}
+
+								.popup-hints {
+									display: none;
+									position: absolute;
+									top: 0;
+									left: 0;
+									width: 100%;
+									height: 100%;
+									background: #f0f0f1;
+									border: 1px dashed #1f1f1f;
+									box-sizing: border-box;
+									z-index: 10;
+									&--inner {
+										padding: 30px 15px;
+										height: 100%;
+										max-height: 400px;
+										overflow-y: auto;
+										overflow-x: hidden;
+									}
+									&--btn-close {
+										position: absolute;
+										top: 20px;
+										right: 20px;
+										font-size: 16px;
+										width: 20px;
+										height: 20px;
+										cursor: pointer;
+										background: url("../images/icon-close.png") no-repeat 50% 50%/contain;
+										&:hover {
+											opacity: .5;
+										}
+									}
+									&--note {
+										font-size: 14px;
+										font-weight: 400;
+									}
+									&--wrp {
+										margin: 0 0 20px 20px;
+										list-style: square;
+										li {
+											margin-bottom: 10px;
+											&.subHeader {
+												list-style: none;
+												font-size: 15px;
+												font-weight: 600;
+												margin-left: -15px;
+											}
+											.line-hint {
+												cursor: pointer;
+												color: #1f1f1f;
+												&:hover {
+													text-decoration: underline;
+												}
+												&.active {
+													color: #0fade9;
+												}
+											}
+										}
+									}
+									&--header {
+										font-size: 16px;
+										font-weight: 600;
+										padding: 0;
+										margin-bottom: 15px;
+									}
+									&--description {
+										display: none;
+										position: absolute;
+										top: 0;
+										right: 0;
+										width: 75%;
+										height: 100%;
+										background: #141518;
+										color: #fff;
+										padding: 50px 20px 40px 20px;
+										box-sizing: border-box;
+										.btn-close {
+											position: absolute;
+											top: 20px;
+											right: 20px;
+											font-size: 16px;
+											width: 20px;
+											height: 20px;
+											cursor: pointer;
+											filter: invert(1);
+											background: url("../images/icon-close.png") no-repeat 50% 50%/contain;
+											&:hover {
+												opacity: .5;
+											}
+										}
+										.info-hint {
+											color: #addcff;
+											overflow-y: auto;
+											overflow-x: hidden;
+											height: 400px;
+											max-height: 100%;
+											padding-right: 20px;
+											h2 {
+												color: #fff;
+												font-size: 20px;
+												margin: 0 0 10px 0;
+												padding: 0;
+											}
+											h4 {
+												color: #fff;
+												margin: 0 0 15px;
+												font-size: 14px;
+											}
+											h5 {
+												color: #ffb757;
+												margin: 0 0 10px;
+												font-size: 14px;
+												font-weight: 400;
+											}
+											ul {
+												list-style: square;
+												margin: 0 0 15px 20px;
+												li {
+													font-size: 13px;
+													color: #fff;
+													font-weight: 300;
+												}
+											}
+											.method-section {
+												display: none;
+											}
+											.method-name {
+												color: #ffb757;
+												margin: 0 0 15px;
+												font-size: 14px;
+												font-weight: 400;
+												pre {
+													overflow-x: auto;
+													overflow-y: hidden;
+													min-height: 50px;
+												}
+											}
+											.info-code {
+												font-size: 14px;
+												font-weight: 300;
+												margin-bottom: 10px;
+											}
+											.code-hint {
+												color: #dbb7ff;
+												font-weight: 400;
+												pre {
+													overflow-x: auto;
+													overflow-y: hidden;
+													min-height: 50px;
+												}
+											}
+										}
+									}
 								}
 							}
 						}

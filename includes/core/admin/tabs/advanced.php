@@ -249,10 +249,8 @@
             <label class="form-label">
                 <?php echo esc_html__('Code', 'ymc-smart-filter'); ?>
                 <span class="information">
-                    <?php  _e('Add your custom JS. Press Ctrl + Space to get a hint inside the editor. <br>Note: The call to the global <b>YMCTools()</b> object should be used 
-                    when the document is fully loaded, for example using the notation:: <b>$(document).on("ready", function () { });</b> or 
-                    <b>$(window).on(load", function() { });</b>. <a href="https://github.com/YMC-22/smart-filter" target="_blank">
-                    see docs <img draggable="false" role="img" class="emoji" alt="↗" src="https://s.w.org/images/core/emoji/14.0.0/svg/2197.svg"></a>',
+                    <?php  _e('Add your custom JS. Press Ctrl + Space to get a hint inside the editor.  
+                        <a class="button-hints" href="#">See docs</a>',
                         'ymc-smart-filter'); ?>
                 </span>
             </label>
@@ -261,7 +259,569 @@
                 <?php echo esc_textarea($ymc_custom_after_js); ?>
             </textarea>
             <hr/>
+            <div class="popup-hints">
+                <div class="popup-hints--inner">
+                    <span class="popup-hints--btn-close" title="Close"></span>
+                    <h2 class="popup-hints--header">Methods and Hooks JS</h2>
+                    <p class="popup-hints--note"><u><b>Note:</b></u> The call to the global <b>YMCTools</b> object should be used
+                       when the document is fully loaded, for example using the notation:: <b>$(document).on("ready", function () {});</b> or
+                        <b>$(window).on(load", function() {});</b> or inside a hook callback function.</p>
+                    <hr/>
+                    <ul class="popup-hints--wrp">
+                        <li class="subHeader">Methods</li>
+                        <li>
+                            <span class="line-hint" data-method="apiTermUpdate" title="This method allows to get posts by ID terms of different taxonomies.">
+                                apiTermUpdate;
+                            </span>
+                        </li>
+                        <li>
+                            <span class="line-hint" data-method="apiMetaUpdate" title="This method allows to get posts by meta fields.">
+                                apiMetaUpdate;
+                            </span>
+                        </li>
+                        <li>
+                            <span class="line-hint" data-method="apiDateUpdate" title="This method allows to get posts by date.">
+                                apiDateUpdate;
+                            </span>
+                        </li>
+                        <li>
+                            <span class="line-hint" data-method="apiSearchPosts" title="This method allows to search for posts by keyword.">
+                                apiSearchPosts;
+                            </span>
+                        </li>
+                        <li>
+                            <span class="line-hint" data-method="apiChoicesPosts" title="This method allows Include / Exclude posts in the post grid.">
+                                apiChoicesPosts;
+                            </span>
+                        </li>
+                        <li>
+                            <span class="line-hint" data-method="apiSortPosts" title="This method allows to sort posts by different criteria.">
+                                apiSortPosts;
+                            </span>
+                        </li>
+                        <li>
+                            <span class="line-hint" data-method="apiTermClear" title="This method allows to clear query parameters in the filter by terms.">
+                                apiTermClear;
+                            </span>
+                        </li>
+                        <li>
+                            <span class="line-hint" data-method="apiMetaClear" title="This method allows to clear query parameters in the filter by meta fields.">
+                                apiMetaClear;
+                            </span>
+                        </li>
+                        <li>
+                            <span class="line-hint" data-method="apiDateClear" title="This method allows to clear query parameters in the filter by date.">
+                                apiDateClear;
+                            </span>
+                        </li>
+                        <li>
+                            <span class="line-hint" data-method="apiSortClear" title="This method allows to clear sort parameters in the filter by sort posts.">
+                                apiSortClear;
+                            </span>
+                        </li>
+                        <li>
+                            <span class="line-hint" data-method="apiLetterAlphabetClear" title="This method allows you to clear the query parameters in the filter by the first letter of the alphabet.">
+                                apiLetterAlphabetClear;
+                            </span>
+                        </li>
+                        <li>
+                            <span class="line-hint" data-method="apiGetPosts" title="This method allows you to make a request to receive posts by previously specified parameters.">
+                                apiGetPosts;
+                            </span>
+                        </li>
+                        <li>
+                            <span class="line-hint" data-method="apiPageUpdated" title="This method allows you to move to a specific page of posts in grid.">
+                                apiPageUpdated;
+                            </span>
+                        </li>
+                        <li>
+                            <span class="line-hint" data-method="apiPopup" title="This method allows you to open a popup post and load content into it.">
+                                apiPopup;
+                            </span>
+                        </li>
+                        <li>
+                            <span class="line-hint" data-method="apiMultiplePosts" title="This method allows you to display different post types with their different taxonomies in a grid.">
+                                apiMultiplePosts;
+                            </span>
+                        </li>
+                        <li class="subHeader">Hooks</li>
+                        <li>
+                            <span class="line-hint" data-method="ymc_stop_loading_data" title="Stop loading posts on page load.">
+                                ymc_stop_loading_data;
+                            </span>
+                        </li>
+                        <li>
+                            <span class="line-hint" data-method="ymc_before_loaded_data" title="Before loaded all posts.">
+                                ymc_before_loaded_data;
+                            </span>
+                        </li>
+                        <li>
+                            <span class="line-hint" data-method="ymc_after_loaded_data" title="After loaded all posts.">
+                                ymc_after_loaded_data;
+                            </span>
+                        </li>
+                        <li>
+                            <span class="line-hint" data-method="ymc_complete_loaded_data" title="Complete loaded all data.">
+                                ymc_complete_loaded_data;
+                            </span>
+                        </li>
+                        <li>
+                            <span class="line-hint" data-method="ymc_before_popup_open" title="Calling a script point before / after opening a popup and loading content into it.">
+                                ymc_before_popup_open;
+                            </span>
+                        </li>
+                        <li>
+                            <span class="line-hint" data-method="ymc_after_popup_open" title="Calling a script point before / after opening a popup and loading content into it.">
+                                ymc_after_popup_open;
+                            </span>
+                        </li>
+                    </ul>
+                    <div class="popup-hints--description">
+                        <span class="btn-close" title="Close"></span>
+                        <div class="info-hint">
+                           <div class="method-section apiTermUpdate">
+                               <h2>[ apiTermUpdate ]</h2>
+                                <div class="method-name">
+                                    <pre>YMCTools({target: ".data-target-ymcFilterID-LayoutID", terms: "termID"}).apiTermUpdate( option );</pre>
+                                </div>
+                                <hr/>
+                                <div class="info-code">This method allows to get posts by ID terms of different taxonomies.</div>
+                                <h5>Required params:</h5>
+                                <ul>
+                                    <li>.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.</li>
+                                    <li>termID - ID term (String). It is a string data type and is enclosed in quotes.
+                                        Can set several ID terms separated by commas, for example: "11,35,47"</li>
+                                </ul>
+                                <h5>Optional params:</h5>
+                                <ul>
+                                    <li>taxRel - define the interaction between different taxonomies in the query. The default is
+                                        "AND". If set "all" will match the relation "OR". Installed in the admin panel Filter -> Tab Ganeral -> Taxonomy Relation.</li>
+                                    <li>option - (bool) true / false - parameter allows to control sending of request. Default is true.</li>
+                                </ul>
+                                <h5>Usage example:</h5>
+                                <div class="code-hint">
+                                    <pre>YMCTools({ target: '.data-target-ymc545-1', terms: '7,9,11' }).apiTermUpdate();</pre>
+                                </div>
+                            </div>
+                           <div class="method-section apiMetaUpdate">
+                               <h2>[ apiMetaUpdate ]</h2>
+                               <div class="method-name">
+                                   <pre>YMCTools({target: ".data-target-ymcFilterID-LayoutID", meta: [params]}).apiMetaUpdate( option );</pre>
+                               </div>
+                               <hr/>
+                               <div class="info-code">This method allows to get posts by meta fields.</div>
+                               <h5>Required params:</h5>
+                               <ul>
+                                   <li>.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.</li>
+                                   <li>meta - (Array) is an array of objects that include in the request settings. All objects must be in josn data format.</li>
+                               </ul>
+                               <h5>Optional params:</h5>
+                               <ul>
+                                   <li>relation - defines a logical relationship between nested arrays. Default is "AND".</li>
+                                   <li>option - (bool) true / false - parameter allows to control sending of request. Default is true.</li>
+                               </ul>
+                               <h5>Usage example:</h5>
+                               <div class="code-hint">
+                                   <pre>
+                                   YMCTools({ target: '.data-target-ymc545-1', meta : [
+                                       { "relation" : "OR" },
+                                       { "key" : "color", "value" : "blue" },
+                                       { "key" : "price", "value" : "10", "compare": "LIKE" },
+                                       { "key" : "grant_value", "value" : ["100", "200"], "compare": "BETWEEN", "type" : "NUMERIC" }
+                                       ]
+                                   }).apiMetaUpdate( option );
+                                   </pre>
+                               </div>
+                           </div>
+                           <div class="method-section apiDateUpdate">
+                               <h2>[ apiDateUpdate ]</h2>
+                               <div class="method-name">
+                                   <pre>YMCTools({target: ".data-target-ymcFilterID-LayoutID", date: [params]}).apiDateUpdate( option );</pre>
+                               </div>
+                               <hr/>
+                               <div class="info-code">This method allows to get posts by date.</div>
+                               <h5>Required params:</h5>
+                               <ul>
+                                   <li>.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.</li>
+                                   <li>date - (Array) is an array of objects that include in the request settings.
+                                       All objects must be in json data format.</li>
+                               </ul>
+                               <h5>Optional params:</h5>
+                               <ul>
+                                   <li>option - (bool) true / false - parameter allows to control sending of request. Default is true.</li>
+                               </ul>
+                               <h5>Usage example:</h5>
+                               <div class="code-hint">
+                                 <pre>
+                                    YMCTools({ target: '.data-target-ymc545-1', date : [
+                                       { "monthnum" : "1", "compare" : "=" },
+                                       { "year" : "2023", "compare" : "=" },
+                                       { "day" : "10", "compare" : ">=" }
+                                     ] }).apiDateUpdate();
+                                  </pre>
+                               </div>
+                           </div>
+                           <div class="method-section apiSearchPosts">
+                               <h2>[ apiSearchPosts ]</h2>
+                                <div class="method-name">
+                                    <pre>YMCTools({target: ".data-target-ymcFilterID-LayoutID", search: 'keyword'}).apiSearchPosts( option, terms );</pre>
+                                </div>
+                               <hr/>
+                               <div class="info-code">This method allows to search for posts by keyword.</div>
+                                <h5>Required params:</h5>
+                                <ul>
+                                    <li>.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.</li>
+                                    <li>search - (String) Phrase for which posts are searched.</li>
+                                </ul>
+                                <h5>Optional params:</h5>
+                                <ul>
+                                    <li>option - (bool) true / false - parameter allows to control sending of request. Default is true.</li>
+                                    <li>terms - (array)  list ids terms. Default is empty</li>
+                                </ul>
+                                <h5>Usage example:</h5>
+                                <div class="code-hint">
+                                    <pre>YMCTools({ target: '.data-target-ymc545-1', search: 'keyword' }).apiSearchPosts( true, [7,11,15] );</pre>
+                                </div>
+                            </div>
+                           <div class="method-section apiChoicesPosts">
+                               <h2>[ apiChoicesPosts ]</h2>
+                                <div class="method-name">
+                                    <pre>YMCTools({target: ".data-target-ymcFilterID-LayoutID", choicesPosts: 'termIDs', excludePosts: 'off'}).apiChoicesPosts( option );</pre>
+                                </div>
+                               <hr/>
+                               <div class="info-code">This method allows Include / Exclude posts in the post grid.</div>
+                                <h5>Required params:</h5>
+                                <ul>
+                                    <li>.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.</li>
+                                    <li>choicesPosts - (String) ID posts.</li>
+                                    <li>excludePosts - (String) on / off. By default excludePosts is "off"".</li>
+                                </ul>
+                                <h5>Optional params:</h5>
+                                <ul>
+                                    <li>option - (bool) true / false - parameter allows to control sending of request. Default is true.</li>
+                                </ul>
+                                <h5>Usage example:</h5>
+                                <div class="code-hint">
+                                    <pre>YMCTools({ target: '.data-target-ymc545-1', choicesPosts: '7,9,11', excludePosts: 'off' }).apiChoicesPosts();</pre>
+                                </div>
+                            </div>
+                           <div class="method-section apiSortPosts">
+                               <h2>[ apiSortPosts ]</h2>
+                                <div class="method-name">
+                                    <pre>YMCTools({target: ".data-target-ymcFilterID-LayoutID", sortOrder: 'asc', sortOrderBy: 'title'}).apiSortPosts( option );</pre>
+                                </div>
+                               <hr/>
+                               <div class="info-code">This method allows to sort posts by different criteria.</div>
+                                <h5>Required params:</h5>
+                                <ul>
+                                    <li>.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.</li>
+                                    <li>sortOrder - (String) asc / desc.</li>
+                                    <li>sortOrderBy - (String) List of fields for sorting posts:
+                                        ID, author, title, name, date, modified, type, parent, rand, comment_count.
+                                        If set meta key set options: meta_value or meta_value_num (for numbers) to sort by meta field</li>
+                                </ul>
+                                <h5>Optional params:</h5>
+                                <ul>
+                                    <li>option - (bool) true / false - parameter allows to control sending of request. Default is true.</li>
+                                    <li>metaKey - (String) Value of meta_key parameter (field data key).</li>
+                                </ul>
+                                <h5>Usage example:</h5>
+                                <div class="code-hint">
+                                    <pre>YMCTools({ target: '.data-target-ymc545-1', sortOrder: 'desc', sortOrderBy: 'meta_value_num', metaKey: 'amount' }).apiSortPosts();</pre>
+                                </div>
+                            </div>
+                           <div class="method-section apiTermClear">
+                               <h2>[ apiTermClear ]</h2>
+                                <div class="method-name">
+                                    <pre>YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiTermClear( option );</pre>
+                                </div>
+                               <hr/>
+                               <div class="info-code">This method allows to clear query parameters in the filter by terms.</div>
+                                <h5>Required params:</h5>
+                                <ul>
+                                    <li>option - (bool) true / false - parameter allows to control sending of request. Default is true</li>
+                                </ul>
+                                <h5>Usage example:</h5>
+                                <div class="code-hint">
+                                    <pre>YMCTools({ target: '.data-target-ymc545-1' }).apiTermClear();</pre>
+                                </div>
+                            </div>
+                           <div class="method-section apiMetaClear">
+                               <h2>[ apiMetaClear ]</h2>
+                                <div class="method-name">
+                                    <pre>YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiMetaClear( option );</pre>
+                                </div>
+                               <hr/>
+                               <div class="info-code">This method allows to clear query parameters in the filter by meta fields.</div>
+                                <h5>Required params:</h5>
+                                <ul>
+                                    <li>option - (bool) true / false - parameter allows to control sending of request. Default is true</li>
+                                </ul>
+                                <h5>Usage example:</h5>
+                                <div class="code-hint">
+                                    <pre>YMCTools({ target: '.data-target-ymc545-1' }).apiMetaClear();</pre>
+                                </div>
+                            </div>
+                           <div class="method-section apiDateClear">
+                               <h2>[ apiDateClear ]</h2>
+                                <div class="method-name">
+                                    <pre>YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiDateClear( option );</pre>
+                                </div>
+                               <hr/>
+                               <div class="info-code">This method allows to clear query parameters in the filter by date.</div>
+                                <h5>Required params:</h5>
+                                <ul>
+                                    <li>option - (bool) true / false - parameter allows to control sending of request. Default is true</li>
+                                </ul>
+                                <h5>Usage example:</h5>
+                                <div class="code-hint">
+                                    <pre>YMCTools({ target: '.data-target-ymc545-1' }).apiDateClear();</pre>
+                                </div>
+                            </div>
+                           <div class="method-section apiSortClear">
+                               <h2>[ apiSortClear ]</h2>
+                                <div class="method-name">
+                                    <pre>YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiSortClear( option );</pre>
+                                </div>
+                               <hr/>
+                               <div class="info-code">This method allows to clear sort parameters in the filter by sort posts.</div>
+                                <h5>Required params:</h5>
+                                <ul>
+                                    <li>option - (bool) true / false - parameter allows to control sending of request. Default is true</li>
+                                </ul>
+                                <h5>Usage example:</h5>
+                                <div class="code-hint">
+                                    <pre>YMCTools({ target: '.data-target-ymc545-1' }).apiSortClear();</pre>
+                                </div>
+                            </div>
+                           <div class="method-section apiLetterAlphabetClear">
+                               <h2>[ apiLetterAlphabetClear ]</h2>
+                                <div class="method-name">
+                                    <pre>YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiLetterAlphabetClear( option );</pre>
+                                </div>
+                               <hr/>
+                               <div class="info-code">This method allows you to clear the query parameters in the filter by the first letter of the alphabet.</div>
+                                <h5>Required params:</h5>
+                                <ul>
+                                    <li>option - (bool) true / false - parameter allows to control sending of request. Default is true</li>
+                                </ul>
+                                <h5>Usage example:</h5>
+                                <div class="code-hint">
+                                    <pre>YMCTools({ target: '.data-target-ymc545-1' }).apiLetterAlphabetClear();</pre>
+                                </div>
+                            </div>
+                           <div class="method-section apiGetPosts">
+                               <h2>[ apiGetPosts ]</h2>
+                                <div class="method-name">
+                                    <pre>YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiGetPosts();</pre>
+                                </div>
+                                <hr/>
+                                <div class="info-code">This method allows you to make a request to receive posts by previously specified parameters.</div>
+                                <h5>Usage example: First we change the request parameters, and then we send the data. You should pass the value false to the methods parameters.</h5>
+                                <div class="code-hint">
+                                <pre>
+                                    YMCTools({ target: '.data-target-ymc545-1', terms: '5,7,9' }).apiTermUpdate(false);
+                                    YMCTools({ target: '.data-target-ymc545-1',  meta : [ { "key" : "amount", "value" : "100" } ] }).apiMetaUpdate(false);
+                                    YMCTools({target: '.data-target-ymc545-1'}).apiGetPosts();
+                                </pre>
+                                </div>
+                            </div>
+                           <div class="method-section apiPageUpdated">
+                                <h2>[ apiPageUpdated ]</h2>
+                                <div class="method-name">
+                                    <pre>YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiPageUpdated( page );</pre>
+                                </div>
+                                <hr/>
+                                <div class="info-code">This method allows you to move to a specific page of posts in grid.</div>
+                                <h5>Required params:</h5>
+                                <ul>
+                                    <li>page - (Number) - page number in the grid Default is 1.</li>
+                                </ul>
+                                <h5>Usage example:</h5>
+                                <div class="code-hint">
+                                    <pre>YMCTools({ target: '.data-target-ymc545-1'}).apiPageUpdated(3);</pre>
+                                </div>
+                            </div>
+                           <div class="method-section apiPopup">
+                                <h2>[ apiPopup ]</h2>
+                                <div class="method-name">
+                                    <pre>YMCTools({ target: '.data-target-ymcFilterID-LayoutID' }).apiPopup( postID );</pre>
+                                </div>
+                                <hr/>
+                                <div class="info-code">This method allows you to open a popup post and load content into it.</div>
+                                <h5>Required params:</h5>
+                                <ul>
+                                    <li>postID - (Number) - post ID</li>
+                                </ul>
+                                <h5>Usage example:</h5>
+                                <div class="code-hint">
+                                    <pre>YMCTools({ target: '.data-target-ymc545-1'}).apiPopup(15);</pre>
+                                </div>
+                            </div>
+                           <div class="method-section apiMultiplePosts">
+                                <h2>[ apiMultiplePosts ]</h2>
+                                <div class="method-name">
+                                    <pre>YMCTools({ target: '.data-target-ymcFilterID-LayoutID' }).apiMultiplePosts( option, cpt = '', tax = '', terms = '' );</pre>
+                                </div>
+                                <hr/>
+                                <div class="info-code">This method allows you to display different post types with their different taxonomies in a grid.</div>
+                                <h5>Required params:</h5>
+                                <ul>
+                                    <li>option - (bool) true / false - parameter allows to control sending of request. Default is true.</li>
+                                    <li>cpt - name of post types (String). Can set several post types separated by commas, for example: "blogs,books"</li>
+                                    <li>tax - name of taxonomies (String). Can set several taxonomies separated by commas, for example: "people,science"</li>
+                                    <li>terms - ID terms (String). Create a list of all terms related to all specified taxonomies, separated by commas, for example: “11,35,47,55,77,95”.</li>
+                                    <li>IMPORTANT! Define the relationship between different taxonomies in a query. The default is "AND". Set the option to "OR" to display all posts in the grid. This can be configured in the admin panel Filter -> General Tab -> Taxonomy.</li>
+                                </ul>
+                                <h5>Usage example: Let's override the global filter settings. To do this, stop loading posts and run the filter with new updated parameters:</h5>
+                                <div class="code-hint">
+                                    <pre>
+                                    wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(el) {
+                                        if( el.classList.contains('data-target-ymc545-1') ) {
+                                            el.dataset.loading = 'false';
 
+                                            YMCTools( { target: '.data-target-ymc545-1' }).apiMultiplePosts(
+                                            true, cpt = 'post,books', tax = 'category,people,science', terms = '5,6,19,15,20,7,55' ); }
+                                    });
+                                    </pre>
+                                </div>
+                            </div>
+                           <div class="method-section ymc_stop_loading_data">
+                                <h2>[ ymc_stop_loading_data ]</h2>
+                                <div class="method-name">
+                                    <pre>wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', 'callback(elem)');</pre>
+                                </div>
+                                <hr/>
+                                <div class="info-code">Stop loading posts on page load. Set the selected filter's data-loading attribute to false ( data-loading="false" )</div>
+                                <h5>Params function callback:</h5>
+                                <ul>
+                                    <li>elem - DOM container filter.</li>
+                                </ul>
+                                <h5>Usage example:</h5>
+                                <div class="code-hint">
+                                    <pre>
+                                        wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(elem) {
+                                            if( elem.classList.contains('data-target-ymc545-1') ) {
+                                            elem.dataset.loading = 'false'; }
+                                        });
+                                   </pre>
+                                </div>
+                            </div>
+                           <div class="method-section ymc_before_loaded_data">
+                                <h2>[ ymc_before_loaded_data ]</h2>
+                                <div class="method-name">
+                                    <pre>wp.hooks.addAction('ymc_before_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name)');</pre>
+                                </div>
+                                <hr/>
+                                <div class="info-code">Note: this hook only works when the page is loaded. By default,
+                                 it stops all posts from loading. Therefore, inside this hook, you must specify the class
+                                 of the selected filter.</div>
+                                <h5>Params function callback:</h5>
+                                <ul>
+                                    <li>class_name - is the name of the filter container class.</li>
+                                </ul>
+                                <h5>Usage example:</h5>
+                                <div class="code-hint">
+                                    <pre>
+                                        wp.hooks.addAction('ymc_before_loaded_data_545_1', 'smartfilter', function(class_name) {
+                                            console.log('Before loading all posts: ' + class_name);
+                                        });
+                                   </pre>
+                                </div>
+                            </div>
+                           <div class="method-section ymc_after_loaded_data">
+                                <h2>[ ymc_after_loaded_data ]</h2>
+                                <div class="method-name">
+                                    <pre>wp.hooks.addAction('ymc_after_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name, response)');</pre>
+                                </div>
+                                <hr/>
+                                <div class="info-code">Hook works after loading all posts.</div>
+                                <h5>Params function callback:</h5>
+                                <ul>
+                                    <li>class_name - is the name of the filter container class.</li>
+                                    <li>response - returned data object, includes the following properties:
+                                    <ul>
+                                        <li>post_count - number of displayed posts per page;</li>
+                                        <li>max_num_pages - maximum number of pages;</li>
+                                        <li>found - number of found posts;</li>
+                                        <li>post_type - post type name;</li>
+                                    </ul>
+                                    </li>
+                                </ul>
+                                <h5>Usage example:</h5>
+                                <div class="code-hint">
+                                    <pre>
+                                        wp.hooks.addAction('ymc_after_loaded_data_545_1', 'smartfilter', function(class_name, response) {
+                                            console.log('Container class: ' + class_name);
+                                            console.log('Post count: ' + response.post_count);
+                                            console.log('Number of found posts: ' + response.found);
+                                        });
+                                    </pre>
+                                </div>
+                            </div>
+                           <div class="method-section ymc_complete_loaded_data">
+                                <h2>[ ymc_complete_loaded_data ]</h2>
+                                <div class="method-name">
+                                    <pre>wp.hooks.addAction('ymc_complete_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name, status)');</pre>
+                                </div>
+                                <hr/>
+                                <div class="info-code">This hook is called regardless of if the request was successful, or not.
+                                              You will always receive a complete callback, even for synchronous requests.</div>
+                                <h5>Params function callback:</h5>
+                                <ul>
+                                    <li>class_name - is the name of the filter container class.</li>
+                                    <li>status - a string categorizing the status of the request ("success", "notmodified",
+                                        "nocontent", "error", "timeout", "abort", or "parsererror").</li>
+                                </ul>
+                                <h5>Usage example:</h5>
+                                <div class="code-hint">
+                                    <pre>
+                                        wp.hooks.addAction('ymc_complete_loaded_data_545_1', 'smartfilter', function(class_name, status) {
+                                            console.log('Complete loaded all data:' + class_name + ' status:' + status);
+                                        });
+                                    </pre>
+                                </div>
+                            </div>
+                           <div class="method-section ymc_before_popup_open">
+                                <h2>[ ymc_before_popup_open ]</h2>
+                                <div class="method-name">
+                                    <pre>wp.hooks.addAction('ymc_before_popup_open_FilterID_LayoutID', 'smartfilter', 'callback');</pre>
+                                </div>
+                                <hr/>
+                                <div class="info-code">This hook allows you to run any desired script before opening a popup for each post.</div>
+                                <h5>Usage example:</h5>
+                                <div class="code-hint">
+                                    <pre>
+                                        wp.hooks.addAction('ymc_before_popup_open_545_1', 'smartfilter', function(data) {
+                                            console.log('Run custom script...');
+                                        });
+                                    </pre>
+                                </div>
+                            </div>
+                           <div class="method-section ymc_after_popup_open">
+                                <h2>[ ymc_after_popup_open ]</h2>
+                                <div class="method-name">
+                                    <pre>wp.hooks.addAction('ymc_after_popup_open_FilterID_LayoutID', 'smartfilter', 'callback');</pre>
+                                </div>
+                                <hr/>
+                                <div class="info-code">This hook allows you to run any desired script after opening a popup for each post.</div>
+                                <h5>Params function callback:</h5>
+                                <ul>
+                                    <li>data - data that is loaded into the popup container.</li>
+                                </ul>
+                                <h5>Usage example:</h5>
+                                <div class="code-hint">
+                                    <pre>
+                                        wp.hooks.addAction('ymc_after_popup_open_545_1', 'smartfilter', function(data){
+                                            console.log('Loaded data: '  + data);
+                                        });
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

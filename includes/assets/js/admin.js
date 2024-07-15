@@ -854,6 +854,54 @@
 
         }
 
+        function popupHints(e) {
+            e.preventDefault();
+            
+            let popupHints = document.querySelector('#advanced .custom-js .popup-hints');
+            let btnCloseMethods = popupHints.querySelector('.popup-hints--btn-close');
+            let btnCloseInfo = popupHints.querySelector('.popup-hints--description .btn-close');
+            let methodsSections = $(popupHints).find('.popup-hints--description .info-hint .method-section');
+
+            // Open Popup
+            popupHints.style.display = 'block';
+
+            // Close Popup
+            btnCloseMethods.addEventListener('click', (e) => {
+                e.preventDefault();
+                popupHints.style.display = 'none';
+                $(popupHints).find('.popup-hints--wrp .line-hint').removeClass('active');
+            });
+
+            // Open Info
+            popupHints.querySelectorAll('.popup-hints--wrp .line-hint').forEach((el) => {
+
+               el.addEventListener('click', (e) => {
+
+                    let methodName = e.target.dataset.method;
+
+                    $(e.target).addClass('active').closest('li').siblings().find('.line-hint').removeClass('active');
+
+                    methodsSections.hide();
+
+                    popupHints.querySelectorAll('.popup-hints--description .info-hint .method-section').forEach((el) => {
+
+                        if( el.classList.contains(methodName) ) {
+
+                            el.style.display = 'block';
+
+                            el.closest('.popup-hints--description').style.display = 'block';
+
+                            btnCloseInfo.addEventListener('click', (e) => {
+                                e.target.closest('.popup-hints--description').style.display = 'none';
+                                methodsSections.hide();
+                                $(popupHints).find('.popup-hints--wrp .line-hint').removeClass('active');
+                            });
+                        }
+                   });
+               });
+            });
+        }
+
         // Choices Posts
         $('.wrapper-selection .ymc-exclude-posts').on('click', function (e) {
 
@@ -1414,6 +1462,9 @@
             ( arr_layouts_posts.includes(postLayout) ) ? columnLayoutSection.show()  :  columnLayoutSection.hide();
 
         });
+
+        // Hints Custom JS
+        $(document).on('click', '.ymc__container-settings #advanced .custom-js .button-hints', popupHints);
 
         // Show / Hide Form Sections
         $('.tab-content .tab-panel .content .sub-header').on('click', function (e) {
