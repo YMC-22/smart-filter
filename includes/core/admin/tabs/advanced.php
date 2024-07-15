@@ -262,13 +262,15 @@
             <div class="popup-hints">
                 <div class="popup-hints--inner">
                     <span class="popup-hints--btn-close" title="Close"></span>
-                    <h2 class="popup-hints--header">Methods and Hooks JS</h2>
-                    <p class="popup-hints--note"><u><b>Note:</b></u> The call to the global <b>YMCTools</b> object should be used
-                       when the document is fully loaded, for example using the notation:: <b>$(document).on("ready", function () {});</b> or
-                        <b>$(window).on(load", function() {});</b> or inside a hook callback function.</p>
+                    <h2 class="popup-hints--header"><?php _e('Methods and Hooks JS', 'ymc-smart-filter'); ?></h2>
+                    <p class="popup-hints--note">
+                        <?php _e('<u><b>Note:</b></u> The call to the global <b>YMCTools</b> object should be used
+                        when the document is fully loaded, for example using the notation:: <b>$(document).on("ready", function () {});</b> or
+                        <b>$(window).on(load", function() {});</b> or inside a hook callback function.', 'ymc-smart-filter'); ?>
+                    </p>
                     <hr/>
                     <ul class="popup-hints--wrp">
-                        <li class="subHeader">Methods</li>
+                        <li class="subHeader"><?php _e('Methods', 'ymc-smart-filter'); ?></li>
                         <li>
                             <span class="line-hint" data-method="apiTermUpdate" title="This method allows to get posts by ID terms of different taxonomies.">
                                 apiTermUpdate;
@@ -344,7 +346,7 @@
                                 apiMultiplePosts;
                             </span>
                         </li>
-                        <li class="subHeader">Hooks</li>
+                        <li class="subHeader"><?php _e('Hooks', 'ymc-smart-filter'); ?></li>
                         <li>
                             <span class="line-hint" data-method="ymc_stop_loading_data" title="Stop loading posts on page load.">
                                 ymc_stop_loading_data;
@@ -400,7 +402,16 @@
                                 </ul>
                                 <h5>Usage example:</h5>
                                 <div class="code-hint">
-                                    <pre>YMCTools({ target: '.data-target-ymc545-1', terms: '7,9,11' }).apiTermUpdate();</pre>
+                                    <div class="clipboard-container">
+                                        <svg class="js-clipboard-copy" height="16" viewBox="0 0 16 16" width="16" data-clipboard-target="#apiTermUpdateHint">
+                                            <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                                        </svg>
+                                        <svg class="js-clipboard-check" height="16" viewBox="0 0 16 16" width="16">
+                                            <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                                        </svg>
+                                        <span class="js-clipboard-tip">Copied!</span>
+                                    </div>
+                                    <pre id="apiTermUpdateHint">YMCTools({ target: '.data-target-ymc545-1', terms: '7,9,11' }).apiTermUpdate();</pre>
                                 </div>
                             </div>
                            <div class="method-section apiMetaUpdate">
@@ -422,7 +433,16 @@
                                </ul>
                                <h5>Usage example:</h5>
                                <div class="code-hint">
-                                   <pre>
+                                   <div class="clipboard-container">
+                                       <svg class="js-clipboard-copy" height="16" viewBox="0 0 16 16" width="16" data-clipboard-target="#apiMetaUpdateHint">
+                                           <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                                       </svg>
+                                       <svg class="js-clipboard-check" height="16" viewBox="0 0 16 16" width="16">
+                                           <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                                       </svg>
+                                       <span class="js-clipboard-tip">Copied!</span>
+                                   </div>
+                                   <pre id="apiMetaUpdateHint">
                                    YMCTools({ target: '.data-target-ymc545-1', meta : [
                                        { "relation" : "OR" },
                                        { "key" : "color", "value" : "blue" },
@@ -452,7 +472,16 @@
                                </ul>
                                <h5>Usage example:</h5>
                                <div class="code-hint">
-                                 <pre>
+                                   <div class="clipboard-container">
+                                       <svg class="js-clipboard-copy" height="16" viewBox="0 0 16 16" width="16" data-clipboard-target="#apiDateUpdateHint">
+                                           <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                                       </svg>
+                                       <svg class="js-clipboard-check" height="16" viewBox="0 0 16 16" width="16">
+                                           <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                                       </svg>
+                                       <span class="js-clipboard-tip">Copied!</span>
+                                   </div>
+                                 <pre id="apiDateUpdateHint">
                                     YMCTools({ target: '.data-target-ymc545-1', date : [
                                        { "monthnum" : "1", "compare" : "=" },
                                        { "year" : "2023", "compare" : "=" },
@@ -462,12 +491,12 @@
                                </div>
                            </div>
                            <div class="method-section apiSearchPosts">
-                               <h2>[ apiSearchPosts ]</h2>
+                                <h2>[ apiSearchPosts ]</h2>
                                 <div class="method-name">
                                     <pre>YMCTools({target: ".data-target-ymcFilterID-LayoutID", search: 'keyword'}).apiSearchPosts( option, terms );</pre>
                                 </div>
-                               <hr/>
-                               <div class="info-code">This method allows to search for posts by keyword.</div>
+                                <hr/>
+                                <div class="info-code">This method allows to search for posts by keyword.</div>
                                 <h5>Required params:</h5>
                                 <ul>
                                     <li>.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.</li>
@@ -480,7 +509,16 @@
                                 </ul>
                                 <h5>Usage example:</h5>
                                 <div class="code-hint">
-                                    <pre>YMCTools({ target: '.data-target-ymc545-1', search: 'keyword' }).apiSearchPosts( true, [7,11,15] );</pre>
+                                    <div class="clipboard-container">
+                                        <svg class="js-clipboard-copy" height="16" viewBox="0 0 16 16" width="16" data-clipboard-target="#apiSearchPostsHint">
+                                            <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                                        </svg>
+                                        <svg class="js-clipboard-check" height="16" viewBox="0 0 16 16" width="16">
+                                            <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                                        </svg>
+                                        <span class="js-clipboard-tip">Copied!</span>
+                                    </div>
+                                    <pre id="apiSearchPostsHint">YMCTools({ target: '.data-target-ymc545-1', search: 'keyword' }).apiSearchPosts( true, [7,11,15] );</pre>
                                 </div>
                             </div>
                            <div class="method-section apiChoicesPosts">
@@ -502,7 +540,16 @@
                                 </ul>
                                 <h5>Usage example:</h5>
                                 <div class="code-hint">
-                                    <pre>YMCTools({ target: '.data-target-ymc545-1', choicesPosts: '7,9,11', excludePosts: 'off' }).apiChoicesPosts();</pre>
+                                    <div class="clipboard-container">
+                                        <svg class="js-clipboard-copy" height="16" viewBox="0 0 16 16" width="16" data-clipboard-target="#apiChoicesPostsHint">
+                                            <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                                        </svg>
+                                        <svg class="js-clipboard-check" height="16" viewBox="0 0 16 16" width="16">
+                                            <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                                        </svg>
+                                        <span class="js-clipboard-tip">Copied!</span>
+                                    </div>
+                                    <pre id="apiChoicesPostsHint">YMCTools({ target: '.data-target-ymc545-1', choicesPosts: '7,9,11', excludePosts: 'off' }).apiChoicesPosts();</pre>
                                 </div>
                             </div>
                            <div class="method-section apiSortPosts">
@@ -510,8 +557,8 @@
                                 <div class="method-name">
                                     <pre>YMCTools({target: ".data-target-ymcFilterID-LayoutID", sortOrder: 'asc', sortOrderBy: 'title'}).apiSortPosts( option );</pre>
                                 </div>
-                               <hr/>
-                               <div class="info-code">This method allows to sort posts by different criteria.</div>
+                                <hr/>
+                                <div class="info-code">This method allows to sort posts by different criteria.</div>
                                 <h5>Required params:</h5>
                                 <ul>
                                     <li>.data-target-ymcFilterID-LayoutID - class name of the filter container on the page.</li>
@@ -527,23 +574,41 @@
                                 </ul>
                                 <h5>Usage example:</h5>
                                 <div class="code-hint">
-                                    <pre>YMCTools({ target: '.data-target-ymc545-1', sortOrder: 'desc', sortOrderBy: 'meta_value_num', metaKey: 'amount' }).apiSortPosts();</pre>
+                                    <div class="clipboard-container">
+                                        <svg class="js-clipboard-copy" height="16" viewBox="0 0 16 16" width="16" data-clipboard-target="#apiSortPostsHint">
+                                            <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                                        </svg>
+                                        <svg class="js-clipboard-check" height="16" viewBox="0 0 16 16" width="16">
+                                            <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                                        </svg>
+                                        <span class="js-clipboard-tip">Copied!</span>
+                                    </div>
+                                    <pre id="apiSortPostsHint">YMCTools({ target: '.data-target-ymc545-1', sortOrder: 'desc', sortOrderBy: 'meta_value_num', metaKey: 'amount' }).apiSortPosts();</pre>
                                 </div>
                             </div>
                            <div class="method-section apiTermClear">
-                               <h2>[ apiTermClear ]</h2>
+                                <h2>[ apiTermClear ]</h2>
                                 <div class="method-name">
                                     <pre>YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiTermClear( option );</pre>
                                 </div>
-                               <hr/>
-                               <div class="info-code">This method allows to clear query parameters in the filter by terms.</div>
+                                <hr/>
+                                <div class="info-code">This method allows to clear query parameters in the filter by terms.</div>
                                 <h5>Required params:</h5>
                                 <ul>
                                     <li>option - (bool) true / false - parameter allows to control sending of request. Default is true</li>
                                 </ul>
                                 <h5>Usage example:</h5>
                                 <div class="code-hint">
-                                    <pre>YMCTools({ target: '.data-target-ymc545-1' }).apiTermClear();</pre>
+                                    <div class="clipboard-container">
+                                        <svg class="js-clipboard-copy" height="16" viewBox="0 0 16 16" width="16" data-clipboard-target="#apiTermClearHint">
+                                            <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                                        </svg>
+                                        <svg class="js-clipboard-check" height="16" viewBox="0 0 16 16" width="16">
+                                            <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                                        </svg>
+                                        <span class="js-clipboard-tip">Copied!</span>
+                                    </div>
+                                    <pre id="apiTermClearHint">YMCTools({ target: '.data-target-ymc545-1' }).apiTermClear();</pre>
                                 </div>
                             </div>
                            <div class="method-section apiMetaClear">
@@ -559,12 +624,21 @@
                                 </ul>
                                 <h5>Usage example:</h5>
                                 <div class="code-hint">
-                                    <pre>YMCTools({ target: '.data-target-ymc545-1' }).apiMetaClear();</pre>
+                                    <div class="clipboard-container">
+                                        <svg class="js-clipboard-copy" height="16" viewBox="0 0 16 16" width="16" data-clipboard-target="#apiMetaClearHint">
+                                            <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                                        </svg>
+                                        <svg class="js-clipboard-check" height="16" viewBox="0 0 16 16" width="16">
+                                            <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                                        </svg>
+                                        <span class="js-clipboard-tip">Copied!</span>
+                                    </div>
+                                    <pre id="apiMetaClearHint">YMCTools({ target: '.data-target-ymc545-1' }).apiMetaClear();</pre>
                                 </div>
                             </div>
                            <div class="method-section apiDateClear">
                                <h2>[ apiDateClear ]</h2>
-                                <div class="method-name">
+                               <div class="method-name">
                                     <pre>YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiDateClear( option );</pre>
                                 </div>
                                <hr/>
@@ -575,7 +649,16 @@
                                 </ul>
                                 <h5>Usage example:</h5>
                                 <div class="code-hint">
-                                    <pre>YMCTools({ target: '.data-target-ymc545-1' }).apiDateClear();</pre>
+                                    <div class="clipboard-container">
+                                        <svg class="js-clipboard-copy" height="16" viewBox="0 0 16 16" width="16" data-clipboard-target="#apiDateClearHint">
+                                            <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                                        </svg>
+                                        <svg class="js-clipboard-check" height="16" viewBox="0 0 16 16" width="16">
+                                            <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                                        </svg>
+                                        <span class="js-clipboard-tip">Copied!</span>
+                                    </div>
+                                    <pre id="apiDateClearHint">YMCTools({ target: '.data-target-ymc545-1' }).apiDateClear();</pre>
                                 </div>
                             </div>
                            <div class="method-section apiSortClear">
@@ -591,7 +674,16 @@
                                 </ul>
                                 <h5>Usage example:</h5>
                                 <div class="code-hint">
-                                    <pre>YMCTools({ target: '.data-target-ymc545-1' }).apiSortClear();</pre>
+                                    <div class="clipboard-container">
+                                        <svg class="js-clipboard-copy" height="16" viewBox="0 0 16 16" width="16" data-clipboard-target="#apiSortClearHint">
+                                            <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                                        </svg>
+                                        <svg class="js-clipboard-check" height="16" viewBox="0 0 16 16" width="16">
+                                            <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                                        </svg>
+                                        <span class="js-clipboard-tip">Copied!</span>
+                                    </div>
+                                    <pre id="apiSortClearHint">YMCTools({ target: '.data-target-ymc545-1' }).apiSortClear();</pre>
                                 </div>
                             </div>
                            <div class="method-section apiLetterAlphabetClear">
@@ -607,7 +699,16 @@
                                 </ul>
                                 <h5>Usage example:</h5>
                                 <div class="code-hint">
-                                    <pre>YMCTools({ target: '.data-target-ymc545-1' }).apiLetterAlphabetClear();</pre>
+                                    <div class="clipboard-container">
+                                        <svg class="js-clipboard-copy" height="16" viewBox="0 0 16 16" width="16" data-clipboard-target="#apiLetterAlphabetClearHint">
+                                            <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                                        </svg>
+                                        <svg class="js-clipboard-check" height="16" viewBox="0 0 16 16" width="16">
+                                            <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                                        </svg>
+                                        <span class="js-clipboard-tip">Copied!</span>
+                                    </div>
+                                    <pre id="apiLetterAlphabetClearHint">YMCTools({ target: '.data-target-ymc545-1' }).apiLetterAlphabetClear();</pre>
                                 </div>
                             </div>
                            <div class="method-section apiGetPosts">
@@ -619,7 +720,16 @@
                                 <div class="info-code">This method allows you to make a request to receive posts by previously specified parameters.</div>
                                 <h5>Usage example: First we change the request parameters, and then we send the data. You should pass the value false to the methods parameters.</h5>
                                 <div class="code-hint">
-                                <pre>
+                                    <div class="clipboard-container">
+                                        <svg class="js-clipboard-copy" height="16" viewBox="0 0 16 16" width="16" data-clipboard-target="#apiGetPostsHint">
+                                            <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                                        </svg>
+                                        <svg class="js-clipboard-check" height="16" viewBox="0 0 16 16" width="16">
+                                            <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                                        </svg>
+                                        <span class="js-clipboard-tip">Copied!</span>
+                                    </div>
+                                <pre id="apiGetPostsHint">
                                     YMCTools({ target: '.data-target-ymc545-1', terms: '5,7,9' }).apiTermUpdate(false);
                                     YMCTools({ target: '.data-target-ymc545-1',  meta : [ { "key" : "amount", "value" : "100" } ] }).apiMetaUpdate(false);
                                     YMCTools({target: '.data-target-ymc545-1'}).apiGetPosts();
@@ -639,7 +749,16 @@
                                 </ul>
                                 <h5>Usage example:</h5>
                                 <div class="code-hint">
-                                    <pre>YMCTools({ target: '.data-target-ymc545-1'}).apiPageUpdated(3);</pre>
+                                    <div class="clipboard-container">
+                                        <svg class="js-clipboard-copy" height="16" viewBox="0 0 16 16" width="16" data-clipboard-target="#apiPageUpdatedHint">
+                                            <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                                        </svg>
+                                        <svg class="js-clipboard-check" height="16" viewBox="0 0 16 16" width="16">
+                                            <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                                        </svg>
+                                        <span class="js-clipboard-tip">Copied!</span>
+                                    </div>
+                                    <pre id="apiPageUpdatedHint">YMCTools({ target: '.data-target-ymc545-1'}).apiPageUpdated(3);</pre>
                                 </div>
                             </div>
                            <div class="method-section apiPopup">
@@ -655,7 +774,16 @@
                                 </ul>
                                 <h5>Usage example:</h5>
                                 <div class="code-hint">
-                                    <pre>YMCTools({ target: '.data-target-ymc545-1'}).apiPopup(15);</pre>
+                                    <div class="clipboard-container">
+                                        <svg class="js-clipboard-copy" height="16" viewBox="0 0 16 16" width="16" data-clipboard-target="#apiPopupHint">
+                                            <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                                        </svg>
+                                        <svg class="js-clipboard-check" height="16" viewBox="0 0 16 16" width="16">
+                                            <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                                        </svg>
+                                        <span class="js-clipboard-tip">Copied!</span>
+                                    </div>
+                                    <pre id="apiPopupHint">YMCTools({ target: '.data-target-ymc545-1'}).apiPopup(15);</pre>
                                 </div>
                             </div>
                            <div class="method-section apiMultiplePosts">
@@ -675,7 +803,16 @@
                                 </ul>
                                 <h5>Usage example: Let's override the global filter settings. To do this, stop loading posts and run the filter with new updated parameters:</h5>
                                 <div class="code-hint">
-                                    <pre>
+                                    <div class="clipboard-container">
+                                        <svg class="js-clipboard-copy" height="16" viewBox="0 0 16 16" width="16" data-clipboard-target="#apiMultiplePostsHint">
+                                            <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                                        </svg>
+                                        <svg class="js-clipboard-check" height="16" viewBox="0 0 16 16" width="16">
+                                            <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                                        </svg>
+                                        <span class="js-clipboard-tip">Copied!</span>
+                                    </div>
+                                    <pre id="apiMultiplePostsHint">
                                     wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(el) {
                                         if( el.classList.contains('data-target-ymc545-1') ) {
                                             el.dataset.loading = 'false';
@@ -699,7 +836,16 @@
                                 </ul>
                                 <h5>Usage example:</h5>
                                 <div class="code-hint">
-                                    <pre>
+                                    <div class="clipboard-container">
+                                        <svg class="js-clipboard-copy" height="16" viewBox="0 0 16 16" width="16" data-clipboard-target="#ymcStopLoadingDataHint">
+                                            <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                                        </svg>
+                                        <svg class="js-clipboard-check" height="16" viewBox="0 0 16 16" width="16">
+                                            <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                                        </svg>
+                                        <span class="js-clipboard-tip">Copied!</span>
+                                    </div>
+                                    <pre id="ymcStopLoadingDataHint">
                                         wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(elem) {
                                             if( elem.classList.contains('data-target-ymc545-1') ) {
                                             elem.dataset.loading = 'false'; }
@@ -722,7 +868,16 @@
                                 </ul>
                                 <h5>Usage example:</h5>
                                 <div class="code-hint">
-                                    <pre>
+                                    <div class="clipboard-container">
+                                        <svg class="js-clipboard-copy" height="16" viewBox="0 0 16 16" width="16" data-clipboard-target="#ymcBeforeLoadedDataHint">
+                                            <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                                        </svg>
+                                        <svg class="js-clipboard-check" height="16" viewBox="0 0 16 16" width="16">
+                                            <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                                        </svg>
+                                        <span class="js-clipboard-tip">Copied!</span>
+                                    </div>
+                                    <pre id="ymcBeforeLoadedDataHint">
                                         wp.hooks.addAction('ymc_before_loaded_data_545_1', 'smartfilter', function(class_name) {
                                             console.log('Before loading all posts: ' + class_name);
                                         });
@@ -750,7 +905,16 @@
                                 </ul>
                                 <h5>Usage example:</h5>
                                 <div class="code-hint">
-                                    <pre>
+                                    <div class="clipboard-container">
+                                        <svg class="js-clipboard-copy" height="16" viewBox="0 0 16 16" width="16" data-clipboard-target="#ymcAfterLoadedDataHint">
+                                            <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                                        </svg>
+                                        <svg class="js-clipboard-check" height="16" viewBox="0 0 16 16" width="16">
+                                            <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                                        </svg>
+                                        <span class="js-clipboard-tip">Copied!</span>
+                                    </div>
+                                    <pre id="ymcAfterLoadedDataHint">
                                         wp.hooks.addAction('ymc_after_loaded_data_545_1', 'smartfilter', function(class_name, response) {
                                             console.log('Container class: ' + class_name);
                                             console.log('Post count: ' + response.post_count);
@@ -775,7 +939,16 @@
                                 </ul>
                                 <h5>Usage example:</h5>
                                 <div class="code-hint">
-                                    <pre>
+                                    <div class="clipboard-container">
+                                        <svg class="js-clipboard-copy" height="16" viewBox="0 0 16 16" width="16" data-clipboard-target="#ymcCompleteLoadedDataHint">
+                                            <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                                        </svg>
+                                        <svg class="js-clipboard-check" height="16" viewBox="0 0 16 16" width="16">
+                                            <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                                        </svg>
+                                        <span class="js-clipboard-tip">Copied!</span>
+                                    </div>
+                                    <pre id="ymcCompleteLoadedDataHint">
                                         wp.hooks.addAction('ymc_complete_loaded_data_545_1', 'smartfilter', function(class_name, status) {
                                             console.log('Complete loaded all data:' + class_name + ' status:' + status);
                                         });
@@ -791,7 +964,16 @@
                                 <div class="info-code">This hook allows you to run any desired script before opening a popup for each post.</div>
                                 <h5>Usage example:</h5>
                                 <div class="code-hint">
-                                    <pre>
+                                    <div class="clipboard-container">
+                                        <svg class="js-clipboard-copy" height="16" viewBox="0 0 16 16" width="16" data-clipboard-target="#ymcBeforePopupOpenHint">
+                                            <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                                        </svg>
+                                        <svg class="js-clipboard-check" height="16" viewBox="0 0 16 16" width="16">
+                                            <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                                        </svg>
+                                        <span class="js-clipboard-tip">Copied!</span>
+                                    </div>
+                                    <pre id="ymcBeforePopupOpenHint">
                                         wp.hooks.addAction('ymc_before_popup_open_545_1', 'smartfilter', function(data) {
                                             console.log('Run custom script...');
                                         });
@@ -811,7 +993,16 @@
                                 </ul>
                                 <h5>Usage example:</h5>
                                 <div class="code-hint">
-                                    <pre>
+                                    <div class="clipboard-container">
+                                        <svg class="js-clipboard-copy" height="16" viewBox="0 0 16 16" width="16" data-clipboard-target="#ymcAfterPopupOpenHint">
+                                            <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                                        </svg>
+                                        <svg class="js-clipboard-check" height="16" viewBox="0 0 16 16" width="16">
+                                            <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                                        </svg>
+                                        <span class="js-clipboard-tip">Copied!</span>
+                                    </div>
+                                    <pre id="ymcAfterPopupOpenHint">
                                         wp.hooks.addAction('ymc_after_popup_open_545_1', 'smartfilter', function(data){
                                             console.log('Loaded data: '  + data);
                                         });

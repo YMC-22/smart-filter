@@ -902,6 +902,32 @@
             });
         }
 
+        function clipboardCopyHints(e) {
+
+            let className = e.target.closest('svg').getAttribute('class');
+            let clipboard = new ClipboardJS( `.${className}` );
+
+            clipboard.on('success', function(e) {
+                e.trigger.style.display= "none";
+                e.trigger.nextElementSibling.style.display = "block";
+                $(e.trigger).siblings('.js-clipboard-tip').show();
+
+                e.clearSelection();
+
+                setTimeout( () => {
+                    e.trigger.style.display= "block";
+                    e.trigger.nextElementSibling.style.display = "none";
+                    $(e.trigger).siblings('.js-clipboard-tip').hide();
+                },1000 );
+
+            });
+
+            clipboard.on('error', function(e) {
+                console.error('Action:', e.action);
+                console.error('Trigger:', e.trigger);
+            });
+        }
+
         // Choices Posts
         $('.wrapper-selection .ymc-exclude-posts').on('click', function (e) {
 
@@ -1465,6 +1491,11 @@
 
         // Hints Custom JS
         $(document).on('click', '.ymc__container-settings #advanced .custom-js .button-hints', popupHints);
+
+        // Clipboard Copy Hints
+        document.querySelectorAll('.ymc__container-settings #advanced .custom-js .popup-hints .js-clipboard-copy').forEach((el) => {
+            el.addEventListener( 'click', clipboardCopyHints );
+        });
 
         // Show / Hide Form Sections
         $('.tab-content .tab-panel .content .sub-header').on('click', function (e) {

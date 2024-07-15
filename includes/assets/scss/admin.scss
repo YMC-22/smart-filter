@@ -1047,12 +1047,40 @@ $font-size: 16;
 												margin-bottom: 10px;
 											}
 											.code-hint {
+												position: relative;
 												color: #dbb7ff;
 												font-weight: 400;
+												background-color: #272b33;
+												padding: 15px 10px 0;
 												pre {
 													overflow-x: auto;
 													overflow-y: hidden;
 													min-height: 50px;
+													margin-top: 20px;
+												}
+												.clipboard-container {
+													svg {
+														position: absolute;
+														right: 10px;
+														top: 10px;
+														filter: invert(1);
+														cursor: pointer;
+														&.js-clipboard-check {
+															display: none;
+															filter: brightness(0) saturate(100%) invert(61%) sepia(31%) saturate(897%) hue-rotate(102deg) brightness(99%) contrast(101%);
+														}
+													}
+													.js-clipboard-tip {
+														display: none;
+														background-color: #fff;
+														color: #000;
+														padding: 3px 5px;
+														border-radius: 5px;
+														position: absolute;
+														right: 35px;
+														top: 5px;
+														font-size: 11px;
+													}
 												}
 											}
 										}
