@@ -28,7 +28,7 @@ $terms_sel   = $terms_selected;
 		<div class="form-group wrapper-cpt">
 
 			<label for="ymc-cpt-select" class="form-label">
-				<?php echo esc_html__('Post Types','ymc-smart-filter'); ?>
+				<?php echo esc_html__('Post Type(s)','ymc-smart-filter'); ?>
 				<span class="information" style="margin-bottom: 10px;">
         <?php echo esc_html__('Select one ore more posts. To select multiple posts, hold down the key Ctrl.
                                    For a more complete display of posts in the grid, set the "Taxonomy Relation" option to OR.','ymc-smart-filter'); ?>
@@ -50,8 +50,13 @@ $terms_sel   = $terms_selected;
 
 		<div class="form-group wrapper-taxonomy">
 
+			<div class="multi-buttons">
+				<span class="ymc-btn-reload tax-reload" title="Update taxonomy(s)."><i class="fas fa-redo"></i></span>
+				<span class="ymc-btn-delete tax-delete" title="Remove taxonomy(s) terms."><i class="far fa-trash-alt"></i></span>
+			</div>
+
 			<label for="ymc-tax-checkboxes" class="form-label">
-				<?php echo esc_html__('Taxonomy','ymc-smart-filter'); ?>
+				<?php echo esc_html__('Taxonomy(s)','ymc-smart-filter'); ?>
 				<span class="information">
                 <?php echo esc_html__('Select taxonomy. Sortable with Drag & Drop feature.','ymc-smart-filter'); ?>
                 </span>
@@ -61,9 +66,6 @@ $terms_sel   = $terms_selected;
 			<?php
 				$data_object = get_object_taxonomies($cpt, $output = 'objects');
 				$taxo = [];
-
-				// Exclude Taxonomies WooCommerce
-				$arr_exclude_slugs = ['product_type','product_visibility','product_shipping_class'];
 
 				foreach ( $data_object as $val ) {
 					$taxo[$val->label] = $val->name;
@@ -86,22 +88,20 @@ $terms_sel   = $terms_selected;
 
 						$sl0 = '';
 
-						if( array_search($slug, $arr_exclude_slugs) === false ) {
+						if( is_array($tax_sel) && count($tax_sel) > 0 ) {
 
-							if( is_array($tax_sel) && count($tax_sel) > 0 ) {
-
-								if (in_array($slug, $tax_sel)) {
-									$sl0 = 'checked';
-								}
-								else{
-									$sl0 = '';
-								}
+							if (in_array($slug, $tax_sel)) {
+								$sl0 = 'checked';
 							}
-
-							echo '<div id="'. esc_attr($slug) .'" class="group-elements">
-                            <input id="id-'. esc_attr($slug) .'" type="checkbox" name="ymc-taxonomy[]" value="'. esc_attr($slug) .'" '. esc_attr($sl0) .'>
-                            <label for="id-'. esc_attr($slug) .'">'.  esc_html($label) . '</label></div>';
+							else{
+								$sl0 = '';
+							}
 						}
+
+						echo '<div id="'. esc_attr($slug) .'" class="group-elements">
+                        <input id="id-'. esc_attr($slug) .'" type="checkbox" name="ymc-taxonomy[]" value="'. esc_attr($slug) .'" '. esc_attr($sl0) .'>
+                        <label for="id-'. esc_attr($slug) .'">'.  esc_html($label) . '</label></div>';
+
 					}
 
 					unset($result_tax);
@@ -111,14 +111,13 @@ $terms_sel   = $terms_selected;
 				}
 			?>
 			</div>
-			<span class="ymc-btn-reload tax-reload" title="Update taxonomies. The current texonomies and terms settings will be reset."><i class="fas fa-redo"></i></span>
 
 		</div>
 
 		<div class="form-group wrapper-terms <?php echo empty($tax_sel) ? 'hidden' : ''; ?>">
 
 			<label for="ymc-terms" class="form-label">
-				<?php echo esc_html__('Terms','ymc-smart-filter'); ?>
+				<?php echo esc_html__('Term(s)','ymc-smart-filter'); ?>
 				<span class="information"><?php echo esc_html__('Select terms. Sortable with Drag and Drop feature. Set the Sort Filter Terms option to Manual sort in the Appearance section.','ymc-smart-filter'); ?></span>
 			</label>
 
@@ -322,7 +321,7 @@ $terms_sel   = $terms_selected;
 			<?php if( $is_cpt ) : ?>
 
 				<label class="form-label">
-					<?php echo esc_html__('Exclude Posts', 'ymc-smart-filter'); ?>
+					<?php echo esc_html__('Exclude Post(s)', 'ymc-smart-filter'); ?>
 					<span class="information">
         <?php echo esc_html__('Check to exclude the selected posts from the grid. Works on selected posts.', 'ymc-smart-filter');?>
         </span>
@@ -338,7 +337,7 @@ $terms_sel   = $terms_selected;
 				<br/>
 
 				<label class="form-label">
-					<?php echo esc_html__('Add posts', 'ymc-smart-filter'); ?>
+					<?php echo esc_html__('Add post(s)', 'ymc-smart-filter'); ?>
 					<span class="information">
         <?php echo esc_html__('Include / Exclude posts in the post grid on the frontend. To exclude posts, check option "Exclude posts". By default, posts are included in the grid. Drag and Drop posts for custom sorting', 'ymc-smart-filter');?>
         </span>

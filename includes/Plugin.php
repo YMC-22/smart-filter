@@ -128,6 +128,28 @@ class Plugin {
 	public $pagination;
 
 
+	/**
+	 * Token Frontend
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @var $token_f
+	 */
+	public $token_f = 'fdd791b3fe1c045fceb0015140b2b70d';
+
+
+	/**
+	 * Token Backend
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @var $token_b
+	 */
+	public  $token_b = '95f8938d2aed81d36fae20a754711c99';
+
+
 
 	/**
 	 * Instance

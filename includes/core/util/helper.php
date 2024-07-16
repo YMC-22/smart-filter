@@ -190,14 +190,3 @@ if( !function_exists('setSelectedIcon') )
 }
 
 
-
-
-
-
-
-
-
-
-
-
-

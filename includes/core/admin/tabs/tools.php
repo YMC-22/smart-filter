@@ -45,7 +45,9 @@
             <label class="form-label">
                 <?php echo esc_html__('Import', 'ymc-smart-filter');?>
                 <span class="information">
-               <?php echo esc_html__('Select a file JSON to import settings.', 'ymc-smart-filter');?>
+               <?php echo esc_html__('Select a File JSON to import settings. 
+                IMPORTANT! Before importing data, make sure that you already have Post Types and Taxonomies that 
+                were exported from other filters.', 'ymc-smart-filter');?>
             </span>
             </label>
 

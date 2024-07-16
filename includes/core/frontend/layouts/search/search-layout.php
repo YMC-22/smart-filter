@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <span class="clear"><i class="fas fa-times"></i></span>
             </div>
 
-            <button class="search-form__submit btn-submit">
+            <button class="search-form__submit btn-submit" type="submit">
                 <?php esc_html_e($ymc_search_text_button, 'ymc-smart-filter'); ?>
             </button>
 

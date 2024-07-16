@@ -6,18 +6,18 @@ $ymcStyleRuleBg   = !empty($ymc_filter_bg_color) ? "background-color:".$ymc_filt
 $ymcStyleRuleActiveColor = !empty($ymc_filter_active_color) ? "color:".$ymc_filter_active_color.";" : '';
 $ymcStyleRuleFont = !empty($ymc_filter_font) ? "font-family:'".$ymc_filter_font."';" : '';
 
-$filter_css = "#ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link, 
-               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link  { ". $ymcStyleRuleColor . $ymcStyleRuleBg." }
-               #ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link:before, 
-               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link:before,
-               #ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link:after, 
-               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link:after  { border-color:". $ymc_filter_text_color ." }
-               #ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link,
-               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link { ". $ymcStyleRuleBg ." }
-               #ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link.active,
-               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link.active {".$ymcStyleRuleActiveColor."}
-               #ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link,
-               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link {".$ymcStyleRuleFont."}";
+$filter_css = "#ymc-smart-filter-container-".$c_target." .filter-layout5 .filter-entry .menu-passive .menu-link, 
+               #ymc-extra-filter-".$c_target." .filter-layout5 .filter-entry .menu-passive .menu-link  { ". $ymcStyleRuleColor . $ymcStyleRuleBg." }
+               #ymc-smart-filter-container-".$c_target." .filter-layout5 .filter-entry .menu-passive .menu-link:before, 
+               #ymc-extra-filter-".$c_target." .filter-layout5 .filter-entry .menu-passive .menu-link:before,
+               #ymc-smart-filter-container-".$c_target." .filter-layout5 .filter-entry .menu-passive .menu-link:after, 
+               #ymc-extra-filter-".$c_target." .filter-layout5 .filter-entry .menu-passive .menu-link:after  { border-color:". $ymc_filter_text_color ." }
+               #ymc-smart-filter-container-".$c_target." .filter-layout5 .filter-entry .menu-passive .menu-link,
+               #ymc-extra-filter-".$c_target." .filter-layout5 .filter-entry .menu-passive .menu-link { ". $ymcStyleRuleBg ." }
+               #ymc-smart-filter-container-".$c_target." .filter-layout5 .filter-entry .menu-passive .menu-link.active,
+               #ymc-extra-filter-".$c_target." .filter-layout5 .filter-entry .menu-passive .menu-link.active {".$ymcStyleRuleActiveColor."}
+               #ymc-smart-filter-container-".$c_target." .filter-layout5 .filter-entry .menu-passive .menu-link,
+               #ymc-extra-filter-".$c_target." .filter-layout5 .filter-entry .menu-passive .menu-link {".$ymcStyleRuleFont."}";
 
 echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 
@@ -28,38 +28,34 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 
 	<?php do_action("ymc_before_filter_layout_".$id.'_'.$c_target); ?>
 
-	<?php if( is_array($terms_selected) ) :
+    <?php if( is_array($terms_selected) ) :
 
 		$all_terms = implode(',', $terms_selected);
+
+	    $text_all = apply_filters('ymc_placeholder_dropdown_'.$id.'_'.$c_target, $ymc_post_elements['button_text_all']);
     ?>
 
-    <div class="filter-entry" data-terms="<?php echo esc_attr($all_terms); ?>">
+    <div class="filter-entry" data-terms="<?php echo esc_attr($all_terms); ?>" data-text-all="<?php echo esc_attr($text_all); ?>">
 
 		<?php
 
-		$type_multiple = ( (bool) $ymc_multiple_filter ) ? 'multiple' : '';
+			$type_multiple = ( (bool) $ymc_multiple_filter ) ? 'multiple' : '';
 
-		if( $ymc_sort_terms !== 'manual' ) {
-			( $ymc_sort_terms === 'asc' ) ? asort($terms_selected) : arsort($terms_selected);
-		}
-
-		?>
-
-        <?php
+			if( $ymc_sort_terms !== 'manual' ) {
+				( $ymc_sort_terms === 'asc' ) ? asort($terms_selected) : arsort($terms_selected);
+			}
 
             $arr_taxonomies = [];
+            $terms_categories = '';
 
             foreach ($terms_selected as $term) {
 
 	            $arr_taxonomies[] = ( ! is_wp_error( get_term( $term ) ) && ! is_null( get_term( $term ) ) ) ? get_term( $term )->taxonomy : null;
             }
+
             $arr_taxonomies = array_unique($arr_taxonomies);
 
-            $show_all = apply_filters('ymc_button_show_all_'.$id.'_'.$c_target, __($ymc_post_elements['button_text_all'],'ymc-smart-filter'));
-
-            echo '<a class="btn-all" href="#" data-selected="all" data-terms="' . esc_attr($all_terms) . '">'. esc_html($show_all) .'</a>';
-
-            if( !is_null($tax_sort) && is_array($tax_sort) ) {
+            if( ! is_null($tax_sort) && is_array($tax_sort) ) {
                 $result_tax = [];
                 foreach($tax_sort as $val) {
                     if(array_search($val, $arr_taxonomies) !== false) {
@@ -71,13 +67,24 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
                 $result_tax = $arr_taxonomies;
             }
 
-            foreach ($result_tax as $tax)
+            foreach ( $result_tax as $tax )
 			{
+				$arr_terms_categories = get_terms(['taxonomy' => $tax, 'hide_empty' => false]);
+
+                if( $arr_terms_categories && ! is_wp_error( $arr_terms_categories ) ) {
+	                foreach( $arr_terms_categories as $term ) {
+						if( in_array($term->term_id, $terms_selected) ) {
+							$terms_categories .= $term->term_id . ',';
+						}
+	                }
+                }
 
 	            $select_term = apply_filters('ymc_select_term_dropdown', $tax);
 	            $tax_name = apply_filters('ymc_tax_name_'.$id.'_'.$c_target.'_'.$tax, get_taxonomy( $select_term )->label);
 
-				if( !empty($default_terms) && empty($type_multiple) )
+				$text_all = apply_filters('ymc_placeholder_dropdown_'.$id.'_'.$c_target.'_'.$tax, $text_all);
+
+				if( ! empty($default_terms) && empty($type_multiple) )
 				{
 					$arr_default_term_ids = explode(',', $default_terms);
 					foreach ( $arr_default_term_ids as $term_id )
@@ -90,11 +97,15 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 				}
 
                 echo '<div class="dropdown-filter tax-'.$tax.'">';
+                echo '<div class="name-category">' . $tax_name .'</div>';
                 echo '<div class="menu-active">';
-                echo '<span>' . $tax_name .'</span> <i class="arrow down"></i>';
+                echo '<span class="text-cat">'. esc_html($text_all) .'</span> <i class="arrow down"></i>';
                 echo '</div>';
                 echo '<div class="menu-passive">';
                 echo '<i class="btn-close">x</i>';
+				echo '<div class="menu-passive__item item-all">
+                    <a class="menu-link all '. esc_attr($type_multiple) .' active" href="#" data-name="'.esc_attr($text_all).'" data-termid="'. esc_attr(rtrim($terms_categories, ',')) .'">'.
+                     __('All','ymc-smart-filter'). '</a></div>';
 
 				// Variables: Options Term
 				$bg_term             = null;
@@ -110,10 +121,10 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 				// Variables: Set Selected Icon
 				$terms_icons         = null;
 
+				$terms_categories = '';
 
-                foreach ($terms_selected as $term)
+                foreach ( $terms_selected as $term )
 				{
-
 					$object_term = get_term( $term );
 
 					if( is_wp_error( $object_term ) || is_null( $object_term ) ) continue;

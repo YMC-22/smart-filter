@@ -201,6 +201,7 @@ $font-size: 16;
 
 								.from-element {
 									margin-bottom: 20px;
+									position: relative;
 								}
 
 								.form-label {
@@ -211,8 +212,8 @@ $font-size: 16;
 									font-size: 14px;
 									.information {
 										display: block;
-										font-size: 12px;
-										font-style: italic;
+										font-size: 13px;
+										//font-style: italic;
 										font-weight: 400;
 										color: #999;
 									}
@@ -437,7 +438,7 @@ $font-size: 16;
 								.sub-header {
 									position: relative;
 									font-size: 16px;
-									border-bottom: 2px solid #098ab8;
+									border-bottom: 2px solid #098ab840;
 									color: #098ab8;
 									padding: 20px 0;
 									text-transform: uppercase;
@@ -710,28 +711,42 @@ $font-size: 16;
 								font-size: 15px;
 							}
 						}
-						.ymc-btn-reload {
-							position: absolute;
-							right: 10px;
-							top: 5px;
-							display: inline-block;
-							width: 22px;
-							height: 22px;
-							cursor: pointer;
-							border: 1px solid #ccc;
-							padding: 7px;
-							background: #f6f6f6;
-							transition: .3s;
-							i {
-								font-size: 22px;
-							}
-							&:hover {
-								background: #e1e1e1;
+
+						.multi-buttons {
+							text-align: right;
+							.ymc-btn-reload,
+							.ymc-btn-delete	{
+								position: relative;
+								right: 10px;
+								top: 0;
+								display: inline-block;
+								width: 22px;
+								height: 22px;
+								cursor: pointer;
+								border: 1px solid #ccc;
+								padding: 7px;
+								background: #f6f6f6;
+								transition: .3s;
 								i {
-									color: #000;
+									font-size: 22px;
+								}
+								&:hover {
+									background: #e1e1e1;
+									i {
+										color: #000;
+									}
 								}
 							}
+							.ymc-btn-delete	{
+								i {
+									filter: brightness(0) saturate(100%) invert(36%) sepia(72%) saturate(6590%) hue-rotate(343deg) brightness(91%) contrast(82%);
+								}
+							}
+							.ymc-btn-reload {
+								right: 15px;
+							}
 						}
+
 						.search-posts {
 							input[type="search"] {
 								border: 1px solid #e0e4e9;
@@ -861,6 +876,7 @@ $font-size: 16;
 								.manage-filters {
 									margin-top: 20px;
 								}
+
 								.preview-preloader {
 									width: 60px;
 									height: 60px;
@@ -868,6 +884,7 @@ $font-size: 16;
 									margin-top: 10px;
 									margin-bottom: 10px;
 								}
+
 								.range-wrapper {
 									input[type="range"] {
 										width: 30%;
@@ -886,6 +903,188 @@ $font-size: 16;
 
 								.ymc-query-type-callback {
 									text-transform: unset;
+								}
+
+								.popup-hints {
+									display: none;
+									position: absolute;
+									top: 0;
+									left: 0;
+									width: 100%;
+									height: 100%;
+									background: #f0f0f1;
+									border: 1px dashed #1f1f1f;
+									box-sizing: border-box;
+									z-index: 10;
+									&--inner {
+										padding: 30px 15px;
+										height: 100%;
+										max-height: 400px;
+										overflow-y: auto;
+										overflow-x: hidden;
+									}
+									&--btn-close {
+										position: absolute;
+										top: 20px;
+										right: 20px;
+										font-size: 16px;
+										width: 20px;
+										height: 20px;
+										cursor: pointer;
+										background: url("../images/icon-close.png") no-repeat 50% 50%/contain;
+										&:hover {
+											opacity: .5;
+										}
+									}
+									&--note {
+										font-size: 14px;
+										font-weight: 400;
+									}
+									&--wrp {
+										margin: 0 0 20px 20px;
+										list-style: square;
+										li {
+											margin-bottom: 10px;
+											&.subHeader {
+												list-style: none;
+												font-size: 15px;
+												font-weight: 600;
+												margin-left: -15px;
+											}
+											.line-hint {
+												cursor: pointer;
+												color: #1f1f1f;
+												&:hover {
+													text-decoration: underline;
+												}
+												&.active {
+													color: #0fade9;
+												}
+											}
+										}
+									}
+									&--header {
+										font-size: 16px;
+										font-weight: 600;
+										padding: 0;
+										margin-bottom: 15px;
+									}
+									&--description {
+										display: none;
+										position: absolute;
+										top: 0;
+										right: 0;
+										width: 75%;
+										height: 100%;
+										background: #141518;
+										color: #fff;
+										padding: 50px 20px 40px 20px;
+										box-sizing: border-box;
+										.btn-close {
+											position: absolute;
+											top: 20px;
+											right: 20px;
+											font-size: 16px;
+											width: 20px;
+											height: 20px;
+											cursor: pointer;
+											filter: invert(1);
+											background: url("../images/icon-close.png") no-repeat 50% 50%/contain;
+											&:hover {
+												opacity: .5;
+											}
+										}
+										.info-hint {
+											color: #addcff;
+											overflow-y: auto;
+											overflow-x: hidden;
+											height: 400px;
+											max-height: 100%;
+											padding-right: 20px;
+											h2 {
+												color: #fff;
+												font-size: 20px;
+												margin: 0 0 10px 0;
+												padding: 0;
+											}
+											h4 {
+												color: #fff;
+												margin: 0 0 15px;
+												font-size: 14px;
+											}
+											h5 {
+												color: #ffb757;
+												margin: 0 0 10px;
+												font-size: 14px;
+												font-weight: 400;
+											}
+											ul {
+												list-style: square;
+												margin: 0 0 15px 20px;
+												li {
+													font-size: 13px;
+													color: #fff;
+													font-weight: 300;
+												}
+											}
+											.method-section {
+												display: none;
+											}
+											.method-name {
+												color: #ffb757;
+												margin: 0 0 15px;
+												font-size: 14px;
+												font-weight: 400;
+												pre {
+													overflow-x: auto;
+													overflow-y: hidden;
+													min-height: 50px;
+												}
+											}
+											.info-code {
+												font-size: 14px;
+												font-weight: 300;
+												margin-bottom: 10px;
+											}
+											.code-hint {
+												position: relative;
+												color: #dbb7ff;
+												font-weight: 400;
+												background-color: #272b33;
+												padding: 15px 10px 0;
+												pre {
+													overflow-x: auto;
+													overflow-y: hidden;
+													min-height: 50px;
+													margin-top: 20px;
+												}
+												.clipboard-container {
+													svg {
+														position: absolute;
+														right: 10px;
+														top: 10px;
+														filter: invert(1);
+														cursor: pointer;
+														&.js-clipboard-check {
+															display: none;
+															filter: brightness(0) saturate(100%) invert(61%) sepia(31%) saturate(897%) hue-rotate(102deg) brightness(99%) contrast(101%);
+														}
+													}
+													.js-clipboard-tip {
+														display: none;
+														background-color: #fff;
+														color: #000;
+														padding: 3px 5px;
+														border-radius: 5px;
+														position: absolute;
+														right: 35px;
+														top: 5px;
+														font-size: 11px;
+													}
+												}
+											}
+										}
+									}
 								}
 							}
 						}
@@ -941,6 +1140,8 @@ $font-size: 16;
 						}
 
 						.info-uploaded {
+							display: flex;
+							align-items: center;
 							font-size: 14px;
 							&--seccess {
 								color: #28bc28;
@@ -956,6 +1157,10 @@ $font-size: 16;
 							}
 							&:empty {
 								display: none;
+							}
+							.import-img {
+								width: 50px;
+								margin-left: 20px;
 							}
 						}
 
@@ -996,7 +1201,7 @@ $font-size: 16;
 	.postbox-header {
 		border: none;
 	}
-	h2.hndle.ui-sortable-handle {
+	 h2.hndle.ui-sortable-handle {
 		font-size: 18px;
 		background: #032f3f;
 		color: #fff;
@@ -1400,8 +1605,6 @@ $font-size: 16;
 		}
 	}
 }
-
-
 
 
 
