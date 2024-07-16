@@ -2,6 +2,8 @@
 
 namespace YMC_Smart_Filters\Core\Frontend;
 
+use YMC_Smart_Filters\Plugin;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -38,7 +40,7 @@ class Shortcode {
 			'id' => '',
 		], $atts );
 
-		$id = $atts['id'];
+		$id = (int) $atts['id'];
 
 		static $c_target = 1;
 
@@ -107,6 +109,10 @@ class Shortcode {
 
 			$ymc_filter_layout = ( $ymc_filter_status === 'on' ) ? $ymc_filter_layout : 'no-filter-layout';
 
+			if( ! empty($ymc_custom_css) ) :
+				echo '<style id="filter-grids-css-'.$id .'-'. $c_target.'">'. sanitize_text_field($ymc_custom_css) .'</style>';
+			endif;
+
 			echo '<div id="ymc-smart-filter-container-'. esc_attr($c_target) .'" 
 				  class="ymc-smart-filter-container ymc-filter-'. esc_attr($id) .' ymc-loaded-filter ymc-'. esc_attr($ymc_filter_layout) .' ymc-'. esc_attr($ymc_post_layout) .' ymc-pagination-'. esc_attr($ymc_pagination_type) .' data-target-ymc'.esc_attr($id).'-'.esc_attr($c_target).' data-target-ymc'. esc_attr($c_target) .' '. $css_special .'" data-loading="true"
 				  data-params=\'{"cpt":"'.esc_attr($ymc_cpt_value).'","tax":"'.esc_attr($ymc_tax).'","terms":"'.esc_attr($ymc_terms).'","default_terms":"'.esc_attr($default_terms).'","exclude_posts":"'.esc_attr($ymc_exclude_posts).'","choices_posts":"'.esc_attr($ymc_choices_posts).'","posts_selected":"all","preloader_icon":"'.esc_attr($ymc_preloader_icon).'","type_pg":"'.esc_attr($ymc_pagination_type).'","per_page":"'.esc_attr($ymc_per_page).'","page":"1","page_scroll":"'.esc_attr($ymc_scroll_page).'","preloader_filters":"'.esc_attr($ymc_preloader_filters).'","preloader_filters_rate":"'.esc_attr($ymc_preloader_filters_rate).'","preloader_filters_custom":"'.esc_attr($ymc_preloader_filters_custom).'","post_animation":"'.esc_attr($ymc_post_animation).'","popup_animation":"'.esc_attr($ymc_popup_animation).'","letter":"","post_layout":"'.esc_attr($ymc_post_layout).'","filter_layout":"'.esc_attr($ymc_filter_layout).'","filter_id":"'.esc_attr($id).'","search":"","search_filtered_posts":"'.esc_attr($ymc_search_filtered_posts).'","sort_order":"","sort_orderby":"","meta_key":"","meta_query":"","date_query":"","data_target":"data-target-ymc'.esc_attr($c_target).'","target_id":"'.esc_attr($c_target).'"}\'>';
@@ -157,7 +163,15 @@ class Shortcode {
 				$breakpoints_classes = 'ymc-xs-col-'.esc_attr($ymc_mobile_xs).' ymc-sm-col-'.esc_attr($ymc_tablet_sm).' ymc-md-col-'.esc_attr($ymc_tablet_md).' ymc-lg-col-'.esc_attr($ymc_desktop_lg).' ymc-xl-col-'.esc_attr($ymc_desktop_xl).' ymc-xxl-col-'.esc_attr($ymc_desktop_xxl);
 			}
 
-			echo '<div class="container-posts container-'. esc_attr($ymc_post_layout) .'"><div class="post-entry '. $breakpoints_classes .' '. esc_attr($ymc_post_layout) .' '. esc_attr($ymc_post_layout) .'-'.$id.' '.esc_attr($ymc_post_layout).'-'.$id.'-'.$c_target.'"></div></div>';
+			echo '<div class="container-posts container-'. esc_attr($ymc_post_layout) .'">';
+
+			do_action("ymc_before_post_layout_".$id.'_'.$c_target);
+
+			echo '<div class="post-entry '. $breakpoints_classes .' '. esc_attr($ymc_post_layout) .' '. esc_attr($ymc_post_layout) .'-'.$id.' '.esc_attr($ymc_post_layout).'-'.$id.'-'.$c_target.'"></div>';
+
+			do_action("ymc_after_post_layout_".$id.'_'.$c_target);
+
+			echo '</div>';
 
 			if ( $ymc_popup_status === 'on' )
 			{
@@ -169,6 +183,20 @@ class Shortcode {
 			}
 
 			echo '</div>';
+
+			// Custom JS
+			if(  wp_script_is( 'filter-grids-' . wp_create_nonce('filter-grids'), 'enqueued' ) &&
+			     ! empty(Plugin::$instance->variables->get_ymc_custom_after_js($id)) )
+			{
+					wp_add_inline_script( 'filter-grids-' . wp_create_nonce('filter-grids'),"	
+				
+					(function( $ ) {
+	                    'use strict'                    
+	                    ". Plugin::$instance->variables->get_ymc_custom_after_js($id) ." 				
+					}( jQuery )); <!-- End Custom JS -->					
+													
+				    ", 'after' );
+			}
 		}
 		else {
 			echo "<div class='ymc-smart-filter-container'>
@@ -200,7 +228,7 @@ class Shortcode {
 
 		$output = '';
 
-		$id = $atts['id'];
+		$id = (int) $atts['id'];
 
 		static $c_target = 1;
 
@@ -265,7 +293,7 @@ class Shortcode {
 
 		$output = '';
 
-		$id = $atts['id'];
+		$id = (int) $atts['id'];
 
 		static $c_target = 1;
 
@@ -322,7 +350,7 @@ class Shortcode {
 
 		$output = '';
 
-		$id = $atts['id'];
+		$id = (int) $atts['id'];
 
 		static $c_target = 1;
 

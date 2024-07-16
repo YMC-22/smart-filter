@@ -107,6 +107,30 @@ add_filter('ymc_button_show_all_545_1', function () {
 }, 10, 1);
 ```
 
+**Change the placeholder "All" for the filter named Dropdown Filter Compact**
+```php
+add_filter('ymc_placeholder_dropdown_FilterID_LayoutID', $ymc_placeholder_all, 10, 1);
+
+Usage example:
+add_filter('ymc_placeholder_dropdown_545_1', function () {
+    return 'My Taxonomy';
+}, 10, 1);
+```
+
+**Change the "All" placeholder for the filter named "Compact Dropdown Filter" individually for each taxonomy**
+```php
+add_filter('ymc_placeholder_dropdown_FilterID_LayoutID_tax-slug', $ymc_placeholder_all, 10, 1);
+
+Usage example:
+add_filter('ymc_placeholder_dropdown_72_1_post_tag', function () {
+	return 'My Tags';
+}, 10, 1);
+
+add_filter('ymc_placeholder_dropdown_72_1_category', function () {
+	return 'My Category';
+}, 10, 1);
+```
+
 **Change the text of the “Sort” button on the sort panel**
 ```php
 add_filter('ymc_sort_text_FilterID_LayoutID', $ymc_button_show_all, 10, 1);
@@ -132,6 +156,11 @@ add_filter('ymc_tax_name_545_1_category', function () {
 ```php
 add_action("ymc_before_filter_layout_FilterID_LayoutID");
 add_action("ymc_after_filter_layout_FilterID_LayoutID");
+```
+**Add your content before or after the post grid layout**
+```php
+add_action("ymc_before_post_layout_FilterID_LayoutID");
+add_action("ymc_after_post_layout_FilterID_LayoutID");
 ```
 
 ### Shortcodes
@@ -445,7 +474,7 @@ add_filter('ymc_popup_custom_layout_545_1', function ( $layout, $post_id ) {
 
 To control the post filter via javascript, use the following methods of the Filter's global YMCTools object. All parameters, their name and values that are passed to the object, are built on the principles and rules of the global WP_Query object in the WordPress core. Therefore, please, refer to the relevant documentation for using the WP_Query object for clarification. All of these methods should be used when creating event handlers. but for example, when clicking on a button or link, call one or another method.
 
-**Note**: calling the YMCTools() object when the page is fully loaded should be placed in the block method setTimeout(() => {});
+**Note**: calling the YMCTools() object when the page is fully loaded should be placed in the block jQuery(document).on("ready", function () { });
 In some cases, this object is used in handler function callbacks.
 
 
@@ -476,7 +505,7 @@ Usage example:
 **This method allows to get posts by meta fields.**
 
 ```js
-YMCTools({target: ".data-target-ymcFilterID-LayoutID", meta: [params]}).apiTermUpdate( option );
+YMCTools({target: ".data-target-ymcFilterID-LayoutID", meta: [params]}).apiMetaUpdate( option );
 ```
 All parameters correspond to the parameters of the global WP_Query object. 
 To make a correct request, specify all the necessary parameters in JSON format. All parameters in double quotes.

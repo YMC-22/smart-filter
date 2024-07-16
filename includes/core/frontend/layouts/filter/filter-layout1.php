@@ -55,40 +55,45 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 				echo '<li class="filter-item">
                       <a class="filter-link all '. $all_class_active .'" href="#" data-selected="all" data-termid="'. esc_attr($ymc_terms) .'">'. esc_html__($show_all) .'</a></li>';
 
-                foreach ($terms_selected as $term)
+
+				foreach ($terms_selected as $term)
 				{
+					$object_term = get_term( $term );
+
+					if( is_wp_error( $object_term ) || is_null( $object_term ) ) continue;
+
 					// Set Options for Icon
-	                setOptionsIcon( $ymc_terms_align, $term, $class_terms_align, $color_icon );
+					setOptionsIcon( $ymc_terms_align, $term, $class_terms_align, $color_icon );
 
-	                // Set Options Term
-	                setOptionsTerm( $ymc_terms_options,
-		                            $term,
-		                         $bg_term,
-		                         $color_term,
-		                         $class_term,
-		                         $default_term_active,
-		                         $name_term );
+					// Set Options Term
+					setOptionsTerm( $ymc_terms_options,
+						$term,
+						$bg_term,
+						$color_term,
+						$class_term,
+						$default_term_active,
+						$name_term );
 
-	                // Selected Icon for Term
-	                setSelectedIcon( $ymc_terms_icons, $term, $terms_icons, $color_icon );
+					// Selected Icon for Term
+					setSelectedIcon( $ymc_terms_icons, $term, $terms_icons, $color_icon );
 
-	                $bg_term = ( !empty($bg_term) ) ? 'background-color:'.$bg_term.';' : '';
-	                $color_term = ( !empty($color_term) ) ? 'color:'.$color_term.';' : '';
-	                $default_term_active = ( $default_term_active === 'checked' ) ? 'active': '';
-					$name_term = ( !empty($name_term) ) ? $name_term : get_term( $term )->name;
+					$bg_term = ( !empty($bg_term) ) ? 'background-color:'.$bg_term.';' : '';
+					$color_term = ( !empty($color_term) ) ? 'color:'.$color_term.';' : '';
+					$default_term_active = ( $default_term_active === 'checked' ) ? 'active': '';
+					$name_term = ( !empty($name_term) ) ? $name_term : $object_term->name;
 
-                    echo "<li class='filter-item'>
-						  <a class='filter-link ".
-                          esc_attr($type_multiple) ." ".
-                          esc_attr($class_terms_align) ." ".
-                          esc_attr($class_term) . " ". esc_attr($default_term_active) ."' style='".
-                          esc_attr($bg_term) .
-                          esc_attr($color_term) ."' href='#' data-selected='" .
-                          esc_attr(get_term( $term )->slug) . "' data-termid='" .
-                          esc_attr($term) . "'>" . $terms_icons .
-                         '<span class="link-inner">'. esc_html($name_term) . '</span>'."</a></li>";
+					echo "<li class='filter-item'>
+					  <a class='filter-link ".
+					     esc_attr($type_multiple) ." ".
+					     esc_attr($class_terms_align) ." ".
+					     esc_attr($class_term) . " ". esc_attr($default_term_active) ."' style='".
+					     esc_attr($bg_term) .
+					     esc_attr($color_term) ."' href='#' data-selected='" .
+					     esc_attr($object_term->slug) . "' data-termid='" .
+					     esc_attr($term) . "'>" . $terms_icons .
+					     '<span class="link-inner">'. esc_html($name_term) . '</span>'."</a></li>";
 
-	                $terms_icons = null;
+					$terms_icons = null;
 					$name_term = '';
 
 				}

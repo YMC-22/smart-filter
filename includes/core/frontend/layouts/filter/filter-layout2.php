@@ -56,7 +56,8 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 
                 $arr_taxonomies = [];
                 foreach ($terms_selected as $term) {
-                    $arr_taxonomies[] = get_term( $term )->taxonomy;
+
+                    $arr_taxonomies[] = ( ! is_wp_error( get_term( $term ) ) && ! is_null( get_term( $term ) ) ) ? get_term( $term )->taxonomy : null;
                 }
                 $arr_taxonomies = array_unique($arr_taxonomies);
 
@@ -82,9 +83,13 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 
                     foreach ($terms_selected as $term)
 					{
-                        if( $tax === get_term( $term )->taxonomy )
+						$object_term = get_term( $term );
+
+						if( is_wp_error( $object_term ) || is_null( $object_term ) ) continue;
+
+                        if( $tax === $object_term->taxonomy )
 						{
-	                        // Set Options for Icon
+							// Set Options for Icon
 	                        setOptionsIcon( $ymc_terms_align, $term, $class_terms_align, $color_icon );
 
 	                        // Set Options for Term
@@ -102,7 +107,7 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 	                        $bg_term = ( !empty($bg_term) ) ? 'background-color:'.$bg_term.';' : '';
 	                        $color_term = ( !empty($color_term) ) ? 'color:'.$color_term.';' : '';
 	                        $default_term_active = ( $default_term_active === 'checked' ) ? 'active': '';
-							$name_term = ( !empty($name_term) ) ? $name_term : get_term( $term )->name;
+							$name_term = ( !empty($name_term) ) ? $name_term : $object_term->name;
 
                             echo  "<li class='filter-item'>
                                    <a class='filter-link ".
@@ -110,7 +115,7 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
                                    esc_attr($class_terms_align) ." ".
                                    esc_attr($class_term) . " ". esc_attr($default_term_active) . "' style='".
                                    esc_attr($bg_term) . esc_attr($color_term) ."' href='#' data-selected='" .
-                                   esc_attr(get_term( $term )->slug) . "' data-termid='" .
+                                   esc_attr($object_term->slug) . "' data-termid='" .
                                    esc_attr($term) . "'>" . $terms_icons .
                                    '<span class="link-inner">'.esc_html($name_term) .'</span>'."</a></li>";
                         }

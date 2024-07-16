@@ -176,6 +176,12 @@ class Variables {
 
 	public $ymc_suppress_filters = 0;
 
+	public $ymc_debug_code = 0;
+
+	public $ymc_custom_css   = '';
+
+	public $ymc_custom_after_js  = '';
+
 
 	/**
 	 * Typography tab used default variables
@@ -744,6 +750,30 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_suppress_filters', true );
 		}
 		return $this->ymc_suppress_filters;
+	}
+
+	public function get_ymc_debug_code( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_debug_code' ) ) {
+			return get_post_meta( $post_id, 'ymc_debug_code', true );
+		}
+		return $this->ymc_debug_code;
+	}
+
+	public function get_ymc_custom_css( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_custom_css' ) ) {
+			return get_post_meta( $post_id, 'ymc_custom_css', true );
+		}
+		return $this->ymc_custom_css;
+	}
+
+	public function get_ymc_custom_after_js( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_custom_after_js' ) ) {
+			return get_post_meta( $post_id, 'ymc_custom_after_js', true );
+		}
+		return $this->ymc_custom_after_js;
 	}
 
 

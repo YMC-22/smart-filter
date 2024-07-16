@@ -3,6 +3,7 @@
 namespace YMC_Smart_Filters\Core\Frontend;
 
 use YMC_Smart_Filters\Plugin;
+use YMC_Smart_Filters\Core\Admin\Filters;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -24,7 +25,7 @@ class Get_Posts {
 
 	public function get_filter_posts() {
 
-		if (!wp_verify_nonce($_POST['nonce_code'], 'custom_ajax_nonce')) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], Plugin::$instance->token_f) ) exit;
 
 		$output  = '';
 		$message = '';
@@ -300,7 +301,7 @@ class Get_Posts {
 			$file_layout = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/post/" . $post_layout . ".php";
 
 			// Post Layout
-			if ( file_exists($file_layout) ) :
+			if ( file_exists($file_layout) && in_array($post_layout, $this->whitelist_post_layouts($post_layout)) ) :
 				include_once $file_layout;
 				$message = 'Post Layout is available';
 			else :
@@ -313,13 +314,12 @@ class Get_Posts {
 
 				switch ( $type_pagination ) :
 
-					case 'numeric' :
-						$pagin = Plugin::instance()->pagination->number( $query, $paged, $type_pagination, $filter_id, $target_id, $ymc_pagination_elements );
-						break;
-
 					case 'load-more' :
 						$pagin = Plugin::instance()->pagination->load_more( $query, $paged, $type_pagination, $filter_id, $target_id, $ymc_pagination_elements );
 						break;
+
+					default :
+						$pagin = Plugin::instance()->pagination->number( $query, $paged, 'numeric', $filter_id, $target_id, $ymc_pagination_elements );
 
 				endswitch;
 
@@ -337,27 +337,43 @@ class Get_Posts {
 		$posts_found = $query->found_posts;
 		$default_posts_selected = apply_filters('ymc_posts_selected_'.$filter_id.'_'.$target_id, $posts_selected, $posts_found);
 
-
-		$data = array(
+		$data = [
 			'data' => $output,
 			'posts_selected' => $default_posts_selected,
-			'message' => $message,
-			'post_type' => $post_type,
-			'tax' => $taxonomy,
-			'term' => $tax_qry,
 			'found' => $query->found_posts,
 			'max_num_pages' => $query->max_num_pages,
 			'post_count' => $query->post_count,
 			'get_current_posts' => ($query->found_posts - $paged * $per_page),
-			'pagin' => !empty($pagin) ? $pagin : '',
-			'paged' => $paged,
-			'meta_query' => $meta_params,
-			'date_query' => $date_params,
-			'custom_wp_query' => $custom_args,
-			'args' => $args
-		);
+			'pagin' => $pagin,
+			'paged' => $paged
+		];
+
+		if( (int) $ymc_debug_code === 1 )
+		{
+			$data = array_merge(
+				$data, [
+				'debug' => [
+					'post_type' => $post_type,
+					'tax' => $taxonomy,
+					'term' => $tax_qry,
+					'meta_query' => $meta_params,
+					'date_query' => $date_params,
+					'wp_query_custom' => $custom_args,
+					'wp_query' => $args,
+					'message' => $message,
+					'all_incoming_data' => $clean_data
+				]
+			]);
+		}
 
 		wp_send_json($data);
+	}
+
+	public function whitelist_post_layouts($post_layout) {
+
+		$filters = new Filters();
+
+		return array_keys( $filters->ymc_post_layouts($post_layout) );
 	}
 
 	public function search_join( $join ) {
@@ -387,7 +403,7 @@ class Get_Posts {
 
 	public function autocomplete_search() {
 
-		if ( !wp_verify_nonce($_POST['nonce_code'], 'custom_ajax_nonce') ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], Plugin::$instance->token_f) ) exit;
 
 		$output  = '';
 		$phrase = trim(mb_strtolower(sanitize_text_field($_POST['phrase'])));
@@ -561,7 +577,7 @@ class Get_Posts {
 
 	public function get_post_popup() {
 
-		if (!wp_verify_nonce($_POST['nonce_code'], 'custom_ajax_nonce')) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], Plugin::$instance->token_f) ) exit;
 
 		$output = '';
 		$post_id = (int) $_POST['post_id'];

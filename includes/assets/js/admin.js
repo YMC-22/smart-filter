@@ -207,12 +207,92 @@
 
         // Delete Taxonomies
         $(document).on('click','.ymc__container-settings #general .tax-delete',function (e) {
-            $('.ymc__container-settings #general #ymc-cpt-select').trigger('change');
+
+            let isDelete = confirm("Are you sure you want to delete all taxonomy terms? Deleting will remove all settings for each term.");
+
+            if( isDelete ) {
+                $('.ymc__container-settings #general #ymc-cpt-select').trigger('change');
+            }
         });
 
-        // UpdatedTaxonomies
+        // Update Taxonomies
         $(document).on('click','.ymc__container-settings #general .tax-reload',function (e) {
-            location.reload();
+
+            let postId = document.querySelector('#ymc-cpt-select').dataset.postid;
+            let cpts = '';
+            let taxonomyWrp = $('#ymc-tax-checkboxes');
+            let termWrp     = $('#ymc-terms');
+            let taxExist = []; // Current Taxonomies
+
+            $("#ymc-cpt-select :selected").map(function(i, el) {
+                cpts +=$(el).val()+',';
+            });
+
+            cpts = cpts.replace(/,\s*$/, "");
+
+            taxonomyWrp.find('input[type="checkbox"]').each(function () {
+                taxExist.push($(this).val());
+            });
+
+            const data = {
+                'action': 'ymc_updated_taxonomy',
+                'nonce_code' : _smart_filter_object.nonce,
+                'cpt' : cpts,
+                'post_id' :postId
+            };
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: _smart_filter_object.ajax_url,
+                data: data,
+                beforeSend: function () {
+                    container.addClass('loading').
+                    prepend(`<img class="preloader" src="${pathPreloader}">`);
+                },
+                success: function (res) {
+                    container.removeClass('loading').find('.preloader').remove();
+                    let dataTax = res.data; // Updated Taxonomies
+
+                    // Get Taxonomies
+                    if(Object.keys(dataTax).length > 0) {
+                        // Add new taxonomy
+                        if( Object.keys(dataTax).length > taxExist.length ) {
+
+                            for (let key in dataTax) {
+
+                                if( ! taxExist.includes(key) ) {
+
+                                    taxonomyWrp.append(`<div id="${key}" class="group-elements" draggable="true">
+                                    <input id="id-${key}" type="checkbox" name="ymc-taxonomy[]" value="${key}">
+                                    <label for="id-${key}">${dataTax[key]}</label>
+                                    </div>`);
+                                }
+                            }
+                        }
+
+                        // Delete taxonomy
+                        if( Object.keys(dataTax).length < taxExist.length ) {
+
+                            for (let key in taxExist) {
+
+                                if( ! Object.keys(dataTax).includes(taxExist[key]) ) {
+                                    taxonomyWrp.find(`#${taxExist[key]}`).remove();
+                                    termWrp.find(`.item-${taxExist[key]}`).remove();
+                                }
+                            }
+                        }
+                    }
+                    else  {
+                        taxonomyWrp.html('').append(`<span class="notice">No data for Post Type / Taxonomy</span>`);
+                        termWrp.html('').closest('.wrapper-terms').addClass('hidden');
+                    }
+                },
+                error: function (obj, err) {
+                    console.log( obj, err );
+                }
+            });
+
         });
 
         // Set Cookie
@@ -683,14 +763,17 @@
                             },
                             success: function (res) {
                                 container.removeClass('loading').find('.preloader').remove();
-                                $(infoUploaded).html(res.mesg + ' <a href="javascript:;" onclick="location.reload();">Reload page</a>');
 
                                 if( res.status === 1 ) {
                                     $(infoUploaded).addClass('info-uploaded--seccess').removeClass('info-uploaded--error');
                                     input.value = '';
+                                    $(infoUploaded).html(res.mesg + `, wait... <img class="import-img" src="${_smart_filter_object.path+"/includes/assets/images/preloader_3.svg"}">`);
+                                    location.reload();
+                                    // document.querySelector('#major-publishing-actions input[type="submit"]').click();
                                 }
                                 else {
                                     $(infoUploaded).removeClass('info-uploaded--seccess').addClass('info-uploaded--error');
+                                    $(infoUploaded).html(res.mesg);
                                 }
                             },
                             error: function (obj, err) {
@@ -709,6 +792,140 @@
                     throw new Error("Incorrect type file");
                 }
             }
+        }
+
+        // CodeMirror Custom CSS
+        function codeMirrorCSS() {
+
+            let editorSource = document.querySelector("#advanced #ymc-custom-css");
+
+            let editor = CodeMirror.fromTextArea( editorSource, {
+                //value: "",
+                lineNumbers: true,
+                mode:  "css",
+                theme: "eclipse",
+                styleActiveLine: true,
+                autoCloseTags:true,
+                lineWrapping: true,
+                tabSize: 2,
+                autofocus: true,
+                smartIndent: false,
+                autoRefresh: true,
+                placeholder: "/*** Here your code CSS... ***/",
+                extraKeys: {"Ctrl-Space": "autocomplete"}
+            });
+
+            editor.setSize(null, "400");
+
+            editor.on('change', (args) => {
+                editorSource.innerHTML = args.getValue().replace(/(\r\n|\n|\r)/gm, "");
+            });
+
+            // editor.toTextArea();
+            // editor.refresh();
+        }
+
+        // Custom Actions
+        function codeMirrorAfterJS() {
+
+            let editorSource = document.querySelector("#advanced #ymc-custom-after-js");
+
+            let editor = CodeMirror.fromTextArea( editorSource, {
+                //value: "",
+                lineNumbers: true,
+                mode:  "javascript",
+                theme: "eclipse",
+                styleActiveLine: true,
+                autoCloseTags:true,
+                lineWrapping: true,
+                tabSize: 2,
+                autofocus: true,
+                smartIndent: false,
+                autoRefresh: true,
+                placeholder: "/*** Enter your custom action here… ***/",
+                extraKeys: {"Ctrl-Space": "autocomplete"}
+            });
+
+            editor.setSize(null, "400");
+
+            editor.on('change', (args) => {
+                editorSource.innerHTML = args.getValue().replace(/(\r\n|\n|\r)/gm, "");
+            });
+
+        }
+
+        function popupHints(e) {
+            e.preventDefault();
+            
+            let popupHints = document.querySelector('#advanced .custom-js .popup-hints');
+            let btnCloseMethods = popupHints.querySelector('.popup-hints--btn-close');
+            let btnCloseInfo = popupHints.querySelector('.popup-hints--description .btn-close');
+            let methodsSections = $(popupHints).find('.popup-hints--description .info-hint .method-section');
+
+            // Open Popup
+            popupHints.style.display = 'block';
+
+            // Close Popup
+            btnCloseMethods.addEventListener('click', (e) => {
+                e.preventDefault();
+                popupHints.style.display = 'none';
+                $(popupHints).find('.popup-hints--wrp .line-hint').removeClass('active');
+            });
+
+            // Open Info
+            popupHints.querySelectorAll('.popup-hints--wrp .line-hint').forEach((el) => {
+
+               el.addEventListener('click', (e) => {
+
+                    let methodName = e.target.dataset.method;
+
+                    $(e.target).addClass('active').closest('li').siblings().find('.line-hint').removeClass('active');
+
+                    methodsSections.hide();
+
+                    popupHints.querySelectorAll('.popup-hints--description .info-hint .method-section').forEach((el) => {
+
+                        if( el.classList.contains(methodName) ) {
+
+                            el.style.display = 'block';
+
+                            el.closest('.popup-hints--description').style.display = 'block';
+
+                            btnCloseInfo.addEventListener('click', (e) => {
+                                e.target.closest('.popup-hints--description').style.display = 'none';
+                                methodsSections.hide();
+                                $(popupHints).find('.popup-hints--wrp .line-hint').removeClass('active');
+                            });
+                        }
+                   });
+               });
+            });
+        }
+
+        function clipboardCopyHints(e) {
+
+            let className = e.target.closest('svg').getAttribute('class');
+            let clipboard = new ClipboardJS( `.${className}` );
+
+            clipboard.on('success', function(e) {
+                e.trigger.style.display= "none";
+                e.trigger.nextElementSibling.style.display = "block";
+                $(e.trigger).siblings('.js-clipboard-tip').show();
+
+                e.clearSelection();
+
+                setTimeout( () => {
+                    e.trigger.style.display= "block";
+                    e.trigger.nextElementSibling.style.display = "none";
+                    $(e.trigger).siblings('.js-clipboard-tip').hide();
+                },1000 );
+
+            });
+
+            clipboard.on('error', function(e) {
+                console.error('Action:', e.action);
+                console.error('Trigger:', e.trigger);
+            });
         }
 
         // Choices Posts
@@ -1272,6 +1489,14 @@
 
         });
 
+        // Hints Custom JS
+        $(document).on('click', '.ymc__container-settings #advanced .custom-js .button-hints', popupHints);
+
+        // Clipboard Copy Hints
+        document.querySelectorAll('.ymc__container-settings #advanced .custom-js .popup-hints .js-clipboard-copy').forEach((el) => {
+            el.addEventListener( 'click', clipboardCopyHints );
+        });
+
         // Show / Hide Form Sections
         $('.tab-content .tab-panel .content .sub-header').on('click', function (e) {
             let className = $(this).data('className');
@@ -1313,6 +1538,11 @@
 
         // Add Color Picker for all inputs
         $('.ymc-custom-color').wpColorPicker();
+
+        // Run CodeMirror for Custom CSS
+        codeMirrorCSS();
+        // Run CodeMirror for Custom Actions
+        codeMirrorAfterJS();
 
     });
 
