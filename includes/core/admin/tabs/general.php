@@ -51,8 +51,8 @@ $terms_sel   = $terms_selected;
 		<div class="form-group wrapper-taxonomy">
 
 			<div class="multi-buttons">
-				<span class="ymc-btn-reload tax-reload" title="Update taxonomy(s)."><i class="fas fa-redo"></i></span>
-				<span class="ymc-btn-delete tax-delete" title="Remove taxonomy(s) terms."><i class="far fa-trash-alt"></i></span>
+				<span class="ymc-btn-reload tax-reload" title="<?php esc_attr_e('Update taxonomy(s).','ymc-smart-filter'); ?>"><i class="fas fa-redo"></i></span>
+				<span class="ymc-btn-delete tax-delete" title="<?php esc_attr_e('Delete taxonomy(s).','ymc-smart-filter'); ?>"><i class="far fa-trash-alt"></i></span>
 			</div>
 
 			<label for="ymc-tax-checkboxes" class="form-label">
@@ -118,7 +118,10 @@ $terms_sel   = $terms_selected;
 
 			<label for="ymc-terms" class="form-label">
 				<?php echo esc_html__('Term(s)','ymc-smart-filter'); ?>
-				<span class="information"><?php echo esc_html__('Select terms. Sortable with Drag and Drop feature. Set the Sort Filter Terms option to Manual sort in the Appearance section.','ymc-smart-filter'); ?></span>
+				<span class="information"><?php echo __('Select terms. Sortable with Drag and Drop feature. 
+			   Set the Sort Filter Terms option to Manual Sort in the Appearance.<br> 
+			   <b>IMPORTANT!</b> If the Manual Sort parameter is set, then when adding new terms they will not be displayed.<br> 
+			   Switch the sort option to ASC or DESC to display all terms.','ymc-smart-filter'); ?></span>
 			</label>
 
 			<div class="category-list" id="ymc-terms" data-postid="<?php echo esc_attr($post->ID); ?>">
@@ -144,7 +147,7 @@ $terms_sel   = $terms_selected;
 									'hide_empty' => false,
 								]);
 
-								if( is_array($terms) )
+								if( is_array( $terms ) && ! is_wp_error( $terms ) )
 								{
 
 									// Variables: Options Term
@@ -165,7 +168,9 @@ $terms_sel   = $terms_selected;
 										$res_terms = [];
 										foreach( $terms as $term ) {
 											$key = array_search($term->term_id, $term_sort);
-											$res_terms[$key] = $term;
+											if( $key !== false ) {
+												$res_terms[$key] = $term;
+											}
 										}
 										ksort($res_terms);
 									}

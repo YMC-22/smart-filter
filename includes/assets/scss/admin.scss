@@ -844,6 +844,23 @@ $font-size: 16;
 							.content {
 								.appearance-section {
 									margin-bottom: 30px;
+
+									.from-element--multiple-sort {
+										height: max-content;
+										padding-right: 10px;
+										overflow-x: hidden;
+										overflow-y: auto;
+										&::-webkit-scrollbar {
+											width: 5px;
+										}
+										&::-webkit-scrollbar-thumb {
+											border-radius: 10px;
+											background: #8e8e8e;
+										}
+										&::-webkit-scrollbar-track {
+											border-radius: 5px;
+										}
+									}
 								}
 							}
 						}
