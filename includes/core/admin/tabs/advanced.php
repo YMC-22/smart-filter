@@ -265,8 +265,8 @@
                     <h2 class="popup-hints--header"><?php _e('Methods and Hooks JS', 'ymc-smart-filter'); ?></h2>
                     <p class="popup-hints--note">
                         <?php _e('<u><b>Note:</b></u> The call to the global <b>YMCTools</b> object should be used
-                        when the document is fully loaded, for example using the notation:: <b>$(document).on("ready", function () {});</b> or
-                        <b>$(window).on(load", function() {});</b> or inside a hook callback function.', 'ymc-smart-filter'); ?>
+                        when the document is fully loaded, for example using the notation:: <b>$(document).on("ready", function () { ... });</b> or inside a hook callback function. <br>
+                        If there is only one filter on the page, then the object property: <b>"target"</b> can be skipped for calling methods.', 'ymc-smart-filter'); ?>
                     </p>
                     <hr/>
                     <ul class="popup-hints--wrp">
