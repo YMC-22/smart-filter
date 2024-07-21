@@ -365,6 +365,11 @@
             }
         }
 
+        /**
+         * Function to create a new YMCTools instance based on the provided settings.
+         * @param {Object} settings - The settings object for configuring the YMCTools instance.
+         * @returns {YMCTools} - A new YMCTools instance.
+         */
         const _FN = function ( settings ) {
             return new YMCTools( settings )
         };
