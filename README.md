@@ -793,6 +793,8 @@ wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(elem) {
 **Before loaded all posts.**
 
 ```js
+wp.hooks.addAction('ymc_before_loaded_data', 'smartfilter', 'callback(class_name)');
+wp.hooks.addAction('ymc_before_loaded_data_FilterID', 'smartfilter', 'callback(class_name)');
 wp.hooks.addAction('ymc_before_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name)');
 ```
 
@@ -814,6 +816,8 @@ wp.hooks.addAction('ymc_before_loaded_data_545_1', 'smartfilter', function(class
 **After loaded all posts.** 
 
 ```js
+wp.hooks.addAction('ymc_after_loaded_data', 'smartfilter', 'callback(class_name, response)');
+wp.hooks.addAction('ymc_after_loaded_data_FilterID', 'smartfilter', 'callback(class_name, response)');
 wp.hooks.addAction('ymc_after_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name, response)');
 ```
 
@@ -843,6 +847,8 @@ This hook is called regardless of if the request was successful, or not.
 You will always receive a complete callback, even for synchronous requests.
 
 ```js
+wp.hooks.addAction('ymc_complete_loaded_data', 'smartfilter', 'callback(class_name, status)');
+wp.hooks.addAction('ymc_complete_loaded_data_FilterID', 'smartfilter', 'callback(class_name, status)');
 wp.hooks.addAction('ymc_complete_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name, status)');
 ```
 
@@ -883,7 +889,12 @@ Usage example:
 This hook allows you to run any desired script after opening a popup for each post
 
 ```js
+wp.hooks.addAction('ymc_before_popup_open', 'smartfilter', 'callback');
+wp.hooks.addAction('ymc_before_popup_open_FilterID', 'smartfilter', 'callback');
 wp.hooks.addAction('ymc_before_popup_open_FilterID_LayoutID', 'smartfilter', 'callback');
+
+wp.hooks.addAction('ymc_after_popup_open', 'smartfilter', 'callback(data)');
+wp.hooks.addAction('ymc_after_popup_open_FilterID', 'smartfilter', 'callback(data)');
 wp.hooks.addAction('ymc_after_popup_open_FilterID_LayoutID', 'smartfilter', 'callback(data)');
 ```
 **Params function callback:**

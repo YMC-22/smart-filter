@@ -32,7 +32,7 @@
         }
 
         YMCTools.prototype.getInfo = function () {
-            return `Author: YMC. Version: 2.9.10`;
+            return `Author: YMC. Version: 2.9.11`;
         }
 
         // Use for custom filter layout
@@ -482,6 +482,8 @@
                     prepend(`<img class="preloader preloader--popup" src="${stylePreloader}" style="${preloaderFilter}">`);
 
                     // Add Hook: before open popup
+                    wp.hooks.doAction('ymc_before_popup_open');
+                    wp.hooks.doAction('ymc_before_popup_open_'+params.filter_id);
                     wp.hooks.doAction('ymc_before_popup_open_'+params.filter_id+'_'+params.target_id);
                 },
                 success: function (res) {
@@ -498,6 +500,8 @@
                     }
 
                     // Add Hook: after open popup
+                    wp.hooks.doAction('ymc_after_popup_open', res.data);
+                    wp.hooks.doAction('ymc_after_popup_open_'+params.filter_id, res.data);
                     wp.hooks.doAction('ymc_after_popup_open_'+params.filter_id+'_'+params.target_id, res.data);
                 },
                 error: function (obj, err) {
@@ -614,6 +618,8 @@
                     }
 
                     // Add Hook: before loaded posts
+                    wp.hooks.doAction('ymc_before_loaded_data', target);
+                    wp.hooks.doAction('ymc_before_loaded_data_'+filterID, target);
                     wp.hooks.doAction('ymc_before_loaded_data_'+filterID+'_'+targetID, target);
                 },
                 success: function (res) {
@@ -729,11 +735,15 @@
                     document.querySelector('.'+target).dataset.loading = 'true';
 
                     // Add Hook: after loaded posts
+                    wp.hooks.doAction('ymc_after_loaded_data', target, res);
+                    wp.hooks.doAction('ymc_after_loaded_data_'+filterID, target, res);
                     wp.hooks.doAction('ymc_after_loaded_data_'+filterID+'_'+targetID, target, res);
 
                 },
                 complete: function (XHR, status) {
                     // Add Hook: called regardless of if the request was successful, or not
+                    wp.hooks.doAction('ymc_complete_loaded_data', target, status);
+                    wp.hooks.doAction('ymc_complete_loaded_data_'+filterID, target, status);
                     wp.hooks.doAction('ymc_complete_loaded_data_'+filterID+'_'+targetID, target, status);
                 },
                 error: function (obj, err) {
