@@ -299,7 +299,7 @@ $font-size: 16;
 
 								#ymc-terms {
 									display: grid;
-									grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
+									grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
 									grid-gap: 30px;
 									margin-top: 10px;
 									.group-term {
@@ -324,6 +324,7 @@ $font-size: 16;
 											padding: 10px 50px 10px 10px;
 											cursor: move;
 											transition: .3s;
+											display: flex;
 											&.all-categories {
 												display: flex;
 												align-items: center;
@@ -756,7 +757,7 @@ $font-size: 16;
 							}
 						}
 						#ymc-cpt-select {
-							height: 100px;
+							height: 140px;
 							&::-webkit-scrollbar {
 								width: 5px;
 							}

@@ -35,7 +35,8 @@ $terms_sel   = $terms_selected;
         </span>
 			</label>
 
-			<select class="form-select" multiple id="ymc-cpt-select" name="ymc-cpt-select[]" data-postid="<?php echo esc_attr($post->ID); ?>">
+			<select class="form-select" multiple id="ymc-cpt-select" name="ymc-cpt-select[]" data-postid="<?php echo esc_attr($post->ID); ?>"
+			        data-previous-value="<?php echo esc_attr(implode(',',$cpt)); ?>">
 			<?php
 				foreach( $cpost_types as $cpost_type ) {
 
