@@ -4,7 +4,7 @@
  *
  * Plugin Name:       Filter & Grids
  * Description:       Filter posts by categories without reloading the page. Create posts grids.
- * Version:           2.9.13
+ * Version:           2.9.14
  * Author:            YMC
  * Author URI:        https://github.com/YMC-22/smart-filter
  * License:           GPL-2.0+
@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! defined('YMC_SMART_FILTER_VERSION') ) {
 
-	define( 'YMC_SMART_FILTER_VERSION', '2.9.13' );
+	define( 'YMC_SMART_FILTER_VERSION', '2.9.14' );
 }
 
 if ( ! defined('YMC_SMART_FILTER_DIR') ) {

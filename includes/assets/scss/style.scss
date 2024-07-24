@@ -705,9 +705,8 @@ $font-size: 16;
 				display: none;
 				max-width: 300px;
 				max-height: 400px;
-				overflow-y: auto;
-				margin-top: 45px;
-				padding: 30px 20px 15px 20px;
+				margin-top: 35px;
+				padding: 20px 20px 15px 20px;
 				background: #141518;
 				color: #fff;
 				position: absolute;
@@ -726,11 +725,19 @@ $font-size: 16;
 					top: -14px;
 					clip-path: polygon(50% 50%, 0% 100%, 100% 100%);
 				}
-
-				/*** Firefox ***/
-				scrollbar-color: #fff #141518;
-				scrollbar-width: thin;
-
+				.btn-close {
+					position: absolute;
+					right: 15px;
+					top: 15px;
+					font-size: 14px;
+					font-style: normal;
+					cursor: pointer;
+				}
+			}
+			.menu-passive__inner-items {
+				margin-top: 5px;
+				overflow-y: auto;
+				max-height: 250px;
 				&::-webkit-scrollbar {
 					width: 5px;
 					background-color: #141518;
@@ -742,19 +749,18 @@ $font-size: 16;
 				&::-webkit-scrollbar-track {
 					border-radius: 5px;
 				}
-				.btn-close {
-					position: absolute;
-					right: 15px;
-					top: 15px;
-					font-size: 14px;
-					font-style: normal;
-					cursor: pointer;
-				}
+
+				/*** Firefox ***/
+				scrollbar-color: #fff #141518;
+				scrollbar-width: thin;
 			}
 			.menu-passive__item {
 				display: flex;
 				align-items: center;
 				padding: 8px 0;
+				&.item-all {
+					border-bottom: 1px solid #565961;
+				}
 				i {
 					font-size: 15px;
 					margin-right: 7px;

@@ -107,6 +107,8 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
                     <a class="menu-link all '. esc_attr($type_multiple) .' active" href="#" data-name="'.esc_attr($text_all).'" data-termid="'. esc_attr(rtrim($terms_categories, ',')) .'">'.
                      __('All','ymc-smart-filter'). '</a></div>';
 
+				echo '<div class="menu-passive__inner-items">';
+
 				// Variables: Options Term
 				$bg_term             = null;
 				$color_term          = null;
@@ -167,6 +169,7 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 					$name_term = '';
                 }
 
+                echo '</div>';
                 echo '</div>';
                 echo '</div>';
             }

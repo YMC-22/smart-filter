@@ -1198,12 +1198,12 @@
 
             if( link.hasClass('all') ) {
                 link.closest('.menu-passive__item').
-                siblings().find('.menu-link').
+                next().find('.menu-link').
                 removeClass('active');
             }
             else {
-                link.closest('.menu-passive__item').
-                siblings().find('.all').
+                link.closest('.menu-passive__inner-items').
+                prev().find('.all').
                 removeClass('active');
             }
 
