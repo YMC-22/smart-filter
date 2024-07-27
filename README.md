@@ -967,7 +967,7 @@ posts_per_page=-1&post_type=portfolio&post_status=publish&orderby=title&tax_quer
 To use a callback for your query arguments simply enter your function name in the field and then add this function to your child theme's functions.php file. Your function should have a unique name and return an array of the arguments to pass onto WP_Query.
 Whitelisting Callbacks - **Important!** Your callback functions must be whitelisted in order for them to work. This is an important security measure.
 How to Whitelist Callback Functions for Elements? 
-In order to white list functions you need to define the “YMC_CALLBACK_FUNCTION_WHITELIST” constant via your child theme
+In order to white list functions you need to define the “YMC_CALLBACK_FUNCTION_WHITELIST” constant via your child theme.
 
 ```php
 /*
@@ -985,10 +985,29 @@ In order to white list functions you need to define the “YMC_CALLBACK_FUNCTION
  
 
 ```
-Once you have defined the YMC_CALLBACK_FUNCTION_WHITELIST constant, you can register (define) a function from an existing list in an array, for example:
-
+Once you have defined the YMC_CALLBACK_FUNCTION_WHITELIST constant, you can register (define) a function from an existing list in an array.<br>
+The $atts function argument is an array of dynamic data set in the plugin settings.
+- $atts['cpt']  - ( Array ) array of selected post types
+- $atts['tax']  - ( Array | Bool ) array of all selected taxonomies or false
+- $atts['term'] - ( Array | Bool ) array of all taxonomy terms or false
+- 
+Example of use:
 ```php
-function my_custom_function_name_1() {
+function my_custom_function_name_1( $atts ) {
+
+   	$term_ids = [];
+
+    // Get all terms related to the post_tag taxonomy
+	if( is_array($atts['term']) && ! empty($atts['term']) ) :
+
+		foreach ( $atts['term'] as $term ) :
+			if( 'post_tag' === get_term( $term )->taxonomy) :
+				$term_ids[] = (int) $term;
+			endif;
+		endforeach;
+
+	endif;
+
 	return [
 		'post_type' => ['post'],
 		'posts_per_page' => 9,
@@ -997,7 +1016,12 @@ function my_custom_function_name_1() {
 				'taxonomy' => 'category',
 				'field' => 'id',
 				'terms' => [6, 7, 15]
-			)
+			),
+			array(
+				'taxonomy' => 'post_tag',
+				'field' => 'id',
+				'terms' => $term_ids
+			),
 		)
 	];
 }

@@ -63,10 +63,10 @@ class Get_Posts {
 		require YMC_SMART_FILTER_DIR . '/includes/core/util/variables.php';
 		require YMC_SMART_FILTER_DIR . '/includes/core/util/helper.php';
 
-		$arr_post_types = !empty( $post_type ) ? explode(',', $post_type) : 'post';
+		$post_types = ! empty( $post_type ) ? explode(',', $post_type) : 'post';
 
 		$args = [
-			'post_type' => $arr_post_types,
+			'post_type' => $post_types,
 			'post_status' => $ymc_post_status,
 			'posts_per_page' => $per_page,
 			'paged' => $paged,
@@ -75,8 +75,8 @@ class Get_Posts {
 		];
 
 		// Convert Taxonomy & Terms to Array
-		$taxonomy = !empty( $taxonomy ) ? explode(',', $taxonomy) : false;
-		$terms    = !empty( $terms )    ? explode(',', $terms)    : false;
+		$taxonomy = ! empty( $taxonomy ) ? explode(',', $taxonomy) : false;
+		$terms    = ! empty( $terms )    ? explode(',', $terms)    : false;
 
 		if ( is_array($taxonomy) && is_array($terms) ) :
 
@@ -267,20 +267,28 @@ class Get_Posts {
 			{
 				if( function_exists(''. $ymc_query_type_callback .'' ) )
 				{
-					$custom_args =  $ymc_query_type_callback();
+					$atts = [ 'cpt' => $post_types, 'tax' => $taxonomy, 'term' => $terms ];
 
-					$intersect_keys_array = array_intersect_key($custom_args, $args); // intersection of array keys
+					$custom_args =  $ymc_query_type_callback( $atts );
 
-					$diff_keys_array = array_diff_key($custom_args, $args); // difference between array keys
-
-					foreach ( $intersect_keys_array as $key => $val )
+					if( is_array( $custom_args ) )
 					{
-						$args[$key] = $val;
+						$intersect_keys_array = array_intersect_key($custom_args, $args); // Intersection of array keys
+
+						$diff_keys_array = array_diff_key($custom_args, $args); // Difference between array keys
+
+						foreach ( $intersect_keys_array as $key => $val )
+						{
+							$args[$key] = $val;
+						}
+
+						foreach ( $diff_keys_array as $key => $val )
+						{
+							$args[$key] = $val;
+						}
 					}
-
-					foreach ( $diff_keys_array as $key => $val )
-					{
-						$args[$key] = $val;
+					else {
+						$custom_args = 'Function \'' . $ymc_query_type_callback . '\' returns an invalid value. Must be an array.';
 					}
 
 					$args['paged'] = $paged;
