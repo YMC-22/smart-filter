@@ -45,7 +45,7 @@
                     <label for="ymc-filter-layout" class="form-label">
                         <?php echo esc_html__('Filter Layout', 'ymc-smart-filter');?>
                         <span class="information">
-                    <?php echo esc_html__('Select design layout of filters.', 'ymc-smart-filter');?>
+                    <?php echo esc_html__('Select layout of filter.', 'ymc-smart-filter');?>
                 </span>
                     </label>
                     <select class="form-select" id="ymc-filter-layout" name="ymc-filter-layout">
@@ -139,7 +139,7 @@
                     <label for="ymc-filter-layout" class="form-label">
                         <?php echo esc_html__('Post Layout', 'ymc-smart-filter');?>
                         <span class="information">
-                    <?php echo esc_html__('Select style design layout for posts.', 'ymc-smart-filter');?>
+                    <?php echo esc_html__('Select layout for posts.', 'ymc-smart-filter');?>
                 </span>
                     </label>
                     <select class="form-select" id="ymc-post-layout" name="ymc-post-layout">

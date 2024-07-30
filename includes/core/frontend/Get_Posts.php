@@ -47,6 +47,7 @@ class Get_Posts {
 		$sort_orderby = $clean_data['sort_orderby'];
 		$meta_params = $clean_data['meta_query'];
 		$date_params = $clean_data['date_query'];
+		$filter_date = $clean_data['filter_date'];
 		$target_id   = $clean_data['target_id'];
 		$choices_posts = $clean_data['choices_posts'];
 		$exclude_posts = $clean_data['exclude_posts'];
@@ -165,6 +166,88 @@ class Get_Posts {
 			else {
 				$args['post__not_in'] = explode(',', $choices_posts);
 			}
+		}
+
+		// Filter Date
+		if( !empty($filter_date) ) {
+
+			// Array Date Params
+			// 0 - Action
+			// 1 - From Date
+			// 2 - To Date
+			$dataDateParams = explode(',', $filter_date);
+
+			switch ( $dataDateParams[0] ) {
+
+				case 'today':
+					$today = getdate();
+					$date_query[] = [
+						'year'     => $today['year'],
+						'monthnum' => $today['mon'],
+						'day'      => $today['mday']
+					];
+					break;
+
+				case 'yesterday':
+					$today = getdate();
+					$date_query[] = [
+						'year'     => $today['year'],
+						'monthnum' => $today['mon'],
+						'day'      => $today['mday'] - 1
+					];
+					break;
+
+				case '3_days':
+					$date_query[] = [
+						'after'     => '3 days ago',
+						'inclusive' => true,
+					];
+					break;
+
+				case 'week':
+					$date_query[] = [
+						'after'     => '7 days ago',
+						'inclusive' => true,
+					];
+					break;
+
+				case 'month':
+					$date_query[] = [
+						'after'     => '30 days ago',
+						'inclusive' => true,
+					];
+					break;
+
+				case 'year':
+					$date_query[] = [
+						'after' => '1 year ago',
+						'inclusive' => true,
+					];
+					break;
+
+				case 'other':
+
+					$date_query[] = [
+						'before' => [
+							'year'  => date('Y', $dataDateParams[2]),
+							'month' => date('m', $dataDateParams[2]),
+							'day'   => date('d', $dataDateParams[2]),
+						],
+						'after'  => [
+							'year'  => date('Y', $dataDateParams[1]),
+							'month' => date('m', $dataDateParams[1]),
+							'day'   => date('d', $dataDateParams[1]),
+						],
+						'inclusive' => true
+					];
+					break;
+
+				default :
+					$date_query = [];
+					break;
+			}
+
+			$args['date_query'] = $date_query;
 		}
 
 		// API Sort Posts

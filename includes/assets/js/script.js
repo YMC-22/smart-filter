@@ -1348,6 +1348,122 @@
             }
         });
 
+        // Filter Date
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .filter-date .date-ranges .date-ranges__selected, .ymc-extra-filter .filter-date .date-ranges .date-ranges__selected', function (e) {
+            $(this).closest('.date-ranges').toggleClass('open');
+        });
+
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .filter-date .date-ranges .date-ranges__dropdown [data-date], .ymc-extra-filter .filter-date .date-ranges .date-ranges__dropdown [data-date]', function (e) {
+
+            let self = $(this);
+            let filterContainer = this.closest('.ymc-smart-filter-container');
+            let dateAction = self.data('date');
+            let dateSelected = self.closest('.date-ranges').find('.date-ranges__selected');
+            let dateRangesCustom = self.closest('.date-ranges').siblings('.date-ranges-custom');
+
+            self.closest('.list-item').addClass('isActive').siblings().removeClass('isActive');
+
+            dateSelected.text(self.text());
+
+            if( dateAction === 'other' ) {
+                dateRangesCustom.show();
+
+                $('.datepicker').datepicker({
+                    dateFormat: 'M dd, yy',
+                    showAnim: 'slideDown',
+                    monthNamesShort: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ],
+                    onSelect: function(dateText, inst) {
+                        let timestamp = new Date(dateText).getTime() / 1000;
+                        let input = inst.input[0];
+                        input.dataset.timestamp = timestamp;
+                    }
+                });
+            }
+            else {
+                dateRangesCustom.hide();
+            }
+
+            if ( this.closest('.ymc-extra-filter') ) {
+                let extraFilterId   = self.closest('.ymc-extra-filter').data('extraFilterId');
+                filterContainer = document.querySelector(`.ymc-filter-${extraFilterId}`);
+            }
+
+            if( filterContainer && dateAction !== 'other' )
+            {
+                // Update data params
+                let params = JSON.parse( filterContainer.dataset.params);
+                params.filter_date = dateAction;
+                params.page = 1;
+                params.search = '';
+                filterContainer.dataset.params = JSON.stringify(params);
+
+                getFilterPosts({
+                    'paged'     : 1,
+                    'toggle_pg' : 1,
+                    'target'    : params.data_target,
+                    'type_pg'   : params.type_pg
+                });
+            }
+
+        });
+
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .filter-date .date-ranges-custom .btn-apply, .ymc-extra-filter .filter-date .date-ranges-custom .btn-apply', function (e) {
+
+            let self = $(this);
+            let filterContainer = this.closest('.ymc-smart-filter-container');
+            let dateFrom = parseInt( self.closest('.date-ranges-custom__container').find('[name="date_from"]')[0].dataset.timestamp )
+            let dateTo   = parseInt( self.closest('.date-ranges-custom__container').find('[name="date_to"]')[0].dataset.timestamp );
+
+            if ( this.closest('.ymc-extra-filter') ) {
+                let extraFilterId   = self.closest('.ymc-extra-filter').data('extraFilterId');
+                filterContainer = document.querySelector(`.ymc-filter-${extraFilterId}`);
+            }
+
+            if ( dateTo >= dateFrom )
+            {
+                self.closest('.date-ranges-custom').find('.message').empty().hide();
+                if( filterContainer )
+                {
+                    // Update data params
+                    let params = JSON.parse( filterContainer.dataset.params);
+                    params.filter_date = 'other,'+ dateFrom +','+ dateTo;
+                    params.page = 1;
+                    params.search = '';
+                    filterContainer.dataset.params = JSON.stringify(params);
+
+                    getFilterPosts({
+                        'paged'     : 1,
+                        'toggle_pg' : 1,
+                        'target'    : params.data_target,
+                        'type_pg'   : params.type_pg
+                    });
+                }
+            }
+            else {
+                self.closest('.date-ranges-custom').find('.message').html('The date range is incorrect.').show();
+            }
+        });
+
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .filter-date .date-ranges-custom .btn-cancel, .ymc-extra-filter .filter-date .date-ranges-custom .btn-cancel', function (e) {
+
+            let self = $(this);
+            let filterContainer = this.closest('.ymc-smart-filter-container');
+
+            if ( this.closest('.ymc-extra-filter') ) {
+                let extraFilterId   = self.closest('.ymc-extra-filter').data('extraFilterId');
+                filterContainer = document.querySelector(`.ymc-filter-${extraFilterId}`);
+            }
+
+            self.closest('.date-ranges-custom').
+            find('.message').empty().hide().end().
+            hide().
+            siblings('.date-ranges').
+            removeClass('open').
+            find('.date-ranges__dropdown [data-date="all"]').
+            trigger('click');
+        });
+
+
         // Filter: Alphabetical Navigation
         $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .alphabetical-layout .filter-link, .ymc-extra-filter .alphabetical-layout .filter-link', function (e) {
             e.preventDefault();
@@ -1722,6 +1838,10 @@
                 $('.ymc-smart-filter-container .search-form .component-input .autocomplete-results').empty().hide();
                 $('.ymc-extra-search .search-form .component-input .autocomplete-results').empty().hide();
             }
+            if( !e.target.closest('.date-ranges') ) {
+                $('.date-ranges').removeClass('open');
+            }
+
         });
 
         $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .search-form .autocomplete-results a[data-clue], .ymc-extra-search .search-form .autocomplete-results a[data-clue]', function (e) {
