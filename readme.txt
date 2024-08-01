@@ -5,7 +5,7 @@ Version: 2.9.16
 Donate link: https://github.com/YMC-22/smart-filter
 Tags: filter, grid, ajax, search, sort
 Requires at least: 4.8
-Tested up to: 6.5
+Tested up to: 6.6.1
 Stable tag: trunk
 Requires PHP: 7.2
 License: GPLv2 or later
