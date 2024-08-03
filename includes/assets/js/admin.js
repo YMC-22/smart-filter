@@ -1163,8 +1163,6 @@
         // Updated list posts in choices box
         $(document).on('click','.ymc__container-settings #general #ymc-terms input[type="checkbox"]',function (e) {
 
-            console.log(456);
-
             // Run updated terms options
             checkedSelectedTerm(e);
 
