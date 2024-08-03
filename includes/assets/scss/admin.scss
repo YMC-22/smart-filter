@@ -57,8 +57,9 @@ $font-size: 16;
 		.ymc {
 			&__header {
 				display: flex;
+				flex-wrap: wrap;
 				.logo {
-					flex: 1 1 28%;
+					flex: 1 1 23%;
 					padding: 20px 5px 0 20px;
 					img {
 						width: 100%;
@@ -66,11 +67,19 @@ $font-size: 16;
 						height: 75px;
 						object-fit: cover;
 					}
+					@media screen and (max-width: 1024px){
+						flex: 1 0 100%;
+						text-align: center;
+					}
 				}
 				.manage-dash {
-					flex: 1 1 70%;
+					flex: 1 1 73%;
 					padding: 20px;
 					background: #fff;
+					@media screen and (max-width: 1024px){
+						flex: 1 0 100%;
+						padding: 0;
+					}
 					.dashicons {
 						background: $color;
 						padding: 7px;
@@ -92,13 +101,17 @@ $font-size: 16;
 
 			&__container-settings {
 				display: flex;
+				flex-wrap: wrap;
 				@media screen and (max-width: 768px) {
 					flex-direction: column;
 				}
 
 				.tab-sidebar {
-					flex: 1 1 28%;
+					flex: 1 1 23%;
 					min-height: 200px;
+					@media screen and (max-width: 1024px){
+						flex: 1 0 100%;
+					}
 					.nav-tabs {
 						list-style: none;
 						margin: 0;
@@ -146,8 +159,11 @@ $font-size: 16;
 				}
 
 				.tab-content {
-					flex: 1 1 70%;
+					flex: 1 1 73%;
 					background: #fff;
+					@media screen and (max-width: 1024px){
+						flex: 1 0 100%;
+					}
 
 					.mb {
 						margin-bottom: 20px;
@@ -271,25 +287,30 @@ $font-size: 16;
 								}
 
 								.ymc-tax-checkboxes {
-									padding: 5px 0;
+									padding: 5px 10px;
 									display: flex;
 									flex-wrap: wrap;
 									align-items: center;
+									border: 1px solid transparent;
+									&.dragging {
+										border: 1px dashed #000;
+										background: rgba(195, 258, 255, 0.25);
+									}
 
 									.group-elements {
-										margin-right: 10px;
-										margin-bottom: 10px;
-										padding: 5px 10px;
+										display: flex;
+										align-items: center;
+										margin: 5px 10px 5px 0;
+										padding: 8px 15px 8px 10px;
 										border: 1px solid #ccc;
 										background: #f6f6f6;
-										cursor: move;
-										transition: .3s;
+										.handle {
+											cursor: move;
+											margin-right: 12px;
+										}
 										label {
 											text-transform: capitalize;
-										}
-										&.selected {
-											background: #098ab8;
-											color: #fff;
+											cursor: pointer;
 										}
 										&:hover {
 											background: #e1e1e1;
@@ -300,7 +321,7 @@ $font-size: 16;
 								#ymc-terms {
 									display: grid;
 									grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
-									grid-gap: 30px;
+									grid-gap: 20px;
 									margin-top: 10px;
 									.group-term {
 										height: 300px;
@@ -317,14 +338,21 @@ $font-size: 16;
 										&::-webkit-scrollbar-track {
 											border-radius: 5px;
 										}
+										.entry-terms {
+											position: relative;
+											border: 1px solid transparent;
+											&.dragging {
+												border: 1px dashed #000;
+												background: rgba(195, 258, 255, 0.25);
+											}
+										}
 										.item-inner {
 											position: relative;
 											margin-bottom: 7px;
 											border: 1px solid #dcdcde;
 											padding: 10px 50px 10px 10px;
-											cursor: move;
-											transition: .3s;
 											display: flex;
+											align-items: center;
 											&.all-categories {
 												display: flex;
 												align-items: center;
@@ -339,10 +367,6 @@ $font-size: 16;
 												border: 1px solid #d63638;
 												color: #d63638;
 											}
-											&.selected {
-												background: #098ab8;
-												color: #fff;
-											}
 											&:hover {
 												background: #e1e1e1;
 											}
@@ -353,11 +377,19 @@ $font-size: 16;
 													width: 16px;
 													height: 16px;
 													right: 32px;
-													top: 12px;
+													top: 50%;
+													transform: translateY(-50%);
 													display: block;
 													background: url("../images/checked.png") no-repeat center/contain;
 													z-index: 3;
 												}
+											}
+											.handle {
+												cursor: move;
+												margin-right: 12px;
+											}
+											.category-list-label {
+												cursor: pointer;
 											}
 										}
 									}
@@ -511,7 +543,6 @@ $font-size: 16;
 										}
 									}
 								}
-
 								input[type="text"],
 								input[type="number"] {
 									border: 1px solid #e0e4e9;
@@ -558,8 +589,14 @@ $font-size: 16;
 								min-height: 18px;
 								cursor: pointer;
 								&:hover {
-									background: #098ab8;
-									color: #fff;
+									background: #e1e1e1;
+									color: #000000;
+								}
+								.postID {
+									display: block;
+								}
+								.postTitle {
+									display: block;
 								}
 							}
 							.choices {
@@ -637,6 +674,8 @@ $font-size: 16;
 										margin-bottom: 0;
 										.ymc-rel-item {
 											padding-right: 30px;
+											padding-bottom: 8px;
+											padding-top: 8px;
 											.ymc-icon-minus {
 												position: absolute;
 												top: 50%;
@@ -666,15 +705,6 @@ $font-size: 16;
 												}
 											}
 										}
-										&.selected {
-											background: #098ab8;
-											color: #fff;
-											.ymc-rel-item {
-												.ymc-icon-minus {
-													display: none;
-												}
-											}
-										}
 										&.over {
 											.ymc-rel-item {
 												background: none;
@@ -687,6 +717,11 @@ $font-size: 16;
 									}
 									&.include-posts {
 										color: #28bc28;
+										border: 1px solid transparent;
+										&.dragging {
+											border: 1px dashed #000;
+											background: rgba(195, 258, 255, 0.25);
+										}
 									}
 									&.exclude-posts {
 										color: #fd6262;
@@ -699,7 +734,8 @@ $font-size: 16;
 							position: absolute;
 							right: 12px;
 							cursor: pointer;
-							top: 13px;
+							top: 50%;
+							transform: translateY(-50%);
 							font-size: 16px;
 						}
 						.indicator-icon {

@@ -100,6 +100,7 @@ $terms_sel   = $terms_selected;
 						}
 
 						echo '<div id="'. esc_attr($slug) .'" class="group-elements">
+						<i class="fas fa-ellipsis-v handle"></i>
                         <input id="id-'. esc_attr($slug) .'" type="checkbox" name="ymc-taxonomy[]" value="'. esc_attr($slug) .'" '. esc_attr($sl0) .'>
                         <label for="id-'. esc_attr($slug) .'">'.  esc_html($label) . '</label></div>';
 
@@ -278,7 +279,7 @@ $terms_sel   = $terms_selected;
 										$name_term = ( !empty($name_term) ) ? $name_term : $term->name;
 
 
-										echo '<div class="item-inner" style="'. esc_attr($style_bg_term) . esc_attr($style_color_term) .'" 
+							  echo '<div class="item-inner" style="'. esc_attr($style_bg_term) . esc_attr($style_color_term) .'" 
 			                  data-termid="'. esc_attr($term->term_id) .'" 
 			                  data-alignterm="'. esc_attr($class_terms_align) .'" 
 			                  data-bg-term="'. esc_attr($bg_term) .'" 
@@ -288,12 +289,16 @@ $terms_sel   = $terms_selected;
 			                  data-class-icon="'. esc_attr($class_icon) .'"
 			                  data-status-term="'. esc_attr($sl1) .'"  
 			                  data-name-term="'. esc_attr($name_term) .'"  
-			                  data-default-term="'. esc_attr($default_term) .'">
-                              <input name="ymc-terms[]" class="category-list" id="category-id-'. esc_attr($term->term_id) .'" type="checkbox" value="'. esc_attr($term->term_id) .'" '. esc_attr($sl1) .'>';
+			                  data-default-term="'. esc_attr($default_term) .'">';
 
-										echo '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">
+							  echo '<i class="fas fa-ellipsis-v handle"></i>';
+                              echo '<input name="ymc-terms[]" class="category-list" id="category-id-'. esc_attr($term->term_id) .'" type="checkbox" value="'. esc_attr($term->term_id) .'" '. esc_attr($sl1) .'>';
+
+							  echo '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">
 							  <span class="name-term">' . esc_html($name_term) .'</span>'. ' ('. esc_attr($term->count) .')</label>						  						  
-							  <i class="far fa-cog choice-icon" title="Setting Term"></i><span class="indicator-icon">'. $terms_icons .'</span></div>';
+							  <i class="far fa-cog choice-icon" title="Tag settings"></i><span class="indicator-icon">'. $terms_icons .'</span>';
+
+							  echo '</div>';
 
 
 										$terms_icons = '';
@@ -417,7 +422,8 @@ $terms_sel   = $terms_selected;
 									if( is_array($ymc_choices_posts) &&  array_search(get_the_ID(), $ymc_choices_posts) !== false) {
 										$class_disabled = 'disabled';
 									}
-									echo '<li><span class="ymc-rel-item ymc-rel-item-add '.$class_disabled.'" data-id="'.get_the_ID().'">ID: '.get_the_ID().'<br>'.get_the_title(get_the_ID()).'</span></li>';
+									echo '<li><div class="ymc-rel-item ymc-rel-item-add '.$class_disabled.'" data-id="'.get_the_ID().'">
+									<span class="postID">ID: '.get_the_ID().'</span> <span class="postTitle">'.get_the_title(get_the_ID()).'</span></div></li>';
 									$class_disabled = null;
 								endwhile;
 
@@ -451,8 +457,8 @@ $terms_sel   = $terms_selected;
 
 								while ($query->have_posts()) : $query->the_post();
 
-									echo '<li><input type="hidden" name="ymc-choices-posts[]" value="'.get_the_ID().'">
-							  <span  class="ymc-rel-item" data-id="'.get_the_ID().'">ID: '.get_the_ID().'<br>'.get_the_title(get_the_ID()).'
+									echo '<li class="item"><input type="hidden" name="ymc-choices-posts[]" value="'.get_the_ID().'">
+							  <span  class="ymc-rel-item" data-id="'.get_the_ID().'">'.get_the_title(get_the_ID()).'
 							  <a href="#" class="ymc-icon-minus remove_item"></a></span></li>';
 								endwhile;
 

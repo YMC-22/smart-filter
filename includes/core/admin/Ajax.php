@@ -91,7 +91,8 @@ class Ajax {
 
 			while ($query->have_posts()) {
 				$query->the_post();
-				$arr_posts[] = '<li><span class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">ID: '.get_the_ID().'<br>'. get_the_title(get_the_ID()).'</span></li>';
+				$arr_posts[] = '<li><span class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">
+				<span class="postID">ID: '.get_the_ID().'</span> <span class="postTitle">'. get_the_title(get_the_ID()).'</span></span></li>';
 			}
 			wp_reset_query();
 		}
@@ -318,7 +319,8 @@ class Ajax {
 
 				$query->the_post();
 
-				$output .= '<li><span class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">ID: '.get_the_ID().'<br>'.get_the_title(get_the_ID()).'</span></li>';
+				$output .= '<li><span class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">
+				<span class="postID">ID: '.get_the_ID().'</span> <span class="postTitle">'.get_the_title(get_the_ID()).'</span></span></li>';
 			}
 		}
 

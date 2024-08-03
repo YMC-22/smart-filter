@@ -8,303 +8,7 @@
         const pathPreloader = _smart_filter_object.path+"/includes/assets/images/preloader.svg";
 
         // Wrapper tab
-        const container   = $('.ymc__container-settings .tab-panel');
-
-        document.querySelectorAll('.ymc__container-settings .nav-tabs .link').forEach((el) => {
-
-            el.addEventListener('click',function (e) {
-                e.preventDefault();
-
-                let hash = this.hash;
-
-                //let text = $(this).find('.text').text();
-                //$('.ymc__header .manage-dash .title').text(text);
-
-                $(el).addClass('active').closest('.nav-item').siblings().find('.link').removeClass('active');
-
-                document.querySelectorAll('.tab-content .tab-panel').forEach((el) => {
-
-                    if(hash === '#'+el.getAttribute('id')) {
-                        $(el).addClass('active').siblings().removeClass('active');
-                    }
-
-                });
-
-            });
-
-        });
-
-        // CPT Event
-        $(document).on('change','.ymc__container-settings #general #ymc-cpt-select',function (e, param) {
-
-            let isCPT = ( undefined === param ) ? confirm(`Are you sure change Post Type? IMPORTANT! Post Type Changes remove all taxonomies and terms settings.`) : true;
-
-            if( isCPT ) {
-
-                let taxonomyWrp = $('#ymc-tax-checkboxes');
-                let termWrp     = $('#ymc-terms');
-                let choicesList = $('#selection-posts .choices-list');
-                let valuesList  = $('#selection-posts .values-list');
-                let foundPosts = $('#selection-posts .choices .number-posts');
-                let valuesCptArray = Array.from(document.querySelectorAll('#general #ymc-cpt-select option:checked')).map(el => el.value);
-                let valuesCptString = valuesCptArray.join(',');
-
-                this.dataset.previousValue =  valuesCptString;
-
-                const data = {
-                    'action': 'ymc_get_taxonomy',
-                    'nonce_code' : _smart_filter_object.nonce,
-                    'cpt' : valuesCptString,
-                    'post_id' : $(this).data('postid')
-                };
-
-                $.ajax({
-                    type: 'POST',
-                    dataType: 'json',
-                    url: _smart_filter_object.ajax_url,
-                    data: data,
-                    beforeSend: function () {
-                        container.addClass('loading').
-                        prepend(`<img class="preloader" src="${pathPreloader}">`);
-                    },
-                    success: function (res) {
-
-                        container.removeClass('loading').find('.preloader').remove();
-
-                        let dataTax = (JSON.parse(res.data));
-
-                        // Get Taxonomies
-                        if(Object.keys(dataTax).length > 0) {
-
-                            taxonomyWrp.html('');
-                            termWrp.html('').closest('.wrapper-terms').addClass('hidden');
-
-                            for (let key in dataTax) {
-
-                                taxonomyWrp.append(`<div id="${key}" class="group-elements" draggable="true">
-                            <input id="id-${key}" type="checkbox" name="ymc-taxonomy[]" value="${key}">
-                            <label for="id-${key}">${dataTax[key]}</label>
-                            </div>`);
-                            }
-                        }
-                        else  {
-
-                            taxonomyWrp.html('').append(`<span class="notice">No data for Post Type / Taxonomy</span>`);
-                            termWrp.html('').closest('.wrapper-terms').addClass('hidden');
-                        }
-
-                        // Get posts
-                        let dataPosts = (JSON.parse(res.lists_posts));
-
-                        valuesList.empty();
-                        choicesList.empty();
-                        foundPosts.html(res.found_posts);
-
-                        if(Object.keys(dataPosts).length > 0) {
-                            for (let key in dataPosts) {
-                                choicesList.append(dataPosts[key]);
-                            }
-                        }
-                        else {
-                            choicesList.html(`<li class="notice">No posts</li>`);
-                        }
-                    },
-                    error: function (obj, err) {
-                        console.log( obj, err );
-                    }
-                });
-
-            }
-            else {
-                let previousValues = this.dataset.previousValue.split(',');
-                document.querySelectorAll('#general #ymc-cpt-select option').forEach((el) => {
-                    el.selected = previousValues.includes(el.value);
-                });
-            }
-        });
-
-        // Taxonomy Event
-        $(document).on('click','.ymc__container-settings #general #ymc-tax-checkboxes input[type="checkbox"]',function (e) {
-
-            let termWrp = $('#ymc-terms');
-
-            let val = '';
-
-            if($(e.target).is(':checked')) {
-
-                val = $(e.target).val();
-
-                const data = {
-                    'action': 'ymc_get_terms',
-                    'nonce_code' : _smart_filter_object.nonce,
-                    'taxonomy' : val
-                };
-
-                $.ajax({
-                    type: 'POST',
-                    dataType: 'json',
-                    url: _smart_filter_object.ajax_url,
-                    data: data,
-                    beforeSend: function () {
-                        container.addClass('loading').
-                        prepend(`<img class="preloader" src="${pathPreloader}">`);
-                    },
-                    success: function (res) {
-
-                        container.removeClass('loading').find('.preloader').remove();
-
-                        if($(e.target).closest('.ymc-tax-checkboxes').find('input[type="checkbox"]:checked').length > 0) {
-                            $('.ymc__container-settings #general .wrapper-terms').removeClass('hidden');
-                        } else {
-                            $('.ymc__container-settings #general .wrapper-terms').addClass('hidden');
-                        }
-
-                        // Get Terms
-                        if( res.data.terms.length ) {
-
-                            let output = '';
-
-                            output += `<article class="group-term item-${val}">
-                                       <div class="item-inner all-categories">
-                                       <input name='all-select' class='category-all' id='category-all-${val}' type='checkbox'>
-                                       <label for='category-all-${val}' class='category-all-label'>All [ ${$(e.target).siblings('label').text()} ]</label></div>
-                                       <div class="entry-terms">`;
-
-                            res.data.terms.forEach((el) => {
-                                output += `<div class='item-inner' 
-                                data-termid='${el.term_id}' 
-                                data-alignterm 
-                                data-bg-term 
-                                data-color-term 
-                                data-custom-class 
-                                data-color-icon 
-                                data-class-icon 
-                                data-status-term 
-                                data-default-term 
-                                data-name-term >
-                                <input name="ymc-terms[]" class="category-list" id="category-id-${el.term_id}" type="checkbox" value="${el.term_id}">
-                                <label for='category-id-${el.term_id}' class='category-list-label'><span class="name-term">${el.name}</span> (${el.count})</label>
-                                <i class="far fa-cog choice-icon" title="Setting Term"></i>
-                                <span class="indicator-icon"></span>                                
-                                </div>`;
-                            });
-
-                            output += `</div></article>`;
-
-                            termWrp.append(output);
-
-                            output = '';
-
-                            sortTerms();
-
-                            updateSortTerms();
-                        }
-                        else  {
-                            termWrp.append(`<article class="group-term item-${val}">
-                            <div class='item-inner notice-error'>No terms for taxonomy <b>${$(e.target).siblings('label').text()}</b></div></article>`);
-                        }
-                    },
-                    error: function (obj, err) {
-                        console.log( obj, err );
-                    }
-                });
-            }
-            else {
-                termWrp.find('.item-'+$(e.target).val()).remove();
-            }
-
-        });
-
-
-        // Delete Taxonomies
-        $(document).on('click','.ymc__container-settings #general .tax-delete',function (e) {
-
-            let isDelete = confirm("Are you sure you want to delete all taxonomy terms? Deleting will remove all settings for each term.");
-
-            if( isDelete ) {
-                $('.ymc__container-settings #general #ymc-cpt-select').trigger('change', [ "delTerms" ]);
-            }
-        });
-
-        // Update Taxonomies
-        $(document).on('click','.ymc__container-settings #general .tax-reload',function (e) {
-
-            let postId = document.querySelector('#ymc-cpt-select').dataset.postid;
-            let cpts = '';
-            let taxonomyWrp = $('#ymc-tax-checkboxes');
-            let termWrp     = $('#ymc-terms');
-            let taxExist = []; // Current Taxonomies
-
-            $("#ymc-cpt-select :selected").map(function(i, el) {
-                cpts +=$(el).val()+',';
-            });
-
-            cpts = cpts.replace(/,\s*$/, "");
-
-            taxonomyWrp.find('input[type="checkbox"]').each(function () {
-                taxExist.push($(this).val());
-            });
-
-            const data = {
-                'action': 'ymc_updated_taxonomy',
-                'nonce_code' : _smart_filter_object.nonce,
-                'cpt' : cpts,
-                'post_id' :postId
-            };
-
-            $.ajax({
-                type: 'POST',
-                dataType: 'json',
-                url: _smart_filter_object.ajax_url,
-                data: data,
-                beforeSend: function () {
-                    container.addClass('loading').
-                    prepend(`<img class="preloader" src="${pathPreloader}">`);
-                },
-                success: function (res) {
-                    container.removeClass('loading').find('.preloader').remove();
-                    let dataTax = res.data; // Updated Taxonomies
-
-                    // Get Taxonomies
-                    if(Object.keys(dataTax).length > 0) {
-                        // Add new taxonomy
-                        if( Object.keys(dataTax).length > taxExist.length ) {
-
-                            for (let key in dataTax) {
-
-                                if( ! taxExist.includes(key) ) {
-
-                                    taxonomyWrp.append(`<div id="${key}" class="group-elements" draggable="true">
-                                    <input id="id-${key}" type="checkbox" name="ymc-taxonomy[]" value="${key}">
-                                    <label for="id-${key}">${dataTax[key]}</label>
-                                    </div>`);
-                                }
-                            }
-                        }
-
-                        // Delete taxonomy
-                        if( Object.keys(dataTax).length < taxExist.length ) {
-
-                            for (let key in taxExist) {
-
-                                if( ! Object.keys(dataTax).includes(taxExist[key]) ) {
-                                    taxonomyWrp.find(`#${taxExist[key]}`).remove();
-                                    termWrp.find(`.item-${taxExist[key]}`).remove();
-                                }
-                            }
-                        }
-                    }
-                    else  {
-                        taxonomyWrp.html('').append(`<span class="notice">No data for Post Type / Taxonomy</span>`);
-                        termWrp.html('').closest('.wrapper-terms').addClass('hidden');
-                    }
-                },
-                error: function (obj, err) {
-                    console.log( obj, err );
-                }
-            });
-
-        });
+        const container = $('.ymc__container-settings .tab-panel');
 
         // Set Cookie
         function setCookie(cname, cvalue, exdays) {
@@ -331,98 +35,11 @@
             return "";
         }
 
-        // Drag & Drop Sort Taxonomy
-        function sortTaxonomy() {
-
-            let taxListElement = document.querySelector('#ymc-tax-checkboxes');
-
-            if( taxListElement ) {
-
-                let taxElements = taxListElement.querySelectorAll('.group-elements');
-
-                for (let tax of taxElements) {
-                    tax.draggable = true;
-                }
-
-                taxListElement.addEventListener('dragstart', (evt) => {
-                    evt.target.classList.add('selected');
-                });
-
-                taxListElement.addEventListener('dragend', (evt) => {
-                    evt.target.classList.remove('selected');
-
-                    let arrTax = [];
-
-                    taxListElement.querySelectorAll('.group-elements').forEach((el) => {
-                        arrTax.push(el.id);
-                    });
-
-                    let data = {
-                        'action': 'ymc_tax_sort',
-                        'nonce_code' : _smart_filter_object.nonce,
-                        'tax_sort' : JSON.stringify(arrTax),
-                        'post_id' : taxListElement.dataset.postid
-                    };
-
-                    $.ajax({
-                        type: 'POST',
-                        dataType: 'json',
-                        url: _smart_filter_object.ajax_url,
-                        data: data,
-                        success: function (res) {},
-                        error: function (obj, err) {
-                            console.log( obj, err );
-                        }
-                    });
-                });
-
-                let getNextElement = (cursorPosition, currentElement) => {
-                    let currentElementCoord = currentElement.getBoundingClientRect();
-                    let currentElementCenter = currentElementCoord.y + currentElementCoord.height / 2;
-                    return (cursorPosition < currentElementCenter) ?
-                        currentElement :
-                        currentElement.nextElementSibling;
-                };
-
-                taxListElement.addEventListener('dragover', (evt) => {
-                    evt.preventDefault();
-
-                    const activeElement = taxListElement.querySelector(`.selected`);
-
-                    const currentElement = evt.target;
-
-                    const isMoveable = activeElement !== currentElement &&
-                        currentElement.classList.contains('group-elements');
-
-                    if (!isMoveable) {
-                        return;
-                    }
-
-                    const nextElement = getNextElement(evt.clientY, currentElement);
-
-                    if (
-                        nextElement &&
-                        activeElement === nextElement.previousElementSibling ||
-                        activeElement === nextElement
-                    ) {
-                        return;
-                    }
-
-                    taxListElement.insertBefore(activeElement, nextElement);
-                });
-
-            }
-
-        }
-        sortTaxonomy();
-
         // Drag & Drop Sort Terms
         function updateSortTerms() {
-
             let arrTerms = [];
-
             document.querySelectorAll('#ymc-terms .item-inner:not(.all-categories)').forEach((el) => {
-                arrTerms.push(el.children[0].value);
+                arrTerms.push( $(el).find('input[type="checkbox"]').val() );
             });
 
             let data = {
@@ -444,128 +61,81 @@
             });
         }
 
-        // Drag & Drop selected posts
-        function sortSelectedPosts() {
-
-            let postListElement = document.querySelector('#selection-posts .include-posts');
-
-            if( postListElement ) {
-
-                let postElement = postListElement.querySelectorAll('li');
-
-                for (let post of postElement) {
-                    post.draggable = true;
+        // Drag & Drop Sort Taxonomy
+        function sortTaxonomy() {
+            let taxListElement = document.querySelector('#ymc-tax-checkboxes');
+            $("#ymc-tax-checkboxes").sortable({
+                axis: 'X',
+                cursor: "move",
+                handle: '.handle',
+                opacity: 0.8,
+                revert: 150,
+                scroll: false,
+                containment: "parent",
+                start: function( event, ui ) {
+                    taxListElement.classList.add('dragging');
+                },
+                stop: function( event, ui ) {
+                    taxListElement.classList.remove('dragging');
+                    let arrTax = [];
+                    taxListElement.querySelectorAll('.group-elements').forEach((el) => {
+                        arrTax.push(el.id);
+                    });
+                    let data = {
+                        'action': 'ymc_tax_sort',
+                        'nonce_code' : _smart_filter_object.nonce,
+                        'tax_sort' : JSON.stringify(arrTax),
+                        'post_id' : taxListElement.dataset.postid
+                    };
+                    $.ajax({
+                        type: 'POST',
+                        dataType: 'json',
+                        url: _smart_filter_object.ajax_url,
+                        data: data,
+                        success: function (res) {},
+                        error: function (obj, err) {
+                            console.log( obj, err );
+                        }
+                    });
                 }
-
-                postListElement.addEventListener('dragstart', (evt) => {
-                    evt.target.classList.add('selected');
-                });
-                postListElement.addEventListener('dragend', (evt) => {
-                    evt.target.classList.remove('selected');
-                    $('.include-posts li:not(.selected)').removeClass('over');
-                });
-
-                postListElement.addEventListener('drag', (evt) => {
-                    $('.include-posts li:not(.selected)').addClass('over');
-                });
-
-                let getNextElement = (cursorPosition, currentElement) => {
-                    let currentElementCoord = currentElement.getBoundingClientRect();
-                    let currentElementCenter = currentElementCoord.y + currentElementCoord.height / 2;
-                    return (cursorPosition < currentElementCenter) ?
-                        currentElement :
-                        currentElement.nextElementSibling;
-                };
-
-                postListElement.addEventListener('dragover', (evt) => {
-                    evt.preventDefault();
-
-                    const activeElement = postListElement.querySelector(`.selected`);
-
-                    const currentElement = evt.target.parentNode;
-
-                    const isMoveable = activeElement !== currentElement;
-
-                    if (!isMoveable) {
-                        return;
-                    }
-
-                    const nextElement = getNextElement(evt.clientY, currentElement);
-
-                    if ( nextElement && activeElement === nextElement.previousElementSibling || activeElement === nextElement )
-                    {
-                        return;
-                    }
-
-                    evt.target.parentNode.parentNode.insertBefore(activeElement, nextElement);
-                });
-            }
+            });
         }
-        sortSelectedPosts();
 
+        // Drag & Drop Sort Terms
         function sortTerms() {
-
-            let termListElement = document.querySelector('#ymc-terms');
-
-            if( termListElement ) {
-
-                let termElements = termListElement.querySelectorAll('.item-inner:not(.all-categories)');
-
-                for (let term of termElements) {
-                    term.draggable = true;
+            $("#ymc-terms .entry-terms").sortable({
+                axis: 'y',
+                cursor: "move",
+                opacity: 0.8,
+                revert: 150,
+                handle: '.handle',
+                containment: "parent",
+                start: function( event, ui ) {
+                    ui.item[0].closest('.entry-terms').classList.add('dragging');
+                },
+                stop: function( event, ui ) {
+                    ui.item[0].closest('.entry-terms').classList.remove('dragging');
+                    updateSortTerms();
                 }
-
-                termListElement.querySelectorAll('.entry-terms').forEach((el) => {
-
-                    el.addEventListener('dragstart', (evt) => {
-                        evt.target.classList.add('selected');
-                    });
-
-                    el.addEventListener('dragend', (evt) => {
-                        evt.target.classList.remove('selected');
-                        updateSortTerms();
-                    });
-                });
-
-                let getNextElement = (cursorPosition, currentElement) => {
-                    let currentElementCoord = currentElement.getBoundingClientRect();
-                    let currentElementCenter = currentElementCoord.y + currentElementCoord.height / 2;
-                    return (cursorPosition < currentElementCenter) ?
-                        currentElement :
-                        currentElement.nextElementSibling;
-                };
-
-                termListElement.querySelectorAll('.entry-terms').forEach((el) => {
-                    el.addEventListener('dragover', (evt) => {
-                        evt.preventDefault();
-
-                        const activeElement = termListElement.querySelector(`.selected`);
-
-                        const currentElement = evt.target;
-
-                        const isMoveable = activeElement !== currentElement &&
-                            currentElement.classList.contains('item-inner');
-
-                        if (!isMoveable) {
-                            return;
-                        }
-
-                        const nextElement = getNextElement(evt.clientY, currentElement);
-
-                        if (
-                            nextElement &&
-                            activeElement === nextElement.previousElementSibling ||
-                            activeElement === nextElement
-                        ) {
-                            return;
-                        }
-
-                        evt.target.parentNode.insertBefore(activeElement, nextElement);
-                    });
-                });
-            }
+            });
         }
-        sortTerms();
+
+        // Drag & Drop Selected Sosts
+        function sortSelectedPosts() {
+            $("#selection-posts .include-posts").sortable({
+                axis: 'y',
+                cursor: "move",
+                revert: 150,
+                containment: "parent",
+                start: function( event, ui ) {
+                    console.log(ui.item[0]);
+                    ui.item[0].closest('.include-posts').classList.add('dragging');
+                },
+                stop: function( event, ui ) {
+                    ui.item[0].closest('.include-posts').classList.remove('dragging');
+                }
+            });
+        }
 
         // Updated settings Icons
         function updatedOptionsIcons(e) {
@@ -939,6 +509,307 @@
             });
         }
 
+        document.querySelectorAll('.ymc__container-settings .nav-tabs .link').forEach((el) => {
+
+            el.addEventListener('click',function (e) {
+                e.preventDefault();
+
+                let hash = this.hash;
+
+                //let text = $(this).find('.text').text();
+                //$('.ymc__header .manage-dash .title').text(text);
+
+                $(el).addClass('active').closest('.nav-item').siblings().find('.link').removeClass('active');
+
+                document.querySelectorAll('.tab-content .tab-panel').forEach((el) => {
+
+                    if(hash === '#'+el.getAttribute('id')) {
+                        $(el).addClass('active').siblings().removeClass('active');
+                    }
+
+                });
+
+            });
+
+        });
+
+        // CPT Event
+        $(document).on('change','.ymc__container-settings #general #ymc-cpt-select',function (e, param) {
+
+            let isCPT = ( undefined === param ) ? confirm(`Are you sure change Post Type? IMPORTANT! Post Type Changes remove all taxonomies and terms settings.`) : true;
+
+            if( isCPT ) {
+
+                let taxonomyWrp = $('#ymc-tax-checkboxes');
+                let termWrp     = $('#ymc-terms');
+                let choicesList = $('#selection-posts .choices-list');
+                let valuesList  = $('#selection-posts .values-list');
+                let foundPosts = $('#selection-posts .choices .number-posts');
+                let valuesCptArray = Array.from(document.querySelectorAll('#general #ymc-cpt-select option:checked')).map(el => el.value);
+                let valuesCptString = valuesCptArray.join(',');
+
+                this.dataset.previousValue =  valuesCptString;
+
+                const data = {
+                    'action': 'ymc_get_taxonomy',
+                    'nonce_code' : _smart_filter_object.nonce,
+                    'cpt' : valuesCptString,
+                    'post_id' : $(this).data('postid')
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: _smart_filter_object.ajax_url,
+                    data: data,
+                    beforeSend: function () {
+                        container.addClass('loading').
+                        prepend(`<img class="preloader" src="${pathPreloader}">`);
+                    },
+                    success: function (res) {
+
+                        container.removeClass('loading').find('.preloader').remove();
+
+                        let dataTax = (JSON.parse(res.data));
+
+                        // Get Taxonomies
+                        if(Object.keys(dataTax).length > 0) {
+
+                            taxonomyWrp.html('');
+                            termWrp.html('').closest('.wrapper-terms').addClass('hidden');
+
+                            for (let key in dataTax) {
+
+                            taxonomyWrp.append(`<div id="${key}" class="group-elements" draggable="true">
+                            <i class="fas fa-ellipsis-v handle"></i>
+                            <input id="id-${key}" type="checkbox" name="ymc-taxonomy[]" value="${key}">
+                            <label for="id-${key}">${dataTax[key]}</label>
+                            </div>`);
+                            }
+                        }
+                        else  {
+
+                            taxonomyWrp.html('').append(`<span class="notice">No data for Post Type / Taxonomy</span>`);
+                            termWrp.html('').closest('.wrapper-terms').addClass('hidden');
+                        }
+
+                        // Get posts
+                        let dataPosts = (JSON.parse(res.lists_posts));
+
+                        valuesList.empty();
+                        choicesList.empty();
+                        foundPosts.html(res.found_posts);
+
+                        if(Object.keys(dataPosts).length > 0) {
+                            for (let key in dataPosts) {
+                                choicesList.append(dataPosts[key]);
+                            }
+                        }
+                        else {
+                            choicesList.html(`<li class="notice">No posts</li>`);
+                        }
+                    },
+                    error: function (obj, err) {
+                        console.log( obj, err );
+                    }
+                });
+
+            }
+            else {
+                let previousValues = this.dataset.previousValue.split(',');
+                document.querySelectorAll('#general #ymc-cpt-select option').forEach((el) => {
+                    el.selected = previousValues.includes(el.value);
+                });
+            }
+        });
+
+        // Taxonomy Event
+        $(document).on('click','.ymc__container-settings #general #ymc-tax-checkboxes input[type="checkbox"]',function (e) {
+
+            let termWrp = $('#ymc-terms');
+
+            let val = '';
+
+            if($(e.target).is(':checked')) {
+
+                val = $(e.target).val();
+
+                const data = {
+                    'action': 'ymc_get_terms',
+                    'nonce_code' : _smart_filter_object.nonce,
+                    'taxonomy' : val
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: _smart_filter_object.ajax_url,
+                    data: data,
+                    beforeSend: function () {
+                        container.addClass('loading').
+                        prepend(`<img class="preloader" src="${pathPreloader}">`);
+                    },
+                    success: function (res) {
+
+                        container.removeClass('loading').find('.preloader').remove();
+
+                        if($(e.target).closest('.ymc-tax-checkboxes').find('input[type="checkbox"]:checked').length > 0) {
+                            $('.ymc__container-settings #general .wrapper-terms').removeClass('hidden');
+                        } else {
+                            $('.ymc__container-settings #general .wrapper-terms').addClass('hidden');
+                        }
+
+                        // Get Terms
+                        if( res.data.terms.length ) {
+
+                            let output = '';
+
+                            output += `<article class="group-term item-${val}">
+                                       <div class="item-inner all-categories">
+                                       <input name='all-select' class='category-all' id='category-all-${val}' type='checkbox'>
+                                       <label for='category-all-${val}' class='category-all-label'>All [ ${$(e.target).siblings('label').text()} ]</label></div>
+                                       <div class="entry-terms">`;
+
+                            res.data.terms.forEach((el) => {
+                                output += `<div class='item-inner' 
+                                data-termid='${el.term_id}' 
+                                data-alignterm 
+                                data-bg-term 
+                                data-color-term 
+                                data-custom-class 
+                                data-color-icon 
+                                data-class-icon 
+                                data-status-term 
+                                data-default-term 
+                                data-name-term >
+                                <i class="fas fa-ellipsis-v handle"></i>
+                                <input name="ymc-terms[]" class="category-list" id="category-id-${el.term_id}" type="checkbox" value="${el.term_id}">
+                                <label for='category-id-${el.term_id}' class='category-list-label'><span class="name-term">${el.name}</span> (${el.count})</label>
+                                <i class="far fa-cog choice-icon" title="Tag settings"></i>
+                                <span class="indicator-icon"></span>                                
+                                </div>`;
+                            });
+
+                            output += `</div></article>`;
+
+                            termWrp.append(output);
+
+                            output = '';
+
+                            sortTerms();
+
+                            updateSortTerms();
+                        }
+                        else  {
+                            termWrp.append(`<article class="group-term item-${val}">
+                            <div class='item-inner notice-error'>No terms for taxonomy <b>${$(e.target).siblings('label').text()}</b></div></article>`);
+                        }
+                    },
+                    error: function (obj, err) {
+                        console.log( obj, err );
+                    }
+                });
+            }
+            else {
+
+                ( confirm("Are you sure you want to disable this taxonomy?") ) ?
+                    termWrp.find('.item-'+$(e.target).val()).remove() :
+                    $(e.target).prop('checked', true);
+            }
+
+        });
+
+        // Delete Taxonomies
+        $(document).on('click','.ymc__container-settings #general .tax-delete',function (e) {
+
+            let isDelete = confirm("Are you sure you want to delete all taxonomies?");
+
+            if( isDelete ) {
+                $('.ymc__container-settings #general #ymc-cpt-select').trigger('change', [ "delTerms" ]);
+            }
+        });
+
+        // Update Taxonomies
+        $(document).on('click','.ymc__container-settings #general .tax-reload',function (e) {
+
+            let postId = document.querySelector('#ymc-cpt-select').dataset.postid;
+            let cpts = '';
+            let taxonomyWrp = $('#ymc-tax-checkboxes');
+            let termWrp     = $('#ymc-terms');
+            let taxExist = []; // Current Taxonomies
+
+            $("#ymc-cpt-select :selected").map(function(i, el) {
+                cpts +=$(el).val()+',';
+            });
+
+            cpts = cpts.replace(/,\s*$/, "");
+
+            taxonomyWrp.find('input[type="checkbox"]').each(function () {
+                taxExist.push($(this).val());
+            });
+
+            const data = {
+                'action': 'ymc_updated_taxonomy',
+                'nonce_code' : _smart_filter_object.nonce,
+                'cpt' : cpts,
+                'post_id' :postId
+            };
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: _smart_filter_object.ajax_url,
+                data: data,
+                beforeSend: function () {
+                    container.addClass('loading').
+                    prepend(`<img class="preloader" src="${pathPreloader}">`);
+                },
+                success: function (res) {
+                    container.removeClass('loading').find('.preloader').remove();
+                    let dataTax = res.data; // Updated Taxonomies
+
+                    // Get Taxonomies
+                    if(Object.keys(dataTax).length > 0) {
+                        // Add new taxonomy
+                        if( Object.keys(dataTax).length > taxExist.length ) {
+
+                            for (let key in dataTax) {
+
+                                if( ! taxExist.includes(key) ) {
+
+                                    taxonomyWrp.append(`<div id="${key}" class="group-elements" draggable="true">
+                                    <i class="fas fa-ellipsis-v handle"></i>
+                                    <input id="id-${key}" type="checkbox" name="ymc-taxonomy[]" value="${key}">
+                                    <label for="id-${key}">${dataTax[key]}</label>
+                                    </div>`);
+                                }
+                            }
+                        }
+
+                        // Delete taxonomy
+                        if( Object.keys(dataTax).length < taxExist.length ) {
+
+                            for (let key in taxExist) {
+
+                                if( ! Object.keys(dataTax).includes(taxExist[key]) ) {
+                                    taxonomyWrp.find(`#${taxExist[key]}`).remove();
+                                    termWrp.find(`.item-${taxExist[key]}`).remove();
+                                }
+                            }
+                        }
+                    }
+                    else  {
+                        taxonomyWrp.html('').append(`<span class="notice">No data for Post Type / Taxonomy</span>`);
+                        termWrp.html('').closest('.wrapper-terms').addClass('hidden');
+                    }
+                },
+                error: function (obj, err) {
+                    console.log( obj, err );
+                }
+            });
+
+        });
+
         // Choices Posts
         $('.wrapper-selection .ymc-exclude-posts').on('click', function (e) {
 
@@ -954,15 +825,15 @@
 
         $(document).on('click','#selection-posts .choices-list .ymc-rel-item-add', function (e) {
 
-            let postID = e.target.dataset.id;
-            let titlePosts = e.target.innerText;
-            e.target.classList.add('disabled');
+            let postID = $(e.target).closest('.ymc-rel-item-add').data('id');
+            let titlePosts = $(e.target).closest('.ymc-rel-item-add').find('.postTitle').text();
+            e.target.closest('.ymc-rel-item-add').classList.add('disabled');
 
             let valuesList = $('#selection-posts .values-list');
             let numberPosts = $('#selection-posts .number-selected-posts');
             valuesList.addClass('include-posts');
 
-            valuesList.append(`<li><input type="hidden" name="ymc-choices-posts[]" value="${postID}">
+            valuesList.append(`<li class="item"><input type="hidden" name="ymc-choices-posts[]" value="${postID}">
 					<span  class="ymc-rel-item" data-id="${postID}">${titlePosts}
                     <a href="#" class="ymc-icon-minus remove_item"></a>
                     </span></li>`);
@@ -1554,6 +1425,15 @@
         codeMirrorCSS();
         // Run CodeMirror for Custom Actions
         codeMirrorAfterJS();
+
+        // Sort Taxonomy
+        sortTaxonomy();
+
+        // Sort Terms
+        sortTerms();
+
+        // Sort Selected Posts
+        sortSelectedPosts();
 
     });
 
