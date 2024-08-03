@@ -366,9 +366,15 @@ class Ajax {
 			{
 				if( substr($key, 0, 4) === 'ymc_' )
 				{
-					foreach ( $value as $item ) {
-						$val = maybe_unserialize($item);
-						$need_options[$key] = $val;
+					if( $key !== 'ymc_custom_after_js' && $key !== 'ymc_custom_css'  )
+					{
+						foreach ( $value as $item ) {
+							$val = maybe_unserialize($item);
+							$need_options[$key] = $val;
+						}
+					}
+					else {
+						$need_options[$key] = '';
 					}
 				}
 			}

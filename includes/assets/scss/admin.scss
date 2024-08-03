@@ -376,7 +376,7 @@ $font-size: 16;
 													position: absolute;
 													width: 16px;
 													height: 16px;
-													right: 32px;
+													right: 40px;
 													top: 50%;
 													transform: translateY(-50%);
 													display: block;
@@ -390,6 +390,7 @@ $font-size: 16;
 											}
 											.category-list-label {
 												cursor: pointer;
+												margin-right: 5px;
 											}
 										}
 									}
