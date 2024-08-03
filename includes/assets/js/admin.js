@@ -1163,6 +1163,8 @@
         // Updated list posts in choices box
         $(document).on('click','.ymc__container-settings #general #ymc-terms input[type="checkbox"]',function (e) {
 
+            console.log(456);
+
             // Run updated terms options
             checkedSelectedTerm(e);
 
@@ -1174,17 +1176,17 @@
 
             // Terms
             document.querySelectorAll('#ymc-terms .item-inner:not(.all-categories)').forEach((el) => {
-                let chbox = el.children[0];
-                if( chbox.checked ) {
-                    arrTerms.push(chbox.value);
+                let chbox = $(el).find('input[type="checkbox"]');
+                if( chbox.is(':checked') ) {
+                    arrTerms.push(chbox.val());
                 }
             });
 
             // Tax
             document.querySelectorAll('.wrapper-taxonomy .ymc-tax-checkboxes .group-elements').forEach((el) => {
-                let chbox = el.children[0];
-                if( chbox.checked ) {
-                    arrTax.push(chbox.value);
+                let chbox = $(el).find('input[type="checkbox"]');
+                if( chbox.is(':checked')) {
+                    arrTax.push(chbox.val());
                 }
             });
 
