@@ -11,7 +11,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Get_Posts {
 
+	/**
+	 * Constructor for initializing the Get_Posts class.
+	 *
+	 * This constructor sets up the necessary actions for AJAX endpoints.
+	 */
 	public function __construct() {
+
 		add_action('wp_ajax_ymc_get_posts', array($this, 'get_filter_posts'));
 		add_action('wp_ajax_nopriv_ymc_get_posts', array($this, 'get_filter_posts'));
 
@@ -20,9 +26,13 @@ class Get_Posts {
 
 		add_action('wp_ajax_get_post_popup', array($this, 'get_post_popup'));
 		add_action('wp_ajax_nopriv_get_post_popup', array($this, 'get_post_popup'));
-
 	}
 
+
+	/**
+	 * Processing all ajax filter requests.
+	 * @return void
+	 */
 	public function get_filter_posts() {
 
 		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], Plugin::$instance->token_f) ) exit;
@@ -460,6 +470,12 @@ class Get_Posts {
 		wp_send_json($data);
 	}
 
+	/**
+	 * Whitelist post layouts based on the given post layout.
+	 *
+	 * @param string $post_layout The post layout to be whitelisted.
+	 * @return array The whitelisted post layouts.
+	 */
 	public function whitelist_post_layouts($post_layout) {
 
 		$filters = new Filters();
@@ -467,6 +483,12 @@ class Get_Posts {
 		return array_keys( $filters->ymc_post_layouts($post_layout) );
 	}
 
+	/**
+	 * Modify the SQL JOIN statement to include the postmeta table for custom meta data retrieval.
+	 *
+	 * @param string $join The existing SQL JOIN statement.
+	 * @return string The modified SQL JOIN statement.
+	 */
 	public function search_join( $join ) {
 
 		global $wpdb;
@@ -476,6 +498,12 @@ class Get_Posts {
 		return $join;
 	}
 
+	/**
+	 * Modify the WHERE clause of the SQL query to include postmeta table for custom meta data search.
+	 *
+	 * @param string $where The existing WHERE clause of the SQL query.
+	 * @return string The modified WHERE clause including the postmeta table search condition.
+	 */
 	public function search_where( $where ) {
 
 		global $wpdb;
@@ -487,11 +515,26 @@ class Get_Posts {
 		return $where;
 	}
 
+	/**
+	 * Returns the DISTINCT keyword used in SQL queries.
+	 *
+	 * @param array $where An array of conditions for the query
+	 * @return string The DISTINCT keyword
+	 */
 	public function search_distinct( $where ) {
 
 		return  'DISTINCT' ;
 	}
 
+	/**
+	 * Perform autocomplete search based on user input.
+	 *
+	 * This function retrieves search results based on the provided search phrase, chosen posts, and excluded posts.
+	 * It also takes into account selected taxonomy and terms for filtering.
+	 * The search results are formatted with highlighted matching phrases.
+	 *
+	 * @return void Outputs JSON response with search results
+	 */
 	public function autocomplete_search() {
 
 		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], Plugin::$instance->token_f) ) exit;
@@ -654,6 +697,13 @@ class Get_Posts {
 		wp_send_json($data);
 	}
 
+	/**
+	 * Add condition to filter posts alphabetically based on starting letter of post title.
+	 *
+	 * @param string $where The WHERE clause of the query.
+	 * @param WP_Query $query The WP_Query object.
+	 * @return string The modified WHERE clause.
+	 */
 	public function alphabetical_where( $where, $query ) {
 
 		global $wpdb;
@@ -666,6 +716,9 @@ class Get_Posts {
 	    return $where;
 	}
 
+	/**
+	 * Retrieves and displays the content for a popup based on the provided post ID, filter ID, and target ID.
+	 */
 	public function get_post_popup() {
 
 		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], Plugin::$instance->token_f) ) exit;

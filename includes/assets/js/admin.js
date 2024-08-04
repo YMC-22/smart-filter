@@ -4,13 +4,24 @@
 
     $(document).on('ready', function () {
 
-        // Path preloader image
+        /**
+         * The path to the preloader image
+         * @type {string}
+         */
         const pathPreloader = _smart_filter_object.path+"/includes/assets/images/preloader.svg";
 
-        // Wrapper tab
+        /**
+         * The tab container
+         * @type {*|jQuery|HTMLElement}
+         */
         const container = $('.ymc__container-settings .tab-panel');
 
-        // Set Cookie
+        /**
+         * Set a cookie with the given name, value, and expiration days.
+         * @param {string} cname - The name of the cookie
+         * @param {string} cvalue - The value of the cookie
+         * @param {number} exdays - The number of days until the cookie expires
+         */
         function setCookie(cname, cvalue, exdays) {
             let d = new Date();
             d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -18,7 +29,11 @@
             document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
 
-        // Get Cookie
+        /**
+         * Function to get the value of a specific cookie by name
+         * @param {string} cname - The name of the cookie to retrieve
+         * @returns {string} The value of the cookie if found, otherwise an empty string
+         */
         function getCookie(cname) {
             let name = cname + "=";
             let decodedCookie = decodeURIComponent(document.cookie);
@@ -35,7 +50,9 @@
             return "";
         }
 
-        // Drag & Drop Sort Terms
+        /**
+         * Updates the sorting of terms.
+         */
         function updateSortTerms() {
             let arrTerms = [];
             document.querySelectorAll('#ymc-terms .item-inner:not(.all-categories)').forEach((el) => {
@@ -61,7 +78,9 @@
             });
         }
 
-        // Drag & Drop Sort Taxonomy
+        /**
+         * Sorts the taxonomy elements by allowing drag and drop functionality.
+         */
         function sortTaxonomy() {
             let taxListElement = document.querySelector('#ymc-tax-checkboxes');
             $("#ymc-tax-checkboxes").sortable({
@@ -101,7 +120,9 @@
             });
         }
 
-        // Drag & Drop Sort Terms
+        /**
+         * Makes the terms sortable using drag and drop functionality.
+         */
         function sortTerms() {
             $("#ymc-terms .entry-terms").sortable({
                 axis: 'y',
@@ -120,7 +141,9 @@
             });
         }
 
-        // Drag & Drop Selected Sosts
+        /**
+         * Makes the selected posts sortable via drag and drop.
+         */
         function sortSelectedPosts() {
             $("#selection-posts .include-posts").sortable({
                 axis: 'y',
@@ -137,7 +160,10 @@
             });
         }
 
-        // Updated settings Icons
+        /**
+         * Updates options icons based on user interaction.
+         * @param {Event} e - The event triggering the icon update.
+         */
         function updatedOptionsIcons(e) {
 
             let arrOptionsIcons = [];
@@ -196,7 +222,9 @@
             });
         }
 
-        // Updated settings Terms
+        /**
+         * Update options for terms
+         */
         function updatedOptionsTerms() {
 
             let optionsTerms = [];
@@ -242,8 +270,11 @@
             });
 
         }
-        
-        // Checked Selected Term
+
+        /**
+         * Check or uncheck a term element and update its status attribute.
+         * @param {Event} e - The event object triggered by the action.
+         */
         function checkedSelectedTerm(e) {
 
             let elem = $(e.target);
@@ -258,7 +289,9 @@
             updatedOptionsTerms();
         }
 
-        // Export Settings
+        /**
+         * Export Settings data via AJAX call.
+         */
         function exportSettings() {
 
             const data = {
@@ -307,7 +340,9 @@
             });
         }
 
-        // Import Settings
+        /**
+         * Import Settings data from a file via AJAX call.
+         */
         function importSettings() {
 
             let input = document.querySelector('.ymc__container-settings #tools input[type="file"]');
@@ -375,7 +410,9 @@
             }
         }
 
-        // CodeMirror Custom CSS
+        /**
+         * Initializes a CodeMirror editor for custom CSS.
+         */
         function codeMirrorCSS() {
 
             let editorSource = document.querySelector("#advanced #ymc-custom-css");
@@ -406,7 +443,9 @@
             // editor.refresh();
         }
 
-        // Custom Actions
+        /**
+         * Initializes CodeMirror editor for custom JavaScript.
+         */
         function codeMirrorAfterJS() {
 
             let editorSource = document.querySelector("#advanced #ymc-custom-after-js");
@@ -435,6 +474,10 @@
 
         }
 
+        /**
+         * Function to handle displaying popup hints and info based on user interaction
+         * @param {Event} e - The event triggering the function
+         */
         function popupHints(e) {
             e.preventDefault();
             
@@ -483,6 +526,10 @@
             });
         }
 
+        /**
+         * Function to handle clipboard copying hints and actions based on user interaction
+         * @param {Event} e - The event triggering the function
+         */
         function clipboardCopyHints(e) {
 
             let className = e.target.closest('svg').getAttribute('class');
@@ -509,29 +556,106 @@
             });
         }
 
-        document.querySelectorAll('.ymc__container-settings .nav-tabs .link').forEach((el) => {
+        /**
+         * Controls the tabs functionality.
+         */
+        function tabsControl() {
 
-            el.addEventListener('click',function (e) {
-                e.preventDefault();
+            // Show / Hide Form Sections
+            $('.tab-content .tab-panel .content .sub-header').on('click', function (e) {
+                let className = $(this).data('className');
+                $(this).siblings(`.${className}`).slideToggle();
+                $(this).find('.fa-chevron-down').toggleClass('fa-chevron-up');
+                setCookie("formClassName", className,30);
+            });
 
-                let hash = this.hash;
+            // Set Cookie for Tab
+            $(".ymc__container-settings #ymcTab a").click(function(e) {
+                let hashUrl = $(this).attr('href');
+                setCookie("hashymc", hashUrl,30);
+            });
 
-                //let text = $(this).find('.text').text();
-                //$('.ymc__header .manage-dash .title').text(text);
+            document.querySelectorAll('.ymc__container-settings .nav-tabs .link').forEach((el) => {
 
-                $(el).addClass('active').closest('.nav-item').siblings().find('.link').removeClass('active');
+                el.addEventListener('click',function (e) {
+                    e.preventDefault();
 
-                document.querySelectorAll('.tab-content .tab-panel').forEach((el) => {
+                    let hash = this.hash;
 
-                    if(hash === '#'+el.getAttribute('id')) {
-                        $(el).addClass('active').siblings().removeClass('active');
-                    }
+                    //let text = $(this).find('.text').text();
+                    //$('.ymc__header .manage-dash .title').text(text);
+
+                    $(el).addClass('active').closest('.nav-item').siblings().find('.link').removeClass('active');
+
+                    document.querySelectorAll('.tab-content .tab-panel').forEach((el) => {
+
+                        if(hash === '#'+el.getAttribute('id')) {
+                            $(el).addClass('active').siblings().removeClass('active');
+                        }
+
+                    });
 
                 });
 
             });
 
-        });
+            if(getCookie("formClassName") !== '') {
+                let className = getCookie("formClassName");
+                $(`.tab-content .tab-panel .content .${className}`).show();
+                $(`.tab-content .tab-panel .content .sub-header[data-class-name="${className}"]`).find('.form-arrow').addClass('fa-chevron-up');
+            }
+
+            // Display selected tab
+            if(getCookie("hashymc") !== '') {
+
+                let hash = getCookie("hashymc");
+
+                $('.ymc__container-settings .nav-tabs a[href="' + hash + '"]').
+                addClass('active').
+                closest('.nav-item').
+                siblings().
+                find('.link').
+                removeClass('active');
+
+                document.querySelectorAll('.tab-content .tab-panel').forEach((el) => {
+                    if(hash === '#'+el.getAttribute('id')) {
+                        $(el).addClass('active').siblings().removeClass('active');
+                    }
+                });
+            }
+        }
+
+        /**
+         * Initializes the color picker for elements with the 'ymc-custom-color' class.
+         */
+        function colorPicker() {
+            // Initialize the color picker
+            $('.ymc-custom-color').wpColorPicker();
+        }
+
+        /**
+         * Checks if all tags are marked and updates the parent checkbox accordingly.
+         */
+        function allTagsMarked() {
+
+            // Loop through each group of checkboxes
+            $('#general #ymc-terms .group-term').each(function () {
+
+                // Count the total number of checkboxes in the group
+                let total = $(this).find('input[type="checkbox"]').length - 1;
+
+                // Count the number of checked checkboxes in the group
+                let totalChecked = $(this).find('input[checked]').length;
+
+                // If all checkboxes are marked, mark the parent checkbox
+                if( total === totalChecked ) {
+                    $(this).find('.all-categories input[type="checkbox"]').attr('checked','checked');
+                }
+            });
+        }
+
+
+        /*** EVENTS ***/
 
         // CPT Event
         $(document).on('change','.ymc__container-settings #general #ymc-cpt-select',function (e, param) {
@@ -1223,15 +1347,6 @@
             });
         });
 
-        // Set checkbox All marked
-        $('#general #ymc-terms .group-term').each(function () {
-            let total = $(this).find('input[type="checkbox"]').length - 1;
-            let totalChecked = $(this).find('input[checked]').length;
-            if(total === totalChecked) {
-                $(this).find('.all-categories input[type="checkbox"]').attr('checked','checked');
-            }
-        });
-
         // Toggle Filter Status
         $(document).on('click', '.ymc__container-settings .ymc-toggle-group .slider', function (e) {
 
@@ -1379,51 +1494,22 @@
             el.addEventListener( 'click', clipboardCopyHints );
         });
 
-        // Show / Hide Form Sections
-        $('.tab-content .tab-panel .content .sub-header').on('click', function (e) {
-            let className = $(this).data('className');
-            $(this).siblings(`.${className}`).slideToggle();
-            $(this).find('.fa-chevron-down').toggleClass('fa-chevron-up');
-            setCookie("formClassName", className,30);
-        });
 
-        if(getCookie("formClassName") !== '') {
-            let className = getCookie("formClassName");
-            $(`.tab-content .tab-panel .content .${className}`).show();
-            $(`.tab-content .tab-panel .content .sub-header[data-class-name="${className}"]`).find('.form-arrow').addClass('fa-chevron-up');
-        }
+        /*** RUN FUNCTIONS ***/
 
-        // Set Cookie for Tab
-        $(".ymc__container-settings #ymcTab a").click(function(e) {
-            let hashUrl = $(this).attr('href');
-            setCookie("hashymc", hashUrl,30);
-        });
+        // Tabs Control
+        tabsControl();
 
-        // Display selected tab
-        if(getCookie("hashymc") !== '') {
+        // Color Picker
+        colorPicker();
 
-            let hash = getCookie("hashymc");
+        // All Tags Marked
+        allTagsMarked();
 
-            $('.ymc__container-settings .nav-tabs a[href="' + hash + '"]').
-                addClass('active').
-                closest('.nav-item').
-                siblings().
-                find('.link').
-                removeClass('active');
-
-            document.querySelectorAll('.tab-content .tab-panel').forEach((el) => {
-                if(hash === '#'+el.getAttribute('id')) {
-                    $(el).addClass('active').siblings().removeClass('active');
-                }
-            });
-        }
-
-        // Add Color Picker for all inputs
-        $('.ymc-custom-color').wpColorPicker();
-
-        // Run CodeMirror for Custom CSS
+        // CodeMirror
         codeMirrorCSS();
-        // Run CodeMirror for Custom Actions
+
+        // CodeMirror
         codeMirrorAfterJS();
 
         // Sort Taxonomy

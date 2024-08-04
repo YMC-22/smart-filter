@@ -4,8 +4,12 @@
 
     $(document).on('ready', function () {
 
-        /*** API FILTER ***/
+        /*** API YMCTools ***/
 
+        /**
+         * YMCTools constructor function.
+         * @param {Object} settings - The settings object for configuring the YMCTools instance.
+         */
         function YMCTools( settings ) {
 
             const _defaults = {
@@ -31,11 +35,18 @@
             this.length = Object.keys(properties).length;
         }
 
+        /**
+         * Get information about the YMCTools object.
+         * @returns {string} Information about the author and version.
+         */
         YMCTools.prototype.getInfo = function () {
-            return `Author: YMC. Version: 2.9.11`;
+            return `Author: YMC. Version: 2.9.18`;
         }
 
-        // Use for custom filter layout
+        /**
+         * Update parameters for custom filter layout.
+         * This function updates parameters based on user interaction.
+         */
         YMCTools.prototype.updateParams = function () {
 
             let container = document.querySelector(''+ this.target +'');
@@ -85,7 +96,9 @@
             container.dataset.params = JSON.stringify(dataParams);
         }
 
-        // Run filter get posts
+        /**
+         * Executes the filter to retrieve posts.
+         */
         YMCTools.prototype.getFilterPosts = function () {
 
             let container = document.querySelector(''+ this.target +'');
@@ -104,6 +117,10 @@
             });
         }
 
+        /**
+         * Retrieves the choices posts based on the provided options.
+         * @param {boolean} option - Indicates whether to perform the operation. Default is true.
+         */
         YMCTools.prototype.apiChoicesPosts = function ( option = true ) {
 
             let container = document.querySelector(''+ this.target +'');
@@ -127,6 +144,10 @@
             }
         }
 
+        /**
+         * Updates the terms in the filter based on user interaction.
+         * @param {boolean} option - Indicates whether to perform the operation. Default is true.
+         */
         YMCTools.prototype.apiTermUpdate = function ( option = true ) {
 
             let container = document.querySelector(''+ this.target +'');
@@ -146,6 +167,10 @@
             }
         }
 
+        /**
+         * Opens a popup for the given post ID.
+         * @param {string} postID - The ID of the post.
+         */
         YMCTools.prototype.apiPopup = function ( postID ) {
 
             let container = document.querySelector(''+ this.target +'');
@@ -159,6 +184,10 @@
             popupApiPost( options );
         }
 
+        /**
+         * Updates the meta data based on the user's selection.
+         * @param {boolean} [option=true] - Indicates whether to perform the update. Default is true.
+         */
         YMCTools.prototype.apiMetaUpdate = function ( option = true ) {
 
             let container = document.querySelector(''+ this.target +'');
@@ -177,6 +206,10 @@
             }
         }
 
+        /**
+         * Updates the API date with the specified options.
+         * @param {boolean} option - Determines if filter posts should be fetched after updating the date.
+         */
         YMCTools.prototype.apiDateUpdate = function ( option = true ) {
 
             let container = document.querySelector(''+ this.target +'');
@@ -195,6 +228,10 @@
             }
         }
 
+        /**
+         * Clears the terms in the filter and updates the search value.
+         * @param {boolean} [option=true] - Indicates whether to clear the terms. Default is true.
+         */
         YMCTools.prototype.apiTermClear = function ( option = true ) {
 
             let container = document.querySelector(''+ this.target +'');
@@ -210,6 +247,11 @@
             }
         }
 
+        /**
+         * Clears the API metadata in the specified container.
+         * If the option is true, it also retrieves filter posts.
+         * @param {boolean} option - Indicates whether to retrieve filter posts after clearing metadata.
+         */
         YMCTools.prototype.apiMetaClear = function ( option = true ) {
 
             let container = document.querySelector(''+ this.target +'');
@@ -225,6 +267,10 @@
             }
         }
 
+        /**
+         * Clears the date in the API and updates the search value.
+         * @param {boolean} [option=true] - Indicates whether to clear the date. Default is true.
+         */
         YMCTools.prototype.apiDateClear = function ( option = true ) {
 
             let container = document.querySelector(''+ this.target +'');
@@ -240,6 +286,10 @@
             }
         }
 
+        /**
+         * Clears the sorting and search parameters in the API filter.
+         * @param {boolean} [option=true] - Determines whether to fetch posts after clearing.
+         */
         YMCTools.prototype.apiSortClear = function ( option = true ) {
 
             let container = document.querySelector(''+ this.target +'');
@@ -259,6 +309,10 @@
             }
         }
 
+        /**
+         * Clears the search and letter filters in the alphabet container.
+         * @param {boolean} [option=true] - Whether to get filter posts after clearing.
+         */
         YMCTools.prototype.apiLetterAlphabetClear = function ( option = true ) {
 
             let container = document.querySelector(''+ this.target +'');
@@ -274,6 +328,11 @@
             }
         }
 
+        /**
+         * Updates parameters for searching posts based on user input.
+         * @param {boolean} [option=true] - Determines whether to fetch posts after searching.
+         * @param {Array} [terms=[]] - The array of search terms.
+         */
         YMCTools.prototype.apiSearchPosts = function ( option = true, terms = [] ) {
 
             let container = document.querySelector(''+ this.target +'');
@@ -298,6 +357,10 @@
             }
         }
 
+        /**
+         * Sorts the posts based on specified criteria.
+         * @param {boolean} option - Determines whether to fetch and display the filtered posts after sorting.
+         */
         YMCTools.prototype.apiSortPosts = function ( option = true ) {
 
             let container = document.querySelector(''+ this.target +'');
@@ -320,6 +383,10 @@
             }
         }
 
+        /**
+         * Update the API page with the specified page number.
+         * @param {number} page - The page number to update to. Default is 1.
+         */
         YMCTools.prototype.apiPageUpdated = function ( page = 1 ) {
 
             let container = document.querySelector(''+ this.target +'');
@@ -338,10 +405,20 @@
             });
         }
 
+        /**
+         * Calls the function to fetch and display filtered posts.
+         */
         YMCTools.prototype.apiGetPosts = function () {
             this.getFilterPosts();
         }
 
+        /**
+         * Updates the API page with the specified page number.
+         * @param option
+         * @param cpt
+         * @param tax
+         * @param terms
+         */
         YMCTools.prototype.apiMultiplePosts = function ( option = true, cpt = '', tax = '', terms = '' ) {
 
             let container = document.querySelector(''+ this.target +'');
@@ -364,7 +441,7 @@
                 this.getFilterPosts();
             }
         }
-
+        
         /**
          * Function to create a new YMCTools instance based on the provided settings.
          * @param {Object} settings - The settings object for configuring the YMCTools instance.
@@ -376,17 +453,31 @@
 
         ( typeof window.YMCTools === 'undefined' ) ? window.YMCTools = _FN : console.error('YMCTools is existed');
 
-        // Path preloader image
+
+        /*** FUNCTIONS ***/
+
+        /**
+         * Preloader path
+         * @type {string}
+         */
         const pathPreloader = _smart_filter_object.path+"/includes/assets/images/preloader.svg";
 
-        // Options IntersectionObserver
+
+        /**
+         * Options for IntersectionObserver
+         * @type {{root: null, rootMargin: string, threshold: number}}
+         */
         const optionsInfinityScroll = {
             root: null,
             rootMargin: '0px',
             threshold: 0.8
         }
 
-        // Object Observer
+
+        /**
+         * Observer for IntersectionObserver
+         * @type {IntersectionObserver}
+         */
         const postsObserver = new IntersectionObserver((entries, observer) => {
 
             entries.forEach(entry => {
@@ -410,7 +501,15 @@
 
         }, optionsInfinityScroll);
 
-        // Set Preloader
+        /**
+         * Filter preloader based on parameters
+         *
+         * @param {object} params - The parameters for filtering the preloader
+         * @param {string} params.preloader_filters - The type of filter
+         * @param {number} params.preloader_filters_rate - The rate for the filter
+         * @param {string} params.preloader_filters_custom - The custom filter
+         * @returns {string} - The filtered preloader output
+         */
         function filterPreloader( params ) {
 
             let filter = params.preloader_filters;
@@ -431,7 +530,13 @@
             return output;
         }
 
-        // Masonry Layouts
+        /**
+         * Function to set up Masonry Grid layouts.
+         *
+         * @param {HTMLElement} el - The element to apply the masonry grid to.
+         * @param {string} f - The value for f.
+         * @param {string} c - The value for c.
+         */
         function masonryGrid( el, f, c ) {
 
             if( el.classList.contains("ymc-post-masonry") || el.classList.contains("ymc-post-custom-masonry") ) {
@@ -449,7 +554,10 @@
             }
         }
 
-        // Popup
+        /**
+         * Function to handle the popup post.
+         * @param {Event} e - The event triggering the popup.
+         */
         function popupPost(e) {
             e.preventDefault();
             let _self = $(e.target);
@@ -510,7 +618,10 @@
             });
         }
 
-        // Close popup
+        /**
+         * Function to close the popup.
+         * @param {Event} e - The event triggering the function.
+         */
         function popupClose(e) {
             e.preventDefault();
 
@@ -525,7 +636,13 @@
             bodyHtml.css({'overflow' : 'auto'});
         }
 
-        // Popup API
+        /**
+         * Function to handle the popup API.
+         *
+         * @param {Object} options - The options for the popup.
+         * @param {string} options.postid - The post ID for the popup.
+         * @param {string} options.target - The target element for the popup.
+         */
         function popupApiPost( options ) {
 
             let postID = options.postid;
@@ -752,7 +869,10 @@
             });
         }
 
-        // Init Loading Posts
+        /**
+         * Initialize Loading Filters & entry point
+         * Add Hook: stop loading posts on page load
+         */
         document.querySelectorAll('.ymc-smart-filter-container').forEach(function (el) {
 
             // Add Hook: stop loading posts on page load
@@ -787,7 +907,7 @@
         });
 
 
-        /*** FILTERS LAYOUTS ***/
+        /*** EVENTS ***/
 
         // Filter Posts Layout1
         $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .filter-layout1 .filter-link, .ymc-extra-filter .filter-layout1 .filter-link', function (e) {

@@ -386,7 +386,7 @@ $terms_sel   = $terms_selected;
 										'hide_empty' => false
 									]);
 
-									if( $terms ) {
+									if( $terms  && ! is_wp_error( $terms )) {
 
 										$arr_terms_ids = [];
 
