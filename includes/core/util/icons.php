@@ -842,27 +842,27 @@
 			<div class="terms-entry">
 				<div class="form-element">
 					<label class="form-label">
-						<?php esc_html_e('Background Tag', 'ymc-smart-filter'); ?>
+						<?php esc_html_e('Tag Background', 'ymc-smart-filter'); ?>
 						<span class="information">
-                            <?php echo esc_html__('Set background for tag.', 'ymc-smart-filter');?>
+                            <?php echo esc_html__('Set tag background .', 'ymc-smart-filter');?>
                         </span>
 					</label>
 					<input class="ymc-custom-color ymc-term-bg" type="text" name='ymc-term-bg' value=""/>
 				</div>
 				<div class="form-element">
 					<label class="form-label">
-						<?php esc_html_e('Color tag', 'ymc-smart-filter'); ?>
+						<?php esc_html_e('Tag Color', 'ymc-smart-filter'); ?>
 						<span class="information">
-                            <?php echo esc_html__('Set color for tag.', 'ymc-smart-filter');?>
+                            <?php echo esc_html__('Set color tag.', 'ymc-smart-filter');?>
                         </span>
 					</label>
 					<input class="ymc-custom-color ymc-term-color" type="text"  name='ymc-term-color' value=""/>
 				</div>
 				<div class="form-element">
 					<label class="form-label">
-						<?php esc_html_e('Custom Class Tag', 'ymc-smart-filter'); ?>
+						<?php esc_html_e('Class Tag', 'ymc-smart-filter'); ?>
 						<span class="information">
-                            <?php echo esc_html__('Set custom class for tag.', 'ymc-smart-filter');?>
+                            <?php echo esc_html__('Set custom class tag.', 'ymc-smart-filter');?>
                         </span>
 					</label>
 					<input class="input-field ymc-term-class" type="text" name="ymc-term-class" placeholder="Custom class for tag" value="" />
@@ -879,9 +879,9 @@
 				</div>
 				<div class="form-element">
 					<label class="form-label">
-						<?php esc_html_e('Change Tag Name', 'ymc-smart-filter'); ?>
+						<?php esc_html_e('Tag Name', 'ymc-smart-filter'); ?>
 						<span class="information">
-                            <?php echo esc_html__('Set a custom name for tag. To restore the default tag name, clear the field.', 'ymc-smart-filter');?>
+                            <?php echo esc_html__('Set a custom tag name. To restore the default tag name, clear the field.', 'ymc-smart-filter');?>
                         </span>
 					</label>
 					<input class="input-field ymc-term-custom-name" type="text" name="ymc-term-custom-name" placeholder="Term custom name" value="" />
