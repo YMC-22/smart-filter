@@ -842,7 +842,7 @@
 			<div class="terms-entry">
 				<div class="form-element">
 					<label class="form-label">
-						<?php esc_html_e('Tag Background', 'ymc-smart-filter'); ?>
+						<?php esc_html_e('Background', 'ymc-smart-filter'); ?>
 						<span class="information">
                             <?php echo esc_html__('Set tag background .', 'ymc-smart-filter');?>
                         </span>
@@ -851,7 +851,7 @@
 				</div>
 				<div class="form-element">
 					<label class="form-label">
-						<?php esc_html_e('Tag Color', 'ymc-smart-filter'); ?>
+						<?php esc_html_e('Color', 'ymc-smart-filter'); ?>
 						<span class="information">
                             <?php echo esc_html__('Set color tag.', 'ymc-smart-filter');?>
                         </span>
@@ -860,7 +860,7 @@
 				</div>
 				<div class="form-element">
 					<label class="form-label">
-						<?php esc_html_e('Class Tag', 'ymc-smart-filter'); ?>
+						<?php esc_html_e('Class', 'ymc-smart-filter'); ?>
 						<span class="information">
                             <?php echo esc_html__('Set custom class tag.', 'ymc-smart-filter');?>
                         </span>
@@ -879,7 +879,7 @@
 				</div>
 				<div class="form-element">
 					<label class="form-label">
-						<?php esc_html_e('Tag Name', 'ymc-smart-filter'); ?>
+						<?php esc_html_e('Name', 'ymc-smart-filter'); ?>
 						<span class="information">
                             <?php echo esc_html__('Set a custom tag name. To restore the default tag name, clear the field.', 'ymc-smart-filter');?>
                         </span>
