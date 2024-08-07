@@ -698,7 +698,7 @@
                     <label class="form-label">
                         <?php echo esc_html__('Load More Button Text', 'ymc-smart-filter'); ?>
                         <span class="information">
-                    <?php echo esc_html__('Load More button will show in Pagination.', 'ymc-smart-filter');?>
+                    <?php echo esc_html__('Load more button will show in pagination.', 'ymc-smart-filter');?>
                     </span>
                     </label>
                     <input class="input-field" type="text" name="ymc-pagination-elements[load_btn_text]"
@@ -709,7 +709,7 @@
                     <label class="form-label">
                         <?php echo esc_html__('Posts Per Page', 'ymc-smart-filter');?>
                         <span class="information">
-                    <?php echo esc_html__('Select Posts Per Page. Use -1 for all posts.', 'ymc-smart-filter');?>
+                    <?php echo esc_html__('Select posts per page. Use -1 for all posts.', 'ymc-smart-filter');?>
                 </span>
                     </label>
                     <input class="input-field" type="text" name="ymc-per-page" value="<?php echo esc_attr($ymc_per_page); ?>">
@@ -718,9 +718,9 @@
                 <div class="from-element">
 
                     <label class="form-label">
-                        <?php echo esc_html__('Pagination Type', 'ymc-smart-filter');?>
+                        <?php echo esc_html__('Type', 'ymc-smart-filter');?>
                         <span class="information">
-                    <?php echo esc_html__('Select type of pagination.', 'ymc-smart-filter');?>
+                    <?php echo esc_html__('Select pagination type.', 'ymc-smart-filter');?>
                 </span>
                     </label>
 
@@ -746,9 +746,9 @@
 
                 <div class="from-element">
                     <label class="form-label">
-                        <?php echo esc_html__('Pagination Hide', 'ymc-smart-filter');?>
+                        <?php echo esc_html__('Hide', 'ymc-smart-filter');?>
                         <span class="information">
-                    <?php echo esc_html__('Hide pagination for filter.', 'ymc-smart-filter');?>
+                    <?php echo esc_html__('Hide pagination.', 'ymc-smart-filter');?>
                 </span>
                     </label>
 

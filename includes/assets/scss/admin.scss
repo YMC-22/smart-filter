@@ -364,6 +364,7 @@ $font-size: 16;
 												}
 											}
 											&.notice-error {
+												display: block;
 												border: 1px solid #d63638;
 												color: #d63638;
 											}
