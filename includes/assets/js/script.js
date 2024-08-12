@@ -454,7 +454,7 @@
         ( typeof window.YMCTools === 'undefined' ) ? window.YMCTools = _FN : console.error('YMCTools is existed');
 
 
-        /*** FUNCTIONS ***/
+        /*** CONSTANTS ***/
 
         /**
          * Preloader path
@@ -500,6 +500,10 @@
             });
 
         }, optionsInfinityScroll);
+
+
+        /*** FUNCTIONS ***/
+
 
         /**
          * Filter preloader based on parameters
@@ -682,6 +686,104 @@
                     },
                     error: function (obj, err) {
                         console.log( obj, err );
+                    }
+                });
+            }
+        }
+
+        /**
+         * This function initializes a Swiper carousel for posts if the given element has the specified class.
+         * @param {Element} el - The element to check for the class.
+         * @param {string} f - The value to use in the event hook.
+         * @param {string} c - The value to use in the event hook.
+         * @param {object} p - An object containing parameters for the Swiper carousel.
+         */
+        function carouselPosts( el,f,c,p ) {
+
+            if( el.classList.contains("ymc-post-carousel-layout") ) {
+
+                wp.hooks.addAction('ymc_complete_loaded_data_'+f+'_'+c, 'smartfilter', function(class_name, status) {
+                    
+                    if( 'success' === status ) {
+
+                        // General Parameters
+                        let disabledSwiper  = JSON.parse(p.parameters.disabled);
+                        let autoHeight      = JSON.parse(p.parameters.autoHeight);
+                        let autoPlay        = JSON.parse(p.parameters.autoPlay);
+                        let delay           = JSON.parse(p.parameters.delay);
+                        let loop            = JSON.parse(p.parameters.loop);
+                        let centeredSlides  = JSON.parse(p.parameters.centeredSlides);
+                        let slidesPerView   = JSON.parse(p.parameters.slidesPerView);
+                        let spaceBetween    = JSON.parse(p.parameters.spaceBetween);
+                        let mousewheel      = JSON.parse(p.parameters.mousewheel);
+                        let speed           = JSON.parse(p.parameters.speed);
+                        let effect          = p.parameters.effect;
+
+                        // Pagination
+                        let visibilityPagination  = JSON.parse(p.pagination.visibility);
+                        let dynamicBullets = JSON.parse(p.pagination.dynamicBullets);
+                        let typePagination  = p.pagination.type;
+
+                        // Navigation
+                        let visibilityNav = JSON.parse(p.navigation.visibility);
+
+                        // Scrollbar
+                        let visibilityScroll = JSON.parse(p.scroll.visibility);
+
+                        // Add Class spaceBetweenSlide to container posts
+                        ( visibilityNav ) ? $(el).find('.carousel-container .post-carousel-layout').addClass('spaceBetweenSlide') : '';
+
+                        // Init Swiper
+                        if( disabledSwiper ) {
+
+                            new Swiper(`.swiper-${f}-${c}`, {
+                                // Default parameters
+                                grabCursor: true,
+                                spaceBetween: spaceBetween,
+                                centeredSlides: centeredSlides,
+
+                                // General Parameters
+                                autoHeight: autoHeight,
+                                autoplay: ( autoPlay) ? { delay: delay } : false,
+                                loop: loop,
+                                slidesPerView: slidesPerView,
+                                mousewheel: ( mousewheel ) ? { invert: true } : false,
+                                speed: speed,
+                                effect: effect,
+                                fadeEffect: ( effect === 'fade' ) ? { crossFade: true } : '',
+                                creativeEffect: ( effect === 'creative' ) ? {
+                                    prev: { shadow: true, translate: [0, 0, -400] },
+                                    next: { translate: ["100%", 0, 0] },
+                                } : '',
+
+
+                                // Pagination Dots
+                                pagination: ( visibilityPagination ) ?  {
+                                    el: '.swiper-pagination',
+                                    clickable: true,
+                                    dynamicBullets : dynamicBullets,
+                                    type: typePagination,
+
+                                } : false,
+
+                                // Navigation Arrows
+                                navigation:  {
+                                    nextEl: '.swiper-button-next',
+                                    prevEl: '.swiper-button-prev',
+                                    enabled: visibilityNav
+                                } ,
+
+                                // Scrollbar
+                                scrollbar:  {
+                                    el: '.swiper-scrollbar',
+                                        draggable: true,
+                                        enabled: visibilityScroll
+                                }
+                            });
+                        }
+                    }
+                    else {
+                        console.error('Failed to load data');
                     }
                 });
             }
@@ -884,6 +986,7 @@
             let type_pg     = params.type_pg;
             let filter_id = params.filter_id;
             let target_id = params.target_id;
+            let carousel_params = params.carousel_params;
 
             if( loadingPosts === 'true' )
             {
@@ -901,8 +1004,12 @@
                     'target'    : data_target,
                     'type_pg'   : type_pg
                 });
+
                 // Run Masonry Grid
                 masonryGrid(el, filter_id, target_id);
+
+                // Carousel Posts
+                carouselPosts(el, filter_id, target_id, carousel_params);
             }
         });
 

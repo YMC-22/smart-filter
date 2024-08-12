@@ -449,8 +449,6 @@ add_filter('ymc_filter_custom_extra_layout_545_1', 'custom_filter_extra_layout',
 ```
 
 
-
-
 **This filter allows you to change the popup custom layout**
 ```php
 add_filter('ymc_popup_custom_layout_FilterID_LayoutID', 'func_custom', 10, 2);
@@ -466,6 +464,42 @@ add_filter('ymc_popup_custom_layout_545_1', function ( $layout, $post_id ) {
 	return $output;
 	
 }, 10, 2);
+```
+
+**This filter allows you to change the carousel custom layout**
+```php
+add_filter('ymc_post_carousel_custom_FilterID_LayoutID', 'post_carousel_custom_layout', 10, 4);
+
+Usage example:
+/**
+ * Creating a Custom Carousel Layout
+ * @param {string} layout - HTML markup
+ * @param {int} post_id - Post ID
+ * @param {int} filter_id - Filter ID 
+ * @param {array} arrOptions - array of additional post parameters. It includes: 
+     - arrOptions['total'] - number of all posts
+     - arrOptions['class_popup'] - class btn popup. Set for btn post. Value: string or empty
+     - arrOptions['terms_settings'] - array of all terms with their settings. Value: object with the following properties. Default empty array.            
+        - termid - ID term
+        - bg - background term. Hex Color Codes (ex: #dd3333)
+        - color - color term. Hex Color Codes (ex: #dd3333)
+        - class - custom name class of the term
+        - status - selected term. Value: checked or empty
+        - alignterm - align icon in term
+        - coloricon - color icon
+        - classicon - name class icon (Font Awesome Icons. ex. far fa-arrow-alt-circle-down) 
+        - status - term status (checked)
+        - default - (string) default term (checked)
+        - name - (string) custom term name
+ * @returns {string} HTML markup card post
+ */
+add_filter('ymc_post_carousel_custom_layout_545_1', function ( $layouts, $post_id, $filter_id, $arrOptions ) {
+
+    $output =  '<h2>Header: '. get_the_title($post_id) .'</h2>';
+    $output .= '<div>Content: '. get_the_content($post_id) .'</div>';
+	return $output;
+	
+}, 10, 4);
 ```
 
 

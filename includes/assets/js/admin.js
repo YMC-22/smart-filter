@@ -1475,6 +1475,8 @@
 
             let postLayout = e.target.value;
             let columnLayoutSection = $('.ymc__container-settings #layouts .column-layout__section');
+            let carouselLayoutSection = $('.ymc__container-settings #layouts .carousel-settings');
+
             // Array Post Layouts for Breakpoints
             let arr_layouts_posts = [
                 'post-layout1',
@@ -1482,7 +1484,11 @@
                 'post-custom-layout'
             ];
 
-            ( arr_layouts_posts.includes(postLayout) ) ? columnLayoutSection.show()  :  columnLayoutSection.hide();
+            // Show / Hide Column Settings
+            ( arr_layouts_posts.includes(postLayout) ) ? columnLayoutSection.show() : columnLayoutSection.hide();
+
+            // Show / Hide Carousel Settings
+            ( postLayout === 'post-carousel-layout' ) ? carouselLayoutSection.show() : carouselLayoutSection.hide();
 
         });
 

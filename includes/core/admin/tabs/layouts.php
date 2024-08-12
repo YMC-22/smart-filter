@@ -163,20 +163,24 @@
 
                 <?php
                 // Array Post Layouts for Breakpoints
-                $arr_layouts_posts = [
+                $layouts_breakpoints = [
                     'post-layout1',
                     'post-layout2',
                     'post-custom-layout'
                 ];
-                $col_layout_hide = ( in_array($ymc_post_layout, $arr_layouts_posts) ) ? '' : 'ymc_hidden';
+                $col_layout_hide = ( in_array($ymc_post_layout, $layouts_breakpoints) ) ? '' : 'ymc_hidden';
+
+                // Show / Hide Carousel Settings
+                $carousel_layout_hide = ( $ymc_post_layout === 'post-carousel-layout' ) ? '' : 'ymc_hidden';
+
                 ?>
 
                 <div class="manage-filters__section column-layout__section <?php echo esc_attr($col_layout_hide); ?>">
                     <label for="ymc-filter-layout" class="form-label">
                         <?php echo esc_html__('Column Layout', 'ymc-smart-filter');?>
                         <span class="information">
-                    <?php echo esc_html__('Select column layout of posts for different screens.', 'ymc-smart-filter');?>
-                </span>
+                        <?php echo esc_html__('Select column layout of posts for different screens.', 'ymc-smart-filter');?>
+                        </span>
                     </label>
                     <div class="row">
                         <div class="input-group">
@@ -216,6 +220,290 @@
                             <input type="number" class="form-control"  placeholder="1" min="1" max="4" name="ymc_mobile_xs" value="<?php echo $ymc_mobile_xs; ?>">
                         </div>
                     </div>
+                </div>
+
+                <!-- Manage Carousel -->
+                <div class="manage-filters__section carousel-settings <?php echo esc_attr($carousel_layout_hide); ?>">
+
+                    <label class="form-label" style="margin-bottom:10px;">
+                        <?php echo esc_html__('Carousel Posts', 'ymc-smart-filter');?>
+                        <span class="information">
+                        <?php echo esc_html__('Set carousel settings.', 'ymc-smart-filter'); ?>
+                        </span>
+                    </label>
+
+                    <fieldset class="form-fieldset" style="margin-bottom:15px;">
+                        <legend class="form-legend"><?php echo esc_html__('General', 'ymc-smart-filter');?></legend>
+                        <div class="meta-info">
+                            <div class="col">
+                                <label><?php echo esc_html__('Auto Height', 'ymc-smart-filter');?>
+                                    <i class="fas fa-info-circle" title="Set to true and slider wrapper will adapt its height to the height of the currently active slide."></i></label>
+                                <select class="form-select" name="ymc_carousel_params[parameters][autoHeight]">
+                                    <option value="false" <?php echo ( $ymc_carousel_params['parameters']['autoHeight'] === 'false') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('False', 'ymc-smart-filter'); ?>
+                                    <option value="true" <?php echo ( $ymc_carousel_params['parameters']['autoHeight'] === 'true') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('True', 'ymc-smart-filter'); ?></option>
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label><?php echo esc_html__('Autoplay', 'ymc-smart-filter');?>
+                                    <i class="fas fa-info-circle" title="Autoplay slides. Default delay is 3000 ms."></i></label>
+                                <select class="form-select" name="ymc_carousel_params[parameters][autoPlay]">
+                                    <option value="false" <?php echo ( $ymc_carousel_params['parameters']['autoPlay'] === 'false') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('False', 'ymc-smart-filter'); ?>
+                                    </option>
+                                    <option value="true" <?php echo ( $ymc_carousel_params['parameters']['autoPlay'] === 'true') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('True', 'ymc-smart-filter'); ?></option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label><?php echo esc_html__('Delay', 'ymc-smart-filter');?>
+                                    <i class="fas fa-info-circle" title="Delay in autoplay of slides (ms)."></i></label>
+                                <select class="form-select" name="ymc_carousel_params[parameters][delay]">
+                                    <option value="500" <?php echo ( $ymc_carousel_params['parameters']['delay'] === '500') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('500', 'ymc-smart-filter'); ?>
+                                    </option>
+                                    <option value="1000" <?php echo ( $ymc_carousel_params['parameters']['delay'] === '1000') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('1000', 'ymc-smart-filter'); ?></option>
+                                    <option value="1500" <?php echo ( $ymc_carousel_params['parameters']['delay'] === '1500') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('1500', 'ymc-smart-filter'); ?></option>
+                                    <option value="2000" <?php echo ( $ymc_carousel_params['parameters']['delay'] === '2000') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('2000', 'ymc-smart-filter'); ?></option>
+                                    <option value="2500" <?php echo ( $ymc_carousel_params['parameters']['delay'] === '2500') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('2500', 'ymc-smart-filter'); ?></option>
+                                    <option value="3000" <?php echo ( $ymc_carousel_params['parameters']['delay'] === '3000') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('3000', 'ymc-smart-filter'); ?></option>
+                                    <option value="3500" <?php echo ( $ymc_carousel_params['parameters']['delay'] === '3500') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('3500', 'ymc-smart-filter'); ?></option>
+                                    <option value="4000" <?php echo ( $ymc_carousel_params['parameters']['delay'] === '4000') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('4000', 'ymc-smart-filter'); ?></option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label><?php echo esc_html__('Loop', 'ymc-smart-filter');?>
+                                    <i class="fas fa-info-circle" title="Set to true to enable continuous loop mode."></i></label>
+                                <select class="form-select" name="ymc_carousel_params[parameters][loop]">
+                                    <option value="false" <?php echo ( $ymc_carousel_params['parameters']['loop'] === 'false') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('False', 'ymc-smart-filter'); ?>
+                                    </option>
+                                    <option value="true" <?php echo ( $ymc_carousel_params['parameters']['loop'] === 'true') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('True', 'ymc-smart-filter'); ?></option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label><?php echo esc_html__('Centered', 'ymc-smart-filter');?>
+                                    <i class="fas fa-info-circle" title="Active slide will be centered, not always on the left side."></i></label>
+                                <select class="form-select" name="ymc_carousel_params[parameters][centeredSlides]">
+                                    <option value="false" <?php echo ( $ymc_carousel_params['parameters']['centeredSlides'] === 'false') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('False', 'ymc-smart-filter'); ?>
+                                    </option>
+                                    <option value="true" <?php echo ( $ymc_carousel_params['parameters']['centeredSlides'] === 'true') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('True', 'ymc-smart-filter'); ?></option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label><?php echo esc_html__('Per View', 'ymc-smart-filter');?>
+                                    <i class="fas fa-info-circle" title="Number of slides per view."></i></label>
+                                <select class="form-select" name="ymc_carousel_params[parameters][slidesPerView]">
+                                    <option value="1" <?php echo ( $ymc_carousel_params['parameters']['slidesPerView'] === '1') ? 'selected' : ''; ?>>
+                                        1</option>
+                                    <option value="1.5" <?php echo ( $ymc_carousel_params['parameters']['slidesPerView'] === '1.5') ? 'selected' : ''; ?>>
+                                        1.5</option>
+                                    <option value="2" <?php echo ( $ymc_carousel_params['parameters']['slidesPerView'] === '2') ? 'selected' : ''; ?>>
+                                        2</option>
+                                    <option value="2.5" <?php echo ( $ymc_carousel_params['parameters']['slidesPerView'] === '2.5') ? 'selected' : ''; ?>>
+                                        2.5</option>
+                                    <option value="3" <?php echo ( $ymc_carousel_params['parameters']['slidesPerView'] === '3') ? 'selected' : ''; ?>>
+                                        3</option>
+                                    <option value="3.5" <?php echo ( $ymc_carousel_params['parameters']['slidesPerView'] === '3.5') ? 'selected' : ''; ?>>
+                                        3.5</option>
+                                    <option value="4" <?php echo ( $ymc_carousel_params['parameters']['slidesPerView'] === '4') ? 'selected' : ''; ?>>
+                                        4</option>
+                                    <option value="4.5" <?php echo ( $ymc_carousel_params['parameters']['slidesPerView'] === '4.5') ? 'selected' : ''; ?>>
+                                        4.5</option>
+                                    <option value="5" <?php echo ( $ymc_carousel_params['parameters']['slidesPerView'] === '5') ? 'selected' : ''; ?>>
+                                        5</option>
+                                    <option value="5.5" <?php echo ( $ymc_carousel_params['parameters']['slidesPerView'] === '5.5') ? 'selected' : ''; ?>>
+                                        5.5</option>
+                                    <option value="6" <?php echo ( $ymc_carousel_params['parameters']['slidesPerView'] === '6') ? 'selected' : ''; ?>>
+                                        6</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label><?php echo esc_html__('Space', 'ymc-smart-filter');?>
+                                    <i class="fas fa-info-circle" title="Distance between slides in px."></i></label>
+                                <select class="form-select" name="ymc_carousel_params[parameters][spaceBetween]">
+                                    <option value="0" <?php echo ( $ymc_carousel_params['parameters']['spaceBetween'] === '0') ? 'selected' : ''; ?>>
+                                        0</option>
+                                    <option value="20" <?php echo ( $ymc_carousel_params['parameters']['spaceBetween'] === '20') ? 'selected' : ''; ?>>
+                                        20</option>
+                                    <option value="40" <?php echo ( $ymc_carousel_params['parameters']['spaceBetween'] === '40') ? 'selected' : ''; ?>>
+                                        40</option>
+                                    <option value="60" <?php echo ( $ymc_carousel_params['parameters']['spaceBetween'] === '60') ? 'selected' : ''; ?>>
+                                        60</option>
+                                    <option value="80" <?php echo ( $ymc_carousel_params['parameters']['spaceBetween'] === '80') ? 'selected' : ''; ?>>
+                                        80</option>
+                                    <option value="100" <?php echo ( $ymc_carousel_params['parameters']['spaceBetween'] === '100') ? 'selected' : ''; ?>>
+                                        100</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label><?php echo esc_html__('Mouse Wheel', 'ymc-smart-filter');?>
+                                    <i class="fas fa-info-circle" title="Enables navigation through slides using mouse wheel."></i></label>
+                                <select class="form-select" name="ymc_carousel_params[parameters][mousewheel]">
+                                    <option value="false" <?php echo ( $ymc_carousel_params['parameters']['mousewheel'] === 'false') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('False', 'ymc-smart-filter'); ?></option>
+                                    <option value="true" <?php echo ( $ymc_carousel_params['parameters']['mousewheel'] === 'true') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('True', 'ymc-smart-filter'); ?></option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label><?php echo esc_html__('Speed', 'ymc-smart-filter');?>
+                                    <i class="fas fa-info-circle" title="Duration of transition between slides (in ms)."></i></label>
+                                <select class="form-select" name="ymc_carousel_params[parameters][speed]">
+                                    <option value="300" <?php echo ( $ymc_carousel_params['parameters']['speed'] === '300') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('300', 'ymc-smart-filter'); ?></option>
+                                    <option value="700" <?php echo ( $ymc_carousel_params['parameters']['speed'] === '700') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('700', 'ymc-smart-filter'); ?></option>
+                                    <option value="1000" <?php echo ( $ymc_carousel_params['parameters']['speed'] === '1000') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('1000', 'ymc-smart-filter'); ?></option>
+                                    <option value="1500" <?php echo ( $ymc_carousel_params['parameters']['speed'] === '1500') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('1500', 'ymc-smart-filter'); ?></option>
+                                    <option value="2000" <?php echo ( $ymc_carousel_params['parameters']['speed'] === '2000') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('2000', 'ymc-smart-filter'); ?></option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label><?php echo esc_html__('Effect', 'ymc-smart-filter');?>
+                                    <i class="fas fa-info-circle" title="Transition effect."></i></label>
+                                <select class="form-select" name="ymc_carousel_params[parameters][effect]">
+                                    <option value="slide" <?php echo ( $ymc_carousel_params['parameters']['effect'] === 'slide') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('Slide', 'ymc-smart-filter'); ?></option>
+                                    <option value="fade" <?php echo ( $ymc_carousel_params['parameters']['effect'] === 'fade') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('Fade', 'ymc-smart-filter'); ?></option>
+                                    <option value="flip" <?php echo ( $ymc_carousel_params['parameters']['effect'] === 'flip') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('Flip', 'ymc-smart-filter'); ?></option>
+                                    <option value="coverflow" <?php echo ( $ymc_carousel_params['parameters']['effect'] === 'coverflow') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('Coverflow', 'ymc-smart-filter'); ?></option>
+                                    <option value="cube" <?php echo ( $ymc_carousel_params['parameters']['effect'] === 'cube') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('Cube', 'ymc-smart-filter'); ?></option>
+                                    <option value="cards" <?php echo ( $ymc_carousel_params['parameters']['effect'] === 'cards') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('Cards', 'ymc-smart-filter'); ?></option>
+                                    <option value="creative" <?php echo ( $ymc_carousel_params['parameters']['effect'] === 'creative') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('Creative', 'ymc-smart-filter'); ?></option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="form-fieldset" style="margin-bottom:15px;">
+                        <legend class="form-legend"><?php echo esc_html__('Pagination', 'ymc-smart-filter');?></legend>
+                        <div class="meta-info">
+                            <div class="col">
+                                <label><?php echo esc_html__('Visibility', 'ymc-smart-filter');?>
+                                    <i class="fas fa-info-circle" title="Pagination visibility."></i></label>
+                                <select class="form-select" name="ymc_carousel_params[pagination][visibility]">
+                                    <option value="true" <?php echo ( $ymc_carousel_params['pagination']['visibility'] === 'true') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('True', 'ymc-smart-filter'); ?></option>
+                                    </option>
+                                    <option value="false" <?php echo ( $ymc_carousel_params['pagination']['visibility'] === 'false') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('False', 'ymc-smart-filter'); ?>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label><?php echo esc_html__('Dynamic Bullets', 'ymc-smart-filter');?>
+                                    <i class="fas fa-info-circle" title="Good to enable if you use bullets pagination with a lot of slides."></i></label>
+                                <select class="form-select" name="ymc_carousel_params[pagination][dynamicBullets]">
+                                    <option value="false" <?php echo ( $ymc_carousel_params['pagination']['dynamicBullets'] === 'false') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('False', 'ymc-smart-filter'); ?>
+                                    <option value="true" <?php echo ( $ymc_carousel_params['pagination']['dynamicBullets'] === 'true') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('True', 'ymc-smart-filter'); ?></option>
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label><?php echo esc_html__('Type', 'ymc-smart-filter');?>
+                                    <i class="fas fa-info-circle" title="Type of pagination."></i></label>
+                                <select class="form-select" name="ymc_carousel_params[pagination][type]">
+                                    <option value="bullets" <?php echo ( $ymc_carousel_params['pagination']['type'] === 'bullets') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('Bullets', 'ymc-smart-filter'); ?>
+                                    <option value="fraction" <?php echo ( $ymc_carousel_params['pagination']['type'] === 'fraction') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('Fraction', 'ymc-smart-filter'); ?></option>
+                                    </option>
+                                    <option value="progressbar" <?php echo ( $ymc_carousel_params['pagination']['type'] === 'progressbar') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('Progressbar', 'ymc-smart-filter'); ?></option>
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="form-fieldset" style="margin-bottom:15px;">
+                        <legend class="form-legend"><?php echo esc_html__('Navigation', 'ymc-smart-filter');?></legend>
+                        <div class="meta-info">
+                            <div class="col">
+                                <label><?php echo esc_html__('Visibility', 'ymc-smart-filter');?>
+                                    <i class="fas fa-info-circle" title="Navigation visibility."></i></label>
+                                <select class="form-select" name="ymc_carousel_params[navigation][visibility]">
+                                    <option value="true" <?php echo ( $ymc_carousel_params['navigation']['visibility'] === 'true') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('True', 'ymc-smart-filter'); ?></option>
+                                    </option>
+                                    <option value="false" <?php echo ( $ymc_carousel_params['navigation']['visibility'] === 'false') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('False', 'ymc-smart-filter'); ?>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="form-fieldset" style="margin-bottom:15px;">
+                        <legend class="form-legend"><?php echo esc_html__('Scrollbar', 'ymc-smart-filter');?></legend>
+                        <div class="meta-info">
+                            <div class="col">
+                                <label><?php echo esc_html__('Visibility', 'ymc-smart-filter');?>
+                                    <i class="fas fa-info-circle" title="Scrollbar visibility."></i></label>
+                                <select class="form-select" name="ymc_carousel_params[scroll][visibility]">
+                                    <option value="false" <?php echo ( $ymc_carousel_params['scroll']['visibility'] === 'false') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('False', 'ymc-smart-filter'); ?>
+                                    <option value="true" <?php echo ( $ymc_carousel_params['scroll']['visibility'] === 'true') ? 'selected' : ''; ?>>
+                                        <?php echo esc_html__('True', 'ymc-smart-filter'); ?></option>
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="from-element">
+                        <label class="form-label"><?php echo esc_html__('Custom Carousel', 'ymc-smart-filter');?>
+                            <span class="information">
+                                <?php echo __('Deactivate the carousel. Override your custom carousel settings in your JS file. 
+                                Use plugin hooks to initialize the carousel asynchronously. 
+                                The carousel is implemented using the <a href="https://swiperjs.com/swiper-api#parameters" target="_blank">Swiper API. 
+                                <img draggable="false" role="img" class="emoji" alt="↗" src="https://s.w.org/images/core/emoji/14.0.0/svg/2197.svg"></a>', 'ymc-smart-filter'); ?>
+                                <span class="tooltip-link">Usage example.
+                                    <span class="tooltip-text">
+                                        wp.hooks.addAction('ymc_complete_loaded_data_545', 'smartfilter', function(class_name, status) {<br>
+                                        &nbsp;&nbsp;&nbsp;new Swiper('.swiper-545', {<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; speed: 400,<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; spaceBetween: 100,<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // do something...<br>
+                                        &nbsp;&nbsp;&nbsp;});<br>
+                                        });<br>
+                                    </span>
+                                </span>
+                            </span>
+                        </label>
+                        <div class="group-elements">
+                            <?php  $carousel_enabled = ( $ymc_carousel_params['parameters']['disabled'] === 'false' ) ? 'checked' : '';  ?>
+                            <input type="hidden" name="ymc_carousel_params[parameters][disabled]" value="true">
+                            <input id="ymc_carousel_params_custom" class="ymc-pagination-hide" type="checkbox" value="false" name="ymc_carousel_params[parameters][disabled]"
+                                <?php echo esc_attr($carousel_enabled); ?>>
+                            <label for="ymc_carousel_params_custom"><?php echo esc_html__('Disable', 'ymc-smart-filter');?></label>
+                        </div>
+                    </div>
+
+                    <hr>
+
                 </div>
 
                 <div class="manage-filters__section">

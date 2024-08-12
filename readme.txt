@@ -1,7 +1,7 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.9.21
+Version: 2.9.22
 Donate link: https://github.com/YMC-22/smart-filter
 Tags: filter, grid, ajax, search, sort
 Requires at least: 5.5
@@ -15,7 +15,7 @@ Filter posts by categories / taxonomies without reloading the page. Create posts
 
 == Description ==
 
-Filter posts or custom post types by custom taxonomy / category without page reload with different pagination types. Create different posts grids. Plugin allows to solve a variety of tasks for displaying posts on site pages. It is possible to develop custom filter and grid layouts for posts, which makes the plugin versatile.
+Filter posts or custom post types by custom taxonomy / category without page reload with different pagination types. Create different posts grids. Plugin allows to solve a variety of tasks for displaying posts on site pages. It is possible to develop custom filter and grid layouts for posts, which makes the plugin versatile. In addition, the plugin supports a powerful post slider with the ability to filter with various effects.
 
 == Custom Post Type & Taxonomies Support ==
 The plugin supports custom post types. You can filter custom post types with the AJAX filter. You can select specific custom taxonomies and their terms to showcase. If you need to create custom filter bar or custom post card, you can use the filters which will allow you to create your templates. You can find more details <a href='https://github.com/YMC-22/smart-filter' target='_blank'>here.</a>
@@ -76,6 +76,8 @@ Detailed information can be found on GitHub at this <a target="_blank" href="htt
 
 == Changelog ==
 
+= 2.9.22 =
+Added post carousel layout to display sliders
 = 2.9.17 =
 Fixed UI Admin Panel
 = 2.9.16 =

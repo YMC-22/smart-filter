@@ -74,7 +74,7 @@
                         <legend class="form-legend"><?php echo esc_html__('Post Elements', 'ymc-smart-filter'); ?></legend>
                         <div class="meta-info">
                             <div class="col post-author">
-                                <label><?php echo esc_html__('Post Author', 'ymc-smart-filter'); ?></label>
+                                <label><?php echo esc_html__('Author', 'ymc-smart-filter'); ?></label>
                                 <select class="form-select" name="ymc-post-elements[author]">
                                     <option value="show" <?php echo ( $ymc_post_elements['author'] === 'show' ) ? 'selected' : ''; ?>>
                                         <?php esc_html_e('Show', 'ymc-smart-filter'); ?></option>
@@ -84,7 +84,7 @@
                             </div>
 
                             <div class="col post-date">
-                                <label><?php echo esc_html__('Post Date', 'ymc-smart-filter'); ?></label>
+                                <label><?php echo esc_html__('Date', 'ymc-smart-filter'); ?></label>
                                 <select class="form-select" name="ymc-post-elements[date]">
                                     <option value="show" <?php echo ( $ymc_post_elements['date'] === 'show' ) ? 'selected' : ''; ?>>
                                         <?php esc_html_e('Show', 'ymc-smart-filter'); ?></option>
@@ -94,7 +94,7 @@
                             </div>
 
                             <div class="col post-tags">
-                                <label><?php echo esc_html__('Post Tags', 'ymc-smart-filter'); ?></label>
+                                <label><?php echo esc_html__('Tags', 'ymc-smart-filter'); ?></label>
                                 <select class="form-select"  name="ymc-post-elements[tag]">
                                     <option value="show" <?php echo ( $ymc_post_elements['tag'] === 'show' ) ? 'selected' : ''; ?>>
                                         <?php esc_html_e('Show', 'ymc-smart-filter'); ?></option>
@@ -104,7 +104,7 @@
                             </div>
 
                             <div class="col post-title">
-                                <label><?php echo esc_html__('Post Title', 'ymc-smart-filter'); ?></label>
+                                <label><?php echo esc_html__('Title', 'ymc-smart-filter'); ?></label>
                                 <select class="form-select" name="ymc-post-elements[title]">
                                     <option value="show" <?php echo ( $ymc_post_elements['title'] === 'show' ) ? 'selected' : ''; ?>>
                                         <?php esc_html_e('Show', 'ymc-smart-filter'); ?></option>
@@ -114,7 +114,7 @@
                             </div>
 
                             <div class="col post-image">
-                                <label><?php echo esc_html__('Post Image', 'ymc-smart-filter'); ?></label>
+                                <label><?php echo esc_html__('Image', 'ymc-smart-filter'); ?></label>
                                 <select class="form-select" name="ymc-post-elements[image]">
                                     <option value="show" <?php echo ( $ymc_post_elements['image'] === 'show' ) ? 'selected' : ''; ?>>
                                         <?php esc_html_e('Show', 'ymc-smart-filter'); ?></option>
@@ -124,7 +124,7 @@
                             </div>
 
                             <div class="col post-excerpt">
-                                <label><?php echo esc_html__('Post Excerpt', 'ymc-smart-filter'); ?></label>
+                                <label><?php echo esc_html__('Excerpt', 'ymc-smart-filter'); ?></label>
                                 <select class="form-select" name="ymc-post-elements[excerpt]">
                                     <option value="show" <?php echo ( $ymc_post_elements['excerpt'] === 'show' ) ? 'selected' : ''; ?>>
                                         <?php esc_html_e('Show', 'ymc-smart-filter'); ?></option>
@@ -134,7 +134,7 @@
                             </div>
 
                             <div class="col post-button">
-                                <label><?php echo esc_html__('Post Button', 'ymc-smart-filter'); ?></label>
+                                <label><?php echo esc_html__('Button', 'ymc-smart-filter'); ?></label>
                                 <select class="form-select" name="ymc-post-elements[button]">
                                     <option value="show" <?php echo ( $ymc_post_elements['button'] === 'show' ) ? 'selected' : ''; ?>>
                                         <?php esc_html_e('Show', 'ymc-smart-filter'); ?></option>

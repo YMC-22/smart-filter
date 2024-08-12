@@ -22,11 +22,13 @@ class Load_Scripts {
 	public function __construct() {
 
 		add_action( 'admin_enqueue_scripts', [ $this, 'backend_embed_scripts' ] );
-		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_embed_css' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_embed_scripts' ],999999 );
 	}
 
-	// Backend enqueue scripts & style.
+
+	/**
+	 * Enqueue scripts and styles for the backend.
+	 */
 	public function backend_embed_scripts() {
 
 		wp_enqueue_style( 'codemirror-css-' . $this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/css/codemirror/codemirror.css', array(), YMC_SMART_FILTER_VERSION);
@@ -59,11 +61,19 @@ class Load_Scripts {
 			));
 	}
 
-	// Frontend enqueue scripts & style.
+
+	/**
+	 * Enqueue scripts and styles for frontend embed
+	 */
 	public function frontend_embed_scripts() {
 
+		wp_enqueue_style( 'filter-datepicker-' . $this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/css/datepicker.css', array(), YMC_SMART_FILTER_VERSION);
+		wp_enqueue_style( 'filter-swiper-' . $this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/css/swiper.min.css', array(), YMC_SMART_FILTER_VERSION);
+		wp_enqueue_style( 'filter-grids-' . $this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/css/style.css', array(), YMC_SMART_FILTER_VERSION);
+
 		wp_enqueue_script( 'filter-grids-masonry-' . $this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/js/masonry.js', array('jquery'), YMC_SMART_FILTER_VERSION, true);
-		wp_enqueue_script('jquery-ui-datepicker');
+		wp_enqueue_script( 'filter-grids-swiper-' . $this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/js/swiper.min.js', array('jquery'), YMC_SMART_FILTER_VERSION, true);
+		wp_enqueue_script( 'jquery-ui-datepicker');
 		wp_enqueue_script( 'filter-grids-' . $this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/js/script.min.js', array('jquery', 'wp-hooks'), YMC_SMART_FILTER_VERSION, true);
 		wp_localize_script( 'filter-grids-' . $this->generate_handle(), '_smart_filter_object',
 			array(
@@ -76,14 +86,14 @@ class Load_Scripts {
 	}
 
 
-	public function frontend_embed_css() {
-		wp_enqueue_style( 'filter-datepicker-' . $this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/css/datepicker.css', array(), YMC_SMART_FILTER_VERSION);
-		wp_enqueue_style( 'filter-grids-' . $this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/css/style.css', array(), YMC_SMART_FILTER_VERSION);
-	}
 
-
-	// Generate handle
+	/**
+	 * Generate handle for nonce creation
+	 *
+	 * @return string The generated nonce handle
+	 */
 	public function generate_handle() {
+
 		return wp_create_nonce('filter-grids');
 	}
 }

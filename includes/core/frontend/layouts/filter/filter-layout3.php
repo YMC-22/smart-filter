@@ -4,22 +4,22 @@
 $ymcStyleRuleColor = !empty($ymc_filter_text_color) ? "color:".$ymc_filter_text_color.";" : '';
 $ymcStyleRuleBg   = !empty($ymc_filter_bg_color) ? "background-color:".$ymc_filter_bg_color.";" : '';
 $ymcStyleRuleActiveColor = !empty($ymc_filter_active_color) ? "color:".$ymc_filter_active_color.";" : '';
-$ymcStyleRuleFont = !empty($ymc_filter_font) ? "font-family:'".$ymc_filter_font."';" : '';
+$ymcStyleRuleFont = "font-family:'".$ymc_filter_font."';";
 
 $filter_css = "#ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link, 
-               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link  { ". $ymcStyleRuleColor . $ymcStyleRuleBg." }
+               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link  { ". $ymcStyleRuleColor . $ymcStyleRuleBg." }               
                #ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link:before, 
                #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link:before,
                #ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link:after, 
-               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link:after  { border-color:". $ymc_filter_text_color ." }
+               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link:after  { border-color:". $ymc_filter_text_color ." }              
                #ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link,
-               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link { ". $ymcStyleRuleBg ." }
+               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link { ". $ymcStyleRuleBg ." }               
                #ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link.active,
-               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link.active {".$ymcStyleRuleActiveColor."}
-               #ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link,
-               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link {".$ymcStyleRuleFont."}";
+               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link.active {".$ymcStyleRuleActiveColor."}               
+               #ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry,               
+               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry {".$ymcStyleRuleFont."}";
 
-echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
+echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) .'</style>';
 
 ?>
 

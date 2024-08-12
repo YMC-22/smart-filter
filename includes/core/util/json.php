@@ -1,5 +1,5 @@
 <?php
-// 31 properties object data-params
+// Properties object data-params
 
 $json = '{ 
 "cpt":"'.esc_attr($ymc_cpt_value).'",
@@ -25,6 +25,7 @@ $json = '{
 "filter_id":"'.esc_attr($id).'",
 "search":"",
 "search_filtered_posts":"'.esc_attr($ymc_search_filtered_posts).'",
+"carousel_params":'.esc_attr($ymc_carousel_params).',
 "filter_date":"",
 "sort_order":"",
 "sort_orderby":"",

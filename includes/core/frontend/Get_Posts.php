@@ -76,6 +76,8 @@ class Get_Posts {
 
 		$post_types = ! empty( $post_type ) ? explode(',', $post_type) : 'post';
 
+		$per_page = ( $post_layout === 'post-carousel-layout' ) ? -1 : $per_page;
+
 		$args = [
 			'post_type' => $post_types,
 			'post_status' => $ymc_post_status,

@@ -109,15 +109,18 @@ class Shortcode {
 
 			$ymc_filter_layout = ( $ymc_filter_status === 'on' ) ? $ymc_filter_layout : 'no-filter-layout';
 
+			$ymc_carousel_params = ( $ymc_post_layout === 'post-carousel-layout' ) ? json_encode($ymc_carousel_params) : '""';
+
 			if( ! empty($ymc_custom_css) ) :
 				echo '<style id="filter-grids-css-'.$id .'-'. $c_target.'">'. sanitize_text_field($ymc_custom_css) .'</style>';
 			endif;
 
+			// Include JSON
 			require YMC_SMART_FILTER_DIR . '/includes/core/util/json.php';
 
 			echo '<div id="ymc-smart-filter-container-'. esc_attr($c_target) .'" 
 				  class="ymc-smart-filter-container ymc-filter-'. esc_attr($id) .' ymc-loaded-filter ymc-'. esc_attr($ymc_filter_layout) .' ymc-'. esc_attr($ymc_post_layout) .' ymc-pagination-'. esc_attr($ymc_pagination_type) .' data-target-ymc'.esc_attr($id).'-'.esc_attr($c_target).' data-target-ymc'. esc_attr($c_target) .' '. $css_special .'" data-loading="true"
-				  data-params=\''. str_replace(array("\r","\n"," "), '', $json) .'\'>';
+				  data-params=\''. str_replace(array("\r","\n","\t"," "), '', $json) .'\'>';
 
 
 			if ( $ymc_filter_search_status === 'on' )
@@ -192,10 +195,10 @@ class Shortcode {
 			{
 					wp_add_inline_script( 'filter-grids-' . wp_create_nonce('filter-grids'),"	
 				
-					(function( $ ) {
+					(function($) {
 	                    'use strict'                    
 	                    ". Plugin::$instance->variables->get_ymc_custom_after_js($id) ." 				
-					}( jQuery )); <!-- End Custom JS -->					
+					}(jQuery)); <!-- End Custom JS -->					
 													
 				    ", 'after' );
 			}

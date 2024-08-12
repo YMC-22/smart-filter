@@ -16,7 +16,7 @@ $post_css = "
 #ymc-smart-filter-container-".$c_target." .ymc-pagination li a {".$ymc_post_text_color . $ymc_post_bg_color."}
 #ymc-smart-filter-container-".$c_target." .container-posts .post-entry.post-layout2 {".$ymc_post_font."}";
 
-echo '<style id="'.$handle_post.'">'.$post_css.'</style>';
+echo '<style id="'.$handle_post.'">'. preg_replace('|\s+|', ' ', $post_css) .'</style>';
 
 
 
