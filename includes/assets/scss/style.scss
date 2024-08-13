@@ -116,8 +116,8 @@ $font-size: 16;
 .ymc-extra-filter,
 .ymc-extra-search,
 .ymc-extra-sort {
-	font-family: 'Poppins', sans-serif;
-	font-weight: 400;
+	font-family: inherit;
+	font-weight: inherit;
 	box-sizing: border-box;
 	position: relative;
 	max-width: 1280px;
