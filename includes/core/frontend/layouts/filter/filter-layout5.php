@@ -42,7 +42,9 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 			$type_multiple = ( (bool) $ymc_multiple_filter ) ? 'multiple' : '';
 
 			if( $ymc_sort_terms !== 'manual' ) {
-				( $ymc_sort_terms === 'asc' ) ? asort($terms_selected) : arsort($terms_selected);
+				//( $ymc_sort_terms === 'asc' ) ? asort($terms_selected) : arsort($terms_selected);
+				( $ymc_sort_terms === 'asc' ) ? sortTaxTerms($terms_selected, 'asc') :
+					sortTaxTerms($terms_selected, 'desc');
 			}
 
             $arr_taxonomies = [];

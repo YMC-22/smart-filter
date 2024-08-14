@@ -32,7 +32,9 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 			{
 
 				if( $ymc_sort_terms !== 'manual' ) {
-					( $ymc_sort_terms === 'asc' ) ? asort($terms_selected) : arsort($terms_selected);
+					//( $ymc_sort_terms === 'asc' ) ? asort($terms_selected) : arsort($terms_selected);
+					( $ymc_sort_terms === 'asc' ) ? sortTaxTerms($terms_selected, 'asc') :
+						sortTaxTerms($terms_selected, 'desc');
 				}
 
 	            $show_all = apply_filters('ymc_button_show_all_'.$id.'_'.$c_target, __($ymc_post_elements['button_text_all'],'ymc-smart-filter'));

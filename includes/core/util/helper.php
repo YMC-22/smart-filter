@@ -190,3 +190,32 @@ if( !function_exists('setSelectedIcon') )
 }
 
 
+/**
+ * Sorts the given terms based on the provided direction.
+ *
+ * @param array $termsSelect The array of terms to be sorted.
+ * @param string $dir The sorting direction, either 'asc' for ascending or 'desc' for descending.
+ */
+if( !function_exists('sortTaxTerms') ) {
+	function sortTaxTerms( &$termsSelect, $dir ) {
+
+		$tempArray = array();
+		$tempArrayResult = array();
+
+		foreach ( $termsSelect as $term )
+		{
+			$tempArray[get_term( $term )->term_id] = get_term( $term )->name;
+		}
+
+		( $dir === 'asc' ) ? asort($tempArray) : arsort($tempArray);
+
+		foreach ( $tempArray as $key => $value )
+		{
+			$tempArrayResult[] = $key;
+		}
+
+		$termsSelect = $tempArrayResult;
+	}
+}
+
+
