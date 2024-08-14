@@ -8,6 +8,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Filters {
 
+	/**
+	 * Constructor for initializing filters.
+	 */
 	public function __construct() {
 
 		add_filter('ymc_filter_layouts',array($this, 'ymc_filter_layouts'), 3, 1);
@@ -19,6 +22,11 @@ class Filters {
 
 	}
 
+	/**
+	 * Filters and returns an array of different layouts with their corresponding labels.
+	 *
+	 * @return array Associative array of layout keys and their labels
+	 */
 	public function ymc_filter_layouts($layout) {
 
 		$layout = [
@@ -27,6 +35,7 @@ class Filters {
 			"filter-layout3" => __('Dropdown Filter','ymc-smart-filter'),
 			"filter-layout4" => __('Sidebar Filter','ymc-smart-filter'),
 			"filter-layout5" => __('Dropdown Filter Compact','ymc-smart-filter'),
+			"filter-date" => __('Filter Date','ymc-smart-filter'),
 			"alphabetical-layout" => __('Alphabetical Navigation','ymc-smart-filter'),
 			"filter-custom-layout" => __('Custom Filter Layout','ymc-smart-filter'),
 			"filter-custom-extra-layout" => __('Custom Filter Extra Layout','ymc-smart-filter')
@@ -35,6 +44,13 @@ class Filters {
 		return $layout;
 	}
 
+
+	/**
+	 * Filters and returns an array of different post layouts with their corresponding labels.
+	 *
+	 * @param array $layout The existing layout array.
+	 * @return array Associative array of post layout keys and their labels
+	 */
 	public function ymc_post_layouts($layout) {
 
 		$layout = [
@@ -42,6 +58,7 @@ class Filters {
 			"post-layout2" => __('Grid Layout Mini','ymc-smart-filter'),
 			"post-masonry" => __('Masonry Layout','ymc-smart-filter'),
 			"post-layout3" => __('Full Width','ymc-smart-filter'),
+			"post-carousel-layout" => __('Carousel Layout','ymc-smart-filter'),
 			"post-vi-timeline" => __('Vertical Timeline','ymc-smart-filter'),
 			"post-custom-layout"  =>  __('Custom Layout','ymc-smart-filter'),
 			"post-custom-masonry" => __('Custom Masonry Layout','ymc-smart-filter')
@@ -50,6 +67,12 @@ class Filters {
 		return $layout;
 	}
 
+
+	/**
+	 * Get an array of pagination types with their corresponding labels.
+	 *
+	 * @return array
+	 */
 	public function ymc_pagination_type($type) {
 		$type = [
 			"numeric" => __('Numeric', 'ymc-smart-filter'),
@@ -60,6 +83,12 @@ class Filters {
 		return $type;
 	}
 
+
+	/**
+	 * Generates an array of order options with their corresponding translated labels.
+	 *
+	 * @return array The array of order options with translated labels
+	 */
 	public function ymc_order_post_by($order) {
 		$order = [
 			"title" => __('Title', 'ymc-smart-filter'),
@@ -80,6 +109,13 @@ class Filters {
 		return $order;
 	}
 
+
+	/**
+	 * Filter and return an array of fonts with their respective labels.
+	 *
+	 * @param string $font The font to be filtered.
+	 * @return array An array of fonts with their respective labels.
+	 */
 	public function ymc_filter_font($font) {
 		$font = [
 			"inherit" => __('Default','ymc-smart-filter'),
@@ -91,6 +127,12 @@ class Filters {
 		return $font;
 	}
 
+
+	/**
+	 * Returns an array of available fonts with their corresponding localized names.
+	 *
+	 * @return array Array of fonts with localized names
+	 */
 	public function ymc_post_font($font) {
 		$font = [
 			"inherit" => __('Default','ymc-smart-filter'),

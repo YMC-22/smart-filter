@@ -265,8 +265,8 @@
                     <h2 class="popup-hints--header"><?php _e('Methods and Hooks JS', 'ymc-smart-filter'); ?></h2>
                     <p class="popup-hints--note">
                         <?php _e('<u><b>Note:</b></u> The call to the global <b>YMCTools</b> object should be used
-                        when the document is fully loaded, for example using the notation:: <b>$(document).on("ready", function () {});</b> or
-                        <b>$(window).on(load", function() {});</b> or inside a hook callback function.', 'ymc-smart-filter'); ?>
+                        when the document is fully loaded, for example using the notation:: <b>$(document).on("ready", function () { ... });</b> or inside a hook callback function. <br>
+                        If there is only one filter on the page, then the object property: <b>"target"</b> can be skipped for calling methods.', 'ymc-smart-filter'); ?>
                     </p>
                     <hr/>
                     <ul class="popup-hints--wrp">
@@ -856,7 +856,11 @@
                            <div class="method-section ymc_before_loaded_data">
                                 <h2>[ ymc_before_loaded_data ]</h2>
                                 <div class="method-name">
-                                    <pre>wp.hooks.addAction('ymc_before_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name)');</pre>
+                                    <pre>
+                                        wp.hooks.addAction('ymc_before_loaded_data', 'smartfilter', 'callback(class_name)');
+                                        wp.hooks.addAction('ymc_before_loaded_data_FilterID', 'smartfilter', 'callback(class_name)');
+                                        wp.hooks.addAction('ymc_before_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name)');
+                                    </pre>
                                 </div>
                                 <hr/>
                                 <div class="info-code">Note: this hook only works when the page is loaded. By default,
@@ -887,7 +891,11 @@
                            <div class="method-section ymc_after_loaded_data">
                                 <h2>[ ymc_after_loaded_data ]</h2>
                                 <div class="method-name">
-                                    <pre>wp.hooks.addAction('ymc_after_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name, response)');</pre>
+                                    <pre>
+                                        wp.hooks.addAction('ymc_after_loaded_data', 'smartfilter', 'callback(class_name, response)');
+                                        wp.hooks.addAction('ymc_after_loaded_data_FilterID', 'smartfilter', 'callback(class_name, response)');
+                                        wp.hooks.addAction('ymc_after_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name, response)');
+                                    </pre>
                                 </div>
                                 <hr/>
                                 <div class="info-code">Hook works after loading all posts.</div>
@@ -926,7 +934,11 @@
                            <div class="method-section ymc_complete_loaded_data">
                                 <h2>[ ymc_complete_loaded_data ]</h2>
                                 <div class="method-name">
-                                    <pre>wp.hooks.addAction('ymc_complete_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name, status)');</pre>
+                                    <pre>
+                                        wp.hooks.addAction('ymc_complete_loaded_data', 'smartfilter', 'callback(class_name, status)');
+                                        wp.hooks.addAction('ymc_complete_loaded_data_FilterID', 'smartfilter', 'callback(class_name, status)');
+                                        wp.hooks.addAction('ymc_complete_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name, status)');
+                                    </pre>
                                 </div>
                                 <hr/>
                                 <div class="info-code">This hook is called regardless of if the request was successful, or not.
@@ -958,7 +970,11 @@
                            <div class="method-section ymc_before_popup_open">
                                 <h2>[ ymc_before_popup_open ]</h2>
                                 <div class="method-name">
-                                    <pre>wp.hooks.addAction('ymc_before_popup_open_FilterID_LayoutID', 'smartfilter', 'callback');</pre>
+                                    <pre>
+                                        wp.hooks.addAction('ymc_before_popup_open', 'smartfilter', 'callback');
+                                        wp.hooks.addAction('ymc_before_popup_open_FilterID', 'smartfilter', 'callback');
+                                        wp.hooks.addAction('ymc_before_popup_open_FilterID_LayoutID', 'smartfilter', 'callback');
+                                    </pre>
                                 </div>
                                 <hr/>
                                 <div class="info-code">This hook allows you to run any desired script before opening a popup for each post.</div>
@@ -983,7 +999,11 @@
                            <div class="method-section ymc_after_popup_open">
                                 <h2>[ ymc_after_popup_open ]</h2>
                                 <div class="method-name">
-                                    <pre>wp.hooks.addAction('ymc_after_popup_open_FilterID_LayoutID', 'smartfilter', 'callback');</pre>
+                                    <pre>
+                                        wp.hooks.addAction('ymc_after_popup_open', 'smartfilter', 'callback');
+                                        wp.hooks.addAction('ymc_after_popup_open_FilterID', 'smartfilter', 'callback');
+                                        wp.hooks.addAction('ymc_after_popup_open_FilterID_LayoutID', 'smartfilter', 'callback');
+                                    </pre>
                                 </div>
                                 <hr/>
                                 <div class="info-code">This hook allows you to run any desired script after opening a popup for each post.</div>

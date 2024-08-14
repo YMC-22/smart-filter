@@ -87,7 +87,7 @@ class Shortcode {
 			}
 
 			if( is_array($ymc_terms_options) &&
-			    !empty($ymc_terms_options) &&
+			    ! empty($ymc_terms_options) &&
 			    $ymc_filter_layout !== 'alphabetical-layout' )
 			{
 				$arr_default_terms = array_column($ymc_terms_options, 'default', 'termid');
@@ -109,13 +109,18 @@ class Shortcode {
 
 			$ymc_filter_layout = ( $ymc_filter_status === 'on' ) ? $ymc_filter_layout : 'no-filter-layout';
 
+			$ymc_carousel_params = ( $ymc_post_layout === 'post-carousel-layout' ) ? json_encode($ymc_carousel_params) : '""';
+
 			if( ! empty($ymc_custom_css) ) :
 				echo '<style id="filter-grids-css-'.$id .'-'. $c_target.'">'. sanitize_text_field($ymc_custom_css) .'</style>';
 			endif;
 
+			// Include JSON
+			require YMC_SMART_FILTER_DIR . '/includes/core/util/json.php';
+
 			echo '<div id="ymc-smart-filter-container-'. esc_attr($c_target) .'" 
 				  class="ymc-smart-filter-container ymc-filter-'. esc_attr($id) .' ymc-loaded-filter ymc-'. esc_attr($ymc_filter_layout) .' ymc-'. esc_attr($ymc_post_layout) .' ymc-pagination-'. esc_attr($ymc_pagination_type) .' data-target-ymc'.esc_attr($id).'-'.esc_attr($c_target).' data-target-ymc'. esc_attr($c_target) .' '. $css_special .'" data-loading="true"
-				  data-params=\'{"cpt":"'.esc_attr($ymc_cpt_value).'","tax":"'.esc_attr($ymc_tax).'","terms":"'.esc_attr($ymc_terms).'","default_terms":"'.esc_attr($default_terms).'","exclude_posts":"'.esc_attr($ymc_exclude_posts).'","choices_posts":"'.esc_attr($ymc_choices_posts).'","posts_selected":"all","preloader_icon":"'.esc_attr($ymc_preloader_icon).'","type_pg":"'.esc_attr($ymc_pagination_type).'","per_page":"'.esc_attr($ymc_per_page).'","page":"1","page_scroll":"'.esc_attr($ymc_scroll_page).'","preloader_filters":"'.esc_attr($ymc_preloader_filters).'","preloader_filters_rate":"'.esc_attr($ymc_preloader_filters_rate).'","preloader_filters_custom":"'.esc_attr($ymc_preloader_filters_custom).'","post_animation":"'.esc_attr($ymc_post_animation).'","popup_animation":"'.esc_attr($ymc_popup_animation).'","letter":"","post_layout":"'.esc_attr($ymc_post_layout).'","filter_layout":"'.esc_attr($ymc_filter_layout).'","filter_id":"'.esc_attr($id).'","search":"","search_filtered_posts":"'.esc_attr($ymc_search_filtered_posts).'","sort_order":"","sort_orderby":"","meta_key":"","meta_query":"","date_query":"","data_target":"data-target-ymc'.esc_attr($c_target).'","target_id":"'.esc_attr($c_target).'"}\'>';
+				  data-params=\''. str_replace(array("\r","\n","\t"," "), '', $json) .'\'>';
 
 
 			if ( $ymc_filter_search_status === 'on' )
@@ -190,10 +195,10 @@ class Shortcode {
 			{
 					wp_add_inline_script( 'filter-grids-' . wp_create_nonce('filter-grids'),"	
 				
-					(function( $ ) {
+					(function($) {
 	                    'use strict'                    
 	                    ". Plugin::$instance->variables->get_ymc_custom_after_js($id) ." 				
-					}( jQuery )); <!-- End Custom JS -->					
+					}(jQuery)); <!-- End Custom JS -->					
 													
 				    ", 'after' );
 			}

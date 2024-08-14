@@ -11,7 +11,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Get_Posts {
 
+	/**
+	 * Constructor for initializing the Get_Posts class.
+	 *
+	 * This constructor sets up the necessary actions for AJAX endpoints.
+	 */
 	public function __construct() {
+
 		add_action('wp_ajax_ymc_get_posts', array($this, 'get_filter_posts'));
 		add_action('wp_ajax_nopriv_ymc_get_posts', array($this, 'get_filter_posts'));
 
@@ -20,9 +26,13 @@ class Get_Posts {
 
 		add_action('wp_ajax_get_post_popup', array($this, 'get_post_popup'));
 		add_action('wp_ajax_nopriv_get_post_popup', array($this, 'get_post_popup'));
-
 	}
 
+
+	/**
+	 * Processing all ajax filter requests.
+	 * @return void
+	 */
 	public function get_filter_posts() {
 
 		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], Plugin::$instance->token_f) ) exit;
@@ -47,6 +57,7 @@ class Get_Posts {
 		$sort_orderby = $clean_data['sort_orderby'];
 		$meta_params = $clean_data['meta_query'];
 		$date_params = $clean_data['date_query'];
+		$filter_date = $clean_data['filter_date'];
 		$target_id   = $clean_data['target_id'];
 		$choices_posts = $clean_data['choices_posts'];
 		$exclude_posts = $clean_data['exclude_posts'];
@@ -63,10 +74,12 @@ class Get_Posts {
 		require YMC_SMART_FILTER_DIR . '/includes/core/util/variables.php';
 		require YMC_SMART_FILTER_DIR . '/includes/core/util/helper.php';
 
-		$arr_post_types = !empty( $post_type ) ? explode(',', $post_type) : 'post';
+		$post_types = ! empty( $post_type ) ? explode(',', $post_type) : 'post';
+
+		$per_page = ( $post_layout === 'post-carousel-layout' ) ? -1 : $per_page;
 
 		$args = [
-			'post_type' => $arr_post_types,
+			'post_type' => $post_types,
 			'post_status' => $ymc_post_status,
 			'posts_per_page' => $per_page,
 			'paged' => $paged,
@@ -75,8 +88,8 @@ class Get_Posts {
 		];
 
 		// Convert Taxonomy & Terms to Array
-		$taxonomy = !empty( $taxonomy ) ? explode(',', $taxonomy) : false;
-		$terms    = !empty( $terms )    ? explode(',', $terms)    : false;
+		$taxonomy = ! empty( $taxonomy ) ? explode(',', $taxonomy) : false;
+		$terms    = ! empty( $terms )    ? explode(',', $terms)    : false;
 
 		if ( is_array($taxonomy) && is_array($terms) ) :
 
@@ -165,6 +178,88 @@ class Get_Posts {
 			else {
 				$args['post__not_in'] = explode(',', $choices_posts);
 			}
+		}
+
+		// Filter Date
+		if( !empty($filter_date) ) {
+
+			// Array Date Params
+			// 0 - Action
+			// 1 - From Date
+			// 2 - To Date
+			$dataDateParams = explode(',', $filter_date);
+
+			switch ( $dataDateParams[0] ) {
+
+				case 'today':
+					$today = getdate();
+					$date_query[] = [
+						'year'     => $today['year'],
+						'monthnum' => $today['mon'],
+						'day'      => $today['mday']
+					];
+					break;
+
+				case 'yesterday':
+					$today = getdate();
+					$date_query[] = [
+						'year'     => $today['year'],
+						'monthnum' => $today['mon'],
+						'day'      => $today['mday'] - 1
+					];
+					break;
+
+				case '3_days':
+					$date_query[] = [
+						'after'     => '3 days ago',
+						'inclusive' => true,
+					];
+					break;
+
+				case 'week':
+					$date_query[] = [
+						'after'     => '7 days ago',
+						'inclusive' => true,
+					];
+					break;
+
+				case 'month':
+					$date_query[] = [
+						'after'     => '30 days ago',
+						'inclusive' => true,
+					];
+					break;
+
+				case 'year':
+					$date_query[] = [
+						'after' => '1 year ago',
+						'inclusive' => true,
+					];
+					break;
+
+				case 'other':
+
+					$date_query[] = [
+						'before' => [
+							'year'  => date('Y', $dataDateParams[2]),
+							'month' => date('m', $dataDateParams[2]),
+							'day'   => date('d', $dataDateParams[2]),
+						],
+						'after'  => [
+							'year'  => date('Y', $dataDateParams[1]),
+							'month' => date('m', $dataDateParams[1]),
+							'day'   => date('d', $dataDateParams[1]),
+						],
+						'inclusive' => true
+					];
+					break;
+
+				default :
+					$date_query = [];
+					break;
+			}
+
+			$args['date_query'] = $date_query;
 		}
 
 		// API Sort Posts
@@ -267,20 +362,28 @@ class Get_Posts {
 			{
 				if( function_exists(''. $ymc_query_type_callback .'' ) )
 				{
-					$custom_args =  $ymc_query_type_callback();
+					$atts = [ 'cpt' => $post_types, 'tax' => $taxonomy, 'term' => $terms ];
 
-					$intersect_keys_array = array_intersect_key($custom_args, $args); // intersection of array keys
+					$custom_args =  $ymc_query_type_callback( $atts );
 
-					$diff_keys_array = array_diff_key($custom_args, $args); // difference between array keys
-
-					foreach ( $intersect_keys_array as $key => $val )
+					if( is_array( $custom_args ) )
 					{
-						$args[$key] = $val;
+						$intersect_keys_array = array_intersect_key($custom_args, $args); // Intersection of array keys
+
+						$diff_keys_array = array_diff_key($custom_args, $args); // Difference between array keys
+
+						foreach ( $intersect_keys_array as $key => $val )
+						{
+							$args[$key] = $val;
+						}
+
+						foreach ( $diff_keys_array as $key => $val )
+						{
+							$args[$key] = $val;
+						}
 					}
-
-					foreach ( $diff_keys_array as $key => $val )
-					{
-						$args[$key] = $val;
+					else {
+						$custom_args = 'Function \'' . $ymc_query_type_callback . '\' returns an invalid value. Must be an array.';
 					}
 
 					$args['paged'] = $paged;
@@ -369,6 +472,12 @@ class Get_Posts {
 		wp_send_json($data);
 	}
 
+	/**
+	 * Whitelist post layouts based on the given post layout.
+	 *
+	 * @param string $post_layout The post layout to be whitelisted.
+	 * @return array The whitelisted post layouts.
+	 */
 	public function whitelist_post_layouts($post_layout) {
 
 		$filters = new Filters();
@@ -376,6 +485,12 @@ class Get_Posts {
 		return array_keys( $filters->ymc_post_layouts($post_layout) );
 	}
 
+	/**
+	 * Modify the SQL JOIN statement to include the postmeta table for custom meta data retrieval.
+	 *
+	 * @param string $join The existing SQL JOIN statement.
+	 * @return string The modified SQL JOIN statement.
+	 */
 	public function search_join( $join ) {
 
 		global $wpdb;
@@ -385,6 +500,12 @@ class Get_Posts {
 		return $join;
 	}
 
+	/**
+	 * Modify the WHERE clause of the SQL query to include postmeta table for custom meta data search.
+	 *
+	 * @param string $where The existing WHERE clause of the SQL query.
+	 * @return string The modified WHERE clause including the postmeta table search condition.
+	 */
 	public function search_where( $where ) {
 
 		global $wpdb;
@@ -396,11 +517,26 @@ class Get_Posts {
 		return $where;
 	}
 
+	/**
+	 * Returns the DISTINCT keyword used in SQL queries.
+	 *
+	 * @param array $where An array of conditions for the query
+	 * @return string The DISTINCT keyword
+	 */
 	public function search_distinct( $where ) {
 
 		return  'DISTINCT' ;
 	}
 
+	/**
+	 * Perform autocomplete search based on user input.
+	 *
+	 * This function retrieves search results based on the provided search phrase, chosen posts, and excluded posts.
+	 * It also takes into account selected taxonomy and terms for filtering.
+	 * The search results are formatted with highlighted matching phrases.
+	 *
+	 * @return void Outputs JSON response with search results
+	 */
 	public function autocomplete_search() {
 
 		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], Plugin::$instance->token_f) ) exit;
@@ -563,6 +699,13 @@ class Get_Posts {
 		wp_send_json($data);
 	}
 
+	/**
+	 * Add condition to filter posts alphabetically based on starting letter of post title.
+	 *
+	 * @param string $where The WHERE clause of the query.
+	 * @param WP_Query $query The WP_Query object.
+	 * @return string The modified WHERE clause.
+	 */
 	public function alphabetical_where( $where, $query ) {
 
 		global $wpdb;
@@ -575,6 +718,9 @@ class Get_Posts {
 	    return $where;
 	}
 
+	/**
+	 * Retrieves and displays the content for a popup based on the provided post ID, filter ID, and target ID.
+	 */
 	public function get_post_popup() {
 
 		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], Plugin::$instance->token_f) ) exit;

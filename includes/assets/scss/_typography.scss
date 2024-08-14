@@ -44,5 +44,27 @@ $fa-font-display: swap;
 }
 
 
+@font-face {
+  font-family: 'OpenSans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: $fa-font-display;
+  src: url('#{$fa-font-path}/OpenSans-Regular.woff2') format('woff2');
+}
 
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: $fa-font-display;
+  src: url('#{$fa-font-path}/Roboto-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'PlayfairDisplay';
+  font-style: normal;
+  font-weight: 400;
+  font-display: $fa-font-display;
+  src: url('#{$fa-font-path}/PlayfairDisplay-Regular.woff2') format('woff2');
+}
 

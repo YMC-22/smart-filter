@@ -432,6 +432,12 @@ class Meta_Boxes {
 			update_post_meta( $post_id, 'ymc_custom_after_js', $ymc_custom_after_js );
 		}
 
+		// Carousel Settings
+		if( isset($_POST['ymc_carousel_params']) ) {
+			$ymc_carousel_params = $_POST['ymc_carousel_params'];
+			update_post_meta( $post_id, 'ymc_carousel_params', $ymc_carousel_params );
+		}
+
 	}
 
 	public function ymc_attached_filters() {
@@ -467,7 +473,7 @@ class Meta_Boxes {
 			{
 				add_meta_box(
 					'ymc_filters_attached' ,
-					__('Attached Filter & Grids','ymc-smart-filter'),
+					__('Filter & Grids','ymc-smart-filter'),
 					array($this,'ymc_attached_filters_callback'),
 					Plugin::instance()->variables->display_cpt(['attachment', 'popup']),
 					'side',
@@ -494,13 +500,13 @@ class Meta_Boxes {
 
 		add_meta_box( 'ymc_top_meta_box' , __('Settings','ymc-smart-filter'), array($this,'ymc_top_meta_box'), 'ymc_filters', 'normal', 'core');
 
-		add_meta_box( 'ymc_side_meta_box_advertising' , __('Advanced Functionality','ymc-smart-filter'), array($this,'ymc_side_meta_box_advertising'), 'ymc_filters', 'side', 'core');
+		//add_meta_box( 'ymc_side_meta_box_advertising' , __('Advanced Functionality','ymc-smart-filter'), array($this,'ymc_side_meta_box_advertising'), 'ymc_filters', 'side', 'core');
 
 		add_meta_box( 'ymc_side_meta_box' , __('Filter & Grids Features','ymc-smart-filter'), array($this,'ymc_side_meta_box'), 'ymc_filters', 'side', 'core');
 
 	}
 
-	public function ymc_side_meta_box_advertising() { ?>
+	/*public function ymc_side_meta_box_advertising() { ?>
 
 		<article class="fg-plugin-features">
 			<div class="fg-plugin-banner">
@@ -508,7 +514,7 @@ class Meta_Boxes {
 			</div>
 		</article>
 
-	<?php }
+	<?php }*/
 
 	public function ymc_top_meta_box() { ?>
 
@@ -659,6 +665,7 @@ class Meta_Boxes {
 				<li><?php echo esc_html__('Installation of different types of pagination (Numeric, Load more, Scroll infinity).','ymc-smart-filter'); ?></li>
 				<li><?php echo esc_html__('Choice of different templates for filters and post cards.','ymc-smart-filter'); ?></li>
 				<li><?php echo esc_html__('Sorting posts on the frontend.','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('Support for sliders of different types.','ymc-smart-filter'); ?></li>
 				<li><?php echo esc_html__('Manual sorting of terms.','ymc-smart-filter'); ?></li>
 				<li><?php echo esc_html__('Creating custom queries (WP Query).','ymc-smart-filter'); ?></li>
 				<li><?php echo esc_html__('Fine tuning of each term (background, color, icons, etc.).','ymc-smart-filter'); ?></li>

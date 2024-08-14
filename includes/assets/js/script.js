@@ -4,13 +4,13 @@
 
     $(document).on('ready', function () {
 
-        /*** API FILTER ***/
-        const _FN = (function () {
+        /*** API YMCTools ***/
 
-            const _info = {
-                version: '2.8.13',
-                author: 'YMC'
-            }
+        /**
+         * YMCTools constructor function.
+         * @param {Object} settings - The settings object for configuring the YMCTools instance.
+         */
+        function YMCTools( settings ) {
 
             const _defaults = {
                 target : '.data-target-ymc1',
@@ -27,371 +27,457 @@
                 metaKey      : null
             }
 
-            function YMCTools(settings = _defaults) {
+            let properties = Object.assign({}, _defaults, settings);
 
-                let properties = Object.assign({}, _defaults, settings);
+            for (let key in properties) {
+                this[key] = properties[key];
+            }
+            this.length = Object.keys(properties).length;
+        }
 
-                for (let key in properties) {
-                    this[key] = properties[key];
-                }
-                this.length = Object.keys(properties).length;
+        /**
+         * Get information about the YMCTools object.
+         * @returns {string} Information about the author and version.
+         */
+        YMCTools.prototype.getInfo = function () {
+            return `Author: YMC. Version: 2.9.18`;
+        }
+
+        /**
+         * Update parameters for custom filter layout.
+         * This function updates parameters based on user interaction.
+         */
+        YMCTools.prototype.updateParams = function () {
+
+            let container = document.querySelector(''+ this.target +'');
+
+            if( ! container )  throw new Error("Filter not found");
+            if( this.self === null )  throw new Error("Terms is not defined");
+
+            let link  = $(this.self);
+            let dataParams = JSON.parse(container.dataset.params);
+
+            let termIds  = link.data('termid');
+
+            if( link.hasClass('multiple') ) {
+                link.toggleClass('active').closest('.filter-layout').find('.all').removeClass('active');
+            }
+            else {
+                link.addClass('active').
+                parent().
+                siblings().find('[data-termid]').
+                removeClass('active').closest('.filter-layout').find('.all').removeClass('active');
             }
 
-            YMCTools.prototype.getInfo = function () {
-                return `Author: ${_info.author}. Version: ${_info.version}`;
-            }
+            let listActiveItems = link.closest('.filter-layout').find('.active');
 
-            // Use for custom filter layout
-            YMCTools.prototype.updateParams = function () {
+            if(listActiveItems.length > 0) {
 
-                let container = document.querySelector(''+ this.target +'');
+                termIds = '';
 
-                if( ! container )  throw new Error("Filter not found");
-                if( this.self === null )  throw new Error("Terms is not defined");
-
-                let link  = $(this.self);
-                let dataParams = JSON.parse(container.dataset.params);
-
-                let termIds  = link.data('termid');
-
-                if( link.hasClass('multiple') ) {
-                    link.toggleClass('active').closest('.filter-layout').find('.all').removeClass('active');
-                }
-                else {
-                    link.addClass('active').
-                    parent().
-                    siblings().find('[data-termid]').
-                    removeClass('active').closest('.filter-layout').find('.all').removeClass('active');
-                }
-
-                let listActiveItems = link.closest('.filter-layout').find('.active');
-
-                if(listActiveItems.length > 0) {
-
-                    termIds = '';
-
-                    link.closest('.filter-layout').find('.active').each(function (){
-                        termIds += $(this).data('termid')+',';
-                    });
-
-                    termIds = termIds.replace(/,\s*$/, "");
-                }
-                else {
-                    termIds = link.closest('.filter-layout').find('.all').data('termid');
-                }
-
-                if(link.hasClass('all')) {
-                    link.addClass('active').parent().siblings().find('[data-termid]').removeClass('active');
-                }
-
-                dataParams.terms = termIds;
-                dataParams.page = 1;
-                dataParams.search = '';
-
-                container.dataset.params = JSON.stringify(dataParams);
-            }
-
-            // Run filter get posts
-            YMCTools.prototype.getFilterPosts = function () {
-
-                let container = document.querySelector(''+ this.target +'');
-
-                if( ! container )  throw new Error("Dom element not found");
-
-                let params      = JSON.parse(container.dataset.params);
-                let data_target = params.data_target;
-                let type_pg     = params.type_pg;
-
-                getFilterPosts({
-                    'paged'     : 1,
-                    'toggle_pg' : 1,
-                    'target'    : data_target,
-                    'type_pg'   : type_pg
+                link.closest('.filter-layout').find('.active').each(function (){
+                    termIds += $(this).data('termid')+',';
                 });
+
+                termIds = termIds.replace(/,\s*$/, "");
+            }
+            else {
+                termIds = link.closest('.filter-layout').find('.all').data('termid');
             }
 
-            //  === API Methods ===
-
-            YMCTools.prototype.apiChoicesPosts = function ( option = true ) {
-
-                let container = document.querySelector(''+ this.target +'');
-                if( ! container )  throw new Error("ApiChoicesPosts: Filter not found");
-                if( this.choicesPosts === null || typeof this.choicesPosts === 'number')  throw new Error("Choices Posts is not defined");
-
-                let dataParams = JSON.parse(container.dataset.params);
-
-                dataParams.page = 1;
-                dataParams.search = "";
-                dataParams.choices_posts = this.choicesPosts;
-
-                if( this.excludePosts !== null || this.excludePosts === 'on') {
-                    dataParams.exclude_posts = this.excludePosts;
-                }
-
-                container.dataset.params = JSON.stringify(dataParams);
-
-                if( option ) {
-                    this.getFilterPosts();
-                }
+            if(link.hasClass('all')) {
+                link.addClass('active').parent().siblings().find('[data-termid]').removeClass('active');
             }
 
-            YMCTools.prototype.apiTermUpdate = function ( option = true ) {
+            dataParams.terms = termIds;
+            dataParams.page = 1;
+            dataParams.search = '';
 
-                let container = document.querySelector(''+ this.target +'');
-                if( ! container )  throw new Error("ApiTermUpdate: Filter not found");
-                if( this.terms === null || typeof this.terms === 'number')  throw new Error("Terms is not defined");
+            container.dataset.params = JSON.stringify(dataParams);
+        }
 
-                let dataParams = JSON.parse(container.dataset.params);
+        /**
+         * Executes the filter to retrieve posts.
+         */
+        YMCTools.prototype.getFilterPosts = function () {
 
-                dataParams.page = 1;
-                dataParams.search = "";
-                dataParams.terms = this.terms.replace(/<[^>]+>/g, '');
+            let container = document.querySelector(''+ this.target +'');
 
-                container.dataset.params = JSON.stringify(dataParams);
+            if( ! container )  throw new Error("Dom element not found");
 
-                if( option ) {
-                    this.getFilterPosts();
-                }
+            let params      = JSON.parse(container.dataset.params);
+            let data_target = params.data_target;
+            let type_pg     = params.type_pg;
+
+            getFilterPosts({
+                'paged'     : 1,
+                'toggle_pg' : 1,
+                'target'    : data_target,
+                'type_pg'   : type_pg
+            });
+        }
+
+        /**
+         * Retrieves the choices posts based on the provided options.
+         * @param {boolean} option - Indicates whether to perform the operation. Default is true.
+         */
+        YMCTools.prototype.apiChoicesPosts = function ( option = true ) {
+
+            let container = document.querySelector(''+ this.target +'');
+            if( ! container )  throw new Error("ApiChoicesPosts: Filter not found");
+            if( this.choicesPosts === null || typeof this.choicesPosts === 'number')  throw new Error("Choices Posts is not defined");
+
+            let dataParams = JSON.parse(container.dataset.params);
+
+            dataParams.page = 1;
+            dataParams.search = "";
+            dataParams.choices_posts = this.choicesPosts;
+
+            if( this.excludePosts !== null || this.excludePosts === 'on') {
+                dataParams.exclude_posts = this.excludePosts;
             }
 
-            YMCTools.prototype.apiPopup = function ( postID ) {
+            container.dataset.params = JSON.stringify(dataParams);
 
-                let container = document.querySelector(''+ this.target +'');
-                if( ! container )  throw new Error("ApiPopup: Target not found");
-                if( ! postID ) throw new Error("ApiPopup: Post ID not defined");
-
-                const options = {
-                    'postid' : postID,
-                    'target' : this.target
-                };
-                popupApiPost( options );
-            }
-
-            YMCTools.prototype.apiMetaUpdate = function ( option = true ) {
-
-                let container = document.querySelector(''+ this.target +'');
-                if( ! container )  throw new Error("ApiMetaUpdate: Filter not found");
-
-                let dataParams = JSON.parse(container.dataset.params);
-
-                dataParams.page = 1;
-                dataParams.search = "";
-                dataParams.meta_query = ( this.meta !== null ) ? this.meta : '';
-
-                container.dataset.params = JSON.stringify(dataParams);
-
-                if( option ) {
-                    this.getFilterPosts();
-                }
-            }
-
-            YMCTools.prototype.apiDateUpdate = function ( option = true ) {
-
-                let container = document.querySelector(''+ this.target +'');
-                if( ! container )  throw new Error("ApiDateUpdate: Filter not found");
-
-                let dataParams = JSON.parse(container.dataset.params);
-
-                dataParams.page = 1;
-                dataParams.search = "";
-                dataParams.date_query = ( this.date !== null ) ? this.date : '';
-
-                container.dataset.params = JSON.stringify(dataParams);
-
-                if( option ) {
-                    this.getFilterPosts();
-                }
-            }
-
-            YMCTools.prototype.apiTermClear = function ( option = true ) {
-
-                let container = document.querySelector(''+ this.target +'');
-                if( ! container )  throw new Error("ApiTermClear: Filter not found");
-
-                let dataParams = JSON.parse(container.dataset.params);
-                dataParams.terms = "";
-                dataParams.search = "";
-                container.dataset.params = JSON.stringify(dataParams);
-
-                if( option ) {
-                    this.getFilterPosts();
-                }
-            }
-
-            YMCTools.prototype.apiMetaClear = function ( option = true ) {
-
-                let container = document.querySelector(''+ this.target +'');
-                if( ! container )  throw new Error("ApiMetaClear: Filter not found");
-
-                let dataParams = JSON.parse(container.dataset.params);
-                dataParams.meta_query = "";
-                dataParams.search = "";
-                container.dataset.params = JSON.stringify(dataParams);
-
-                if( option ) {
-                    this.getFilterPosts();
-                }
-            }
-
-            YMCTools.prototype.apiDateClear = function ( option = true ) {
-
-                let container = document.querySelector(''+ this.target +'');
-                if( ! container )  throw new Error("ApiDateClear: Filter not found");
-
-                let dataParams = JSON.parse(container.dataset.params);
-                dataParams.date_query = "";
-                dataParams.search = "";
-                container.dataset.params = JSON.stringify(dataParams);
-
-                if( option ) {
-                    this.getFilterPosts();
-                }
-            }
-
-            YMCTools.prototype.apiSortClear = function ( option = true ) {
-
-                let container = document.querySelector(''+ this.target +'');
-                if( ! container )  throw new Error("ApiSortClear: Filter not found");
-
-                let dataParams = JSON.parse(container.dataset.params);
-
-                dataParams.search = "";
-                dataParams.sort_order = "";
-                dataParams.sort_orderby = "";
-                dataParams.meta_key = "";
-
-                container.dataset.params = JSON.stringify(dataParams);
-
-                if( option ) {
-                    this.getFilterPosts();
-                }
-            }
-
-            YMCTools.prototype.apiLetterAlphabetClear = function ( option = true ) {
-
-                let container = document.querySelector(''+ this.target +'');
-                if( ! container )  throw new Error("apiLetterAlphabetClear: Filter not found");
-
-                let dataParams = JSON.parse(container.dataset.params);
-                dataParams.search = "";
-                dataParams.letter = "";
-                container.dataset.params = JSON.stringify(dataParams);
-
-                if( option ) {
-                    this.getFilterPosts();
-                }
-            }
-
-            YMCTools.prototype.apiSearchPosts = function ( option = true, terms = [] ) {
-
-                let container = document.querySelector(''+ this.target +'');
-                if( ! container )  throw new Error("ApiSearchPosts: Filter not found");
-                if( this.search === null || typeof this.terms === 'number')  throw new Error("Search is not defined");
-
-                let dataParams = JSON.parse(container.dataset.params);
-
-                dataParams.page = 1;
-                dataParams.search = this.search;
-
-                dataParams.terms = ( Array.isArray(terms) && terms.length > 0 ) ? terms.join(',') :
-                    ( dataParams.search_filtered_posts === "1" ) ? dataParams.terms : "";
-
-                dataParams.meta_query = "";
-                dataParams.date_query = "";
-
-                container.dataset.params = JSON.stringify(dataParams);
-
-                if( option ) {
-                    this.getFilterPosts();
-                }
-            }
-
-            YMCTools.prototype.apiSortPosts = function ( option = true ) {
-
-                let container = document.querySelector(''+ this.target +'');
-                if( ! container )  throw new Error("ApiSortPosts: Filter not found");
-                if( this.sortOrder === null || typeof this.sortOrder === 'number')  throw new Error("Sort Order is not defined");
-                if( this.sortOrderBy === null || typeof this.sortOrderBy === 'number')  throw new Error("Sort OrderBy is not defined");
-
-                let dataParams = JSON.parse(container.dataset.params);
-
-                dataParams.page = 1;
-                dataParams.search = "";
-                dataParams.sort_order = this.sortOrder;
-                dataParams.sort_orderby = this.sortOrderBy;
-                dataParams.meta_key = this.metaKey;
-
-                container.dataset.params = JSON.stringify(dataParams);
-
-                if( option ) {
-                    this.getFilterPosts();
-                }
-            }
-
-            YMCTools.prototype.apiPageUpdated = function ( page = 1 ) {
-
-                let container = document.querySelector(''+ this.target +'');
-                if( ! container )  throw new Error("apiPageUpdated: Filter not found");
-
-                let dataParams = JSON.parse(container.dataset.params);
-
-                let data_target = dataParams.data_target;
-                let type_pg     = dataParams.type_pg;
-
-                getFilterPosts({
-                    'paged'     : page,
-                    'toggle_pg' : 1,
-                    'target'    : data_target,
-                    'type_pg'   : type_pg
-                });
-            }
-
-            YMCTools.prototype.apiGetPosts = function () {
+            if( option ) {
                 this.getFilterPosts();
             }
+        }
 
-            YMCTools.prototype.apiMultiplePosts = function ( option = true, cpt = '', tax = '', terms = '' ) {
+        /**
+         * Updates the terms in the filter based on user interaction.
+         * @param {boolean} option - Indicates whether to perform the operation. Default is true.
+         */
+        YMCTools.prototype.apiTermUpdate = function ( option = true ) {
 
-                let container = document.querySelector(''+ this.target +'');
-                if( ! container )  throw new Error("ApiMultiplePosts: Filter not found");
+            let container = document.querySelector(''+ this.target +'');
+            if( ! container )  throw new Error("ApiTermUpdate: Filter not found");
+            if( this.terms === null || typeof this.terms === 'number')  throw new Error("Terms is not defined");
 
-                let dataParams = JSON.parse(container.dataset.params);
+            let dataParams = JSON.parse(container.dataset.params);
 
-                dataParams.page = 1;
-                dataParams.search = "";
+            dataParams.page = 1;
+            dataParams.search = "";
+            dataParams.terms = this.terms.replace(/<[^>]+>/g, '');
 
-                dataParams.cpt = ( cpt !== '' ) ? cpt.replaceAll(' ', '') : dataParams.cpt;
+            container.dataset.params = JSON.stringify(dataParams);
 
-                dataParams.tax = ( tax !== '' ) ? tax.replaceAll(' ', '') : dataParams.tax;
-
-                dataParams.terms = ( terms !== '' ) ? terms.replaceAll(' ', '') : dataParams.terms;
-
-                container.dataset.params = JSON.stringify(dataParams);
-
-                if( option ) {
-                    this.getFilterPosts();
-                }
+            if( option ) {
+                this.getFilterPosts();
             }
+        }
 
-            return function (settings) {
-                return  new YMCTools(settings);
+        /**
+         * Opens a popup for the given post ID.
+         * @param {string} postID - The ID of the post.
+         */
+        YMCTools.prototype.apiPopup = function ( postID ) {
+
+            let container = document.querySelector(''+ this.target +'');
+            if( ! container )  throw new Error("ApiPopup: Target not found");
+            if( ! postID ) throw new Error("ApiPopup: Post ID not defined");
+
+            const options = {
+                'postid' : postID,
+                'target' : this.target
+            };
+            popupApiPost( options );
+        }
+
+        /**
+         * Updates the meta data based on the user's selection.
+         * @param {boolean} [option=true] - Indicates whether to perform the update. Default is true.
+         */
+        YMCTools.prototype.apiMetaUpdate = function ( option = true ) {
+
+            let container = document.querySelector(''+ this.target +'');
+            if( ! container )  throw new Error("ApiMetaUpdate: Filter not found");
+
+            let dataParams = JSON.parse(container.dataset.params);
+
+            dataParams.page = 1;
+            dataParams.search = "";
+            dataParams.meta_query = ( this.meta !== null ) ? this.meta : '';
+
+            container.dataset.params = JSON.stringify(dataParams);
+
+            if( option ) {
+                this.getFilterPosts();
             }
+        }
 
-        }());
+        /**
+         * Updates the API date with the specified options.
+         * @param {boolean} option - Determines if filter posts should be fetched after updating the date.
+         */
+        YMCTools.prototype.apiDateUpdate = function ( option = true ) {
+
+            let container = document.querySelector(''+ this.target +'');
+            if( ! container )  throw new Error("ApiDateUpdate: Filter not found");
+
+            let dataParams = JSON.parse(container.dataset.params);
+
+            dataParams.page = 1;
+            dataParams.search = "";
+            dataParams.date_query = ( this.date !== null ) ? this.date : '';
+
+            container.dataset.params = JSON.stringify(dataParams);
+
+            if( option ) {
+                this.getFilterPosts();
+            }
+        }
+
+        /**
+         * Clears the terms in the filter and updates the search value.
+         * @param {boolean} [option=true] - Indicates whether to clear the terms. Default is true.
+         */
+        YMCTools.prototype.apiTermClear = function ( option = true ) {
+
+            let container = document.querySelector(''+ this.target +'');
+            if( ! container )  throw new Error("ApiTermClear: Filter not found");
+
+            let dataParams = JSON.parse(container.dataset.params);
+            dataParams.terms = "";
+            dataParams.search = "";
+            container.dataset.params = JSON.stringify(dataParams);
+
+            if( option ) {
+                this.getFilterPosts();
+            }
+        }
+
+        /**
+         * Clears the API metadata in the specified container.
+         * If the option is true, it also retrieves filter posts.
+         * @param {boolean} option - Indicates whether to retrieve filter posts after clearing metadata.
+         */
+        YMCTools.prototype.apiMetaClear = function ( option = true ) {
+
+            let container = document.querySelector(''+ this.target +'');
+            if( ! container )  throw new Error("ApiMetaClear: Filter not found");
+
+            let dataParams = JSON.parse(container.dataset.params);
+            dataParams.meta_query = "";
+            dataParams.search = "";
+            container.dataset.params = JSON.stringify(dataParams);
+
+            if( option ) {
+                this.getFilterPosts();
+            }
+        }
+
+        /**
+         * Clears the date in the API and updates the search value.
+         * @param {boolean} [option=true] - Indicates whether to clear the date. Default is true.
+         */
+        YMCTools.prototype.apiDateClear = function ( option = true ) {
+
+            let container = document.querySelector(''+ this.target +'');
+            if( ! container )  throw new Error("ApiDateClear: Filter not found");
+
+            let dataParams = JSON.parse(container.dataset.params);
+            dataParams.date_query = "";
+            dataParams.search = "";
+            container.dataset.params = JSON.stringify(dataParams);
+
+            if( option ) {
+                this.getFilterPosts();
+            }
+        }
+
+        /**
+         * Clears the sorting and search parameters in the API filter.
+         * @param {boolean} [option=true] - Determines whether to fetch posts after clearing.
+         */
+        YMCTools.prototype.apiSortClear = function ( option = true ) {
+
+            let container = document.querySelector(''+ this.target +'');
+            if( ! container )  throw new Error("ApiSortClear: Filter not found");
+
+            let dataParams = JSON.parse(container.dataset.params);
+
+            dataParams.search = "";
+            dataParams.sort_order = "";
+            dataParams.sort_orderby = "";
+            dataParams.meta_key = "";
+
+            container.dataset.params = JSON.stringify(dataParams);
+
+            if( option ) {
+                this.getFilterPosts();
+            }
+        }
+
+        /**
+         * Clears the search and letter filters in the alphabet container.
+         * @param {boolean} [option=true] - Whether to get filter posts after clearing.
+         */
+        YMCTools.prototype.apiLetterAlphabetClear = function ( option = true ) {
+
+            let container = document.querySelector(''+ this.target +'');
+            if( ! container )  throw new Error("apiLetterAlphabetClear: Filter not found");
+
+            let dataParams = JSON.parse(container.dataset.params);
+            dataParams.search = "";
+            dataParams.letter = "";
+            container.dataset.params = JSON.stringify(dataParams);
+
+            if( option ) {
+                this.getFilterPosts();
+            }
+        }
+
+        /**
+         * Updates parameters for searching posts based on user input.
+         * @param {boolean} [option=true] - Determines whether to fetch posts after searching.
+         * @param {Array} [terms=[]] - The array of search terms.
+         */
+        YMCTools.prototype.apiSearchPosts = function ( option = true, terms = [] ) {
+
+            let container = document.querySelector(''+ this.target +'');
+            if( ! container )  throw new Error("ApiSearchPosts: Filter not found");
+            if( this.search === null || typeof this.terms === 'number')  throw new Error("Search is not defined");
+
+            let dataParams = JSON.parse(container.dataset.params);
+
+            dataParams.page = 1;
+            dataParams.search = this.search;
+
+            dataParams.terms = ( Array.isArray(terms) && terms.length > 0 ) ? terms.join(',') :
+                ( dataParams.search_filtered_posts === "1" ) ? dataParams.terms : "";
+
+            dataParams.meta_query = "";
+            dataParams.date_query = "";
+
+            container.dataset.params = JSON.stringify(dataParams);
+
+            if( option ) {
+                this.getFilterPosts();
+            }
+        }
+
+        /**
+         * Sorts the posts based on specified criteria.
+         * @param {boolean} option - Determines whether to fetch and display the filtered posts after sorting.
+         */
+        YMCTools.prototype.apiSortPosts = function ( option = true ) {
+
+            let container = document.querySelector(''+ this.target +'');
+            if( ! container )  throw new Error("ApiSortPosts: Filter not found");
+            if( this.sortOrder === null || typeof this.sortOrder === 'number')  throw new Error("Sort Order is not defined");
+            if( this.sortOrderBy === null || typeof this.sortOrderBy === 'number')  throw new Error("Sort OrderBy is not defined");
+
+            let dataParams = JSON.parse(container.dataset.params);
+
+            dataParams.page = 1;
+            dataParams.search = "";
+            dataParams.sort_order = this.sortOrder;
+            dataParams.sort_orderby = this.sortOrderBy;
+            dataParams.meta_key = this.metaKey;
+
+            container.dataset.params = JSON.stringify(dataParams);
+
+            if( option ) {
+                this.getFilterPosts();
+            }
+        }
+
+        /**
+         * Update the API page with the specified page number.
+         * @param {number} page - The page number to update to. Default is 1.
+         */
+        YMCTools.prototype.apiPageUpdated = function ( page = 1 ) {
+
+            let container = document.querySelector(''+ this.target +'');
+            if( ! container )  throw new Error("apiPageUpdated: Filter not found");
+
+            let dataParams = JSON.parse(container.dataset.params);
+
+            let data_target = dataParams.data_target;
+            let type_pg     = dataParams.type_pg;
+
+            getFilterPosts({
+                'paged'     : page,
+                'toggle_pg' : 1,
+                'target'    : data_target,
+                'type_pg'   : type_pg
+            });
+        }
+
+        /**
+         * Calls the function to fetch and display filtered posts.
+         */
+        YMCTools.prototype.apiGetPosts = function () {
+            this.getFilterPosts();
+        }
+
+        /**
+         * Updates the API page with the specified page number.
+         * @param option
+         * @param cpt
+         * @param tax
+         * @param terms
+         */
+        YMCTools.prototype.apiMultiplePosts = function ( option = true, cpt = '', tax = '', terms = '' ) {
+
+            let container = document.querySelector(''+ this.target +'');
+            if( ! container )  throw new Error("ApiMultiplePosts: Filter not found");
+
+            let dataParams = JSON.parse(container.dataset.params);
+
+            dataParams.page = 1;
+            dataParams.search = "";
+
+            dataParams.cpt = ( cpt !== '' ) ? cpt.replaceAll(' ', '') : dataParams.cpt;
+
+            dataParams.tax = ( tax !== '' ) ? tax.replaceAll(' ', '') : dataParams.tax;
+
+            dataParams.terms = ( terms !== '' ) ? terms.replaceAll(' ', '') : dataParams.terms;
+
+            container.dataset.params = JSON.stringify(dataParams);
+
+            if( option ) {
+                this.getFilterPosts();
+            }
+        }
+        
+        /**
+         * Function to create a new YMCTools instance based on the provided settings.
+         * @param {Object} settings - The settings object for configuring the YMCTools instance.
+         * @returns {YMCTools} - A new YMCTools instance.
+         */
+        const _FN = function ( settings ) {
+            return new YMCTools( settings )
+        };
 
         ( typeof window.YMCTools === 'undefined' ) ? window.YMCTools = _FN : console.error('YMCTools is existed');
 
-        // Path preloader image
+
+        /*** CONSTANTS ***/
+
+        /**
+         * Preloader path
+         * @type {string}
+         */
         const pathPreloader = _smart_filter_object.path+"/includes/assets/images/preloader.svg";
 
-        // Options IntersectionObserver
+
+        /**
+         * Options for IntersectionObserver
+         * @type {{root: null, rootMargin: string, threshold: number}}
+         */
         const optionsInfinityScroll = {
             root: null,
             rootMargin: '0px',
             threshold: 0.8
         }
 
-        // Object Observer
+
+        /**
+         * Observer for IntersectionObserver
+         * @type {IntersectionObserver}
+         */
         const postsObserver = new IntersectionObserver((entries, observer) => {
 
             entries.forEach(entry => {
@@ -415,7 +501,19 @@
 
         }, optionsInfinityScroll);
 
-        // Set Preloader
+
+        /*** FUNCTIONS ***/
+
+
+        /**
+         * Filter preloader based on parameters
+         *
+         * @param {object} params - The parameters for filtering the preloader
+         * @param {string} params.preloader_filters - The type of filter
+         * @param {number} params.preloader_filters_rate - The rate for the filter
+         * @param {string} params.preloader_filters_custom - The custom filter
+         * @returns {string} - The filtered preloader output
+         */
         function filterPreloader( params ) {
 
             let filter = params.preloader_filters;
@@ -436,7 +534,13 @@
             return output;
         }
 
-        // Masonry Layouts
+        /**
+         * Function to set up Masonry Grid layouts.
+         *
+         * @param {HTMLElement} el - The element to apply the masonry grid to.
+         * @param {string} f - The value for f.
+         * @param {string} c - The value for c.
+         */
         function masonryGrid( el, f, c ) {
 
             if( el.classList.contains("ymc-post-masonry") || el.classList.contains("ymc-post-custom-masonry") ) {
@@ -454,7 +558,10 @@
             }
         }
 
-        // Popup
+        /**
+         * Function to handle the popup post.
+         * @param {Event} e - The event triggering the popup.
+         */
         function popupPost(e) {
             e.preventDefault();
             let _self = $(e.target);
@@ -487,6 +594,8 @@
                     prepend(`<img class="preloader preloader--popup" src="${stylePreloader}" style="${preloaderFilter}">`);
 
                     // Add Hook: before open popup
+                    wp.hooks.doAction('ymc_before_popup_open');
+                    wp.hooks.doAction('ymc_before_popup_open_'+params.filter_id);
                     wp.hooks.doAction('ymc_before_popup_open_'+params.filter_id+'_'+params.target_id);
                 },
                 success: function (res) {
@@ -503,6 +612,8 @@
                     }
 
                     // Add Hook: after open popup
+                    wp.hooks.doAction('ymc_after_popup_open', res.data);
+                    wp.hooks.doAction('ymc_after_popup_open_'+params.filter_id, res.data);
                     wp.hooks.doAction('ymc_after_popup_open_'+params.filter_id+'_'+params.target_id, res.data);
                 },
                 error: function (obj, err) {
@@ -511,7 +622,10 @@
             });
         }
 
-        // Close popup
+        /**
+         * Function to close the popup.
+         * @param {Event} e - The event triggering the function.
+         */
         function popupClose(e) {
             e.preventDefault();
 
@@ -526,7 +640,13 @@
             bodyHtml.css({'overflow' : 'auto'});
         }
 
-        // Popup API
+        /**
+         * Function to handle the popup API.
+         *
+         * @param {Object} options - The options for the popup.
+         * @param {string} options.postid - The post ID for the popup.
+         * @param {string} options.target - The target element for the popup.
+         */
         function popupApiPost( options ) {
 
             let postID = options.postid;
@@ -566,6 +686,104 @@
                     },
                     error: function (obj, err) {
                         console.log( obj, err );
+                    }
+                });
+            }
+        }
+
+        /**
+         * This function initializes a Swiper carousel for posts if the given element has the specified class.
+         * @param {Element} el - The element to check for the class.
+         * @param {string} f - The value to use in the event hook.
+         * @param {string} c - The value to use in the event hook.
+         * @param {object} p - An object containing parameters for the Swiper carousel.
+         */
+        function carouselPosts( el,f,c,p ) {
+
+            if( el.classList.contains("ymc-post-carousel-layout") ) {
+
+                wp.hooks.addAction('ymc_complete_loaded_data_'+f+'_'+c, 'smartfilter', function(class_name, status) {
+                    
+                    if( 'success' === status ) {
+
+                        // General Parameters
+                        let disabledSwiper  = JSON.parse(p.parameters.disabled);
+                        let autoHeight      = JSON.parse(p.parameters.autoHeight);
+                        let autoPlay        = JSON.parse(p.parameters.autoPlay);
+                        let delay           = JSON.parse(p.parameters.delay);
+                        let loop            = JSON.parse(p.parameters.loop);
+                        let centeredSlides  = JSON.parse(p.parameters.centeredSlides);
+                        let slidesPerView   = JSON.parse(p.parameters.slidesPerView);
+                        let spaceBetween    = JSON.parse(p.parameters.spaceBetween);
+                        let mousewheel      = JSON.parse(p.parameters.mousewheel);
+                        let speed           = JSON.parse(p.parameters.speed);
+                        let effect          = p.parameters.effect;
+
+                        // Pagination
+                        let visibilityPagination  = JSON.parse(p.pagination.visibility);
+                        let dynamicBullets = JSON.parse(p.pagination.dynamicBullets);
+                        let typePagination  = p.pagination.type;
+
+                        // Navigation
+                        let visibilityNav = JSON.parse(p.navigation.visibility);
+
+                        // Scrollbar
+                        let visibilityScroll = JSON.parse(p.scroll.visibility);
+
+                        // Add Class spaceBetweenSlide to container posts
+                        ( visibilityNav ) ? $(el).find('.carousel-container .post-carousel-layout').addClass('spaceBetweenSlide') : '';
+
+                        // Init Swiper
+                        if( disabledSwiper ) {
+
+                            new Swiper(`.swiper-${f}-${c}`, {
+                                // Default parameters
+                                grabCursor: true,
+                                spaceBetween: spaceBetween,
+                                centeredSlides: centeredSlides,
+
+                                // General Parameters
+                                autoHeight: autoHeight,
+                                autoplay: ( autoPlay) ? { delay: delay } : false,
+                                loop: loop,
+                                slidesPerView: slidesPerView,
+                                mousewheel: ( mousewheel ) ? { invert: true } : false,
+                                speed: speed,
+                                effect: effect,
+                                fadeEffect: ( effect === 'fade' ) ? { crossFade: true } : '',
+                                creativeEffect: ( effect === 'creative' ) ? {
+                                    prev: { shadow: true, translate: [0, 0, -400] },
+                                    next: { translate: ["100%", 0, 0] },
+                                } : '',
+
+
+                                // Pagination Dots
+                                pagination: ( visibilityPagination ) ?  {
+                                    el: '.swiper-pagination',
+                                    clickable: true,
+                                    dynamicBullets : dynamicBullets,
+                                    type: typePagination,
+
+                                } : false,
+
+                                // Navigation Arrows
+                                navigation:  {
+                                    nextEl: '.swiper-button-next',
+                                    prevEl: '.swiper-button-prev',
+                                    enabled: visibilityNav
+                                } ,
+
+                                // Scrollbar
+                                scrollbar:  {
+                                    el: '.swiper-scrollbar',
+                                        draggable: true,
+                                        enabled: visibilityScroll
+                                }
+                            });
+                        }
+                    }
+                    else {
+                        console.error('Failed to load data');
                     }
                 });
             }
@@ -619,6 +837,8 @@
                     }
 
                     // Add Hook: before loaded posts
+                    wp.hooks.doAction('ymc_before_loaded_data', target);
+                    wp.hooks.doAction('ymc_before_loaded_data_'+filterID, target);
                     wp.hooks.doAction('ymc_before_loaded_data_'+filterID+'_'+targetID, target);
                 },
                 success: function (res) {
@@ -734,11 +954,15 @@
                     document.querySelector('.'+target).dataset.loading = 'true';
 
                     // Add Hook: after loaded posts
+                    wp.hooks.doAction('ymc_after_loaded_data', target, res);
+                    wp.hooks.doAction('ymc_after_loaded_data_'+filterID, target, res);
                     wp.hooks.doAction('ymc_after_loaded_data_'+filterID+'_'+targetID, target, res);
 
                 },
                 complete: function (XHR, status) {
                     // Add Hook: called regardless of if the request was successful, or not
+                    wp.hooks.doAction('ymc_complete_loaded_data', target, status);
+                    wp.hooks.doAction('ymc_complete_loaded_data_'+filterID, target, status);
                     wp.hooks.doAction('ymc_complete_loaded_data_'+filterID+'_'+targetID, target, status);
                 },
                 error: function (obj, err) {
@@ -747,7 +971,10 @@
             });
         }
 
-        // Init Loading Posts
+        /**
+         * Initialize Loading Filters & entry point
+         * Add Hook: stop loading posts on page load
+         */
         document.querySelectorAll('.ymc-smart-filter-container').forEach(function (el) {
 
             // Add Hook: stop loading posts on page load
@@ -759,6 +986,7 @@
             let type_pg     = params.type_pg;
             let filter_id = params.filter_id;
             let target_id = params.target_id;
+            let carousel_params = params.carousel_params;
 
             if( loadingPosts === 'true' )
             {
@@ -776,13 +1004,17 @@
                     'target'    : data_target,
                     'type_pg'   : type_pg
                 });
+
                 // Run Masonry Grid
                 masonryGrid(el, filter_id, target_id);
+
+                // Carousel Posts
+                carouselPosts(el, filter_id, target_id, carousel_params);
             }
         });
 
 
-        /*** FILTERS LAYOUTS ***/
+        /*** EVENTS ***/
 
         // Filter Posts Layout1
         $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .filter-layout1 .filter-link, .ymc-extra-filter .filter-layout1 .filter-link', function (e) {
@@ -1193,12 +1425,12 @@
 
             if( link.hasClass('all') ) {
                 link.closest('.menu-passive__item').
-                siblings().find('.menu-link').
+                next().find('.menu-link').
                 removeClass('active');
             }
             else {
-                link.closest('.menu-passive__item').
-                siblings().find('.all').
+                link.closest('.menu-passive__inner-items').
+                prev().find('.all').
                 removeClass('active');
             }
 
@@ -1342,6 +1574,122 @@
                 });
             }
         });
+
+        // Filter Date
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .filter-date .date-ranges .date-ranges__selected, .ymc-extra-filter .filter-date .date-ranges .date-ranges__selected', function (e) {
+            $(this).closest('.date-ranges').toggleClass('open');
+        });
+
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .filter-date .date-ranges .date-ranges__dropdown [data-date], .ymc-extra-filter .filter-date .date-ranges .date-ranges__dropdown [data-date]', function (e) {
+
+            let self = $(this);
+            let filterContainer = this.closest('.ymc-smart-filter-container');
+            let dateAction = self.data('date');
+            let dateSelected = self.closest('.date-ranges').find('.date-ranges__selected');
+            let dateRangesCustom = self.closest('.date-ranges').siblings('.date-ranges-custom');
+
+            self.closest('.list-item').addClass('isActive').siblings().removeClass('isActive');
+
+            dateSelected.text(self.text());
+
+            if( dateAction === 'other' ) {
+                dateRangesCustom.show();
+
+                $('.datepicker').datepicker({
+                    dateFormat: 'M dd, yy',
+                    showAnim: 'slideDown',
+                    monthNamesShort: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ],
+                    onSelect: function(dateText, inst) {
+                        let timestamp = new Date(dateText).getTime() / 1000;
+                        let input = inst.input[0];
+                        input.dataset.timestamp = timestamp;
+                    }
+                });
+            }
+            else {
+                dateRangesCustom.hide();
+            }
+
+            if ( this.closest('.ymc-extra-filter') ) {
+                let extraFilterId   = self.closest('.ymc-extra-filter').data('extraFilterId');
+                filterContainer = document.querySelector(`.ymc-filter-${extraFilterId}`);
+            }
+
+            if( filterContainer && dateAction !== 'other' )
+            {
+                // Update data params
+                let params = JSON.parse( filterContainer.dataset.params);
+                params.filter_date = dateAction;
+                params.page = 1;
+                params.search = '';
+                filterContainer.dataset.params = JSON.stringify(params);
+
+                getFilterPosts({
+                    'paged'     : 1,
+                    'toggle_pg' : 1,
+                    'target'    : params.data_target,
+                    'type_pg'   : params.type_pg
+                });
+            }
+
+        });
+
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .filter-date .date-ranges-custom .btn-apply, .ymc-extra-filter .filter-date .date-ranges-custom .btn-apply', function (e) {
+
+            let self = $(this);
+            let filterContainer = this.closest('.ymc-smart-filter-container');
+            let dateFrom = parseInt( self.closest('.date-ranges-custom__container').find('[name="date_from"]')[0].dataset.timestamp )
+            let dateTo   = parseInt( self.closest('.date-ranges-custom__container').find('[name="date_to"]')[0].dataset.timestamp );
+
+            if ( this.closest('.ymc-extra-filter') ) {
+                let extraFilterId   = self.closest('.ymc-extra-filter').data('extraFilterId');
+                filterContainer = document.querySelector(`.ymc-filter-${extraFilterId}`);
+            }
+
+            if ( dateTo >= dateFrom )
+            {
+                self.closest('.date-ranges-custom').find('.message').empty().hide();
+                if( filterContainer )
+                {
+                    // Update data params
+                    let params = JSON.parse( filterContainer.dataset.params);
+                    params.filter_date = 'other,'+ dateFrom +','+ dateTo;
+                    params.page = 1;
+                    params.search = '';
+                    filterContainer.dataset.params = JSON.stringify(params);
+
+                    getFilterPosts({
+                        'paged'     : 1,
+                        'toggle_pg' : 1,
+                        'target'    : params.data_target,
+                        'type_pg'   : params.type_pg
+                    });
+                }
+            }
+            else {
+                self.closest('.date-ranges-custom').find('.message').html('The date range is incorrect.').show();
+            }
+        });
+
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .filter-date .date-ranges-custom .btn-cancel, .ymc-extra-filter .filter-date .date-ranges-custom .btn-cancel', function (e) {
+
+            let self = $(this);
+            let filterContainer = this.closest('.ymc-smart-filter-container');
+
+            if ( this.closest('.ymc-extra-filter') ) {
+                let extraFilterId   = self.closest('.ymc-extra-filter').data('extraFilterId');
+                filterContainer = document.querySelector(`.ymc-filter-${extraFilterId}`);
+            }
+
+            self.closest('.date-ranges-custom').
+            find('.message').empty().hide().end().
+            hide().
+            siblings('.date-ranges').
+            removeClass('open').
+            find('.date-ranges__dropdown [data-date="all"]').
+            trigger('click');
+        });
+
 
         // Filter: Alphabetical Navigation
         $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .alphabetical-layout .filter-link, .ymc-extra-filter .alphabetical-layout .filter-link', function (e) {
@@ -1717,6 +2065,10 @@
                 $('.ymc-smart-filter-container .search-form .component-input .autocomplete-results').empty().hide();
                 $('.ymc-extra-search .search-form .component-input .autocomplete-results').empty().hide();
             }
+            if( !e.target.closest('.date-ranges') ) {
+                $('.date-ranges').removeClass('open');
+            }
+
         });
 
         $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .search-form .autocomplete-results a[data-clue], .ymc-extra-search .search-form .autocomplete-results a[data-clue]', function (e) {

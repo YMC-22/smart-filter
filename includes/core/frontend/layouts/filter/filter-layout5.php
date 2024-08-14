@@ -4,7 +4,7 @@
 $ymcStyleRuleColor = !empty($ymc_filter_text_color) ? "color:".$ymc_filter_text_color.";" : '';
 $ymcStyleRuleBg   = !empty($ymc_filter_bg_color) ? "background-color:".$ymc_filter_bg_color.";" : '';
 $ymcStyleRuleActiveColor = !empty($ymc_filter_active_color) ? "color:".$ymc_filter_active_color.";" : '';
-$ymcStyleRuleFont = !empty($ymc_filter_font) ? "font-family:'".$ymc_filter_font."';" : '';
+$ymcStyleRuleFont = "font-family:'".$ymc_filter_font."';";
 
 $filter_css = "#ymc-smart-filter-container-".$c_target." .filter-layout5 .filter-entry .menu-passive .menu-link, 
                #ymc-extra-filter-".$c_target." .filter-layout5 .filter-entry .menu-passive .menu-link  { ". $ymcStyleRuleColor . $ymcStyleRuleBg." }
@@ -16,10 +16,10 @@ $filter_css = "#ymc-smart-filter-container-".$c_target." .filter-layout5 .filter
                #ymc-extra-filter-".$c_target." .filter-layout5 .filter-entry .menu-passive .menu-link { ". $ymcStyleRuleBg ." }
                #ymc-smart-filter-container-".$c_target." .filter-layout5 .filter-entry .menu-passive .menu-link.active,
                #ymc-extra-filter-".$c_target." .filter-layout5 .filter-entry .menu-passive .menu-link.active {".$ymcStyleRuleActiveColor."}
-               #ymc-smart-filter-container-".$c_target." .filter-layout5 .filter-entry .menu-passive .menu-link,
-               #ymc-extra-filter-".$c_target." .filter-layout5 .filter-entry .menu-passive .menu-link {".$ymcStyleRuleFont."}";
+               #ymc-smart-filter-container-".$c_target." .filter-layout5 .filter-entry,
+               #ymc-extra-filter-".$c_target." .filter-layout5 .filter-entry {".$ymcStyleRuleFont."}";
 
-echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
+echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) .'</style>';
 
 ?>
 
@@ -107,6 +107,8 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
                     <a class="menu-link all '. esc_attr($type_multiple) .' active" href="#" data-name="'.esc_attr($text_all).'" data-termid="'. esc_attr(rtrim($terms_categories, ',')) .'">'.
                      __('All','ymc-smart-filter'). '</a></div>';
 
+				echo '<div class="menu-passive__inner-items">';
+
 				// Variables: Options Term
 				$bg_term             = null;
 				$color_term          = null;
@@ -167,6 +169,7 @@ echo '<style id="'.$handle_filter.'">'.$filter_css.'</style>';
 					$name_term = '';
                 }
 
+                echo '</div>';
                 echo '</div>';
                 echo '</div>';
             }

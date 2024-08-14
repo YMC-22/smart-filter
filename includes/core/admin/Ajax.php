@@ -10,10 +10,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Ajax {
 
+	/**
+	 * @var string
+	 */
 	public $token;
 
+	/**
+	 * Constructor for initializing the Ajax class.
+	 */
 	public function __construct() {
 
+		// Set the token property
 		$this->token = Plugin::$instance->token_b;
 
 		add_action('wp_ajax_ymc_get_taxonomy',array($this, 'ymc_get_taxonomy'));
@@ -41,6 +48,9 @@ class Ajax {
 		add_action( 'wp_ajax_ymc_updated_taxonomy', array( $this, 'ymc_updated_taxonomy'));
 	}
 
+	/**
+	 * Retrieves taxonomy data based on custom post types and sends JSON response.
+	 */
 	public function ymc_get_taxonomy() {
 
 		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
@@ -91,7 +101,8 @@ class Ajax {
 
 			while ($query->have_posts()) {
 				$query->the_post();
-				$arr_posts[] = '<li><span class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">ID: '.get_the_ID().'<br>'. get_the_title(get_the_ID()).'</span></li>';
+				$arr_posts[] = '<li><span class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">
+				<span class="postID">ID: '.get_the_ID().'</span> <span class="postTitle">'. get_the_title(get_the_ID()).'</span></span></li>';
 			}
 			wp_reset_query();
 		}
@@ -105,6 +116,12 @@ class Ajax {
 		wp_send_json($data);
 	}
 
+	/**
+	 * Retrieves and returns terms based on the provided taxonomy.
+	 *
+	 * This function first checks the nonce code for security.
+	 * Then, it retrieves terms based on the taxonomy and sends the data as a JSON response.
+	 */
 	public function ymc_get_terms() {
 
 		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
@@ -128,6 +145,9 @@ class Ajax {
 
 	}
 
+	/**
+	 * Retrieves and updates taxonomy data based on custom post types and sends JSON response.
+	 */
 	public function ymc_updated_taxonomy() {
 
 		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
@@ -162,6 +182,9 @@ class Ajax {
 		wp_send_json($data);
 	}
 
+	/**
+	 * Sorts and updates taxonomy data based on the provided data and sends a JSON response.
+	 */
 	public function ymc_tax_sort() {
 
 		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
@@ -182,6 +205,9 @@ class Ajax {
 		wp_send_json($data);
 	}
 
+	/**
+	 * Sorts and updates terms based on the provided data and sends a JSON response.
+	 */
 	public function ymc_term_sort() {
 
 		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
@@ -202,6 +228,9 @@ class Ajax {
 		wp_send_json($data);
 	}
 
+	/**
+	 * Deletes choices posts based on the provided post ID and sends a JSON response.
+	 */
 	public function ymc_delete_choices_posts() {
 
 		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
@@ -217,6 +246,9 @@ class Ajax {
 		wp_send_json($data);
 	}
 
+	/**
+	 * Delete the choices icons associated with a post.
+	 */
 	public function ymc_delete_choices_icons() {
 
 		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
@@ -232,6 +264,9 @@ class Ajax {
 		wp_send_json($data);
 	}
 
+	/**
+	 * Updates the post meta with the provided data for terms alignment and sends a JSON response.
+	 */
 	public function ymc_options_icons() {
 
 		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
@@ -251,6 +286,9 @@ class Ajax {
 		wp_send_json($data);
 	}
 
+	/**
+	 * Handle updating posts based on the received data.
+	 */
 	public function ymc_updated_posts() {
 
 		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
@@ -318,7 +356,8 @@ class Ajax {
 
 				$query->the_post();
 
-				$output .= '<li><span class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">ID: '.get_the_ID().'<br>'.get_the_title(get_the_ID()).'</span></li>';
+				$output .= '<li><span class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">
+				<span class="postID">ID: '.get_the_ID().'</span> <span class="postTitle">'.get_the_title(get_the_ID()).'</span></span></li>';
 			}
 		}
 
@@ -330,6 +369,9 @@ class Ajax {
 		wp_send_json($data);
 	}
 
+	/**
+	 * Updates the post meta with the provided data for terms options and sends a JSON response.
+	 */
 	public function ymc_options_terms() {
 
 		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
@@ -349,6 +391,9 @@ class Ajax {
 		wp_send_json($data);
 	}
 
+	/**
+	 * Export settings to a JSON object.
+	 */
 	public function ymc_export_settings() {
 
 		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
@@ -364,9 +409,15 @@ class Ajax {
 			{
 				if( substr($key, 0, 4) === 'ymc_' )
 				{
-					foreach ( $value as $item ) {
-						$val = maybe_unserialize($item);
-						$need_options[$key] = $val;
+					if( $key !== 'ymc_custom_after_js' && $key !== 'ymc_custom_css'  )
+					{
+						foreach ( $value as $item ) {
+							$val = maybe_unserialize($item);
+							$need_options[$key] = $val;
+						}
+					}
+					else {
+						$need_options[$key] = '';
 					}
 				}
 			}
@@ -378,6 +429,9 @@ class Ajax {
 		exit;
 	}
 
+	/**
+	 * Processes the import of settings data and sends a JSON response.
+	 */
 	public function ymc_import_settings() {
 
 		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;

@@ -35,7 +35,8 @@ $terms_sel   = $terms_selected;
         </span>
 			</label>
 
-			<select class="form-select" multiple id="ymc-cpt-select" name="ymc-cpt-select[]" data-postid="<?php echo esc_attr($post->ID); ?>">
+			<select class="form-select" multiple id="ymc-cpt-select" name="ymc-cpt-select[]" data-postid="<?php echo esc_attr($post->ID); ?>"
+			        data-previous-value="<?php echo esc_attr(implode(',',$cpt)); ?>">
 			<?php
 				foreach( $cpost_types as $cpost_type ) {
 
@@ -52,7 +53,7 @@ $terms_sel   = $terms_selected;
 
 			<div class="multi-buttons">
 				<span class="ymc-btn-reload tax-reload" title="<?php esc_attr_e('Update taxonomy(s).','ymc-smart-filter'); ?>"><i class="fas fa-redo"></i></span>
-				<span class="ymc-btn-delete tax-delete" title="<?php esc_attr_e('Remove taxonomy(s) terms.','ymc-smart-filter'); ?>"><i class="far fa-trash-alt"></i></span>
+				<span class="ymc-btn-delete tax-delete" title="<?php esc_attr_e('Delete taxonomy(s).','ymc-smart-filter'); ?>"><i class="far fa-trash-alt"></i></span>
 			</div>
 
 			<label for="ymc-tax-checkboxes" class="form-label">
@@ -99,6 +100,7 @@ $terms_sel   = $terms_selected;
 						}
 
 						echo '<div id="'. esc_attr($slug) .'" class="group-elements">
+						<i class="fas fa-ellipsis-v handle"></i>
                         <input id="id-'. esc_attr($slug) .'" type="checkbox" name="ymc-taxonomy[]" value="'. esc_attr($slug) .'" '. esc_attr($sl0) .'>
                         <label for="id-'. esc_attr($slug) .'">'.  esc_html($label) . '</label></div>';
 
@@ -118,7 +120,10 @@ $terms_sel   = $terms_selected;
 
 			<label for="ymc-terms" class="form-label">
 				<?php echo esc_html__('Term(s)','ymc-smart-filter'); ?>
-				<span class="information"><?php echo esc_html__('Select terms. Sortable with Drag and Drop feature. Set the Sort Filter Terms option to Manual sort in the Appearance section.','ymc-smart-filter'); ?></span>
+				<span class="information"><?php echo __('Select terms. Sortable with Drag and Drop feature. 
+			   Set the Sort Filter Terms option to Manual Sort in the Appearance.<br> 
+			   <b>IMPORTANT!</b> If the Manual Sort parameter is set, then when adding new terms they will not be displayed.<br> 
+			   Switch the sort option to ASC or DESC to display all terms.','ymc-smart-filter'); ?></span>
 			</label>
 
 			<div class="category-list" id="ymc-terms" data-postid="<?php echo esc_attr($post->ID); ?>">
@@ -144,7 +149,7 @@ $terms_sel   = $terms_selected;
 									'hide_empty' => false,
 								]);
 
-								if( is_array($terms) )
+								if( is_array( $terms ) && ! is_wp_error( $terms ) )
 								{
 
 									// Variables: Options Term
@@ -165,7 +170,9 @@ $terms_sel   = $terms_selected;
 										$res_terms = [];
 										foreach( $terms as $term ) {
 											$key = array_search($term->term_id, $term_sort);
-											$res_terms[$key] = $term;
+											if( $key !== false ) {
+												$res_terms[$key] = $term;
+											}
 										}
 										ksort($res_terms);
 									}
@@ -272,7 +279,7 @@ $terms_sel   = $terms_selected;
 										$name_term = ( !empty($name_term) ) ? $name_term : $term->name;
 
 
-										echo '<div class="item-inner" style="'. esc_attr($style_bg_term) . esc_attr($style_color_term) .'" 
+							  echo '<div class="item-inner" style="'. esc_attr($style_bg_term) . esc_attr($style_color_term) .'" 
 			                  data-termid="'. esc_attr($term->term_id) .'" 
 			                  data-alignterm="'. esc_attr($class_terms_align) .'" 
 			                  data-bg-term="'. esc_attr($bg_term) .'" 
@@ -282,12 +289,16 @@ $terms_sel   = $terms_selected;
 			                  data-class-icon="'. esc_attr($class_icon) .'"
 			                  data-status-term="'. esc_attr($sl1) .'"  
 			                  data-name-term="'. esc_attr($name_term) .'"  
-			                  data-default-term="'. esc_attr($default_term) .'">
-                              <input name="ymc-terms[]" class="category-list" id="category-id-'. esc_attr($term->term_id) .'" type="checkbox" value="'. esc_attr($term->term_id) .'" '. esc_attr($sl1) .'>';
+			                  data-default-term="'. esc_attr($default_term) .'">';
 
-										echo '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">
+							  echo '<i class="fas fa-ellipsis-v handle"></i>';
+                              echo '<input name="ymc-terms[]" class="category-list" id="category-id-'. esc_attr($term->term_id) .'" type="checkbox" value="'. esc_attr($term->term_id) .'" '. esc_attr($sl1) .'>';
+
+							  echo '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">
 							  <span class="name-term">' . esc_html($name_term) .'</span>'. ' ('. esc_attr($term->count) .')</label>						  						  
-							  <i class="far fa-cog choice-icon" title="Setting Term"></i><span class="indicator-icon">'. $terms_icons .'</span></div>';
+							  <i class="far fa-cog choice-icon" title="Tag settings"></i><span class="indicator-icon">'. $terms_icons .'</span>';
+
+							  echo '</div>';
 
 
 										$terms_icons = '';
@@ -375,7 +386,7 @@ $terms_sel   = $terms_selected;
 										'hide_empty' => false
 									]);
 
-									if( $terms ) {
+									if( $terms  && ! is_wp_error( $terms )) {
 
 										$arr_terms_ids = [];
 
@@ -411,7 +422,8 @@ $terms_sel   = $terms_selected;
 									if( is_array($ymc_choices_posts) &&  array_search(get_the_ID(), $ymc_choices_posts) !== false) {
 										$class_disabled = 'disabled';
 									}
-									echo '<li><span class="ymc-rel-item ymc-rel-item-add '.$class_disabled.'" data-id="'.get_the_ID().'">ID: '.get_the_ID().'<br>'.get_the_title(get_the_ID()).'</span></li>';
+									echo '<li><div class="ymc-rel-item ymc-rel-item-add '.$class_disabled.'" data-id="'.get_the_ID().'">
+									<span class="postID">ID: '.get_the_ID().'</span> <span class="postTitle">'.get_the_title(get_the_ID()).'</span></div></li>';
 									$class_disabled = null;
 								endwhile;
 
@@ -445,8 +457,8 @@ $terms_sel   = $terms_selected;
 
 								while ($query->have_posts()) : $query->the_post();
 
-									echo '<li><input type="hidden" name="ymc-choices-posts[]" value="'.get_the_ID().'">
-							  <span  class="ymc-rel-item" data-id="'.get_the_ID().'">ID: '.get_the_ID().'<br>'.get_the_title(get_the_ID()).'
+									echo '<li class="item"><input type="hidden" name="ymc-choices-posts[]" value="'.get_the_ID().'">
+							  <span  class="ymc-rel-item" data-id="'.get_the_ID().'">'.get_the_title(get_the_ID()).'
 							  <a href="#" class="ymc-icon-minus remove_item"></a></span></li>';
 								endwhile;
 

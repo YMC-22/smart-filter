@@ -449,8 +449,6 @@ add_filter('ymc_filter_custom_extra_layout_545_1', 'custom_filter_extra_layout',
 ```
 
 
-
-
 **This filter allows you to change the popup custom layout**
 ```php
 add_filter('ymc_popup_custom_layout_FilterID_LayoutID', 'func_custom', 10, 2);
@@ -466,6 +464,42 @@ add_filter('ymc_popup_custom_layout_545_1', function ( $layout, $post_id ) {
 	return $output;
 	
 }, 10, 2);
+```
+
+**This filter allows you to change the carousel custom layout**
+```php
+add_filter('ymc_post_carousel_custom_FilterID_LayoutID', 'post_carousel_custom_layout', 10, 4);
+
+Usage example:
+/**
+ * Creating a Custom Carousel Layout
+ * @param {string} layout - HTML markup
+ * @param {int} post_id - Post ID
+ * @param {int} filter_id - Filter ID 
+ * @param {array} arrOptions - array of additional post parameters. It includes: 
+     - arrOptions['total'] - number of all posts
+     - arrOptions['class_popup'] - class btn popup. Set for btn post. Value: string or empty
+     - arrOptions['terms_settings'] - array of all terms with their settings. Value: object with the following properties. Default empty array.            
+        - termid - ID term
+        - bg - background term. Hex Color Codes (ex: #dd3333)
+        - color - color term. Hex Color Codes (ex: #dd3333)
+        - class - custom name class of the term
+        - status - selected term. Value: checked or empty
+        - alignterm - align icon in term
+        - coloricon - color icon
+        - classicon - name class icon (Font Awesome Icons. ex. far fa-arrow-alt-circle-down) 
+        - status - term status (checked)
+        - default - (string) default term (checked)
+        - name - (string) custom term name
+ * @returns {string} HTML markup card post
+ */
+add_filter('ymc_post_carousel_custom_layout_545_1', function ( $layouts, $post_id, $filter_id, $arrOptions ) {
+
+    $output =  '<h2>Header: '. get_the_title($post_id) .'</h2>';
+    $output .= '<div>Content: '. get_the_content($post_id) .'</div>';
+	return $output;
+	
+}, 10, 4);
 ```
 
 
@@ -793,6 +827,8 @@ wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(elem) {
 **Before loaded all posts.**
 
 ```js
+wp.hooks.addAction('ymc_before_loaded_data', 'smartfilter', 'callback(class_name)');
+wp.hooks.addAction('ymc_before_loaded_data_FilterID', 'smartfilter', 'callback(class_name)');
 wp.hooks.addAction('ymc_before_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name)');
 ```
 
@@ -814,6 +850,8 @@ wp.hooks.addAction('ymc_before_loaded_data_545_1', 'smartfilter', function(class
 **After loaded all posts.** 
 
 ```js
+wp.hooks.addAction('ymc_after_loaded_data', 'smartfilter', 'callback(class_name, response)');
+wp.hooks.addAction('ymc_after_loaded_data_FilterID', 'smartfilter', 'callback(class_name, response)');
 wp.hooks.addAction('ymc_after_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name, response)');
 ```
 
@@ -843,6 +881,8 @@ This hook is called regardless of if the request was successful, or not.
 You will always receive a complete callback, even for synchronous requests.
 
 ```js
+wp.hooks.addAction('ymc_complete_loaded_data', 'smartfilter', 'callback(class_name, status)');
+wp.hooks.addAction('ymc_complete_loaded_data_FilterID', 'smartfilter', 'callback(class_name, status)');
 wp.hooks.addAction('ymc_complete_loaded_data_FilterID_LayoutID', 'smartfilter', 'callback(class_name, status)');
 ```
 
@@ -883,7 +923,12 @@ Usage example:
 This hook allows you to run any desired script after opening a popup for each post
 
 ```js
+wp.hooks.addAction('ymc_before_popup_open', 'smartfilter', 'callback');
+wp.hooks.addAction('ymc_before_popup_open_FilterID', 'smartfilter', 'callback');
 wp.hooks.addAction('ymc_before_popup_open_FilterID_LayoutID', 'smartfilter', 'callback');
+
+wp.hooks.addAction('ymc_after_popup_open', 'smartfilter', 'callback(data)');
+wp.hooks.addAction('ymc_after_popup_open_FilterID', 'smartfilter', 'callback(data)');
 wp.hooks.addAction('ymc_after_popup_open_FilterID_LayoutID', 'smartfilter', 'callback(data)');
 ```
 **Params function callback:**
@@ -956,7 +1001,7 @@ posts_per_page=-1&post_type=portfolio&post_status=publish&orderby=title&tax_quer
 To use a callback for your query arguments simply enter your function name in the field and then add this function to your child theme's functions.php file. Your function should have a unique name and return an array of the arguments to pass onto WP_Query.
 Whitelisting Callbacks - **Important!** Your callback functions must be whitelisted in order for them to work. This is an important security measure.
 How to Whitelist Callback Functions for Elements? 
-In order to white list functions you need to define the “YMC_CALLBACK_FUNCTION_WHITELIST” constant via your child theme
+In order to white list functions you need to define the “YMC_CALLBACK_FUNCTION_WHITELIST” constant via your child theme.
 
 ```php
 /*
@@ -974,10 +1019,29 @@ In order to white list functions you need to define the “YMC_CALLBACK_FUNCTION
  
 
 ```
-Once you have defined the YMC_CALLBACK_FUNCTION_WHITELIST constant, you can register (define) a function from an existing list in an array, for example:
-
+Once you have defined the YMC_CALLBACK_FUNCTION_WHITELIST constant, you can register (define) a function from an existing list in an array.<br>
+The $atts function argument is an array of dynamic data set in the plugin settings.
+- $atts['cpt']  - ( Array ) array of selected post types
+- $atts['tax']  - ( Array | Bool ) array of all selected taxonomies or false
+- $atts['term'] - ( Array | Bool ) array of all taxonomy terms or false
+- 
+Example of use:
 ```php
-function my_custom_function_name_1() {
+function my_custom_function_name_1( $atts ) {
+
+   	$term_ids = [];
+
+    // Get all terms related to the post_tag taxonomy
+	if( is_array($atts['term']) && ! empty($atts['term']) ) :
+
+		foreach ( $atts['term'] as $term ) :
+			if( 'post_tag' === get_term( $term )->taxonomy) :
+				$term_ids[] = (int) $term;
+			endif;
+		endforeach;
+
+	endif;
+
 	return [
 		'post_type' => ['post'],
 		'posts_per_page' => 9,
@@ -986,7 +1050,12 @@ function my_custom_function_name_1() {
 				'taxonomy' => 'category',
 				'field' => 'id',
 				'terms' => [6, 7, 15]
-			)
+			),
+			array(
+				'taxonomy' => 'post_tag',
+				'field' => 'id',
+				'terms' => $term_ids
+			),
 		)
 	];
 }

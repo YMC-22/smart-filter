@@ -87,6 +87,33 @@ class Variables {
 
 	public $ymc_mobile_xs = 1;
 
+	public $ymc_carousel_params = [
+		"parameters" => [
+			"disabled"      => "true",
+			"autoHeight"    => "false",
+			"autoPlay"      => "false",
+			"delay"         => "500",
+			"loop"          => "false",
+			"centeredSlides"=> "false",
+			"slidesPerView" => "1",
+			"spaceBetween"  => "0",
+			"mousewheel"    => "false",
+			"speed"         => "300",
+			"effect"        => "slide"
+		],
+		"pagination" => [
+			"visibility"     => "true",
+			"dynamicBullets" => "false",
+			"type"           => "bullets"
+		],
+		"navigation" => [
+			"visibility" => "true"
+		],
+		"scroll" => [
+			"visibility" => "false"
+		]
+	];
+
 
 
 	/**
@@ -487,6 +514,15 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_mobile_xs', true );
 		}
 		return $this->ymc_mobile_xs;
+	}
+
+
+	public function get_ymc_carousel_params( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_carousel_params' ) ) {
+			return get_post_meta( $post_id, 'ymc_carousel_params', true );
+		}
+		return $this->ymc_carousel_params;
 	}
 
 
