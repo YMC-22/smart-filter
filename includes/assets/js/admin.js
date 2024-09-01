@@ -88,7 +88,7 @@
                 cursor: "move",
                 handle: '.handle',
                 opacity: 0.8,
-                revert: 150,
+                //revert: 150,
                 scroll: false,
                 containment: "parent",
                 start: function( event, ui ) {
@@ -128,7 +128,7 @@
                 axis: 'y',
                 cursor: "move",
                 opacity: 0.8,
-                revert: 150,
+                //revert: 150,
                 handle: '.handle',
                 containment: "parent",
                 start: function( event, ui ) {
@@ -136,6 +136,28 @@
                 },
                 stop: function( event, ui ) {
                     ui.item[0].closest('.entry-terms').classList.remove('dragging');
+                    updateSortTerms();
+                }
+            });
+        }
+
+        /**
+         * Sorts the nested terms within the entry-terms using drag and drop functionality.
+         */
+        function sortNestedTerms() {
+
+            $("#ymc-terms .entry-terms .sub_item").sortable({
+                axis: 'y',
+                cursor: "move",
+                opacity: 0.8,
+                //revert: true,
+                handle: '.handle_nested',
+                containment: "parent",
+                start: function( event, ui ) {
+                    ui.item[0].closest('.sub_item').classList.add('dragging');
+                },
+                stop: function( event, ui ) {
+                    ui.item[0].closest('.sub_item').classList.remove('dragging');
                     updateSortTerms();
                 }
             });
@@ -761,7 +783,8 @@
                 const data = {
                     'action': 'ymc_get_terms',
                     'nonce_code' : _smart_filter_object.nonce,
-                    'taxonomy' : val
+                    'taxonomy' : val,
+                    'post_id' : $(this).closest('#ymc-tax-checkboxes').data('postid')
                 };
 
                 $.ajax({
@@ -784,8 +807,8 @@
                         }
 
                         // Get Terms
-                        if( res.data.terms.length ) {
-
+                        if( res.data.terms.length )
+                        {
                             let output = '';
 
                             output += `<article class="group-term item-${val}">
@@ -794,8 +817,8 @@
                                        <label for='category-all-${val}' class='category-all-label'>All [ ${$(e.target).siblings('label').text()} ]</label></div>
                                        <div class="entry-terms">`;
 
-                            res.data.terms.forEach((el) => {
-                                output += `<div class='item-inner' 
+                            res.data.terms.forEach((el,i) => {
+                                output += `<div class="item"><div class='item-inner' 
                                 data-termid='${el.term_id}' 
                                 data-alignterm 
                                 data-bg-term 
@@ -812,6 +835,13 @@
                                 <i class="far fa-cog choice-icon" title="Tag settings"></i>
                                 <span class="indicator-icon"></span>                                
                                 </div>`;
+
+                                // Add Nestsed Tree Terms
+                                if( res.data.hierarchy.length && res.data.hierarchy[i] !== '' ) {
+                                    output += res.data.hierarchy[i];
+                                }
+
+                                output += `</div>`;
                             });
 
                             output += `</div></article>`;
@@ -1257,8 +1287,8 @@
                 selectedTerm.setAttribute('style',`background-color: ${bgTerm}; color: ${colorTerm}`) :
                 selectedTerm.removeAttribute('style');
 
-
-            document.querySelector('#ymc-terms .entry-terms .open-popup').dataset.colorIcon = colorIcon;
+            selectedTerm.querySelector('.name-term').innerText = nameTerm;
+            selectedTerm.dataset.colorIcon = colorIcon;
             $(selectedTerm).find('.indicator-icon i').attr('style',`color: ${colorIcon}`);
 
             updatedOptionsIcons();
@@ -1524,9 +1554,11 @@
         // Sort Terms
         sortTerms();
 
+        // Sort Nested Terms
+        sortNestedTerms();
+
         // Sort Selected Posts
         sortSelectedPosts();
-
     });
 
 }( jQuery ));

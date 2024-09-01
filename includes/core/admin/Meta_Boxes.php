@@ -125,7 +125,6 @@ class Meta_Boxes {
 			update_post_meta($post_id, 'ymc_multiple_filter', $ymc_multiple_filter);
 		}
 
-
 		// Post Layout
 		if ( isset($_POST['ymc-post-layout']) ) {
 			$post_layout = sanitize_text_field($_POST['ymc-post-layout']);
@@ -233,7 +232,6 @@ class Meta_Boxes {
 			$ymc_preloader_icon = sanitize_text_field($_POST['ymc-preloader-icon']);
 			update_post_meta($post_id, 'ymc_preloader_icon', $ymc_preloader_icon);
 		}
-
 
 		// Filter Font
 		if (isset($_POST['ymc-filter-font'])) {
@@ -438,6 +436,12 @@ class Meta_Boxes {
 			update_post_meta( $post_id, 'ymc_carousel_params', $ymc_carousel_params );
 		}
 
+		// Hierarchical Tree of Terms
+		if( isset($_POST['ymc_hierarchy_terms']) ) {
+			$ymc_hierarchy_terms = sanitize_text_field($_POST['ymc_hierarchy_terms']);
+			update_post_meta( $post_id, 'ymc_hierarchy_terms', $ymc_hierarchy_terms );
+		}
+
 	}
 
 	public function ymc_attached_filters() {
@@ -600,6 +604,7 @@ class Meta_Boxes {
 					$id = $post->ID;
 					require_once YMC_SMART_FILTER_DIR . '/includes/core/util/variables.php';
 					require_once YMC_SMART_FILTER_DIR . '/includes/core/util/icons.php';
+					require_once YMC_SMART_FILTER_DIR . '/includes/core/util/helper.php';
 
                 ?>
 

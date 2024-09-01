@@ -7,6 +7,7 @@ $cpt         = explode(',', $ymc_cpt_value);
 $tax         = $variable->tax;
 $tax_sel     = $tax_selected;
 $terms_sel   = $terms_selected;
+$ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 
 ?>
 
@@ -121,14 +122,36 @@ $terms_sel   = $terms_selected;
 			<label for="ymc-terms" class="form-label">
 				<?php echo esc_html__('Term(s)','ymc-smart-filter'); ?>
 				<span class="information"><?php echo __('Select terms. Sortable with Drag and Drop feature. 
-			   Set the Sort Filter Terms option to Manual Sort in the Appearance.<br> 
-			   <b>IMPORTANT!</b> If the Manual Sort parameter is set, then when adding new terms they will not be displayed.<br> 
-			   Switch the sort option to ASC or DESC to display all terms.','ymc-smart-filter'); ?></span>
+			    Set the Sorting terms option to Manual Sort in the Appearance - Filter Settings.','ymc-smart-filter'); ?></span>
 			</label>
 
-			<div class="category-list" id="ymc-terms" data-postid="<?php echo esc_attr($post->ID); ?>">
+			<div class="info-panel">
+				<span class="info-panel__text">
+					<?php echo esc_html__('Layout:','ymc-smart-filter'); ?>
+					<i><?php
+						$arrayFilterLayouts = \YMC_Smart_Filters\Plugin::instance()->filters->ymc_filter_layouts($ymc_filter_layout);
+						if ( array_key_exists($ymc_filter_layout, $arrayFilterLayouts) ) {
+							echo $arrayFilterLayouts[$ymc_filter_layout];
+						} ?>
+					</i>
+				</span>
+				<span class="info-panel__text">
+					<?php echo esc_html__('Type:','ymc-smart-filter'); ?>
+					<i><?php echo ( $ymc_hierarchy_terms ) ? esc_html('Hierarchy') : esc_html('List'); ?></i>
+				</span>
+				<span class="info-panel__text">
+					<?php echo esc_html__('Multiple Taxonomy:','ymc-smart-filter'); ?>
+					<i><?php echo ( (bool) $ymc_multiple_filter ) ? esc_html('Enabled') : esc_html('Disabled'); ?></i>
+				</span>
+				<span class="info-panel__text">
+					<?php echo esc_html__('Sorting:','ymc-smart-filter'); ?>
+					<i><?php echo esc_html($ymc_sort_terms); ?></i>
+				</span>
+			</div>
 
-				<?php
+			<div class="category-list <?php echo ( $ymc_hierarchy_terms ) ? esc_html('hierarchy') : esc_html('list'); ?>" id="ymc-terms" data-postid="<?php echo esc_attr($post->ID); ?>">
+
+			<?php
 				if( is_array($cpt) ) {
 
 					$is_cpt = true;
@@ -139,130 +162,119 @@ $terms_sel   = $terms_selected;
 						}
 					}
 
-					if( $is_cpt ) {
-						if( is_array($tax_sel) && count($tax_sel) > 0 ) {
-
+					if( $is_cpt )
+					{
+						if( is_array($tax_sel) && count($tax_sel) > 0 )
+						{
 							foreach ( $tax_sel as $tax ) :
 
-								$terms = get_terms([
+								$argsTerms = [
 									'taxonomy' => $tax,
-									'hide_empty' => false,
-								]);
+									'hide_empty' => false
+								];
+
+								// Set Sort Terms
+							    $order_terms = ( $ymc_sort_terms === 'desc' && $ymc_sort_terms !== 'manual' ) ? 'desc' : 'asc';
+								$argsTerms['order'] = $order_terms;
+
+								// Set parent for terms (Hierarchy Terms Tree)
+								( $ymc_hierarchy_terms ) ? $argsTerms['parent'] = 0 : '';
+
+								$terms = get_terms($argsTerms);
 
 								if( is_array( $terms ) && ! is_wp_error( $terms ) )
 								{
 
-									// Variables: Options Term
-									$bg_term          = '';
-									$color_term       = '';
-									$class_term       = '';
-									$default_term     = '';
-									$name_term        = '';
+									// Options Term
+									$bg_term = '';
+									$color_term = '';
+									$class_term = '';
+									$default_term = '';
+									$name_term  = '';
 
-									// Variables: Options Icon
+									// Options Icon
 									$color_icon   = '';
 									$class_icon   = '';
 
-									// Variables: Set Selected Icon
+									// Set Selected Icon
 									$terms_icons  = '';
 
-									if( !is_null($term_sort) && $ymc_sort_terms === 'manual' ) {
-										$res_terms = [];
+									// Manual Sort Terms
+									if( is_array($term_sort) && $ymc_sort_terms === 'manual' )
+									{
+										$temp_array = [];
+										$temp_no_exist = [];
 										foreach( $terms as $term ) {
 											$key = array_search($term->term_id, $term_sort);
 											if( $key !== false ) {
-												$res_terms[$key] = $term;
+												$temp_array[$key] = $term;
+											}
+											else {
+												$temp_no_exist[] = $term;
 											}
 										}
-										ksort($res_terms);
-									}
-									else {
-										$res_terms = $terms;
+										if( count($temp_no_exist) > 0 ) {
+											foreach ($temp_no_exist as $term) {
+												array_push($temp_array, $term);
+											}
+										}
+
+										ksort($temp_array);
+										$terms = $temp_array;
 									}
 
 									echo '<article class="group-term item-'. esc_attr($tax) .'">';
 
 									echo '<div class="item-inner all-categories">
-                            <input name="all-select" class="category-all" id="category-all-'.esc_attr($tax).'" type="checkbox">
-                            <label for="category-all-'.esc_attr($tax).'" class="category-all-label">'. esc_html__('All [ '. get_taxonomy( $tax )->label .']', 'ymc-smart-filter') .'</label>                                                    
-                            </div>';
+			                              <input name="all-select" class="category-all" id="category-all-'.esc_attr($tax).'" type="checkbox">
+			                              <label for="category-all-'.esc_attr($tax).'" class="category-all-label">'. esc_html__('All [ '. get_taxonomy( $tax )->label .']', 'ymc-smart-filter') .'</label>                                                    
+			                              </div>';
 
 									echo '<div class="entry-terms">';
 
-									foreach( $res_terms as $term ) :
+									foreach( $terms as $term ) :
 
 										$sl1 = '';
+										$hierarchy_terms_html = '';
 
-										if(is_array($terms_sel) && count($terms_sel) > 0) {
-
-											if (in_array($term->term_id, $terms_sel)) {
+										if( is_array($terms_sel) && count($terms_sel) > 0 )
+										{
+											if ( in_array($term->term_id, $terms_sel) ) {
 												$sl1 = 'checked';
 											}
 											else{ $sl1 = ''; }
 										}
 
 										// Set Options Icon
-										if( !empty($ymc_terms_align) ) {
+										if( !empty($ymc_terms_align) )
+										{
+											$iconStylesArray = iconStylesConfig($term->term_id, $ymc_terms_align);
 
-											$flag_terms_align = false;
-
-											foreach ( $ymc_terms_align as $sub_terms_align ) {
-
-												foreach ( $sub_terms_align as $key => $val) {
-
-													if ( $key === 'termid' && $term->term_id === (int) $val ) {
-														$flag_terms_align = true;
-													}
-													if ( $key === 'alignterm' && $flag_terms_align ) {
-														$class_terms_align = $val;
-													}
-													if ( $key === 'coloricon' && $flag_terms_align ) {
-														$color_icon = $val;
-													}
-													if ( $key === 'classicon' && $flag_terms_align ) {
-														$class_icon = $val;
-													}
-												}
-
-												if( $flag_terms_align ) {break;}
+											if( !empty($iconStylesArray) ) {
+												$class_terms_align = $iconStylesArray['class_terms_align'];
+												$color_icon = $iconStylesArray['color_icon'];
+												$class_icon = $iconStylesArray['class_icon'];
 											}
 										}
 
 										// Set Options Term
-										if( !empty($ymc_terms_options) ) {
+										if( !empty($ymc_terms_options) )
+										{
+											$termStylesArray = termStylesConfig( $term->term_id, $ymc_terms_options );
 
-											$flag_terms_option = false;
-
-											foreach ( $ymc_terms_options as $terms_opt ) {
-
-												foreach ( $terms_opt as $key => $val) {
-
-													if ( $key === 'termid' && $term->term_id === (int) $val ) {
-														$flag_terms_option = true;
-													}
-													if ( $key === 'bg' && $flag_terms_option ) {
-														$bg_term = $val;
-													}
-													if ( $key === 'color' && $flag_terms_option ) {
-														$color_term =  $val;
-													}
-													if ( $key === 'class' && $flag_terms_option ) {
-														$class_term = $val;
-													}
-													if ( $key === 'default' && $flag_terms_option ) {
-														$default_term = $val;
-													}
-													if ( $key === 'name' && $flag_terms_option ) {
-														$name_term = $val;
-													}
-												}
-
-												if( $flag_terms_option ) {break;}
+											if( !empty($termStylesArray) )
+											{
+												$bg_term          = $termStylesArray['bg_term'];
+												$color_term       = $termStylesArray['color_term'];
+												$class_term       = $termStylesArray['class_term'];
+												$default_term     = $termStylesArray['default_term'];
+												$name_term        = $termStylesArray['name_term'];
 											}
 										}
 
 										// Set Selected Icon
-										if( !empty($ymc_terms_icons) ) {
+										if( !empty($ymc_terms_icons) )
+										{
 											foreach ( $ymc_terms_icons as $key => $val ) {
 												if( $term->term_id === (int) $key ) {
 													$style_color_icon = ( !empty($color_icon) ) ? 'style="color: '.$color_icon.'"' : '';
@@ -278,28 +290,45 @@ $terms_sel   = $terms_selected;
 										$style_color_term = ( !empty($color_term) ) ? 'color:'.$color_term.';' : '';
 										$name_term = ( !empty($name_term) ) ? $name_term : $term->name;
 
+										// Hierarchy Terms Tree
+										if( $ymc_hierarchy_terms )
+										{
+											$arrayTermsOptions = [
+												'style_icon' => $ymc_terms_align,
+												'selected_icon' => $ymc_terms_icons,
+												'style_term' => $ymc_terms_options,
+												'selected_terms' => $terms_sel,
+												'order_terms' => $ymc_sort_terms,
+												'manual_sort' => $term_sort
+											];
 
-							  echo '<div class="item-inner" style="'. esc_attr($style_bg_term) . esc_attr($style_color_term) .'" 
-			                  data-termid="'. esc_attr($term->term_id) .'" 
-			                  data-alignterm="'. esc_attr($class_terms_align) .'" 
-			                  data-bg-term="'. esc_attr($bg_term) .'" 
-			                  data-color-term="'. esc_attr($color_term) .'" 
-			                  data-custom-class="'. esc_attr($class_term) .'" 
-			                  data-color-icon="'. esc_attr($color_icon) .'"
-			                  data-class-icon="'. esc_attr($class_icon) .'"
-			                  data-status-term="'. esc_attr($sl1) .'"  
-			                  data-name-term="'. esc_attr($name_term) .'"  
-			                  data-default-term="'. esc_attr($default_term) .'">';
+											$hierarchy_terms_html = hierarchyTermsOutput($term->term_id, $tax, 0, $arrayTermsOptions);
+										}
 
-							  echo '<i class="fas fa-ellipsis-v handle"></i>';
-                              echo '<input name="ymc-terms[]" class="category-list" id="category-id-'. esc_attr($term->term_id) .'" type="checkbox" value="'. esc_attr($term->term_id) .'" '. esc_attr($sl1) .'>';
+										// Generate HTML
+										echo '<div class="item">';
+									    echo '<div class="item-inner" style="'. esc_attr($style_bg_term) . esc_attr($style_color_term) .'" 
+						                    data-termid="'. esc_attr($term->term_id) .'" 
+						                    data-alignterm="'. esc_attr($class_terms_align) .'" 
+						                    data-bg-term="'. esc_attr($bg_term) .'" 
+						                    data-color-term="'. esc_attr($color_term) .'" 
+						                    data-custom-class="'. esc_attr($class_term) .'" 
+						                    data-color-icon="'. esc_attr($color_icon) .'"
+						                    data-class-icon="'. esc_attr($class_icon) .'"
+						                    data-status-term="'. esc_attr($sl1) .'"  
+						                    data-name-term="'. esc_attr($name_term) .'"  
+						                    data-default-term="'. esc_attr($default_term) .'">';
 
-							  echo '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">
-							  <span class="name-term">' . esc_html($name_term) .'</span>'. ' ('. esc_attr($term->count) .')</label>						  						  
-							  <i class="far fa-cog choice-icon" title="Tag settings"></i><span class="indicator-icon">'. $terms_icons .'</span>';
+							            echo '<i class="fas fa-ellipsis-v handle"></i>';
+                                        echo '<input name="ymc-terms[]" class="category-list" id="category-id-'. esc_attr($term->term_id) .'" type="checkbox" value="'. esc_attr($term->term_id) .'" '. esc_attr($sl1) .'>';
 
-							  echo '</div>';
+									    echo '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">
+									    <span class="name-term">' . esc_html($name_term) .'</span>'. ' ('. esc_html($term->count) .')</label>						  						  
+									    <i class="far fa-cog choice-icon" title="Tag settings"></i><span class="indicator-icon">'. $terms_icons .'</span>';
 
+							            echo '</div>'; // end item-inner
+										echo $hierarchy_terms_html; // Added hierarchy terms tree
+							            echo '</div>'; // end item
 
 										$terms_icons = '';
 										$class_icon = '';
@@ -307,11 +336,9 @@ $terms_sel   = $terms_selected;
 
 									endforeach;
 
-									$res_terms = null;
+									echo '</div>'; // end entry-terms
 
-									echo '</div>';
-
-									echo '</article>';
+									echo '</article>'; // end group-term
 								}
 
 							endforeach;
@@ -321,7 +348,7 @@ $terms_sel   = $terms_selected;
 				else {
 					echo '<span class="notice">'. esc_html__('No data for terms', 'ymc-smart-filter') .'</span>';
 				}
-				?>
+			?>
 
 			</div>
 
@@ -332,10 +359,28 @@ $terms_sel   = $terms_selected;
 			<?php if( $is_cpt ) : ?>
 
 				<label class="form-label">
+					<?php echo esc_html__('Hierarchical Tree of Terms', 'ymc-smart-filter'); ?>
+					<span class="information">
+                    <?php echo __('Check to display the hierarchy tree of terms. The depth of nesting 
+                     of terms is 3 levels. If the nesting depth exceeds 3 levels, then terms with a nesting level greater than three will not be displayed in filters.
+                     This applies to the following filter layouts: <b>Default Filter, Dropdown Filter, Sidebar Filter.</b>', 'ymc-smart-filter');?>
+                    </span>
+				</label>
+
+				<div class="group-elements">
+					<?php  $check_hierarchy_terms = ( $ymc_hierarchy_terms ) ? 'checked' : '';  ?>
+					<input type="hidden" name='ymc_hierarchy_terms' value="0">
+					<input class="ymc-hierarchy-terms" type="checkbox" value="1" name="ymc_hierarchy_terms" id="ymc-hierarchy-terms" <?php echo esc_attr($check_hierarchy_terms); ?>>
+					<label for="ymc-hierarchy-terms"><?php echo esc_html__('Enable', 'ymc-smart-filter'); ?></label>
+				</div>
+
+				<br/>
+
+				<label class="form-label">
 					<?php echo esc_html__('Exclude Post(s)', 'ymc-smart-filter'); ?>
 					<span class="information">
-        <?php echo esc_html__('Check to exclude the selected posts from the grid. Works on selected posts.', 'ymc-smart-filter');?>
-        </span>
+                    <?php echo esc_html__('Check to exclude the selected posts from the grid. Works on selected posts.', 'ymc-smart-filter');?>
+                    </span>
 				</label>
 
 				<div class="group-elements">
@@ -348,10 +393,10 @@ $terms_sel   = $terms_selected;
 				<br/>
 
 				<label class="form-label">
-					<?php echo esc_html__('Add post(s)', 'ymc-smart-filter'); ?>
+					<?php echo esc_html__('Add Post(s)', 'ymc-smart-filter'); ?>
 					<span class="information">
-        <?php echo esc_html__('Include / Exclude posts in the post grid on the frontend. To exclude posts, check option "Exclude posts". By default, posts are included in the grid. Drag and Drop posts for custom sorting', 'ymc-smart-filter');?>
-        </span>
+                    <?php echo esc_html__('Include / Exclude posts in the post grid on the frontend. To exclude posts, check option "Exclude posts". By default, posts are included in the grid. Drag and Drop posts for custom sorting', 'ymc-smart-filter');?>
+                    </span>
 				</label>
 
 				<div class="search-posts">

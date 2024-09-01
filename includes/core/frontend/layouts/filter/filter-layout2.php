@@ -1,16 +1,23 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Add Style
-$ymc_filter_text_color = !empty($ymc_filter_text_color) ? "color:".$ymc_filter_text_color.";" : '';
-$ymc_filter_bg_color   = !empty($ymc_filter_bg_color) ? "background-color:".$ymc_filter_bg_color.";" : '';
-$ymc_filter_active_color = !empty($ymc_filter_active_color) ? "color:".$ymc_filter_active_color.";" : '';
-$ymc_filter_font =  "font-family:'".$ymc_filter_font."';";
-
-$filter_css = "#ymc-smart-filter-container-".$c_target." .filter-layout2 .filter-entry .filter-link,
-               #ymc-extra-filter-".$c_target." .filter-layout2 .filter-entry .filter-link  {
-               ". $ymc_filter_text_color . $ymc_filter_bg_color . $ymc_filter_font ."}               
-               #ymc-smart-filter-container-".$c_target." .filter-layout2 .filter-entry .filter-item .filter-link.active,
-               #ymc-extra-filter-".$c_target." .filter-layout2 .filter-entry .filter-link.active {".$ymc_filter_active_color."}";
+$filter_css = "";
+if( !empty($ymc_filter_text_color) ) {
+	$filter_css .= "#ymc-smart-filter-container-".$c_target." .filter-layout2 .filter-entry .filter-link, 
+                    #ymc-extra-filter-".$c_target." .filter-layout2 .filter-entry .filter-link { color:".$ymc_filter_text_color.";}";
+}
+if( !empty($ymc_filter_bg_color) ) {
+	$filter_css .= "#ymc-smart-filter-container-".$c_target." .filter-layout2 .filter-entry .filter-link, 
+                    #ymc-extra-filter-".$c_target." .filter-layout2 .filter-entry .filter-link { background-color:".$ymc_filter_bg_color.";}";
+}
+if( !empty($ymc_filter_active_color) ) {
+	$filter_css .= "#ymc-smart-filter-container-".$c_target." .filter-layout2 .filter-entry .filter-link.active, 
+                    #ymc-extra-filter-".$c_target." .filter-layout2 .filter-entry .filter-link.active { color:".$ymc_filter_active_color.";}";
+}
+if( $ymc_filter_font !== 'inherit' ) {
+	$filter_css .= "#ymc-smart-filter-container-".$c_target." .filter-layout2 .filter-entry .filter-link, 
+                    #ymc-extra-filter-".$c_target." .filter-layout2 .filter-entry .filter-link { font-family:".$ymc_filter_font.";}";
+}
 
 echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) .'</style>';
 
@@ -25,27 +32,26 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 
 		<?php
 
-            $type_multiple = ( (bool) $ymc_multiple_filter ) ? 'multiple' : '';
+            if ( is_array($terms_selected) )
+			{
+				$type_multiple = ( (bool) $ymc_multiple_filter ) ? 'multiple' : '';
 
-            if ( is_array($terms_selected) ) {
-
-	            // Variables: Options Term
+	            // Options Term
 	            $bg_term             = null;
 	            $color_term          = null;
 	            $class_term          = null;
 	            $default_term_active = null;
 	            $name_term           = null;
 
-	            // Variables: Options Icon
+	            // Options Icon
 	            $class_terms_align   = null;
 	            $color_icon          = null;
 
-	            // Variables: Set Selected Icon
+	            // Set Selected Icon
 	            $terms_icons         = null;
 
 
 				if( $ymc_sort_terms !== 'manual' ) {
-					//( $ymc_sort_terms === 'asc' ) ? asort($terms_selected) : arsort($terms_selected);
 					( $ymc_sort_terms === 'asc' ) ? sortTaxTerms($terms_selected, 'asc') :
 						sortTaxTerms($terms_selected, 'desc');
 				}
@@ -110,10 +116,13 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 	                        $default_term_active = ( $default_term_active === 'checked' ) ? 'active': '';
 							$name_term = ( !empty($name_term) ) ? $name_term : $object_term->name;
 
+							$is_disabled = ( $object_term->count === 0 ) ? 'isDisabled' : '';
+
                             echo  "<li class='filter-item'>
                                    <a class='filter-link ".
                                    esc_attr($type_multiple) ." ".
                                    esc_attr($class_terms_align) ." ".
+                                   esc_attr($is_disabled) ." ".
                                    esc_attr($class_term) . " ". esc_attr($default_term_active) . "' style='".
                                    esc_attr($bg_term) . esc_attr($color_term) ."' href='#' data-selected='" .
                                    esc_attr($object_term->slug) . "' data-termid='" .
@@ -139,3 +148,5 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 	<?php do_action("ymc_after_filter_layout_".$id.'_'.$c_target); ?>
 
 </div>
+
+

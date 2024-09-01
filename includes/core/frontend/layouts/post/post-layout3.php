@@ -44,12 +44,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			    if( $term_list ) {
 				    foreach($term_list as $term_single) {
-					    $list_categories .= '<span class="cat-inner">'. esc_html($term_single->name) .'</span>';
+					    $list_categories .= '<span class="cat-inner '. esc_attr($term_single->slug) .'">'. esc_html($term_single->name) .'</span>';
 				    }
 			    }
 		    }
 	    }
-
 
         echo '<article class="ymc-'.esc_attr($post_layout).' post-'.$post_id.' post-item '.esc_attr($class_animation).'">';
 

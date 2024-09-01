@@ -45,7 +45,7 @@ while ($query->have_posts()) : $query->the_post();
 
 			if( $term_list ) {
 				foreach($term_list as $term_single) {
-					$list_categories .= '<span class="cat-inner">'. esc_html($term_single->name) .'</span>';
+					$list_categories .= '<span class="cat-inner '. esc_attr($term_single->slug) .'">'. esc_html($term_single->name) .'</span>';
 				}
 			}
 		}
@@ -84,3 +84,5 @@ while ($query->have_posts()) : $query->the_post();
 	echo '</article>';
 
 endwhile;
+
+

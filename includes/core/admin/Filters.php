@@ -118,7 +118,7 @@ class Filters {
 	 */
 	public function ymc_filter_font($font) {
 		$font = [
-			"inherit" => __('Default','ymc-smart-filter'),
+			"inherit" => __('Inherit','ymc-smart-filter'),
 			"OpenSans" =>  __('OpenSans','ymc-smart-filter'),
 			"Roboto" =>  __('Roboto','ymc-smart-filter'),
 			"PlayfairDisplay" =>  __('Playfair Display','ymc-smart-filter')
@@ -135,7 +135,7 @@ class Filters {
 	 */
 	public function ymc_post_font($font) {
 		$font = [
-			"inherit" => __('Default','ymc-smart-filter'),
+			"inherit" => __('Inherit','ymc-smart-filter'),
 			"OpenSans" =>  __('OpenSans', 'ymc-smart-filter'),
 			"Roboto" =>  __('Roboto', 'ymc-smart-filter'),
 			"PlayfairDisplay" =>  __('Playfair Display', 'ymc-smart-filter')

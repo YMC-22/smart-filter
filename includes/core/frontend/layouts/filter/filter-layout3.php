@@ -1,30 +1,42 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Add Style
-$ymcStyleRuleColor = !empty($ymc_filter_text_color) ? "color:".$ymc_filter_text_color.";" : '';
-$ymcStyleRuleBg   = !empty($ymc_filter_bg_color) ? "background-color:".$ymc_filter_bg_color.";" : '';
-$ymcStyleRuleActiveColor = !empty($ymc_filter_active_color) ? "color:".$ymc_filter_active_color.";" : '';
-$ymcStyleRuleFont = "font-family:'".$ymc_filter_font."';";
-
-$filter_css = "#ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link, 
-               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link  { ". $ymcStyleRuleColor . $ymcStyleRuleBg." }               
+$filter_css = "";
+if( !empty($ymc_filter_text_color) ) {
+	$filter_css .= "#ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link, 
+               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link  { color:".$ymc_filter_text_color." }
+               
                #ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link:before, 
                #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link:before,
                #ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link:after, 
-               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link:after  { border-color:". $ymc_filter_text_color ." }              
-               #ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link,
-               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link { ". $ymcStyleRuleBg ." }               
-               #ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link.active,
-               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link.active {".$ymcStyleRuleActiveColor."}               
-               #ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry,               
-               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry {".$ymcStyleRuleFont."}";
+               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link:after  { border-color:".$ymc_filter_text_color." }";
+}
+if( !empty($ymc_filter_bg_color) ) {
+	$filter_css .= "#ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link, 
+               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link  { background-color:".$ymc_filter_bg_color." }";
+}
+if( !empty($ymc_filter_active_color) ) {
+	$filter_css .= "#ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link.active,
+               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link.active { color:".$ymc_filter_active_color."}
+               #ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link.active:before, 
+               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link:before,
+               #ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link.active:after, 
+               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry .menu-passive .menu-link:after  { border-color:".$ymc_filter_active_color." }";
+}
+if( $ymc_filter_font !== 'inherit' ) {
+	$filter_css .= "#ymc-smart-filter-container-".$c_target." .filter-layout3 .filter-entry,               
+               #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry { font-family:".$ymc_filter_font."}";
+}
 
 echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) .'</style>';
 
+
+// Check Hierarchy of terms
+$ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 ?>
 
-
-<div id="<?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($c_target); ?>" class="filter-layout <?php echo esc_attr($ymc_filter_layout); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?>-<?php echo esc_attr($c_target); ?>">
+<div id="<?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($c_target); ?>" class="filter-layout <?php echo esc_attr($ymc_filter_layout); ?>
+	<?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?>-<?php echo esc_attr($c_target); ?> <?php echo ( $ymc_hierarchy_terms ) ? esc_html('hierarchy-filter3') : ''; ?>">
 
 	<?php do_action("ymc_before_filter_layout_".$id.'_'.$c_target); ?>
 
@@ -37,17 +49,12 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 
 		<?php
 
-		$type_multiple = ( (bool) $ymc_multiple_filter ) ? 'multiple' : '';
+			$type_multiple = ( (bool) $ymc_multiple_filter ) ? 'multiple' : '';
 
-		if( $ymc_sort_terms !== 'manual' ) {
-			//( $ymc_sort_terms === 'asc' ) ? asort($terms_selected) : arsort($terms_selected);
-			( $ymc_sort_terms === 'asc' ) ? sortTaxTerms($terms_selected, 'asc') :
-				sortTaxTerms($terms_selected, 'desc');
-		}
-
-		?>
-
-        <?php
+			if( $ymc_sort_terms !== 'manual' ) {
+				( $ymc_sort_terms === 'asc' ) ? sortTaxTerms($terms_selected, 'asc') :
+					sortTaxTerms($terms_selected, 'desc');
+			}
 
             $arr_taxonomies = [];
 
@@ -61,6 +68,7 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 
             echo '<a class="btn-all" href="#" data-selected="all" data-terms="' . esc_attr($all_terms) . '">'. esc_html($show_all) .'</a>';
 
+			// Taxonomies sorting
             if( !is_null($tax_sort) && is_array($tax_sort) ) {
                 $result_tax = [];
                 foreach($tax_sort as $val) {
@@ -93,24 +101,10 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 
                 echo '<div class="dropdown-filter tax-'.$tax.'">';
                 echo '<div class="menu-active">';
-                echo '<span>' . $tax_name .'</span> <i class="arrow down"></i>';
+                echo '<span class="original-tax-name" data-original-tax-name="'. esc_attr($tax_name).'">' . $tax_name .'</span> <i class="arrow down"></i>';
                 echo '</div>';
                 echo '<div class="menu-passive">';
                 echo '<i class="btn-close">x</i>';
-
-				// Variables: Options Term
-				$bg_term             = null;
-				$color_term          = null;
-				$class_term          = null;
-				$default_term_active = null;
-				$name_term           = null;
-
-				// Variables: Options Icon
-				$class_terms_align   = null;
-				$color_icon          = null;
-
-				// Variables: Set Selected Icon
-				$terms_icons         = null;
 
 
                 foreach ($terms_selected as $term)
@@ -118,7 +112,28 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 
 					$object_term = get_term( $term );
 
-					if( is_wp_error( $object_term ) || is_null( $object_term ) ) continue;
+					if( is_wp_error( $object_term ) || is_null( $object_term ) ||
+					    ( $object_term->parent !== 0 && $ymc_hierarchy_terms) ) continue;
+
+
+					// Options Term
+					$bg_term = '';
+					$color_term = '';
+					$class_term = '';
+					$default_term_active = '';
+					$name_term = '';
+
+					// Options Icon
+					$class_terms_align = '';
+					$color_icon = '';
+
+					// Set Selected Icon
+					$terms_icons = '';
+
+					// Hierarchy Terms
+					$class_hierarchy = '';
+					$tree_output = '';
+					$arrow = '';
 
                     if( $tax === $object_term->taxonomy )
 					{
@@ -144,18 +159,47 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 	                    $default_term_active = ( $default_term_active === 'checked' ) ? 'active': '';
 						$name_term = ( !empty($name_term) ) ? $name_term : $object_term->name;
 
-                        echo '<div class="menu-passive__item item-'. esc_attr($object_term->slug) .' '.esc_attr($class_terms_align).'">
-							  '. $terms_icons .'
-                              <a class="menu-link '.
+						// Set Hierarchy Terms
+						if( $ymc_hierarchy_terms )
+						{
+							$arrayTermsOptions = [
+								'multiple' => $type_multiple,
+								'terms_align' => $ymc_terms_align,
+								'terms_options' => $ymc_terms_options,
+								'terms_icons' => $ymc_terms_icons,
+								'terms_selected' => $terms_selected,
+								'terms_order' => $ymc_sort_terms,
+								'filter_layout' => $ymc_filter_layout
+							];
+
+							// Get Hierarchy Terms
+							$tree_output = hierarchyTermsLayout($object_term->term_id, $object_term->taxonomy, 0, $arrayTermsOptions);
+							if( !empty($tree_output) ) {
+								$class_hierarchy = 'item-has-children';
+								$arrow = '<span class="fas fa-chevron-down isArrow"></span>';
+							}
+						}
+
+                        echo '<div class="menu-passive__item item-'. esc_attr($object_term->slug) .' '.esc_attr($class_terms_align).' '.esc_attr($class_hierarchy).'">
+							  <div class="link-inner">'. $terms_icons;
+
+                        echo '<a class="menu-link '.
                               esc_attr($is_disabled) .' '.
                               esc_attr($type_multiple) .' '.
                               esc_attr($class_term) . " ". esc_attr($default_term_active) .'" style="'.esc_attr($bg_term) . esc_attr($color_term).'" 
                               href="#" data-selected="'. esc_attr($object_term->slug) .'" data-termid="' . esc_attr($term) . '" data-name="'.esc_attr($object_term->name).'">'.
-                              esc_html($name_term) . ' <span class="count">'. esc_html($object_term->count) .'</span></a></div>';
+                              esc_html($name_term) . ' <span class="count">'. esc_html($object_term->count) .'</span></a>';
+
+						echo $arrow;
+
+						echo '</div>'; // .menu-passive__item
+
+						// Insert Hierarchy Terms Tree
+						echo $tree_output;
+
+                        echo '</div>';
                     }
 
-	                $terms_icons = null;
-					$name_term = '';
                 }
 
                 echo '</div>';
@@ -177,3 +221,5 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 	<?php do_action("ymc_after_filter_layout_".$id.'_'.$c_target); ?>
 
 </div>
+
+

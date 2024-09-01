@@ -36,7 +36,7 @@
                             <?php echo esc_html__('Desc', 'ymc-smart-filter'); ?>
                         </option>
                         <option value="manual" <?php if ($ymc_sort_terms === 'manual') {echo "selected";} ?>>
-                            <?php echo esc_html__('Manual sort', 'ymc-smart-filter'); ?>
+                            <?php echo esc_html__('Manual', 'ymc-smart-filter'); ?>
                         </option>
                     </select>
                 </div>

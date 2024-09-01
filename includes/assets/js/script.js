@@ -1025,62 +1025,76 @@
             let posts_selected = link.data('selected');
             let filterContainer = this.closest('.ymc-smart-filter-container');
 
-            if ( this.closest('.ymc-extra-filter') ) {
-                let extraFilterId   = link.closest('.ymc-extra-filter').data('extraFilterId');
-                filterContainer = document.querySelector(`.ymc-filter-${extraFilterId}`);
-            }
-
-            if(link.hasClass('multiple')) {
-                link.toggleClass('active').closest('.filter-item').siblings().find('.all').removeClass('active');
-            }
-            else {
-                link.addClass('active').
-                closest('.filter-item').
-                siblings().
-                find('.filter-link').
-                removeClass('active').
-                closest('.filter-entry').
-                find('.all').
-                removeClass('active');
-            }
-
-            let listActiveItems = link.closest('.filter-entry').find('.active');
-
-            if(listActiveItems.length > 0) {
-
-                term_id = '';
-
-                link.closest('.filter-entry').find('.active').each(function (){
-                    term_id += $(this).data('termid')+',';
-                });
-
-                term_id = term_id.replace(/,\s*$/, "");
-            }
-            else {
-                term_id = link.closest('.filter-entry').find('.all').data('termid');
-            }
-
-            if(link.hasClass('all')) {
-                link.addClass('active').closest('.filter-item').siblings().find('.filter-link').removeClass('active');
-            }
-
-            if( filterContainer )
+            if( !link.hasClass('isDisabled') )
             {
-                let params = JSON.parse( filterContainer.dataset.params);
-                params.terms = term_id;
-                params.page = 1;
-                params.search = '';
-                params.posts_selected = posts_selected;
-                filterContainer.dataset.params = JSON.stringify(params);
+                if ( this.closest('.ymc-extra-filter') ) {
+                    let extraFilterId = link.closest('.ymc-extra-filter').data('extraFilterId');
+                    filterContainer = document.querySelector(`.ymc-filter-${extraFilterId}`);
+                }
 
-                getFilterPosts({
-                    'paged'      : 1,
-                    'toggle_pg'  : 1,
-                    'target'     : params.data_target,
-                    'type_pg'    : params.type_pg
-                });
+                if(link.hasClass('multiple')) {
+                    link.toggleClass('active').closest('.filter-entry').find('.all').removeClass('active');
+                }
+                else {
+                    link.closest('.filter-entry').find('.filter-item .filter-link').removeClass('active');
+                    link.addClass('active');
+                }
+
+                let listActiveItems = link.closest('.filter-entry').find('.active');
+
+                if(listActiveItems.length > 0) {
+
+                    term_id = '';
+
+                    link.closest('.filter-entry').find('.active').each(function (){
+                        term_id += $(this).data('termid')+',';
+                    });
+
+                    term_id = term_id.replace(/,\s*$/, "");
+                }
+                else {
+                    term_id = link.closest('.filter-entry').find('.all').data('termid');
+                }
+
+                if(link.hasClass('all')) {
+                    link.addClass('active').closest('.filter-entry').find('.filter-link:not(.all)').removeClass('active');
+                }
+
+                if( filterContainer )
+                {
+                    let params = JSON.parse( filterContainer.dataset.params);
+                    params.terms = term_id;
+                    params.page = 1;
+                    params.search = '';
+                    params.posts_selected = posts_selected;
+                    filterContainer.dataset.params = JSON.stringify(params);
+
+                    getFilterPosts({
+                        'paged'      : 1,
+                        'toggle_pg'  : 1,
+                        'target'     : params.data_target,
+                        'type_pg'    : params.type_pg
+                    });
+                }
+
             }
+        });
 
+        // Submenu off-screen (Hierarchy Tree)
+        $(document).on('mouseenter mouseleave', '.ymc-smart-filter-container .filter-layout1 .filter-entry .item-has-children, .ymc-extra-filter .filter-layout1 .filter-entry .item-has-children', function (e) {
+            let elem = $('.sub_item', this);
+            let offElem = elem.offset();
+            let l = offElem.left;
+            let w = elem.width();
+            let filetr = $(document);
+            let docW = filetr.width();
+            let isEntirelyVisible = ( l + w + 50 <= docW );
+            if ( !isEntirelyVisible ) {
+                $(this).find('.sub_item').addClass('edge');
+            }
+            else {
+                $(this).find('.sub_item').removeClass('edge');
+            }
         });
 
         // Filter Posts Layout2
@@ -1092,59 +1106,61 @@
             let posts_selected = link.data('selected');
             let filterContainer = this.closest('.ymc-smart-filter-container');
 
-            if ( this.closest('.ymc-extra-filter') ) {
-                let extraFilterId   = link.closest('.ymc-extra-filter').data('extraFilterId');
-                filterContainer = document.querySelector(`.ymc-filter-${extraFilterId}`);
-            }
-
-            if(link.hasClass('multiple')) {
-                link.toggleClass('active').closest('.filter-entry').find('.all').removeClass('active');
-            }
-            else {
-                link.addClass('active').
-                closest('.filter-item').
-                siblings().find('.filter-link').
-                removeClass('active').
-                closest('.filter-entry').find('.all').removeClass('active');
-            }
-
-            let listActiveItems = link.closest('.filter-entry').find('.active');
-
-            if(listActiveItems.length > 0) {
-
-                term_id = '';
-
-                link.closest('.filter-entry').find('.active').each(function (){
-                    term_id += $(this).data('termid')+',';
-                });
-
-                term_id = term_id.replace(/,\s*$/, "");
-            }
-            else {
-                term_id = link.closest('.filter-entry').find('.all').data('termid');
-            }
-
-            if(link.hasClass('all')) {
-                link.addClass('active').closest('.filter-item').siblings().find('.filter-link').removeClass('active');
-            }
-
-            if( filterContainer )
+            if( !link.hasClass('isDisabled') )
             {
-                let params = JSON.parse( filterContainer.dataset.params);
-                params.terms = term_id;
-                params.page = 1;
-                params.search = '';
-                params.posts_selected = posts_selected;
-                filterContainer.dataset.params = JSON.stringify(params);
+                if ( this.closest('.ymc-extra-filter') ) {
+                    let extraFilterId   = link.closest('.ymc-extra-filter').data('extraFilterId');
+                    filterContainer = document.querySelector(`.ymc-filter-${extraFilterId}`);
+                }
 
-                getFilterPosts({
-                    'paged'     : 1,
-                    'toggle_pg' : 1,
-                    'target'    : params.data_target,
-                    'type_pg'   : params.type_pg
-                });
+                if(link.hasClass('multiple')) {
+                    link.toggleClass('active').closest('.filter-entry').find('.all').removeClass('active');
+                }
+                else {
+                    link.addClass('active').
+                    closest('.filter-item').
+                    siblings().find('.filter-link').
+                    removeClass('active').
+                    closest('.filter-entry').find('.all').removeClass('active');
+                }
+
+                let listActiveItems = link.closest('.filter-entry').find('.active');
+
+                if(listActiveItems.length > 0) {
+
+                    term_id = '';
+
+                    link.closest('.filter-entry').find('.active').each(function (){
+                        term_id += $(this).data('termid')+',';
+                    });
+
+                    term_id = term_id.replace(/,\s*$/, "");
+                }
+                else {
+                    term_id = link.closest('.filter-entry').find('.all').data('termid');
+                }
+
+                if(link.hasClass('all')) {
+                    link.addClass('active').closest('.filter-item').siblings().find('.filter-link').removeClass('active');
+                }
+
+                if( filterContainer )
+                {
+                    let params = JSON.parse( filterContainer.dataset.params);
+                    params.terms = term_id;
+                    params.page = 1;
+                    params.search = '';
+                    params.posts_selected = posts_selected;
+                    filterContainer.dataset.params = JSON.stringify(params);
+
+                    getFilterPosts({
+                        'paged'     : 1,
+                        'toggle_pg' : 1,
+                        'target'    : params.data_target,
+                        'type_pg'   : params.type_pg
+                    });
+                }
             }
-
         });
 
         // Filter Post Layout3
@@ -1167,72 +1183,131 @@
             let posts_selected = link.data('selected');
             let filterContainer = this.closest('.ymc-smart-filter-container');
 
-            if ( this.closest('.ymc-extra-filter') ) {
-                let extraFilterId   = link.closest('.ymc-extra-filter').data('extraFilterId');
-                filterContainer = document.querySelector(`.ymc-filter-${extraFilterId}`);
-            }
+            if( !link.hasClass('isDisabled') )
+            {
+                if ( this.closest('.ymc-extra-filter') ) {
+                    let extraFilterId   = link.closest('.ymc-extra-filter').data('extraFilterId');
+                    filterContainer = document.querySelector(`.ymc-filter-${extraFilterId}`);
+                }
 
-            link.toggleClass('active');
+                // List items
+                if( link.closest('.hierarchy-filter3').length === 0 ) {
 
-            // Single selected terms
-            if( !link.hasClass('multiple') ) {
+                    link.toggleClass('active');
 
-                link.closest('.menu-passive__item').
-                siblings().find('.menu-link').
-                removeClass('active');
+                    // Single selected terms
+                    if( !link.hasClass('multiple') ) {
 
-                link.closest('.dropdown-filter').find('.menu-active span').html($(this).data('name'));
-            }
+                        link.closest('.menu-passive__item').
+                        siblings().find('.menu-link').
+                        removeClass('active');
 
-            let listActiveItems = link.closest('.filter-entry').find('.active');
+                        link.closest('.dropdown-filter').find('.menu-active span').html($(this).data('name'));
+                    }
 
-            if(listActiveItems.length > 0) {
+                    let listActiveItems = link.closest('.filter-entry').find('.active');
 
-                link.closest('.filter-entry').find('.active').each(function (){
-                    term_id += $(this).data('termid')+',';
-                });
+                    if(listActiveItems.length > 0) {
 
-                term_id = term_id.replace(/,\s*$/, "");
-
-                if( link.hasClass('multiple') ) {
-                    // Add selected terms
-                    let allLinks = $(link.closest('.filter-entry')).find('.dropdown-filter .menu-link');
-                    let selItem = '';
-
-                    term_id.split(',').forEach(function (el) {
-                        allLinks.each(function () {
-                            if ($(this).data('termid') === parseInt(el)) {
-                                selItem += `<span data-trm="${el}" class="item">${$(this).data('name')} <small>x</small></span>`;
-                            }
+                        link.closest('.filter-entry').find('.active').each(function (){
+                            term_id += $(this).data('termid')+',';
                         });
-                    });
 
-                    $(link.closest('.filter-entry')).find('.selected-items').html(selItem);
+                        term_id = term_id.replace(/,\s*$/, "");
+
+                        if( link.hasClass('multiple') ) {
+                            // Add selected terms
+                            let allLinks = $(link.closest('.filter-entry')).find('.dropdown-filter .menu-link');
+                            let selItem = '';
+
+                            term_id.split(',').forEach(function (el) {
+                                allLinks.each(function () {
+                                    if ($(this).data('termid') === parseInt(el)) {
+                                        selItem += `<span data-trm="${el}" class="item">${$(this).data('name')} <small>x</small></span>`;
+                                    }
+                                });
+                            });
+
+                            $(link.closest('.filter-entry')).find('.selected-items').html(selItem);
+                        }
+                    }
+                    else {
+                        term_id = link.closest('.filter-entry').data('terms');
+                        $(link.closest('.filter-entry')).find('.selected-items').empty();
+                    }
+                }
+                // Hierarchy items
+                else {
+
+                    // Single selected terms
+                    if( !link.hasClass('multiple') ) {
+                        link.closest('.dropdown-filter').find('.menu-link').removeClass('active');
+                        link.addClass('active');
+
+                        link.closest('.dropdown-filter').find('.menu-active span').html(link.data('name'));
+                    }
+                    else {
+                        link.toggleClass('active');
+                    }
+
+                    let listActiveItems = link.closest('.filter-entry').find('.active');
+
+                    if(listActiveItems.length > 0) {
+
+                        link.closest('.filter-entry').find('.active').each(function (){
+                            term_id += $(this).data('termid')+',';
+                        });
+
+                        term_id = term_id.replace(/,\s*$/, "");
+
+                        if( link.hasClass('multiple') ) {
+                            // Add selected terms
+                            let allLinks = link.closest('.filter-entry').find('.dropdown-filter .menu-link');
+                            let selItem = '';
+
+                            term_id.split(',').forEach(function (el) {
+                                allLinks.each(function () {
+                                    if ($(this).data('termid') === parseInt(el)) {
+                                        selItem += `<span data-trm="${el}" class="item">${$(this).data('name')} <small>x</small></span>`;
+                                    }
+                                });
+                            });
+
+                            link.closest('.filter-entry').find('.selected-items').html(selItem);
+                        }
+                    }
+                    else {
+                        term_id = link.closest('.filter-entry').data('terms');
+                        $(link.closest('.filter-entry')).find('.selected-items').empty();
+                    }
+                }
+
+                if( filterContainer )
+                {
+                    // Update data params
+                    let params = JSON.parse( filterContainer.dataset.params);
+                    params.terms = term_id;
+                    params.page = 1;
+                    params.search = '';
+                    params.posts_selected = posts_selected;
+                    filterContainer.dataset.params = JSON.stringify(params);
+
+                    getFilterPosts({
+                        'paged'     : 1,
+                        'toggle_pg' : 1,
+                        'target'    : params.data_target,
+                        'type_pg'   : params.type_pg
+                    });
                 }
             }
-            else {
-                term_id = link.closest('.filter-entry').data('terms');
-                $(link.closest('.filter-entry')).find('.selected-items').empty();
-            }
+        });
 
-            if( filterContainer )
-            {
-                // Update data params
-                let params = JSON.parse( filterContainer.dataset.params);
-                params.terms = term_id;
-                params.page = 1;
-                params.search = '';
-                params.posts_selected = posts_selected;
-                filterContainer.dataset.params = JSON.stringify(params);
-
-                getFilterPosts({
-                    'paged'     : 1,
-                    'toggle_pg' : 1,
-                    'target'    : params.data_target,
-                    'type_pg'   : params.type_pg
-                });
-            }
-
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .hierarchy-filter3 .item-has-children .isArrow, .ymc-extra-filter .hierarchy-filter3 .item-has-children .isArrow', function (e) {
+            let arrow = $(e.target);
+            // Open / Close sub items
+            arrow.toggleClass('isOpen').next('.sub_item').length > 0 ?
+                arrow.next('.sub_item').toggleClass('isActive').closest('.item-has-children').toggleClass('isActive') :
+                arrow.closest('.link-inner').next('.sub_item').toggleClass('isActive').closest('.item-has-children').toggleClass('isActive');
         });
 
         $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .filter-layout3 .filter-entry .selected-items small, .ymc-extra-filter .filter-layout3 .filter-entry .selected-items small', function (e) {
@@ -1313,7 +1388,11 @@
 
                 _self.siblings('.selected-items').empty();
                 _self.siblings('.dropdown-filter').find('.active').removeClass('active');
+                _self.siblings('.dropdown-filter').find('.isActive, .isOpen').removeClass('isActive isOpen');
                 _self.siblings('.dropdown-filter').find('.menu-passive').hide();
+                _self.siblings('.dropdown-filter').find('.original-tax-name').each(function () {
+                    $(this).text($(this).data('originalTaxName'));
+                });
 
                 getFilterPosts({
                     'paged'     : 1,
@@ -1334,63 +1413,68 @@
             e.preventDefault();
 
             let link = $(this);
-            let term_id = link.data('termid');
+            let term_id = '';
             let posts_selected = link.data('selected');
             let filterContainer = this.closest('.ymc-smart-filter-container');
 
-            if ( this.closest('.ymc-extra-filter') ) {
-                let extraFilterId   = link.closest('.ymc-extra-filter').data('extraFilterId');
-                filterContainer = document.querySelector(`.ymc-filter-${extraFilterId}`);
-            }
-
-            if(link.hasClass('multiple')) {
-                link.toggleClass('active').closest('.filter-entry').find('.all').removeClass('active');
-            }
-            else {
-                link.addClass('active').
-                closest('.filter-item').
-                siblings().find('.filter-link').
-                removeClass('active').
-                closest('.filter-entry').find('.all').removeClass('active');
-            }
-
-            let listActiveItems = link.closest('.filter-entry').find('.active');
-
-            if(listActiveItems.length > 0) {
-
-                term_id = '';
-
-                link.closest('.filter-entry').find('.active').each(function (){
-                    term_id += $(this).data('termid')+',';
-                });
-
-                term_id = term_id.replace(/,\s*$/, "");
-            }
-            else {
-                term_id = link.closest('.filter-entry').find('.all').data('termid');
-            }
-
-            if(link.hasClass('all')) {
-                link.addClass('active').closest('.filter-item').siblings().find('.filter-link').removeClass('active');
-            }
-
-            if( filterContainer )
+            if( !link.hasClass('isDisabled') )
             {
-                let params = JSON.parse( filterContainer.dataset.params);
-                params.terms = term_id;
-                params.page = 1;
-                params.search = '';
-                params.posts_selected = posts_selected;
-                filterContainer.dataset.params = JSON.stringify(params);
+                if ( this.closest('.ymc-extra-filter') ) {
+                    let extraFilterId   = link.closest('.ymc-extra-filter').data('extraFilterId');
+                    filterContainer = document.querySelector(`.ymc-filter-${extraFilterId}`);
+                }
 
-                getFilterPosts({
-                    'paged'     : 1,
-                    'toggle_pg' : 1,
-                    'target'    : params.data_target,
-                    'type_pg'   : params.type_pg
-                });
+                if(link.hasClass('multiple')) {
+                    link.toggleClass('active').closest('.filter-entry').find('.all').removeClass('active');
+                }
+                else {
+                    link.closest('.filter-entry').find('.active').removeClass('active').end().end().addClass('active');
+                }
+
+                let listActiveItems = link.closest('.filter-entry').find('.active');
+
+                if( listActiveItems.length > 0 ) {
+
+                    listActiveItems.each(function() {
+                        term_id += $(this).data('termid')+',';
+                    });
+
+                    term_id = term_id.replace(/,\s*$/, "");
+                }
+                else {
+                    term_id = link.closest('.filter-entry').find('.all').data('termid');
+                }
+
+                if(link.hasClass('all')) {
+                    link.addClass('active').closest('.filter-entry').find('.group-filters .active, .group-filters .isActive, .group-filters .isOpen').removeClass('active isActive isOpen');
+                }
+
+                if( filterContainer )
+                {
+                    let params = JSON.parse( filterContainer.dataset.params);
+                    params.terms = term_id;
+                    params.page = 1;
+                    params.search = '';
+                    params.posts_selected = posts_selected;
+                    filterContainer.dataset.params = JSON.stringify(params);
+
+                    getFilterPosts({
+                        'paged'     : 1,
+                        'toggle_pg' : 1,
+                        'target'    : params.data_target,
+                        'type_pg'   : params.type_pg
+                    });
+                }
             }
+        });
 
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .hierarchy-filter4 .item-has-children .isArrow, .ymc-extra-filter .hierarchy-filter4 .item-has-children .isArrow', function (e) {
+            let arrow = $(e.target);
+
+            // Open / Close sub items
+            arrow.toggleClass('isOpen').next('.sub_item').length > 0 ?
+                arrow.next('.sub_item').toggleClass('isActive').closest('.item-has-children').toggleClass('isActive') :
+                arrow.closest('.link-inner').next('.sub_item').toggleClass('isActive').closest('.item-has-children').toggleClass('isActive');
         });
 
         // Filter Post Layout5 (Dropdown Filter Compact)
@@ -1414,107 +1498,109 @@
             let filterContainer = this.closest('.ymc-smart-filter-container');
             let textAll = link.closest('.filter-entry').data('textAll');
 
-            link.toggleClass('active');
-
-            if ( this.closest('.ymc-extra-filter') ) {
-                let extraFilterId   = link.closest('.ymc-extra-filter').data('extraFilterId');
-                filterContainer = document.querySelector(`.ymc-filter-${extraFilterId}`);
-            }
-
-            let listActiveItems = link.closest('.filter-entry').find('.active');
-
-            if( link.hasClass('all') ) {
-                link.closest('.menu-passive__item').
-                next().find('.menu-link').
-                removeClass('active');
-            }
-            else {
-                link.closest('.menu-passive__inner-items').
-                prev().find('.all').
-                removeClass('active');
-            }
-
-            // Not Multiple Taxonomy
-            if( listActiveItems.length > 0 && ! link.hasClass('multiple') ) {
-
-                link.closest('.menu-passive__item').siblings().find('.menu-link').removeClass('active');
-
-                link.closest('.dropdown-filter').find('.menu-active .text-cat').html($(this).data('name'));
-
-                link.closest('.filter-entry').find('.active:not(.all)').each(function () {
-                    term_id += $(this).data('termid')+',';
-                });
-            }
-
-            // Multiple Taxonomy
-            else if( listActiveItems.length > 0 && link.hasClass('multiple') ) {
-
-                let placeholderTax = link.closest('.dropdown-filter').find('.menu-active .text-cat');
-
-                let allTerms = link.closest('.filter-entry').find('.menu-link:not(.all)');
-
-                let allTermsCheked = link.closest('.filter-entry').find('.active:not(.all)');
-
-                let selTermsActive = link.closest('.menu-passive').find('.active');
-
-                let selTerms = '';
-
-                let selItemHTML = '';
-
-                // Add selected terms to HTML ---
-                allTermsCheked.each(function () {
-                    selTerms += $(this).data('termid')+',';
-                });
-
-                selTerms = selTerms.replace(/,\s*$/, "");
-
-                selTerms.split(',').forEach(function (el) {
-                    allTerms.each(function () {
-                        if ($(this).data('termid') === parseInt(el)) {
-                            selItemHTML += `<span data-trm="${el}" class="item">${$(this).data('name')} <small>x</small></span>`;
-                        }
-                    });
-                });
-
-                $(link.closest('.filter-entry')).find('.selected-items').html(selItemHTML);
-
-                // Add selected IDs terms --
-                link.closest('.filter-entry').find('.active:not(.all)').each(function () {
-                    term_id += $(this).data('termid')+',';
-                });
-
-                // Rename Label Tax --
-                ( ! link.hasClass('all') && selTermsActive.length > 0 ) ?  placeholderTax.html('Selected') : placeholderTax.html(textAll);
-
-            }
-
-            else {
-
-                link.closest('.filter-entry').find('.menu-active .text-cat').html('All');
-
-                link.closest('.filter-entry').find('.selected-items').empty();
-            }
-
-            term_id = term_id.replace(/,\s*$/, "");
-
-            if( filterContainer )
+            if( !link.hasClass('isDisabled') )
             {
-                // Update data params
-                let params = JSON.parse( filterContainer.dataset.params);
-                params.terms = term_id;
-                params.page = 1;
-                params.search = '';
-                params.posts_selected = posts_selected;
-                filterContainer.dataset.params = JSON.stringify(params);
+                link.toggleClass('active');
 
-                getFilterPosts({
-                    'paged'     : 1,
-                    'toggle_pg' : 1,
-                    'target'    : params.data_target,
-                    'type_pg'   : params.type_pg
-                });
+                if ( this.closest('.ymc-extra-filter') ) {
+                    let extraFilterId   = link.closest('.ymc-extra-filter').data('extraFilterId');
+                    filterContainer = document.querySelector(`.ymc-filter-${extraFilterId}`);
+                }
+
+                let listActiveItems = link.closest('.filter-entry').find('.active');
+
+                if( link.hasClass('all') ) {
+                    link.closest('.menu-passive__item').
+                    next().find('.menu-link').
+                    removeClass('active');
+                }
+                else {
+                    link.closest('.menu-passive__inner-items').
+                    prev().find('.all').
+                    removeClass('active');
+                }
+
+                // Not Multiple Taxonomy
+                if( listActiveItems.length > 0 && ! link.hasClass('multiple') ) {
+
+                    link.closest('.menu-passive__item').siblings().find('.menu-link').removeClass('active');
+
+                    link.closest('.dropdown-filter').find('.menu-active .text-cat').html($(this).data('name'));
+
+                    link.closest('.filter-entry').find('.active:not(.all)').each(function () {
+                        term_id += $(this).data('termid')+',';
+                    });
+                }
+
+                // Multiple Taxonomy
+                else if( listActiveItems.length > 0 && link.hasClass('multiple') ) {
+
+                    let placeholderTax = link.closest('.dropdown-filter').find('.menu-active .text-cat');
+
+                    let allTerms = link.closest('.filter-entry').find('.menu-link:not(.all)');
+
+                    let allTermsCheked = link.closest('.filter-entry').find('.active:not(.all)');
+
+                    let selTermsActive = link.closest('.menu-passive').find('.active');
+
+                    let selTerms = '';
+
+                    let selItemHTML = '';
+
+                    // Add selected terms to HTML ---
+                    allTermsCheked.each(function () {
+                        selTerms += $(this).data('termid')+',';
+                    });
+
+                    selTerms = selTerms.replace(/,\s*$/, "");
+
+                    selTerms.split(',').forEach(function (el) {
+                        allTerms.each(function () {
+                            if ($(this).data('termid') === parseInt(el)) {
+                                selItemHTML += `<span data-trm="${el}" class="item">${$(this).data('name')} <small>x</small></span>`;
+                            }
+                        });
+                    });
+
+                    $(link.closest('.filter-entry')).find('.selected-items').html(selItemHTML);
+
+                    // Add selected IDs terms --
+                    link.closest('.filter-entry').find('.active:not(.all)').each(function () {
+                        term_id += $(this).data('termid')+',';
+                    });
+
+                    // Rename Label Tax --
+                    ( ! link.hasClass('all') && selTermsActive.length > 0 ) ?  placeholderTax.html('Selected') : placeholderTax.html(textAll);
+
+                }
+
+                else {
+
+                    link.closest('.filter-entry').find('.menu-active .text-cat').html('All');
+
+                    link.closest('.filter-entry').find('.selected-items').empty();
+                }
+
+                term_id = term_id.replace(/,\s*$/, "");
+
+                if( filterContainer )
+                {
+                    // Update data params
+                    let params = JSON.parse( filterContainer.dataset.params);
+                    params.terms = term_id;
+                    params.page = 1;
+                    params.search = '';
+                    params.posts_selected = posts_selected;
+                    filterContainer.dataset.params = JSON.stringify(params);
+
+                    getFilterPosts({
+                        'paged'     : 1,
+                        'toggle_pg' : 1,
+                        'target'    : params.data_target,
+                        'type_pg'   : params.type_pg
+                    });
+                }
             }
-
         });
 
         $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .filter-layout5 .filter-entry .selected-items small, .ymc-extra-filter .filter-layout5 .filter-entry .selected-items small', function (e) {
@@ -2173,7 +2259,6 @@
                $('body, html').css({'overflow' : 'auto'});
             }
         });
-
 
     });
 

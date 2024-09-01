@@ -43,6 +43,7 @@ class Variables {
 	public $ymc_terms_align = null;
 
 	public $ymc_terms_options = null;
+	public $ymc_hierarchy_terms = 0;
 
 
 	/**
@@ -239,7 +240,7 @@ class Variables {
 
 
 	/**
-	 * General tab General
+	 * Methods for tab General
 	 */
 
 	public function display_cpt( $exclude_arr ) {
@@ -357,9 +358,17 @@ class Variables {
 		return $this->ymc_terms_options;
 	}
 
+	public function get_ymc_hierarchy_terms( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_hierarchy_terms' ) ) {
+			return get_post_meta( $post_id, 'ymc_hierarchy_terms', true );
+		}
+		return $this->ymc_hierarchy_terms;
+	}
+
 
 	/**
-	 * Layouts tab Layouts
+	 * Methods for tab Layouts
 	 */
 	public function get_filter_status( $post_id ) {
 
@@ -527,7 +536,7 @@ class Variables {
 
 
 	/**
-	 * Layouts tab Appearance
+	 * Methods for tab Appearance
 	 */
 	public function get_empty_post_result( $post_id ) {
 
@@ -698,7 +707,7 @@ class Variables {
 
 
 	/**
-	 * Layouts tab Advanced
+	 * Methods for tab Advanced
 	 */
 	public function get_special_post_class( $post_id ) {
 
@@ -814,7 +823,7 @@ class Variables {
 
 
 	/**
-	 * Typography tab used default variables
+	 *  Methods for tab Typography
 	 */
 	public function get_filter_font( $post_id ) {
 
@@ -835,7 +844,7 @@ class Variables {
 
 
 	/**
-	 * Search tab used default variables
+	 * Methods for tab Search
 	 */
 	public function get_filter_search_status( $post_id ) {
 

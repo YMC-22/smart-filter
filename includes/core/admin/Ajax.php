@@ -126,14 +126,47 @@ class Ajax {
 
 		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
 
-		if(isset($_POST["taxonomy"])) {
-			$taxonomy = sanitize_text_field($_POST["taxonomy"]);
-		}
-		if($taxonomy) {
-			$terms = get_terms([
+		$id = sanitize_text_field($_POST["post_id"]);
+		$taxonomy = sanitize_text_field($_POST["taxonomy"]);
+
+		$data = [];
+		$data['terms'] = [];
+		$data['hierarchy'] = [];
+
+		require_once YMC_SMART_FILTER_DIR . '/includes/core/util/variables.php';
+		require_once YMC_SMART_FILTER_DIR . '/includes/core/util/helper.php';
+
+		if( $taxonomy )
+		{
+			$ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
+
+			$argsTerms = [
 				'taxonomy' => $taxonomy,
-				'hide_empty' => false,
-			]);
+				'hide_empty' => false
+			];
+
+			// Set parent for terms (Hierarchy Terms Tree)
+			( $ymc_hierarchy_terms ) ? $argsTerms['parent'] = 0 : '';
+
+			$terms = get_terms($argsTerms);
+
+			if( $ymc_hierarchy_terms && is_array( $terms ) && ! is_wp_error( $terms ) )
+			{
+				foreach( $terms as $term )
+				{
+					$arrayTermsOptions = [
+						'style_icon' => $ymc_terms_align,
+						'selected_icon' => $ymc_terms_icons,
+						'style_term' => $ymc_terms_options,
+						'selected_terms' => $terms_sel,
+						'order_terms' => $ymc_sort_terms,
+						'manual_sort' => null
+					];
+
+					$data['hierarchy'][] = hierarchyTermsOutput($term->term_id, $taxonomy, 0, $arrayTermsOptions);
+				}
+			}
+
 			$data['terms'] = $terms;
 		}
 
