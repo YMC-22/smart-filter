@@ -352,29 +352,29 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 
 			</div>
 
+			<br/>
+
+			<label class="form-label">
+				<?php echo esc_html__('Hierarchical Tree of Terms', 'ymc-smart-filter'); ?>
+				<span class="information">
+                    <?php echo __('Check to display the hierarchy tree of terms. The depth of nesting 
+                     of terms is 3 levels. If the nesting depth exceeds 3 levels, then terms with a nesting level greater than three will not be displayed in filters.
+                     This applies to the following filter layouts: <b>Default Filter, Dropdown Filter, Sidebar Filter.</b>', 'ymc-smart-filter');?>
+                    </span>
+			</label>
+
+			<div class="group-elements">
+				<?php  $check_hierarchy_terms = ( $ymc_hierarchy_terms ) ? 'checked' : '';  ?>
+				<input type="hidden" name='ymc_hierarchy_terms' value="0">
+				<input class="ymc-hierarchy-terms" type="checkbox" value="1" name="ymc_hierarchy_terms" id="ymc-hierarchy-terms" <?php echo esc_attr($check_hierarchy_terms); ?>>
+				<label for="ymc-hierarchy-terms"><?php echo esc_html__('Enable', 'ymc-smart-filter'); ?></label>
+			</div>
+
 		</div>
 
 		<div class="form-group wrapper-selection">
 
 			<?php if( $is_cpt ) : ?>
-
-				<label class="form-label">
-					<?php echo esc_html__('Hierarchical Tree of Terms', 'ymc-smart-filter'); ?>
-					<span class="information">
-                    <?php echo __('Check to display the hierarchy tree of terms. The depth of nesting 
-                     of terms is 3 levels. If the nesting depth exceeds 3 levels, then terms with a nesting level greater than three will not be displayed in filters.
-                     This applies to the following filter layouts: <b>Default Filter, Dropdown Filter, Sidebar Filter.</b>', 'ymc-smart-filter');?>
-                    </span>
-				</label>
-
-				<div class="group-elements">
-					<?php  $check_hierarchy_terms = ( $ymc_hierarchy_terms ) ? 'checked' : '';  ?>
-					<input type="hidden" name='ymc_hierarchy_terms' value="0">
-					<input class="ymc-hierarchy-terms" type="checkbox" value="1" name="ymc_hierarchy_terms" id="ymc-hierarchy-terms" <?php echo esc_attr($check_hierarchy_terms); ?>>
-					<label for="ymc-hierarchy-terms"><?php echo esc_html__('Enable', 'ymc-smart-filter'); ?></label>
-				</div>
-
-				<br/>
 
 				<label class="form-label">
 					<?php echo esc_html__('Exclude Post(s)', 'ymc-smart-filter'); ?>

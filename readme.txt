@@ -1,7 +1,7 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.9.26
+Version: 2.9.27
 Donate link: https://github.com/YMC-22/smart-filter
 Tags: filter, grid, ajax, search, sort
 Requires at least: 5.5
@@ -25,6 +25,7 @@ The plugin provides the following functionality:
 - Development of custom Filters for your design.
 - Selecting one or more post types to display different posts in a grid.
 - Sorting taxonomies and terms.
+- Displaying taxonomy terms Hierarchy in filters.
 - Installation of different types of pagination (Numeric, Load more, Scroll infinity).
 - Choice of different templates for filters and post cards.
 - Separating components (Filter Layout, Search Bar, Sort Panel): using shortcodes anywhere on the page.
@@ -76,7 +77,8 @@ Detailed information can be found on GitHub at this <a target="_blank" href="htt
 
 == Changelog ==
 
-
+= 2.9.27 =
+Fixed the appearance of the terms section in the AP
 = 2.9.26 =
 Implementation of hierarchical term mapping
 = 2.9.24 =

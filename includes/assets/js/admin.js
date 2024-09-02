@@ -772,8 +772,8 @@
         // Taxonomy Event
         $(document).on('click','.ymc__container-settings #general #ymc-tax-checkboxes input[type="checkbox"]',function (e) {
 
+            let termsSection = $('.wrapper-terms');
             let termWrp = $('#ymc-terms');
-
             let val = '';
 
             if($(e.target).is(':checked')) {
@@ -866,11 +866,25 @@
             }
             else {
 
-                ( confirm("Are you sure you want to disable this taxonomy?") ) ?
-                    termWrp.find('.item-'+$(e.target).val()).remove() :
-                    $(e.target).prop('checked', true);
-            }
+               let act = confirm("Are you sure you want to disable this taxonomy?");
+               if( act ) {
 
+                   termWrp.find('.item-'+$(e.target).val()).remove();
+                   let checkboxes = $(e.target).closest('.group-elements').siblings().find('input[type="checkbox"]');
+                   let flag = true;
+
+                   checkboxes.each(function () {
+                       if( $(this).is(':checked') ) {
+                           flag = false;
+                       }
+                   });
+
+                   ( flag ) ? termsSection.addClass('hidden') : '';
+               }
+               else {
+                   $(e.target).prop('checked', true);
+               }
+            }
         });
 
         // Delete Taxonomies

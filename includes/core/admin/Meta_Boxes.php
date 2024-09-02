@@ -42,6 +42,9 @@ class Meta_Boxes {
 			$tax_val = sanitize_html_class( $_POST['ymc-taxonomy'] );
 			update_post_meta( $post_id, 'ymc_taxonomy', $tax_val );
 		}
+		else {
+			update_post_meta( $post_id, 'ymc_taxonomy', '' );
+		}
 
 		// Terms
 		if( isset($_POST['ymc-terms']) ) {
