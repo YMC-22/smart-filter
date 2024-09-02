@@ -258,7 +258,7 @@ $font-size: 16;
 						text-decoration: none;
 					}
 					&.isDisabled {
-						cursor: not-allowed;
+						cursor: text;
 						opacity: .75;
 					}
 				}
@@ -307,7 +307,7 @@ $font-size: 16;
 						}
 					}
 					&.isDisabled {
-						cursor: not-allowed;
+						cursor: text;
 						color: #adadad;
 					}
 					i {
@@ -421,7 +421,7 @@ $font-size: 16;
 						}
 					}
 					&.isDisabled {
-						cursor: not-allowed;
+						cursor: text;
 						opacity: .75;
 					}
 				}
@@ -586,7 +586,7 @@ $font-size: 16;
 						}
 						&.isDisabled {
 							opacity: .75;
-							cursor: not-allowed;
+							cursor: text;
 						}
 						.count {
 							position: relative;
@@ -810,7 +810,7 @@ $font-size: 16;
 					}
 					&.isDisabled {
 						opacity: .75;
-						cursor: not-allowed;
+						cursor: text;
 					}
 				}
 				&.item-has-children {
@@ -841,7 +841,7 @@ $font-size: 16;
 							}
 							&.isDisabled {
 								opacity: .75;
-								cursor: not-allowed;
+								cursor: text;
 							}
 						}
 						&.isActive {
@@ -1046,7 +1046,7 @@ $font-size: 16;
 					}
 				}
 				.menu-link.isDisabled {
-					cursor: not-allowed;
+					cursor: text;
 					color: #a8a8a8;
 				}
 			}
