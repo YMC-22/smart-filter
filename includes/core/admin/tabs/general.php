@@ -43,7 +43,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 
 					$sel = ( array_search($cpost_type, $cpt) !== false ) ? 'selected' : '';
 
-					echo "<option value='" . esc_attr($cpost_type) ."' ". esc_attr($sel) .">" . esc_html( str_replace(['-','_'],' ', $cpost_type) ) . "</option>";
+					echo "<option value='" . esc_attr($cpost_type) ."' ". esc_attr($sel) .">" . esc_html( get_post_type_object( $cpost_type )->label ) . "</option>";
 				}
 			?>
 			</select>
@@ -126,6 +126,20 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 			</label>
 
 			<div class="info-panel">
+				<span class="info-panel__text">
+					<?php echo esc_html__('Post Type:','ymc-smart-filter'); ?>
+					<i>
+					<?php
+						if( is_array($cpt) ) {
+							$cpt_list = '';
+							foreach ( $cpt as $value ) {
+								$cpt_list .= get_post_type_object( $value )->label.', ';
+							}
+							echo rtrim($cpt_list,', ');
+						}
+					?>
+					</i>
+				</span>
 				<span class="info-panel__text">
 					<?php echo esc_html__('Layout:','ymc-smart-filter'); ?>
 					<i><?php
