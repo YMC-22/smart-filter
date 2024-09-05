@@ -395,6 +395,7 @@ class Get_Posts {
 			}
 		}
 
+		$args = apply_filters('ymc_get_filter_posts_query_args_'.$filter_id.'_'.$target_id, $args, $clean_data);
 		$query = new \WP_query($args);
 
 		ob_start();
@@ -652,6 +653,7 @@ class Get_Posts {
 			}
 		}
 
+		$args = apply_filters('ymc_autocomplete_search_query_args', $args, $id, $term_ids);
 		$query = new \WP_Query($args);
 
 		if ( $query->have_posts() ) :
