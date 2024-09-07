@@ -509,7 +509,7 @@ if( !function_exists('hierarchyTermsOutput') )
 			                data-name-term="'. esc_attr($name_term) .'"  
 			                data-default-term="'. esc_attr($default_term) .'">';
 
-				$output .= '<i class="fas fa-ellipsis-v handle_nested"></i>';
+				$output .= '<i class="fas fa-grip-vertical handle_nested"></i>';
 
 				$output .= '<input name="ymc-terms[]" class="category-list" id="category-id-'. esc_attr($term->term_id) .'" type="checkbox" value="'. esc_attr($term->term_id) .'" '. esc_attr($sl1) .'>';
 
@@ -517,7 +517,7 @@ if( !function_exists('hierarchyTermsOutput') )
 
 				$output .= '<span class="name-term">' . esc_html($name_term) .'</span>'. ' ('. esc_html($term->count) .')</label>';
 
-				$output .= '<i class="far fa-cog choice-icon" title="Tag settings"></i><span class="indicator-icon">'. $terms_icons .'</span></div>';
+				$output .= '<i class="far fa-ellipsis-v choice-icon" title="Tag settings"></i><span class="indicator-icon">'. $terms_icons .'</span></div>';
 
 				// Depth 3
 				if( $counter <= 2 ) {

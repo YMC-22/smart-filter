@@ -101,7 +101,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 						}
 
 						echo '<div id="'. esc_attr($slug) .'" class="group-elements">
-						<i class="fas fa-ellipsis-v handle"></i>
+						<i class="fas fa-grip-vertical handle"></i>
                         <input id="id-'. esc_attr($slug) .'" type="checkbox" name="ymc-taxonomy[]" value="'. esc_attr($slug) .'" '. esc_attr($sl0) .'>
                         <label for="id-'. esc_attr($slug) .'">'.  esc_html($label) . '</label></div>';
 
@@ -242,6 +242,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 									echo '<div class="item-inner all-categories">
 			                              <input name="all-select" class="category-all" id="category-all-'.esc_attr($tax).'" type="checkbox">
 			                              <label for="category-all-'.esc_attr($tax).'" class="category-all-label">'. esc_html__('All [ '. get_taxonomy( $tax )->label .']', 'ymc-smart-filter') .'</label>                                                    
+			                              <i class="far fa-ellipsis-v choice-icon" title="Taxonomy settings"></i>
 			                              </div>';
 
 									echo '<div class="entry-terms">';
@@ -333,12 +334,12 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 						                    data-name-term="'. esc_attr($name_term) .'"  
 						                    data-default-term="'. esc_attr($default_term) .'">';
 
-							            echo '<i class="fas fa-ellipsis-v handle"></i>';
+							            echo '<i class="fas fa-grip-vertical handle"></i>';
                                         echo '<input name="ymc-terms[]" class="category-list" id="category-id-'. esc_attr($term->term_id) .'" type="checkbox" value="'. esc_attr($term->term_id) .'" '. esc_attr($sl1) .'>';
 
 									    echo '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">
-									    <span class="name-term">' . esc_html($name_term) .'</span>'. ' ('. esc_html($term->count) .')</label>						  						  
-									    <i class="far fa-cog choice-icon" title="Tag settings"></i><span class="indicator-icon">'. $terms_icons .'</span>';
+									    <span class="name-term">' . esc_html($name_term) .'</span>'. ' ['. esc_html($term->count) .']</label>						  						  
+									    <i class="far fa-ellipsis-v choice-icon" title="Tag settings"></i><span class="indicator-icon">'. $terms_icons .'</span>';
 
 							            echo '</div>'; // end item-inner
 										echo $hierarchy_terms_html; // Added hierarchy terms tree

@@ -727,7 +727,7 @@
                             for (let key in dataTax) {
 
                             taxonomyWrp.append(`<div id="${key}" class="group-elements" draggable="true">
-                            <i class="fas fa-ellipsis-v handle"></i>
+                            <i class="fas fa-grip-vertical handle"></i>
                             <input id="id-${key}" type="checkbox" name="ymc-taxonomy[]" value="${key}">
                             <label for="id-${key}">${dataTax[key]}</label>
                             </div>`);
@@ -814,7 +814,8 @@
                             output += `<article class="group-term item-${val}">
                                        <div class="item-inner all-categories">
                                        <input name='all-select' class='category-all' id='category-all-${val}' type='checkbox'>
-                                       <label for='category-all-${val}' class='category-all-label'>All [ ${$(e.target).siblings('label').text()} ]</label></div>
+                                       <label for='category-all-${val}' class='category-all-label'>All [ ${$(e.target).siblings('label').text()} ]</label>
+                                       <i class="far fa-ellipsis-v choice-icon" title="Taxonomy settings"></i></div>
                                        <div class="entry-terms">`;
 
                             res.data.terms.forEach((el,i) => {
@@ -829,10 +830,10 @@
                                 data-status-term 
                                 data-default-term 
                                 data-name-term >
-                                <i class="fas fa-ellipsis-v handle"></i>
+                                <i class="fas fa-grip-vertical handle"></i>
                                 <input name="ymc-terms[]" class="category-list" id="category-id-${el.term_id}" type="checkbox" value="${el.term_id}">
-                                <label for='category-id-${el.term_id}' class='category-list-label'><span class="name-term">${el.name}</span> (${el.count})</label>
-                                <i class="far fa-cog choice-icon" title="Tag settings"></i>
+                                <label for='category-id-${el.term_id}' class='category-list-label'><span class="name-term">${el.name}</span> [${el.count}]</label>
+                                <i class="far fa-ellipsis-v choice-icon" title="Tag settings"></i>
                                 <span class="indicator-icon"></span>                                
                                 </div>`;
 
@@ -946,7 +947,7 @@
                                 if( ! taxExist.includes(key) ) {
 
                                     taxonomyWrp.append(`<div id="${key}" class="group-elements" draggable="true">
-                                    <i class="fas fa-ellipsis-v handle"></i>
+                                    <i class="fas fa-grip-vertical handle"></i>
                                     <input id="id-${key}" type="checkbox" name="ymc-taxonomy[]" value="${key}">
                                     <label for="id-${key}">${dataTax[key]}</label>
                                     </div>`);
