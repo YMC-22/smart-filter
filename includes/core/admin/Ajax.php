@@ -46,6 +46,8 @@ class Ajax {
 		add_action( 'wp_ajax_ymc_import_settings', array( $this, 'ymc_import_settings'));
 
 		add_action( 'wp_ajax_ymc_updated_taxonomy', array( $this, 'ymc_updated_taxonomy'));
+
+		add_action( 'wp_ajax_ymc_taxonomy_options', array( $this, 'ymc_taxonomy_options'));
 	}
 
 	/**
@@ -415,6 +417,28 @@ class Ajax {
 
 		if(isset($_POST["post_id"])) {
 			$id = update_post_meta( (int) $_POST["post_id"], 'ymc_terms_options', $cleanData);
+		}
+
+		$data = array(
+			'update' => $id
+		);
+
+		wp_send_json($data);
+	}
+
+	/**
+	 * Handles the taxonomy options data sent via AJAX.
+	 */
+	public function ymc_taxonomy_options() {
+
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+
+		$postedData = $_POST['params'];
+		$tempData   = str_replace("\\", "",$postedData);
+		$cleanData  = json_decode($tempData, true);
+
+		if(isset($_POST["post_id"])) {
+			$id = update_post_meta( (int) $_POST["post_id"], 'ymc_taxonomy_options', $cleanData);
 		}
 
 		$data = array(

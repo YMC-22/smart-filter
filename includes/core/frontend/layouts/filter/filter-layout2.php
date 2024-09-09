@@ -82,9 +82,31 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 
                 foreach ($result_tax as $tax)
 				{
-	                $tax_name = apply_filters('ymc_tax_name_'.$id.'_'.$c_target.'_'.$tax, get_taxonomy( $tax )->label);
 
-                    echo '<li class="group-filters tax-'.$tax.'">
+					// Options Taxonomy
+					$tacBg = '';
+					$taxColor = '';
+					$taxName = '';
+
+					if( !empty($ymc_taxonomy_options) )
+					{
+						$taxonomyStylesArray = taxonomyStylesConfig($tax, $ymc_taxonomy_options);
+
+						if( !empty($taxonomyStylesArray) )
+						{
+							$tacBg = $taxonomyStylesArray['bg'];
+							$taxColor = $taxonomyStylesArray['color'];
+							$taxName = $taxonomyStylesArray['name'];
+						}
+					}
+
+					$style_tax_bg = !empty( $tacBg ) ? 'background-color:'.$tacBg.';' : '';
+					$style_tax_color = !empty($taxColor) ? 'color:'.$taxColor.';' : '';
+					$tax_name = !empty($taxName) ? $taxName : get_taxonomy( $tax )->label;
+
+	                $tax_name = apply_filters('ymc_tax_name_'.$id.'_'.$c_target.'_'.$tax, $tax_name);
+
+                    echo '<li class="group-filters tax-'.$tax.'" style="'.esc_attr($style_tax_bg).esc_attr($style_tax_color).'">
                           <header class="name-tax">'. esc_html($tax_name) .'</header>
                           <ul class="sub-filters">';
 

@@ -11,7 +11,7 @@
 			</div>
 			<div class="tab tab-terms">
 				<span class="tab-inner" data-content="<?php esc_attr_e('term'); ?>">
-					<?php esc_html_e('Tag Settings','ymc-smart-filter'); ?></span>
+					<?php esc_html_e('Term Settings','ymc-smart-filter'); ?></span>
 			</div>
 		</div>
 
@@ -844,7 +844,7 @@
 					<label class="form-label">
 						<?php esc_html_e('Background', 'ymc-smart-filter'); ?>
 						<span class="information">
-                            <?php echo esc_html__('Set tag background .', 'ymc-smart-filter');?>
+                            <?php echo esc_html__('Set term background .', 'ymc-smart-filter');?>
                         </span>
 					</label>
 					<input class="ymc-custom-color ymc-term-bg" type="text" name='ymc-term-bg' value=""/>
@@ -853,7 +853,7 @@
 					<label class="form-label">
 						<?php esc_html_e('Color', 'ymc-smart-filter'); ?>
 						<span class="information">
-                            <?php echo esc_html__('Set color tag.', 'ymc-smart-filter');?>
+                            <?php echo esc_html__('Set term color.', 'ymc-smart-filter');?>
                         </span>
 					</label>
 					<input class="ymc-custom-color ymc-term-color" type="text"  name='ymc-term-color' value=""/>
@@ -862,7 +862,7 @@
 					<label class="form-label">
 						<?php esc_html_e('Class', 'ymc-smart-filter'); ?>
 						<span class="information">
-                            <?php echo esc_html__('Set custom class tag.', 'ymc-smart-filter');?>
+                            <?php echo esc_html__('Set custom class term.', 'ymc-smart-filter');?>
                         </span>
 					</label>
 					<input class="input-field ymc-term-class" type="text" name="ymc-term-class" placeholder="Custom class for tag" value="" />
@@ -871,7 +871,7 @@
 					<label class="form-label">
 						<?php esc_html_e('Default Tag', 'ymc-smart-filter'); ?>
 						<span class="information">
-                            <?php echo esc_html__('Set the tag to default while posts load on frontend. For standard plugin Filter Layouts except for the Alphabetical Layout.', 'ymc-smart-filter');?>
+                            <?php echo esc_html__('Set the term to default while posts load on frontend. For standard plugin Filter Layouts except for the Alphabetical Layout.', 'ymc-smart-filter');?>
                         </span>
 					</label>
 					<input class="input-field ymc-term-default" id="ymc-term-default" type="checkbox" name="ymc-term-default" value="checked" />
@@ -881,7 +881,7 @@
 					<label class="form-label">
 						<?php esc_html_e('Name', 'ymc-smart-filter'); ?>
 						<span class="information">
-                            <?php echo esc_html__('Set a custom tag name. To restore the default tag name, clear the field.', 'ymc-smart-filter');?>
+                            <?php echo esc_html__('Set a custom term name. To restore the default tag name, clear the field.', 'ymc-smart-filter');?>
                         </span>
 					</label>
 					<input class="input-field ymc-term-custom-name" type="text" name="ymc-term-custom-name" placeholder="Term custom name" value="" />

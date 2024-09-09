@@ -607,6 +607,7 @@ class Meta_Boxes {
 					$id = $post->ID;
 					require_once YMC_SMART_FILTER_DIR . '/includes/core/util/variables.php';
 					require_once YMC_SMART_FILTER_DIR . '/includes/core/util/icons.php';
+					require_once YMC_SMART_FILTER_DIR . '/includes/core/util/taxonomy.php';
 					require_once YMC_SMART_FILTER_DIR . '/includes/core/util/helper.php';
 
                 ?>

@@ -43,6 +43,7 @@ class Variables {
 	public $ymc_terms_align = null;
 
 	public $ymc_terms_options = null;
+	public $ymc_taxonomy_options = null;
 	public $ymc_hierarchy_terms = 0;
 
 
@@ -356,6 +357,14 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_terms_options', true );
 		}
 		return $this->ymc_terms_options;
+	}
+
+	public function get_taxonomy_options( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_taxonomy_options' ) ) {
+			return get_post_meta( $post_id, 'ymc_taxonomy_options', true );
+		}
+		return $this->ymc_taxonomy_options;
 	}
 
 	public function get_ymc_hierarchy_terms( $post_id ) {

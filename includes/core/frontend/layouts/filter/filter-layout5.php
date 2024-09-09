@@ -86,8 +86,29 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 	                }
                 }
 
+				// Options Taxonomy
+				$tacBg = '';
+				$taxColor = '';
+				$taxName = '';
+
+				if( !empty($ymc_taxonomy_options) )
+				{
+					$taxonomyStylesArray = taxonomyStylesConfig($tax, $ymc_taxonomy_options);
+
+					if( !empty($taxonomyStylesArray) )
+					{
+						$tacBg = $taxonomyStylesArray['bg'];
+						$taxColor = $taxonomyStylesArray['color'];
+						$taxName = $taxonomyStylesArray['name'];
+					}
+				}
+
+				$style_tax_bg = !empty( $tacBg ) ? 'background-color:'.$tacBg.';' : '';
+				$style_tax_color = !empty($taxColor) ? 'color:'.$taxColor.';' : '';
+				$tax_name = !empty($taxName) ? $taxName : get_taxonomy( $tax )->label;
+
 	            $select_term = apply_filters('ymc_select_term_dropdown', $tax);
-	            $tax_name = apply_filters('ymc_tax_name_'.$id.'_'.$c_target.'_'.$tax, get_taxonomy( $select_term )->label);
+	            $tax_name = apply_filters('ymc_tax_name_'.$id.'_'.$c_target.'_'.$tax, $tax_name);
 
 				$text_all = apply_filters('ymc_placeholder_dropdown_'.$id.'_'.$c_target.'_'.$tax, $text_all);
 
@@ -105,7 +126,7 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 
                 echo '<div class="dropdown-filter tax-'.$tax.'">';
                 echo '<div class="name-category">' . $tax_name .'</div>';
-                echo '<div class="menu-active">';
+                echo '<div class="menu-active" style="'.esc_attr($style_tax_bg).$style_tax_color.'">';
                 echo '<span class="text-cat">'. esc_html($text_all) .'</span> <i class="arrow down"></i>';
                 echo '</div>';
                 echo '<div class="menu-passive">';

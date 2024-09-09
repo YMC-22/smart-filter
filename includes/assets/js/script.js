@@ -811,6 +811,7 @@
             let filterID = params.filter_id;
             let targetID = params.target_id;
             let pageScroll = params.page_scroll;
+            let postLayout = params.post_layout;
 
             const data = {
                 'action'     : 'ymc_get_posts',
@@ -850,8 +851,8 @@
                         container.find('.filter-layout .posts-found').empty();
                     }
 
-                    switch ( type_pg ) {
-
+                    switch ( type_pg )
+                    {
                         case 'load-more' :
 
                             if(toggle_pg === 0) {
@@ -921,7 +922,7 @@
                                 append(res.pagin);
                             }
 
-                            if(res.get_current_posts > 0) {
+                            if( res.get_current_posts > 0 && postLayout !== 'post-carousel-layout' ) {
                                 postsObserver.observe(document.querySelector('.'+target+' .post-entry .post-item:last-child'));
                             }
 

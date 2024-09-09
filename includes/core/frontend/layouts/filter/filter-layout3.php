@@ -83,9 +83,29 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 
             foreach ($result_tax as $tax)
 			{
+				// Options Taxonomy
+				$tacBg = '';
+				$taxColor = '';
+				$taxName = '';
+
+				if( !empty($ymc_taxonomy_options) )
+				{
+					$taxonomyStylesArray = taxonomyStylesConfig($tax, $ymc_taxonomy_options);
+
+					if( !empty($taxonomyStylesArray) )
+					{
+						$tacBg = $taxonomyStylesArray['bg'];
+						$taxColor = $taxonomyStylesArray['color'];
+						$taxName = $taxonomyStylesArray['name'];
+					}
+				}
+
+				$style_tax_bg = !empty( $tacBg ) ? 'background-color:'.$tacBg.';' : '';
+				$style_tax_color = !empty($taxColor) ? 'color:'.$taxColor.';' : '';
+				$tax_name = !empty($taxName) ? $taxName : get_taxonomy( $tax )->label;
 
 	            $select_term = apply_filters('ymc_select_term_dropdown', $tax);
-	            $tax_name = apply_filters('ymc_tax_name_'.$id.'_'.$c_target.'_'.$tax, get_taxonomy( $select_term )->label);
+	            $tax_name = apply_filters('ymc_tax_name_'.$id.'_'.$c_target.'_'.$tax, $tax_name);
 
 				if( !empty($default_terms) && empty($type_multiple) )
 				{
@@ -100,7 +120,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 				}
 
                 echo '<div class="dropdown-filter tax-'.$tax.'">';
-                echo '<div class="menu-active">';
+                echo '<div class="menu-active" style="'.esc_attr($style_tax_bg).$style_tax_color.'">';
                 echo '<span class="original-tax-name" data-original-tax-name="'. esc_attr($tax_name).'">' . $tax_name .'</span> <i class="arrow down"></i>';
                 echo '</div>';
                 echo '<div class="menu-passive">';

@@ -288,6 +288,52 @@ if( !function_exists('debugEntries') )
 
 
 /**
+ * Retrieves taxonomy styles configuration based on the provided taxonomy slug and settings.
+ *
+ * @param string $tax_slug The taxonomy slug to retrieve styles for.
+ * @param array $settings The array of settings containing styles for different taxonomies.
+ * @return array An array containing the background color, text color, and name of the taxonomy styles.
+ */
+if( !function_exists('taxonomyStylesConfig') ) :
+	function taxonomyStylesConfig($tax_slug, $settings) {
+
+		// Set Options Taxonomy
+		if( !empty($settings) ) {
+
+			$flag_tax_option = false;
+			$taxArray = [];
+
+			foreach ( $settings as $tax_opt ) {
+
+				foreach ( $tax_opt as $key => $val) {
+
+					if ( $key === 'slug' && $tax_slug === $val ) {
+						$flag_tax_option = true;
+					}
+					if ( $key === 'bg' && $flag_tax_option ) {
+						$taxArray['bg'] = $val;
+					}
+					if ( $key === 'color' && $flag_tax_option ) {
+						$taxArray['color'] = $val;
+					}
+					if ( $key === 'name' && $flag_tax_option ) {
+						$taxArray['name'] = $val;
+					}
+				}
+
+				if( $flag_tax_option ) {break;}
+			}
+
+			return $taxArray;
+		}
+
+		return [];
+	}
+
+endif;
+
+
+/**
  * Retrieves the styles configuration for a specific term.
  *
  * @param int $term_id The ID of the term.

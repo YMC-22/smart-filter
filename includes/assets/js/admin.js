@@ -294,6 +294,48 @@
         }
 
         /**
+         * Update options taxonomies based on the elements with class 'all-categories' under the '#ymc-terms' element
+         */
+        function updatedOptionsTaxonomies() {
+
+            let optionsTaxonomies = [];
+
+            document.querySelectorAll('#ymc-terms .all-categories').forEach((el) => {
+                optionsTaxonomies.push({
+                    'slug' : el.dataset.taxSlug,
+                    'name' : el.dataset.taxName,
+                    'color' : el.dataset.taxColor,
+                    'bg' : el.dataset.taxBg
+                });
+            });
+
+            const data = {
+                'action' : 'ymc_taxonomy_options',
+                'nonce_code' : _smart_filter_object.nonce,
+                'post_id' : $('#ymc-cpt-select').data('postid'),
+                'params'  : JSON.stringify(optionsTaxonomies)
+            };
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: _smart_filter_object.ajax_url,
+                data: data,
+                beforeSend: function () {
+                    container.addClass('loading').
+                    prepend(`<img class="preloader" src="${pathPreloader}">`);
+                },
+                success: function (res) {
+                    container.removeClass('loading').find('.preloader').remove();
+                    tb_remove();
+                },
+                error: function (obj, err) {
+                    console.log( obj, err );
+                }
+            });
+        }
+
+        /**
          * Check or uncheck a term element and update its status attribute.
          * @param {Event} e - The event object triggered by the action.
          */
@@ -810,11 +852,13 @@
                         if( res.data.terms.length )
                         {
                             let output = '';
+                            let taxName = $(e.target).siblings('label').text();
 
                             output += `<article class="group-term item-${val}">
-                                       <div class="item-inner all-categories">
+                                       <div class="item-inner all-categories" data-tax-slug="${val}" data-tax-color data-tax-bg data-tax-name="${taxName}" data-tax-original-name="${taxName}">
                                        <input name='all-select' class='category-all' id='category-all-${val}' type='checkbox'>
-                                       <label for='category-all-${val}' class='category-all-label'>All [ ${$(e.target).siblings('label').text()} ]</label>
+                                       <label for='category-all-${val}' class='category-all-label'>
+                                       All [ ${taxName} ]</label>
                                        <i class="far fa-ellipsis-v choice-icon" title="Taxonomy settings"></i></div>
                                        <div class="entry-terms">`;
 
@@ -833,7 +877,7 @@
                                 <i class="fas fa-grip-vertical handle"></i>
                                 <input name="ymc-terms[]" class="category-list" id="category-id-${el.term_id}" type="checkbox" value="${el.term_id}">
                                 <label for='category-id-${el.term_id}' class='category-list-label'><span class="name-term">${el.name}</span> [${el.count}]</label>
-                                <i class="far fa-ellipsis-v choice-icon" title="Tag settings"></i>
+                                <i class="far fa-ellipsis-v choice-icon" title="Term settings"></i>
                                 <span class="indicator-icon"></span>                                
                                 </div>`;
 
@@ -1111,7 +1155,7 @@
             let newIcon = $(e.target).siblings('.indicator-icon').find('i').clone(true).css('color',colorIcon);
 
             // Run popup
-            tb_show( '&#9998; &#91; '+nameTerm+' &#93;', '/?TB_inline&inlineId=ymc-icons-modal&width=740&height=768' );
+            tb_show( '&#9998; Term: &#91; '+nameTerm+' &#93;', '/?TB_inline&inlineId=ymc-icons-modal&width=740&height=768' );
 
             // Get elements in popup
             let iconCurrentColor   = $('#TB_ajaxContent .ymc-icons-content .ymc-icon-color');
@@ -1543,6 +1587,64 @@
         // Clipboard Copy Hints
         document.querySelectorAll('.ymc__container-settings #advanced .custom-js .popup-hints .js-clipboard-copy').forEach((el) => {
             el.addEventListener( 'click', clipboardCopyHints );
+        });
+
+        // Open popup Taxonomy Settings
+        $(document).on('click','#general #ymc-terms .all-categories .choice-icon', function (e) {
+
+            let _self = $(e.target);
+
+            $('#ymc-terms .all-categories').removeClass('open-popup');
+            _self.closest('.all-categories').addClass('open-popup');
+
+            // Get values data attributes taxonomy
+            let taxName = e.target.closest('.all-categories').dataset.taxName;
+            let taxBg = e.target.closest('.all-categories').dataset.taxBg;
+            let taxColor = e.target.closest('.all-categories').dataset.taxColor;
+
+            // Run popup
+            tb_show('&#9998; Taxonomy: &#91; '+ taxName +' &#93;', '/?TB_inline&width=740&height=768&inlineId=config-taxonomy');
+
+            // Get elements in popup
+            let taxCurrentBg = $('#TB_ajaxContent .ymc-tax-content #ymc-tax-bg');
+            let taxCurrentColor = $('#TB_ajaxContent .ymc-tax-content #ymc-tax-color');
+            let taxCustomName = $('#TB_ajaxContent .ymc-tax-content #ymc-tax-custom-name');
+
+            // Set current settings
+            taxCurrentBg.wpColorPicker('color', taxBg);
+            taxCurrentColor.wpColorPicker('color', taxColor);
+            taxCustomName.val(taxName);
+        });
+
+        // Save Settings Taxonomy
+        $(document).on('click','#TB_ajaxContent .btn-tax-apply', function (e) {
+            e.preventDefault();
+
+            let taxBg = $('#TB_ajaxContent .ymc-tax-content .ymc-tax-bg').val();
+            let taxColor = $('#TB_ajaxContent .ymc-tax-content .ymc-tax-color').val();
+            let taxName = $('#TB_ajaxContent .ymc-tax-content .ymc-tax-custom-name').val();
+            let selectedTax = document.querySelector('#ymc-terms .all-categories.open-popup');
+            let taxOriginalName = selectedTax.dataset.taxOriginalName;
+
+            selectedTax.dataset.taxBg = taxBg;
+            selectedTax.dataset.taxColor = taxColor;
+            selectedTax.dataset.taxName = ( taxName ) ? taxName : taxOriginalName;
+
+            let styleTaxBg = ( taxBg ) ? `background-color: ${taxBg};` : '';
+            let styleTaxColor = ( taxColor ) ? `color: ${taxColor};` : '';
+
+            ( taxBg || taxColor ) ?
+                selectedTax.setAttribute('style',`${styleTaxBg}${styleTaxColor}`) :
+                selectedTax.removeAttribute('style');
+
+            ( taxName ) ?
+                selectedTax.querySelector('.category-all-label').innerHTML = 'All [ '+taxName+' ]' :
+                selectedTax.querySelector('.category-all-label').innerHTML = 'All [ '+taxOriginalName+' ]';
+
+            $('#ymc-terms .all-categories').removeClass('open-popup');
+
+            updatedOptionsTaxonomies();
+
         });
 
 

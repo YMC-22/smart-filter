@@ -199,6 +199,28 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 								if( is_array( $terms ) && ! is_wp_error( $terms ) )
 								{
 
+									// Options Taxonomy
+									$tacBg = '';
+									$taxColor = '';
+									$taxName = '';
+
+									if( !empty($ymc_taxonomy_options) )
+									{
+										$taxonomyStylesArray = taxonomyStylesConfig($tax, $ymc_taxonomy_options);
+
+										if( !empty($taxonomyStylesArray) )
+										{
+											$tacBg = $taxonomyStylesArray['bg'];
+											$taxColor = $taxonomyStylesArray['color'];
+											$taxName = $taxonomyStylesArray['name'];
+										}
+									}
+
+									$style_tax_bg = !empty( $tacBg ) ? 'background-color:'.$tacBg.';' : '';
+									$style_tax_color = !empty($taxColor) ? 'color:'.$taxColor.';' : '';
+									$tax_name = !empty($taxName) ? $taxName : get_taxonomy( $tax )->label;
+
+
 									// Options Term
 									$bg_term = '';
 									$color_term = '';
@@ -239,9 +261,10 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 
 									echo '<article class="group-term item-'. esc_attr($tax) .'">';
 
-									echo '<div class="item-inner all-categories">
+									echo '<div class="item-inner all-categories" data-tax-slug="'. esc_attr($tax) .'" data-tax-color="'.esc_attr($taxColor).'" data-tax-bg="'.esc_attr($tacBg).'" data-tax-name="'.esc_attr($tax_name).'" 
+									      data-tax-original-name="'. esc_attr(get_taxonomy( $tax )->label) .'" style="'.esc_attr($style_tax_bg) . esc_attr($style_tax_color).'">
 			                              <input name="all-select" class="category-all" id="category-all-'.esc_attr($tax).'" type="checkbox">
-			                              <label for="category-all-'.esc_attr($tax).'" class="category-all-label">'. esc_html__('All [ '. get_taxonomy( $tax )->label .']', 'ymc-smart-filter') .'</label>                                                    
+			                              <label for="category-all-'.esc_attr($tax).'" class="category-all-label">'. esc_html__('All [ '. $tax_name .']', 'ymc-smart-filter') .'</label>                                                    
 			                              <i class="far fa-ellipsis-v choice-icon" title="Taxonomy settings"></i>
 			                              </div>';
 
@@ -339,7 +362,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 
 									    echo '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">
 									    <span class="name-term">' . esc_html($name_term) .'</span>'. ' ['. esc_html($term->count) .']</label>						  						  
-									    <i class="far fa-ellipsis-v choice-icon" title="Tag settings"></i><span class="indicator-icon">'. $terms_icons .'</span>';
+									    <i class="far fa-ellipsis-v choice-icon" title="Term settings"></i><span class="indicator-icon">'. $terms_icons .'</span>';
 
 							            echo '</div>'; // end item-inner
 										echo $hierarchy_terms_html; // Added hierarchy terms tree
