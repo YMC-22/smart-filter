@@ -873,7 +873,7 @@
                                 data-class-icon 
                                 data-status-term 
                                 data-default-term 
-                                data-name-term >
+                                data-name-term="${el.name}" >
                                 <i class="fas fa-grip-vertical handle"></i>
                                 <input name="ymc-terms[]" class="category-list" id="category-id-${el.term_id}" type="checkbox" value="${el.term_id}">
                                 <label for='category-id-${el.term_id}' class='category-list-label'><span class="name-term">${el.name}</span> [${el.count}]</label>

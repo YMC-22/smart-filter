@@ -1,5 +1,5 @@
 
-<<div id="config-taxonomy" class="config-taxonomy" style="display:none;">
+<div id="config-taxonomy" class="config-taxonomy" style="display:none;">
 
 	<div class="ymc-tax-content">
 
