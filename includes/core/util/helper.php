@@ -96,7 +96,7 @@ if( !function_exists('arrayToObject') )
  */
 if( !function_exists('setOptionsTerm') )
 {
-	function setOptionsTerm( $termSettings, $termID, &$bg_term, &$color_term, &$class_term, &$default_term_active, &$counterame_term )
+	function setOptionsTerm( $termSettings, $termID, &$bg_term, &$color_term, &$class_term, &$default_term_active, &$counterame_term, &$hide_term='' )
 	{
 		$flag_terms_option = false;
 
@@ -128,6 +128,9 @@ if( !function_exists('setOptionsTerm') )
 					}
 					if ( $key === 'name' && $flag_terms_option ) {
 						$counterame_term = $val;
+					}
+					if ( $key === 'hide' && $flag_terms_option ) {
+						$hide_term = $val;
 					}
 				}
 
@@ -334,6 +337,29 @@ endif;
 
 
 /**
+ * Retrieves the term IDs of the hidden terms from the given options array.
+ *
+ * @param array $terms_options An array of term options.
+ * @return array An array containing the term IDs of the hidden terms.
+ */
+if( !function_exists('getHiddenTerms') ) :
+	function getHiddenTerms($terms_options) {
+		if( !empty( $terms_options ) ) {
+			$termArray = [];
+			foreach ( $terms_options as $terms_opt ) {
+				if( array_search('enabled', $terms_opt) !== false ) {
+					$termArray[] = $terms_opt['termid'];
+				}
+			}
+			return $termArray;
+		}
+		return [];
+	}
+
+endif;
+
+
+/**
  * Retrieves the styles configuration for a specific term.
  *
  * @param int $term_id The ID of the term.
@@ -370,6 +396,9 @@ if( !function_exists('termStylesConfig') ) :
 					}
 					if ( $key === 'name' && $flag_terms_option ) {
 						$termArray['name_term'] = $val;
+					}
+					if ( $key === 'hide' && $flag_terms_option ) {
+						$termArray['hide_term'] = $val;
 					}
 				}
 
@@ -508,6 +537,7 @@ if( !function_exists('hierarchyTermsOutput') )
 					$color_term = $termStylesArray['color_term'];
 					$class_term = $termStylesArray['class_term'];
 					$name_term = $termStylesArray['name_term'];
+					$hide_term = !empty($termStylesArray['hide_term']) ? $termStylesArray['hide_term'] : '';
 					$default_term = $termStylesArray['default_term'];
 				}
 
@@ -552,7 +582,8 @@ if( !function_exists('hierarchyTermsOutput') )
 			                data-color-icon="'. esc_attr($color_icon) .'"
 			                data-class-icon="'. esc_attr($class_icon) .'"
 			                data-status-term="'. esc_attr($sl1) .'"  
-			                data-name-term="'. esc_attr($name_term) .'"  
+			                data-name-term="'. esc_attr($name_term) .'"
+			                data-hide-term="'. esc_attr($hide_term) .'"
 			                data-default-term="'. esc_attr($default_term) .'">';
 
 				$output .= '<i class="fas fa-grip-vertical handle_nested"></i>';
@@ -561,7 +592,7 @@ if( !function_exists('hierarchyTermsOutput') )
 
 				$output .= '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">';
 
-				$output .= '<span class="name-term">' . esc_html($name_term) .'</span>'. ' ('. esc_html($term->count) .')</label>';
+				$output .= '<span class="name-term">' . esc_html($name_term) .'</span>'. ' ['. esc_html($term->count) .']</label>';
 
 				$output .= '<i class="far fa-ellipsis-v choice-icon" title="Tag settings"></i><span class="indicator-icon">'. $terms_icons .'</span></div>';
 
@@ -717,7 +748,7 @@ if( !function_exists('hierarchyTermsLayout') ) :
 
 		++$counter;
 
-		$list = get_categories_tree($termID, $taxonomy,$arrayTermsOptions['terms_order'], $arrayTermsOptions['terms_selected']);
+		$list = get_categories_tree($termID, $taxonomy, $arrayTermsOptions['terms_order'], $arrayTermsOptions['terms_selected']);
 
 		if( !empty($list) )
 		{
@@ -731,6 +762,7 @@ if( !function_exists('hierarchyTermsLayout') ) :
 				$class_term = '';
 				$default_term_active = '';
 				$name_term = '';
+				$hide_term = '';
 
 				// Options Icon
 				$class_terms_align = '';
@@ -754,7 +786,11 @@ if( !function_exists('hierarchyTermsLayout') ) :
 					$color_term,
 					$class_term,
 					$default_term_active,
-					$name_term );
+					$name_term,
+					$hide_term );
+
+				// Hide term ( exclude term )
+				if($hide_term === 'enabled') continue;
 
 				// Selected Icon for Term
 				setSelectedIcon( $arrayTermsOptions['terms_icons'], $term->term_id, $terms_icons, $color_icon );

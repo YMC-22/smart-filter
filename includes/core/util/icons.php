@@ -869,13 +869,23 @@
 				</div>
 				<div class="form-element">
 					<label class="form-label">
-						<?php esc_html_e('Default Tag', 'ymc-smart-filter'); ?>
+						<?php esc_html_e('Default Term', 'ymc-smart-filter'); ?>
 						<span class="information">
                             <?php echo esc_html__('Set the term to default while posts load on frontend. For standard plugin Filter Layouts except for the Alphabetical Layout.', 'ymc-smart-filter');?>
                         </span>
 					</label>
 					<input class="input-field ymc-term-default" id="ymc-term-default" type="checkbox" name="ymc-term-default" value="checked" />
 					<label for="ymc-term-default"><?php esc_html_e('Enable', 'ymc-smart-filter'); ?></label>
+				</div>
+				<div class="form-element">
+					<label class="form-label">
+						<?php esc_html_e('Hide Term', 'ymc-smart-filter'); ?>
+						<span class="information">
+                            <?php echo esc_html__('Hide the term on the frontend. But loading posts will take this term into account.', 'ymc-smart-filter');?>
+                        </span>
+					</label>
+					<input class="input-field ymc-term-hide" id="ymc-term-hide" type="checkbox" name="ymc-term-hide" value="enabled" />
+					<label for="ymc-term-hide"><?php esc_html_e('Enable', 'ymc-smart-filter'); ?></label>
 				</div>
 				<div class="form-element">
 					<label class="form-label">

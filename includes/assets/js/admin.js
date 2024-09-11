@@ -259,7 +259,8 @@
                     "class"   : el.dataset.customClass,
                     "status"  : el.dataset.statusTerm,
                     "default" : el.dataset.defaultTerm,
-                    "name"    : el.dataset.nameTerm
+                    "name"    : el.dataset.nameTerm,
+                    "hide"    : el.dataset.hideTerm
                 });
             });
 
@@ -872,6 +873,7 @@
                                 data-color-icon 
                                 data-class-icon 
                                 data-status-term 
+                                data-hide-term 
                                 data-default-term 
                                 data-name-term="${el.name}" >
                                 <i class="fas fa-grip-vertical handle"></i>
@@ -1150,6 +1152,7 @@
             let colorTerm = e.target.closest('.item-inner').dataset.colorTerm;
             let customClass = e.target.closest('.item-inner').dataset.customClass || '';
             let defaultTerm = e.target.closest('.item-inner').dataset.defaultTerm || '';
+            let hideTerm = e.target.closest('.item-inner').dataset.hideTerm || '';
             let customNameTerm = e.target.closest('.item-inner').dataset.nameTerm || '';
             let colorIcon = e.target.closest('.item-inner').dataset.colorIcon || '#3c434a';
             let newIcon = $(e.target).siblings('.indicator-icon').find('i').clone(true).css('color',colorIcon);
@@ -1163,6 +1166,7 @@
             let termCurrentBg      = $('#TB_ajaxContent .ymc-terms-content .terms-entry .ymc-term-bg');
             let termCurrentColor   = $('#TB_ajaxContent .ymc-terms-content .terms-entry .ymc-term-color');
             let termCurrentDefault = $('#TB_ajaxContent .ymc-terms-content .terms-entry .ymc-term-default');
+            let termCurrentHide    = $('#TB_ajaxContent .ymc-terms-content .terms-entry .ymc-term-hide');
             let termCustomName     = $('#TB_ajaxContent .ymc-terms-content .terms-entry .ymc-term-custom-name');
 
             if( newIcon.length > 0 ) {
@@ -1182,6 +1186,10 @@
             termCurrentColor.wpColorPicker('color', colorTerm);
             ( defaultTerm !== '' ) ? termCurrentDefault.attr('checked', defaultTerm).prop('checked', true) :
                                      termCurrentDefault.removeAttr('checked');
+
+            ( hideTerm !== '' ) ? termCurrentHide.attr('checked','checked').prop('checked', true) :
+                termCurrentHide.removeAttr('checked');
+
             iconCurrentColor.wpColorPicker('color', colorIcon);
             iconCurrentClass.val(customClass);
             termCustomName.val(customNameTerm);
@@ -1331,6 +1339,7 @@
             let colorTerm = $('#TB_ajaxContent .ymc-terms-content .ymc-term-color').val();
             let customClass = $('#TB_ajaxContent .ymc-terms-content .ymc-term-class').val();
             let defaultTerm = $('#TB_ajaxContent .ymc-terms-content .ymc-term-default:checked').val();
+            let hideTerm = $('#TB_ajaxContent .ymc-terms-content .ymc-term-hide:checked').val();
             let nameTerm = $('#TB_ajaxContent .ymc-terms-content .ymc-term-custom-name').val();
             let colorIcon = $('#TB_ajaxContent .ymc-icons-content .panel-setting .ymc-icon-color').val();
             let selectedTerm = document.querySelector('#ymc-terms .entry-terms .open-popup');
@@ -1339,6 +1348,7 @@
             selectedTerm.dataset.colorTerm = colorTerm;
             selectedTerm.dataset.customClass = customClass;
             selectedTerm.dataset.defaultTerm = (undefined !== defaultTerm) ? defaultTerm : '';
+            selectedTerm.dataset.hideTerm = (undefined !== hideTerm) ? hideTerm : '';
             selectedTerm.dataset.colorIcon = colorIcon;
             selectedTerm.dataset.nameTerm = nameTerm;
 

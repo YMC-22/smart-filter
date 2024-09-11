@@ -126,6 +126,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
                 echo '<div class="menu-passive">';
                 echo '<i class="btn-close">x</i>';
 
+				$terms_selected = array_diff($terms_selected, getHiddenTerms($ymc_terms_options));
 
                 foreach ($terms_selected as $term)
 				{
@@ -163,13 +164,14 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 						setOptionsIcon( $ymc_terms_align, $term, $class_terms_align, $color_icon );
 
 						// Set Options for Term
-						setOptionsTerm( $ymc_terms_options,
-									   $term,
-							        $bg_term,
-							        $color_term,
-									$class_term,
-									$default_term_active,
-									$name_term );
+						setOptionsTerm(
+							  $ymc_terms_options,
+							  $term,
+					        $bg_term,
+					        $color_term,
+							$class_term,
+							$default_term_active,
+							$name_term );
 
 						// Selected Icon for Term
 						setSelectedIcon( $ymc_terms_icons, $term, $terms_icons, $color_icon );

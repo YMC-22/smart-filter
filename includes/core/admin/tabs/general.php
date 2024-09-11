@@ -227,6 +227,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 									$class_term = '';
 									$default_term = '';
 									$name_term  = '';
+									$hide_term  = '';
 
 									// Options Icon
 									$color_icon   = '';
@@ -307,6 +308,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 												$class_term       = $termStylesArray['class_term'];
 												$default_term     = $termStylesArray['default_term'];
 												$name_term        = $termStylesArray['name_term'];
+												$hide_term        = !empty($termStylesArray['hide_term']) ? $termStylesArray['hide_term'] : '';
 											}
 										}
 
@@ -355,6 +357,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 						                    data-class-icon="'. esc_attr($class_icon) .'"
 						                    data-status-term="'. esc_attr($sl1) .'"  
 						                    data-name-term="'. esc_attr($name_term) .'"  
+						                    data-hide-term="'. esc_attr($hide_term) .'"  
 						                    data-default-term="'. esc_attr($default_term) .'">';
 
 							            echo '<i class="fas fa-grip-vertical handle"></i>';

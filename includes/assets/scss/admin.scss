@@ -388,17 +388,44 @@ $font-size: 16;
 												background: #e1e1e1;
 											}
 											&[data-default-term="checked"] {
-												&:after {
+												/*&:after {
 													content: '';
 													position: absolute;
 													width: 16px;
 													height: 16px;
-													right: 40px;
+													right: 50px;
 													top: 50%;
 													transform: translateY(-50%);
 													display: block;
 													background: url("../images/checked.png") no-repeat center/contain;
 													z-index: 3;
+												}*/
+												input[type=checkbox] {
+													background-color: #0aa018;
+													border: none;
+													&:checked {
+														&:before {
+															filter: brightness(0) saturate(100%) invert(99%) sepia(100%) saturate(0%) hue-rotate(191deg) brightness(106%) contrast(100%);
+														}
+													}
+												}
+											}
+											&[data-hide-term="enabled"] {
+												&:before {
+													content: "";
+													position: absolute;
+													width: 16px;
+													height: 16px;
+													right: 25px;
+													top: 50%;
+													transform: translateY(-50%);
+													display: block;
+													background-size: contain;
+													background-image: url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M15.406 1.125l-3.229 3.229C14.47 5.834 16 7.969 16 7.969s-3.582 5-8 5c-1.244 0-2.422-.397-3.472-.966l-3.372 3.372-.707-.707 3.2-3.2C1.451 9.997 0 7.969 0 7.969s3.582-5 8-5c1.17 0 2.28.351 3.282.867L14.7.418l.707.707zM8 4.969c.61 0 1.179.182 1.653.496L8.546 6.57a1.5 1.5 0 00-1.943 1.943L5.495 9.622A3 3 0 018 4.968zm-.742 4.304l-1.08 1.08a3 3 0 004.205-4.205l-1.079 1.08a1.5 1.5 0 01-2.046 2.046z' fill='%23000'%3E%3C/path%3E%3C/svg%3E");
+													z-index: 3;
+												}
+												.category-list-label {
+													opacity: .5;
 												}
 											}
 											.handle,

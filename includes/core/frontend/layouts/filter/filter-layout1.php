@@ -51,6 +51,7 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 				echo '<li class="filter-item">
                       <a class="filter-link all '. $all_class_active .'" href="#" data-selected="all" data-termid="'. esc_attr($ymc_terms) .'">'. esc_html__($show_all) .'</a></li>';
 
+				$terms_selected = array_diff($terms_selected, getHiddenTerms($ymc_terms_options));
 
 				foreach ($terms_selected as $term_id)
 				{
@@ -81,7 +82,8 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 					setOptionsIcon( $ymc_terms_align, $term_id, $class_terms_align, $color_icon );
 
 					// Set Options Term
-					setOptionsTerm( $ymc_terms_options,
+					setOptionsTerm(
+						$ymc_terms_options,
 						$term_id,
 						$bg_term,
 						$color_term,
