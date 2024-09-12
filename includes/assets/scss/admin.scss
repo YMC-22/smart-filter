@@ -1038,6 +1038,12 @@ $font-size: 16;
 											border-radius: 5px;
 										}
 									}
+
+									#ymc-post-status {
+										option:checked {
+											background-color: rgba(9, 138, 184, .5);
+										}
+									}
 								}
 							}
 						}

@@ -386,33 +386,39 @@
                     <label class="form-label">
                         <?php echo esc_html__('Post Status', 'ymc-smart-filter'); ?>
                         <span class="information">
-                        <?php echo esc_html__('Set posts with specified status.', 'ymc-smart-filter');?>
+                        <?php echo esc_html__('Set posts with specified status. To select multiple status, hold down the key Ctrl.', 'ymc-smart-filter');?>
                     </span>
                     </label>
-                    <select class="form-select"  id="ymc-post-status" name="ymc-post-status">
-                        <option value="publish" <?php if ($ymc_post_status === 'publish') {echo "selected";} ?>>
+
+                    <?php $ymc_post_status = ( is_array($ymc_post_status) ) ? $ymc_post_status : [ $ymc_post_status ]; ?>
+
+                    <select class="form-select"  id="ymc-post-status" multiple name="ymc-post-status[]" style="height: 100px;">
+                        <option value="publish" <?php if (array_search('publish', $ymc_post_status) !== false) {echo "selected";} ?>>
                             <?php echo esc_html__('publish', 'ymc-smart-filter'); ?>
                         </option>
-                        <option value="pending" <?php if ($ymc_post_status === 'pending') {echo "selected";} ?>>
+                        <option value="pending" <?php if (array_search('pending', $ymc_post_status) !== false) {echo "selected";} ?>>
                             <?php echo esc_html__('Pending', 'ymc-smart-filter'); ?>
                         </option>
-                        <option value="draft" <?php if ($ymc_post_status === 'draft') {echo "selected";} ?>>
+                        <option value="draft" <?php if (array_search('draft', $ymc_post_status) !== false) {echo "selected";} ?>>
                             <?php echo esc_html__('Draft', 'ymc-smart-filter'); ?>
                         </option>
-                        <option value="future" <?php if ($ymc_post_status === 'future') {echo "selected";} ?>>
+                        <option value="future" <?php if (array_search('future', $ymc_post_status) !== false) {echo "selected";} ?>>
                             <?php echo esc_html__('Future', 'ymc-smart-filter'); ?>
                         </option>
-                        <option value="private" <?php if ($ymc_post_status === 'private') {echo "selected";} ?>>
+                        <option value="private" <?php if (array_search('private', $ymc_post_status) !== false) {echo "selected";} ?>>
                             <?php echo esc_html__('Private', 'ymc-smart-filter'); ?>
                         </option>
-                        <option value="inherit" <?php if ($ymc_post_status === 'inherit') {echo "selected";} ?>>
+                        <option value="inherit" <?php if (array_search('inherit', $ymc_post_status) !== false) {echo "selected";} ?>>
                             <?php echo esc_html__('Inherit', 'ymc-smart-filter'); ?>
                         </option>
-                        <option value="trash" <?php if ($ymc_post_status === 'trash') {echo "selected";} ?>>
+                        <option value="trash" <?php if (array_search('trash', $ymc_post_status) !== false) {echo "selected";} ?>>
                             <?php echo esc_html__('Trash', 'ymc-smart-filter'); ?>
                         </option>
-                        <option value="any" <?php if ($ymc_post_status === 'any') {echo "selected";} ?>>
+                        <option value="any" <?php if (array_search('any', $ymc_post_status) !== false) {echo "selected";} ?>>
                             <?php echo esc_html__('Any', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="auto-draft" <?php if (array_search('auto-draft', $ymc_post_status) !== false) {echo "selected";} ?>>
+		                    <?php echo esc_html__('Auto Draft', 'ymc-smart-filter'); ?>
                         </option>
                     </select>
                 </div>

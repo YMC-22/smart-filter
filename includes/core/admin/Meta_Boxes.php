@@ -202,7 +202,7 @@ class Meta_Boxes {
 
 		// Post Status
 		if (isset($_POST['ymc-post-status'])) {
-			$ymc_post_status = sanitize_text_field($_POST['ymc-post-status']);
+			$ymc_post_status = $_POST['ymc-post-status'];
 			update_post_meta($post_id, 'ymc_post_status', $ymc_post_status);
 		}
 

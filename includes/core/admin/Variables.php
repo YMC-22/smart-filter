@@ -75,7 +75,7 @@ class Variables {
 
 	public $ymc_multiple_filter = 0;
 
-	public $ymc_post_status = 'publish';
+	public $ymc_post_status = ['publish'];
 
 	public $ymc_desktop_xxl = 4;
 
