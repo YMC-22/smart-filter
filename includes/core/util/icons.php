@@ -7,11 +7,11 @@
 		<div class="tabs">
 			<div class="tab tab-icons active">
 				<span class="tab-inner" data-content="<?php esc_attr_e('icon'); ?>">
-					<?php esc_html_e('Icon Settings','ymc-smart-filter'); ?></span>
+					<?php esc_html_e('Icon','ymc-smart-filter'); ?></span>
 			</div>
 			<div class="tab tab-terms">
 				<span class="tab-inner" data-content="<?php esc_attr_e('term'); ?>">
-					<?php esc_html_e('Term Settings','ymc-smart-filter'); ?></span>
+					<?php esc_html_e('Term','ymc-smart-filter'); ?></span>
 			</div>
 		</div>
 

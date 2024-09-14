@@ -277,11 +277,11 @@
                 url: _smart_filter_object.ajax_url,
                 data: data,
                 beforeSend: function () {
-                    container.addClass('loading').
+                    $('#TB_window').addClass('loading').
                     prepend(`<img class="preloader" src="${pathPreloader}">`);
                 },
                 success: function (res) {
-                    container.removeClass('loading').find('.preloader').remove();
+                    $('#TB_window').removeClass('loading').find('.preloader').remove();
 
                     $('#ymc-terms .entry-terms .open-popup').removeClass('open-popup');
 
@@ -323,11 +323,11 @@
                 url: _smart_filter_object.ajax_url,
                 data: data,
                 beforeSend: function () {
-                    container.addClass('loading').
+                    $('#TB_window').addClass('loading').
                     prepend(`<img class="preloader" src="${pathPreloader}">`);
                 },
                 success: function (res) {
-                    container.removeClass('loading').find('.preloader').remove();
+                    $('#TB_window').removeClass('loading').find('.preloader').remove();
                     tb_remove();
                 },
                 error: function (obj, err) {
