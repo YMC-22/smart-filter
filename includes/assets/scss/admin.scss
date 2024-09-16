@@ -677,7 +677,6 @@ $font-size: 16;
 						.selection-posts {
 							position: relative;
 							display: flex;
-							margin-top: 10px;
 							.ymc-rel-item {
 								padding: 5px 5px 5px 10px;
 								margin: 0;
@@ -721,8 +720,11 @@ $font-size: 16;
 										border-radius: 5px;
 									}
 									overflow: auto;
-									height: 185px;
+									height: 200px;
 									margin: 15px 0 0 0;
+									&.expand {
+										height: auto;
+									}
 									li {
 										margin-bottom: 0;
 										padding-right: 10px;
@@ -765,8 +767,11 @@ $font-size: 16;
 										border-radius: 5px;
 									}
 									overflow: auto;
-									height: 185px;
+									height: 200px;
 									margin: 15px 0 0 0;
+									&.expand {
+										height: auto;
+									}
 									li {
 										margin-bottom: 0;
 										.ymc-rel-item {
@@ -835,6 +840,41 @@ $font-size: 16;
 							top: 50%;
 							transform: translateY(-50%);
 							font-size: 16px;
+						}
+
+						.button-expand {
+							text-align: right;
+							&__link {
+								position: relative;
+								display: inline-block;
+								margin: 5px 0 2px;
+								font-size: 14px;
+								color: #098ab8;
+								font-weight: 400;
+								text-decoration: none;
+								margin-right: 15px;
+								padding-right: 7px;
+								&:before {
+									content: "";
+									width: 15px;
+									height: 15px;
+									background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3C!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--%3E%3Cpath d='M322.9 304H125.1c-10.7 0-16.1-13-8.5-20.5l98.9-98.3c4.7-4.7 12.2-4.7 16.9 0l98.9 98.3c7.7 7.5 2.3 20.5-8.4 20.5zM448 80v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48zm-48 346V86c0-3.3-2.7-6-6-6H54c-3.3 0-6 2.7-6 6v340c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z'/%3E%3C/svg%3E");
+									background-size: contain;
+									background-repeat: no-repeat;
+									position: absolute;
+									right: -15px;
+									top: 50%;
+									transform: translateY(-50%);
+								}
+								&:hover {
+									text-decoration: underline;
+								}
+								&.collapse {
+									&:before {
+										background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3C!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--%3E%3Cpath d='M108 284c-6.6 0-12-5.4-12-12v-32c0-6.6 5.4-12 12-12h232c6.6 0 12 5.4 12 12v32c0 6.6-5.4 12-12 12H108zM448 80v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48zm-48 346V86c0-3.3-2.7-6-6-6H54c-3.3 0-6 2.7-6 6v340c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z'/%3E%3C/svg%3E");
+									}
+								}
+							}
 						}
 
 						.indicator-icon {

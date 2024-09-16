@@ -1059,10 +1059,10 @@
                         $selected_preloader = 'selected="selected"';
                     }
                     if( $i === 11 ) {
-                        echo '<option value="preloader_'.$i.'" '. $selected_preloader .'>'. esc_html('None', 'ymc-smart-filter') .'</option>';
+                        echo '<option value="preloader_'.$i.'" '. $selected_preloader .'>'. esc_html__('None', 'ymc-smart-filter') .'</option>';
                     }
                     else {
-                        echo '<option value="preloader_'.$i.'" '. $selected_preloader .'>'. esc_html('Preloader '.$i, 'ymc-smart-filter') .'</option>';
+                        echo '<option value="preloader_'.$i.'" '. $selected_preloader .'>'. esc_html__('Preloader '.$i, 'ymc-smart-filter') .'</option>';
                     }
                     $selected_preloader = '';
                 }
