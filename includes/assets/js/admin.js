@@ -1656,6 +1656,18 @@
             updatedOptionsTaxonomies();
 
         });
+        
+        // Expand Selected Posts
+        $('#general .wrapper-selection .button-expand a').on('click', function (e) {
+            e.preventDefault();
+
+            if( !$(this).hasClass('collapse') ) {
+                $(this).text('collapse').addClass('collapse');
+            } else {
+                $(this).text('expand').removeClass('collapse');
+            }
+            $('.choices-list,.values-list').toggleClass('expand');
+        });
 
 
         /*** RUN FUNCTIONS ***/

@@ -444,6 +444,8 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 					<input class="input-field" type="search" placeholder="Search..." />
 				</div>
 
+                <div class="button-expand"><a href="#" class="button-expand__link"><?php esc_html_e('expand', 'ymc-smart-filter') ?></a></div>
+
 				<div class="selection-posts" id="selection-posts">
 
 					<div class="choices">
@@ -530,7 +532,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 						<?php $class_choices = ( $ymc_exclude_posts === 'on' ) ? 'exclude-posts' : 'include-posts'; ?>
 
 						<ul class="list values-list <?php echo $class_choices; ?>">
-							<?php
+						<?php
 
 							if( is_array($ymc_choices_posts) ) :
 
@@ -544,8 +546,8 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 								while ($query->have_posts()) : $query->the_post();
 
 									echo '<li class="item"><input type="hidden" name="ymc-choices-posts[]" value="'.get_the_ID().'">
-							  <span  class="ymc-rel-item" data-id="'.get_the_ID().'">'.get_the_title(get_the_ID()).'
-							  <a href="#" class="ymc-icon-minus remove_item"></a></span></li>';
+							        <span  class="ymc-rel-item" data-id="'.get_the_ID().'">'.get_the_title(get_the_ID()).'
+							        <a href="#" class="ymc-icon-minus remove_item"></a></span></li>';
 								endwhile;
 
 								echo '<span class="number-selected-posts">'. $query->found_posts .'</span>';
@@ -557,7 +559,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 							endif;
 
 							$post = $tmp_post;
-							?>
+						?>
 						</ul>
 						<?php wp_reset_postdata(); ?>
 					</div>
