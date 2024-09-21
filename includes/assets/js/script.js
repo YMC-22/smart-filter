@@ -789,6 +789,19 @@
             }
         }
 
+        function getRangeTerms(s,e,termsArray) {
+            let terms = '';
+            for(let i = s; i <= e; i++) {
+                terms += termsArray[i][0] + ',';
+            }
+            return terms.replace(/,\s*$/, "");
+        }
+
+        function fillRangeColor(sliderOne,sliderTwo,sliderMaxValue,sliderTrack) {
+            let percent1 = (sliderOne.value / sliderMaxValue) * 100;
+            let percent2 = (sliderTwo.value / sliderMaxValue) * 100;
+            sliderTrack.style.background = `linear-gradient(to right, #dadae5 ${percent1}% , rgb(9, 138, 184) ${percent1}% , rgb(9, 138, 184) ${percent2}%, #dadae5 ${percent2}%)`;
+        }
 
         /**
          * Main Request function to get filter posts based on options provided.
@@ -1777,6 +1790,179 @@
             trigger('click');
         });
 
+        // Filter Range
+        if(document.querySelectorAll('.ymc-smart-filter-container .filter-range, .ymc-extra-filter .filter-range').length > 0) {
+
+            document.querySelectorAll('.ymc-smart-filter-container .filter-range .range-wrapper, .ymc-extra-filter .filter-range .range-wrapper').forEach((range) => {
+
+                let params = range.querySelector('[data-tags]').dataset.tags;
+                if( params !== '' )
+                {
+                    params = JSON.parse(params);
+
+                    let selectedTags = range.querySelector('[data-selected-tags]');
+                    let sliderOne = range.querySelector(".slider-1");
+                    let sliderTwo = range.querySelector(".slider-2");
+                    let displayValOne = range.querySelector(".range1");
+                    let displayValTwo = range.querySelector(".range2");
+                    let termsArray = [];
+                    let sliderTrack = range.querySelector(".slider-track");
+                    let length = Object.keys(params).length;
+                    let entries = Object.entries(params);
+                    let minGap = 0;
+
+                    // Sorting
+                    entries.sort((a, b) => {
+                        if (!isNaN(Number(a[1])) && !isNaN(Number(b[1]))) {
+                            return a[1] - b[1];
+                        }
+                        else {
+                            return a[1].localeCompare(b[1]);
+                        }
+                    });
+                    // Add array
+                    for (const [ key, value ] of entries) {
+                        termsArray.push([key, value]);
+                    }
+
+                    sliderOne.setAttribute('max', length-1);
+                    sliderTwo.setAttribute('max', length-1);
+                    sliderTwo.setAttribute('value', length-1);
+                    displayValOne.textContent = termsArray[0][1];
+                    displayValTwo.textContent = termsArray[length-1][1];
+
+                    let sliderMaxValue = sliderOne.max;
+
+                    sliderOne.addEventListener("input", function (e) {
+
+                        if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+                            sliderOne.value = parseInt(sliderTwo.value) - minGap;
+                        }
+
+                        sliderOne.style.zIndex = 10;
+                        sliderTwo.style.zIndex = 0;
+
+                        displayValOne.textContent = termsArray[sliderOne.value][1];
+
+                        let start = Number(sliderOne.value);
+                        let end = Number(sliderTwo.value);
+
+                        selectedTags.dataset.selectedTags = getRangeTerms(start,end,termsArray);
+
+                        fillRangeColor(sliderOne,sliderTwo,sliderMaxValue,sliderTrack);
+                    });
+
+                    sliderTwo.addEventListener("input", function (e) {
+
+                        if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+                            sliderTwo.value = parseInt(sliderOne.value) + minGap;
+                        }
+
+                        sliderOne.style.zIndex = 0;
+                        sliderTwo.style.zIndex = 10;
+
+                        displayValTwo.textContent = termsArray[sliderTwo.value][1];
+
+                        let start = Number(sliderOne.value);
+                        let end = Number(sliderTwo.value);
+
+                        selectedTags.dataset.selectedTags = getRangeTerms(start,end,termsArray);
+
+                        fillRangeColor(sliderOne,sliderTwo,sliderMaxValue,sliderTrack);
+                    });
+
+                    fillRangeColor(sliderOne,sliderTwo,sliderMaxValue,sliderTrack);
+                }
+
+                range.querySelector('.apply-button button').addEventListener('click', function (e) {
+
+                    let tagsSelected = '';
+                    let filterContainer = this.closest('.ymc-smart-filter-container');
+
+                    if ( this.closest('.ymc-extra-filter') ) {
+                        let extraFilterId = this.closest('.ymc-extra-filter').dataset.extraFilterId;
+                        filterContainer = document.querySelector(`.ymc-filter-${extraFilterId}`);
+                    }
+
+                    this.closest('.filter-range').querySelectorAll('.range-wrapper .tag-values').forEach((el) => {
+                        tagsSelected += el.dataset.selectedTags+',';
+                    });
+
+                    tagsSelected = tagsSelected.replace(/,\s*$/,"");
+
+                    if( filterContainer )
+                    {
+                        let params = JSON.parse( filterContainer.dataset.params);
+                        params.terms = tagsSelected;
+                        params.page = 1;
+                        params.search = '';
+                        params.posts_selected = tagsSelected;
+                        filterContainer.dataset.params = JSON.stringify(params);
+
+                        getFilterPosts({
+                            'paged'      : 1,
+                            'toggle_pg'  : 1,
+                            'target'     : params.data_target,
+                            'type_pg'    : params.type_pg
+                        });
+                    }
+
+
+                });
+            });
+        }
+
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .filter-range .clear-button, .ymc-extra-filter .filter-range .clear-button', function (e) {
+
+            let filterContainer = this.closest('.ymc-smart-filter-container');
+            let tagsArray = [];
+
+            if ( this.closest('.ymc-extra-filter') ) {
+                let extraFilterId = this.closest('.ymc-extra-filter').dataset.extraFilterId;
+                filterContainer = document.querySelector(`.ymc-filter-${extraFilterId}`);
+            }
+
+            document.querySelectorAll('.ymc-smart-filter-container .filter-range .range-wrapper, .ymc-extra-filter .filter-range .range-wrapper').forEach((range) => {
+
+                let params = range.querySelector('[data-tags]').dataset.tags;
+                let sliderOne = range.querySelector(".slider-1");
+                let sliderTwo = range.querySelector(".slider-2");
+                let sliderTrack = range.querySelector(".slider-track");
+
+                if( params !== '' )
+                {
+                    params = JSON.parse(params);
+                    let length = Object.keys(params).length;
+                    let entries = Object.entries(params);
+                    entries.forEach(([key, value]) => {
+                        tagsArray.push(key);
+                    });
+
+                    sliderOne.value = 0;
+                    sliderTwo.value = length-1;
+
+                    fillRangeColor(sliderOne,sliderTwo,sliderOne.max,sliderTrack);
+                }
+            });
+
+            if( filterContainer )
+            {
+                let params = JSON.parse( filterContainer.dataset.params);
+                params.terms = tagsArray.join(',');
+                params.page = 1;
+                params.search = '';
+                params.posts_selected = 'all';
+                filterContainer.dataset.params = JSON.stringify(params);
+
+                getFilterPosts({
+                    'paged'      : 1,
+                    'toggle_pg'  : 1,
+                    'target'     : params.data_target,
+                    'type_pg'    : params.type_pg
+                });
+            }
+
+        });
 
         // Filter: Alphabetical Navigation
         $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .alphabetical-layout .filter-link, .ymc-extra-filter .alphabetical-layout .filter-link', function (e) {

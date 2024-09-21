@@ -34,6 +34,7 @@ class Filters {
 			"filter-layout2" => __('Grouped Filter','ymc-smart-filter'),
 			"filter-layout3" => __('Dropdown Filter','ymc-smart-filter'),
 			"filter-layout4" => __('Sidebar Filter','ymc-smart-filter'),
+			"filter-range" => __('Range Filter','ymc-smart-filter'),
 			"filter-layout5" => __('Dropdown Filter Compact','ymc-smart-filter'),
 			"filter-date" => __('Filter Date','ymc-smart-filter'),
 			"alphabetical-layout" => __('Alphabetical Navigation','ymc-smart-filter'),

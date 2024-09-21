@@ -124,7 +124,8 @@ $font-size: 16;
 	width: 100%;
 	margin: 0 auto;
 
-	&.ymc-filter-layout4 {
+	&.ymc-filter-layout4,
+	&.ymc-filter-range {
 		display: grid;
 		grid-template-columns: 23% 77%;
 		grid-column-gap: 20px;
@@ -1090,6 +1091,177 @@ $font-size: 16;
 					text-align: center;
 					cursor: pointer;
 					line-height: 1;
+				}
+			}
+		}
+	}
+
+	.filter-range {
+		.filter-entry {
+			.clear-wrapper {
+				.clear-button {
+					color: #0C1021;
+					font-size: 16px;
+					line-height: 1;
+					padding: 10px 25px;
+					border: 1px solid #a8a8a8;
+					background-color: #ededed;
+					margin-bottom: 20px;
+					border-radius: 5px;
+					cursor: pointer;
+					transition: .3s ease;
+					&:hover {
+						background-color: #fff;
+					}
+				}
+			}
+			.posts-found {
+				margin-bottom: 10px;
+				font-size: 16px;
+				font-weight: 400;
+			}
+			.range-wrapper {
+				position: relative;
+				width: 100%;
+				font-family: 'OpenSans', sans-serif;
+				background-color: #fff;
+				padding: 20px 20px 20px 20px;
+				margin-bottom: 20px;
+				-webkit-box-shadow: 0 0 10px 0 rgba(237,237,237,1);
+				-moz-box-shadow: 0 0 10px 0 rgba(237,237,237,1);
+				box-shadow: 0 0 10px 0 rgba(237,237,237,1);
+				.tax-label {
+					font-size: 16px;
+					margin-bottom: 10px;
+					font-weight: 600;
+					line-height: 1;
+				}
+				.tag-values {
+					background-color: #098ab8;
+					width: 100%;
+					position: relative;
+					margin: auto;
+					padding: 10px 5px;
+					border-radius: 5px;
+					text-align: center;
+					font-weight: 500;
+					font-size: 16px;
+					color: #ffffff;
+					&:before {
+						content: "";
+						position: absolute;
+						height: 0;
+						width: 0;
+						border-top: 12px solid #098ab8;
+						border-left: 15px solid transparent;
+						border-right: 15px solid transparent;
+						margin: auto;
+						bottom: -11px;
+						left: 0;
+						right: 0;
+					}
+				}
+				.range-container {
+					position: relative;
+					width: 100%;
+					margin-top: 35px;
+					margin-bottom: 70px;
+					.slider-track {
+						width: 100%;
+						height: 7px;
+						position: absolute;
+						margin: auto;
+						top: 0;
+						bottom: 0;
+						border-radius: 5px;
+						background: linear-gradient(to right, rgb(218, 218, 229) 0%, #098ab8 0%, #098ab8 100%, rgb(218, 218, 229) 100%);
+					}
+					input[type="range"] {
+						-webkit-appearance: none;
+						-moz-appearance: none;
+						appearance: none;
+						width: 100%;
+						outline: none;
+						position: absolute;
+						margin: auto;
+						top: 0;
+						bottom: 0;
+						background-color: transparent;
+						pointer-events: none;
+					}
+					input[type="range"]::-webkit-slider-runnable-track {
+						-webkit-appearance: none;
+						height: 5px;
+					}
+					input[type="range"]::-moz-range-track {
+						-moz-appearance: none;
+						height: 5px;
+					}
+					input[type="range"]::-ms-track {
+						appearance: none;
+						height: 5px;
+					}
+					input[type="range"]::-webkit-slider-thumb {
+						-webkit-appearance: none;
+						height: 25px;
+						width: 25px;
+						background-color: #ededed;
+						cursor: grabbing;
+						margin-top: -10px;
+						pointer-events: auto;
+						border-radius: 50%;
+						border: 1px solid #8e8e8e;
+					}
+					input[type="range"]::-moz-range-thumb {
+						-webkit-appearance: none;
+						height: 25px;
+						width: 25px;
+						cursor: grabbing;
+						border-radius: 50%;
+						background-color: #ededed;
+						pointer-events: auto;
+						border: 1px solid #8e8e8e;
+					}
+					input[type="range"]::-ms-thumb {
+						appearance: none;
+						height: 25px;
+						width: 25px;
+						cursor: grabbing;
+						border-radius: 10px;
+						background-color: #ededed;
+						pointer-events: auto;
+						border: 1px solid #8e8e8e;
+					}
+					input[type="range"]:active {
+						&::-webkit-slider-thumb {
+							background-color: #098ab8;
+							border: 1px solid #098ab8;
+							cursor: grabbing;
+						}
+						&::-moz-range-thumb {
+							background-color: #098ab8;
+							border: 1px solid #098ab8;
+							cursor: grabbing;
+						}
+					}
+				}
+				.apply-button {
+					&__inner {
+						font-size: 16px;
+						line-height: 1;
+						font-weight: 400;
+						background-color: #ffffff;
+						padding: 10px 20px;
+						border-radius: 5px;
+						color: #098ab8;
+						cursor: pointer;
+						border: 1px solid #098ab8;
+						transition: .3s ease;
+						&:hover {
+							color: #222;
+							background-color: rgba(9, 137, 183, .1);
+						}
+					}
 				}
 			}
 		}

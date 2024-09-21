@@ -1,0 +1,86 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
+
+?>
+
+<div id="<?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($c_target); ?>" class="filter-layout <?php echo esc_attr($ymc_filter_layout); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?>-<?php echo esc_attr($c_target); ?>">
+
+	<?php do_action("ymc_before_filter_layout_".$id.'_'.$c_target); ?>
+
+	<?php
+
+	if( !empty($tax_selected) ) : ?>
+
+        <div class="filter-entry">
+
+            <div class="clear-wrapper">
+                <button class="clear-button" type="button"><?php esc_html_e('Clear','ymc-smart-filter'); ?></button>
+            </div>
+
+            <div class="posts-found"></div>
+
+            <div class="filter-items">
+
+			<?php foreach ($tax_selected as $tax) :
+
+				$all_tags = [];
+                $dataArray = [];
+                $tagArrayIDs = [];
+
+				$terms = get_terms(array(
+					'taxonomy'   => $tax,
+					'hide_empty' => false
+				));
+
+                if( $terms && ! is_wp_error( $terms ) )
+                {
+                    foreach ( $terms as $term ) {
+                        $all_tags[] = $term->term_id;
+                    }
+                    if( !empty($terms_selected) ) {
+	                    $result = array_intersect($all_tags, $terms_selected);
+	                    $end_tags = array_diff($result, getHiddenTerms($ymc_terms_options));
+
+	                    foreach ( $end_tags as $value ) {
+		                    $term = get_term($value);
+		                    $dataArray[$term->term_id] = $term->name;
+		                    $tagArrayIDs[] = $term->term_id;
+	                    }
+                    }
+                }
+
+				$json_data = !empty($dataArray) ? json_encode($dataArray) : '';
+                $tagsIDs = !empty($tagArrayIDs) ? implode(',', $tagArrayIDs) : '';
+
+				?>
+                <div class="range-wrapper tax-<?php echo esc_attr($tax); ?>">
+                    <div class="range__component tax-label"><?php esc_html_e(get_taxonomy($tax)->labels->name); ?></div>
+                    <div class="range__component tag-values" data-tags='<?php echo esc_attr($json_data); ?>' data-selected-tags='<?php echo esc_attr($tagsIDs); ?>'>
+                        <span class="range1"></span>
+                        <span> <?php echo !empty($dataArray) ? '&dash;' : __('No tags','ymc-smart-filter'); ?></span>
+                        <span class="range2"></span>
+                    </div>
+                    <?php if( !empty($json_data) ) : ?>
+                    <div class="range__component range-container">
+                        <div class="slider-track"></div>
+                        <input class="slider-1" type="range" min="0" max="" value="0" >
+                        <input class="slider-2" type="range" min="0" max="" value="" >
+                    </div>
+                    <div class="range__component apply-button">
+                        <button class="apply-button__inner"><?php esc_html_e('Apply','ymc_smart_filter');  ?></button>
+                    </div>
+                    <?php endif; ?>
+                </div>
+
+			<?php
+
+			endforeach; ?>
+
+            </div>
+
+        </div>
+
+	<?php endif;  ?>
+
+	<?php do_action("ymc_after_filter_layout_".$id.'_'.$c_target); ?>
+
+</div>
