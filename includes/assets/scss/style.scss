@@ -1100,6 +1100,7 @@ $font-size: 16;
 		.filter-entry {
 			.clear-wrapper {
 				.clear-button {
+					font-family: inherit;
 					color: #0C1021;
 					font-size: 16px;
 					line-height: 1;
@@ -1123,7 +1124,7 @@ $font-size: 16;
 			.range-wrapper {
 				position: relative;
 				width: 100%;
-				font-family: 'OpenSans', sans-serif;
+				font-family: inherit;
 				background-color: #fff;
 				padding: 20px 20px 20px 20px;
 				margin-bottom: 20px;
@@ -1137,6 +1138,7 @@ $font-size: 16;
 					line-height: 1;
 				}
 				.tag-values {
+					font-family: inherit;
 					background-color: #098ab8;
 					width: 100%;
 					position: relative;
@@ -1247,6 +1249,7 @@ $font-size: 16;
 				}
 				.apply-button {
 					&__inner {
+						font-family: inherit;
 						font-size: 16px;
 						line-height: 1;
 						font-weight: 400;
