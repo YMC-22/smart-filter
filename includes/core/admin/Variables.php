@@ -181,6 +181,8 @@ class Variables {
 		'load_btn_text' => 'Load More'
 	];
 
+	public $ymc_post_image_size = 'full';
+
 
 	/**
 	 * Advanced tab used default variables
@@ -713,6 +715,14 @@ class Variables {
 		return $this->ymc_pagination_elements;
 	}
 
+
+	public function get_post_image_size( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_post_image_size' ) ) {
+			return get_post_meta( $post_id, 'ymc_post_image_size', true );
+		}
+		return $this->ymc_post_image_size;
+	}
 
 
 	/**

@@ -206,6 +206,13 @@ class Meta_Boxes {
 			update_post_meta($post_id, 'ymc_post_status', $ymc_post_status);
 		}
 
+        // Post Image Size
+		if (isset($_POST['ymc-post-image-size'])) {
+			$ymc_post_image_size = sanitize_text_field($_POST['ymc-post-image-size']);
+			update_post_meta($post_id, 'ymc_post_image_size', $ymc_post_image_size);
+		}
+
+
 		// Meta Key by sort
 		if (isset($_POST['ymc-meta-key'])) {
 			$ymc_meta_key = sanitize_text_field($_POST['ymc-meta-key']);

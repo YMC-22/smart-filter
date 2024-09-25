@@ -34,8 +34,22 @@ $arrOptions['terms_settings'] = arrayToObject( generalArrayMerging( $ymc_terms_o
 		$button_text      = !empty($ymc_post_elements['button_text']) ? $ymc_post_elements['button_text'] : 'Read More';
 		$class_popup      = ( $ymc_popup_status === 'off' ) ? '' : 'ymc-popup';
 		$post_date_format = apply_filters('ymc_post_date_format_'.$filter_id.'_'.$target_id, 'd, M Y');
-		$image_post       = ( has_post_thumbnail($post_id) ) ? get_the_post_thumbnail($post_id, 'full') :
-				            '<img src="'. YMC_SMART_FILTER_URL .'includes/assets/images/dummy-Image.svg">';
+
+//        $image_post       = ( has_post_thumbnail($post_id) ) ? get_the_post_thumbnail($post_id, 'full') :
+//				            '<img src="'. YMC_SMART_FILTER_URL .'includes/assets/images/dummy-Image.svg">';
+
+		if( has_post_thumbnail($post_id) ) {
+			switch ($ymc_post_image_size) {
+				case 'full': $image_post = get_the_post_thumbnail($post_id, 'full'); break;
+				case 'medium': $image_post = get_the_post_thumbnail($post_id, 'medium'); break;
+				case 'thumbnail': $image_post = get_the_post_thumbnail($post_id, 'thumbnail'); break;
+				case 'large': $image_post = get_the_post_thumbnail($post_id, 'large'); break;
+			}
+		}
+        else {
+	        $image_post = '<img src="'. YMC_SMART_FILTER_URL .'includes/assets/images/dummy-Image.svg">';
+        }
+
 		$c_length         = apply_filters('ymc_post_excerpt_length_'.$filter_id.'_'.$target_id, $length_excerpt);
 
 		$content          = ( empty($post->post_excerpt) ) ? $post->post_content : $post->post_excerpt;

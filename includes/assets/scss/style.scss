@@ -1592,9 +1592,23 @@ $font-size: 16;
 					overflow: hidden;
 					img {
 						width: 100%;
-						height: 220px;
+						height: 250px;
 						object-fit: cover;
 						transition: .3s;
+						&.size-thumbnail {
+							width: auto;
+							height: 150px;
+							object-fit: contain;
+						}
+						&.size-medium {
+							object-fit: contain;
+							width: auto;
+							height: auto;
+						}
+						&.size-large {
+							object-fit: contain;
+							height: auto;
+						}
 					}
 				}
 				.category {
@@ -1746,8 +1760,21 @@ $font-size: 16;
 					object-fit: cover;
 					object-position: 50% 50%;
 					transition: .3s;
+					&.size-thumbnail {
+						width: auto;
+						height: 150px;
+						object-fit: contain;
+					}
+					&.size-medium {
+						object-fit: contain;
+						height: auto;
+					}
+					&.size-large {
+						object-fit: contain;
+						height: auto;
+					}
 					&:hover {
-						transform: scale(1.2);
+						transform: scale(1.1);
 					}
 				}
 			}
@@ -1799,6 +1826,8 @@ $font-size: 16;
 				margin: 0 5px 20px 0;
 				border-radius: 0;
 				display: inline-block;
+				border: 1px solid #141518;
+				text-decoration: none;
 				transition: .3s;
 				&:hover {
 					background-color: #fff;
@@ -1881,10 +1910,24 @@ $font-size: 16;
 				.media {
 					img {
 						width: 100%;
-						height: 250px;
+						height: 300px;
 						object-fit: cover;
 						object-position: center;
 						margin-bottom: 10px;
+						&.size-thumbnail {
+							width: auto;
+							height: 150px;
+							object-fit: contain;
+						}
+						&.size-medium {
+							object-fit: contain;
+							width: auto;
+							height: auto;
+						}
+						&.size-large {
+							object-fit: contain;
+							height: auto;
+						}
 					}
 				}
 				.category {
@@ -1988,6 +2031,20 @@ $font-size: 16;
 						width: 100%;
 						height: 220px;
 						object-fit: cover;
+						transition: .3s;
+						&.size-thumbnail {
+							width: auto;
+							height: 150px;
+							object-fit: contain;
+						}
+						&.size-medium {
+							object-fit: contain;
+							height: auto;
+						}
+						&.size-large {
+							object-fit: contain;
+							height: auto;
+						}
 					}
 				}
 				.category {
@@ -2222,6 +2279,19 @@ $font-size: 16;
 						position: absolute;
 						left: 0;
 						top: 0;
+						&.size-thumbnail {
+							width: auto;
+							height: 150px;
+							object-fit: contain;
+						}
+						&.size-medium {
+							width: auto;
+							height: auto;
+							object-fit: contain;
+						}
+						&.size-large {
+							object-fit: contain;
+						}
 					}
 				}
 

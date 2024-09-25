@@ -149,6 +149,30 @@
 
                 <div class="from-element">
                     <label class="form-label">
+		                <?php echo esc_html__('Post Image Size', 'ymc-smart-filter'); ?>
+                        <span class="information">
+                        <?php echo esc_html__('Set image size for post.', 'ymc-smart-filter'); ?>
+                        </span>
+                    </label>
+                    <select class="form-select"  id="ymc-post-image-size" name="ymc-post-image-size">
+                        <option value="full" <?php if ($ymc_post_image_size === 'full') {echo "selected";} ?>>
+			                <?php echo esc_html__('Full Image', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="large" <?php if ($ymc_post_image_size === 'large') {echo "selected";} ?>>
+			                <?php echo esc_html__('Large Image', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="medium" <?php if ($ymc_post_image_size === 'medium') {echo "selected";} ?>>
+		                    <?php echo esc_html__('Medium Image', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="thumbnail" <?php if ($ymc_post_image_size === 'thumbnail') {echo "selected";} ?>>
+		                    <?php echo esc_html__('Thumbnail Image', 'ymc-smart-filter'); ?>
+                        </option>
+                    </select>
+
+                </div>
+
+                <div class="from-element">
+                    <label class="form-label">
                         <?php echo esc_html__('Button Text', 'ymc-smart-filter'); ?>
                         <span class="information">
                         <?php echo esc_html__('Change the text of the Read More button.', 'ymc-smart-filter');?>

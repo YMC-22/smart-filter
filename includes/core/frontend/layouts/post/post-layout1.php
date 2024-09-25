@@ -20,7 +20,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$image_post = null;
 
 	    if( has_post_thumbnail($post_id) ) {
-		    $image_post = get_the_post_thumbnail($post_id, 'full');
+
+			switch ($ymc_post_image_size) {
+				case 'full': $image_post = get_the_post_thumbnail($post_id, 'full'); break;
+				case 'medium': $image_post = get_the_post_thumbnail($post_id, 'medium'); break;
+				case 'thumbnail': $image_post = get_the_post_thumbnail($post_id, 'thumbnail'); break;
+				case 'large': $image_post = get_the_post_thumbnail($post_id, 'large'); break;
+			}
         }
 
 	    $content = $post->post_excerpt;
