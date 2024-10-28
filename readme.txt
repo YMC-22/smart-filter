@@ -1,11 +1,11 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.9.37
+Version: 2.9.38
 Donate link: https://github.com/YMC-22/smart-filter
 Tags: filter, grid, ajax, search, sort
 Requires at least: 5.5
-Tested up to: 6.6.1
+Tested up to: 6.7
 Stable tag: trunk
 Requires PHP: 7.2
 License: GPLv2 or later

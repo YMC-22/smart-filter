@@ -448,7 +448,7 @@ class Get_Posts {
 			'max_num_pages' => $query->max_num_pages,
 			'post_count' => $query->post_count,
 			'get_current_posts' => ($query->found_posts - $paged * $per_page),
-			'pagin' => $pagin,
+			'pagin' => !empty($pagin) ? $pagin : null,
 			'paged' => $paged
 		];
 
