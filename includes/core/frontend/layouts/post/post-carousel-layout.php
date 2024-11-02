@@ -85,7 +85,11 @@ $arrOptions['terms_settings'] = arrayToObject( generalArrayMerging( $ymc_terms_o
 			$layout .= '<div class="col col-image">';
 
 			if( $ymc_post_elements['image'] === 'show' ) :
-				$layout .= '<div class="image">'. wp_kses_post($image_post) .'</div>';
+				$layout .= '<div class="image">'. wp_kses_post($image_post);
+				if( $ymc_image_clickable === 'on' ) :
+					$layout .= '<a class="media-link '.esc_attr($class_popup).'" data-postid="'.esc_attr($post_id).'" '. esc_attr($target) .' href="'. esc_url($link) .'"></a>';
+				endif;
+                $layout .= '</div>';
 			endif;
 
 			$layout .= '</div>';
@@ -93,7 +97,11 @@ $arrOptions['terms_settings'] = arrayToObject( generalArrayMerging( $ymc_terms_o
 			$layout .= '<div class="col col-text">';
 
 				if( $ymc_post_elements['title'] === 'show' ) :
-					$layout .= '<header class="title">'. esc_html($title) .'</header>';
+					$layout .= '<header class="title">';
+					$layout .= '<a class="media-link '.esc_attr($class_popup).'" data-postid="'.esc_attr($post_id).'" '. esc_attr($target) .' href="'. esc_url($link) .'">';
+					$layout .=  esc_html($title);
+					$layout .= '</a>';
+					$layout .= '</header>';
 				endif;
 
 				if( !empty($all_terms) && $ymc_post_elements['tag'] === 'show' ) :

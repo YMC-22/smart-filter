@@ -212,6 +212,11 @@ class Meta_Boxes {
 			update_post_meta($post_id, 'ymc_post_image_size', $ymc_post_image_size);
 		}
 
+		// Image Clickable
+		if (isset($_POST['ymc-image-clickable'])) {
+			$ymc_image_clickable = sanitize_text_field($_POST['ymc-image-clickable']);
+			update_post_meta($post_id, 'ymc_image_clickable', $ymc_image_clickable);
+		}
 
 		// Meta Key by sort
 		if (isset($_POST['ymc-meta-key'])) {

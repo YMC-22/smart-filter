@@ -60,7 +60,11 @@ if ( ! defined( 'ABSPATH' ) ) {
         echo '<article class="ymc-'.esc_attr($post_layout).' post-'.get_the_id().' post-item '.esc_attr($class_animation).'">';
 
 	    if( !empty($image_post) && $ymc_post_elements['image'] === 'show' ) :
-		echo '<figure class="media">'. wp_kses_post($image_post) .'</figure>';
+		echo '<figure class="media">'. wp_kses_post($image_post);
+			if( $ymc_image_clickable === 'on' ) :
+			echo '<a class="media-link '.esc_attr($class_popup).'" data-postid="'.esc_attr($post_id).'" '. esc_attr($target) .' href="'. esc_url($link) .'"></a>';
+			endif;
+		echo '</figure>';
 		endif;
 
 		if( !empty($list_categories) && $ymc_post_elements['tag'] === 'show' ) :
@@ -68,7 +72,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 		endif;
 
 	    if( $ymc_post_elements['title'] === 'show' ) :
-        echo '<header class="title">'. esc_html($title) .'</header>';
+        echo '<header class="title">';
+		echo '<a class="media-link '.esc_attr($class_popup).'" data-postid="'.esc_attr($post_id).'" '. esc_attr($target) .' href="'. esc_url($link) .'">';
+        echo  esc_html($title);
+		echo '</a>';
+        echo '</header>';
 	    endif;
 
 	    if( $ymc_post_elements['date'] === 'show' ) :

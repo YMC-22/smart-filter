@@ -183,6 +183,8 @@ class Variables {
 
 	public $ymc_post_image_size = 'full';
 
+	public $ymc_image_clickable = 'off';
+
 
 	/**
 	 * Advanced tab used default variables
@@ -722,6 +724,14 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_post_image_size', true );
 		}
 		return $this->ymc_post_image_size;
+	}
+
+	public function get_image_clickable( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_image_clickable' ) ) {
+			return get_post_meta( $post_id, 'ymc_image_clickable', true );
+		}
+		return $this->ymc_image_clickable;
 	}
 
 

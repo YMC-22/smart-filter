@@ -168,7 +168,21 @@
 		                    <?php echo esc_html__('Thumbnail Image', 'ymc-smart-filter'); ?>
                         </option>
                     </select>
+                </div>
 
+                <div class="from-element">
+                    <label class="form-label">
+                        <?php echo esc_html__('Image Clickable', 'ymc-smart-filter'); ?>
+                        <span class="information">
+                        <?php echo esc_html__('Set image clickable.', 'ymc-smart-filter'); ?>
+                        </span>
+                    </label>
+                    <div class="group-elements">
+		                <?php  $check_image_clickable = ( $ymc_image_clickable === 'on' ) ? 'checked' : '';  ?>
+                        <input type="hidden" name='ymc-image-clickable' value="off">
+                        <input class="ymc-image-clickable" type="checkbox" value="on"  name='ymc-image-clickable' id="ymc-image-clickable" <?php echo esc_attr($check_image_clickable); ?>/>
+                        <label for="ymc-image-clickable"><?php echo esc_html__('Enable','ymc-smart-filter'); ?></label>
+                    </div>
                 </div>
 
                 <div class="from-element">

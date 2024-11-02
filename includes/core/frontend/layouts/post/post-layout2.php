@@ -33,7 +33,11 @@ if ( ! defined( 'ABSPATH' ) ) {
         echo '<article class="ymc-'.esc_attr($post_layout).' post-'.get_the_id().' post-item '.esc_attr($class_animation).'">';
 
 	    if( $ymc_post_elements['title'] === 'show' ) :
-        echo '<header class="title">'. esc_html($title) .'</header>';
+		    echo '<header class="title">';
+		    echo '<a class="media-link '.esc_attr($class_popup).'" data-postid="'.esc_attr($post_id).'" '. esc_attr($target) .' href="'. esc_url($link) .'">';
+		    echo  esc_html($title);
+		    echo '</a>';
+		    echo '</header>';
 		endif;
 
 	    if( $ymc_post_elements['excerpt'] === 'show' ) :

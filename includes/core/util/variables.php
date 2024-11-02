@@ -81,3 +81,4 @@ $ymc_custom_after_js = $variable->get_ymc_custom_after_js( $id );
 $ymc_carousel_params = $variable->get_ymc_carousel_params( $id );
 $ymc_hierarchy_terms = $variable->get_ymc_hierarchy_terms( $id );
 $ymc_post_image_size = $variable->get_post_image_size( $id );
+$ymc_image_clickable = $variable->get_image_clickable( $id );
