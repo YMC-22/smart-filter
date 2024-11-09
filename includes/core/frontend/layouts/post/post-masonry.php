@@ -45,7 +45,7 @@ while ($query->have_posts()) : $query->the_post();
 			$content  = wp_trim_words($content, $c_length);
 			break;
 		case 'excerpt_line_break' :
-			preg_match('/>([^<]+).*(?:$|<br>)/m', $content, $matches);
+			preg_match('/>([^<]+).*(?:$|<br)/m', $content, $matches);
 			$content = $matches[1];
 			break;
 	endswitch;

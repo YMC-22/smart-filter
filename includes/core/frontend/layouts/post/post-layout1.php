@@ -46,7 +46,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$content  = wp_trim_words($content, $c_length);
 				break;
 			case 'excerpt_line_break' :
-				preg_match('/>([^<]+).*(?:$|<br>)/m', $content, $matches);
+				preg_match('/>([^<]+).*(?:$|<br)/m', $content, $matches);
 				$content = $matches[1];
 				break;
 		endswitch;
