@@ -185,6 +185,8 @@ class Variables {
 
 	public $ymc_image_clickable = 'off';
 
+	public $ymc_excerpt_truncate_method = 'excerpt_truncated_text';
+
 
 	/**
 	 * Advanced tab used default variables
@@ -732,6 +734,14 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_image_clickable', true );
 		}
 		return $this->ymc_image_clickable;
+	}
+
+	public function get_excerpt_truncate_method( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_excerpt_truncate_method' ) ) {
+			return get_post_meta( $post_id, 'ymc_excerpt_truncate_method', true );
+		}
+		return $this->ymc_excerpt_truncate_method;
 	}
 
 

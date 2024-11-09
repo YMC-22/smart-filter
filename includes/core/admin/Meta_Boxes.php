@@ -218,6 +218,12 @@ class Meta_Boxes {
 			update_post_meta($post_id, 'ymc_image_clickable', $ymc_image_clickable);
 		}
 
+		// Excerpt truncate method
+		if (isset($_POST['ymc-excerpt-truncate-method'])) {
+			$ymc_excerpt_truncate_method = sanitize_text_field($_POST['ymc-excerpt-truncate-method']);
+			update_post_meta($post_id, 'ymc_excerpt_truncate_method', $ymc_excerpt_truncate_method);
+		}
+
 		// Meta Key by sort
 		if (isset($_POST['ymc-meta-key'])) {
 			$ymc_meta_key = sanitize_text_field($_POST['ymc-meta-key']);

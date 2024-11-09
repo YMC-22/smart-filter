@@ -187,6 +187,31 @@
 
                 <div class="from-element">
                     <label class="form-label">
+		                <?php echo esc_html__('Truncate Post Excerpt', 'ymc-smart-filter'); ?>
+                        <span class="information">
+                        <?php echo __('Set the post excerpt truncate method:<br>
+                                - <b>Truncate text:</b> truncate text to the specified number of words (default 30 words).<br>
+                                - <b>The first block of content:</b> the first block of content (tags p or h1,h2,h3,h4,h5,h6).<br>
+                                - <b>At the first line break:</b> at the first line break (tag: br)', 'ymc-smart-filter'); ?>
+                        </span>
+                    </label>
+
+                    <select class="form-select"  id="ymc-excerpt-truncate-method" name="ymc-excerpt-truncate-method">
+                        <option value="excerpt_truncated_text" <?php echo ( $ymc_excerpt_truncate_method === 'excerpt_truncated_text') ? 'selected' : ''; ?>>
+			                <?php echo esc_html__('Truncate text', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="excerpt_first_block" <?php echo ( $ymc_excerpt_truncate_method === 'excerpt_first_block') ? 'selected' : ''; ?>>
+			                <?php echo esc_html__('The first block of content', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="excerpt_line_break" <?php echo ( $ymc_excerpt_truncate_method === 'excerpt_line_break') ? 'selected' : ''; ?>>
+			                <?php echo esc_html__('At the first line break', 'ymc-smart-filter'); ?>
+                        </option>
+                    </select>
+
+                </div>
+
+                <div class="from-element">
+                    <label class="form-label">
                         <?php echo esc_html__('Button Text', 'ymc-smart-filter'); ?>
                         <span class="information">
                         <?php echo esc_html__('Change the text of the Read More button.', 'ymc-smart-filter');?>
@@ -432,7 +457,7 @@
 
                     <select class="form-select"  id="ymc-post-status" multiple name="ymc-post-status[]" style="height: 100px;">
                         <option value="publish" <?php if (array_search('publish', $ymc_post_status) !== false) {echo "selected";} ?>>
-                            <?php echo esc_html__('publish', 'ymc-smart-filter'); ?>
+                            <?php echo esc_html__('Publish', 'ymc-smart-filter'); ?>
                         </option>
                         <option value="pending" <?php if (array_search('pending', $ymc_post_status) !== false) {echo "selected";} ?>>
                             <?php echo esc_html__('Pending', 'ymc-smart-filter'); ?>

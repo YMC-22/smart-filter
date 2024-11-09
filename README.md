@@ -782,9 +782,9 @@ Usage example:
               target: '.data-target-ymc545-1'
            }).apiMultiplePosts( 
                   true,
-                  cpt = 'post,books',
-                  tax = 'category,people,science',
-                  terms = '5,6,19,15,20,7,55'
+                  'post,books',
+                  'category,people,science',
+                  '5,6,19,15,20,7,55'
            );
        }
 });

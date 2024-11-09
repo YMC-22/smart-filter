@@ -6,8 +6,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	// Layout: Full Width
     while ($query->have_posts()) : $query->the_post();
 
-	    global $post;
-
         // Get data
 	    $post_id = get_the_ID();
 	    $title   = get_the_title($post_id);
@@ -27,12 +25,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 		    }
 	    }
 
-	    $content = $post->post_excerpt;
+	    $content = apply_filters( 'the_content', get_the_content($post_id) );
 	    if( empty($content) ) {
-		    $content = $post->post_content;
+		    $content = get_the_excerpt($post_id);
 	    }
 
 	    $content  = preg_replace('#\[[^\]]+\]#', '', $content);
+	    $c_length = apply_filters('ymc_post_excerpt_length_'.$filter_id.'_'.$target_id, $length_excerpt);
+
+	    switch ($ymc_excerpt_truncate_method) :
+		    case 'excerpt_truncated_text' :
+			    $content  = wp_trim_words($content, $c_length);
+			    break;
+		    case 'excerpt_first_block' :
+			    preg_match_all("/(<p>|<h1>|<h2>|<h3>|<h4>|<h5>|<h6>)(.*)(<\/p>|<\/h1>|<\/h2>|<\/h3>|<\/h4>|<\/h5>|<\/h6>)/U", $content, $matches);
+			    $content = strip_tags($matches[0][0]);
+			    $c_length = strlen($content);
+			    $content  = wp_trim_words($content, $c_length);
+			    break;
+		    case 'excerpt_line_break' :
+			    preg_match('/>([^<]+).*(?:$|<br>)/m', $content, $matches);
+			    $content = $matches[1];
+			    break;
+	    endswitch;
+
 	    $c_length = apply_filters('ymc_post_excerpt_length_'.$filter_id.'_'.$target_id, $length_excerpt);
 	    $content  = wp_trim_words($content, $c_length);
 
