@@ -16,9 +16,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	    $class_popup = ( $ymc_popup_status === 'off' ) ? '' : 'ymc-popup';
         $post_date_format = apply_filters('ymc_post_date_format_'.$filter_id.'_'.$target_id, 'd, M Y');
 
-	    $content = apply_filters( 'the_content', get_the_content($post_id) );
-	    if( empty($content) ) {
+	    if( has_excerpt($post_id) ) {
 		    $content = get_the_excerpt($post_id);
+	    } else {
+		    $content = apply_filters( 'the_content', get_the_content($post_id) );
 	    }
 
         $content  = preg_replace('#\[[^\]]+\]#', '', $content);
