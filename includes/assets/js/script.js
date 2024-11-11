@@ -994,36 +994,39 @@
             // Add Hook: stop loading posts on page load
             wp.hooks.doAction('ymc_stop_loading_data', el);
 
-            let loadingPosts   = el.dataset.loading;
-            let params      = JSON.parse(el.dataset.params);
-            let data_target = params.data_target;
-            let type_pg     = params.type_pg;
-            let filter_id = params.filter_id;
-            let target_id = params.target_id;
-            let carousel_params = params.carousel_params;
-
-            if( loadingPosts === 'true' )
+            if( undefined !== el.dataset.params )
             {
-                // Set Default Terms
-                if( params.default_terms !== '' )
+                let loadingPosts   = el.dataset.loading;
+                let params      = JSON.parse(el.dataset.params);
+                let data_target = params.data_target;
+                let type_pg     = params.type_pg;
+                let filter_id = params.filter_id;
+                let target_id = params.target_id;
+                let carousel_params = params.carousel_params;
+
+                if( loadingPosts === 'true' )
                 {
-                    params.terms = params.default_terms;
-                    el.dataset.params = JSON.stringify(params);
+                    // Set Default Terms
+                    if( params.default_terms !== '' )
+                    {
+                        params.terms = params.default_terms;
+                        el.dataset.params = JSON.stringify(params);
+                    }
+
+                    // Init Load Posts
+                    getFilterPosts({
+                        'paged'     : 1,
+                        'toggle_pg' : 1,
+                        'target'    : data_target,
+                        'type_pg'   : type_pg
+                    });
+
+                    // Run Masonry Grid
+                    masonryGrid(el, filter_id, target_id);
+
+                    // Carousel Posts
+                    carouselPosts(el, filter_id, target_id, carousel_params);
                 }
-
-                // Init Load Posts
-                getFilterPosts({
-                    'paged'     : 1,
-                    'toggle_pg' : 1,
-                    'target'    : data_target,
-                    'type_pg'   : type_pg
-                });
-
-                // Run Masonry Grid
-                masonryGrid(el, filter_id, target_id);
-
-                // Carousel Posts
-                carouselPosts(el, filter_id, target_id, carousel_params);
             }
         });
 
