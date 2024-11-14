@@ -82,24 +82,26 @@
 
     </div>
 
-    <header class="sub-header" data-class-name="filter-location">
+    <!--<header class="sub-header" data-class-name="filter-location">
         <i class="dashicons dashicons-location"></i>
-		<?php echo esc_html__('Filter Location ', 'ymc-smart-filter'); ?>
+		<?php /*echo esc_html__('Filter Location ', 'ymc-smart-filter'); */?>
         <i class="fas fa-chevron-down form-arrow"></i>
-    </header>
+    </header>-->
 
-    <div class="form-wrapper filter-location">
+     <!--<div class="form-wrapper filter-location">
 
         <div class="form-group">
             <label for="ymc-shortcode" class="form-label">
-                <?php echo esc_html__('Shortcode Location','ymc-smart-filter'); ?>
+                <?php /*echo esc_html__('Shortcode Location','ymc-smart-filter'); */?>
                 <span class="information">
-            <?php echo esc_html__('List of pages or posts where the current shortcode is installed. 
-             Post types are (publicly_queryable) public or not are also will displayed here.','ymc-smart-filter'); ?>
+            <?php /*echo esc_html__('List of pages or posts where the current shortcode is installed.
+             Post types are (publicly_queryable) public or not are also will displayed here.','ymc-smart-filter'); */?>
             </span>
-            </label>
+            </label>-->
 
             <?php
+
+            /*
             $posts_array = get_posts([
                 'posts_per_page' => -1,
                 'post_status'    => 'publish',
@@ -134,10 +136,11 @@
                 echo '</ul>';
 
             endif;
+
+            */
             ?>
 
-        </div>
-
-    </div>
+        <!--</div>
+    </div>-->
 
 </div>

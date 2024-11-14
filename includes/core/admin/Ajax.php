@@ -37,7 +37,7 @@ class Ajax {
 
 		add_action('wp_ajax_ymc_options_icons',array($this, 'ymc_options_icons'));
 
-		add_action('wp_ajax_ymc_updated_posts',array($this, 'ymc_updated_posts'));
+		//add_action('wp_ajax_ymc_updated_posts',array($this, 'ymc_updated_posts'));
 
 		add_action('wp_ajax_ymc_options_terms',array($this, 'ymc_options_terms'));
 
@@ -48,6 +48,47 @@ class Ajax {
 		add_action( 'wp_ajax_ymc_updated_taxonomy', array( $this, 'ymc_updated_taxonomy'));
 
 		add_action( 'wp_ajax_ymc_taxonomy_options', array( $this, 'ymc_taxonomy_options'));
+
+		add_action( 'wp_ajax_ymc_selected_posts', array( $this, 'ymc_selected_posts'));
+
+	}
+
+
+	public function ymc_selected_posts() {
+
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+
+		$post_type   = $_POST['cpt'];
+		$post_types = ! empty( $post_type ) ? explode(',', $post_type) : 'post';
+		$paged = (int) $_POST['paged'];
+		$paged += 1;
+
+		// Get posts
+		$query = new \WP_query([
+			'post_type' => $post_types,
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'paged' => $paged,
+			'posts_per_page' => 10
+		]);
+
+		$arr_posts = [];
+
+		if ( $query->have_posts() ) {
+			while ($query->have_posts()) {
+				$query->the_post();
+				$arr_posts[] = '<li><span class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">
+				<span class="postID">ID: '.get_the_ID().'</span> <span class="postTitle">'. get_the_title(get_the_ID()).'</span></span></li>';
+			}
+			wp_reset_query();
+		}
+
+		$data = array(
+			'data' => 1,
+			'lists_posts' => json_encode($arr_posts)
+		);
+
+		wp_send_json($data);
 	}
 
 	/**
@@ -59,7 +100,7 @@ class Ajax {
 
 		if(isset($_POST["cpt"])) {
 			$post_types = sanitize_text_field($_POST["cpt"]);
-			$cpts = !empty( $post_types ) ? explode(',', $post_types) : false;
+			$cpts = !empty( $post_types ) ? explode(',', $post_types) : 'post';
 		}
 		if(isset($_POST["post_id"])) {
 			update_post_meta( (int) $_POST["post_id"], 'ymc_taxonomy', '' );
@@ -91,10 +132,10 @@ class Ajax {
 
 		// Get posts
 		$query = new \WP_query([
-			'post_type' => $cpt,
+			'post_type' => $cpts,
 			'orderby' => 'title',
 			'order' => 'ASC',
-			'posts_per_page' => -1
+			'posts_per_page' => 10
 		]);
 
 		$arr_posts = [];
@@ -328,7 +369,8 @@ class Ajax {
 
 		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
 
-		$cpt = $_POST['cpt'];
+		$post_types = sanitize_text_field($_POST["cpt"]);
+		$cpts = !empty( $post_types ) ? explode(',', $post_types) : 'post';
 		$tax = $_POST['tax'];
 		$terms = $_POST['terms'];
 		$output = '';
@@ -340,10 +382,10 @@ class Ajax {
 		$termsChecked  = json_decode($termsData, true);
 
 		$arg = [
-			'post_type' => $cpt,
+			'post_type' => $cpts,
 			'orderby' => 'title',
 			'order' => 'ASC',
-			'posts_per_page' => -1
+			'posts_per_page' => 10
 		];
 
 		if ( is_array($taxChecked) && is_array($termsChecked) && count($termsChecked) > 0 ) {
@@ -359,7 +401,7 @@ class Ajax {
 					'hide_empty' => false
 				]);
 
-				if( $terms ) {
+				if( is_array( $terms ) && ! is_wp_error( $terms ) ) {
 
 					$arr_terms_ids = [];
 

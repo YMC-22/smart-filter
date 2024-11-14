@@ -719,6 +719,61 @@
             });
         }
 
+        function loadSelectedPosts(e) {
+
+            let choicesList = $('#selection-posts .choices-list');
+            let valuesCptArray = Array.from(document.querySelectorAll('#general #ymc-cpt-select option:checked')).map(el => el.value);
+            let valuesCptString = valuesCptArray.join(',');
+            let wrapper = this;
+
+            const data = {
+                'action': 'ymc_selected_posts',
+                'nonce_code' : _smart_filter_object.nonce,
+                'cpt' : valuesCptString,
+                'paged' : _smart_filter_object.current_page
+            };
+
+            if (this.scrollHeight - this.scrollTop === this.clientHeight && wrapper.dataset.loading === 'true')
+            {
+                $.ajax({
+                   type: 'POST',
+                   dataType: 'json',
+                   url: _smart_filter_object.ajax_url,
+                   data: data,
+                   beforeSend: function () {
+                       container.addClass('loading').
+                       prepend(`<img class="preloader" src="${pathPreloader}">`);
+                   },
+                   success: function (res) {
+                       container.removeClass('loading').find('.preloader').remove();
+                       _smart_filter_object.current_page++;
+
+                       // Get posts
+                       let dataPosts = (JSON.parse(res.lists_posts));
+
+                       if(Object.keys(dataPosts).length > 0) {
+                           for (let key in dataPosts) {
+                               choicesList.append(dataPosts[key]);
+                           }
+                       }
+                       else {
+                           wrapper.dataset.loading = 'false';
+                       }
+                   },
+                   error: function (obj, err) {
+                       console.log( obj, err );
+                   }
+               });
+            }
+        }
+
+        function resetSelectedPosts() {
+            let choicesList = $('#selection-posts .choices-list');
+            document.querySelector('#selection-posts .choices-list').dataset.loading = 'true';
+            choicesList.scrollTop(0);
+            _smart_filter_object.current_page = 1;
+        }
+
 
         /*** EVENTS ***/
 
@@ -758,6 +813,7 @@
                     success: function (res) {
 
                         container.removeClass('loading').find('.preloader').remove();
+                        resetSelectedPosts();
 
                         let dataTax = (JSON.parse(res.data));
 
@@ -1389,7 +1445,9 @@
             // Run updated terms options
             checkedSelectedTerm(e);
 
-            let cpt = document.querySelector('#ymc-cpt-select').value;
+            /*
+            let valuesCptArray = Array.from(document.querySelectorAll('#general #ymc-cpt-select option:checked')).map(el => el.value);
+            let cpts = valuesCptArray.join(',');
             let arrTax = [];
             let arrTerms = [];
             let numberPosts = document.querySelector('#selection-posts .number-posts');
@@ -1414,7 +1472,7 @@
             const data = {
                 'action': 'ymc_updated_posts',
                 'nonce_code' : _smart_filter_object.nonce,
-                'cpt' : cpt,
+                'cpt' : cpts,
                 'tax' : JSON.stringify(arrTax),
                 'terms' : JSON.stringify(arrTerms),
             };
@@ -1431,6 +1489,7 @@
                 success: function (res) {
 
                     container.removeClass('loading').find('.preloader').remove();
+                    resetSelectedPosts();
 
                     if( res.output ) {
                         choicesPosts.innerHTML = res.output;
@@ -1444,6 +1503,7 @@
                     console.log( obj, err );
                 }
             });
+            */
         });
 
         // Toggle Filter Status
@@ -1656,6 +1716,9 @@
             updatedOptionsTaxonomies();
 
         });
+
+        // Load selected posts
+        $('#general .selection-posts .choices .choices-list').on('scroll', loadSelectedPosts);
         
         // Expand Selected Posts
         $('#general .wrapper-selection .button-expand a').on('click', function (e) {

@@ -449,7 +449,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 				<div class="selection-posts" id="selection-posts">
 
 					<div class="choices">
-						<ul class="list choices-list">
+						<ul class="list choices-list" data-loading="true">
 							<?php
 
 							$tmp_post = $post;
@@ -458,10 +458,10 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 								'post_type' => $cpt,
 								'orderby' => 'title',
 								'order' => 'ASC',
-								'posts_per_page' => -1
+								'posts_per_page' => 10
 							];
 
-							if( is_array($tax_sel) && count($tax_sel) > 0 && !empty($terms_sel) ) {
+							/*if( is_array($tax_sel) && count($tax_sel) > 0 && !empty($terms_sel) ) {
 
 								$params_choices = [
 									'relation' => 'OR'
@@ -498,7 +498,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 								endforeach;
 
 								$arg['tax_query'] = $params_choices;
-							}
+							}*/
 
 							$query = new \WP_query($arg);
 
