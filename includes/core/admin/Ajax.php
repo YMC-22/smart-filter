@@ -54,14 +54,18 @@ class Ajax {
 	}
 
 
+	/**
+	 * Posts loaded on scroll
+	 */
 	public function ymc_selected_posts() {
 
 		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
 
-		$post_type   = $_POST['cpt'];
+		$post_type   = sanitize_text_field($_POST["cpt"]);
 		$post_types = ! empty( $post_type ) ? explode(',', $post_type) : 'post';
 		$paged = (int) $_POST['paged'];
 		$paged += 1;
+		$arr_posts = [];
 
 		// Get posts
 		$query = new \WP_query([
@@ -69,22 +73,22 @@ class Ajax {
 			'orderby' => 'title',
 			'order' => 'ASC',
 			'paged' => $paged,
-			'posts_per_page' => 10
+			'posts_per_page' => 20
 		]);
 
-		$arr_posts = [];
+		$posts_loaded = $query->found_posts;
 
 		if ( $query->have_posts() ) {
 			while ($query->have_posts()) {
 				$query->the_post();
-				$arr_posts[] = '<li><span class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">
-				<span class="postID">ID: '.get_the_ID().'</span> <span class="postTitle">'. get_the_title(get_the_ID()).'</span></span></li>';
+				$arr_posts[] = '<li><div class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">
+				<span class="postID">ID: '.get_the_ID().'</span> <span class="postTitle">'. get_the_title(get_the_ID()).'</span></div></li>';
 			}
 			wp_reset_query();
 		}
 
 		$data = array(
-			'data' => 1,
+			'posts_loaded' => count($arr_posts),
 			'lists_posts' => json_encode($arr_posts)
 		);
 
@@ -135,7 +139,7 @@ class Ajax {
 			'post_type' => $cpts,
 			'orderby' => 'title',
 			'order' => 'ASC',
-			'posts_per_page' => 10
+			'posts_per_page' => 20
 		]);
 
 		$arr_posts = [];
@@ -144,8 +148,8 @@ class Ajax {
 
 			while ($query->have_posts()) {
 				$query->the_post();
-				$arr_posts[] = '<li><span class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">
-				<span class="postID">ID: '.get_the_ID().'</span> <span class="postTitle">'. get_the_title(get_the_ID()).'</span></span></li>';
+				$arr_posts[] = '<li><div class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">
+				<span class="postID">ID: '.get_the_ID().'</span> <span class="postTitle">'. get_the_title(get_the_ID()).'</span></div></li>';
 			}
 			wp_reset_query();
 		}
@@ -153,7 +157,8 @@ class Ajax {
 		$data = array(
 			'data' => json_encode($arr_tax_result),
 			'lists_posts' => json_encode($arr_posts),
-			'found_posts' => $query->found_posts
+			'found_posts' => $query->found_posts,
+			'posts_loaded' => count($arr_posts)
 		);
 
 		wp_send_json($data);

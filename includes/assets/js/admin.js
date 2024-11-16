@@ -719,6 +719,9 @@
             });
         }
 
+        /**
+         * Posts loaded on scroll
+         */
         function loadSelectedPosts(e) {
 
             let choicesList = $('#selection-posts .choices-list');

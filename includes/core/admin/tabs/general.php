@@ -458,7 +458,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 								'post_type' => $cpt,
 								'orderby' => 'title',
 								'order' => 'ASC',
-								'posts_per_page' => 10
+								'posts_per_page' => 20
 							];
 
 							/*if( is_array($tax_sel) && count($tax_sel) > 0 && !empty($terms_sel) ) {
@@ -514,7 +514,6 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 									<span class="postID">ID: '.get_the_ID().'</span> <span class="postTitle">'.get_the_title(get_the_ID()).'</span></div></li>';
 									$class_disabled = null;
 								endwhile;
-
 							}
 							else {
 								echo '<li class="notice">'.esc_html__('No posts', 'ymc-smart-filter').'</li>';

@@ -3229,9 +3229,11 @@ $font-size: 16;
 				background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' enable-background='new 0 0 32 32' height='32px' id='Layer_1' version='1.1' viewBox='0 0 32 32' width='32px' xml:space='preserve'%3E%3Cg%3E%3Cpath d='M15.42,7.221c0-0.951-0.771-1.721-1.721-1.721H6.729c-0.951,0-1.721,0.771-1.721,1.721v6.103 c0,0.951,0.771,1.721,1.721,1.721h6.971c0.951,0,1.721-0.771,1.721-1.721V7.221z' fill='%23208ab0'/%3E%3Cpath d='M27.742,7.221c0-0.951-0.77-1.721-1.721-1.721h-6.971c-0.951,0-1.721,0.771-1.721,1.721v6.103 c0,0.951,0.77,1.721,1.721,1.721h6.971c0.951,0,1.721-0.771,1.721-1.721V7.221z' fill='%23208ab0'/%3E%3Cpath d='M15.42,18.676c0-0.951-0.771-1.721-1.721-1.721H6.729c-0.951,0-1.721,0.77-1.721,1.721v6.104 c0,0.95,0.771,1.721,1.721,1.721h6.971c0.951,0,1.721-0.771,1.721-1.721V18.676z' fill='%23208ab0'/%3E%3Cpath d='M27.742,18.676c0-0.951-0.77-1.721-1.721-1.721h-6.971c-0.951,0-1.721,0.77-1.721,1.721v6.104 c0,0.95,0.77,1.721,1.721,1.721h6.971c0.951,0,1.721-0.771,1.721-1.721V18.676z' fill='%23208ab0'/%3E%3C/g%3E%3C/svg%3E") !important;
 				background-size: contain;
 				background-position: center;
+				background-repeat: no-repeat;
 				top: 5px;
 				width: 20px;
 				height: 20px;
+				filter: brightness(0) saturate(100%) invert(67%) sepia(7%) saturate(234%) hue-rotate(165deg) brightness(94%) contrast(94%);
 			}
 		}
 	}
