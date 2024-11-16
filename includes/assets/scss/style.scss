@@ -3210,7 +3210,7 @@ $font-size: 16;
 	#wp-admin-bar-ymc-filter-grids {
 		& > .ab-item {
 			.counter {
-				display: inline-block;
+				display: none;
 				vertical-align: middle;
 				box-sizing: border-box;
 				margin: -2px 0 0 2px;
@@ -3230,7 +3230,8 @@ $font-size: 16;
 				background-size: contain;
 				background-position: center;
 				background-repeat: no-repeat;
-				top: 5px;
+				top: 50%;
+				transform: translateY(-50%);
 				width: 20px;
 				height: 20px;
 				filter: brightness(0) saturate(100%) invert(67%) sepia(7%) saturate(234%) hue-rotate(165deg) brightness(94%) contrast(94%);
@@ -3238,6 +3239,8 @@ $font-size: 16;
 		}
 	}
 }
+
+
 
 .ymc__debugger {
 	position: fixed;

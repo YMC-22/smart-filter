@@ -1883,8 +1883,6 @@ $font-size: 16;
 			}
 		}
 	}
-
-
 }
 
 #ymc_filters_attached {
@@ -1947,7 +1945,7 @@ $font-size: 16;
 	#wp-admin-bar-ymc-filter-grids {
 		& > .ab-item {
 			.counter {
-				display: inline-block;
+				display: none;
 				vertical-align: middle;
 				box-sizing: border-box;
 				margin: -2px 0 0 2px;
@@ -1975,6 +1973,5 @@ $font-size: 16;
 		}
 	}
 }
-
 
 
