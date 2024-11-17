@@ -1165,37 +1165,115 @@
         });
 
         // Search Posts in Choices Box
-        $(document).on('input','#general .search-posts input[type="search"]', function (e) {
+        $(document).on('input','#general .search-posts .input-field', function (e) {
 
             let keyword = e.target.value.toLowerCase();
-
-            let arrWords = [];
+            let valuesCptArray = Array.from(document.querySelectorAll('#general #ymc-cpt-select option:checked')).map(el => el.value);
+            let valuesCptString = valuesCptArray.join(',');
+            let choicesList = $('#selection-posts .choices-list');
+            let container = $('#selection-posts .choices');
+            let btnClear = $('.search-posts .clear-button');
+            let input = e.target;
 
             if( keyword.length >= 3 ) {
 
-                document.querySelectorAll('.selection-posts .choices-list li').forEach((el) => {
+                document.querySelector('#selection-posts .choices-list').dataset.loading = 'false';
 
-                    let text = $(el).find('.ymc-rel-item').text().toLowerCase();
+                const data = {
+                    'action'     : 'ymc_search_posts',
+                    'nonce_code' : _smart_filter_object.nonce,
+                    'phrase'     : keyword,
+                    'cpt'        : valuesCptString
+                };
 
-                    if( text.includes(keyword) ) {
-                        arrWords.push(el);
-                    }
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: _smart_filter_object.ajax_url,
+                    data: data,
+                    beforeSend: function () {
+                        container.addClass('loading').
+                        prepend(`<img class="preloader" src="${pathPreloader}">`);
+                        //input.setAttribute('disabled', 'disabled');
+                        btnClear.addClass('active');
+                    },
+                    success: function (res) {
+                        container.removeClass('loading').find('.preloader').remove();
+                        //input.removeAttribute('disabled');
+                        input.focus();
 
-                    if( arrWords.length > 0 ) {
-                        arrWords.forEach((elem) => {
-                            elem.classList.add('result');
-                        });
-                        $('.selection-posts .choices-list li:not(.result)').hide();
-                        $('.selection-posts .choices-list li.result').show();
-                    }
-                    else {
-                        $('.selection-posts .choices-list li').hide();
+                        // Get posts
+                        let dataPosts = (JSON.parse(res.lists_posts));
+                        container.find('.number-posts').html(res.found_posts);
+                        choicesList.empty();
+
+                        if(Object.keys(dataPosts).length > 0) {
+                            for (let key in dataPosts) {
+                                choicesList.append(dataPosts[key]);
+                            }
+                        }
+                        else {
+                            choicesList.append('<li class="no-result">No results found</li>');
+                        }
+                    },
+                    error: function (obj, err) {
+                        console.log( obj, err );
                     }
                 });
             }
-            else {
-                $('.selection-posts .choices-list li').removeClass('result').show();
+
+            if( keyword.length === 0 ) {
+                $('#general .search-posts .clear-button').trigger('click');
             }
+        });
+
+        $(document).on('click','#general .search-posts .clear-button', function (e) {
+
+            let choicesList = $('#selection-posts .choices-list');
+            let container = $('#selection-posts .choices');
+            let valuesCptArray = Array.from(document.querySelectorAll('#general #ymc-cpt-select option:checked')).map(el => el.value);
+            let valuesCptString = valuesCptArray.join(',');
+
+            document.querySelector('#selection-posts .choices-list').dataset.loading = 'true';
+            e.target.closest('.search-posts').querySelector('.input-field').value = '';
+            e.target.closest('.search-posts').querySelector('.input-field').focus();
+            e.target.closest('.search-posts').querySelector('.input-field').removeAttribute('disabled');
+            e.target.closest('.search-posts').querySelector('.clear-button').classList.remove('active');
+
+            const data = {
+                'action': 'ymc_selected_posts',
+                'nonce_code' : _smart_filter_object.nonce,
+                'cpt' : valuesCptString,
+                'paged' : 0
+            };
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: _smart_filter_object.ajax_url,
+                data: data,
+                beforeSend: function () {
+                    container.addClass('loading').
+                    prepend(`<img class="preloader" src="${pathPreloader}">`);
+                },
+                success: function (res) {
+                    container.removeClass('loading').find('.preloader').remove();
+
+                    // Get posts
+                    let dataPosts = (JSON.parse(res.lists_posts));
+                    container.find('.number-posts').html(res.found_posts);
+                    choicesList.empty();
+
+                    if(Object.keys(dataPosts).length > 0) {
+                        for (let key in dataPosts) {
+                            choicesList.append(dataPosts[key]);
+                        }
+                    }
+                },
+                error: function (obj, err) {
+                    console.log( obj, err );
+                }
+            });
         });
 
         // Open Popup for Settings Term & Icons

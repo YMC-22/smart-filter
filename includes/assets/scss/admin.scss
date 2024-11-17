@@ -673,6 +673,29 @@ $font-size: 16;
 
 					#general {
 
+						.search-posts {
+							position: relative;
+							.clear-button {
+								position: absolute;
+								right: 10px;
+								top: 50%;
+								width: 7px;
+								height: 7px;
+								font-style: normal;
+								font-size: 16px;
+								transform: translateY(-50%);
+								align-items: center;
+								justify-content: space-around;
+								cursor: pointer;
+								color: #2196F3;
+								font-weight: 700;
+								display: none;
+								&.active {
+									display: flex;
+								}
+							}
+						}
+
 						.selection-posts {
 							position: relative;
 							display: flex;

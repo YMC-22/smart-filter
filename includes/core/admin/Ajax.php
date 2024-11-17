@@ -51,6 +51,49 @@ class Ajax {
 
 		add_action( 'wp_ajax_ymc_selected_posts', array( $this, 'ymc_selected_posts'));
 
+		add_action('wp_ajax_ymc_search_posts',array($this, 'ymc_search_posts'));
+
+	}
+
+	/**
+	 * Search Posts
+	 */
+	public function ymc_search_posts() {
+
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+
+		$post_type   = sanitize_text_field($_POST["cpt"]);
+		$post_types = ! empty( $post_type ) ? explode(',', $post_type) : 'post';
+		$phrase = trim(mb_strtolower(sanitize_text_field($_POST['phrase'])));
+		$arr_posts = [];
+
+		$args = [
+			'post_type' => $post_types,
+			'posts_per_page' => -1,
+			'orderby' => 'title',
+			'order' => 'asc',
+			'sentence' => true,
+			's' => $phrase
+		];
+
+		$query = new \WP_Query($args);
+		$found_posts = $query->found_posts;
+
+		if ( $query->have_posts() ) {
+			while ($query->have_posts()) {
+				$query->the_post();
+				$arr_posts[] = '<li><div class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">
+				<span class="postID">ID: '.get_the_ID().'</span> <span class="postTitle">'. get_the_title(get_the_ID()).'</span></div></li>';
+			}
+			wp_reset_query();
+		}
+
+		$data = array(
+			'found_posts' => $found_posts,
+			'lists_posts' => json_encode($arr_posts)
+		);
+
+		wp_send_json($data);
 	}
 
 
@@ -75,8 +118,7 @@ class Ajax {
 			'paged' => $paged,
 			'posts_per_page' => 20
 		]);
-
-		$posts_loaded = $query->found_posts;
+		$found_posts = $query->found_posts;
 
 		if ( $query->have_posts() ) {
 			while ($query->have_posts()) {
@@ -89,6 +131,7 @@ class Ajax {
 
 		$data = array(
 			'posts_loaded' => count($arr_posts),
+			'found_posts' => $found_posts,
 			'lists_posts' => json_encode($arr_posts)
 		);
 
