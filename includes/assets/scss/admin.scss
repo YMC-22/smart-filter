@@ -689,6 +689,7 @@ $font-size: 16;
 								}
 								.postID {
 									display: block;
+									margin-bottom: 3px;
 								}
 								.postTitle {
 									display: block;
@@ -697,10 +698,26 @@ $font-size: 16;
 							.choices {
 								width: 50%;
 								margin: 0;
-								padding: 5px;
+								padding: 25px 5px 5px 5px;
 								background: #f9f9f9;
 								border: 1px solid #ccc;
 								position: relative;
+								&.loading {
+									opacity: .5;
+									position: relative;
+									&:before {
+										content: '';
+										position: absolute;
+										top: 0;
+										left: 0;
+										right: 0;
+										bottom: 0;
+										width: 100%;
+										height: 100%;
+										background: rgba(0, 0, 0, 0.1);
+										z-index: 1;
+									}
+								}
 								.number-posts {
 									position: absolute;
 									right: 7px;
@@ -720,12 +737,15 @@ $font-size: 16;
 									}
 									overflow: auto;
 									height: 200px;
-									margin: 15px 0 0 0;
+									line-height: 1;
+									margin: 0;
+									padding: 0;
+									border: none;
 									&.expand {
 										height: auto;
 									}
 									li {
-										margin-bottom: 0;
+										margin-bottom: 5px;
 										padding-right: 10px;
 										.ymc-rel-item-add {
 											&.disabled {
