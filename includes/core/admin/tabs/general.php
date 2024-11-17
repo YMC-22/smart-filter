@@ -441,8 +441,11 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 				</label>
 
 				<div class="search-posts">
-					<input class="input-field" type="text" placeholder="Search..." />
-                    <i class="clear-button" title="Clear">x</i>
+                    <div class="search-inner">
+                        <input class="input-field" type="text" placeholder="Search..." />
+                        <i class="clear-button" title="Clear">x</i>
+                    </div>
+                    <button class="btn-submit">Search</button>
 				</div>
 
                 <div class="button-expand"><a href="#" class="button-expand__link"><?php esc_html_e('expand', 'ymc-smart-filter') ?></a></div>

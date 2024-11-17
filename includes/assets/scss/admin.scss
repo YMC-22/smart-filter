@@ -674,10 +674,18 @@ $font-size: 16;
 					#general {
 
 						.search-posts {
-							position: relative;
+							display: flex;
+							align-items: center;
+							.search-inner {
+								position: relative;
+								width: 90%;
+							}
+							.input-field {
+								padding-right: 40px;
+							}
 							.clear-button {
 								position: absolute;
-								right: 10px;
+								right: 20px;
 								top: 50%;
 								width: 7px;
 								height: 7px;
@@ -693,6 +701,18 @@ $font-size: 16;
 								&.active {
 									display: flex;
 								}
+							}
+							.btn-submit {
+								display: inline-block;
+								height: 35px;
+								padding: 0 20px;
+								border: 1px solid #e0e4e9;
+								border-radius: 0;
+								cursor: pointer;
+								font-size: 14px;
+								line-height: unset;
+								background-color: #f6f6f6;
+								color: #0C1021;
 							}
 						}
 
