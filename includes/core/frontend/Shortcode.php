@@ -189,6 +189,10 @@ class Shortcode {
 
 			echo '</div>';
 
+			if( $ymc_post_layout === 'post-carousel-layout' ) {
+				wp_enqueue_script( 'filter-grids-swiper', YMC_SMART_FILTER_URL . 'includes/assets/js/swiper.min.js', array(), YMC_SMART_FILTER_VERSION, true);
+			}
+
 			// Custom JS
 			if(  wp_script_is( 'filter-grids-' . wp_create_nonce('filter-grids'), 'enqueued' ) &&
 			     ! empty(Plugin::$instance->variables->get_ymc_custom_after_js($id)) )
