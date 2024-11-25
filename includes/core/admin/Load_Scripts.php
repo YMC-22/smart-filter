@@ -89,7 +89,7 @@ class Load_Scripts {
 
 	public function frontend_embed_css() {
 		wp_enqueue_style( 'filter-datepicker-' . $this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/css/datepicker.css', array(), YMC_SMART_FILTER_VERSION);
-		wp_enqueue_style( 'filter-swiper-' . $this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/css/swiper.min.css', array(), YMC_SMART_FILTER_VERSION);
+		//wp_enqueue_style( 'filter-swiper-' . $this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/css/swiper.min.css', array(), YMC_SMART_FILTER_VERSION);
 		wp_enqueue_style( 'filter-grids-' . $this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/css/style.css', array(), YMC_SMART_FILTER_VERSION);
 	}
 

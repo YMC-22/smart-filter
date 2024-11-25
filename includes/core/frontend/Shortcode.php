@@ -190,7 +190,8 @@ class Shortcode {
 			echo '</div>';
 
 			if( $ymc_post_layout === 'post-carousel-layout' ) {
-				wp_enqueue_script( 'filter-grids-swiper', YMC_SMART_FILTER_URL . 'includes/assets/js/swiper.min.js', array(), YMC_SMART_FILTER_VERSION, true);
+				wp_enqueue_style( 'filter-grids-swiper-css', YMC_SMART_FILTER_URL . 'includes/assets/css/swiper.min.css', array(), YMC_SMART_FILTER_VERSION);
+				wp_enqueue_script( 'filter-grids-swiper-js', YMC_SMART_FILTER_URL . 'includes/assets/js/swiper.min.js', array(), YMC_SMART_FILTER_VERSION, true);
 			}
 
 			// Custom JS
