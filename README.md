@@ -931,6 +931,27 @@ wp.hooks.addAction('ymc_after_popup_open', 'smartfilter', 'callback(data)');
 wp.hooks.addAction('ymc_after_popup_open_FilterID', 'smartfilter', 'callback(data)');
 wp.hooks.addAction('ymc_after_popup_open_FilterID_LayoutID', 'smartfilter', 'callback(data)');
 ```
+
+**Change custom preloader:**
+
+This filter allows you to override preloader when loading grid posts or other content into opening popups.
+```js
+wp.hooks.addFilter('ymc_custom_popup_preloader', 'smartfilter', 'callback');
+wp.hooks.addFilter('ymc_custom_popup_preloader_FilterID', 'smartfilter', 'callback');
+wp.hooks.addFilter('ymc_custom_popup_preloader_FilterID_LayoutID', 'smartfilter', 'callback');
+
+wp.hooks.addFilter('ymc_custom_grid_preloader', 'smartfilter', 'callback(data)');
+wp.hooks.addFilter('ymc_custom_grid_preloader_FilterID', 'smartfilter', 'callback(data)');
+wp.hooks.addFilter('ymc_custom_grid_preloader_FilterID_LayoutID', 'smartfilter', 'callback(data)');
+```
+```js       
+Usage example:
+    wp.hooks.addFilter('ymc_custom_popup_preloader_545_1', 'smartfilter', function(stylePreloader) {
+        stylePreloader = '/wp-content/themes/myTheme/images/icon.svg';
+        return stylePreloader;
+    });
+```
+
 **Params function callback:**
 - `data - data that is loaded into the popup container.`
 

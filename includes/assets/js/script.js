@@ -576,6 +576,10 @@
             let preloaderFilter = filterPreloader( params );
             let classAnimation = params.popup_animation;
 
+            stylePreloader = wp.hooks.applyFilters('ymc_custom_popup_preloader', stylePreloader);
+            stylePreloader = wp.hooks.applyFilters('ymc_custom_popup_preloader_'+ params.filter_id, stylePreloader);
+            stylePreloader = wp.hooks.applyFilters('ymc_custom_popup_preloader_'+ params.filter_id+'_'+params.target_id, stylePreloader);
+
             const data = {
                 'action'     : 'get_post_popup',
                 'nonce_code' : _smart_filter_object.nonce,
@@ -832,6 +836,10 @@
                 'params'     : JSON.stringify(params),
                 'paged'      : paged
             };
+
+            stylePreloader = wp.hooks.applyFilters('ymc_custom_grid_preloader', stylePreloader);
+            stylePreloader = wp.hooks.applyFilters('ymc_custom_grid_preloader_'+ params.filter_id, stylePreloader);
+            stylePreloader = wp.hooks.applyFilters('ymc_custom_grid_preloader_'+ params.filter_id+'_'+params.target_id, stylePreloader);
 
             $.ajax({
                 type: 'POST',
