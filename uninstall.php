@@ -13,7 +13,8 @@ if( ! defined('WP_UNINSTALL_PLUGIN') ) exit;
 
 global $wpdb;
 
-$wpdb->get_results('DELETE FROM wp_postmeta WHERE meta_key IN (
+// phpcs:ignore WordPress.DB.DirectDatabaseQuery
+$wpdb->get_results('DELETE FROM wp_postmeta WHERE meta_key IN ( 
                                   "ymc_cpt_value", 
                                   "ymc_taxonomy", 
                                   "ymc_terms", 
@@ -90,17 +91,7 @@ $wpdb->get_results('DELETE FROM wp_postmeta WHERE meta_key IN (
                                 )');
 
 
-$wpdb->get_results('DELETE FROM wp_posts WHERE post_type IN ("ymc_filters")');
-
-
-
-
-
-
-
-
-
-
+$wpdb->get_results('DELETE FROM wp_posts WHERE post_type IN ("ymc_filters")'); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
 
 
 

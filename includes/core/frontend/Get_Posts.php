@@ -35,14 +35,17 @@ class Get_Posts {
 	 */
 	public function get_filter_posts() {
 
-		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], Plugin::$instance->token_f) ) exit;
+		if ( !isset($_POST['nonce_code']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce_code'])), Plugin::$instance->token_f) ) exit;
 
 		$output  = '';
 		$message = '';
+		$clean_data = [];
 
-		$posted_data = $_POST['params'];
-		$temp_data = str_replace("\\", "", $posted_data);
-		$clean_data = json_decode($temp_data, true);
+		if(!empty($_POST['params']))
+		{
+			$temp_data = sanitize_text_field(wp_unslash($_POST['params']));
+			$clean_data = json_decode($temp_data, true);
+		}
 
 		// Get data from json
 		$post_type   = $clean_data['cpt'];
@@ -66,7 +69,7 @@ class Get_Posts {
 		$letter = $clean_data['letter'];
 		$custom_args = null;
 
-		$paged = (int) $_POST['paged'];
+		$paged = !empty( $_POST['paged'] ) ? (int) $_POST['paged'] : 1;
 		$id = (int) $filter_id;
 		$tax_qry = null;
 
@@ -241,14 +244,14 @@ class Get_Posts {
 
 					$date_query[] = [
 						'before' => [
-							'year'  => date('Y', $dataDateParams[2]),
-							'month' => date('m', $dataDateParams[2]),
-							'day'   => date('d', $dataDateParams[2]),
+							'year'  => gmdate('Y', $dataDateParams[2]),
+							'month' => gmdate('m', $dataDateParams[2]),
+							'day'   => gmdate('d', $dataDateParams[2]),
 						],
 						'after'  => [
-							'year'  => date('Y', $dataDateParams[1]),
-							'month' => date('m', $dataDateParams[1]),
-							'day'   => date('d', $dataDateParams[1]),
+							'year'  => gmdate('Y', $dataDateParams[1]),
+							'month' => gmdate('m', $dataDateParams[1]),
+							'day'   => gmdate('d', $dataDateParams[1]),
 						],
 						'inclusive' => true
 					];
@@ -540,16 +543,30 @@ class Get_Posts {
 	 */
 	public function autocomplete_search() {
 
-		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], Plugin::$instance->token_f) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce_code'])), Plugin::$instance->token_f) ) exit;
 
 		$output  = '';
-		$phrase = trim(mb_strtolower(sanitize_text_field($_POST['phrase'])));
-		$choices_posts = sanitize_text_field($_POST['choices_posts']);
-		$exclude_posts = sanitize_text_field($_POST['exclude_posts']);
-		$id = (int) $_POST['post_id'];
-		$term_ids = !empty($_POST['terms_ids']) ? explode(',', sanitize_text_field($_POST['terms_ids'])) : "";
+		$phrase = '';
+		$choices_posts = '';
+		$exclude_posts = '';
+		$id = '';
 
-		$per_page  = -1;
+		if(!empty($_POST['phrase'])) {
+			$phrase = trim(mb_strtolower(sanitize_text_field(wp_unslash($_POST['phrase']))));
+		}
+		if(!empty($_POST['choices_posts'])) {
+			$choices_posts = sanitize_text_field(wp_unslash($_POST['choices_posts']));
+		}
+		if(!empty($_POST['exclude_posts'])) {
+			$exclude_posts = sanitize_text_field(wp_unslash($_POST['exclude_posts']));
+		}
+		if(!empty($_POST['post_id'])) {
+			$id = (int) sanitize_text_field(wp_unslash($_POST['post_id']));
+		}
+
+		$term_ids = !empty($_POST['terms_ids']) ? explode(',', sanitize_text_field(wp_unslash($_POST['terms_ids']))) : "";
+
+		$per_page  = 20;
 		$total = 0;
 
 		// Set variables
@@ -659,8 +676,8 @@ class Get_Posts {
 
 			while ($query->have_posts()) : $query->the_post();
 
-				$title = mb_strtolower(strip_tags(get_the_title(get_the_ID())));
-				$content = mb_strtolower(strip_tags(get_the_content(get_the_ID())));
+				$title = mb_strtolower(wp_strip_all_tags(get_the_title(get_the_ID())));
+				$content = mb_strtolower(wp_strip_all_tags(get_the_content(get_the_ID())));
 
 				$content = preg_replace('/\[.*?\]/', '', $content);
 				$content = preg_replace('/&lt;.*?&gt;/', '', $content);
@@ -724,29 +741,35 @@ class Get_Posts {
 	 */
 	public function get_post_popup() {
 
-		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], Plugin::$instance->token_f) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce_code'])), Plugin::$instance->token_f) ) exit;
 
 		$output = '';
-		$post_id = (int) $_POST['post_id'];
-		$filter_id = $_POST['filter_id'];
-		$target_id = $_POST['target_id'];
+		$post_id   = !empty($_POST['post_id']) ? (int) sanitize_text_field(wp_unslash($_POST['post_id'])) : '';
+		$filter_id = !empty($_POST['filter_id']) ? sanitize_text_field(wp_unslash($_POST['filter_id'])) : '';
+		$target_id = !empty($_POST['target_id']) ? sanitize_text_field(wp_unslash($_POST['target_id'])) : '';
 
 		$title = get_the_title($post_id);
 
 		$post = get_post( $post_id );
-		$content = apply_filters('the_content', $post->post_content);
 
-		$output .= '<article class="popup-content">';
+		if(!empty($post))
+		{
+			$content = apply_filters('the_content', $post->post_content);
 
-		if( has_post_thumbnail($post_id) ) :
-			$output .=  '<figure class="image-inner"><img src="'. get_the_post_thumbnail_url( $post_id, 'full' ) .'"></figure>';
-		endif;
+			$output .= '<article class="popup-content">';
 
-		$output .= '<header class="title">'.$title.'</header>';
-		$output .= '<div class="content">'.$content.'</div>';
-		$output .= '</article>';
+			if( has_post_thumbnail($post_id) ) :
+				$output .=  '<figure class="image-inner"><img src="'. get_the_post_thumbnail_url( $post_id, 'full' ) .'"></figure>';
+			endif;
 
-		$output = apply_filters('ymc_popup_custom_layout_'.$filter_id.'_'.$target_id, $output, $post_id);
+			$output .= '<header class="title">'.$title.'</header>';
+			$output .= '<div class="content">'.$content.'</div>';
+			$output .= '</article>';
+
+			$output = apply_filters('ymc_popup_custom_layout_'.$filter_id.'_'.$target_id, $output, $post_id);
+		} else {
+			$output = esc_html__('Post not found', 'ymc-smart-filter');
+		}
 
 		$data = array(
 			'data'   => $output

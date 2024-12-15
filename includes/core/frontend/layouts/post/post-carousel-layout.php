@@ -29,7 +29,7 @@ $arrOptions['terms_settings'] = arrayToObject( generalArrayMerging( $ymc_terms_o
 		$title            = get_the_title($post_id);
 		$link             = ( $ymc_popup_status === 'off' ) ? get_the_permalink($post_id) : '#';
 		$length_excerpt   = !empty($ymc_post_elements['length_excerpt']) ? esc_attr($ymc_post_elements['length_excerpt']) : 30;
-		$button_text      = !empty($ymc_post_elements['button_text']) ? $ymc_post_elements['button_text'] : 'Read More';
+		$button_text      = !empty($ymc_post_elements['button_text']) ? $ymc_post_elements['button_text'] : __('Read More', 'ymc-smart-filter');
 		$class_popup      = ( $ymc_popup_status === 'off' ) ? '' : 'ymc-popup';
 		$post_date_format = apply_filters('ymc_post_date_format_'.$filter_id.'_'.$target_id, 'd, M Y');
 
@@ -63,7 +63,7 @@ $arrOptions['terms_settings'] = arrayToObject( generalArrayMerging( $ymc_terms_o
 				break;
 			case 'excerpt_first_block' :
 				preg_match_all("/(<p>|<h1>|<h2>|<h3>|<h4>|<h5>|<h6>)(.*)(<\/p>|<\/h1>|<\/h2>|<\/h3>|<\/h4>|<\/h5>|<\/h6>)/U", $content, $matches);
-				$content = strip_tags($matches[0][0]);
+				$content = wp_strip_all_tags($matches[0][0]);
 				$c_length = strlen($content);
 				$content  = wp_trim_words($content, $c_length);
 				break;
@@ -73,8 +73,8 @@ $arrOptions['terms_settings'] = arrayToObject( generalArrayMerging( $ymc_terms_o
 				break;
 		endswitch;
 
-		$read_more        = apply_filters('ymc_post_read_more_'.$filter_id.'_'.$target_id, __($button_text,'ymc-smart-filter'));
-		$target           = "target=" . $ymc_link_target . "";
+		$read_more = apply_filters('ymc_post_read_more_'.$filter_id.'_'.$target_id, $button_text);
+		$target    = "target=" . $ymc_link_target . "";
 
 		if( is_array($taxonomy) && count($taxonomy) > 0 ) {
 
@@ -95,7 +95,7 @@ $arrOptions['terms_settings'] = arrayToObject( generalArrayMerging( $ymc_terms_o
 		// Display Post
 		echo '<div class="swiper-slide">';
 
-		echo '<article class="'.esc_attr($post_layout).' post-'.$post_id.' post-item">';
+		echo '<article class="'.esc_attr($post_layout).' post-'.esc_attr($post_id).' post-item">';
 
 		$layout .= '<div class="row">';
 
@@ -151,6 +151,7 @@ $arrOptions['terms_settings'] = arrayToObject( generalArrayMerging( $ymc_terms_o
 		$layout .= '</div>';
 
 		// Custom layout
+		// phpcs:ignore WordPress
 		echo apply_filters('ymc_post_carousel_custom_layout_'.esc_attr($filter_id).'_'.esc_attr($target_id),
 			$layout,
 			$post_id,

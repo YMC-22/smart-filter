@@ -28,7 +28,7 @@ if( $ymc_filter_font !== 'inherit' ) {
                #ymc-extra-filter-".$c_target." .filter-layout3 .filter-entry { font-family:".$ymc_filter_font."}";
 }
 
-echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) .'</style>';
+echo '<style id="'.esc_attr($handle_filter).'">'. esc_html(preg_replace('|\s+|', ' ', $filter_css)) .'</style>';
 
 
 // Check Hierarchy of terms
@@ -64,7 +64,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
             }
             $arr_taxonomies = array_unique($arr_taxonomies);
 
-            $show_all = apply_filters('ymc_button_show_all_'.$id.'_'.$c_target, __($ymc_post_elements['button_text_all'],'ymc-smart-filter'));
+            $show_all = apply_filters('ymc_button_show_all_'.$id.'_'.$c_target, $ymc_post_elements['button_text_all']);
 
             echo '<a class="btn-all" href="#" data-selected="all" data-terms="' . esc_attr($all_terms) . '">'. esc_html($show_all) .'</a>';
 
@@ -119,9 +119,9 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 					}
 				}
 
-                echo '<div class="dropdown-filter tax-'.$tax.'">';
-                echo '<div class="menu-active" style="'.esc_attr($style_tax_bg).$style_tax_color.'">';
-                echo '<span class="original-tax-name" data-original-tax-name="'. esc_attr($tax_name).'">' . $tax_name .'</span> <i class="arrow down"></i>';
+                echo '<div class="dropdown-filter tax-'.esc_attr($tax).'">';
+                echo '<div class="menu-active" style="'.esc_attr($style_tax_bg).esc_attr($style_tax_color).'">';
+                echo '<span class="original-tax-name" data-original-tax-name="'. esc_attr($tax_name).'">'. esc_html($tax_name) .'</span> <i class="arrow down"></i>';
                 echo '</div>';
                 echo '<div class="menu-passive">';
                 echo '<i class="btn-close">x</i>';
@@ -203,7 +203,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 						}
 
                         echo '<div class="menu-passive__item item-'. esc_attr($object_term->slug) .' '.esc_attr($class_terms_align).' '.esc_attr($class_hierarchy).'">
-							  <div class="link-inner">'. $terms_icons;
+							  <div class="link-inner">'. wp_kses_post($terms_icons);
 
                         echo '<a class="menu-link '.
                               esc_attr($is_disabled) .' '.
@@ -212,11 +212,12 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
                               href="#" data-selected="'. esc_attr($object_term->slug) .'" data-termid="' . esc_attr($term) . '" data-name="'.esc_attr($object_term->name).'">'.
                               esc_html($name_term) . ' <span class="count">'. esc_html($object_term->count) .'</span></a>';
 
-						echo $arrow;
+						echo wp_kses_post($arrow);
 
 						echo '</div>'; // .menu-passive__item
 
 						// Insert Hierarchy Terms Tree
+						// phpcs:ignore WordPress
 						echo $tree_output;
 
                         echo '</div>';

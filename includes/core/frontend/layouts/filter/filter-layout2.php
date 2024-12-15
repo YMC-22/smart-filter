@@ -19,7 +19,7 @@ if( $ymc_filter_font !== 'inherit' ) {
                     #ymc-extra-filter-".$c_target." .filter-layout2 .filter-entry .filter-link { font-family:".$ymc_filter_font.";}";
 }
 
-echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) .'</style>';
+echo '<style id="'.esc_attr($handle_filter).'">'. esc_html(preg_replace('|\s+|', ' ', $filter_css)) .'</style>';
 
 ?>
 
@@ -56,10 +56,10 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 						sortTaxTerms($terms_selected, 'desc');
 				}
 
-	            $show_all = apply_filters('ymc_button_show_all_'.$id.'_'.$c_target, __($ymc_post_elements['button_text_all'],'ymc-smart-filter'));
+	            $show_all = apply_filters('ymc_button_show_all_'.$id.'_'.$c_target, $ymc_post_elements['button_text_all']);
 	            $all_class_active = ( empty($default_terms) ) ? 'active' : '';
 
-				echo '<li class="filter-item"><a class="filter-link all '. $all_class_active .'" href="#" data-selected="all" data-termid="' . esc_attr($ymc_terms) . '">'. esc_html__($show_all) .'</a></li>';
+				echo '<li class="filter-item"><a class="filter-link all '. esc_attr($all_class_active) .'" href="#" data-selected="all" data-termid="' . esc_attr($ymc_terms) . '">'. esc_html($show_all) .'</a></li>';
 
                 $arr_taxonomies = [];
                 foreach ($terms_selected as $term) {
@@ -106,7 +106,7 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 
 	                $tax_name = apply_filters('ymc_tax_name_'.$id.'_'.$c_target.'_'.$tax, $tax_name);
 
-                    echo '<li class="group-filters tax-'.$tax.'" style="'.esc_attr($style_tax_bg).esc_attr($style_tax_color).'">
+                    echo '<li class="group-filters tax-'.esc_attr($tax).'" style="'.esc_attr($style_tax_bg).esc_attr($style_tax_color).'">
                           <header class="name-tax">'. esc_html($tax_name) .'</header>
                           <ul class="sub-filters">';
 
@@ -151,7 +151,7 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
                                    esc_attr($class_term) . " ". esc_attr($default_term_active) . "' style='".
                                    esc_attr($bg_term) . esc_attr($color_term) ."' href='#' data-selected='" .
                                    esc_attr($object_term->slug) . "' data-termid='" .
-                                   esc_attr($term) . "'>" . $terms_icons .
+                                   esc_attr($term) . "'>" . wp_kses_post($terms_icons) .
                                    '<span class="link-inner">'.esc_html($name_term) .'</span>'."</a></li>";
                         }
 

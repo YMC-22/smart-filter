@@ -20,7 +20,7 @@ while ($query->have_posts()) : $query->the_post();
 
 	do_action( "ymc_before_custom_layout_".$filter_id.'_'.$target_id, $increment_post, $arrOptions );
 
-	echo '<article class="ymc-'.esc_attr($post_layout).' post-'.get_the_id().' post-item '.esc_attr($class_animation).'">';
+	echo '<article class="ymc-'.esc_attr($post_layout).' post-'.esc_attr(get_the_id()).' post-item '.esc_attr($class_animation).'">';
 
 	$layouts .= '<header class="head-post">'.esc_html__('Add Custom Layout.','ymc-smart-filter').'</header>';
 	$layouts .= '<div class="inform">'.esc_html__('Use a filter:','ymc-smart-filter').' 
@@ -57,7 +57,7 @@ while ($query->have_posts()) : $query->the_post();
 		- name - (string) custom term name
 	 * @returns {string} HTML markup card post
 	 */
-
+	// phpcs:ignore WordPress
 	echo apply_filters('ymc_post_custom_layout_'.$filter_id.'_'.$target_id,
 			$layouts,
 			get_the_ID(),

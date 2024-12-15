@@ -121,8 +121,8 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 
 			<label for="ymc-terms" class="form-label">
 				<?php echo esc_html__('Term(s)','ymc-smart-filter'); ?>
-				<span class="information"><?php echo __('Select terms. Sortable with Drag and Drop feature. 
-			    Set the Sorting terms option to Manual Sort in the Appearance - Filter Settings.','ymc-smart-filter'); ?></span>
+				<span class="information"><?php esc_html_e('Select terms. Sortable with Drag and Drop feature. 
+			    Set the Sorting terms option to Manual Sort in the Appearance -> Filter Settings.','ymc-smart-filter'); ?></span>
 			</label>
 
 			<div class="info-panel">
@@ -135,7 +135,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 							foreach ( $cpt as $value ) {
 								$cpt_list .= get_post_type_object( $value )->label.', ';
 							}
-							echo rtrim($cpt_list,', ');
+							echo esc_html(rtrim($cpt_list,', '));
 						}
 					?>
 					</i>
@@ -145,7 +145,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 					<i><?php
 						$arrayFilterLayouts = \YMC_Smart_Filters\Plugin::instance()->filters->ymc_filter_layouts($ymc_filter_layout);
 						if ( array_key_exists($ymc_filter_layout, $arrayFilterLayouts) ) {
-							echo $arrayFilterLayouts[$ymc_filter_layout];
+							echo esc_html($arrayFilterLayouts[$ymc_filter_layout]);
 						} ?>
 					</i>
 				</span>
@@ -265,7 +265,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 									echo '<div class="item-inner all-categories" data-tax-slug="'. esc_attr($tax) .'" data-tax-color="'.esc_attr($taxColor).'" data-tax-bg="'.esc_attr($tacBg).'" data-tax-name="'.esc_attr($tax_name).'" 
 									      data-tax-original-name="'. esc_attr(get_taxonomy( $tax )->label) .'" style="'.esc_attr($style_tax_bg) . esc_attr($style_tax_color).'">
 			                              <input name="all-select" class="category-all" id="category-all-'.esc_attr($tax).'" type="checkbox">
-			                              <label for="category-all-'.esc_attr($tax).'" class="category-all-label">'. esc_html__('All [ '. $tax_name .']', 'ymc-smart-filter') .'</label>                                                    
+			                              <label for="category-all-'.esc_attr($tax).'" class="category-all-label">'. esc_html('All [ '. $tax_name .']') .'</label>                                                    
 			                              <i class="far fa-ellipsis-v choice-icon" title="Taxonomy settings"></i>
 			                              </div>';
 
@@ -317,8 +317,8 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 										{
 											foreach ( $ymc_terms_icons as $key => $val ) {
 												if( $term->term_id === (int) $key ) {
-													$style_color_icon = ( !empty($color_icon) ) ? 'style="color: '.$color_icon.'"' : '';
-													$terms_icons = '<i class="'. $val .'" '. $style_color_icon .'"></i><input name="ymc-terms-icons['. $key .']" type="hidden" value="'. $val .'">';
+													$style_color_icon = ( !empty($color_icon) ) ? 'style="color: '. $color_icon .'"' : '';
+													$terms_icons = '<i class="'.$val.'" '. $style_color_icon .'></i><input name="ymc-terms-icons['. $key .']" type="hidden" value="'. $val .'">';
 													break;
 												}
 											}
@@ -365,9 +365,14 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 
 									    echo '<label for="category-id-'. esc_attr($term->term_id) .'" class="category-list-label">
 									    <span class="name-term">' . esc_html($name_term) .'</span>'. ' ['. esc_html($term->count) .']</label>						  						  
-									    <i class="far fa-ellipsis-v choice-icon" title="Term settings"></i><span class="indicator-icon">'. $terms_icons .'</span>';
+									    <i class="far fa-ellipsis-v choice-icon" title="Term settings"></i><span class="indicator-icon">'.
+                                             wp_kses($terms_icons, [
+                                                     'input' => [ 'name' => true, 'type' => true, 'value' => true ],
+                                                     'i' => [ 'class' => true, 'style' => true ]
+                                                 ]) . '</span>';
 
 							            echo '</div>'; // end item-inner
+										// phpcs:ignore WordPress
 										echo $hierarchy_terms_html; // Added hierarchy terms tree
 							            echo '</div>'; // end item
 
@@ -398,9 +403,9 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 			<label class="form-label">
 				<?php echo esc_html__('Hierarchical Tree of Terms', 'ymc-smart-filter'); ?>
 				<span class="information">
-                    <?php echo __('Check to display the hierarchy tree of terms. The depth of nesting 
+                    <?php echo wp_kses_post('Check to display the hierarchy tree of terms. The depth of nesting 
                      of terms is 3 levels. If the nesting depth exceeds 3 levels, then terms with a nesting level greater than three will not be displayed in filters.
-                     This applies to the following filter layouts: <b>Default Filter, Dropdown Filter, Sidebar Filter.</b>', 'ymc-smart-filter');?>
+                     This applies to the following filter layouts: <b>Default Filter, Dropdown Filter, Sidebar Filter.</b>');?>
                     </span>
 			</label>
 
@@ -514,8 +519,8 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 									if( is_array($ymc_choices_posts) &&  array_search(get_the_ID(), $ymc_choices_posts) !== false) {
 										$class_disabled = 'disabled';
 									}
-									echo '<li><div class="ymc-rel-item ymc-rel-item-add '.$class_disabled.'" data-id="'.get_the_ID().'">
-									<span class="postID">ID: '.get_the_ID().'</span> <span class="postTitle">'.get_the_title(get_the_ID()).'</span></div></li>';
+									echo '<li><div class="ymc-rel-item ymc-rel-item-add '.esc_attr($class_disabled).'" data-id="'.esc_attr(get_the_ID()).'">
+									<span class="postID">ID: '.esc_html(get_the_ID()).'</span> <span class="postTitle">'.esc_html(get_the_title(get_the_ID())).'</span></div></li>';
 									$class_disabled = null;
 								endwhile;
 							}
@@ -525,7 +530,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 							?>
 						</ul>
 						<?php
-						echo '<span class="number-posts">'. $query->found_posts .'</span>';
+						echo '<span class="number-posts">'. esc_html($query->found_posts) .'</span>';
 						wp_reset_postdata();
 						?>
 					</div>
@@ -534,7 +539,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 
 						<?php $class_choices = ( $ymc_exclude_posts === 'on' ) ? 'exclude-posts' : 'include-posts'; ?>
 
-						<ul class="list values-list <?php echo $class_choices; ?>">
+						<ul class="list values-list <?php echo esc_attr($class_choices); ?>">
 						<?php
 
 							if( is_array($ymc_choices_posts) ) :
@@ -548,12 +553,12 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 
 								while ($query->have_posts()) : $query->the_post();
 
-									echo '<li class="item"><input type="hidden" name="ymc-choices-posts[]" value="'.get_the_ID().'">
-							        <span  class="ymc-rel-item" data-id="'.get_the_ID().'">'.get_the_title(get_the_ID()).'
+									echo '<li class="item"><input type="hidden" name="ymc-choices-posts[]" value="'.esc_attr(get_the_ID()).'">
+							        <span  class="ymc-rel-item" data-id="'.esc_attr(get_the_ID()).'">'.esc_html(get_the_title(get_the_ID())).'
 							        <a href="#" class="ymc-icon-minus remove_item"></a></span></li>';
 								endwhile;
 
-								echo '<span class="number-selected-posts">'. $query->found_posts .'</span>';
+								echo '<span class="number-selected-posts">'. esc_html($query->found_posts) .'</span>';
 
 							else :
 
@@ -595,6 +600,8 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 			</select>
 
 		</div>
+
+        <?php wp_nonce_field( 'save-post-' . $post->ID, 'ymc_nonce' ); ?>
 
 	</div>
 

@@ -60,23 +60,23 @@ class Cpt {
 			switch( $column ) {
 
 				case 'shortcode' :
-					echo '<input type="text" onclick="this.select();" value="[ymc_filter id=&quot;'.$post_id.'&quot;]" readonly="">';
+					echo '<input type="text" onclick="this.select();" value="[ymc_filter id=&quot;'.esc_attr($post_id).'&quot;]" readonly="">';
 					break;
 
 				case 'extra_filter' :
-					echo '<input type="text" onclick="this.select();" value="[ymc_extra_filter id=&quot;'.$post_id.'&quot;]" readonly="">';
+					echo '<input type="text" onclick="this.select();" value="[ymc_extra_filter id=&quot;'.esc_attr($post_id).'&quot;]" readonly="">';
 					break;
 
 				case 'extra_search' :
-					echo '<input type="text" onclick="this.select();" value="[ymc_extra_search id=&quot;'.$post_id.'&quot;]" readonly="">';
+					echo '<input type="text" onclick="this.select();" value="[ymc_extra_search id=&quot;'.esc_attr($post_id).'&quot;]" readonly="">';
 					break;
 
 				case 'extra_sort' :
-					echo '<input type="text" onclick="this.select();" value="[ymc_extra_sort id=&quot;'.$post_id.'&quot;]" readonly="">';
+					echo '<input type="text" onclick="this.select();" value="[ymc_extra_sort id=&quot;'.esc_attr($post_id).'&quot;]" readonly="">';
 					break;
 
 				case 'id' :
-					echo $post_id;
+					echo esc_attr($post_id);
 					break;
 
 				default :

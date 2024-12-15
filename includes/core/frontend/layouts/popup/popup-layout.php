@@ -19,7 +19,7 @@ if( $custom_location === 'left center' ) {
 $style_popup = 'style="transform-origin:'.esc_attr($ymc_popup_animation_origin).'; width:'.esc_attr($custom_width).esc_attr($custom_width_unit).';height:'.esc_attr($custom_height).esc_attr($custom_height_unit).';"';
 
 echo '<div class="ymc-popup-overlay" style="background: '.esc_attr($custom_bg_overlay).'">';
-echo '<div class="ymc-popup-wrp popup-'. esc_attr($id).' popup-'. esc_attr($id).'-'.esc_attr($c_target).' '. $class_popup_location .'" '.$style_popup.'>';
+echo '<div class="ymc-popup-wrp popup-'. esc_attr($id).' popup-'. esc_attr($id).'-'.esc_attr($c_target).' '. esc_attr($class_popup_location) .'" '. esc_attr($style_popup).'>';
 
 echo '<span class="btn-close" title="Close"><i class="fas fa-times"></i></span>';
 echo '<hr/>';

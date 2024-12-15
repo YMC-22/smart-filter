@@ -53,12 +53,12 @@
 					<div class="datepickerForm">
 						<header class="header"><?php esc_attr_e('From', 'ymc-smart-filter'); ?></header>
 						<input class="datepicker" type="text" name="date_from"
-						       data-timestamp="<?php echo strtotime(date("Y-m-d")); ?>" value="<?php echo date('M d, Y'); ?>">
+						       data-timestamp="<?php echo esc_attr(strtotime(gmdate("Y-m-d"))); ?>" value="<?php echo esc_attr(gmdate('M d, Y')); ?>">
 					</div>
 					<div class="datepickerForm">
 						<header class="header"><?php esc_attr_e('To', 'ymc-smart-filter'); ?></header>
 						<input class="datepicker" type="text" name="date_to"
-						       data-timestamp="<?php echo strtotime(date("Y-m-d")); ?>" value="<?php echo date('M d, Y'); ?>">
+						       data-timestamp="<?php echo esc_attr(strtotime(gmdate("Y-m-d"))); ?>" value="<?php echo esc_attr(gmdate('M d, Y')); ?>">
 					</div>
 					<div class="datepickerForm">
 						<button class="btn-apply"><?php esc_attr_e('Apply', 'ymc-smart-filter'); ?></button>

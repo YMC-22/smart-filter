@@ -56,7 +56,7 @@ class Load_Scripts {
 			wp_enqueue_script( 'codemirror-javascript-'.$this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/js/codemirror/javascript.js', array( 'jquery' ), YMC_SMART_FILTER_VERSION, true );
 			wp_enqueue_script( 'codemirror-javascript-hint-'.$this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/js/codemirror/javascript-hint.js', array( 'jquery' ), YMC_SMART_FILTER_VERSION, true );
 
-			wp_enqueue_script( 'clipboard-js-'.$this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/js/clipboard.min.js', array( 'jquery' ), YMC_SMART_FILTER_VERSION, true );
+			//wp_enqueue_script( 'clipboard-js-'.$this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/js/clipboard.min.js', array( 'jquery' ), YMC_SMART_FILTER_VERSION, true );
 			wp_enqueue_script( 'filter-grids-'.$this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/js/admin.min.js', array( 'jquery' ), YMC_SMART_FILTER_VERSION, true );
 			wp_localize_script( 'filter-grids-'.$this->generate_handle(), '_smart_filter_object',
 				array(

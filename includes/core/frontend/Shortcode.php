@@ -109,18 +109,19 @@ class Shortcode {
 
 			$ymc_filter_layout = ( $ymc_filter_status === 'on' ) ? $ymc_filter_layout : 'no-filter-layout';
 
-			$ymc_carousel_params = ( $ymc_post_layout === 'post-carousel-layout' ) ? json_encode($ymc_carousel_params) : '""';
+			$ymc_carousel_params = ( $ymc_post_layout === 'post-carousel-layout' ) ? wp_json_encode($ymc_carousel_params) : '""';
 
 			if( ! empty($ymc_custom_css) ) :
-				echo '<style id="filter-grids-css-'.$id .'-'. $c_target.'">'. sanitize_text_field($ymc_custom_css) .'</style>';
+				// phpcs:ignore WordPress
+				echo '<style id="filter-grids-css-'.esc_attr($id) .'-'. esc_attr($c_target).'">'. wp_strip_all_tags($ymc_custom_css) .'</style>';
 			endif;
 
 			// Include JSON
 			require YMC_SMART_FILTER_DIR . '/includes/core/util/json.php';
 
 			echo '<div id="ymc-smart-filter-container-'. esc_attr($c_target) .'" 
-				  class="ymc-smart-filter-container ymc-filter-'. esc_attr($id) .' ymc-loaded-filter ymc-'. esc_attr($ymc_filter_layout) .' ymc-'. esc_attr($ymc_post_layout) .' ymc-pagination-'. esc_attr($ymc_pagination_type) .' data-target-ymc'.esc_attr($id).'-'.esc_attr($c_target).' data-target-ymc'. esc_attr($c_target) .' '. $css_special .'" data-loading="true"
-				  data-params=\''. str_replace(array("\r","\n","\t"," "), '', $json) .'\'>';
+				  class="ymc-smart-filter-container ymc-filter-'. esc_attr($id) .' ymc-loaded-filter ymc-'. esc_attr($ymc_filter_layout) .' ymc-'. esc_attr($ymc_post_layout) .' ymc-pagination-'. esc_attr($ymc_pagination_type) .' data-target-ymc'.esc_attr($id).'-'.esc_attr($c_target).' data-target-ymc'. esc_attr($c_target) .' '. esc_attr($css_special) .'" data-loading="true"
+				  data-params=\''. wp_kses_post(str_replace(array("\r","\n","\t"," "), '', $json)) .'\'>';
 
 
 			if ( $ymc_filter_search_status === 'on' )
@@ -172,7 +173,7 @@ class Shortcode {
 
 			do_action("ymc_before_post_layout_".$id.'_'.$c_target);
 
-			echo '<div class="post-entry '. $breakpoints_classes .' '. esc_attr($ymc_post_layout) .' '. esc_attr($ymc_post_layout) .'-'.$id.' '.esc_attr($ymc_post_layout).'-'.$id.'-'.$c_target.'"></div>';
+			echo '<div class="post-entry '. esc_attr($breakpoints_classes) .' '. esc_attr($ymc_post_layout) .' '. esc_attr($ymc_post_layout) .'-'.esc_attr($id).' '.esc_attr($ymc_post_layout).'-'.esc_attr($id).'-'.esc_attr($c_target).'"></div>';
 
 			do_action("ymc_after_post_layout_".$id.'_'.$c_target);
 

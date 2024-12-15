@@ -9,7 +9,7 @@ $term_settings = arrayToObject( generalArrayMerging( $ymc_terms_options, $ymc_te
 
 ?>
 
-<div id="<?php echo esc_attr($ymc_filter_layout) . esc_attr($c_target); ?>" class="filter-layout <?php echo esc_attr($ymc_filter_layout); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?>-<?php echo $c_target; ?> ">
+<div id="<?php echo esc_attr($ymc_filter_layout) . esc_attr($c_target); ?>" class="filter-layout <?php echo esc_attr($ymc_filter_layout); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?>-<?php echo esc_attr($c_target); ?> ">
 
 	<?php
 
@@ -78,7 +78,7 @@ $term_settings = arrayToObject( generalArrayMerging( $ymc_terms_options, $ymc_te
 	            - name - custom term name
 	         * @returns {string} HTML markup filter bar
 	         */
-
+	        // phpcs:ignore WordPress
 			$filter_layout = apply_filters('ymc_filter_custom_layout_'.$id.'_'.$c_target,
                                  $layout,
 								 $result_terms,
@@ -87,7 +87,7 @@ $term_settings = arrayToObject( generalArrayMerging( $ymc_terms_options, $ymc_te
                                  $target,
 								 $term_settings
 								);
-
+	        // phpcs:ignore WordPress
 			echo $filter_layout;
 
 		}

@@ -60,7 +60,7 @@
                                 {
                                     $selected = ( $ymc_filter_layout === $key ) ? 'selected' : '';
 
-                                    echo '<option value="' . esc_attr($key) . '" ' . esc_attr($selected) . '>' . esc_html__($layout, 'ymc-smart-filter') . '</option>';
+                                    echo '<option value="' . esc_attr($key) . '" ' . esc_attr($selected) . '>' .esc_html($layout) . '</option>';
                                 }
 
                             endforeach;
@@ -187,37 +187,37 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" title="≥1400px"><i class="fa fa-desktop"></i></span>
                             </div>
-                            <input type="number" class="form-control"  placeholder="4" min="1" max="12" name="ymc_desktop_xxl" value="<?php echo $ymc_desktop_xxl; ?>">
+                            <input type="number" class="form-control"  placeholder="4" min="1" max="12" name="ymc_desktop_xxl" value="<?php echo esc_html($ymc_desktop_xxl); ?>">
                         </div>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" title="≥1200px"><i class="fa fa-desktop"></i></span>
                             </div>
-                            <input type="number" class="form-control"  placeholder="4" min="1" max="12" name="ymc_desktop_xl" value="<?php echo $ymc_desktop_xl; ?>">
+                            <input type="number" class="form-control"  placeholder="4" min="1" max="12" name="ymc_desktop_xl" value="<?php echo esc_html($ymc_desktop_xl); ?>">
                         </div>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" title="≥992px"><i class="fa fa-tablet"></i></span>
                             </div>
-                            <input type="number" class="form-control"  placeholder="4" min="1" max="12" name="ymc_desktop_lg" value="<?php echo $ymc_desktop_lg; ?>">
+                            <input type="number" class="form-control"  placeholder="4" min="1" max="12" name="ymc_desktop_lg" value="<?php echo esc_html($ymc_desktop_lg); ?>">
                         </div>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" title="≥768px"><i class="fa fa-tablet"></i></span>
                             </div>
-                            <input type="number" class="form-control"  placeholder="3" min="1" max="6" name="ymc_tablet_md" value="<?php echo $ymc_tablet_md; ?>">
+                            <input type="number" class="form-control"  placeholder="3" min="1" max="6" name="ymc_tablet_md" value="<?php echo esc_html($ymc_tablet_md); ?>">
                         </div>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" title="≥576px"><i class="fa fa-mobile"></i></span>
                             </div>
-                            <input type="number" class="form-control"  placeholder="2" min="1" max="4" name="ymc_tablet_sm" value="<?php echo $ymc_tablet_sm; ?>">
+                            <input type="number" class="form-control"  placeholder="2" min="1" max="4" name="ymc_tablet_sm" value="<?php echo esc_html($ymc_tablet_sm); ?>">
                         </div>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" title="<576px"><i class="fa fa-mobile"></i></span>
                             </div>
-                            <input type="number" class="form-control"  placeholder="1" min="1" max="4" name="ymc_mobile_xs" value="<?php echo $ymc_mobile_xs; ?>">
+                            <input type="number" class="form-control"  placeholder="1" min="1" max="4" name="ymc_mobile_xs" value="<?php echo esc_html($ymc_mobile_xs); ?>">
                         </div>
                     </div>
                 </div>
@@ -476,10 +476,9 @@
                     <div class="from-element">
                         <label class="form-label"><?php echo esc_html__('Custom Carousel', 'ymc-smart-filter');?>
                             <span class="information">
-                                <?php echo __('Deactivate the carousel. Override your custom carousel settings in your JS file. 
+                                <?php echo wp_kses_post('Deactivate the carousel. Override your custom carousel settings in your JS file. 
                                 Use plugin hooks to initialize the carousel asynchronously. 
-                                The carousel is implemented using the <a href="https://swiperjs.com/swiper-api#parameters" target="_blank">Swiper API. 
-                                <img draggable="false" role="img" class="emoji" alt="↗" src="https://s.w.org/images/core/emoji/14.0.0/svg/2197.svg"></a>', 'ymc-smart-filter'); ?>
+                                The carousel is implemented using the <a href="https://swiperjs.com/swiper-api#parameters" target="_blank">Swiper API</a>.'); ?>
                                 <span class="tooltip-link">Usage example.
                                     <span class="tooltip-text">
                                         wp.hooks.addAction('ymc_complete_loaded_data_545', 'smartfilter', function(class_name, status) {<br>

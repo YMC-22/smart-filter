@@ -42,15 +42,15 @@
                     <label class="form-label">
                         <?php echo esc_html__('Query Type', 'ymc-smart-filter'); ?>
                         <span class="information">
-                    <?php _e('Select the type of query construction', 'ymc-smart-filter'); ?>
+                    <?php esc_html_e('Select the type of query construction', 'ymc-smart-filter'); ?>
                 </span>
                     </label>
 
                     <select class="form-select ymc-query-type" name="ymc-query-type" id="ymc-query-type">
                         <option value="query_custom" <?php echo ( $ymc_query_type === 'query_custom') ? 'selected' : ''; ?>>
-                            <?php _e('Advanced (custom arguments)','ymc-smart-filter'); ?></option>
+                            <?php esc_html_e('Advanced (custom arguments)','ymc-smart-filter'); ?></option>
                         <option value="query_callback" <?php echo ( $ymc_query_type === 'query_callback') ? 'selected' : ''; ?>>
-                            <?php _e('Callback (theme function)','ymc-smart-filter'); ?></option>
+                            <?php esc_html_e('Callback (theme function)','ymc-smart-filter'); ?></option>
                     </select>
                 </div>
 
@@ -58,24 +58,24 @@
                     <label class="form-label">
                         <?php echo esc_html__('Query Parameter String', 'ymc-smart-filter'); ?>
                         <span class="information">
-                    <?php _e('Build a query according to the WordPress Codex in string format or enter a 
+                    <?php echo wp_kses_post('Build a query according to the WordPress Codex in string format or enter a 
                     custom callback function name that will return an array of query arguments.
                     <a href="https://developer.wordpress.org/reference/classes/wp_query/" target="_blank">
-                    view docs <img draggable="false" role="img" class="emoji" alt="↗" src="https://s.w.org/images/core/emoji/14.0.0/svg/2197.svg"></a>
-                    ', 'ymc-smart-filter'); ?>
+                    view docs</a>'); ?>
                 </span>
                     </label>
 
                     <textarea class="form-textarea custom_query_args" name="ymc-query-type-custom" id="ymc-custom-query-args"
-                              placeholder="posts_per_page=-1&post_type=portfolio&post_status=publish"><?php echo (!empty($ymc_query_type_custom)) ? $ymc_query_type_custom : ''; ?></textarea>
+                        placeholder="posts_per_page=-1&post_type=portfolio&post_status=publish">
+                        <?php echo (!empty($ymc_query_type_custom)) ? esc_html($ymc_query_type_custom) : ''; ?></textarea>
                 </div>
 
                 <div class="type-query-content query_callback <?php echo ( $ymc_query_type === 'query_custom') ? 'ymc_hidden' : ''; ?>">
                     <label class="form-label">
                         <?php echo esc_html__('Callback Function Name', 'ymc-smart-filter'); ?>
                         <span class="information">
-                    <?php _e('Callback functions must be <a href="https://github.com/YMC-22/smart-filter?tab=readme-ov-file#callback-function" target="_blank">whitelisted</a> for security reasons 
-                                  (<a href="https://github.com/YMC-22/smart-filter?tab=readme-ov-file#advanced-query" target="_blank">see docs</a>).', 'ymc-smart-filter'); ?>
+                    <?php echo wp_kses_post('Callback functions must be <a href="https://github.com/YMC-22/smart-filter?tab=readme-ov-file#callback-function" target="_blank">whitelisted</a> for security reasons 
+                                  (<a href="https://github.com/YMC-22/smart-filter?tab=readme-ov-file#advanced-query" target="_blank">see docs</a>)'); ?>
                 </span>
                     </label>
 
@@ -84,11 +84,12 @@
                         if( defined( 'YMC_CALLBACK_FUNCTION_WHITELIST' ) && is_array( YMC_CALLBACK_FUNCTION_WHITELIST ))
                         {
                             foreach ( YMC_CALLBACK_FUNCTION_WHITELIST as $func_name ) : ?>
-                                <option value="<?php echo $func_name; ?>" <?php echo ( $ymc_query_type_callback === $func_name) ? "selected" : ""; ?>><?php echo $func_name; ?></option>
+                                <option value="<?php echo esc_attr($func_name); ?>" <?php echo ( $ymc_query_type_callback === $func_name) ? "selected" : ""; ?>>
+                                    <?php echo esc_html($func_name); ?></option>
                             <?php endforeach;
                         }
                         else {
-                            echo '<option value="">'. __('No callback functions','ymc-smart-filter') .'</option>';
+                            echo '<option value="">'. esc_html__('No callback functions','ymc-smart-filter') .'</option>';
                         }
                         ?>
                     </select>
@@ -158,11 +159,9 @@
             <label class="form-label">
                 <?php echo esc_html__('Extra Filter Layout', 'ymc-smart-filter');?>
                 <span class="information">
-                    <?php _e('Select extra layout of filters. 
+                    <?php echo wp_kses_post('Select extra layout of filters. 
                     This filter will be located outside the current post grid filter anywhere on the page
-                    <a href="https://github.com/YMC-22/smart-filter#shortcodes" target="_blank">
-                    view docs <img draggable="false" role="img" class="emoji" alt="↗" src="https://s.w.org/images/core/emoji/14.0.0/svg/2197.svg"></a>
-                    ', 'ymc-smart-filter');?>
+                    <a href="https://github.com/YMC-22/smart-filter#shortcodes" target="_blank"> view docs</a>'); ?>
                 </span>
             </label>
 
@@ -179,7 +178,7 @@
                         {
                             $selected = ( $ymc_filter_extra_layout === $key ) ? 'selected' : '';
 
-                            echo '<option value="' . esc_attr($key) . '" ' . esc_attr($selected) . '>' . esc_html__($layout, 'ymc-smart-filter') . '</option>';
+                            echo '<option value="' . esc_attr($key) . '" ' . esc_attr($selected) . '>' . esc_html($layout) . '</option>';
                         }
 
                     endforeach;
@@ -225,8 +224,8 @@
             <label class="form-label">
                 <?php echo esc_html__('Custom CSS', 'ymc-smart-filter'); ?>
                 <span class="information">
-                    <?php _e('Add your custom CSS. Use the parent container ID named: <b>"#ymc-smart-filter-container-{ID}"</b> 
-                    if you want to override the base filter styles. Example: <b>#ymc-smart-filter-container-1</b>. Press Ctrl + Space to get a hint inside the editor.', 'ymc-smart-filter');?>
+                    <?php echo wp_kses_post('Add your custom CSS. Use the parent container ID named: <b>"#ymc-smart-filter-container-{ID}"</b> 
+                    if you want to override the base filter styles. Example: <b>#ymc-smart-filter-container-1</b>. Press Ctrl + Space to get a hint inside the editor.');?>
                 </span>
             </label>
             <hr/>
@@ -249,9 +248,8 @@
             <label class="form-label">
                 <?php echo esc_html__('Code', 'ymc-smart-filter'); ?>
                 <span class="information">
-                    <?php  _e('Add your custom JS. Press Ctrl + Space to get a hint inside the editor.  
-                        <a class="button-hints" href="#">See docs</a>',
-                        'ymc-smart-filter'); ?>
+                    <?php  echo wp_kses_post('Add your custom JS. Press Ctrl + Space to get a hint inside the editor.  
+                        <a class="button-hints" href="#">See docs</a>'); ?>
                 </span>
             </label>
             <hr/>
@@ -262,15 +260,15 @@
             <div class="popup-hints">
                 <div class="popup-hints--inner">
                     <span class="popup-hints--btn-close" title="Close"></span>
-                    <h2 class="popup-hints--header"><?php _e('Methods and Hooks JS', 'ymc-smart-filter'); ?></h2>
+                    <h2 class="popup-hints--header"><?php esc_html_e('Methods and Hooks JS', 'ymc-smart-filter'); ?></h2>
                     <p class="popup-hints--note">
-                        <?php _e('<u><b>Note:</b></u> The call to the global <b>YMCTools</b> object should be used
+                        <?php echo wp_kses_post('<u><b>Note:</b></u> The call to the global <b>YMCTools</b> object should be used
                         when the document is fully loaded, for example using the notation:: <b>$(document).on("ready", function () { ... });</b> or inside a hook callback function. <br>
-                        If there is only one filter on the page, then the object property: <b>"target"</b> can be skipped for calling methods.', 'ymc-smart-filter'); ?>
+                        If there is only one filter on the page, then the object property: <b>"target"</b> can be skipped for calling methods.'); ?>
                     </p>
                     <hr/>
                     <ul class="popup-hints--wrp">
-                        <li class="subHeader"><?php _e('Methods', 'ymc-smart-filter'); ?></li>
+                        <li class="subHeader"><?php esc_html_e('Methods', 'ymc-smart-filter'); ?></li>
                         <li>
                             <span class="line-hint" data-method="apiTermUpdate" title="This method allows to get posts by ID terms of different taxonomies.">
                                 apiTermUpdate;
@@ -346,7 +344,7 @@
                                 apiMultiplePosts;
                             </span>
                         </li>
-                        <li class="subHeader"><?php _e('Hooks', 'ymc-smart-filter'); ?></li>
+                        <li class="subHeader"><?php esc_html_e('Hooks', 'ymc-smart-filter'); ?></li>
                         <li>
                             <span class="line-hint" data-method="ymc_stop_loading_data" title="Stop loading posts on page load.">
                                 ymc_stop_loading_data;
@@ -1059,10 +1057,10 @@
                         $selected_preloader = 'selected="selected"';
                     }
                     if( $i === 11 ) {
-                        echo '<option value="preloader_'.$i.'" '. $selected_preloader .'>'. esc_html__('None', 'ymc-smart-filter') .'</option>';
+                        echo '<option value="preloader_'.esc_attr($i).'" '. esc_attr($selected_preloader) .'>'. esc_html__('None', 'ymc-smart-filter') .'</option>';
                     }
                     else {
-                        echo '<option value="preloader_'.$i.'" '. $selected_preloader .'>'. esc_html__('Preloader ', 'ymc-smart-filter') .$i .'</option>';
+                        echo '<option value="preloader_'.esc_attr($i).'" '. esc_attr($selected_preloader) .'>'. esc_html__('Preloader ', 'ymc-smart-filter') .esc_attr($i) .'</option>';
                     }
                     $selected_preloader = '';
                 }
@@ -1070,10 +1068,12 @@
             </select>
 
             <div class="preview-preloader">
-                <img src="<?php echo YMC_SMART_FILTER_URL; ?>/includes/assets/images/<?php echo $ymc_preloader_icon; ?>.svg"
+                <img src="<?php echo esc_url(YMC_SMART_FILTER_URL); ?>/includes/assets/images/<?php echo esc_html($ymc_preloader_icon); ?>.svg"
                      style="<?php echo ( $ymc_preloader_filters !== 'none' ) ?
-                         ( $ymc_preloader_filters !== 'custom_filters' ) ?
-                             'filter:'.$ymc_preloader_filters.'('.$ymc_preloader_filters_rate.')' : $ymc_preloader_filters_custom : 'filter: none'; ?>">
+                         ( esc_attr($ymc_preloader_filters) !== 'custom_filters' ) ?
+	                         // phpcs:ignore WordPress
+	                         esc_attr('filter:').esc_attr($ymc_preloader_filters).'('.esc_attr($ymc_preloader_filters_rate).')' :
+                             esc_attr($ymc_preloader_filters_custom) : esc_attr('filter: none'); ?>">
             </div>
         </div>
 
@@ -1112,7 +1112,7 @@
             <div class="range-wrapper">
                 <span>0</span>
                 <input type="range" id="ymc-filter-rate" name="ymc-preloader-filters-rate"
-                       value="<?php echo $ymc_preloader_filters_rate; ?>" step="0.001" min="0" max="1" />
+                       value="<?php echo esc_attr($ymc_preloader_filters_rate); ?>" step="0.001" min="0" max="1" />
                 <span>1</span>
             </div>
         </div>
@@ -1120,9 +1120,9 @@
         <div class="form-group filters-custom <?php echo ( $ymc_preloader_filters === 'custom_filters' ) ? '' : 'ymc_hidden'; ?>">
             <label class="form-label">
                 <?php esc_html_e('Custom Filters CSS for Preloader Icon', 'ymc-smart-filter'); ?>
-                <span class="information"><?php _e('Add a list of filters.  <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter">more detail</a>', 'ymc-smart-filter'); ?></span>
+                <span class="information"><?php echo wp_kses_post('Add a list of filters.  <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter">more detail</a>'); ?></span>
             </label>
-            <input type="text" id="ymc-filters-custom" name="ymc-preloader-filters-custom" value="<?php echo $ymc_preloader_filters_custom; ?>" placeholder="filter: grayscale(0.5) brightness(0.7)" />
+            <input type="text" id="ymc-filters-custom" name="ymc-preloader-filters-custom" value="<?php echo esc_attr($ymc_preloader_filters_custom); ?>" placeholder="filter: grayscale(0.5) brightness(0.7)" />
         </div>
 
     </div>

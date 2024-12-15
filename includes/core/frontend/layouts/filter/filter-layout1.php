@@ -19,7 +19,7 @@ if( $ymc_filter_font !== 'inherit' ) {
                     #ymc-extra-filter-".$c_target." .filter-layout1 .filter-entry .filter-link { font-family:".$ymc_filter_font.";}";
 }
 
-echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) .'</style>';
+echo '<style id="'.esc_attr($handle_filter).'">'. esc_html(preg_replace('|\s+|', ' ', $filter_css)) .'</style>';
 
 ?>
 
@@ -44,12 +44,12 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 						sortTaxTerms($terms_selected, 'desc');
 				}
 
-	            $show_all = apply_filters('ymc_button_show_all_'.$id.'_'.$c_target, __($ymc_post_elements['button_text_all'],'ymc-smart-filter'));
+	            $show_all = apply_filters('ymc_button_show_all_'.$id.'_'.$c_target, $ymc_post_elements['button_text_all']);
 
                 $all_class_active = ( empty($default_terms) ) ? 'active' : '';
 
 				echo '<li class="filter-item">
-                      <a class="filter-link all '. $all_class_active .'" href="#" data-selected="all" data-termid="'. esc_attr($ymc_terms) .'">'. esc_html__($show_all) .'</a></li>';
+                      <a class="filter-link all '. esc_attr($all_class_active) .'" href="#" data-selected="all" data-termid="'. esc_attr($ymc_terms) .'">'. esc_html($show_all) .'</a></li>';
 
 				$terms_selected = array_diff($terms_selected, getHiddenTerms($ymc_terms_options));
 
@@ -130,10 +130,11 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 					     esc_attr($class_term) . " ". esc_attr($default_term_active) ."' style='".
 					     esc_attr($bg_term) .
 					     esc_attr($color_term) ."' href='#' data-selected='" .
-					     esc_attr($object_term->slug) . "' data-termid='". esc_attr($term_id) ."'>" . $terms_icons .
+					     esc_attr($object_term->slug) . "' data-termid='". esc_attr($term_id) ."'>" . wp_kses_post($terms_icons) .
 					     '<span class="link-inner">'. esc_html($name_term) . '</span>'."</a>";
 
 					// Insert Hierarchy Terms Tree
+					// phpcs:ignore WordPress
 					echo $tree_output;
 
 					echo '</li>';

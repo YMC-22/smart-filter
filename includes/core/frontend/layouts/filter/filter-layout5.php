@@ -24,7 +24,7 @@ if( $ymc_filter_font !== 'inherit' ) {
     #ymc-extra-filter-".$c_target." .filter-layout5 .filter-entry {font-family:".$ymc_filter_font."}";
 }
 
-echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) .'</style>';
+echo '<style id="'.esc_attr($handle_filter).'">'. esc_html(preg_replace('|\s+|', ' ', $filter_css)) .'</style>';
 
 ?>
 
@@ -124,16 +124,16 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 					}
 				}
 
-                echo '<div class="dropdown-filter tax-'.$tax.'">';
-                echo '<div class="name-category">' . $tax_name .'</div>';
-                echo '<div class="menu-active" style="'.esc_attr($style_tax_bg).$style_tax_color.'">';
+                echo '<div class="dropdown-filter tax-'.esc_attr($tax).'">';
+                echo '<div class="name-category">' . esc_html($tax_name) .'</div>';
+                echo '<div class="menu-active" style="'.esc_attr($style_tax_bg).esc_attr($style_tax_color).'">';
                 echo '<span class="text-cat">'. esc_html($text_all) .'</span> <i class="arrow down"></i>';
                 echo '</div>';
                 echo '<div class="menu-passive">';
                 echo '<i class="btn-close">x</i>';
 				echo '<div class="menu-passive__item item-all">
                     <a class="menu-link all '. esc_attr($type_multiple) .' active" href="#" data-name="'.esc_attr($text_all).'" data-termid="'. esc_attr(rtrim($terms_categories, ',')) .'">'.
-                     __('All','ymc-smart-filter'). '</a></div>';
+                     esc_html__('All','ymc-smart-filter'). '</a></div>';
 
 				echo '<div class="menu-passive__inner-items">';
 
@@ -187,7 +187,7 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 						$name_term = ( !empty($name_term) ) ? $name_term : $object_term->name;
 
                         echo '<div class="menu-passive__item item-'. esc_attr($object_term->slug) .' '.esc_attr($class_terms_align).'">
-							  '. $terms_icons .'
+							  '. wp_kses_post($terms_icons) .'
                               <a class="menu-link '.
                               esc_attr($is_disabled) .' '.
                               esc_attr($type_multiple) .' '.

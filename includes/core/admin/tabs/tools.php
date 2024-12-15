@@ -19,8 +19,8 @@
             <label class="form-label">
                 <?php echo esc_html__('Export', 'ymc-smart-filter'); ?>
                 <span class="information">
-                 <?php echo __('Export settings to a file in format JSON.<br> 
-                 <b>IMPORTANT!</b> Custom JS code and CSS will not be exported to the file.', 'ymc-smart-filter');?>
+                 <?php echo wp_kses_post('Export settings to a file in format JSON.<br> 
+                 <b>IMPORTANT!</b> Custom JS code and CSS will not be exported to the file.');?>
             </span>
             </label>
 

@@ -21,7 +21,7 @@ if( $ymc_filter_font !== 'inherit' ) {
     #ymc-extra-filter-".$c_target." .filter-range .filter-entry {font-family:".$ymc_filter_font."}";
 }
 
-echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) .'</style>';
+echo '<style id="'.esc_attr($handle_filter).'">'. esc_html(preg_replace('|\s+|', ' ', $filter_css)) .'</style>';
 
 ?>
 
@@ -71,15 +71,15 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
                     }
                 }
 
-				$json_data = !empty($dataArray) ? json_encode($dataArray) : '';
+				$json_data = !empty($dataArray) ? wp_json_encode($dataArray) : '';
                 $tagsIDs = !empty($tagArrayIDs) ? implode(',', $tagArrayIDs) : '';
 
 				?>
                 <div class="range-wrapper tax-<?php echo esc_attr($tax); ?>">
-                    <div class="range__component tax-label"><?php esc_html_e(get_taxonomy($tax)->labels->name); ?></div>
+                    <div class="range__component tax-label"><?php echo esc_html(get_taxonomy($tax)->labels->name); ?></div>
                     <div class="range__component tag-values" data-tags='<?php echo esc_attr($json_data); ?>' data-selected-tags='<?php echo esc_attr($tagsIDs); ?>'>
                         <span class="range1"></span>
-                        <span> <?php echo !empty($dataArray) ? '&dash;' : __('No tags','ymc-smart-filter'); ?></span>
+                        <span> <?php echo !empty($dataArray) ? '&dash;' : esc_html__('No tags','ymc-smart-filter'); ?></span>
                         <span class="range2"></span>
                     </div>
                     <?php if( !empty($json_data) ) : ?>
@@ -89,7 +89,7 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
                         <input class="slider-2" type="range" min="0" max="" value="" >
                     </div>
                     <div class="range__component apply-button">
-                        <button class="apply-button__inner"><?php esc_html_e('Apply','ymc_smart_filter');  ?></button>
+                        <button class="apply-button__inner"><?php esc_html_e('Apply','ymc-smart-filter'); ?></button>
                     </div>
                     <?php endif; ?>
                 </div>

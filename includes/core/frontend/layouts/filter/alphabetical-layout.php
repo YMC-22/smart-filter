@@ -20,7 +20,7 @@ if( $ymc_filter_font !== 'inherit' ) {
     #ymc-extra-filter-".$c_target." .alphabetical-layout .filter-entry {font-family:".$ymc_filter_font."}";
 }
 
-echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) .'</style>';
+echo '<style id="'.esc_attr($handle_filter).'">'. esc_html(preg_replace('|\s+|', ' ', $filter_css)) .'</style>';
 
 	// Array letters
     $letters = [
@@ -37,7 +37,7 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 	<ul class="filter-entry">
 
 		<li class="filter-item">
-			<a class="filter-link active" href="#" data-letter="all"><?php esc_html_e($ymc_post_elements['button_text_all'],'ymc-smart-filter'); ?></a>
+			<a class="filter-link active" href="#" data-letter="all"><?php echo esc_html($ymc_post_elements['button_text_all']); ?></a>
 		</li>
 
 		<?php
@@ -45,7 +45,7 @@ echo '<style id="'.$handle_filter.'">'. preg_replace('|\s+|', ' ', $filter_css) 
 			foreach ( $letters as $letter) {
 
 				echo '<li class="filter-item">';
-				echo '<a class="filter-link" href="#" data-letter="'.$letter.'">'. $letter .'</a>';
+				echo '<a class="filter-link" href="#" data-letter="'.esc_attr($letter).'">'. esc_html($letter) .'</a>';
 				echo '</li>';
 			}
 

@@ -189,10 +189,10 @@
                     <label class="form-label">
 		                <?php echo esc_html__('Truncate Post Excerpt', 'ymc-smart-filter'); ?>
                         <span class="information">
-                        <?php echo __('Set the post excerpt truncate method:<br>
+                        <?php echo wp_kses_post('Set the post excerpt truncate method:<br>
                                 - <b>Truncate text:</b> truncate text to the specified number of words (default 30 words).<br>
                                 - <b>The first block of content:</b> the first block of content (tags p or h1,h2,h3,h4,h5,h6).<br>
-                                - <b>At the first line break:</b> at the first line break (tag: br)', 'ymc-smart-filter'); ?>
+                                - <b>At the first line break:</b> at the first line break (tag: br)'); ?>
                         </span>
                     </label>
 
@@ -302,7 +302,7 @@
                     </label>
 
                     <input class="input-field" type="text" placeholder="meta_key" name="ymc-meta-key"
-                           value="<?php echo ( !empty($ymc_meta_key) ) ? $ymc_meta_key : ''?>">
+                           value="<?php echo ( !empty($ymc_meta_key) ) ? esc_attr($ymc_meta_key) : ''?>">
 
                     <label class="form-label">
                         <span class="information">
@@ -311,7 +311,7 @@
                     </label>
 
                     <input class="input-field" type="text" placeholder="meta_value or meta_value_num" name="ymc-meta-value"
-                           value="<?php echo ( !empty($ymc_meta_value) ) ? $ymc_meta_value : ''?>">
+                           value="<?php echo ( !empty($ymc_meta_value) ) ? esc_attr($ymc_meta_value) : ''?>">
 
                 </div>
 
@@ -343,7 +343,7 @@
                                 <div class="rows-options">
                                     <fieldset class="rows-options__col">
                                         <legend><?php echo esc_html__('Field name', 'ymc-smart-filter'); ?></legend>
-                                        <select class="form-select ymc-multiple-orderby"  name="ymc-multiple-sort[<?php echo $i; ?>][orderby]">
+                                        <select class="form-select ymc-multiple-orderby"  name="ymc-multiple-sort[<?php echo esc_attr($i); ?>][orderby]">
                                             <option value="title" <?php if ( in_array('title', $item) ) { echo "selected"; } ?>>
                                                 <?php echo esc_html__('Title', 'ymc-smart-filter'); ?>
                                             </option>
@@ -375,7 +375,7 @@
                                     </fieldset>
                                     <fieldset class="rows-options__col">
                                         <legend><?php echo esc_html__('Post Order Type', 'ymc-smart-filter'); ?></legend>
-                                        <select class="form-select ymc-multiple-order"  name="ymc-multiple-sort[<?php echo $i; ?>][order]">
+                                        <select class="form-select ymc-multiple-order"  name="ymc-multiple-sort[<?php echo esc_attr($i); ?>][order]">
                                             <option value="asc" <?php if ( in_array('asc', $item) ) { echo "selected"; } ?>>
                                             <?php echo esc_html__('Asc', 'ymc-smart-filter'); ?>
                                             </option>
@@ -721,7 +721,7 @@
                         <label class="form-label">
                             <?php echo esc_html__('Background Overlay', 'ymc-smart-filter'); ?>
                             <span class="information">
-                        <?php echo __('Set a custom background overlay for the popup. Use <a target="_blank" href="https://rgbacolorpicker.com/rgba-to-hex">RGBA to Hex Converter</a>', 'ymc-smart-filter');?>
+                        <?php echo wp_kses_post('Set a custom background overlay for the popup. Use <a target="_blank" href="https://rgbacolorpicker.com/rgba-to-hex">RGBA to Hex Converter</a>');?>
                         </span>
                         </label>
 

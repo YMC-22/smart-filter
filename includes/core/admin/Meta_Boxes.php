@@ -27,19 +27,15 @@ class Meta_Boxes {
 		}
 
 		// CPT
-		if( isset($_POST['ymc-cpt-select']) ) {
-			$cpt_values = $_POST['ymc-cpt-select'];
-			$str_cpts = '';
-			foreach ($cpt_values as $cpt) {
-				$str_cpts .= $cpt.',';
-			}
+		if( isset($_POST['ymc-cpt-select']) && check_admin_referer('save-post-'.$post_id, 'ymc_nonce')) {
+			$str_cpts = implode(',', array_map( 'sanitize_text_field', wp_unslash($_POST['ymc-cpt-select'])));
 			$str_cpts = rtrim($str_cpts, ',');
 			update_post_meta( $post_id, 'ymc_cpt_value', $str_cpts );
 		}
 
 		// Taxonomy
 		if( isset($_POST['ymc-taxonomy']) ) {
-			$tax_val = sanitize_html_class( $_POST['ymc-taxonomy'] );
+			$tax_val =  array_map( 'sanitize_text_field', wp_unslash($_POST['ymc-taxonomy']));
 			update_post_meta( $post_id, 'ymc_taxonomy', $tax_val );
 		}
 		else {
@@ -48,7 +44,7 @@ class Meta_Boxes {
 
 		// Terms
 		if( isset($_POST['ymc-terms']) ) {
-			$terms = sanitize_html_class( $_POST['ymc-terms'] );
+			$terms =  array_map( 'sanitize_text_field', wp_unslash($_POST['ymc-terms']));
 			update_post_meta( $post_id, 'ymc_terms', $terms );
 		}
 		else {
@@ -57,409 +53,419 @@ class Meta_Boxes {
 
 		// Terms Icons
 		if( isset($_POST['ymc-terms-icons']) ) {
-			$terms_icons = $_POST['ymc-terms-icons'];
+			$terms_icons =  array_map( 'sanitize_text_field', wp_unslash($_POST['ymc-terms-icons']));
 			update_post_meta( $post_id, 'ymc_terms_icons', $terms_icons );
 		}
 
 
 		// Choices Posts
 		if( isset($_POST['ymc-choices-posts']) ) {
-			$choices_posts = sanitize_html_class( $_POST['ymc-choices-posts'] );
+			$choices_posts =  array_map( 'sanitize_text_field', wp_unslash($_POST['ymc-choices-posts']));
 			update_post_meta( $post_id, 'ymc_choices_posts', $choices_posts );
 		}
 
 		// Exclude Posts
 		if( isset($_POST['ymc-exclude-posts']) ) {
-			$exclude_posts = sanitize_html_class( $_POST['ymc-exclude-posts'] );
+			$exclude_posts = sanitize_text_field(wp_unslash($_POST['ymc-exclude-posts']));
 			update_post_meta( $post_id, 'ymc_exclude_posts', $exclude_posts );
 		}
 
 		// Taxonomy Relation
 		if( isset($_POST['ymc-tax-relation']) ) {
-			$tax_relation = sanitize_html_class( $_POST['ymc-tax-relation'] );
+			$tax_relation = sanitize_text_field(wp_unslash($_POST['ymc-tax-relation']));
 			update_post_meta( $post_id, 'ymc_tax_relation', $tax_relation );
 		}
 
 		// Filter Status (on/off)
 		if( isset($_POST['ymc-filter-status']) ) {
-			$filter_status = sanitize_text_field( $_POST['ymc-filter-status']);
+			$filter_status = sanitize_text_field(wp_unslash($_POST['ymc-filter-status']));
 			update_post_meta( $post_id, 'ymc_filter_status', $filter_status );
 		}
 
 		// Sort Posts on Frontend
 		if( isset($_POST['ymc-sort-status']) ) {
-			$sort_status = sanitize_text_field( $_POST['ymc-sort-status']);
+			$sort_status = sanitize_text_field(wp_unslash($_POST['ymc-sort-status']));
 			update_post_meta( $post_id, 'ymc_sort_status', $sort_status );
 		}
 
 		// Filter Layout
 		if ( isset($_POST['ymc-filter-layout']) ) {
-			$filter_layout = sanitize_text_field($_POST['ymc-filter-layout']);
+			$filter_layout = sanitize_text_field(wp_unslash($_POST['ymc-filter-layout']));
 			update_post_meta($post_id, 'ymc_filter_layout', $filter_layout);
 		}
 
         // Filter Extra Layout
 		if ( isset($_POST['ymc-filter-extra-layout']) ) {
-			$filter_extra_layout = sanitize_text_field($_POST['ymc-filter-extra-layout']);
+			$filter_extra_layout = sanitize_text_field(wp_unslash($_POST['ymc-filter-extra-layout']));
 			update_post_meta($post_id, 'ymc_filter_extra_layout', $filter_extra_layout);
 		}
 
 		// Filter Text Color
 		if ( isset($_POST['ymc-filter-text-color']) ) {
-			$filter_layout_text_color = sanitize_text_field($_POST['ymc-filter-text-color']);
+			$filter_layout_text_color = sanitize_text_field(wp_unslash($_POST['ymc-filter-text-color']));
 			update_post_meta($post_id, 'ymc_filter_text_color', $filter_layout_text_color);
 		}
 
 		// Filter Background Color
 		if ( isset($_POST['ymc-filter-bg-color']) ) {
-			$filter_layout_bg_color = sanitize_text_field($_POST['ymc-filter-bg-color']);
+			$filter_layout_bg_color = sanitize_text_field(wp_unslash($_POST['ymc-filter-bg-color']));
 			update_post_meta($post_id, 'ymc_filter_bg_color', $filter_layout_bg_color);
 		}
 
 		// Filter Active Color
 		if ( isset($_POST['ymc-filter-active-color']) ) {
-			$filter_layout_active_color = sanitize_text_field($_POST['ymc-filter-active-color']);
+			$filter_layout_active_color = sanitize_text_field(wp_unslash($_POST['ymc-filter-active-color']));
 			update_post_meta($post_id, 'ymc_filter_active_color', $filter_layout_active_color);
 		}
 
 		// Multiple Filter
 		if ( isset($_POST['ymc-multiple-filter']) ) {
-			$ymc_multiple_filter = sanitize_text_field($_POST['ymc-multiple-filter']);
+			$ymc_multiple_filter = sanitize_text_field(wp_unslash($_POST['ymc-multiple-filter']));
 			update_post_meta($post_id, 'ymc_multiple_filter', $ymc_multiple_filter);
 		}
 
 		// Post Layout
 		if ( isset($_POST['ymc-post-layout']) ) {
-			$post_layout = sanitize_text_field($_POST['ymc-post-layout']);
+			$post_layout = sanitize_text_field(wp_unslash($_POST['ymc-post-layout']));
 			update_post_meta($post_id, 'ymc_post_layout', $post_layout);
 		}
 
 		// Post Text Color
 		if ( isset($_POST['ymc-post-text-color']) ) {
-			$post_layout_text_color = sanitize_text_field($_POST['ymc-post-text-color']);
+			$post_layout_text_color = sanitize_text_field(wp_unslash($_POST['ymc-post-text-color']));
 			update_post_meta($post_id, 'ymc_post_text_color', $post_layout_text_color);
 		}
 
 		// Post Bg Color
 		if ( isset($_POST['ymc-post-bg-color']) ) {
-			$post_layout_bg_color = sanitize_text_field($_POST['ymc-post-bg-color']);
+			$post_layout_bg_color = sanitize_text_field(wp_unslash($_POST['ymc-post-bg-color']));
 			update_post_meta($post_id, 'ymc_post_bg_color', $post_layout_bg_color);
 		}
 
 		// Post Active Color
 		if ( isset($_POST['ymc-post-active-color']) ) {
-			$post_layout_active_color = sanitize_text_field($_POST['ymc-post-active-color']);
+			$post_layout_active_color = sanitize_text_field(wp_unslash($_POST['ymc-post-active-color']));
 			update_post_meta($post_id, 'ymc_post_active_color', $post_layout_active_color);
 		}
 
 		// Empty Text Post
 		if ( isset($_POST['ymc-empty-post-result']) ) {
-			$ymc_empty_post_result = sanitize_text_field($_POST['ymc-empty-post-result']);
+			$ymc_empty_post_result = sanitize_text_field(wp_unslash($_POST['ymc-empty-post-result']));
 			update_post_meta($post_id, 'ymc_empty_post_result', $ymc_empty_post_result);
 		}
 
 		// Link Target Post
 		if ( isset($_POST['ymc-link-target']) ) {
-			$ymc_link_target = sanitize_text_field($_POST['ymc-link-target']);
+			$ymc_link_target = sanitize_text_field(wp_unslash($_POST['ymc-link-target']));
 			update_post_meta($post_id, 'ymc_link_target', $ymc_link_target);
 		}
 
 		// Per Posts
 		if (isset($_POST['ymc-per-page'])) {
-			$ymc_per_page = sanitize_text_field($_POST['ymc-per-page']);
+			$ymc_per_page = sanitize_text_field(wp_unslash($_POST['ymc-per-page']));
 			update_post_meta($post_id, 'ymc_per_page', $ymc_per_page);
 		}
 
 		// Type Pagination
 		if (isset($_POST['ymc-pagination-type'])) {
-			$ymc_pagination_type = sanitize_text_field($_POST['ymc-pagination-type']);
+			$ymc_pagination_type = sanitize_text_field(wp_unslash($_POST['ymc-pagination-type']));
 			update_post_meta($post_id, 'ymc_pagination_type', $ymc_pagination_type);
 		}
 
 		// Hide Pagination
 		if ( isset($_POST['ymc-pagination-hide']) ) {
-			$ymc_pagination_hide = sanitize_text_field($_POST['ymc-pagination-hide']);
+			$ymc_pagination_hide = sanitize_text_field(wp_unslash($_POST['ymc-pagination-hide']));
 			update_post_meta($post_id, 'ymc_pagination_hide', $ymc_pagination_hide);
 		}
 
 		// Sort Terms Filter
 		if (isset($_POST['ymc-sort-terms'])) {
-			$ymc_sort_terms = sanitize_text_field($_POST['ymc-sort-terms']);
+			$ymc_sort_terms = sanitize_text_field(wp_unslash($_POST['ymc-sort-terms']));
 			update_post_meta($post_id, 'ymc_sort_terms', $ymc_sort_terms);
 		}
 
 		// Type Order Post By
 		if (isset($_POST['ymc-order-post-by'])) {
-			$ymc_order_post_by = sanitize_text_field($_POST['ymc-order-post-by']);
+			$ymc_order_post_by = sanitize_text_field(wp_unslash($_POST['ymc-order-post-by']));
 			update_post_meta($post_id, 'ymc_order_post_by', $ymc_order_post_by);
 		}
 
 		// Type Order Post Type
 		if (isset($_POST['ymc-order-post-type'])) {
-			$ymc_order_post_type = sanitize_text_field($_POST['ymc-order-post-type']);
+			$ymc_order_post_type = sanitize_text_field(wp_unslash($_POST['ymc-order-post-type']));
 			update_post_meta($post_id, 'ymc_order_post_type', $ymc_order_post_type);
 		}
 
 		// Post Status
 		if (isset($_POST['ymc-post-status'])) {
-			$ymc_post_status = $_POST['ymc-post-status'];
+			$ymc_post_status = array_map( 'sanitize_text_field', wp_unslash($_POST['ymc-post-status']));
 			update_post_meta($post_id, 'ymc_post_status', $ymc_post_status);
 		}
 
         // Post Image Size
 		if (isset($_POST['ymc-post-image-size'])) {
-			$ymc_post_image_size = sanitize_text_field($_POST['ymc-post-image-size']);
+			$ymc_post_image_size = sanitize_text_field(wp_unslash($_POST['ymc-post-image-size']));
 			update_post_meta($post_id, 'ymc_post_image_size', $ymc_post_image_size);
 		}
 
 		// Image Clickable
 		if (isset($_POST['ymc-image-clickable'])) {
-			$ymc_image_clickable = sanitize_text_field($_POST['ymc-image-clickable']);
+			$ymc_image_clickable = sanitize_text_field(wp_unslash($_POST['ymc-image-clickable']));
 			update_post_meta($post_id, 'ymc_image_clickable', $ymc_image_clickable);
 		}
 
 		// Excerpt truncate method
 		if (isset($_POST['ymc-excerpt-truncate-method'])) {
-			$ymc_excerpt_truncate_method = sanitize_text_field($_POST['ymc-excerpt-truncate-method']);
+			$ymc_excerpt_truncate_method = sanitize_text_field(wp_unslash($_POST['ymc-excerpt-truncate-method']));
 			update_post_meta($post_id, 'ymc_excerpt_truncate_method', $ymc_excerpt_truncate_method);
 		}
 
 		// Meta Key by sort
 		if (isset($_POST['ymc-meta-key'])) {
-			$ymc_meta_key = sanitize_text_field($_POST['ymc-meta-key']);
+			$ymc_meta_key = sanitize_text_field(wp_unslash($_POST['ymc-meta-key']));
 			update_post_meta($post_id, 'ymc_meta_key', $ymc_meta_key);
 		}
 
 		// Meta Value by sort
 		if (isset($_POST['ymc-meta-value'])) {
-			$ymc_meta_value = sanitize_text_field($_POST['ymc-meta-value']);
+			$ymc_meta_value = sanitize_text_field(wp_unslash($_POST['ymc-meta-value']));
 			update_post_meta($post_id, 'ymc_meta_value', $ymc_meta_value);
 		}
 
 		// Multiple Sort
 		if (isset($_POST['ymc-multiple-sort'])) {
-			$ymc_multiple_sort = $_POST['ymc-multiple-sort'];
-			update_post_meta($post_id, 'ymc_multiple_sort', $ymc_multiple_sort);
+			// phpcs:ignore WordPress
+			$arr_multiple_sort = wp_unslash($_POST['ymc-multiple-sort']);
+            $array_result = [];
+            foreach ($arr_multiple_sort as $arr) {
+	            $array_result[] = array_map( 'sanitize_text_field', $arr);
+            }
+			update_post_meta($post_id, 'ymc_multiple_sort', $array_result);
 		}
 
 		// Special Post CSS Class
 		if (isset($_POST['ymc-special-post-class'])) {
-			$ymc_special_post_class = sanitize_text_field($_POST['ymc-special-post-class']);
+			$ymc_special_post_class = sanitize_text_field(wp_unslash($_POST['ymc-special-post-class']));
 			update_post_meta($post_id, 'ymc_special_post_class', $ymc_special_post_class);
 		}
 
 		// Preloader Posts
 		if (isset($_POST['ymc-preloader-icon'])) {
-			$ymc_preloader_icon = sanitize_text_field($_POST['ymc-preloader-icon']);
+			$ymc_preloader_icon = sanitize_text_field(wp_unslash($_POST['ymc-preloader-icon']));
 			update_post_meta($post_id, 'ymc_preloader_icon', $ymc_preloader_icon);
 		}
 
 		// Filter Font
 		if (isset($_POST['ymc-filter-font'])) {
-			$ymc_filter_font = sanitize_text_field($_POST['ymc-filter-font']);
+			$ymc_filter_font = sanitize_text_field(wp_unslash($_POST['ymc-filter-font']));
 			update_post_meta($post_id, 'ymc_filter_font', $ymc_filter_font);
 		}
 
 		// Post Font
 		if (isset($_POST['ymc-post-font'])) {
-			$ymc_filter_font = sanitize_text_field($_POST['ymc-post-font']);
+			$ymc_filter_font = sanitize_text_field(wp_unslash($_POST['ymc-post-font']));
 			update_post_meta($post_id, 'ymc_post_font', $ymc_filter_font);
 		}
 
 		// Search Posts Status (on/off)
 		if( isset($_POST['ymc-filter-search-status']) ) {
-			$search_status = sanitize_text_field( $_POST['ymc-filter-search-status']);
+			$search_status = sanitize_text_field(wp_unslash($_POST['ymc-filter-search-status']));
 			update_post_meta( $post_id, 'ymc_filter_search_status', $search_status );
 		}
 
 		// Button Text Search
 		if( isset($_POST['ymc-search-text-button']) ) {
-			$search_text_button = sanitize_text_field( $_POST['ymc-search-text-button']);
+			$search_text_button = sanitize_text_field(wp_unslash($_POST['ymc-search-text-button']));
 			update_post_meta( $post_id, 'ymc_search_text_button', $search_text_button );
 		}
 
 		// Change Placeholder Field Search
 		if( isset($_POST['ymc-search-placeholder']) ) {
-			$search_placeholder = sanitize_text_field( $_POST['ymc-search-placeholder']);
+			$search_placeholder = sanitize_text_field(wp_unslash($_POST['ymc-search-placeholder']));
 			update_post_meta( $post_id, 'ymc_search_placeholder', $search_placeholder );
 		}
 
 		// Disable Autocomplete for Search Posts
 		if( isset($_POST['ymc-autocomplete-state']) ) {
-			$autocomplete_state = sanitize_text_field( $_POST['ymc-autocomplete-state']);
+			$autocomplete_state = sanitize_text_field(wp_unslash($_POST['ymc-autocomplete-state']));
 			update_post_meta( $post_id, 'ymc_autocomplete_state', $autocomplete_state );
 		}
 
 		// Find a post exactly the specified phrase
 		if( isset($_POST['ymc-exact-phrase']) ) {
-			$ymc_exact_phrase = sanitize_text_field( $_POST['ymc-exact-phrase']);
+			$ymc_exact_phrase = sanitize_text_field(wp_unslash($_POST['ymc-exact-phrase']));
 			update_post_meta( $post_id, 'ymc_exact_phrase', $ymc_exact_phrase );
 		}
 
 		// Disable Scroll Page
 		if( isset($_POST['ymc-scroll-page']) ) {
-			$ymc_scroll_page = sanitize_text_field( $_POST['ymc-scroll-page']);
+			$ymc_scroll_page = sanitize_text_field(wp_unslash($_POST['ymc-scroll-page']));
 			update_post_meta( $post_id, 'ymc_scroll_page', $ymc_scroll_page );
 		}
 
 		// Preloader Filters
 		if( isset($_POST['ymc-preloader-filters']) ) {
-			$ymc_preloader_filters = sanitize_text_field( $_POST['ymc-preloader-filters']);
+			$ymc_preloader_filters = sanitize_text_field(wp_unslash($_POST['ymc-preloader-filters']));
 			update_post_meta( $post_id, 'ymc_preloader_filters', $ymc_preloader_filters );
 		}
 
 		// Preloader Filters Rate
 		if( isset($_POST['ymc-preloader-filters-rate']) ) {
-			$ymc_preloader_filters_rate = sanitize_text_field( $_POST['ymc-preloader-filters-rate']);
+			$ymc_preloader_filters_rate = sanitize_text_field(wp_unslash($_POST['ymc-preloader-filters-rate']));
 			update_post_meta( $post_id, 'ymc_preloader_filters_rate', $ymc_preloader_filters_rate );
 		}
 
 		// Preloader Filters Custom
 		if( isset($_POST['ymc-preloader-filters-custom']) ) {
-			$ymc_preloader_filters_custom = sanitize_text_field( $_POST['ymc-preloader-filters-custom']);
+			$ymc_preloader_filters_custom = sanitize_text_field(wp_unslash($_POST['ymc-preloader-filters-custom']));
 			update_post_meta( $post_id, 'ymc_preloader_filters_custom', $ymc_preloader_filters_custom );
 		}
 
 		// Post Animation
 		if( isset($_POST['ymc-post-animation']) ) {
-			$ymc_post_animation = sanitize_text_field( $_POST['ymc-post-animation']);
+			$ymc_post_animation = sanitize_text_field(wp_unslash($_POST['ymc-post-animation']));
 			update_post_meta( $post_id, 'ymc_post_animation', $ymc_post_animation );
 		}
 
 		// Popup Status
 		if( isset($_POST['ymc-popup-status']) ) {
-			$ymc_popup_status = sanitize_text_field( $_POST['ymc-popup-status']);
+			$ymc_popup_status = sanitize_text_field(wp_unslash($_POST['ymc-popup-status']));
 			update_post_meta( $post_id, 'ymc_popup_status', $ymc_popup_status );
 		}
 
 		// Popup Animation
 		if( isset($_POST['ymc-popup-animation']) ) {
-			$ymc_popup_animation = sanitize_text_field( $_POST['ymc-popup-animation']);
+			$ymc_popup_animation = sanitize_text_field(wp_unslash($_POST['ymc-popup-animation']));
 			update_post_meta( $post_id, 'ymc_popup_animation', $ymc_popup_animation );
 		}
 
 		// Popup Animation Origin
 		if( isset($_POST['ymc-popup-animation-origin']) ) {
-			$ymc_popup_animation_origin = sanitize_text_field( $_POST['ymc-popup-animation-origin']);
+			$ymc_popup_animation_origin = sanitize_text_field(wp_unslash($_POST['ymc-popup-animation-origin']));
 			update_post_meta( $post_id, 'ymc_popup_animation_origin', $ymc_popup_animation_origin );
 		}
 		// Popup Settings
 		if( isset($_POST['ymc_popup_settings']) ) {
-			$ymc_popup_settings = $_POST['ymc_popup_settings'];
+			$ymc_popup_settings = array_map( 'sanitize_text_field', wp_unslash($_POST['ymc_popup_settings']));
 			update_post_meta( $post_id, 'ymc_popup_settings', $ymc_popup_settings );
 		}
 
 		// Search by Filtered Posts
 		if( isset($_POST['ymc-search-filtered-posts']) ) {
-			$ymc_search_filtered_posts = $_POST['ymc-search-filtered-posts'];
+			$ymc_search_filtered_posts = sanitize_text_field(wp_unslash($_POST['ymc-search-filtered-posts']));
 			update_post_meta( $post_id, 'ymc_search_filtered_posts', $ymc_search_filtered_posts );
 		}
 
 		// Advanced Custom Query Status
 		if( isset($_POST['ymc-advanced-query-status']) ) {
-			$ymc_advanced_query_status = sanitize_text_field( $_POST['ymc-advanced-query-status']);
+			$ymc_advanced_query_status = sanitize_text_field(wp_unslash($_POST['ymc-advanced-query-status']));
 			update_post_meta( $post_id, 'ymc_advanced_query_status', $ymc_advanced_query_status );
 		}
 
 		// Query Type
 		if( isset($_POST['ymc-query-type']) ) {
-			$ymc_query_type = sanitize_text_field( $_POST['ymc-query-type']);
+			$ymc_query_type = sanitize_text_field(wp_unslash($_POST['ymc-query-type']));
 			update_post_meta( $post_id, 'ymc_query_type', $ymc_query_type );
 		}
 
 		// Query Type Content Custom
 		if( isset($_POST['ymc-query-type-custom']) ) {
-			$ymc_query_type_custom = sanitize_text_field( $_POST['ymc-query-type-custom']);
+			$ymc_query_type_custom = sanitize_text_field(wp_unslash($_POST['ymc-query-type-custom']));
 			update_post_meta( $post_id, 'ymc_query_type_custom', $ymc_query_type_custom );
 		}
 
 		// Query Type Content Callback
 		if( isset($_POST['ymc-query-type-callback']) ) {
-			$ymc_query_type_callback = sanitize_text_field( $_POST['ymc-query-type-callback']);
+			$ymc_query_type_callback = sanitize_text_field(wp_unslash($_POST['ymc-query-type-callback']));
 			update_post_meta( $post_id, 'ymc_query_type_callback', $ymc_query_type_callback );
 		}
 
 		// XXL Breakpoints
 		if( isset($_POST['ymc_desktop_xxl']) ) {
-			$ymc_desktop_xxl = ( !empty($_POST['ymc_desktop_xxl']) ) ? sanitize_text_field( $_POST['ymc_desktop_xxl']) : 4;
+			$ymc_desktop_xxl = ( !empty($_POST['ymc_desktop_xxl']) ) ? sanitize_text_field(wp_unslash($_POST['ymc_desktop_xxl'])) : 4;
 			update_post_meta( $post_id, 'ymc_desktop_xxl', $ymc_desktop_xxl );
 		}
 
 		// XL Breakpoints
 		if( isset($_POST['ymc_desktop_xl']) ) {
-			$ymc_desktop_xl = ( !empty($_POST['ymc_desktop_xl']) ) ? sanitize_text_field( $_POST['ymc_desktop_xl']) : 4;
+			$ymc_desktop_xl = ( !empty($_POST['ymc_desktop_xl']) ) ? sanitize_text_field(wp_unslash($_POST['ymc_desktop_xl'])) : 4;
 			update_post_meta( $post_id, 'ymc_desktop_xl', $ymc_desktop_xl );
 		}
 
 		// LG Breakpoints
 		if( isset($_POST['ymc_desktop_lg']) ) {
-			$ymc_desktop_lg = ( !empty($_POST['ymc_desktop_lg']) ) ? sanitize_text_field( $_POST['ymc_desktop_lg']) : 4;
+			$ymc_desktop_lg = ( !empty($_POST['ymc_desktop_lg']) ) ? sanitize_text_field(wp_unslash($_POST['ymc_desktop_lg'])) : 4;
 			update_post_meta( $post_id, 'ymc_desktop_lg', $ymc_desktop_lg );
 		}
 
 		// MD Breakpoints
 		if( isset($_POST['ymc_tablet_md']) ) {
-			$ymc_tablet_md = ( !empty($_POST['ymc_tablet_md']) ) ? sanitize_text_field( $_POST['ymc_tablet_md']) : 3;
+			$ymc_tablet_md = ( !empty($_POST['ymc_tablet_md']) ) ? sanitize_text_field(wp_unslash($_POST['ymc_tablet_md'])) : 3;
 			update_post_meta( $post_id, 'ymc_tablet_md', $ymc_tablet_md );
 		}
 
 		// SM Breakpoints
 		if( isset($_POST['ymc_tablet_sm']) ) {
-			$ymc_tablet_sm = ( !empty($_POST['ymc_tablet_sm']) ) ? sanitize_text_field( $_POST['ymc_tablet_sm']) : 2;
+			$ymc_tablet_sm = ( !empty($_POST['ymc_tablet_sm']) ) ? sanitize_text_field(wp_unslash($_POST['ymc_tablet_sm'])) : 2;
 			update_post_meta( $post_id, 'ymc_tablet_sm', $ymc_tablet_sm );
 		}
 
 		// XS Breakpoints
 		if( isset($_POST['ymc_mobile_xs']) ) {
-			$ymc_mobile_xs = ( !empty($_POST['ymc_mobile_xs']) ) ? sanitize_text_field( $_POST['ymc_mobile_xs']) : 1;
+			$ymc_mobile_xs = ( !empty($_POST['ymc_mobile_xs']) ) ? sanitize_text_field(wp_unslash($_POST['ymc_mobile_xs'])) : 1;
 			update_post_meta( $post_id, 'ymc_mobile_xs', $ymc_mobile_xs );
 		}
 
 		// Suppress Filters
 		if( isset($_POST['ymc-suppress-filters']) ) {
-			$ymc_suppress_filters = sanitize_text_field( $_POST['ymc-suppress-filters']);
+			$ymc_suppress_filters = sanitize_text_field(wp_unslash($_POST['ymc-suppress-filters']));
 			update_post_meta( $post_id, 'ymc_suppress_filters', $ymc_suppress_filters );
 		}
 
 		// Post Elements
 		if( isset($_POST['ymc-post-elements']) ) {
-			$ymc_post_elements =  $_POST['ymc-post-elements'];
+			$ymc_post_elements = array_map( 'sanitize_text_field', wp_unslash($_POST['ymc-post-elements']));
 			update_post_meta( $post_id, 'ymc_post_elements', $ymc_post_elements );
 		}
 
 		// Pagination Elements
 		if( isset($_POST['ymc-pagination-elements']) ) {
-			$ymc_pagination_elements =  $_POST['ymc-pagination-elements'];
+			$ymc_pagination_elements = array_map( 'sanitize_text_field', wp_unslash($_POST['ymc-pagination-elements']));
 			update_post_meta( $post_id, 'ymc_pagination_elements', $ymc_pagination_elements );
 		}
 
 		// Enable Debug
 		if( isset($_POST['ymc-debug-code']) ) {
-			$ymc_debug_code = sanitize_text_field( $_POST['ymc-debug-code']);
+			$ymc_debug_code = sanitize_text_field(wp_unslash($_POST['ymc-debug-code']));
 			update_post_meta( $post_id, 'ymc_debug_code', $ymc_debug_code );
 		}
 
 		// Custom CSS
 		if( isset($_POST['ymc-custom-css']) ) {
-			$ymc_custom_css = wp_strip_all_tags($_POST['ymc-custom-css']);
+			$ymc_custom_css = wp_strip_all_tags(wp_unslash($_POST['ymc-custom-css']));
 			update_post_meta( $post_id, 'ymc_custom_css', $ymc_custom_css );
 		}
 
 		// Custom JS
 		if( isset($_POST['ymc-custom-after-js']) ) {
-			$ymc_custom_after_js = wp_strip_all_tags($_POST['ymc-custom-after-js']);
+			$ymc_custom_after_js = wp_strip_all_tags(wp_unslash($_POST['ymc-custom-after-js']));
 			update_post_meta( $post_id, 'ymc_custom_after_js', $ymc_custom_after_js );
 		}
 
 		// Carousel Settings
 		if( isset($_POST['ymc_carousel_params']) ) {
-			$ymc_carousel_params = $_POST['ymc_carousel_params'];
-			update_post_meta( $post_id, 'ymc_carousel_params', $ymc_carousel_params );
+			// phpcs:ignore WordPress
+			$arr_carousel_params = wp_unslash($_POST['ymc_carousel_params']);
+			$array_result = [];
+			foreach ($arr_carousel_params as $key => $arr) {
+				$array_result[$key] = array_map( 'sanitize_text_field', $arr);
+			}
+			update_post_meta( $post_id, 'ymc_carousel_params', $array_result );
 		}
 
 		// Hierarchical Tree of Terms
 		if( isset($_POST['ymc_hierarchy_terms']) ) {
-			$ymc_hierarchy_terms = sanitize_text_field($_POST['ymc_hierarchy_terms']);
+			$ymc_hierarchy_terms = sanitize_text_field(wp_unslash($_POST['ymc_hierarchy_terms']));
 			update_post_meta( $post_id, 'ymc_hierarchy_terms', $ymc_hierarchy_terms );
 		}
 
@@ -515,8 +521,8 @@ class Meta_Boxes {
 
 		foreach ( $metabox_args[ 'args' ][ 'filter_ids' ] as $id )
 		{
-			echo '<li><span class="dashicons dashicons-sticky"></span> <a href="'.get_edit_post_link( $id ).'" target="_blank" title="Edit Filter">'.
-			           get_the_title( $id ) . ' (<i>ID: '.$id.'</i>) <span class="dashicons dashicons-edit"></span></a></li>';
+			echo '<li><span class="dashicons dashicons-sticky"></span> <a href="'.esc_url(get_edit_post_link( esc_attr($id) )).'" target="_blank" title="Edit Filter">'.
+			      esc_html(get_the_title( esc_attr($id) )) . ' (<i>ID: '.esc_attr($id).'</i>) <span class="dashicons dashicons-edit"></span></a></li>';
 		}
 		echo '</ul>';
 	}
@@ -544,7 +550,7 @@ class Meta_Boxes {
 	public function ymc_top_meta_box() { ?>
 
 		<header class="ymc__header">
-			<div class="logo"><img src="<?php echo YMC_SMART_FILTER_URL . 'includes/assets/images/YMC-logos.svg'; ?>"></div>
+			<div class="logo"><img src="<?php echo esc_url(YMC_SMART_FILTER_URL) . 'includes/assets/images/YMC-logos.svg'; ?>"></div>
 			<div class="manage-dash">
 				<span class="dashicons dashicons-admin-tools"></span>
 				<span class="title"><?php echo esc_html__('Settings','ymc-smart-filter'); ?></span>
@@ -713,7 +719,7 @@ class Meta_Boxes {
 				<li><?php echo esc_html__('Compatible with multilingual WPML plugin','ymc-smart-filter'); ?></li>
 				<li class="button">
 					<a href="https://github.com/YMC-22/smart-filter" target="_blank">
-						<span class="dashicons dashicons-visibility"></span>View Documentation</a>
+						<span class="dashicons dashicons-visibility"></span><?php echo esc_html__('View Documentation','ymc-smart-filter'); ?></a>
 				</li>
 			</ol>
 		</article>
@@ -725,10 +731,10 @@ class Meta_Boxes {
 	}
 
 	public function ymc_filter_grids_callback() {
-		_e('<b>Welcome to Filter & Grids.</b> <br/>
+		echo wp_kses_post('<b>Welcome to Filter & Grids.</b> <br/>
 		<p>This plugin will allow you to easily and quickly create all kinds of post grids with their filters.</p> 
 		<p>Create your first grid of posts: <a href="'. site_url().'/wp-admin/post-new.php?post_type=ymc_filters">Create</a></p>
-		<p>For more detailed information see <a target="_blank" href="https://github.com/YMC-22/smart-filter">documentation <span style="text-decoration: none;" class="dashicons dashicons-external"></span></a> on using this plugin.</p>','ymc-smart-filter');
+		<p>For more detailed information see <a target="_blank" href="https://github.com/YMC-22/smart-filter">documentation <span style="text-decoration: none;" class="dashicons dashicons-external"></span></a> on using this plugin.</p>');
 	}
 
 	public function ymc_is_shortcode( $content, $id ) {

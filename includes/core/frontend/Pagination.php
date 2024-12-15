@@ -26,9 +26,8 @@ class Pagination {
 		if ( ! $query ) return;
 
 		$output = '';
-
-		$prev_text = __( !empty($pagination_elements['prev_btn_text']) ? $pagination_elements['prev_btn_text'] : 'Prev'  ,'ymc-smart-filter');
-		$next_text = __( !empty($pagination_elements['next_btn_text']) ?  $pagination_elements['next_btn_text'] : 'Next' ,'ymc-smart-filter');
+		$prev_text = !empty($pagination_elements['prev_btn_text']) ? $pagination_elements['prev_btn_text'] : 'Prev';
+		$next_text = !empty($pagination_elements['next_btn_text']) ? $pagination_elements['next_btn_text'] : 'Next';
 		$prev_text = apply_filters('ymc_pagination_prev_text_'.$filter_id.'_'.$target_id, $prev_text);
 		$next_text = apply_filters('ymc_pagination_next_text_'.$filter_id.'_'.$target_id, $next_text);
 
@@ -90,8 +89,8 @@ class Pagination {
 
 		$output = '';
 
-		$load_more_text = !empty($pagination_elements['load_btn_text']) ? $pagination_elements['load_btn_text'] : 'Load More';
-		$load_more = apply_filters('ymc_pagination_load_more_'.$filter_id.'_'.$target_id, __($load_more_text,'ymc-smart-filter'));
+		$load_more_text = !empty($pagination_elements['load_btn_text']) ? $pagination_elements['load_btn_text'] : __('Load More', 'ymc-smart-filter');
+		$load_more = apply_filters('ymc_pagination_load_more_'.$filter_id.'_'.$target_id, $load_more_text);
 
 		if( $query->max_num_pages > 1 ) :
 			$output .= "<div id='ymc-layout-pagination' class='ymc-pagination pagination-" . esc_attr($type_pagination) ."'>";

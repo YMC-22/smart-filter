@@ -6,11 +6,11 @@
 
 		<div class="tabs">
 			<div class="tab tab-icons active">
-				<span class="tab-inner" data-content="<?php esc_attr_e('icon'); ?>">
+				<span class="tab-inner" data-content="<?php echo esc_attr('icon'); ?>">
 					<?php esc_html_e('Icon','ymc-smart-filter'); ?></span>
 			</div>
 			<div class="tab tab-terms">
-				<span class="tab-inner" data-content="<?php esc_attr_e('term'); ?>">
+				<span class="tab-inner" data-content="<?php echo esc_attr('term'); ?>">
 					<?php esc_html_e('Term','ymc-smart-filter'); ?></span>
 			</div>
 		</div>
@@ -31,11 +31,11 @@
 				<div class="align-icon">
 					<a class="toggle-align-icon" href="#" data-align="left-icon" title="Align Left">
 						<i class="fas fa-align-left"></i>
-						<span class="note"><?php _e('Saved','ymc-smart-filter'); ?></span>
+						<span class="note"><?php esc_html_e('Saved','ymc-smart-filter'); ?></span>
 					</a>
 					<a class="toggle-align-icon" href="#" data-align="right-icon" title="Align Right">
 						<i class="fas fa-align-right"></i>
-						<span class="note"><?php _e('Saved','ymc-smart-filter'); ?></span>
+						<span class="note"><?php esc_html_e('Saved','ymc-smart-filter'); ?></span>
 					</a>
 				</div>
 				<span class="preview-icon"></span>

@@ -1,7 +1,7 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.9.49
+Version: 2.9.50
 Donate link: https://github.com/YMC-22/smart-filter
 Tags: filter, grid, ajax, search, sort
 Requires at least: 5.5
@@ -52,7 +52,7 @@ The plugin provides the following functionality:
 
 == Installation ==
 
-1. Activate Plugin or upload the entire 'ymc-smart-filters' folder to the '/wp-content/plugins/' directory.
+1. Activate Plugin or upload the entire 'ymc-smart-filter' folder to the '/wp-content/plugins/' directory.
 2. Add new YMC Smart Filter
 3. Copy YMC Smart Filter shortcode and paste to any page or post
 4. Set setting for each post
@@ -78,6 +78,8 @@ Detailed information can be found on GitHub at this <a target="_blank" href="htt
 == Changelog ==
 
 
+= 2.9.50 =
+Updated plugin security system
 = 2.9.49 =
 Added filter: change custom preloader
 = 2.9.42 =

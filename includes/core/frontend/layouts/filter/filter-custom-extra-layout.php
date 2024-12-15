@@ -9,7 +9,7 @@ $term_settings = arrayToObject( generalArrayMerging( $ymc_terms_options, $ymc_te
 
 ?>
 
-<div id="<?php echo esc_attr($ymc_filter_layout) .'-'. esc_attr($c_target); ?>" class="filter-layout <?php echo esc_attr($ymc_filter_layout); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?>-<?php echo $c_target; ?> ">
+<div id="<?php echo esc_attr($ymc_filter_layout) .'-'. esc_attr($c_target); ?>" class="filter-layout <?php echo esc_attr($ymc_filter_layout); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?>-<?php echo esc_attr($c_target); ?> ">
 
 	<?php
 
@@ -82,7 +82,7 @@ $term_settings = arrayToObject( generalArrayMerging( $ymc_terms_options, $ymc_te
 				                 $multiple,
                                  $target,
 								 $term_settings );
-
+	        // phpcs:ignore WordPress
 			echo $filter_layout;
 
 		}

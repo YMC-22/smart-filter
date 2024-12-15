@@ -37,8 +37,6 @@ class Ajax {
 
 		add_action('wp_ajax_ymc_options_icons',array($this, 'ymc_options_icons'));
 
-		//add_action('wp_ajax_ymc_updated_posts',array($this, 'ymc_updated_posts'));
-
 		add_action('wp_ajax_ymc_options_terms',array($this, 'ymc_options_terms'));
 
 		add_action( 'wp_ajax_ymc_export_settings', array( $this, 'ymc_export_settings'));
@@ -60,16 +58,24 @@ class Ajax {
 	 */
 	public function ymc_search_posts() {
 
-		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce_code'])), $this->token) ) exit;
 
-		$post_type   = sanitize_text_field($_POST["cpt"]);
+		$post_type = '';
+		$phrase = '';
+
+		if( !empty($_POST["cpt"]) ) {
+			$post_type   = sanitize_text_field(wp_unslash($_POST["cpt"]));
+		}
+		if( !empty($_POST["phrase"]) ) {
+			$phrase = trim(mb_strtolower(sanitize_text_field(wp_unslash($_POST['phrase']))));
+		}
+
 		$post_types = ! empty( $post_type ) ? explode(',', $post_type) : 'post';
-		$phrase = trim(mb_strtolower(sanitize_text_field($_POST['phrase'])));
 		$arr_posts = [];
 
 		$args = [
 			'post_type' => $post_types,
-			'posts_per_page' => -1,
+			'posts_per_page' => 50,
 			'orderby' => 'title',
 			'order' => 'asc',
 			'sentence' => true,
@@ -85,12 +91,12 @@ class Ajax {
 				$arr_posts[] = '<li><div class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">
 				<span class="postID">ID: '.get_the_ID().'</span> <span class="postTitle">'. get_the_title(get_the_ID()).'</span></div></li>';
 			}
-			wp_reset_query();
+			wp_reset_postdata();
 		}
 
 		$data = array(
 			'found_posts' => $found_posts,
-			'lists_posts' => json_encode($arr_posts)
+			'lists_posts' => wp_json_encode($arr_posts)
 		);
 
 		wp_send_json($data);
@@ -102,11 +108,19 @@ class Ajax {
 	 */
 	public function ymc_selected_posts() {
 
-		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( !isset($_POST['nonce_code']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce_code'])), $this->token) ) exit;
 
-		$post_type   = sanitize_text_field($_POST["cpt"]);
+		$post_type = '';
+		$paged = 1;
+
+		if( !empty($_POST["cpt"]) ) {
+			$post_type   = sanitize_text_field(wp_unslash($_POST["cpt"]));
+		}
+		if( !empty($_POST["paged"]) ) {
+			$paged = (int) sanitize_text_field(wp_unslash($_POST['paged']));
+		}
+
 		$post_types = ! empty( $post_type ) ? explode(',', $post_type) : 'post';
-		$paged = (int) $_POST['paged'];
 		$paged += 1;
 		$arr_posts = [];
 
@@ -126,13 +140,13 @@ class Ajax {
 				$arr_posts[] = '<li><div class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">
 				<span class="postID">ID: '.get_the_ID().'</span> <span class="postTitle">'. get_the_title(get_the_ID()).'</span></div></li>';
 			}
-			wp_reset_query();
+			wp_reset_postdata();
 		}
 
 		$data = array(
 			'posts_loaded' => count($arr_posts),
 			'found_posts' => $found_posts,
-			'lists_posts' => json_encode($arr_posts)
+			'lists_posts' => wp_json_encode($arr_posts)
 		);
 
 		wp_send_json($data);
@@ -143,10 +157,10 @@ class Ajax {
 	 */
 	public function ymc_get_taxonomy() {
 
-		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce_code'])), $this->token) ) exit;
 
 		if(isset($_POST["cpt"])) {
-			$post_types = sanitize_text_field($_POST["cpt"]);
+			$post_types = sanitize_text_field(wp_unslash($_POST["cpt"]));
 			$cpts = !empty( $post_types ) ? explode(',', $post_types) : 'post';
 		}
 		if(isset($_POST["post_id"])) {
@@ -194,12 +208,12 @@ class Ajax {
 				$arr_posts[] = '<li><div class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">
 				<span class="postID">ID: '.get_the_ID().'</span> <span class="postTitle">'. get_the_title(get_the_ID()).'</span></div></li>';
 			}
-			wp_reset_query();
+			wp_reset_postdata();
 		}
 
 		$data = array(
-			'data' => json_encode($arr_tax_result),
-			'lists_posts' => json_encode($arr_posts),
+			'data' => wp_json_encode($arr_tax_result),
+			'lists_posts' => wp_json_encode($arr_posts),
 			'found_posts' => $query->found_posts,
 			'posts_loaded' => count($arr_posts)
 		);
@@ -215,10 +229,17 @@ class Ajax {
 	 */
 	public function ymc_get_terms() {
 
-		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce_code'])), $this->token) ) exit;
 
-		$id = sanitize_text_field($_POST["post_id"]);
-		$taxonomy = sanitize_text_field($_POST["taxonomy"]);
+		$id = '';
+		$taxonomy = '';
+
+		if(!empty($_POST["post_id"])) {
+			$id = sanitize_text_field(wp_unslash($_POST["post_id"]));
+		}
+		if(!empty($_POST["taxonomy"])) {
+			$taxonomy = sanitize_text_field(wp_unslash($_POST["taxonomy"]));
+		}
 
 		$data = [];
 		$data['terms'] = [];
@@ -274,17 +295,19 @@ class Ajax {
 	 */
 	public function ymc_updated_taxonomy() {
 
-		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce_code'])), $this->token) ) exit;
 
 		$arr_tax_result = [];
 
+		$post_id = !empty($_POST["post_id"]) ? (int) sanitize_text_field(wp_unslash($_POST["post_id"])) : 0;
+
 		if( isset($_POST["cpt"]) ) {
 
-			$post_types = sanitize_text_field($_POST["cpt"]);
+			$post_types = sanitize_text_field(wp_unslash($_POST["cpt"]));
 			$cpts = !empty( $post_types ) ? explode(',', $post_types) : false;
 		}
 
-		if( is_array($cpts) ) {
+		if( is_array($cpts) && $post_id > 0 ) {
 
 			foreach ( $cpts as $cpt ) {
 
@@ -296,7 +319,7 @@ class Ajax {
 				}
 			}
 
-			update_post_meta( (int) $_POST["post_id"], 'ymc_tax_sort', '' );
+			update_post_meta( $post_id, 'ymc_tax_sort', '' );
 		}
 
 		$data = array(
@@ -311,13 +334,13 @@ class Ajax {
 	 */
 	public function ymc_tax_sort() {
 
-		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce_code'])), $this->token) ) exit;
 
 		if(isset($_POST["tax_sort"])) {
 
-			$temp_data = str_replace("\\", "", sanitize_text_field($_POST["tax_sort"]));
+			$temp_data = sanitize_text_field(wp_unslash($_POST["tax_sort"]));
 			$clean_data = json_decode($temp_data, true);
-			$post_id = (int) sanitize_text_field($_POST["post_id"]);
+			$post_id = !empty($_POST["post_id"]) ? (int) sanitize_text_field(wp_unslash($_POST["post_id"])) : 0;
 
 			$id = update_post_meta( $post_id, 'ymc_tax_sort', $clean_data );
 		}
@@ -334,13 +357,13 @@ class Ajax {
 	 */
 	public function ymc_term_sort() {
 
-		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce_code'])), $this->token) ) exit;
 
 		if(isset($_POST["term_sort"])) {
 
-			$temp_data = str_replace("\\", "", sanitize_text_field($_POST["term_sort"]));
+			$temp_data = sanitize_text_field(wp_unslash($_POST["term_sort"]));
 			$clean_data = json_decode($temp_data, true);
-			$post_id = (int) sanitize_text_field($_POST["post_id"]);
+			$post_id = !empty($_POST["post_id"]) ? (int) sanitize_text_field(wp_unslash($_POST["post_id"])) : 0;
 
 			$id = update_post_meta( $post_id, 'ymc_term_sort', $clean_data );
 		}
@@ -357,7 +380,7 @@ class Ajax {
 	 */
 	public function ymc_delete_choices_posts() {
 
-		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce_code'])), $this->token) ) exit;
 
 		if(isset($_POST["post_id"])) {
 			$id = delete_post_meta( (int) $_POST["post_id"], 'ymc_choices_posts' );
@@ -375,7 +398,7 @@ class Ajax {
 	 */
 	public function ymc_delete_choices_icons() {
 
-		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce_code'])), $this->token) ) exit;
 
 		if(isset($_POST["post_id"])) {
 			$idIcons = delete_post_meta( (int) $_POST["post_id"], 'ymc_terms_icons' );
@@ -393,14 +416,13 @@ class Ajax {
 	 */
 	public function ymc_options_icons() {
 
-		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce_code'])), $this->token) ) exit;
 
-		$postedData = $_POST['params'];
-		$tempData   = str_replace("\\", "",$postedData);
+		$tempData = !empty($_POST["params"]) ? sanitize_text_field(wp_unslash($_POST["params"])) : '';
 		$cleanData  = json_decode($tempData, true);
 
 		if(isset($_POST["post_id"])) {
-			$id = update_post_meta( (int) $_POST["post_id"], 'ymc_terms_align', $cleanData);
+			$id = update_post_meta( (int) sanitize_text_field(wp_unslash($_POST["post_id"])), 'ymc_terms_align', $cleanData);
 		}
 
 		$data = array(
@@ -411,102 +433,17 @@ class Ajax {
 	}
 
 	/**
-	 * Handle updating posts based on the received data.
-	 */
-	public function ymc_updated_posts() {
-
-		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
-
-		$post_types = sanitize_text_field($_POST["cpt"]);
-		$cpts = !empty( $post_types ) ? explode(',', $post_types) : 'post';
-		$tax = $_POST['tax'];
-		$terms = $_POST['terms'];
-		$output = '';
-
-		$taxData   = str_replace("\\", "",$tax);
-		$termsData   = str_replace("\\", "",$terms);
-
-		$taxChecked  = json_decode($taxData, true);
-		$termsChecked  = json_decode($termsData, true);
-
-		$arg = [
-			'post_type' => $cpts,
-			'orderby' => 'title',
-			'order' => 'ASC',
-			'posts_per_page' => 10
-		];
-
-		if ( is_array($taxChecked) && is_array($termsChecked) && count($termsChecked) > 0 ) {
-
-			$params_choices = [
-				'relation' => 'OR'
-			];
-
-			foreach ( $taxChecked as $tax ) {
-
-				$terms = get_terms([
-					'taxonomy' => $tax,
-					'hide_empty' => false
-				]);
-
-				if( is_array( $terms ) && ! is_wp_error( $terms ) ) {
-
-					$arr_terms_ids = [];
-
-					foreach( $terms as $term ) {
-
-						if( in_array($term->term_id, $termsChecked) ) {
-							array_push($arr_terms_ids, $term->term_id);
-						}
-					}
-
-					$params_choices[] = [
-						'taxonomy' => $tax,
-						'field'    => 'id',
-						'terms'    => $arr_terms_ids
-					];
-
-					$arr_terms_ids = null;
-				}
-			}
-
-			$arg['tax_query'] = $params_choices;
-		}
-
-		$query = new \WP_query($arg);
-
-		if ( $query->have_posts() ) {
-
-			while ($query->have_posts()) {
-
-				$query->the_post();
-
-				$output .= '<li><span class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">
-				<span class="postID">ID: '.get_the_ID().'</span> <span class="postTitle">'.get_the_title(get_the_ID()).'</span></span></li>';
-			}
-		}
-
-		$data = array(
-			'output' => $output,
-			'found' => $query->found_posts
-		);
-
-		wp_send_json($data);
-	}
-
-	/**
 	 * Updates the post meta with the provided data for terms options and sends a JSON response.
 	 */
 	public function ymc_options_terms() {
 
-		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce_code'])), $this->token) ) exit;
 
-		$postedData = $_POST['params'];
-		$tempData   = str_replace("\\", "",$postedData);
+		$tempData = !empty($_POST["params"]) ? sanitize_text_field(wp_unslash($_POST["params"])) : '';
 		$cleanData  = json_decode($tempData, true);
 
 		if(isset($_POST["post_id"])) {
-			$id = update_post_meta( (int) $_POST["post_id"], 'ymc_terms_options', $cleanData);
+			$id = update_post_meta( (int) sanitize_text_field(wp_unslash($_POST["post_id"])), 'ymc_terms_options', $cleanData);
 		}
 
 		$data = array(
@@ -521,14 +458,13 @@ class Ajax {
 	 */
 	public function ymc_taxonomy_options() {
 
-		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce_code'])), $this->token) ) exit;
 
-		$postedData = $_POST['params'];
-		$tempData   = str_replace("\\", "",$postedData);
+		$tempData = !empty($_POST["params"]) ? sanitize_text_field(wp_unslash($_POST["params"])) : '';
 		$cleanData  = json_decode($tempData, true);
 
 		if(isset($_POST["post_id"])) {
-			$id = update_post_meta( (int) $_POST["post_id"], 'ymc_taxonomy_options', $cleanData);
+			$id = update_post_meta( (int) sanitize_text_field(wp_unslash($_POST["post_id"])), 'ymc_taxonomy_options', $cleanData);
 		}
 
 		$data = array(
@@ -543,9 +479,9 @@ class Ajax {
 	 */
 	public function ymc_export_settings() {
 
-		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce_code'])), $this->token) ) exit;
 
-		$post_id = sanitize_text_field($_POST["post_id"]);
+		$post_id = !empty($_POST["post_id"]) ? (int) sanitize_text_field(wp_unslash($_POST["post_id"])) : 0;
 
 		$need_options = [];
 		$options = get_post_meta( $post_id );
@@ -570,9 +506,9 @@ class Ajax {
 			}
 		}
 
-		$json_data = json_encode($need_options);
+		$json_data = wp_json_encode($need_options);
 
-		echo $json_data;
+		echo wp_kses_post($json_data);
 		exit;
 	}
 
@@ -581,15 +517,14 @@ class Ajax {
 	 */
 	public function ymc_import_settings() {
 
-		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce($_POST['nonce_code'], $this->token) ) exit;
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce_code'])), $this->token) ) exit;
 
-		$post_id = sanitize_text_field($_POST["post_id"]);
-		$posted_data = $_POST['params'];
-		$temp_data = str_replace("\\", "", $posted_data);
+		$post_id = !empty($_POST["post_id"]) ? (int) sanitize_text_field(wp_unslash($_POST["post_id"])) : 0;
+		$temp_data = !empty($_POST["params"]) ? sanitize_text_field(wp_unslash($_POST["params"])) : '';
 		$clean_data = json_decode($temp_data, true);
 		$status = 0;
 
-		if( is_array($clean_data) && count($clean_data) > 0 )
+		if( is_array($clean_data) && count($clean_data) > 0 && $post_id > 0 )
 		{
 			foreach ( $clean_data as $meta_key => $meta_value )
 			{

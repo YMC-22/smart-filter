@@ -12,7 +12,7 @@ while ($query->have_posts()) : $query->the_post();
 	$title   = get_the_title($post_id);
 	$link    = get_the_permalink($post_id);
 	$length_excerpt = !empty($ymc_post_elements['length_excerpt']) ? esc_attr($ymc_post_elements['length_excerpt']) : 30;
-	$button_text = !empty($ymc_post_elements['button_text']) ? $ymc_post_elements['button_text'] : 'Read More';
+	$button_text = !empty($ymc_post_elements['button_text']) ? $ymc_post_elements['button_text'] : __('Read More', 'ymc-smart-filter');
 	$class_popup = ( $ymc_popup_status === 'off' ) ? '' : 'ymc-popup';
 	$post_date_format = apply_filters('ymc_post_date_format_'.$filter_id.'_'.$target_id, 'd, M Y');
 	$image_post = null;
@@ -41,7 +41,7 @@ while ($query->have_posts()) : $query->the_post();
 			break;
 		case 'excerpt_first_block' :
 			preg_match_all("/(<p>|<h1>|<h2>|<h3>|<h4>|<h5>|<h6>)(.*)(<\/p>|<\/h1>|<\/h2>|<\/h3>|<\/h4>|<\/h5>|<\/h6>)/U", $content, $matches);
-			$content = strip_tags($matches[0][0]);
+			$content  = wp_strip_all_tags($matches[0][0]);
 			$c_length = strlen($content);
 			$content  = wp_trim_words($content, $c_length);
 			break;
@@ -53,7 +53,7 @@ while ($query->have_posts()) : $query->the_post();
 
 	$content  = wp_trim_words($content, $c_length);
 
-	$read_more = apply_filters('ymc_post_read_more_'.$filter_id.'_'.$target_id, __($button_text,'ymc-smart-filter'));
+	$read_more = apply_filters('ymc_post_read_more_'.$filter_id.'_'.$target_id, $button_text);
 	$target = "target=" . $ymc_link_target . "";
 
 	$list_categories = '';
@@ -72,7 +72,7 @@ while ($query->have_posts()) : $query->the_post();
 		}
 	}
 
-	echo '<article class="ymc-'.esc_attr($post_layout).' post-'.get_the_id().' post-item fade-in">';
+	echo '<article class="ymc-'.esc_attr($post_layout).' post-'.esc_attr(get_the_id()).' post-item fade-in">';
 
 	if( !empty($image_post) && $ymc_post_elements['image'] === 'show' ) :
 	echo '<figure class="media">'. wp_kses_post($image_post);

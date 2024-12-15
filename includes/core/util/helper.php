@@ -244,6 +244,7 @@ if( !function_exists('sortTaxTerms') )
  * @param mixed $data The data to be debugged.
  * @param bool $flag Optional. Whether to use var_dump instead of print_r. Default false.
  */
+/*
 if( !function_exists('debugEntries') )
 {
 	function debugEntries( $data, $flag=false )
@@ -288,6 +289,7 @@ if( !function_exists('debugEntries') )
         <?php
 	}
 }
+*/
 
 
 /**
