@@ -1840,7 +1840,7 @@ $font-size: 16;
 		}
 		.icons-entry {
 			overflow-y: auto;
-			height: 500px;
+			max-height: 420px;
 			&::-webkit-scrollbar {
 				width: 5px;
 			}
