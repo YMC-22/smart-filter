@@ -36,7 +36,7 @@
                             <?php echo esc_html__('Desc', 'ymc-smart-filter'); ?>
                         </option>
                         <option value="manual" <?php if ($ymc_sort_terms === 'manual') {echo "selected";} ?>>
-                            <?php echo esc_html__('Manual', 'ymc-smart-filter'); ?>
+                            <?php echo esc_html__('Manually', 'ymc-smart-filter'); ?>
                         </option>
                     </select>
                 </div>
@@ -787,7 +787,7 @@
                 <div class="from-element">
 
                     <label class="form-label">
-                        <?php echo esc_html__('Type', 'ymc-smart-filter');?>
+                        <?php echo esc_html__('Pagination Type', 'ymc-smart-filter');?>
                         <span class="information">
                     <?php echo esc_html__('Select pagination type.', 'ymc-smart-filter');?>
                 </span>
@@ -815,9 +815,9 @@
 
                 <div class="from-element">
                     <label class="form-label">
-                        <?php echo esc_html__('Hide', 'ymc-smart-filter');?>
+                        <?php echo esc_html__('Disable Pagination', 'ymc-smart-filter');?>
                         <span class="information">
-                    <?php echo esc_html__('Hide pagination.', 'ymc-smart-filter');?>
+                    <?php echo esc_html__('Hide pagination on the page.', 'ymc-smart-filter');?>
                 </span>
                     </label>
 
