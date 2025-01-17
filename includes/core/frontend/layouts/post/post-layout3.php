@@ -64,7 +64,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			    $term_list = get_the_terms($post_id, $tax);
 
-			    if( $term_list ) {
+			    if( $term_list && ! is_wp_error($term_list)) {
 				    foreach($term_list as $term_single) {
 					    $list_categories .= '<span class="cat-inner '. esc_attr($term_single->slug) .'">'. esc_html($term_single->name) .'</span>';
 				    }

@@ -72,15 +72,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			    $term_list = get_the_terms($post_id, $tax);
 
-			    if( $term_list ) {
+			    if( $term_list && ! is_wp_error($term_list) ) {
 				    foreach($term_list as $term_single) {
-					    $list_categories .= '<span class="cat-inner">'. esc_html($term_single->name) .'</span>';
+					    $list_categories .= '<span class="cat-inner '.esc_attr($term_single->slug).'">'. esc_html($term_single->name) .'</span>';
 				    }
 			    }
 		    }
 	    }
 
-        echo '<article class="ymc-'.esc_attr($post_layout).' post-'.esc_attr(get_the_id()).' post-item '.esc_attr($class_animation).'">';
+        echo '<article class="ymc-'.esc_attr($post_layout).' post-'.esc_attr($post_id).' post-item '.esc_attr($class_animation).'">';
 
         echo '<div class="col col-1">';
 	    echo '<div class="col-inner"><span class="date">'. esc_html(get_the_date($post_date_format)) .'</span></div>';

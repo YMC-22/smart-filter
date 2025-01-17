@@ -44,7 +44,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         $read_more = apply_filters('ymc_post_read_more_'.$filter_id.'_'.$target_id, $button_text);
         $target = "target=" . $ymc_link_target . "";
 
-        echo '<article class="ymc-'.esc_attr($post_layout).' post-'.esc_attr(get_the_id()).' post-item '.esc_attr($class_animation).'">';
+        echo '<article class="ymc-'.esc_attr($post_layout).' post-'.esc_attr($post_id).' post-item '.esc_attr($class_animation).'">';
 
 	    if( $ymc_post_elements['title'] === 'show' ) :
 		    echo '<header class="title">';

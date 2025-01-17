@@ -82,11 +82,11 @@ $arrOptions['terms_settings'] = arrayToObject( generalArrayMerging( $ymc_terms_o
 
 				$terms_list = get_the_terms($post_id, $tax);
 
-				if( is_array($terms_list ) && count($terms_list) > 0 ) {
+				if( is_array($terms_list) && ! is_wp_error($terms_list) && count($terms_list) > 0 ) {
 
 					foreach($terms_list as $term) {
 
-						$all_terms .= '<span class="category__item">'. esc_html($term->name) .'</span>';
+						$all_terms .= '<span class="category__item '.esc_attr($term->slug).'">'. esc_html($term->name) .'</span>';
 					}
 				}
 			}

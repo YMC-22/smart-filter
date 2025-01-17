@@ -64,7 +64,7 @@ while ($query->have_posts()) : $query->the_post();
 
 			$term_list = get_the_terms($post_id, $tax);
 
-			if( $term_list ) {
+			if( $term_list && ! is_wp_error($term_list)) {
 				foreach($term_list as $term_single) {
 					$list_categories .= '<span class="cat-inner '. esc_attr($term_single->slug) .'">'. esc_html($term_single->name) .'</span>';
 				}
@@ -72,7 +72,7 @@ while ($query->have_posts()) : $query->the_post();
 		}
 	}
 
-	echo '<article class="ymc-'.esc_attr($post_layout).' post-'.esc_attr(get_the_id()).' post-item fade-in">';
+	echo '<article class="ymc-'.esc_attr($post_layout).' post-'.esc_attr($post_id).' post-item fade-in">';
 
 	if( !empty($image_post) && $ymc_post_elements['image'] === 'show' ) :
 	echo '<figure class="media">'. wp_kses_post($image_post);
