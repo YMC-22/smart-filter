@@ -83,7 +83,7 @@ while ($query->have_posts()) : $query->the_post();
 	endif;
 
 	if( !empty($list_categories) && $ymc_post_elements['tag'] === 'show' ) :
-		echo '<div class="category">'. wp_kses_post($list_categories) .'</div>';
+		echo '<div class="category">'. wp_kses($list_categories, ['span' => ['class' => true]]) .'</div>';
 	endif;
 
 	if( $ymc_post_elements['title'] === 'show' ) :

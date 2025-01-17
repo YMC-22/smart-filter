@@ -122,7 +122,7 @@ $arrOptions['terms_settings'] = arrayToObject( generalArrayMerging( $ymc_terms_o
 				endif;
 
 				if( !empty($all_terms) && $ymc_post_elements['tag'] === 'show' ) :
-					$layout .= '<div class="category">'. wp_kses_post($all_terms) .'</div>';
+					$layout .= '<div class="category">'. wp_kses($all_terms, ['span' => ['class' => true]]) .'</div>';
 				endif;
 
 				$layout .= '<div class="date_author">';
