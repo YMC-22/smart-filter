@@ -1268,7 +1268,7 @@
                 'action': 'ymc_selected_posts',
                 'nonce_code' : _smart_filter_object.nonce,
                 'cpt' : valuesCptString,
-                'paged' : 0
+                'clear_search' : true
             };
 
             $.ajax({
@@ -1282,6 +1282,7 @@
                 },
                 success: function (res) {
                     container.removeClass('loading').find('.preloader').remove();
+                    _smart_filter_object.current_page = 1;
 
                     // Get posts
                     let dataPosts = (JSON.parse(res.lists_posts));

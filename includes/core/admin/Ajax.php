@@ -116,12 +116,12 @@ class Ajax {
 		if( !empty($_POST["cpt"]) ) {
 			$post_type   = sanitize_text_field(wp_unslash($_POST["cpt"]));
 		}
-		if( !empty($_POST["paged"]) ) {
+		if( !empty($_POST["paged"] ) ) {
 			$paged = (int) sanitize_text_field(wp_unslash($_POST['paged']));
+			$paged += 1;
 		}
 
 		$post_types = ! empty( $post_type ) ? explode(',', $post_type) : 'post';
-		$paged += 1;
 		$arr_posts = [];
 
 		// Get posts
