@@ -15,6 +15,7 @@ class Filters {
 
 		add_filter('ymc_filter_layouts',array($this, 'ymc_filter_layouts'), 3, 1);
 		add_filter('ymc_post_layouts', array($this, 'ymc_post_layouts'), 3, 1);
+		add_filter('ymc_featured_post_layout', array($this, 'ymc_featured_post_layout'), 3, 1);
 		add_filter('ymc_pagination_type', array($this, 'ymc_pagination_type'), 3, 1);
 		add_filter('ymc_order_post_by', array($this, 'ymc_order_post_by'), 3, 1);
 		add_filter('ymc_filter_font', array($this, 'ymc_filter_font'), 3, 1);
@@ -66,6 +67,21 @@ class Filters {
 		];
 
 		return $layout;
+	}
+
+
+	/**
+	 * Filters and returns an array of different featured post layouts with their corresponding labels.
+	 *
+	 * @param array $layout The existing layout array.
+	 * @return array Associative array of featured post layout keys and their labels
+	 */
+	public function ymc_featured_post_layout() {
+
+		return [
+				"featured-post-layout-default" => __('Default Layout','ymc-smart-filter'),
+				"featured-post-layout-custom"  =>  __('Custom Layout','ymc-smart-filter')
+			];
 	}
 
 

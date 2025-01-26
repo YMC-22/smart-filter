@@ -57,7 +57,6 @@ class Meta_Boxes {
 			update_post_meta( $post_id, 'ymc_terms_icons', $terms_icons );
 		}
 
-
 		// Choices Posts
 		if( isset($_POST['ymc-choices-posts']) ) {
 			$choices_posts =  array_map( 'sanitize_text_field', wp_unslash($_POST['ymc-choices-posts']));
@@ -68,6 +67,30 @@ class Meta_Boxes {
 		if( isset($_POST['ymc-exclude-posts']) ) {
 			$exclude_posts = sanitize_text_field(wp_unslash($_POST['ymc-exclude-posts']));
 			update_post_meta( $post_id, 'ymc_exclude_posts', $exclude_posts );
+		}
+
+		// Featured Posts
+		if( isset($_POST['ymc_featured_posts']) ) {
+			$featured_posts =  array_map( 'sanitize_text_field', wp_unslash($_POST['ymc_featured_posts']));
+			update_post_meta( $post_id, 'ymc_featured_posts', $featured_posts );
+		}
+
+        // Featured Post Layout
+		if( isset($_POST['ymc_featured_post_layout']) ) {
+			$featured_post_layout = sanitize_text_field(wp_unslash($_POST['ymc_featured_post_layout']));
+			update_post_meta( $post_id, 'ymc_featured_post_layout', $featured_post_layout );
+		}
+
+        // Location Featured Posts
+		if( isset($_POST['ymc_location_featured_posts']) ) {
+			$location_featured_posts = sanitize_text_field(wp_unslash($_POST['ymc_location_featured_posts']));
+			update_post_meta( $post_id, 'ymc_location_featured_posts', $location_featured_posts );
+		}
+
+        // Featured Post Status
+		if( isset($_POST['ymc_featured_post_status']) ) {
+			$featured_post_status = sanitize_text_field(wp_unslash($_POST['ymc_featured_post_status']));
+			update_post_meta( $post_id, 'ymc_featured_post_status', $featured_post_status );
 		}
 
 		// Taxonomy Relation

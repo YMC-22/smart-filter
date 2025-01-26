@@ -23,19 +23,14 @@ class Variables {
 	public $cpt = 'post';
 
 	public $tax = 'category';
-
 	public $tax_sel = array();
-
 	public $terms_sel = array();
-
 	public $tax_rel = 'AND';
 
 	public $tax_sort = null;
-
 	public $term_sort = null;
-
 	public $choices_posts = null;
-
+	public $featured_posts = null;
 	public $ymc_exclude_posts = 'off';
 
 	public $ymc_terms_icons = null;
@@ -45,6 +40,7 @@ class Variables {
 	public $ymc_terms_options = null;
 	public $ymc_taxonomy_options = null;
 	public $ymc_hierarchy_terms = 0;
+	public $ymc_location_featured_posts = 'top_before';
 
 
 	/**
@@ -54,6 +50,8 @@ class Variables {
 	public $filter_status = 'on';
 
 	public $sort_status = 'off';
+
+	public $ymc_featured_post_status = 'off';
 
 	public $filter_layout = 'filter-layout1';
 
@@ -66,6 +64,8 @@ class Variables {
 	public $filter_active_color = '';
 
 	public $ymc_post_layout = 'post-layout1';
+
+	public $ymc_featured_post_layout = 'featured-post-layout-default';
 
 	public $ymc_post_text_color = '';
 
@@ -330,6 +330,38 @@ class Variables {
 		return $this->choices_posts;
 	}
 
+	public function get_featured_posts( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_featured_posts' ) ) {
+			return get_post_meta( $post_id, 'ymc_featured_posts', true );
+		}
+		return $this->featured_posts;
+	}
+
+	public function get_location_featured_posts( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_location_featured_posts' ) ) {
+			return get_post_meta( $post_id, 'ymc_location_featured_posts', true );
+		}
+		return $this->ymc_location_featured_posts;
+	}
+
+	public function get_featured_post_status( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_featured_post_status' ) ) {
+			return get_post_meta( $post_id, 'ymc_featured_post_status', true );
+		}
+		return $this->ymc_featured_post_status;
+	}
+
+	public function get_featured_post_layout( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_featured_post_layout' ) ) {
+			return get_post_meta( $post_id, 'ymc_featured_post_layout', true );
+		}
+		return $this->ymc_featured_post_layout;
+	}
+
 	public function get_exclude_posts( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_exclude_posts' ) ) {
@@ -337,7 +369,6 @@ class Variables {
 		}
 		return $this->ymc_exclude_posts;
 	}
-
 
 	public function get_terms_icons( $post_id ) {
 

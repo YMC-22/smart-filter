@@ -839,3 +839,24 @@ if( !function_exists('hierarchyTermsLayout') ) :
 
 endif;
 
+
+/**
+ * Debug in Console
+ */
+if ( !function_exists( 'js_console_log' ) ) {
+	function js_console_log( $x, $as_text = true ) {
+		$str = '<div class="php-to-js-console-log" style="display: none !important;" data-as-text="' . esc_attr( (bool) $as_text ) .
+		       '" data-variable="' . htmlspecialchars( wp_json_encode( $x ) ) . '">' . htmlspecialchars( var_export( $x, true ) ) . '</div>';
+		echo wp_kses($str, ['div' => ['class' => true, 'style' => true, 'data-as-text' => true, 'data-variable' => true]]);
+	}
+	
+	if ( function_exists( 'js_console_log' ) ) {
+		add_action( 'wp_footer', function () {
+			echo '<script type="text/javascript">jQuery(document).ready(function ($) { 
+    		$(".php-to-js-console-log").each(function (i, el) { let $e = $(el); console.log("PHP debug is below:"); 
+            (!$e.attr("data-as-text")) ? console.log(JSON.parse($e.attr("data-variable"))) : console.log($e.text()); }); });</script>';
+		}, 99999 );
+	}
+}
+
+

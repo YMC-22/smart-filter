@@ -173,11 +173,28 @@
                 revert: 150,
                 containment: "parent",
                 start: function( event, ui ) {
-                    console.log(ui.item[0]);
                     ui.item[0].closest('.include-posts').classList.add('dragging');
                 },
                 stop: function( event, ui ) {
                     ui.item[0].closest('.include-posts').classList.remove('dragging');
+                }
+            });
+        }
+
+        /**
+         * Makes the selected featured posts sortable via drag and drop.
+         */
+        function sortSelectedFeaturedPosts() {
+            $("#general #featured-posts .selected-posts .selected-posts__inner").sortable({
+                axis: 'y',
+                cursor: "move",
+                revert: 150,
+                containment: "parent",
+                start: function( event, ui ) {
+                    ui.item[0].closest('.selected-posts__inner').classList.add('dragging');
+                },
+                stop: function( event, ui ) {
+                    ui.item[0].closest('.selected-posts__inner').classList.remove('dragging');
                 }
             });
         }
@@ -725,7 +742,7 @@
         function loadSelectedPosts() {
 
             const optionsInfinityScroll = {
-                root: document.querySelector("#selection-posts .choices-list"),
+                root: document.querySelector(".ymc__container-settings #general #selection-posts .choices-list"),
                 rootMargin: '0px',
                 threshold: 0.8
             }
@@ -786,30 +803,158 @@
                 });
             }, optionsInfinityScroll);
             
-            postsObserver.observe(document.querySelector('#selection-posts .choices-list li:last-child'));
+            postsObserver.observe(document.querySelector('.ymc__container-settings #general #selection-posts .choices-list li:last-child'));
         }
 
+        /**
+         * Featured Posts loaded on scroll
+         */
+        function loadFeaturedPosts() {
+
+            const optionsInfinityScroll = {
+                root: document.querySelector(".ymc__container-settings #general #featured-posts .list-posts__inner"),
+                rootMargin: '0px',
+                threshold: 0.8
+            }
+
+            // IntersectionObserver for Posts loaded on scroll
+            const postsObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting && !entry.target.classList.contains('isActive')) {
+
+                        entry.target.classList.add('isActive');
+
+                        let choicesList = $('.ymc__container-settings #general #featured-posts .list-posts__inner');
+                        let valuesCptArray = Array.from(document.querySelectorAll('.ymc__container-settings #general #ymc-cpt-select option:checked')).map(el => el.value);
+                        let valuesCptString = valuesCptArray.join(',');
+                        let wrapper = this;
+                        let container = $('#featured-posts .list-posts');
+
+                        const data = {
+                            'action': 'ymc_loaded_featured_posts',
+                            'nonce_code' : _smart_filter_object.nonce,
+                            'cpt' : valuesCptString,
+                            'paged' : _smart_filter_object.current_page
+                        };
+
+                        $.ajax({
+                            type: 'POST',
+                            dataType: 'json',
+                            url: _smart_filter_object.ajax_url,
+                            data: data,
+                            beforeSend: function () {
+                                container.addClass('loading').
+                                prepend(`<img class="preloader" src="${pathPreloader}">`);
+                            },
+                            success: function (res) {
+                                container.removeClass('loading').find('.preloader').remove();
+                                _smart_filter_object.current_page++;
+
+                                // Get posts
+                                let dataPosts = (JSON.parse(res.lists_posts));
+
+                                if(Object.keys(dataPosts).length > 0) {
+                                    for (let key in dataPosts) {
+                                        choicesList.append(dataPosts[key]);
+                                    }
+                                }
+                                else {
+                                    wrapper.dataset.loading = 'false';
+                                }
+                            },
+                            error: function (obj, err) {
+                                console.log( obj, err );
+                            }
+                        });
+
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, optionsInfinityScroll);
+
+            postsObserver.observe(document.querySelector('.ymc__container-settings #general #featured-posts .list-posts__inner li:last-child'));
+            
+        }
+
+        /**
+         * Reset Selected & Featured posts
+         */
         function resetSelectedPosts() {
             let choicesList = $('#selection-posts .choices-list');
+            let choicesFeaturedList = $('#featured-posts .list-posts__inner');
             document.querySelector('#selection-posts .choices-list').dataset.loading = 'true';
+            document.querySelector('#featured-posts .list-posts__inner').dataset.loading = 'true';
             choicesList.scrollTop(0);
+            choicesFeaturedList.scrollTop(0);
             _smart_filter_object.current_page = 1;
         }
 
         /**
-         * Search posts
+         * Search choices posts
          */
         function searchPosts() {
-            let keyword = document.querySelector('#general .search-posts .input-field').value.toLowerCase();
-            let valuesCptArray = Array.from(document.querySelectorAll('#general #ymc-cpt-select option:checked')).map(el => el.value);
+            let keyword = document.querySelector('.ymc__container-settings #general .search-posts .input-field').value.toLowerCase();
+            let valuesCptArray = Array.from(document.querySelectorAll('.ymc__container-settings #general #ymc-cpt-select option:checked')).map(el => el.value);
             let valuesCptString = valuesCptArray.join(',');
-            let choicesList = $('#selection-posts .choices-list');
-            let container = $('#selection-posts .choices');
+            let choicesList = $('.ymc__container-settings #selection-posts .choices-list');
+            let container = $('.ymc__container-settings #selection-posts .choices');
 
-            document.querySelector('#selection-posts .choices-list').dataset.loading = 'false';
+            document.querySelector('.ymc__container-settings #selection-posts .choices-list').dataset.loading = 'false';
 
             const data = {
                 'action'     : 'ymc_search_posts',
+                'nonce_code' : _smart_filter_object.nonce,
+                'phrase'     : keyword,
+                'cpt'        : valuesCptString
+            };
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: _smart_filter_object.ajax_url,
+                data: data,
+                beforeSend: function () {
+                    container.addClass('loading').
+                    prepend(`<img class="preloader" src="${pathPreloader}">`);
+                },
+                success: function (res) {
+                    container.removeClass('loading').find('.preloader').remove();
+
+                    // Get posts
+                    let dataPosts = (JSON.parse(res.lists_posts));
+                    container.find('.number-posts').html(res.found_posts);
+                    choicesList.empty();
+
+                    if(Object.keys(dataPosts).length > 0) {
+                        for (let key in dataPosts) {
+                            choicesList.append(dataPosts[key]);
+                        }
+                    }
+                    else {
+                        choicesList.append('<li class="no-result">No results found</li>');
+                    }
+                },
+                error: function (obj, err) {
+                    console.log( obj, err );
+                }
+            });
+        }
+
+        /**
+         * Search featured posts
+         */
+        function searchFeaturedPosts() {
+            let keyword = document.querySelector('.ymc__container-settings #general .search-featured-posts .input-field').value.toLowerCase();
+            let valuesCptArray = Array.from(document.querySelectorAll('.ymc__container-settings #general #ymc-cpt-select option:checked')).map(el => el.value);
+            let valuesCptString = valuesCptArray.join(',');
+            let choicesList = $('.ymc__container-settings #featured-posts .list-posts__inner');
+            let container = $('.ymc__container-settings #featured-posts .list-posts');
+
+            document.querySelector('#featured-posts .list-posts__inner').dataset.loading = 'false';
+
+            const data = {
+                'action'     : 'ymc_search_featured_posts',
                 'nonce_code' : _smart_filter_object.nonce,
                 'phrase'     : keyword,
                 'cpt'        : valuesCptString
@@ -862,6 +1007,9 @@
                 let choicesList = $('#selection-posts .choices-list');
                 let valuesList  = $('#selection-posts .values-list');
                 let foundPosts = $('#selection-posts .choices .number-posts');
+                let foundFeaturedPosts = $('#featured-posts .list-posts .number-posts');
+                let choicesFeaturedList = $('#featured-posts .list-posts__inner');
+                let valuesFeaturedList  = $('#featured-posts .selected-posts__inner');
                 let valuesCptArray = Array.from(document.querySelectorAll('#general #ymc-cpt-select option:checked')).map(el => el.value);
                 let valuesCptString = valuesCptArray.join(',');
 
@@ -913,11 +1061,16 @@
 
                         // Get posts
                         let dataPosts = (JSON.parse(res.lists_posts));
+                        let dataFeaturedPosts = (JSON.parse(res.lists_featured_posts));
 
                         valuesList.empty();
                         choicesList.empty();
+                        choicesFeaturedList.empty();
+                        valuesFeaturedList.empty();
                         foundPosts.html(res.found_posts);
+                        foundFeaturedPosts.html(res.found_posts);
 
+                        // Selected posts
                         if(Object.keys(dataPosts).length > 0) {
                             for (let key in dataPosts) {
                                 choicesList.append(dataPosts[key]);
@@ -926,6 +1079,17 @@
                         else {
                             choicesList.html(`<li class="notice">No posts</li>`);
                         }
+
+                        // FeaturedPosts
+                        if(Object.keys(dataFeaturedPosts).length > 0) {
+                            for (let key in dataFeaturedPosts) {
+                                choicesFeaturedList.append(dataFeaturedPosts[key]);
+                            }
+                        }
+                        else {
+                            choicesFeaturedList.html(`<li class="notice">No posts</li>`);
+                        }
+
                     },
                     error: function (obj, err) {
                         console.log( obj, err );
@@ -1167,7 +1331,7 @@
             }
         });
 
-        $(document).on('click','#selection-posts .choices-list .ymc-rel-item-add', function (e) {
+        $(document).on('click','.ymc__container-settings #selection-posts .choices-list .ymc-rel-item-add', function (e) {
 
             let postID = $(e.target).closest('.ymc-rel-item-add').data('id');
             let titlePosts = $(e.target).closest('.ymc-rel-item-add').find('.postTitle').text();
@@ -1187,7 +1351,7 @@
             sortSelectedPosts();
         });
 
-        $(document).on('click','#selection-posts .values-list .remove_item', function (e) {
+        $(document).on('click','.ymc__container-settings #selection-posts .values-list .remove_item', function (e) {
             e.preventDefault();
 
             let postID = $(e.target).closest('.ymc-rel-item').data('id');
@@ -1234,15 +1398,15 @@
         });
 
         // Search Posts in Choices Box
-        $(document).on('click','#general .search-posts .btn-submit', function (e) {
+        $(document).on('click','.ymc__container-settings #general .search-posts .btn-submit', function (e) {
             e.preventDefault();
-            let keyword = document.querySelector('#general .search-posts .input-field').value;
+            let keyword = document.querySelector('.ymc__container-settings #general .search-posts .input-field').value;
             if( keyword.length > 0 ) {
                 searchPosts();
             }
         });
 
-        $(document).on('input','#general .search-posts .input-field', function (e) {
+        $(document).on('input','.ymc__container-settings #general .search-posts .input-field', function (e) {
             let keyword = document.querySelector('#general .search-posts .input-field').value.toLowerCase();
             let btnClear = $('.search-posts .clear-button');
             btnClear.addClass('active');
@@ -1251,7 +1415,7 @@
             }
         });
 
-        $(document).on('click','#general .search-posts .clear-button', function (e) {
+        $(document).on('click','.ymc__container-settings #general .search-posts .clear-button', function (e) {
 
             let choicesList = $('#selection-posts .choices-list');
             let container = $('#selection-posts .choices');
@@ -1301,8 +1465,141 @@
             });
         });
 
+        // Featured Posts
+        $(document).on('click', '.ymc__container-settings #general #featured-posts .list-posts .post-item', function (e) {
+
+            let postID = $(this).data('postid');
+            let postTitle = $(this).find('.post-title').text();
+            let selectedPosts =  $(this).closest('#featured-posts').find('.selected-posts .selected-posts__inner');
+            let numberPosts = $(this).closest('#featured-posts').find('.selected-posts .number-posts');
+            $(this).addClass('disabled');
+
+            selectedPosts.append(`<li class="post-item">
+                          <input type="hidden" name="ymc_featured_posts[]" value="${postID}">
+                          <div class="post-title" data-postid="${postID}">${postTitle}
+                          <a href="#" class="icon-minus remove_item"></a></div></li>`);
+
+            numberPosts.html(selectedPosts.find('li').length);
+
+            sortSelectedFeaturedPosts();
+        });
+
+        $(document).on('click','.ymc__container-settings #general #featured-posts .selected-posts .post-item .remove_item', function (e) {
+            e.preventDefault();
+
+            let postID = $(this).closest('.post-title').data('postid');
+            let numberPosts = $(this).closest('#featured-posts').find('.selected-posts .number-posts');
+            let selectedPosts =  $(this).closest('#featured-posts').find('.selected-posts .selected-posts__inner');
+            let filterId = $('.ymc__container-settings #general #ymc-cpt-select').data('postid');
+
+            $('#general #featured-posts .list-posts__inner .post-item').each(function (){
+                if( postID === $(this).data('postid')) {
+                    $(this).removeClass('disabled');
+                }
+            });
+
+            //  Deletes featured posts
+            if( $(this).closest('.selected-posts__inner').find('li').length - 1 === 0 ) {
+
+                const data = {
+                    'action': 'ymc_delete_featured_posts',
+                    'nonce_code' : _smart_filter_object.nonce,
+                    'post_id' : filterId
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: _smart_filter_object.ajax_url,
+                    data: data,
+                    beforeSend: function () {
+                        container.addClass('loading').
+                        prepend(`<img class="preloader" src="${pathPreloader}">`);
+                    },
+                    success: function (res) {
+                        container.removeClass('loading').find('.preloader').remove();
+                    },
+                    error: function (obj, err) {
+                        console.log( obj, err );
+                    }
+                });
+            }
+
+            $(e.target).closest('.post-item').remove();
+            numberPosts.html(selectedPosts.find('.post-item').length);
+        });
+
+        $(document).on('click','.ymc__container-settings #general .search-featured-posts .btn-submit', function (e) {
+            e.preventDefault();
+            let keyword = document.querySelector('.ymc__container-settings #general .search-featured-posts .input-field').value;
+            if( keyword.length > 0 ) {
+                console.log(keyword);
+                searchFeaturedPosts();
+            }
+        });
+
+        $(document).on('input','.ymc__container-settings #general .search-featured-posts .input-field', function (e) {
+            let keyword = document.querySelector('#general .search-featured-posts .input-field').value.toLowerCase();
+            let btnClear = $('.search-featured-posts .clear-button');
+            btnClear.addClass('active');
+            if( keyword.length === 0 ) {
+                $('#general .search-featured-posts .clear-button').trigger('click');
+            }
+        });
+
+        $(document).on('click','.ymc__container-settings #general .search-featured-posts .clear-button', function (e) {
+
+            let choicesList = $('.ymc__container-settings #featured-posts .list-posts__inner');
+            let container = $('.ymc__container-settings #featured-posts .list-posts');
+            let valuesCptArray = Array.from(document.querySelectorAll('#general #ymc-cpt-select option:checked')).map(el => el.value);
+            let valuesCptString = valuesCptArray.join(',');
+
+            document.querySelector('#featured-posts .list-posts__inner').dataset.loading = 'false';
+
+            e.target.closest('.search-featured-posts').querySelector('.input-field').value = '';
+            e.target.closest('.search-featured-posts').querySelector('.input-field').focus();
+            e.target.closest('.search-featured-posts').querySelector('.input-field').removeAttribute('disabled');
+            e.target.closest('.search-featured-posts').querySelector('.clear-button').classList.remove('active');
+
+            const data = {
+                'action': 'ymc_loaded_featured_posts',
+                'nonce_code' : _smart_filter_object.nonce,
+                'cpt' : valuesCptString,
+                'clear_search' : true
+            };
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: _smart_filter_object.ajax_url,
+                data: data,
+                beforeSend: function () {
+                    container.addClass('loading').
+                    prepend(`<img class="preloader" src="${pathPreloader}">`);
+                },
+                success: function (res) {
+                    container.removeClass('loading').find('.preloader').remove();
+                    _smart_filter_object.current_page = 1;
+
+                    // Get posts
+                    let dataPosts = (JSON.parse(res.lists_posts));
+                    container.find('.number-posts').html(res.found_posts);
+                    choicesList.empty();
+
+                    if(Object.keys(dataPosts).length > 0) {
+                        for (let key in dataPosts) {
+                            choicesList.append(dataPosts[key]);
+                        }
+                    }
+                },
+                error: function (obj, err) {
+                    console.log( obj, err );
+                }
+            });
+        });
+
         // Open Popup for Settings Term & Icons
-        $(document).on('click','#general #ymc-terms .entry-terms .choice-icon', function (e) {
+        $(document).on('click','.ymc__container-settings #general #ymc-terms .entry-terms .choice-icon', function (e) {
 
             $('#ymc-terms .entry-terms .item-inner').removeClass('open-popup');
 
@@ -1548,83 +1845,28 @@
 
         // Updated list posts in choices box
         $(document).on('click','.ymc__container-settings #general #ymc-terms input[type="checkbox"]',function (e) {
-
             // Run updated terms options
             checkedSelectedTerm(e);
-
-            /*
-            let valuesCptArray = Array.from(document.querySelectorAll('#general #ymc-cpt-select option:checked')).map(el => el.value);
-            let cpts = valuesCptArray.join(',');
-            let arrTax = [];
-            let arrTerms = [];
-            let numberPosts = document.querySelector('#selection-posts .number-posts');
-            let choicesPosts = document.querySelector('#selection-posts .list');
-
-            // Terms
-            document.querySelectorAll('#ymc-terms .item-inner:not(.all-categories)').forEach((el) => {
-                let chbox = $(el).find('input[type="checkbox"]');
-                if( chbox.is(':checked') ) {
-                    arrTerms.push(chbox.val());
-                }
-            });
-
-            // Tax
-            document.querySelectorAll('.wrapper-taxonomy .ymc-tax-checkboxes .group-elements').forEach((el) => {
-                let chbox = $(el).find('input[type="checkbox"]');
-                if( chbox.is(':checked')) {
-                    arrTax.push(chbox.val());
-                }
-            });
-
-            const data = {
-                'action': 'ymc_updated_posts',
-                'nonce_code' : _smart_filter_object.nonce,
-                'cpt' : cpts,
-                'tax' : JSON.stringify(arrTax),
-                'terms' : JSON.stringify(arrTerms),
-            };
-
-            $.ajax({
-                type: 'POST',
-                dataType: 'json',
-                url: _smart_filter_object.ajax_url,
-                data: data,
-                beforeSend: function () {
-                    container.addClass('loading').
-                    prepend(`<img class="preloader" src="${pathPreloader}">`);
-                },
-                success: function (res) {
-
-                    container.removeClass('loading').find('.preloader').remove();
-                    resetSelectedPosts();
-
-                    if( res.output ) {
-                        choicesPosts.innerHTML = res.output;
-                        numberPosts.innerHTML = res.found;
-                    }
-                    else {
-                        choicesPosts.innerHTML = '';
-                    }
-                },
-                error: function (obj, err) {
-                    console.log( obj, err );
-                }
-            });
-            */
         });
 
-        // Toggle Filter Status
+        // Toggle Status
         $(document).on('click', '.ymc__container-settings .ymc-toggle-group .slider', function (e) {
 
             let input = $(e.target).siblings('input');
 
-           // ( input.is(':checked') ) ? input.siblings('input[type="hidden"]').val('on') : input.siblings('input[type="hidden"]').val('off');
-
             if(input.is(':checked')) {
                 input.siblings('input[type="hidden"]').val('on').closest('.form-group').find('.manage-filters').show();
+
+                if($(e.target).hasClass('slider-featured-post')) {
+                    $('.ymc__container-settings #layouts .featured-posts-wrp').show();
+                }
             }
             else  {
                 input.siblings('input[type="hidden"]').val('off').closest('.form-group').find('.manage-filters').hide();
+
+                if($(e.target).hasClass('slider-featured-post')) {
+                    $('.ymc__container-settings #layouts .featured-posts-wrp').hide();
+                }
             }
 
         });
@@ -1674,13 +1916,13 @@
         });
 
         // Set Style Preloader
-        $(document).on('change', '#advanced #ymc-preloader-icon', function (e) {
+        $(document).on('change', '.ymc__container-settings #advanced #ymc-preloader-icon', function (e) {
             let preloaderURL = _smart_filter_object.path + "/includes/assets/images/" + $(this).val() + '.svg';
             $(this).closest('#ymc-preloader-icon').next('.preview-preloader').find('img').attr('src', preloaderURL);
         });
 
         // Apply Filters for Preloader Icon
-        $(document).on('change', '#advanced #ymc-filter-preloader', function (e) {
+        $(document).on('change', '.ymc__container-settings #advanced #ymc-filter-preloader', function (e) {
 
             let filter = e.target.value;
             let filterRate = document.querySelector('#advanced .filter-rate');
@@ -1704,7 +1946,7 @@
         });
 
         // Change Coefficient for Preloader Icon
-        $(document).on('input', '#advanced #ymc-filter-rate', function (e) {
+        $(document).on('input', '.ymc__container-settings #advanced #ymc-filter-rate', function (e) {
             let rate = e.target.value;
             let filter = document.querySelector('#advanced #ymc-filter-preloader');
             let preview = document.querySelector('#advanced .preview-preloader img');
@@ -1712,7 +1954,7 @@
         });
 
         // Add custom filters for Preloader Icon
-        $(document).on('input', '#advanced #ymc-filters-custom', function (e) {
+        $(document).on('input', '.ymc__container-settings #advanced #ymc-filters-custom', function (e) {
             let filters = e.target.value;
             let preview = document.querySelector('#advanced .preview-preloader img');
             preview.setAttribute('style', filters);
@@ -1767,7 +2009,7 @@
         });
 
         // Open popup Taxonomy Settings
-        $(document).on('click','#general #ymc-terms .all-categories .choice-icon', function (e) {
+        $(document).on('click','.ymc__container-settings #general #ymc-terms .all-categories .choice-icon', function (e) {
 
             let _self = $(e.target);
 
@@ -1824,11 +2066,14 @@
 
         });
 
-        // Load selected posts
-        $('#general .selection-posts .choices .choices-list').on('scroll', loadSelectedPosts);
+        // Load Selected Posts
+        $('.ymc__container-settings #general .selection-posts .choices .choices-list').on('scroll', loadSelectedPosts);
+
+        // Load Featured Posts
+        $('.ymc__container-settings #general .featured-posts .list-posts .list-posts__inner').on('scroll', loadFeaturedPosts);
         
         // Expand Selected Posts
-        $('#general .wrapper-selection .button-expand a').on('click', function (e) {
+        $('.ymc__container-settings #general .wrapper-selection .button-expand a').on('click', function (e) {
             e.preventDefault();
 
             if( !$(this).hasClass('collapse') ) {
@@ -1837,6 +2082,18 @@
                 $(this).text('expand').removeClass('collapse');
             }
             $('.choices-list,.values-list').toggleClass('expand');
+        });
+
+        // Expand Featured Posts
+        $('.ymc__container-settings #general .wrapper-featured-posts .button-featured-expand a').on('click', function (e) {
+            e.preventDefault();
+
+            if( !$(this).hasClass('collapse') ) {
+                $(this).text('collapse').addClass('collapse');
+            } else {
+                $(this).text('expand').removeClass('collapse');
+            }
+            $('.featured-posts .list-posts__inner, .featured-posts .selected-posts__inner').toggleClass('expand');
         });
 
 
@@ -1868,6 +2125,9 @@
 
         // Sort Selected Posts
         sortSelectedPosts();
+        
+        // Sort Featured Posts
+        sortSelectedFeaturedPosts();
     });
 
 }( jQuery ));

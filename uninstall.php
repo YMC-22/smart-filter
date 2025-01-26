@@ -87,7 +87,11 @@ $wpdb->get_results('DELETE FROM wp_postmeta WHERE meta_key IN (
                                   "ymc_taxonomy_options",
                                   "ymc_post_image_size",
                                   "ymc_image_clickable",
-                                  "ymc_excerpt_truncate_method"
+                                  "ymc_excerpt_truncate_method",
+                                  "ymc_featured_posts",
+                                  "ymc_location_featured_posts",
+                                  "ymc_featured_post_status",
+                                  "ymc_featured_post_layout"
                                 )');
 
 

@@ -133,6 +133,19 @@ class Shortcode {
 				}
 			}
 
+			// Before Filter insert Featured Posts
+			if ( $ymc_featured_post_status === 'on' &&
+			     $ymc_location_featured_posts === 'top_before' &&
+			     !empty($ymc_featured_posts) )
+			{
+				$filepath_featured_post = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/featured-post/" . $ymc_featured_post_layout . ".php";
+
+				if ( file_exists($filepath_featured_post) )
+				{
+					require $filepath_featured_post;
+				}
+			}
+
 			if ( $ymc_filter_status === 'on' )
 			{
 				if ( $ymc_filter_layout )
@@ -143,6 +156,19 @@ class Shortcode {
 					{
 						require $filepath_filter;
 					}
+				}
+			}
+
+			// After Filter insert Featured Posts
+			if ( $ymc_featured_post_status === 'on' &&
+			     $ymc_location_featured_posts === 'top_after' &&
+			     !empty($ymc_featured_posts) )
+			{
+				$filepath_featured_post = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/featured-post/" . $ymc_featured_post_layout . ".php";
+
+				if ( file_exists($filepath_featured_post) )
+				{
+					require $filepath_featured_post;
 				}
 			}
 
@@ -178,6 +204,19 @@ class Shortcode {
 			do_action("ymc_after_post_layout_".$id.'_'.$c_target);
 
 			echo '</div>';
+
+			// Bottom Grid insert Featured Posts
+			if ( $ymc_featured_post_status === 'on' &&
+			     $ymc_location_featured_posts === 'bottom' &&
+			     !empty($ymc_featured_posts) )
+			{
+				$filepath_featured_post = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/featured-post/" . $ymc_featured_post_layout . ".php";
+
+				if ( file_exists($filepath_featured_post) )
+				{
+					require $filepath_featured_post;
+				}
+			}
 
 			if ( $ymc_popup_status === 'on' )
 			{

@@ -673,12 +673,13 @@ $font-size: 16;
 
 					#general {
 
-						.search-posts {
+						.search-posts,
+						.search-featured-posts {
 							display: flex;
 							align-items: center;
 							.search-inner {
 								position: relative;
-								width: 90%;
+								width: 92%;
 							}
 							.input-field {
 								padding-right: 40px;
@@ -713,6 +714,12 @@ $font-size: 16;
 								line-height: unset;
 								background-color: #f6f6f6;
 								color: #0C1021;
+							}
+							input[type="search"] {
+								border: 1px solid #e0e4e9;
+								height: 35px;
+								border-radius: 0;
+								width: 100%;
 							}
 						}
 
@@ -796,6 +803,9 @@ $font-size: 16;
 												opacity: .5;
 											}
 										}
+									}
+									.no-result {
+										padding: 7px 5px 7px 10px;
 									}
 									.notice {
 										background: none;
@@ -895,6 +905,144 @@ $font-size: 16;
 							}
 						}
 
+						.featured-posts {
+							position: relative;
+							display: flex;
+							margin-bottom: 20px;
+							.col {
+								width: 50%;
+								padding: 25px 5px 5px 5px;
+								background: #f9f9f9;
+								border: 1px solid #ccc;
+								position: relative;
+							}
+							.list-posts {
+								&__inner {
+									&::-webkit-scrollbar {
+										width: 5px;
+									}
+									&::-webkit-scrollbar-thumb {
+										border-radius: 10px;
+										background: #8e8e8e;
+									}
+									&::-webkit-scrollbar-track {
+										border-radius: 5px;
+									}
+									overflow: auto;
+									height: 200px;
+									line-height: 1;
+									margin: 0;
+									padding: 0 15px 0 0;
+									border: none;
+									&.expand {
+										height: auto;
+									}
+									.post-item {
+										padding: 7px 5px 7px 10px;
+										margin-bottom: 5px;
+										cursor: pointer;
+										&.disabled {
+											pointer-events: none;
+											opacity: .5;
+										}
+										&:hover {
+											background: #e1e1e1;
+											color: #000000;
+										}
+										.post-id {
+											margin-bottom: 3px;
+										}
+										.post-title {}
+									}
+									.no-result {
+										padding: 7px 5px 7px 10px;
+									}
+								}
+							}
+							.selected-posts {
+								background-color: white;
+								&__inner {
+									&::-webkit-scrollbar {
+										width: 5px;
+									}
+									&::-webkit-scrollbar-thumb {
+										border-radius: 10px;
+										background: #8e8e8e;
+									}
+									&::-webkit-scrollbar-track {
+										border-radius: 5px;
+									}
+									overflow: auto;
+									height: 200px;
+									line-height: 1;
+									margin: 0;
+									padding: 0;
+									border: 1px solid rgba(0, 0, 0, 0);
+									&.expand {
+										height: auto;
+									}
+									&.dragging {
+										border: 1px dashed #000;
+										background: rgba(195, 258, 255, 0.25);
+									}
+									.post-item {
+										margin-bottom: 0;
+										cursor: pointer;
+										.post-title {
+											position: relative;
+											color: #28bc28;
+											padding: 12px 30px 12px 10px;
+											.icon-minus {
+												position: absolute;
+												top: 50%;
+												transform: translateY(-50%);
+												right: 7px;
+												display: none;
+												width: 20px;
+												height: 20px;
+												font-size: 14px;
+												background: #23282d;
+												color: #eee;
+												border-radius: 50%;
+												text-decoration: none;
+												&:before {
+													content: "\f460";
+													font-family: dashicons;
+													position: absolute;
+													left: 50%;
+													top: 50%;
+													transform: translate(-50%, -50%);
+												}
+											}
+											&:hover {
+												cursor: move;
+												background: #e1e1e1;
+												color: #000;
+												.icon-minus {
+													display: inline-flex;
+												}
+											}
+										}
+									}
+								}
+							}
+							.number-posts {
+								position: absolute;
+								right: 7px;
+								top: 2px;
+								font-size: 14px;
+							}
+						}
+
+						.location-featured-posts {
+							display: flex;
+							align-items: center;
+							margin-top: 10px;
+							.radio-group-item {
+								margin-right: 10px;
+							}
+						}
+
 						.choice-icon {
 							position: absolute;
 							right: 12px;
@@ -904,7 +1052,8 @@ $font-size: 16;
 							font-size: 16px;
 						}
 
-						.button-expand {
+						.button-expand,
+						.button-featured-expand {
 							text-align: right;
 							&__link {
 								position: relative;
@@ -979,15 +1128,6 @@ $font-size: 16;
 							}
 							.ymc-btn-reload {
 								right: 15px;
-							}
-						}
-
-						.search-posts {
-							input[type="search"] {
-								border: 1px solid #e0e4e9;
-								height: 35px;
-								border-radius: 0;
-								width: 100%;
 							}
 						}
 

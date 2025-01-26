@@ -2441,7 +2441,7 @@
 
 
         /*** Popup ***/
-        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .container-posts .post-entry .post-item .ymc-popup', popupPost);
+        $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .post-item .ymc-popup', popupPost);
 
         $(document).on('click.ymc_smart_filter','.ymc-smart-filter-container .ymc-popup-wrp .btn-close', popupClose);
 

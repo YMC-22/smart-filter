@@ -11,7 +11,6 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 
 ?>
 
-
 <div class="header">
 	<?php echo esc_html__('General', 'ymc-smart-filter'); ?>
 </div>
@@ -441,16 +440,16 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 				<label class="form-label">
 					<?php echo esc_html__('Add Post(s)', 'ymc-smart-filter'); ?>
 					<span class="information">
-                    <?php echo esc_html__('Include / Exclude posts in the post grid on the frontend. To exclude posts, check option "Exclude posts". By default, posts are included in the grid. Drag and Drop posts for custom sorting', 'ymc-smart-filter');?>
+                    <?php echo esc_html__('Include / Exclude posts in the post grid on the frontend. To exclude posts, check option "Exclude posts". By default, posts are included in the grid. Drag and Drop posts for custom sorting.', 'ymc-smart-filter');?>
                     </span>
 				</label>
 
 				<div class="search-posts">
                     <div class="search-inner">
-                        <input class="input-field" type="text" placeholder="Search..." />
+                        <input class="input-field" type="text" placeholder="<?php esc_html_e('Search...', 'ymc-smart-filter') ?>" />
                         <i class="clear-button" title="Clear">x</i>
                     </div>
-                    <button class="btn-submit">Search</button>
+                    <button class="btn-submit"><?php esc_html_e('Search', 'ymc-smart-filter') ?></button>
 				</div>
 
                 <div class="button-expand"><a href="#" class="button-expand__link"><?php esc_html_e('expand', 'ymc-smart-filter') ?></a></div>
@@ -459,58 +458,15 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 
 					<div class="choices">
 						<ul class="list choices-list" data-loading="true">
-							<?php
-
+						<?php
 							$tmp_post = $post;
-
 							$arg = [
 								'post_type' => $cpt,
 								'orderby' => 'title',
 								'order' => 'ASC',
 								'posts_per_page' => 20
 							];
-
-							/*if( is_array($tax_sel) && count($tax_sel) > 0 && !empty($terms_sel) ) {
-
-								$params_choices = [
-									'relation' => 'OR'
-								];
-
-								foreach ( $tax_sel as $tax ) :
-
-									$terms = get_terms([
-										'taxonomy' => $tax,
-										'hide_empty' => false
-									]);
-
-									if( $terms  && ! is_wp_error( $terms )) {
-
-										$arr_terms_ids = [];
-
-										foreach( $terms as $term ) :
-
-											if( in_array($term->term_id, $terms_sel) ) {
-												array_push($arr_terms_ids, $term->term_id);
-											}
-
-										endforeach;
-
-										$params_choices[] = [
-											'taxonomy' => $tax,
-											'field'    => 'id',
-											'terms'    => $arr_terms_ids
-										];
-
-										$arr_terms_ids = null;
-									}
-
-								endforeach;
-
-								$arg['tax_query'] = $params_choices;
-							}*/
-
 							$query = new \WP_query($arg);
-
 							if ( $query->have_posts() ) {
 
 								$class_disabled = '';
@@ -527,7 +483,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 							else {
 								echo '<li class="notice">'.esc_html__('No posts', 'ymc-smart-filter').'</li>';
 							}
-							?>
+						?>
 						</ul>
 						<?php
 						echo '<span class="number-posts">'. esc_html($query->found_posts) .'</span>';
@@ -536,12 +492,9 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 					</div>
 
 					<div class="values">
-
 						<?php $class_choices = ( $ymc_exclude_posts === 'on' ) ? 'exclude-posts' : 'include-posts'; ?>
-
 						<ul class="list values-list <?php echo esc_attr($class_choices); ?>">
 						<?php
-
 							if( is_array($ymc_choices_posts) ) :
 
 								$query = new \WP_query([
@@ -556,6 +509,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 									echo '<li class="item"><input type="hidden" name="ymc-choices-posts[]" value="'.esc_attr(get_the_ID()).'">
 							        <span  class="ymc-rel-item" data-id="'.esc_attr(get_the_ID()).'">'.esc_html(get_the_title(get_the_ID())).'
 							        <a href="#" class="ymc-icon-minus remove_item"></a></span></li>';
+
 								endwhile;
 
 								echo '<span class="number-selected-posts">'. esc_html($query->found_posts) .'</span>';
@@ -565,8 +519,6 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 								echo '<span class="number-selected-posts">0</span>';
 
 							endif;
-
-							$post = $tmp_post;
 						?>
 						</ul>
 						<?php wp_reset_postdata(); ?>
@@ -578,14 +530,14 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 
 		</div>
 
-		<div class="form-group wrapper-relation">
+        <div class="form-group wrapper-relation">
 
-			<label for="ymc-terms" class="form-label">
+            <label for="ymc-terms" class="form-label">
 				<?php echo esc_html__('Taxonomy Relation','ymc-smart-filter'); ?>
-				<span class="information"><?php echo esc_html__('Select taxonomy relation','ymc-smart-filter'); ?></span>
-			</label>
+                <span class="information"><?php echo esc_html__('Select taxonomy relation','ymc-smart-filter'); ?></span>
+            </label>
 
-			<select class="form-select" id="ymc-tax-relation" name="ymc-tax-relation">
+            <select class="form-select" id="ymc-tax-relation" name="ymc-tax-relation">
 				<?php
 				$tax_relations = array('AND', 'OR');
 				foreach($tax_relations as $tax_val) {
@@ -597,13 +549,148 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 					echo "<option value='". esc_attr($tax_val) ."' ". esc_attr($sel_rel) .">" . esc_html($tax_val) . "</option>";
 				}
 				?>
-			</select>
+            </select>
 
-		</div>
+        </div>
 
+        <div class="form-group wrapper-featured-posts">
+
+            <label for="ymc-filter-layout" class="form-label">
+		        <?php echo esc_html__('Enable / Disable Featured Post(s)', 'ymc-smart-filter');?>
+                <span class="information">
+                <?php echo esc_html__('Add Featured Post.', 'ymc-smart-filter'); ?>
+            </span>
+            </label>
+
+            <div class="ymc-toggle-group" style="margin-bottom: 10px;">
+                <label class="switch">
+                    <input type="checkbox" <?php echo ($ymc_featured_post_status === "off") ? "checked" : ""; ?>>
+                    <input type="hidden" name="ymc_featured_post_status" value='<?php echo esc_attr($ymc_featured_post_status); ?>'>
+                    <span class="slider slider-featured-post"></span>
+                </label>
+            </div>
+
+	        <?php $ymc_hide = ($ymc_featured_post_status === 'on') ? '' : 'ymc_hidden'; ?>
+
+            <div class="manage-filters <?php echo esc_attr($ymc_hide); ?>">
+
+            <label class="form-label">
+		        <?php echo esc_html__('Featured Post(s)', 'ymc-smart-filter'); ?>
+                <span class="information">
+                    <?php echo esc_html__('Add featured posts to appear above/below the filter bar or at the bottom of the main posts grid.. These posts will not be filtered. Drag and Drop posts for custom sorting.', 'ymc-smart-filter'); ?>
+                    </span>
+            </label>
+
+            <div class="search-featured-posts">
+                <div class="search-inner">
+                    <input class="input-field" type="text" placeholder="<?php esc_html_e('Search...', 'ymc-smart-filter') ?>" />
+                    <i class="clear-button" title="Clear">x</i>
+                </div>
+                <button class="btn-submit"><?php esc_html_e('Search', 'ymc-smart-filter') ?></button>
+            </div>
+
+            <div class="button-featured-expand"><a href="#" class="button-expand__link">
+                    <?php esc_html_e('expand', 'ymc-smart-filter') ?></a></div>
+
+            <div class="featured-posts" id="featured-posts">
+
+                <div class="col list-posts">
+                    <ul class="list list-posts__inner" data-loading="true">
+	                    <?php
+	                    $arg = [
+		                    'post_type' => $cpt,
+		                    'orderby' => 'title',
+		                    'order' => 'ASC',
+		                    'posts_per_page' => 20
+	                    ];
+	                    $query = new \WP_query($arg);
+	                    if ( $query->have_posts() ) {
+		                    $class_disabled = '';
+		                    while ($query->have_posts()) : $query->the_post();
+			                    if( is_array($ymc_featured_posts) &&  array_search(get_the_ID(), $ymc_featured_posts) !== false) {
+				                    $class_disabled = 'disabled';
+			                    }
+			                    echo '<li class="post-item '.esc_attr($class_disabled).'" data-postid="'.esc_attr(get_the_ID()).'">
+                                      <div class="post-id">ID: '.esc_attr(get_the_ID()).'</div>
+									  <div class="post-title">'.esc_html(get_the_title(get_the_ID())).'</div></li>';
+			                    $class_disabled = null;
+		                    endwhile;
+	                    }
+	                    else {
+		                    echo '<li class="notice">'.esc_html__('No posts', 'ymc-smart-filter').'</li>';
+	                    }
+	                    ?>
+                    </ul>
+                    <span class="number-posts"><?php echo esc_html($query->found_posts); ?></span>
+                    <?php wp_reset_postdata(); ?>
+
+                </div>
+
+                <div class="col selected-posts">
+                    <ul class="list selected-posts__inner">
+	                <?php
+	                    if( is_array($ymc_featured_posts) ) :
+
+		                    $query = new \WP_query([
+			                    'post_type' => $cpt,
+			                    'orderby' => 'post__in',
+			                    'post__in'  => $ymc_featured_posts,
+			                    'posts_per_page' => -1
+		                    ]);
+
+		                    while ($query->have_posts()) : $query->the_post();
+
+			                    echo '<li class="post-item">
+                                      <input type="hidden" name="ymc_featured_posts[]" value="'.esc_attr(get_the_ID()).'">
+							          <div class="post-title" data-postid="'.esc_attr(get_the_ID()).'">'.esc_html(get_the_title(get_the_ID())).'
+							          <a href="#" class="icon-minus remove_item"></a></div></li>';
+		                    endwhile;
+
+	                    endif;
+	                ?>
+                    </ul>
+	                <?php
+	                    echo ( is_array($ymc_featured_posts) ) ?
+                            '<span class="number-posts">'. esc_html($query->found_posts) .'</span>' :
+                            '<span class="number-posts">0</span>';
+
+                        wp_reset_postdata(); ?>
+                </div>
+
+            </div>
+
+            <label class="form-label">
+		        <?php echo esc_html__('Location of Featured Post(s)', 'ymc-smart-filter'); ?>
+                <span class="information">
+                    <?php echo esc_html__('Specify the location of featured posts relative to the main post grid.', 'ymc-smart-filter'); ?>
+                    </span>
+            </label>
+
+            <div class="location-featured-posts">
+                <div class="radio-group-item">
+                    <?php $checked = ($ymc_location_featured_posts === 'top_before') ? 'checked' : ''; ?>
+                    <input type="radio" id="top" name="ymc_location_featured_posts" value="top_before" <?php echo esc_attr($checked); ?> />
+                    <label for="top"><?php esc_html_e('Top Before Filter','ymc-smart-filter'); ?></label>
+                </div>
+                <div class="radio-group-item">
+	                <?php $checked = ($ymc_location_featured_posts === 'top_after') ? 'checked' : ''; ?>
+                    <input type="radio" id="top_after" name="ymc_location_featured_posts" value="top_after" <?php echo esc_attr($checked);; ?> />
+                    <label for="top_after"><?php esc_html_e('Top After Filter','ymc-smart-filter'); ?></label>
+                </div>
+                <div class="radio-group-item">
+	                <?php $checked = ($ymc_location_featured_posts === 'bottom') ? 'checked' : ''; ?>
+                    <input type="radio" id="bottom" name="ymc_location_featured_posts" value="bottom" <?php echo esc_attr($checked);; ?> />
+                    <label for="bottom"><?php esc_html_e('Bottom','ymc-smart-filter'); ?></label>
+                </div>
+            </div>
+
+            </div>
+
+        </div>
+
+        <?php $post = $tmp_post; ?>
         <?php wp_nonce_field( 'save-post-' . $post->ID, 'ymc_nonce' ); ?>
 
 	</div>
 
 </div>
-

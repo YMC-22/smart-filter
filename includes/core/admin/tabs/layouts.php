@@ -1,6 +1,4 @@
-<?php if ( ! defined( 'ABSPATH' ) ) exit;
-
-?>
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 
 <div class="header">
 	<?php echo esc_html__('Layouts', 'ymc-smart-filter'); ?>
@@ -23,8 +21,8 @@
                 <label for="ymc-filter-layout" class="form-label">
                     <?php echo esc_html__('Enable / Disable Filter', 'ymc-smart-filter');?>
                     <span class="information">
-                <?php echo esc_html__('Enable / Disable filter.', 'ymc-smart-filter'); ?>
-            </span>
+                    <?php echo esc_html__('Enable / Disable filter.', 'ymc-smart-filter'); ?>
+                    </span>
                 </label>
 
                 <div class="ymc-toggle-group">
@@ -133,14 +131,15 @@
         </header>
 
         <div class="form-wrapper post-layout-settings">
+
             <div class="manage-post">
 
                 <div class="manage-filters__section">
                     <label for="ymc-filter-layout" class="form-label">
                         <?php echo esc_html__('Post Layout', 'ymc-smart-filter');?>
                         <span class="information">
-                    <?php echo esc_html__('Select layout for posts.', 'ymc-smart-filter');?>
-                </span>
+                        <?php echo esc_html__('Select layout for posts.', 'ymc-smart-filter');?>
+                        </span>
                     </label>
                     <select class="form-select" id="ymc-post-layout" name="ymc-post-layout">
                         <?php
@@ -544,6 +543,44 @@
                 </div>
 
             </div>
+
+	        <?php $ymc_hide = ($ymc_featured_post_status === 'on') ? '' : 'ymc_hidden'; ?>
+
+            <div class="manage-post featured-posts-wrp <?php echo esc_attr($ymc_hide); ?>">
+
+                <hr>
+
+                <div class="manage-filters__section">
+
+                    <label for="ymc-filter-layout" class="form-label">
+		                <?php echo esc_html__('Featured Post Layout', 'ymc-smart-filter');?>
+                        <span class="information">
+                        <?php echo esc_html__('Select layout for featured posts.', 'ymc-smart-filter');?>
+                        </span>
+                    </label>
+
+                    <select class="form-select" id="ymc_featured_post_layout" name="ymc_featured_post_layout">
+	                <?php
+	                    $featured_post_layouts = apply_filters('ymc_featured_post_layout', $layouts);
+
+	                    if( $featured_post_layouts ) :
+
+		                    foreach ( $featured_post_layouts as $key => $layout ) :
+
+			                    $selected = ( $ymc_featured_post_layout === $key ) ? 'selected' : '';
+
+			                    echo '<option value="' . esc_attr($key) . '" ' . esc_attr($selected) . '>' . esc_attr($layout) . '</option>';
+
+		                    endforeach;
+
+	                    endif;
+	                ?>
+                    </select>
+
+                </div>
+
+            </div>
+
         </div>
 
     </div>

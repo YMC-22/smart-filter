@@ -191,7 +191,7 @@ Important! Keep HTML structure with all attributes as in the example below.
 **Required ID:**
 - `FilterID & LayoutID (Number)`
 
-**Example Custom Post Layout**
+Usage example:
 ```php
 /**
  * Creating a custom post template
@@ -282,9 +282,9 @@ Use, for example, following WordPress functions to get the required data: get_ta
 - `data-selected`
 - `data-termid`
 
-```php
-// Usage example:
+Usage example:
 
+```php
 /**
  * Creating a Custom Filter Layout
  * @param {string} layout - HTML markup filter
@@ -364,7 +364,6 @@ function my_custom_filter_layout( $layout, $terms, $taxonomy, $multiple, $target
  }
  return $layout;
 }
-
 add_filter('ymc_filter_custom_layout_545_1', 'my_custom_filter_layout', 10, 6);
 ```
 
@@ -374,12 +373,9 @@ add_filter('ymc_filter_custom_extra_layout_FilterID_LayoutID', 'custom_extra_fil
 ```
 This filter allows you to change the layout of an extra filter outside of the main filter. All parameters for extra filter are the same as for the custom filter layout.
 
+Usage example:
 ```php
-
-// Usage example:
-
 function custom_filter_extra_layout( $layout, $terms, $taxonomy, $multiple, $target, $options ) { ?>
-
     <script>
         window.addEventListener('DOMContentLoaded', () => {
         
@@ -443,7 +439,6 @@ function custom_filter_extra_layout( $layout, $terms, $taxonomy, $multiple, $tar
 
 	return $layout;
 }
-
 add_filter('ymc_filter_custom_extra_layout_545_1', 'custom_filter_extra_layout', 10, 6);
 
 ```
@@ -469,8 +464,10 @@ add_filter('ymc_popup_custom_layout_545_1', function ( $layout, $post_id ) {
 **This filter allows you to change the carousel custom layout**
 ```php
 add_filter('ymc_post_carousel_custom_FilterID_LayoutID', 'post_carousel_custom_layout', 10, 4);
-
+```
 Usage example:
+
+```php
 /**
  * Creating a Custom Carousel Layout
  * @param {string} layout - HTML markup
@@ -494,14 +491,45 @@ Usage example:
  * @returns {string} HTML markup card post
  */
 add_filter('ymc_post_carousel_custom_layout_545_1', function ( $layouts, $post_id, $filter_id, $arrOptions ) {
-
     $output =  '<h2>Header: '. get_the_title($post_id) .'</h2>';
     $output .= '<div>Content: '. get_the_content($post_id) .'</div>';
-	return $output;
-	
+	return $output;	
 }, 10, 4);
 ```
 
+**This filter allows you to change the featured custom post layout**
+```php
+add_filter('ymc_featured_post_custom_layout_FilterID_LayoutID', 'func_custom', 10, 2);
+```
+Usage example:
+```php
+/**
+ * Creating a featured custom post template
+ * @param {string} layout - HTML markup
+ * @param {int} post_id - Post ID
+ * @param {int} filter_id - Filter ID
+ * @param {array} arrOptions - array of additional post parameters. It includes:
+- arrOptions['class_popup'] - string class btn popup
+- arrOptions['terms_settings'] - (array) array terms settings. Default empty array. List of object properties:
+- termid - ID term
+- bg - background term. Hex Color Codes (ex: #dd3333)
+- color - color term. Hex Color Codes (ex: #dd3333)
+- class - custom name class of the term
+- status - checked term
+- alignterm - align icon in term
+- coloricon - color icon
+- classicon - name class icon (Font Awesome Icons. ex. far fa-arrow-alt-circle-down)
+- status - term status (checked)
+- default - (string) default term (checked)
+- name - (string) custom term name
+ * @returns {string} HTML markup card post
+ */
+add_filter('ymc_featured_post_custom_layout_545_1', function ( $layouts, $post_id, $filter_id, $arrOptions ) {
+    $output =  '<h2>'. get_the_title($post_id) .'</h2>';
+    $output .= '<div>'. get_the_content($post_id) .'</div>';
+    return $output;	
+}, 10, 4);
+```
 
 
 ### JS API Filter & Grids
@@ -1085,6 +1113,8 @@ function my_custom_function_name_1( $atts ) {
 After that, in the plugin settings, add the new function you registered to the list.
 Building your queries: Check out the **[WordPress WP_Query Codex](https://developer.wordpress.org/reference/classes/wp_query/)** for all the different parameters you can use in the your query.
 
+### Visual Hook Guide: Grid Posts
+![This is an image](/includes/assets/images/visual_hook_guide.png)
 
 ### Support
 For support questions, please write to: wss.office21@gmail.com

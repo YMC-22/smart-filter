@@ -51,6 +51,12 @@ class Ajax {
 
 		add_action('wp_ajax_ymc_search_posts',array($this, 'ymc_search_posts'));
 
+		add_action('wp_ajax_ymc_search_featured_posts',array($this, 'ymc_search_featured_posts'));
+
+		add_action('wp_ajax_ymc_delete_featured_posts',array($this, 'ymc_delete_featured_posts'));
+
+		add_action('wp_ajax_ymc_loaded_featured_posts',array($this, 'ymc_loaded_featured_posts'));
+
 	}
 
 	/**
@@ -104,6 +110,60 @@ class Ajax {
 
 
 	/**
+	 * Search Featured Posts
+	 */
+	public function ymc_search_featured_posts() {
+
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce_code'])), $this->token) ) exit;
+
+		$post_type = '';
+		$phrase = '';
+
+		if( !empty($_POST["cpt"]) ) {
+			$post_type   = sanitize_text_field(wp_unslash($_POST["cpt"]));
+		}
+		if( !empty($_POST["phrase"]) ) {
+			$phrase = trim(mb_strtolower(sanitize_text_field(wp_unslash($_POST['phrase']))));
+		}
+
+		$post_types = ! empty( $post_type ) ? explode(',', $post_type) : 'post';
+		$arr_posts = [];
+
+		$args = [
+			'post_type' => $post_types,
+			'posts_per_page' => 50,
+			'orderby' => 'title',
+			'order' => 'asc',
+			'sentence' => true,
+			's' => $phrase
+		];
+
+		$query = new \WP_Query($args);
+		$found_posts = $query->found_posts;
+
+		if ( $query->have_posts() ) {
+			while ($query->have_posts()) {
+				$query->the_post();
+				$arr_posts[] = '<li class="post-item" data-postid="'.esc_attr(get_the_ID()).'">
+								<div class="post-id">ID: '.esc_attr(get_the_ID()).'</div>
+								<div class="post-title">'.esc_html(get_the_title(get_the_ID())).'</div>
+								</li>';
+			}
+
+			wp_reset_postdata();
+		}
+
+		$data = array(
+			'found_posts' => $found_posts,
+			'lists_posts' => wp_json_encode($arr_posts)
+		);
+
+		wp_send_json($data);
+
+	}
+
+
+	/**
 	 * Posts loaded on scroll
 	 */
 	public function ymc_selected_posts() {
@@ -153,6 +213,56 @@ class Ajax {
 	}
 
 	/**
+	 * Posts loaded featured on scroll
+	 */
+	public function ymc_loaded_featured_posts() {
+
+		if ( !isset($_POST['nonce_code']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce_code'])), $this->token) ) exit;
+
+		$post_type = '';
+		$paged = 1;
+
+		if( !empty($_POST["cpt"]) ) {
+			$post_type   = sanitize_text_field(wp_unslash($_POST["cpt"]));
+		}
+		if( !empty($_POST["paged"] ) ) {
+			$paged = (int) sanitize_text_field(wp_unslash($_POST['paged']));
+			$paged += 1;
+		}
+
+		$post_types = ! empty( $post_type ) ? explode(',', $post_type) : 'post';
+		$arr_posts = [];
+
+		// Get posts
+		$query = new \WP_query([
+			'post_type' => $post_types,
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'paged' => $paged,
+			'posts_per_page' => 20
+		]);
+		$found_posts = $query->found_posts;
+
+		if ( $query->have_posts() ) {
+			while ($query->have_posts()) {
+				$query->the_post();
+				$arr_posts[] = '<li class="post-item" data-postid="'.esc_attr(get_the_ID()).'">
+								<div class="post-id">ID: '.esc_attr(get_the_ID()).'</div>
+								<div class="post-title">'.esc_html(get_the_title(get_the_ID())).'</div></li>';
+			}
+			wp_reset_postdata();
+		}
+
+		$data = array(
+			'posts_loaded' => count($arr_posts),
+			'found_posts' => $found_posts,
+			'lists_posts' => wp_json_encode($arr_posts)
+		);
+
+		wp_send_json($data);
+	}
+
+	/**
 	 * Retrieves taxonomy data based on custom post types and sends JSON response.
 	 */
 	public function ymc_get_taxonomy() {
@@ -187,6 +297,7 @@ class Ajax {
 		update_post_meta( (int) $_POST["post_id"], 'ymc_tax_sort', '' );
 		delete_post_meta( (int) $_POST["post_id"], 'ymc_term_sort' );
 		delete_post_meta( (int) $_POST["post_id"], 'ymc_choices_posts' );
+		delete_post_meta( (int) $_POST["post_id"], 'ymc_featured_posts' );
 		delete_post_meta( (int) $_POST["post_id"], 'ymc_terms_options' );
 		delete_post_meta( (int) $_POST["post_id"], 'ymc_terms_icons' );
 		delete_post_meta( (int) $_POST["post_id"], 'ymc_terms_align' );
@@ -207,6 +318,11 @@ class Ajax {
 				$query->the_post();
 				$arr_posts[] = '<li><div class="ymc-rel-item ymc-rel-item-add" data-id="'.get_the_ID().'">
 				<span class="postID">ID: '.get_the_ID().'</span> <span class="postTitle">'. get_the_title(get_the_ID()).'</span></div></li>';
+
+				$arr_featured_posts[] = '<li class="post-item" data-postid="'.esc_attr(get_the_ID()).'">
+								<div class="post-id">ID: '.esc_attr(get_the_ID()).'</div>
+								<div class="post-title">'.esc_html(get_the_title(get_the_ID())).'</div></li>';
+
 			}
 			wp_reset_postdata();
 		}
@@ -214,6 +330,7 @@ class Ajax {
 		$data = array(
 			'data' => wp_json_encode($arr_tax_result),
 			'lists_posts' => wp_json_encode($arr_posts),
+			'lists_featured_posts' => wp_json_encode($arr_featured_posts),
 			'found_posts' => $query->found_posts,
 			'posts_loaded' => count($arr_posts)
 		);
@@ -384,6 +501,24 @@ class Ajax {
 
 		if(isset($_POST["post_id"])) {
 			$id = delete_post_meta( (int) $_POST["post_id"], 'ymc_choices_posts' );
+		}
+
+		$data = array(
+			'delete' => $id
+		);
+
+		wp_send_json($data);
+	}
+
+	/**
+	 * Deletes featured posts based on the provided post ID and sends a JSON response.
+	 */
+	public function ymc_delete_featured_posts() {
+
+		if ( ! isset($_POST['nonce_code']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce_code'])), $this->token) ) exit;
+
+		if(isset($_POST["post_id"])) {
+			$id = delete_post_meta( (int) $_POST["post_id"], 'ymc_featured_posts' );
 		}
 
 		$data = array(
