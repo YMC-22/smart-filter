@@ -1115,6 +1115,7 @@ Building your queries: Check out the **[WordPress WP_Query Codex](https://develo
 
 ### Visual Hook Guide: Grid Posts
 ![This is an image](/includes/assets/images/visual_hook_guide.png)
+![This is an image](/includes/assets/images/YMC-logos.png)
 
 ### Support
 For support questions, please write to: wss.office21@gmail.com
