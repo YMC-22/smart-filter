@@ -445,6 +445,7 @@ add_filter('ymc_filter_custom_extra_layout_545_1', 'custom_filter_extra_layout',
 add_filter('ymc_popup_custom_layout_FilterID_LayoutID', 'func_custom', 10, 2);
 ```
 Usage example:
+
 **This filter allows you to change the popup custom layout**
 ```php
 /**
