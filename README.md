@@ -1114,8 +1114,7 @@ After that, in the plugin settings, add the new function you registered to the l
 Building your queries: Check out the **[WordPress WP_Query Codex](https://developer.wordpress.org/reference/classes/wp_query/)** for all the different parameters you can use in the your query.
 
 ### Visual Hook Guide: Grid Posts
-![This is an image](/includes/assets/images/visual_hook_guide.png)
-![This is an image](/includes/assets/images/YMC-logos.png)
+![This is an image](/includes/assets/images/Visual_Hook_Guide.png)
 
 ### Support
 For support questions, please write to: wss.office21@gmail.com
