@@ -1575,6 +1575,7 @@ $font-size: 16;
 		&__wrapper {
 			display: flex;
 			flex-wrap: wrap;
+			justify-content: center;
 			max-width: 1280px;
 			width: 100%;
 			margin: 0 auto;
