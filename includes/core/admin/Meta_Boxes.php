@@ -726,6 +726,7 @@ class Meta_Boxes {
 				<li><?php echo esc_html__('Creating custom queries (WP Query).','ymc-smart-filter'); ?></li>
 				<li><?php echo esc_html__('Fine tuning of each term (background, color, icons, etc.).','ymc-smart-filter'); ?></li>
 				<li><?php echo esc_html__('Adding featured posts to the post grid.','ymc-smart-filter'); ?></li>
+				<li><?php echo esc_html__('Adding featured posts off grid.','ymc-smart-filter'); ?></li>
 				<li><?php echo esc_html__('View post content in a popup.','ymc-smart-filter'); ?></li>
 				<li><?php echo esc_html__('Setting up a grid of posts.','ymc-smart-filter'); ?></li>
 				<li><?php echo esc_html__('Editing terms: adding icons and customizing them.','ymc-smart-filter'); ?></li>

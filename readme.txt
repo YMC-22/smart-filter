@@ -1,7 +1,7 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.9.56
+Version: 2.9.57
 Donate link: https://github.com/YMC-22/smart-filter
 Tags: filter, grid, ajax, search, sort
 Requires at least: 5.5
@@ -31,6 +31,7 @@ The plugin provides the following functionality:
 - Separating components (Filter Layout, Search Bar, Sort Panel): using shortcodes anywhere on the page.
 - Sorting posts on the frontend.
 - Manual sorting of terms.
+- Adding Featured Posts Off Grid.
 - Creating custom queries (WP Query)
 - Fine tuning of each term (background, color, icons, etc.).
 - Adding featured posts to the post grid.
@@ -75,8 +76,21 @@ Yes, Filter & Grids is a free WordPress plugin.
 
 Detailed information can be found on GitHub at this <a target="_blank" href="https://github.com/YMC-22/smart-filter">link</a>.
 
+= Posts in the filter grid not loading? =
+
+If your posts are not loading, you should check on your site or theme:
+- the jQuery Migrate plugin is enabled. Open the browser console and make sure there is a message: Migrate is installed, version >= 3.4.1
+- check if the wp-hooks WordPress core library is connected. If not, you should connect it in your theme in the functions.php file with the following code:
+// Manually load the wp-hooks script.
+wp_enqueue_script( 'wp-hooks' );
+- check if third-party plugins are blocking Ajax requests.
+- clear the cache (browser or server).
+
+
 == Changelog ==
 
+= 2.9.57 =
+Added plugin dependency on Jquery Migrate
 = 2.9.56 =
 Added the ability to add featured posts to the grid
 = 2.9.50 =
@@ -281,31 +295,6 @@ Fixed js
 Fixed css.
 = 2.1.0 =
 Plugin core updated. Before updating. Create a backup copy of website.
-= 1.3.1 =
-Fixed css in layouts posts.
-= 1.3.0 =
-Javascript hooks added.
-= 1.2.9 =
-Added the ability to hide / show the pagination panel in the admin panel
-= 1.2.8 =
-Added the ability to interact with the filter through javascript. Implemented API methods of YMCTools object for filtering posts by criteria:
-- meta fields.
-- date fields.
-- taxonomy terms.
-= 1.2.7 =
-Fixed all filters on the plugin. Changed numbering in filter names.
-= 1.2.6 =
-* Added the ability to customize posts (filter: ymc_post_custom_layout_ID).
-= 1.2.5 =
-* Added criteria for filtering posts by the criterion Menu Order (backeend).
-= 1.2.4 =
-* Fixed file js (frontend).
-= 1.2.3 =
-* Add filter ymc_sort_posts_by_ID.
-= 1.2.2 =
-* Add filter ymc_posts_selected_ID.
-= 1.2.0 =
-* Added sorting of posts on the frontend.
 
 
 == Video ==
