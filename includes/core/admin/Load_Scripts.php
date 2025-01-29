@@ -73,7 +73,7 @@ class Load_Scripts {
 
 		wp_enqueue_script( 'filter-grids-masonry-' . $this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/js/masonry.js', array('jquery'), YMC_SMART_FILTER_VERSION, true);
 		wp_enqueue_script( 'jquery-ui-datepicker');
-		wp_enqueue_script( 'filter-grids-' . $this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/js/script.min.js', array('jquery', 'jquery-migrate', 'wp-hooks'), YMC_SMART_FILTER_VERSION, true);
+		wp_enqueue_script( 'filter-grids-' . $this->generate_handle(), YMC_SMART_FILTER_URL . 'includes/assets/js/script.min.js', array('jquery', 'wp-hooks'), YMC_SMART_FILTER_VERSION, true);
 		wp_localize_script( 'filter-grids-' . $this->generate_handle(), '_smart_filter_object',
 			array(
 				'ajax_url' => admin_url('admin-ajax.php'),
