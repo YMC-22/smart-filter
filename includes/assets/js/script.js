@@ -2,6 +2,10 @@
 (function( $ ) {
     "use strict"
 
+    if( 'undefined' === typeof jQuery.migrateMute ) {
+        console.error('jQuery Migrate is not defined.');
+    }
+
     $(document).on('ready', function () {
 
         /*** API YMCTools ***/
@@ -863,7 +867,7 @@
                     wp.hooks.doAction('ymc_before_loaded_data_'+filterID, target);
                     wp.hooks.doAction('ymc_before_loaded_data_'+filterID+'_'+targetID, target);
                 },
-                success: function (res) {
+                success: function (res, status, request) {
 
                     if( params.posts_selected !== 'all' || params.search !== '' ) {
                         container.find('.filter-layout .posts-found').html(`<span>${res.posts_selected}</span>`);
