@@ -44,7 +44,7 @@
          * @returns {string} Information about the author and version.
          */
         YMCTools.prototype.getInfo = function () {
-            return `Author: YMC. Version: 2.9.18`;
+            return `Author: YMC. Version: 2.9.59`;
         }
 
         /**
@@ -549,15 +549,66 @@
 
             if( el.classList.contains("ymc-post-masonry") || el.classList.contains("ymc-post-custom-masonry") ) {
 
-                wp.hooks.addAction('ymc_after_loaded_data_'+f+'_'+c, 'smartfilter', function(class_name, response){
+                wp.hooks.addAction('ymc_after_loaded_data_'+f+'_'+c, 'smartfilter', function(class_name, response) {
+
+                    // Default Parameters
+                    let gutter       = 15;
+                    let maxColumns   = 5;
+                    let useMin       = false;
+                    let useTransform = true;
+                    let animate      = false;
+                    let center       = true;
+
+                    gutter = wp.hooks.applyFilters('ymc_magicGrid_gutter', gutter);
+                    gutter = wp.hooks.applyFilters('ymc_magicGrid_gutter_'+ f+'', gutter);
+                    gutter = wp.hooks.applyFilters('ymc_magicGrid_gutter_'+ f+'_'+c, gutter);
+
+                    maxColumns = wp.hooks.applyFilters('ymc_magicGrid_maxColumns', maxColumns);
+                    maxColumns = wp.hooks.applyFilters('ymc_magicGrid_maxColumns_'+ f+'', maxColumns);
+                    maxColumns = wp.hooks.applyFilters('ymc_magicGrid_maxColumns_'+ f+'_'+c, maxColumns);
+
+                    useMin = wp.hooks.applyFilters('ymc_magicGrid_useMin', useMin);
+                    useMin = wp.hooks.applyFilters('ymc_magicGrid_useMin_'+ f+'', useMin);
+                    useMin = wp.hooks.applyFilters('ymc_magicGrid_useMin_'+ f+'_'+c, useMin);
+
+                    useTransform = wp.hooks.applyFilters('ymc_magicGrid_useTransform', useTransform);
+                    useTransform = wp.hooks.applyFilters('ymc_magicGrid_useTransform_'+ f+'', useTransform);
+                    useTransform = wp.hooks.applyFilters('ymc_magicGrid_useTransform_'+ f+'_'+c, useTransform);
+
+                    animate = wp.hooks.applyFilters('ymc_magicGrid_animate', animate);
+                    animate = wp.hooks.applyFilters('ymc_magicGrid_animate_'+ f+'', animate);
+                    animate = wp.hooks.applyFilters('ymc_magicGrid_animate_'+ f+'_'+c, animate);
+
+                    center = wp.hooks.applyFilters('ymc_magicGrid_center', center);
+                    center = wp.hooks.applyFilters('ymc_magicGrid_center_'+ f+'', center);
+                    center = wp.hooks.applyFilters('ymc_magicGrid_center_'+ f+'_'+c, center);
 
                     let magicGrid = new MagicGrid({
                         container: `.${class_name} .post-entry`,
                         items: response.post_count,
-                        gutter: 15
+                        gutter: gutter,
+                        maxColumns: maxColumns,
+                        useMin: useMin,
+                        useTransform: useTransform,
+                        animate: animate,
+                        center: center
                     });
+
+                     magicGrid.onReady(() => {
+                         wp.hooks.doAction('ymc_magicGrid_ready');
+                         wp.hooks.doAction('ymc_magicGrid_ready_'+f);
+                         wp.hooks.doAction('ymc_magicGrid_ready_'+f+'_'+c);
+                    });
+
+                    magicGrid.onPositionComplete(() => {
+                        wp.hooks.doAction('ymc_magicGrid_position_complete');
+                        wp.hooks.doAction('ymc_magicGrid_position_complete_'+f);
+                        wp.hooks.doAction('ymc_magicGrid_position_complete_'+f+'_'+c);
+                    });
+
                     magicGrid.listen();
                     magicGrid.positionItems();
+
                 });
             }
         }

@@ -22,7 +22,7 @@ Add code to `function.php` to your theme
 add_filter('ymc_pagination_prev_text_FilterID_LayoutID', $ymc_pagination_prev_text, 10, 1);
 add_filter('ymc_pagination_next_text_FilterID_LayoutID', $ymc_pagination_next_text, 10, 1);
 
-Usage example:
+// Usage example:
 add_filter('ymc_pagination_next_text_545_1', function() {
    return 'My Text';
 }, 10, 1);
@@ -32,7 +32,7 @@ add_filter('ymc_pagination_next_text_545_1', function() {
 ```php
 add_filter('ymc_pagination_load_more_FilterID_LayoutID', $ymc_pagination_load_more, 10, 1);
 
-Usage example:
+// Usage example:
 add_filter('ymc_pagination_load_more_545_1', function ($load){
     $load = 'Button More';
     return $load;
@@ -42,7 +42,7 @@ add_filter('ymc_pagination_load_more_545_1', function ($load){
 ```php
 add_filter('ymc_post_date_format_FilterID_LayoutID', $ymc_post_date_format, 10, 1);
 
-Usage example:
+// Usage example:
 add_filter('ymc_post_date_format_545_1', function () {
    return 'Y-m-d';
 }, 10, 1);
@@ -51,7 +51,7 @@ add_filter('ymc_post_date_format_545_1', function () {
 ```php
 add_filter('ymc_post_excerpt_length_FilterID_LayoutID', $ymc_post_excerpt_length, 10, 1);
 
-Usage example:
+// Usage example:
 add_filter('ymc_post_excerpt_length_545_1', function () {
    return 10;
 }, 10, 1);
@@ -60,7 +60,7 @@ add_filter('ymc_post_excerpt_length_545_1', function () {
 ```php
 add_filter('ymc_post_read_more_FilterID_LayoutID', $ymc_post_read_more, 10, 1);
 
-Usage example:
+// Usage example:
 add_filter('ymc_post_read_more_545_1', function () {
     return 'Read...';
 }, 10, 1);
@@ -70,7 +70,7 @@ add_filter('ymc_post_read_more_545_1', function () {
 ```php
 add_filter('ymc_posts_selected_FilterID_LayoutID', 'ymc_posts_selected', 10, 2);
 
-Usage example:
+// Usage example:
 function ymc_posts_selected($layouts, $founded_post) {
     $layouts = 'Posts found: ' . $founded_post .'';
     return $layouts;
@@ -82,10 +82,10 @@ add_filter('ymc_posts_selected_545_1', 'ymc_posts_selected', 10, 2);
 ```php
 add_filter('ymc_sort_posts_by_FilterID_LayoutID', '$ymc_sort_posts', 10, 1);
 
-Usage example:
-List of fields for sorting posts: ID, author, title, name, date, modified, type, parent, rand, comment_count
-Important! Keep HTML structure with all attributes as in the example below.
-Add a new item for sorting posts by the 'name' field:
+// Usage example:
+// List of fields for sorting posts: ID, author, title, name, date, modified, type, parent, rand, comment_count
+// Important! Keep HTML structure with all attributes as in the example below.
+// Add a new item for sorting posts by the 'name' field:
 
 function ymc_sort_posts($layouts) {
    $layouts .= '<div class="menu-passive__item">
@@ -101,7 +101,7 @@ add_filter('ymc_sort_posts_by_545_1', 'ymc_sort_posts', 10, 1);
 ```php
 add_filter('ymc_button_show_all_FilterID_LayoutID', $ymc_button_show_all, 10, 1);
 
-Usage example:
+// Usage example:
 add_filter('ymc_button_show_all_545_1', function () {
     return 'My All';
 }, 10, 1);
@@ -111,7 +111,7 @@ add_filter('ymc_button_show_all_545_1', function () {
 ```php
 add_filter('ymc_placeholder_dropdown_FilterID_LayoutID', $ymc_placeholder_all, 10, 1);
 
-Usage example:
+// Usage example:
 add_filter('ymc_placeholder_dropdown_545_1', function () {
     return 'My Taxonomy';
 }, 10, 1);
@@ -121,7 +121,7 @@ add_filter('ymc_placeholder_dropdown_545_1', function () {
 ```php
 add_filter('ymc_placeholder_dropdown_FilterID_LayoutID_tax-slug', $ymc_placeholder_all, 10, 1);
 
-Usage example:
+// Usage example:
 add_filter('ymc_placeholder_dropdown_72_1_post_tag', function () {
 	return 'My Tags';
 }, 10, 1);
@@ -135,7 +135,7 @@ add_filter('ymc_placeholder_dropdown_72_1_category', function () {
 ```php
 add_filter('ymc_sort_text_FilterID_LayoutID', $ymc_button_show_all, 10, 1);
 
-Usage example:
+// Usage example:
 add_filter('ymc_sort_text_545_1', function () {
     return 'My Sort';
 }, 10, 1);
@@ -146,7 +146,7 @@ add_filter('ymc_sort_text_545_1', function () {
 add_filter('ymc_tax_name_FilterID_LayoutID_slugTax', $ymc_button_show_all, 10, 1);
 - slugTax - category (taxonomy) slug
 
-Usage example:
+// Usage example:
 add_filter('ymc_tax_name_545_1_category', function () {
     return 'My Tax Name';
 }, 10, 1);
@@ -555,9 +555,8 @@ YMCTools({target: ".data-target-ymcFilterID-LayoutID", terms: "termID"}).apiTerm
 - `taxRel - define the interaction between different taxonomies in the query. The default is "AND". If set "all" will match the relation "OR". Installed in the admin panel Filter -> Tab Ganeral -> Taxonomy Relation.`
 - `option - (bool) true / false - parameter allows to control sending of request. Default is true`
 
-```js
 Usage example:
-
+```js
      YMCTools({
          target: '.data-target-ymc545-1',
          terms: 'termID'            
@@ -581,9 +580,8 @@ To make a correct request, specify all the necessary parameters in JSON format. 
 - `relation - defines a logical relationship between nested arrays. Default is "AND"`
 - `option - (bool) true / false - parameter allows to control sending of request. Default is true`
 
-```js
 Usage example:
-
+```js
     YMCTools({
 	target: '.data-target-ymc545-1',
         meta : [
@@ -612,9 +610,8 @@ To make a correct request, specify all the necessary parameters in JSON format. 
 - `relation - defines a logical relationship between nested arrays. Default is "AND"`
 - `option - (bool) true / false - parameter allows to control sending of request. Default is true` 
 
-```js
 Usage example:
-
+```js
       YMCTools({
 	  target: '.data-target-ymc545-1',
           date : [                  
@@ -640,14 +637,12 @@ YMCTools({target: ".data-target-ymcFilterID-LayoutID", search: 'keyword'}).apiSe
 - `option - (bool) true / false - parameter allows to control sending of request. Default is true`
 - `terms - (array)  list ids terms. Default is empty`
 
-```js
 Usage example:
-
+```js
       YMCTools({
 	    target: '.data-target-ymc545-1',
             search: 'keyword',
-      }).apiSearchPosts(true, [7,11,15]);     
-	 
+      }).apiSearchPosts(true, [7,11,15]); 	 
 ```
 
 **This method allows Include / Exclude posts in the post grid.**
@@ -663,15 +658,13 @@ YMCTools({target: ".data-target-ymcFilterID-LayoutID", choicesPosts: '7,9,11', e
 **Optional params:**
 - `option - (bool) true / false - parameter allows to control sending of request. Default is true`
 
-```js
 Usage example:
-
+```js
       YMCTools({
 	    target: '.data-target-ymc545-1',
             choicesPosts: '7,9,11',
             excludePosts: 'off'
-      }).apiChoicesPosts();     
-	 
+      }).apiChoicesPosts(); 	 
 ```
 
 
@@ -690,9 +683,8 @@ YMCTools({target: ".data-target-ymcFilterID-LayoutID", sortOrder: 'asc', sortOrd
 - `metaKey - (String) Value of meta_key parameter (field data key).`
 - `option - (bool) true / false - parameter allows to control sending of request. Default is true`
 
-```js
 Usage example:
-
+```js
         YMCTools({
           target: '.data-target-ymc545-1',
           sortOrder: 'desc',
@@ -740,23 +732,22 @@ YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiLetterAlphabetClear( 
 ```js
 YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiGetPosts();
 ```
-Usage example:
 
 First we change the request parameters, and then we send the data. You should pass the value false to the methods parameters.
 
+Usage example:
 ```js
+YMCTools({
+  target: '.data-target-ymc545-1',
+  terms: '5,7,9'
+}).apiTermUpdate(false);
 
-        YMCTools({
-          target: '.data-target-ymc545-1',
-          terms: '5,7,9'
-        }).apiTermUpdate(false);
+YMCTools({
+  target: '.data-target-ymc545-1',
+  meta : [ { "key" : "amount", "value" : "100" } ]
+}).apiMetaUpdate(false);        
 
-        YMCTools({
-          target: '.data-target-ymc545-1',
-          meta : [ { "key" : "amount", "value" : "100" } ]
-        }).apiMetaUpdate(false);        
-
-        YMCTools({target: '.data-target-ymc545-1'}).apiGetPosts();	 
+YMCTools({target: '.data-target-ymc545-1'}).apiGetPosts();	 
 ```
 
 **This method allows you to move to a specific page of posts in grid.**
@@ -767,7 +758,6 @@ YMCTools({target: '.data-target-ymcFilterID-LayoutID'}).apiPageUpdated( page );
 - `page - (Number) - page number in the grid Default is 1`
 
 Usage example:
-
 ```js
 YMCTools({ target: '.data-target-ymc545-1'}).apiPageUpdated(3); 
 ```
@@ -781,7 +771,6 @@ YMCTools({ target: '.data-target-ymcFilterID-LayoutID' }).apiPopup( postID );
 - `postID - (Number) - post ID`
 
 Usage example:
-
 ```js
 YMCTools({ target: '.data-target-ymc545-1'}).apiPopup(15); 
 ```
@@ -799,23 +788,24 @@ YMCTools({ target: '.data-target-ymcFilterID-LayoutID' }).apiMultiplePosts( opti
 - `IMPORTANT! Define the relationship between different taxonomies in a query. The default is "AND".
    Set the option to "OR" to display all posts in the grid. This can be configured in the admin panel Filter -> General Tab -> Taxonomy. `
 
-Usage example:
+
 `Let's override the global filter settings. To do this, stop loading posts and run the filter with new updated parameters:`
 
+Usage example:
 ```js
-        wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(el) {
-           if( el.classList.contains('data-target-ymc545-1') ) {
-           el.dataset.loading = 'false';
+wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(el) {
+   if( el.classList.contains('data-target-ymc545-1') ) {
+   el.dataset.loading = 'false';
 
-           YMCTools({
-              target: '.data-target-ymc545-1'
-           }).apiMultiplePosts( 
-                  true,
-                  'post,books',
-                  'category,people,science',
-                  '5,6,19,15,20,7,55'
-           );
-       }
+   YMCTools({
+      target: '.data-target-ymc545-1'
+   }).apiMultiplePosts( 
+          true,
+          'post,books',
+          'category,people,science',
+          '5,6,19,15,20,7,55'
+   );
+}
 });
 ```
 
@@ -840,14 +830,13 @@ Set the selected filter's data-loading attribute to false ( data-loading="false"
 **Params function callback:**
 - `elem - DOM container filter.`
 
-```js
 Usage example:
-
+```js
 wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(elem) {
      if( elem.classList.contains('data-target-ymc545-1') ) {
             elem.dataset.loading = 'false';
-         }
-    });
+     }
+});
 ```
 
 **Note**: this hook only works when the page is loaded. By default, it stops all posts from loading. Therefore, inside this hook, you must specify the class of the selected filter.
@@ -866,12 +855,11 @@ Hook works before loading all posts.
 **Params function callback:**
 - `class_name - is the name of the filter container class.`
 
-```js
 Usage example:
-
+```js
 wp.hooks.addAction('ymc_before_loaded_data_545_1', 'smartfilter', function(class_name){
-       console.log('Before loading all posts: ' + class_name);
-   });
+   console.log('Before loading all posts: ' + class_name);
+});
 ```
 
 
@@ -894,9 +882,9 @@ Hook works after loading all posts.
   - `found - number of found posts;`
   - `post_type - post type name;`
 
-```js
-Usage example:
 
+Usage example:
+```js
 wp.hooks.addAction('ymc_after_loaded_data_545_1', 'smartfilter', function(class_name, response){
       console.log('Container class: ' + class_name);
       console.log('Post count: ' + response.post_count);
@@ -919,9 +907,8 @@ wp.hooks.addAction('ymc_complete_loaded_data_FilterID_LayoutID', 'smartfilter', 
 - `class_name - is the name of the filter container class.`
 - `status - a string categorizing the status of the request ("success", "notmodified", "nocontent", "error", "timeout", "abort", or "parsererror").`
 
-```js
 Usage example:
-
+```js
 wp.hooks.addAction('ymc_complete_loaded_data_545_1', 'smartfilter', function(class_name, status){
       console.log('Complete loaded all data:' + class_name + ' status:' + status);
    });
@@ -931,9 +918,8 @@ wp.hooks.addAction('ymc_complete_loaded_data_545_1', 'smartfilter', function(cla
 
 Stop loading posts for the selected filter and then load posts for the selected term
 
+Usage example:
 ```js 
-Usage example: 
-
     wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(el){
         if( el.classList.contains('data-target-ymc545-1') ) {
             el.dataset.loading = 'false';
@@ -973,24 +959,22 @@ wp.hooks.addFilter('ymc_custom_grid_preloader', 'smartfilter', 'callback(data)')
 wp.hooks.addFilter('ymc_custom_grid_preloader_FilterID', 'smartfilter', 'callback(data)');
 wp.hooks.addFilter('ymc_custom_grid_preloader_FilterID_LayoutID', 'smartfilter', 'callback(data)');
 ```
-```js       
 Usage example:
-    wp.hooks.addFilter('ymc_custom_popup_preloader_545_1', 'smartfilter', function(stylePreloader) {
-        stylePreloader = '/wp-content/themes/myTheme/images/icon.svg';
-        return stylePreloader;
-    });
+```js 
+wp.hooks.addFilter('ymc_custom_popup_preloader_545_1', 'smartfilter', function(stylePreloader) {
+    stylePreloader = '/wp-content/themes/myTheme/images/icon.svg';
+    return stylePreloader;
+});
 ```
 
 **Params function callback:**
 - `data - data that is loaded into the popup container.`
-
-```js       
+  
 Usage example:
-
-    wp.hooks.addAction('ymc_after_popup_open_545_1', 'smartfilter', function(data){
-        console.log('Loaded data: '  + data);
-    });    
-
+```js 
+wp.hooks.addAction('ymc_after_popup_open_545_1', 'smartfilter', function(data){
+    console.log('Loaded data: '  + data);
+}); 
 ```
 
 
@@ -1017,22 +1001,76 @@ To correctly display the grid, set styles for the post item, for example:
     }
 ```
 
-```js
 Usage example:
-
-wp.hooks.addAction('ymc_after_loaded_data_545_1', 'smartfilter', function(class_name, response){
-
-        const magicGrid = new MagicGrid({
-              container: '.' + class_name + ' .post-entry',
-              items: response.post_count,
-              center: false,
-              gutter: 20                
-       });
-        
-       magicGrid.listen();
-   });
+```js
+wp.hooks.addAction('ymc_after_loaded_data_545_1', 'smartfilter', function(class_name, response) {
+    const magicGrid = new MagicGrid({
+          container: '.' + class_name + ' .post-entry',
+          items: response.post_count,
+          center: false,
+          gutter: 20                
+   });    
+   magicGrid.listen();
+});
 ```
 
+**List of Filters and Actions to override default settings of the Masonry Grid**
+```js
+// Space between items
+wp.hooks.addFilter('ymc_magicGrid_gutter', 'smartfilter', 'callback');
+wp.hooks.addFilter('ymc_magicGrid_gutter_FilterID', 'smartfilter', 'callback');
+wp.hooks.addFilter('ymc_magicGrid_gutter_FilterID_LayoutID', 'smartfilter', 'callback');
+
+// Maximum number of columns
+wp.hooks.addFilter('ymc_magicGrid_maxColumns', 'smartfilter', 'callback');
+wp.hooks.addFilter('ymc_magicGrid_maxColumns_FilterID', 'smartfilter', 'callback');
+wp.hooks.addFilter('ymc_magicGrid_maxColumns_FilterID_LayoutID', 'smartfilter', 'callback');
+
+// Prioritize shorter columns when positioning items
+wp.hooks.addFilter('ymc_magicGrid_useMin', 'smartfilter', 'callback');
+wp.hooks.addFilter('ymc_magicGrid_useMin_FilterID', 'smartfilter', 'callback');
+wp.hooks.addFilter('ymc_magicGrid_useMin_FilterID_LayoutID', 'smartfilter', 'callback');
+
+// Position items using CSS transform
+wp.hooks.addFilter('ymc_magicGrid_useTransform', 'smartfilter', 'callback');
+wp.hooks.addFilter('ymc_magicGrid_useTransform_FilterID', 'smartfilter', 'callback');
+wp.hooks.addFilter('ymc_magicGrid_useTransform_FilterID_LayoutID', 'smartfilter', 'callback');
+
+// Animate item positioning
+wp.hooks.addFilter('ymc_magicGrid_animate', 'smartfilter', 'callback');
+wp.hooks.addFilter('ymc_magicGrid_animate_FilterID', 'smartfilter', 'callback');
+wp.hooks.addFilter('ymc_magicGrid_animate_FilterID_LayoutID', 'smartfilter', 'callback');
+
+// Center the grid items
+wp.hooks.addFilter('ymc_magicGrid_center', 'smartfilter', 'callback');
+wp.hooks.addFilter('ymc_magicGrid_center_FilterID', 'smartfilter', 'callback');
+wp.hooks.addFilter('ymc_magicGrid_center_FilterID_LayoutID', 'smartfilter', 'callback');
+
+// Adds a listener that executes a function once the grid is ready.
+wp.hooks.addAction('ymc_magicGrid_ready', 'smartfilter', 'callback');
+wp.hooks.addAction('ymc_magicGrid_ready_FilterID', 'smartfilter', 'callback');
+wp.hooks.addAction('ymc_magicGrid_ready_FilterID_LayoutID', 'smartfilter', 'callback');
+
+// Adds a listener that executes a function whenever positionItems is called. Note: positionItems is called during initial setup and whenever the container or window is resized
+wp.hooks.addAction('ymc_magicGrid_position_complete', 'smartfilter', 'callback');
+wp.hooks.addAction('ymc_magicGrid_position_complete_FilterID', 'smartfilter', 'callback');
+wp.hooks.addAction('ymc_magicGrid_position_complete_FilterID_LayoutID', 'smartfilter', 'callback');
+```
+Usage example:
+```js
+wp.hooks.addFilter('ymc_magicGrid_gutter_545_1', 'smartfilter', function(gutter) {
+    gutter = 30; // Change the space between items
+    return gutter;
+});
+
+wp.hooks.addAction('ymc_magicGrid_ready_545_1', 'smartfilter', function() {
+    console.log('Magic Grid Ready'); // Example function
+});
+
+wp.hooks.addAction('ymc_magicGrid_position_complete_545_1', 'smartfilter', function() {
+    console.log("Grid Has Been Resized"); // Example function
+});
+```
 
 ### Advanced Query.
 When using a plugin that displays different posts based on different criteria, there are built-in settings to control which posts are displayed, so you can choose how many to display, include or exclude terms, change the order, etc. However, if you need more complex queries, The plugin offers an "Advanced" query type that allows you to return exactly the arguments you need for your query.
