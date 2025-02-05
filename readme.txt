@@ -90,7 +90,7 @@ wp_enqueue_script( 'wp-hooks' );
 == Changelog ==
 
 = 2.9.59 =
-Added filters and actions to the masonry grid construction
+Added filters and actions JS to the masonry grid construction
 = 2.9.57 =
 Added plugin dependency on Jquery Migrate
 = 2.9.56 =
