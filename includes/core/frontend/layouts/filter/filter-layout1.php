@@ -25,7 +25,10 @@ echo '<style id="'.esc_attr($handle_filter).'">'. esc_html(preg_replace('|\s+|',
 
 <div id="<?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($c_target); ?>" class="filter-layout <?php echo esc_attr($ymc_filter_layout); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?>-<?php echo esc_attr($c_target); ?>">
 
-	<?php do_action("ymc_before_filter_layout_".$id.'_'.$c_target); ?>
+	<?php
+	    do_action("ymc_before_filter_layout_".$id);
+        do_action("ymc_before_filter_layout_".$id.'_'.$c_target);
+    ?>
 
     <ul class="filter-entry">
 
@@ -147,7 +150,10 @@ echo '<style id="'.esc_attr($handle_filter).'">'. esc_html(preg_replace('|\s+|',
 
     <div class="posts-found"></div>
 
-    <?php do_action("ymc_after_filter_layout_".$id.'_'.$c_target); ?>
+    <?php
+        do_action("ymc_after_filter_layout_".$id);
+        do_action("ymc_after_filter_layout_".$id.'_'.$c_target);
+    ?>
 
 </div>
 

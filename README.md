@@ -154,12 +154,16 @@ add_filter('ymc_tax_name_545_1_category', function () {
 
 **Add your content before or after the filter bar**
 ```php
+add_action("ymc_before_filter_layout_FilterID");
 add_action("ymc_before_filter_layout_FilterID_LayoutID");
+add_action("ymc_after_filter_layout_FilterID");
 add_action("ymc_after_filter_layout_FilterID_LayoutID");
 ```
 **Add your content before or after the post grid layout**
 ```php
+add_action("ymc_before_post_layout_FilterID");
 add_action("ymc_before_post_layout_FilterID_LayoutID");
+add_action("ymc_after_post_layout_FilterID");
 add_action("ymc_after_post_layout_FilterID_LayoutID");
 ```
 
@@ -184,6 +188,7 @@ add_action("ymc_after_post_layout_FilterID_LayoutID");
 ### Layouts
 **This filter allows you to change the post template**
 ```php
+add_filter('ymc_post_custom_layout_FilterID', 'custom_post_layout', 10, 5);
 add_filter('ymc_post_custom_layout_FilterID_LayoutID', 'custom_post_layout', 10, 5);
 
 Important! Keep HTML structure with all attributes as in the example below.
@@ -230,7 +235,9 @@ add_filter('ymc_post_custom_layout_545_1', 'my_custom_post_layout', 10, 5);
 
 **This action allows you to change the post grid template**
 ```php
+add_action('ymc_before_custom_layout_FilterID', 'my_before_custom_layout', 10, 2);
 add_action('ymc_before_custom_layout_FilterID_LayoutID', 'my_before_custom_layout', 10, 2);
+add_action('ymc_after_custom_layout_FilterID', 'my_after_custom_layout', 10, 2);
 add_action('ymc_after_custom_layout_FilterID_LayoutID', 'my_after_custom_layout', 10, 2);
 ```
 It will be possible to insert any content in the place you need (before or after the selected post).
@@ -263,6 +270,7 @@ add_action( 'ymc_after_custom_layout_545_1', 'ymc_after_custom_layout', 10, 2 );
 
 **This filter allows you to change the Filter Custom Layout**
 ```php
+add_filter('ymc_filter_custom_layout_FilterID', 'custom_filter_layout', 10, 6);
 add_filter('ymc_filter_custom_layout_FilterID_LayoutID', 'custom_filter_layout', 10, 6);
 ```
 If you need to create your custom filter bar, you can use the filter which will allow you to create your filter bar. In the example, it is indicated how you can use the settings and output of a custom filter. 
@@ -369,6 +377,7 @@ add_filter('ymc_filter_custom_layout_545_1', 'my_custom_filter_layout', 10, 6);
 
 **This filter allows you to change the Extra Filter Custom Layout**
 ```php
+add_filter('ymc_filter_custom_extra_layout_FilterID', 'custom_extra_filter_layout', 10, 6);
 add_filter('ymc_filter_custom_extra_layout_FilterID_LayoutID', 'custom_extra_filter_layout', 10, 6);
 ```
 This filter allows you to change the layout of an extra filter outside of the main filter. All parameters for extra filter are the same as for the custom filter layout.
@@ -445,6 +454,7 @@ add_filter('ymc_filter_custom_extra_layout_545_1', 'custom_filter_extra_layout',
 **This filter allows you to change the popup custom layout**
 
 ```php
+add_filter('ymc_popup_custom_layout_FilterID', 'func_custom', 10, 2);
 add_filter('ymc_popup_custom_layout_FilterID_LayoutID', 'func_custom', 10, 2);
 ```
 Usage example:
@@ -500,6 +510,7 @@ add_filter('ymc_post_carousel_custom_layout_545_1', function ( $layouts, $post_i
 
 **This filter allows you to change the featured custom post layout**
 ```php
+add_filter('ymc_featured_post_custom_layout_FilterID', 'func_custom', 10, 2);
 add_filter('ymc_featured_post_custom_layout_FilterID_LayoutID', 'func_custom', 10, 2);
 ```
 Usage example:

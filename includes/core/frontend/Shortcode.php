@@ -197,10 +197,12 @@ class Shortcode {
 
 			echo '<div class="container-posts container-'. esc_attr($ymc_post_layout) .'">';
 
+			do_action("ymc_before_post_layout_".$id);
 			do_action("ymc_before_post_layout_".$id.'_'.$c_target);
 
 			echo '<div class="post-entry '. esc_attr($breakpoints_classes) .' '. esc_attr($ymc_post_layout) .' '. esc_attr($ymc_post_layout) .'-'.esc_attr($id).' '.esc_attr($ymc_post_layout).'-'.esc_attr($id).'-'.esc_attr($c_target).'"></div>';
 
+			do_action("ymc_after_post_layout_".$id);
 			do_action("ymc_after_post_layout_".$id.'_'.$c_target);
 
 			echo '</div>';

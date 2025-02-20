@@ -152,12 +152,21 @@ $arrOptions['terms_settings'] = arrayToObject( generalArrayMerging( $ymc_terms_o
 
 		// Custom layout
 		// phpcs:ignore WordPress
-		echo apply_filters('ymc_post_carousel_custom_layout_'.esc_attr($filter_id).'_'.esc_attr($target_id),
+		$layout = apply_filters('ymc_post_carousel_custom_layout_'.esc_attr($filter_id),
 			$layout,
 			$post_id,
 			$filter_id,
 			$arrOptions
 		);
+
+		$layout = apply_filters('ymc_post_carousel_custom_layout_'.esc_attr($filter_id).'_'.esc_attr($target_id),
+			$layout,
+			$post_id,
+			$filter_id,
+			$arrOptions
+		);
+
+		echo $layout;
 
 		echo '</article>';
 

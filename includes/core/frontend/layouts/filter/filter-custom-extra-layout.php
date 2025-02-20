@@ -46,6 +46,7 @@ $term_settings = arrayToObject( generalArrayMerging( $ymc_terms_options, $ymc_te
 
             $layout  = '<div class="cf-wrp"><header class="head-filter">'.esc_html__('Add Custom Extra Filter Layout.','ymc-smart-filter').'</header>';
 			$layout .= '<div class="inform">'. esc_html__('Use a filter:','ymc-smart-filter') .' 
+                        <span class="doc-text">ymc_filter_custom_extra_layout_'.$id.'</span> OR
                         <span class="doc-text">ymc_filter_custom_extra_layout_'.$id.'_'.$c_target.'</span> 
                         '. esc_html__('Example:','ymc-smart-filter') .' 
                         <span class="doc-text">add_filter("ymc_filter_custom_extra_layout_"'.$id.'_'.$c_target.', "callback_function", 10, 6);</span>
@@ -75,15 +76,24 @@ $term_settings = arrayToObject( generalArrayMerging( $ymc_terms_options, $ymc_te
 	         * @returns {string} HTML markup filter bar
 	         */
 
-			$filter_layout = apply_filters('ymc_filter_custom_extra_layout_'.$id.'_'.$c_target,
-                                 $layout,
-								 $result_terms,
-				                 $result_tax,
-				                 $multiple,
-                                 $target,
-								 $term_settings );
+	        $layout = apply_filters('ymc_filter_custom_extra_layout_'. esc_attr($id),
+                 $layout,
+                 $result_terms,
+                 $result_tax,
+                 $multiple,
+                 $target,
+                 $term_settings );
+
+	        $layout = apply_filters('ymc_filter_custom_extra_layout_'. esc_attr($id).'_'. esc_attr($c_target),
+		        $layout,
+		        $result_terms,
+		        $result_tax,
+		        $multiple,
+		        $target,
+		        $term_settings );
+
 	        // phpcs:ignore WordPress
-			echo $filter_layout;
+			echo $layout;
 
 		}
    ?>

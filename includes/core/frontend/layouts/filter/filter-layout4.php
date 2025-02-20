@@ -29,7 +29,10 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 <div id="<?php echo  esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($c_target); ?>" class="filter-layout <?php echo  esc_attr($ymc_filter_layout); ?>
 	<?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?> <?php echo esc_attr($ymc_filter_layout); ?>-<?php echo esc_attr($id); ?>-<?php echo esc_attr($c_target); ?> <?php echo ( $ymc_hierarchy_terms ) ? esc_html('hierarchy-filter4') : ''; ?>">
 
-	<?php do_action("ymc_before_filter_layout_".$id.'_'.$c_target); ?>
+	<?php
+        do_action("ymc_before_filter_layout_".$id);
+        do_action("ymc_before_filter_layout_".$id.'_'.$c_target);
+	?>
 
 	<ul class="filter-entry">
 
@@ -206,7 +209,10 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 
 	</ul>
 
-	<?php do_action("ymc_after_filter_layout_".$id.'_'.$c_target); ?>
+	<?php
+        do_action("ymc_after_filter_layout_".$id);
+        do_action("ymc_after_filter_layout_".$id.'_'.$c_target);
+	?>
 
 </div>
 

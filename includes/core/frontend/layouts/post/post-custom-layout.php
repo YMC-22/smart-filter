@@ -18,13 +18,14 @@ $arrOptions['terms_settings'] = arrayToObject( generalArrayMerging( $ymc_terms_o
 
 while ($query->have_posts()) : $query->the_post();
 
-	do_action( "ymc_before_custom_layout_".$filter_id.'_'.$target_id, $increment_post, $arrOptions );
+	do_action( "ymc_before_custom_layout_". esc_attr($filter_id), $increment_post, $arrOptions );
+	do_action( "ymc_before_custom_layout_". esc_attr($filter_id).'_'. esc_attr($target_id), $increment_post, $arrOptions );
 
 	echo '<article class="ymc-'.esc_attr($post_layout).' post-'.esc_attr(get_the_id()).' post-item '.esc_attr($class_animation).'">';
 
 	$layouts .= '<header class="head-post">'.esc_html__('Add Custom Layout.','ymc-smart-filter').'</header>';
 	$layouts .= '<div class="inform">'.esc_html__('Use a filter:','ymc-smart-filter').' 
-                 <span class="doc-text">ymc_post_custom_layout_'.$filter_id.'_'.$target_id.'</span> 
+                 <span class="doc-text">ymc_post_custom_layout_'.$filter_id.' <br> ymc_post_custom_layout_'.$filter_id.'_'.$target_id.'</span>                  
                  '.esc_html__('to override post template.','ymc-smart-filter').' <br>'.esc_html__('Example:','ymc-smart-filter').'
                  <span class="doc-text">add_filter("ymc_post_custom_layout_'.$filter_id.'_'.$target_id.'", "callback_function", 10, 5);</span>
                  <a target="_blank" href="https://github.com/YMC-22/smart-filter">'.esc_html__('See documentation.','ymc-smart-filter').'</a>
@@ -58,19 +59,30 @@ while ($query->have_posts()) : $query->the_post();
 	 * @returns {string} HTML markup card post
 	 */
 	// phpcs:ignore WordPress
-	echo apply_filters('ymc_post_custom_layout_'.$filter_id.'_'.$target_id,
-			$layouts,
-			get_the_ID(),
-			$filter_id,
-			$increment_post,
-			$arrOptions
-		 );
+	$layouts = apply_filters('ymc_post_custom_layout_'. esc_attr($filter_id),
+		$layouts,
+		get_the_ID(),
+		$filter_id,
+		$increment_post,
+		$arrOptions
+	);
+
+	$layouts = apply_filters('ymc_post_custom_layout_'. esc_attr($filter_id).'_'. esc_attr($target_id),
+		$layouts,
+		get_the_ID(),
+		$filter_id,
+		$increment_post,
+		$arrOptions
+	 );
+
+	echo $layouts;
 
 	$layouts = null;
 
 	echo '</article>';
 
-	do_action( "ymc_after_custom_layout_".$filter_id.'_'.$target_id, $increment_post, $arrOptions );
+	do_action( "ymc_after_custom_layout_". esc_attr($filter_id), $increment_post, $arrOptions );
+	do_action( "ymc_after_custom_layout_". esc_attr($filter_id).'_'. esc_attr($target_id), $increment_post, $arrOptions );
 
 	$increment_post++;
 

@@ -766,6 +766,7 @@ class Get_Posts {
 			$output .= '<div class="content">'.$content.'</div>';
 			$output .= '</article>';
 
+			$output = apply_filters('ymc_popup_custom_layout_'.$filter_id, $output, $post_id);
 			$output = apply_filters('ymc_popup_custom_layout_'.$filter_id.'_'.$target_id, $output, $post_id);
 		} else {
 			$output = esc_html__('Post not found', 'ymc-smart-filter');

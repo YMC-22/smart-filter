@@ -30,6 +30,7 @@ if ( $query->have_posts() ) : ?>
 
 		        $layout .= '<header class="head-post">'.esc_html__('Add Custom Featured Layout.','ymc-smart-filter').'</header>';
 		        $layout .= '<div class="inform">'.esc_html__('Use a filter:','ymc-smart-filter').' 
+                 <span class="doc-text">ymc_featured_post_custom_layout_'.$id.'</span> OR
                  <span class="doc-text">ymc_featured_post_custom_layout_'.$id.'_'.$c_target.'</span> 
                  '.esc_html__('to override post template.','ymc-smart-filter').' <br>'.esc_html__('Example:','ymc-smart-filter').'
                  <span class="doc-text">add_filter("ymc_featured_post_custom_layout_'.$id.'_'.$c_target.'", "callback_function", 10, 4);</span>
@@ -59,12 +60,19 @@ if ( $query->have_posts() ) : ?>
 		         */
 
 		        // phpcs:ignore WordPress
-		        echo apply_filters('ymc_featured_post_custom_layout_'.$id.'_'.$c_target,
+		        $layout = apply_filters('ymc_featured_post_custom_layout_'. esc_attr($id),
                     $layout,
                     get_the_ID(),
                     $id,
-                    $arrOptions
-                );
+                    $arrOptions);
+
+		        $layout = apply_filters('ymc_featured_post_custom_layout_'. esc_attr($id).'_'. esc_attr($c_target),
+			        $layout,
+			        get_the_ID(),
+			        $id,
+			        $arrOptions);
+
+		        echo $layout;
 
 		        $layout = null;
 
