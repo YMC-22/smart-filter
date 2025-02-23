@@ -60,7 +60,10 @@ echo '<style id="'.esc_attr($handle_filter).'">'. esc_html(preg_replace('|\s+|',
 						sortTaxTerms($terms_selected, 'desc');
 				}
 
-	            $show_all = apply_filters('ymc_button_show_all_'.$id.'_'.$c_target, $ymc_post_elements['button_text_all']);
+				$show_all = $ymc_post_elements['button_text_all'];
+				$show_all = apply_filters('ymc_button_show_all_'.$id, $show_all);
+				$show_all = apply_filters('ymc_button_show_all_'.$id.'_'.$c_target, $show_all);
+
 	            $all_class_active = ( empty($default_terms) ) ? 'active' : '';
 
 				echo '<li class="filter-item"><a class="filter-link all '. esc_attr($all_class_active) .'" href="#" data-selected="all" data-termid="' . esc_attr($ymc_terms) . '">'. esc_html($show_all) .'</a></li>';
@@ -108,6 +111,7 @@ echo '<style id="'.esc_attr($handle_filter).'">'. esc_html(preg_replace('|\s+|',
 					$style_tax_color = !empty($taxColor) ? 'color:'.$taxColor.';' : '';
 					$tax_name = !empty($taxName) ? $taxName : get_taxonomy( $tax )->label;
 
+	                $tax_name = apply_filters('ymc_tax_name_'.$id.'_'.$tax, $tax_name);
 	                $tax_name = apply_filters('ymc_tax_name_'.$id.'_'.$c_target.'_'.$tax, $tax_name);
 
                     echo '<li class="group-filters tax-'.esc_attr($tax).'" style="'.esc_attr($style_tax_bg).esc_attr($style_tax_color).'">

@@ -78,7 +78,24 @@ class Shortcode {
 				$ymc_tax = implode(",", $tax_selected);
 			}
 
-			if ( is_array($terms_selected) ) {
+			if ( is_array($terms_selected) && ( $ymc_display_terms === 'selected_terms' || $ymc_display_terms === 'hide_empty_terms' ))
+			{
+				// Remove empty terms
+				if( $ymc_display_terms === 'hide_empty_terms' ) {
+					$terms_selected = array_filter($terms_selected, 'hideEmptyTerm');
+				}
+				$ymc_terms = implode(',', $terms_selected);
+			}
+
+			if( !$ymc_hierarchy_terms && ($ymc_display_terms === 'auto_populate_all' || $ymc_display_terms === 'auto_populate_all_empty'))
+			{
+				if( $ymc_display_terms === 'auto_populate_all' ) {
+					// Auto populate all terms
+					$terms_selected = autoPopulateAllTerms($tax_selected, false);
+				} else {
+					// Auto populate all without empty
+					$terms_selected = autoPopulateAllTerms($tax_selected);
+				}
 				$ymc_terms = implode(',', $terms_selected);
 			}
 

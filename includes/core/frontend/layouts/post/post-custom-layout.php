@@ -74,7 +74,7 @@ while ($query->have_posts()) : $query->the_post();
 		$increment_post,
 		$arrOptions
 	 );
-
+	// phpcs:ignore WordPress
 	echo $layouts;
 
 	$layouts = null;

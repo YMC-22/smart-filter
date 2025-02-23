@@ -22,9 +22,11 @@ if ( ! defined( 'ABSPATH' ) ) {
         $title   = get_the_title($post_id);
         $link    = get_the_permalink($post_id);
 	    $length_excerpt = !empty($ymc_post_elements['length_excerpt']) ? esc_attr($ymc_post_elements['length_excerpt']) : 30;
-	    $button_text = !empty($ymc_post_elements['button_text']) ? $ymc_post_elements['button_text'] : __('Read More', 'ymc-smart-filter');
+	    $read_more = !empty($ymc_post_elements['button_text']) ? $ymc_post_elements['button_text'] : __('Read More', 'ymc-smart-filter');
 	    $class_popup = ( $ymc_popup_status === 'off' ) ? '' : 'ymc-popup';
-        $post_date_format = apply_filters('ymc_post_date_format_'.$filter_id.'_'.$target_id, 'F Y');
+	    $post_date_format = 'd, M Y';
+        $post_date_format = apply_filters('ymc_post_date_format_'.$filter_id, $post_date_format);
+        $post_date_format = apply_filters('ymc_post_date_format_'.$filter_id.'_'.$target_id, $post_date_format);
 	    $image_post = null;
 
 	    if( has_post_thumbnail($post_id) ) {
@@ -61,8 +63,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 			    break;
 	    endswitch;
 
-        $read_more = apply_filters('ymc_post_read_more_'.$filter_id.'_'.$target_id, $button_text);
-        $target = "target=" . $ymc_link_target . "";
+        $read_more = apply_filters('ymc_post_read_more_'.$filter_id, $read_more);
+        $read_more = apply_filters('ymc_post_read_more_'.$filter_id.'_'.$target_id, $read_more);
+
+        $target = "target=" . $ymc_link_target;
 
 	    $list_categories = '';
 

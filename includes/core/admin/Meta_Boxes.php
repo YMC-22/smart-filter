@@ -207,6 +207,12 @@ class Meta_Boxes {
 			update_post_meta($post_id, 'ymc_sort_terms', $ymc_sort_terms);
 		}
 
+        // Display Terms
+		if (isset($_POST['ymc_display_terms'])) {
+			$ymc_display_terms = sanitize_text_field(wp_unslash($_POST['ymc_display_terms']));
+			update_post_meta($post_id, 'ymc_display_terms', $ymc_display_terms);
+		}
+
 		// Type Order Post By
 		if (isset($_POST['ymc-order-post-by'])) {
 			$ymc_order_post_by = sanitize_text_field(wp_unslash($_POST['ymc-order-post-by']));

@@ -43,12 +43,9 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
         do_action("ymc_before_filter_layout_".$id.'_'.$c_target);
 	?>
 
-	<?php if( is_array($terms_selected) ) :
+	<?php if( is_array($terms_selected) ) :	?>
 
-		$all_terms = implode(',', $terms_selected);
-    ?>
-
-    <div class="filter-entry" data-terms="<?php echo esc_attr($all_terms); ?>">
+    <div class="filter-entry" data-terms="<?php echo esc_attr($ymc_terms); ?>">
 
 		<?php
 
@@ -67,9 +64,11 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
             }
             $arr_taxonomies = array_unique($arr_taxonomies);
 
-            $show_all = apply_filters('ymc_button_show_all_'.$id.'_'.$c_target, $ymc_post_elements['button_text_all']);
+            $show_all = $ymc_post_elements['button_text_all'];
+            $show_all = apply_filters('ymc_button_show_all_'.$id, $show_all);
+            $show_all = apply_filters('ymc_button_show_all_'.$id.'_'.$c_target, $show_all);
 
-            echo '<a class="btn-all" href="#" data-selected="all" data-terms="' . esc_attr($all_terms) . '">'. esc_html($show_all) .'</a>';
+            echo '<a class="btn-all" href="#" data-selected="all" data-terms="' . esc_attr($ymc_terms) . '">'. esc_html($show_all) .'</a>';
 
 			// Taxonomies sorting
             if( !is_null($tax_sort) && is_array($tax_sort) ) {
@@ -108,6 +107,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 				$tax_name = !empty($taxName) ? $taxName : get_taxonomy( $tax )->label;
 
 	            $select_term = apply_filters('ymc_select_term_dropdown', $tax);
+	            $tax_name = apply_filters('ymc_tax_name_'.$id.'_'.$tax, $tax_name);
 	            $tax_name = apply_filters('ymc_tax_name_'.$id.'_'.$c_target.'_'.$tax, $tax_name);
 
 				if( !empty($default_terms) && empty($type_multiple) )

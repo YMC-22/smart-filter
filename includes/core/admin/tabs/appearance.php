@@ -35,8 +35,39 @@
                         <option value="desc" <?php if ($ymc_sort_terms === 'desc') {echo "selected";} ?>>
                             <?php echo esc_html__('Desc', 'ymc-smart-filter'); ?>
                         </option>
+                        <?php if ($ymc_display_terms === 'selected_terms' || $ymc_display_terms === 'hide_empty_terms') : ?>
                         <option value="manual" <?php if ($ymc_sort_terms === 'manual') {echo "selected";} ?>>
                             <?php echo esc_html__('Manually', 'ymc-smart-filter'); ?>
+                        </option>
+	                    <?php endif; ?>
+                    </select>
+                </div>
+
+                <div class="from-element">
+                    <label class="form-label">
+		                <?php echo esc_html__('Display Terms', 'ymc-smart-filter');?>
+                        <span class="information">
+                        <?php echo wp_kses_post('Set the display settings for terms. 
+                            Manual sorting applies only to <b>Selected Terms</b> and <b>Selected Terms Without Empty</b>.<br> 
+                            - <b>Selected Terms:</b> Display selected terms.<br> 
+                            - <b>Hide Empty for Selected Terms:</b> Display selected terms without empty terms.<br> 
+                            - <b>Auto Populate All:</b> Display all terms. Overrides previously selected terms.<br> 
+                            - <b>Auto Populate All Without Empty:</b> Display all terms without empty terms. Overrides previously selected terms.<br>                            
+                            <b>Note:</b> Not supported for Hierarchical Tree of Terms.');?>
+                        </span>
+                    </label>
+                    <select class="form-select"  id="ymc_display_terms" name="ymc_display_terms">
+                        <option value="selected_terms" <?php if ($ymc_display_terms === 'selected_terms') {echo "selected";} ?>>
+		                    <?php echo esc_html__('Selected Terms', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="hide_empty_terms" <?php if ($ymc_display_terms === 'hide_empty_terms') {echo "selected";} ?>>
+		                    <?php echo esc_html__('Selected Terms Without Empty', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="auto_populate_all" <?php if ($ymc_display_terms === 'auto_populate_all') {echo "selected";} ?>>
+		                    <?php echo esc_html__('Auto Populate All', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="auto_populate_all_empty" <?php if ($ymc_display_terms === 'auto_populate_all_empty') {echo "selected";} ?>>
+		                    <?php echo esc_html__('Auto Populate All Without Empty', 'ymc-smart-filter'); ?>
                         </option>
                     </select>
                 </div>

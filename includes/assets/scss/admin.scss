@@ -465,11 +465,14 @@ $font-size: 16;
 								}
 
 								.info-panel {
+									display: flex;
+									flex-wrap: wrap;
+									align-items: center;
 									margin-top: 20px;
 									&__text {
 										display: inline-block;
 										font-size: 14px;
-										margin-bottom: 5px;
+										margin-bottom: 10px;
 										margin-right: 10px;
 										padding-right: 10px;
 										border-right: 1px solid #000;

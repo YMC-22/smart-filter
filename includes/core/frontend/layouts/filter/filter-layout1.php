@@ -47,7 +47,9 @@ echo '<style id="'.esc_attr($handle_filter).'">'. esc_html(preg_replace('|\s+|',
 						sortTaxTerms($terms_selected, 'desc');
 				}
 
-	            $show_all = apply_filters('ymc_button_show_all_'.$id.'_'.$c_target, $ymc_post_elements['button_text_all']);
+				$show_all = $ymc_post_elements['button_text_all'];
+	            $show_all = apply_filters('ymc_button_show_all_'.$id, $show_all);
+	            $show_all = apply_filters('ymc_button_show_all_'.$id.'_'.$c_target, $show_all);
 
                 $all_class_active = ( empty($default_terms) ) ? 'active' : '';
 

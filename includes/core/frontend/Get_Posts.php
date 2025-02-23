@@ -442,11 +442,12 @@ class Get_Posts {
 
 		$posts_selected = "{$query->found_posts} posts selected";
 		$posts_found = $query->found_posts;
-		$default_posts_selected = apply_filters('ymc_posts_selected_'.$filter_id.'_'.$target_id, $posts_selected, $posts_found);
+		$posts_selected = apply_filters('ymc_posts_selected_'.$filter_id, $posts_selected, $posts_found);
+		$posts_selected = apply_filters('ymc_posts_selected_'.$filter_id.'_'.$target_id, $posts_selected, $posts_found);
 
 		$data = [
 			'data' => $output,
-			'posts_selected' => $default_posts_selected,
+			'posts_selected' => $posts_selected,
 			'found' => $query->found_posts,
 			'max_num_pages' => $query->max_num_pages,
 			'post_count' => $query->post_count,

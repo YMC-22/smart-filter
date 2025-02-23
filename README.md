@@ -19,7 +19,9 @@ Add code to `function.php` to your theme
 
 **Change previous or next numbered paginator arrows:**
 ```php
+add_filter('ymc_pagination_prev_text_FilterID', $ymc_pagination_prev_text, 10, 1);
 add_filter('ymc_pagination_prev_text_FilterID_LayoutID', $ymc_pagination_prev_text, 10, 1);
+add_filter('ymc_pagination_next_text_FilterID', $ymc_pagination_next_text, 10, 1);
 add_filter('ymc_pagination_next_text_FilterID_LayoutID', $ymc_pagination_next_text, 10, 1);
 
 // Usage example:
@@ -30,6 +32,7 @@ add_filter('ymc_pagination_next_text_545_1', function() {
 ```
 **Change button text Load More**
 ```php
+add_filter('ymc_pagination_load_more_FilterID', $ymc_pagination_load_more, 10, 1);
 add_filter('ymc_pagination_load_more_FilterID_LayoutID', $ymc_pagination_load_more, 10, 1);
 
 // Usage example:
@@ -40,6 +43,7 @@ add_filter('ymc_pagination_load_more_545_1', function ($load){
 ```
 **Change publication date of a post in grid of cards**
 ```php
+add_filter('ymc_post_date_format_FilterID', $ymc_post_date_format, 10, 1);
 add_filter('ymc_post_date_format_FilterID_LayoutID', $ymc_post_date_format, 10, 1);
 
 // Usage example:
@@ -56,8 +60,9 @@ add_filter('ymc_post_excerpt_length_545_1', function () {
    return 10;
 }, 10, 1);
 ```
-**Change button text in post card**
+**Change button text in post item**
 ```php
+add_filter('ymc_post_read_more_FilterID', $ymc_post_read_more, 10, 1);
 add_filter('ymc_post_read_more_FilterID_LayoutID', $ymc_post_read_more, 10, 1);
 
 // Usage example:
@@ -68,6 +73,7 @@ add_filter('ymc_post_read_more_545_1', function () {
 
 **Change result text: "# posts selected". Parameters: $layouts, $found_posts**
 ```php
+add_filter('ymc_posts_selected_FilterID', 'ymc_posts_selected', 10, 2);
 add_filter('ymc_posts_selected_FilterID_LayoutID', 'ymc_posts_selected', 10, 2);
 
 // Usage example:
@@ -80,6 +86,7 @@ add_filter('ymc_posts_selected_545_1', 'ymc_posts_selected', 10, 2);
 
 **Change list of post sort items**
 ```php
+add_filter('ymc_sort_posts_by_FilterID', '$ymc_sort_posts', 10, 1);
 add_filter('ymc_sort_posts_by_FilterID_LayoutID', '$ymc_sort_posts', 10, 1);
 
 // Usage example:
@@ -99,6 +106,7 @@ add_filter('ymc_sort_posts_by_545_1', 'ymc_sort_posts', 10, 1);
 
 **Change text of Show All button in filter panel**
 ```php
+add_filter('ymc_button_show_all_FilterID', $ymc_button_show_all, 10, 1);
 add_filter('ymc_button_show_all_FilterID_LayoutID', $ymc_button_show_all, 10, 1);
 
 // Usage example:
@@ -109,6 +117,7 @@ add_filter('ymc_button_show_all_545_1', function () {
 
 **Change the placeholder "All" for the filter named Dropdown Filter Compact**
 ```php
+add_filter('ymc_placeholder_dropdown_FilterID', $ymc_placeholder_all, 10, 1);
 add_filter('ymc_placeholder_dropdown_FilterID_LayoutID', $ymc_placeholder_all, 10, 1);
 
 // Usage example:
@@ -119,6 +128,7 @@ add_filter('ymc_placeholder_dropdown_545_1', function () {
 
 **Change the "All" placeholder for the filter named "Compact Dropdown Filter" individually for each taxonomy**
 ```php
+add_filter('ymc_placeholder_dropdown_FilterID_tax-slug', $ymc_placeholder_all, 10, 1);
 add_filter('ymc_placeholder_dropdown_FilterID_LayoutID_tax-slug', $ymc_placeholder_all, 10, 1);
 
 // Usage example:
@@ -133,6 +143,7 @@ add_filter('ymc_placeholder_dropdown_72_1_category', function () {
 
 **Change the text of the “Sort” button on the sort panel**
 ```php
+add_filter('ymc_sort_text_FilterID', $ymc_button_show_all, 10, 1);
 add_filter('ymc_sort_text_FilterID_LayoutID', $ymc_button_show_all, 10, 1);
 
 // Usage example:
@@ -143,6 +154,7 @@ add_filter('ymc_sort_text_545_1', function () {
 
 **Change the name of the category (taxonomy) in the dropdown list button filters on the filter panel.**
 ```php
+add_filter('ymc_tax_name_FilterID_slugTax', $ymc_button_show_all, 10, 1);
 add_filter('ymc_tax_name_FilterID_LayoutID_slugTax', $ymc_button_show_all, 10, 1);
 - slugTax - category (taxonomy) slug
 

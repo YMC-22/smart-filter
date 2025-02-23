@@ -71,7 +71,7 @@ if ( $query->have_posts() ) : ?>
 			        get_the_ID(),
 			        $id,
 			        $arrOptions);
-
+		        // phpcs:ignore WordPress
 		        echo $layout;
 
 		        $layout = null;

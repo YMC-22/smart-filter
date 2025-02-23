@@ -126,7 +126,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 
 			<div class="info-panel">
 				<span class="info-panel__text">
-					<?php echo esc_html__('Post Type:','ymc-smart-filter'); ?>
+					<?php echo esc_html__('CPT:','ymc-smart-filter'); ?>
 					<i>
 					<?php
 						if( is_array($cpt) ) {
@@ -153,11 +153,11 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 					<i><?php echo ( $ymc_hierarchy_terms ) ? esc_html('Hierarchy') : esc_html('List'); ?></i>
 				</span>
 				<span class="info-panel__text">
-					<?php echo esc_html__('Multiple Taxonomy:','ymc-smart-filter'); ?>
+					<?php echo esc_html__('Multiple Tax.:','ymc-smart-filter'); ?>
 					<i><?php echo ( (bool) $ymc_multiple_filter ) ? esc_html('Enabled') : esc_html('Disabled'); ?></i>
 				</span>
 				<span class="info-panel__text">
-					<?php echo esc_html__('Sorting:','ymc-smart-filter'); ?>
+					<?php echo esc_html__('Sort Terms:','ymc-smart-filter'); ?>
 					<i><?php echo esc_html($ymc_sort_terms); ?></i>
 				</span>
 			</div>

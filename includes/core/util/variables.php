@@ -39,6 +39,7 @@ $ymc_link_target  = $variable->get_link_target( $id );
 $ymc_per_page     = $variable->get_per_page( $id );
 $ymc_pagination_type = $variable->get_pagination_type( $id );
 $ymc_sort_terms   = $variable->get_sort_terms( $id );
+$ymc_display_terms   = $variable->get_display_terms( $id );
 $ymc_order_post_by = $variable->get_order_post_by( $id );
 $ymc_order_post_type = $variable->get_order_post_type( $id );
 $ymc_meta_key = $variable->get_ymc_meta_key( $id );

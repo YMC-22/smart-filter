@@ -860,3 +860,55 @@ if ( !function_exists( 'js_console_log' ) ) {
 }
 
 
+/**
+ * Hide Empty Term
+ * @param $termID ID Term
+ * @return mixed
+ */
+if ( !function_exists( 'hideEmptyTerm' ) ) :
+	function hideEmptyTerm($termID) {
+
+		if( empty($termID) ) return;
+
+		$objectTerm = get_term($termID);
+
+		if( !is_wp_error($objectTerm) && !is_null($objectTerm) && $objectTerm->count !== 0 ) return $termID;
+	}
+
+endif;
+
+/**
+ * Auto Populate All Terms
+ * @param array $taxonomy List taxonomies.
+ * @param bool $hide_empty Hide empty terms.
+ *
+ * @return array Return array iDs terms or empty array
+ * @return array|WP_Error Array of terms, or WP_Error if any of the taxonomies do not exist.
+ *
+ */
+if ( !function_exists( 'autoPopulateAllTerms' ) ) :
+	function autoPopulateAllTerms($taxonomy, $hide_empty = true) {
+
+		if( !is_array($taxonomy) ) return;
+
+		$all_terms = [];
+
+		$terms = get_terms([
+			'taxonomy'   => $taxonomy,
+			'hide_empty' => $hide_empty
+		]);
+
+		if( $terms && ! is_wp_error( $terms ) ) {
+			foreach($terms as $term) {
+				$all_terms[] = $term->term_id;
+			}
+		}
+
+		return $all_terms;
+	}
+
+endif;
+
+
+
+

@@ -38,9 +38,12 @@ echo '<style id="'.esc_attr($handle_filter).'">'. esc_html(preg_replace('|\s+|',
 
     <?php if( is_array($terms_selected) ) :
 
-		$all_terms = implode(',', $terms_selected);
+		$all_terms = $ymc_terms;
 
-	    $text_all = apply_filters('ymc_placeholder_dropdown_'.$id.'_'.$c_target, $ymc_post_elements['button_text_all']);
+	    $text_all = $ymc_post_elements['button_text_all'];
+
+	    $text_all = apply_filters('ymc_placeholder_dropdown_'.$id, $text_all);
+	    $text_all = apply_filters('ymc_placeholder_dropdown_'.$id.'_'.$c_target, $text_all);
     ?>
 
     <div class="filter-entry" data-terms="<?php echo esc_attr($all_terms); ?>" data-text-all="<?php echo esc_attr($text_all); ?>">
@@ -111,8 +114,10 @@ echo '<style id="'.esc_attr($handle_filter).'">'. esc_html(preg_replace('|\s+|',
 				$tax_name = !empty($taxName) ? $taxName : get_taxonomy( $tax )->label;
 
 	            $select_term = apply_filters('ymc_select_term_dropdown', $tax);
+	            $tax_name = apply_filters('ymc_tax_name_'.$id.'_'.$tax, $tax_name);
 	            $tax_name = apply_filters('ymc_tax_name_'.$id.'_'.$c_target.'_'.$tax, $tax_name);
 
+				$text_all = apply_filters('ymc_placeholder_dropdown_'.$id.'_'.$tax, $text_all);
 				$text_all = apply_filters('ymc_placeholder_dropdown_'.$id.'_'.$c_target.'_'.$tax, $text_all);
 
 				if( ! empty($default_terms) && empty($type_multiple) )

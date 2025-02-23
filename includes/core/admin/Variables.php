@@ -134,6 +134,8 @@ class Variables {
 
 	public $ymc_sort_terms = 'asc';
 
+	public $ymc_display_terms = 'selected_terms';
+
 	public $ymc_order_post_by = 'title';
 
 	public $ymc_order_post_type = 'asc';
@@ -592,7 +594,6 @@ class Variables {
 		return $this->ymc_empty_post_result;
 	}
 
-
 	public function get_link_target( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_link_target' ) ) {
@@ -600,7 +601,6 @@ class Variables {
 		}
 		return $this->ymc_link_target;
 	}
-
 
 	public function get_per_page( $post_id ) {
 
@@ -610,7 +610,6 @@ class Variables {
 		return $this->ymc_per_page;
 	}
 
-
 	public function get_pagination_type( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_pagination_type' ) ) {
@@ -618,7 +617,6 @@ class Variables {
 		}
 		return $this->ymc_pagination_type;
 	}
-
 
 	public function get_pagination_hide( $post_id ) {
 
@@ -628,7 +626,6 @@ class Variables {
 		return $this->ymc_pagination_hide;
 	}
 
-
 	public function get_sort_terms( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_sort_terms' ) ) {
@@ -637,6 +634,13 @@ class Variables {
 		return $this->ymc_sort_terms;
 	}
 
+	public function get_display_terms( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_display_terms' ) ) {
+			return get_post_meta( $post_id, 'ymc_display_terms', true );
+		}
+		return $this->ymc_display_terms;
+	}
 
 	public function get_order_post_by( $post_id ) {
 
@@ -646,7 +650,6 @@ class Variables {
 		return $this->ymc_order_post_by;
 	}
 
-
 	public function get_order_post_type( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_order_post_type' ) ) {
@@ -654,7 +657,6 @@ class Variables {
 		}
 		return $this->ymc_order_post_type;
 	}
-
 
 	public function get_ymc_meta_key( $post_id ) {
 
@@ -664,7 +666,6 @@ class Variables {
 		return $this->ymc_meta_key;
 	}
 
-
 	public function get_ymc_meta_value( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_meta_value' ) ) {
@@ -672,7 +673,6 @@ class Variables {
 		}
 		return $this->ymc_meta_value;
 	}
-
 
 	public function get_ymc_multiple_sort( $post_id ) {
 
@@ -682,7 +682,6 @@ class Variables {
 		return $this->ymc_multiple_sort;
 	}
 
-
 	public function get_ymc_post_status( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_post_status' ) ) {
@@ -691,7 +690,6 @@ class Variables {
 		return $this->ymc_post_status;
 	}
 
-
 	public function get_ymc_post_animation( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_post_animation' ) ) {
@@ -699,7 +697,6 @@ class Variables {
 		}
 		return $this->ymc_post_animation;
 	}
-
 
 	public function get_ymc_popup_status( $post_id ) {
 

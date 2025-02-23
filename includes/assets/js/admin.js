@@ -2096,6 +2096,22 @@
             $('.featured-posts .list-posts__inner, .featured-posts .selected-posts__inner').toggleClass('expand');
         });
 
+        // Linked lists Sort Terms and Display Terms
+        $(document).on('change', '.ymc__container-settings #appearance #ymc_display_terms', function (e) {
+
+            let selectSort = $('.ymc__container-settings #appearance #ymc-sort-terms');
+            let selectDisplay = $(this);
+            let val = selectDisplay.val();
+
+            if( val === 'auto_populate_all' || val === 'auto_populate_all_empty' ) {
+                selectSort.find('option[value="manual"]').remove();
+            } else {
+                if(selectSort.find('option[value="manual"]').length === 0) {
+                    selectSort.append(`<option value="manual">Manual</option>`);
+                }
+            }
+        });
+
 
         /*** RUN FUNCTIONS ***/
 

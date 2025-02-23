@@ -29,12 +29,11 @@ $arrOptions['terms_settings'] = arrayToObject( generalArrayMerging( $ymc_terms_o
 		$title            = get_the_title($post_id);
 		$link             = ( $ymc_popup_status === 'off' ) ? get_the_permalink($post_id) : '#';
 		$length_excerpt   = !empty($ymc_post_elements['length_excerpt']) ? esc_attr($ymc_post_elements['length_excerpt']) : 30;
-		$button_text      = !empty($ymc_post_elements['button_text']) ? $ymc_post_elements['button_text'] : __('Read More', 'ymc-smart-filter');
+		$read_more      = !empty($ymc_post_elements['button_text']) ? $ymc_post_elements['button_text'] : __('Read More', 'ymc-smart-filter');
 		$class_popup      = ( $ymc_popup_status === 'off' ) ? '' : 'ymc-popup';
-		$post_date_format = apply_filters('ymc_post_date_format_'.$filter_id.'_'.$target_id, 'd, M Y');
-
-//        $image_post       = ( has_post_thumbnail($post_id) ) ? get_the_post_thumbnail($post_id, 'full') :
-//				            '<img src="'. YMC_SMART_FILTER_URL .'includes/assets/images/dummy-Image.svg">';
+		$post_date_format = 'd, M Y';
+		$post_date_format = apply_filters('ymc_post_date_format_'.$filter_id, $post_date_format);
+		$post_date_format = apply_filters('ymc_post_date_format_'.$filter_id.'_'.$target_id, $post_date_format);
 
 		if( has_post_thumbnail($post_id) ) {
 			switch ($ymc_post_image_size) {
@@ -73,8 +72,10 @@ $arrOptions['terms_settings'] = arrayToObject( generalArrayMerging( $ymc_terms_o
 				break;
 		endswitch;
 
-		$read_more = apply_filters('ymc_post_read_more_'.$filter_id.'_'.$target_id, $button_text);
-		$target    = "target=" . $ymc_link_target . "";
+		$read_more = apply_filters('ymc_post_read_more_'.$filter_id, $read_more);
+		$read_more = apply_filters('ymc_post_read_more_'.$filter_id.'_'.$target_id, $read_more);
+
+		$target    = "target=" . $ymc_link_target;
 
 		if( is_array($taxonomy) && count($taxonomy) > 0 ) {
 
@@ -165,7 +166,7 @@ $arrOptions['terms_settings'] = arrayToObject( generalArrayMerging( $ymc_terms_o
 			$filter_id,
 			$arrOptions
 		);
-
+		// phpcs:ignore WordPress
 		echo $layout;
 
 		echo '</article>';
