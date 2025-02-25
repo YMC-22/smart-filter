@@ -23,10 +23,10 @@
 
                 <div class="from-element">
                     <label class="form-label">
-                        <?php echo esc_html__('Sort Terms', 'ymc-smart-filter');?>
+                        <?php echo esc_html__('Sort Direction Terms', 'ymc-smart-filter');?>
                         <span class="information">
-                        <?php echo esc_html__('Set sorting by filter terms.', 'ymc-smart-filter');?>
-                    </span>
+                        <?php echo esc_html__('Set direction sort terms.', 'ymc-smart-filter');?>
+                        </span>
                     </label>
                     <select class="form-select"  id="ymc-sort-terms" name="ymc-sort-terms">
                         <option value="asc" <?php if ($ymc_sort_terms === 'asc') {echo "selected";} ?>>
@@ -40,6 +40,55 @@
                             <?php echo esc_html__('Manually', 'ymc-smart-filter'); ?>
                         </option>
 	                    <?php endif; ?>
+                    </select>
+                </div>
+
+	            <?php $ymc_hide = ($ymc_display_terms === 'auto_populate_all' || $ymc_display_terms === 'auto_populate_all_empty') ? '' : 'ymc_hidden'; ?>
+
+                <div class="from-element from-element__order-term-by <?php echo esc_attr($ymc_hide); ?>">
+                    <label class="form-label">
+		                <?php echo esc_html__('Field to Sort by Terms', 'ymc-smart-filter');?>
+                        <span class="information">
+                        <?php echo esc_html__('Set sort by terms by fields.', 'ymc-smart-filter');?>
+                        </span>
+                    </label>
+                    <select class="form-select"  id="ymc-order-term-by" name="ymc_order_term_by">
+                        <option value="name" <?php if ($ymc_order_term_by === 'name') {echo "selected";} ?>>
+			                <?php echo esc_html__('Name', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="id" <?php if ($ymc_order_term_by === 'id') {echo "selected";} ?>>
+		                    <?php echo esc_html__('Id', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="count" <?php if ($ymc_order_term_by === 'count') {echo "selected";} ?>>
+		                    <?php echo esc_html__('Count', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="slug" <?php if ($ymc_order_term_by === 'slug') {echo "selected";} ?>>
+		                    <?php echo esc_html__('Slug', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="description" <?php if ($ymc_order_term_by === 'description') {echo "selected";} ?>>
+		                    <?php echo esc_html__('Description', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="term_group" <?php if ($ymc_order_term_by === 'term_group') {echo "selected";} ?>>
+		                    <?php echo esc_html__('Term group', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="parent" <?php if ($ymc_order_term_by === 'parent') {echo "selected";} ?>>
+		                    <?php echo esc_html__('Parent', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="include" <?php if ($ymc_order_term_by === 'include') {echo "selected";} ?>>
+		                    <?php echo esc_html__('Include', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="slug__in" <?php if ($ymc_order_term_by === 'slug__in') {echo "selected";} ?>>
+		                    <?php echo esc_html__('Slug in', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="meta_value" <?php if ($ymc_order_term_by === 'meta_value') {echo "selected";} ?>>
+		                    <?php echo esc_html__('Meta value', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="meta_value_num" <?php if ($ymc_order_term_by === 'meta_value_num') {echo "selected";} ?>>
+		                    <?php echo esc_html__('Meta value num', 'ymc-smart-filter'); ?>
+                        </option>
+                        <option value="none" <?php if ($ymc_order_term_by === 'none') {echo "selected";} ?>>
+		                    <?php echo esc_html__('None', 'ymc-smart-filter'); ?>
+                        </option>
                     </select>
                 </div>
 

@@ -1,7 +1,7 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.9.61
+Version: 2.9.62
 Donate link: https://github.com/YMC-22/smart-filter
 Tags: filter, grid, ajax, search, sort
 Requires at least: 5.5
@@ -89,6 +89,8 @@ wp_enqueue_script( 'wp-hooks' );
 
 == Changelog ==
 
+= 2.9.62 =
+Added Order Terms
 = 2.9.61 =
 Added Display Terms
 = 2.9.60 =

@@ -2100,15 +2100,18 @@
         $(document).on('change', '.ymc__container-settings #appearance #ymc_display_terms', function (e) {
 
             let selectSort = $('.ymc__container-settings #appearance #ymc-sort-terms');
+            let orderTermBy = $('.ymc__container-settings #appearance .from-element__order-term-by');
             let selectDisplay = $(this);
             let val = selectDisplay.val();
 
             if( val === 'auto_populate_all' || val === 'auto_populate_all_empty' ) {
                 selectSort.find('option[value="manual"]').remove();
+                orderTermBy.show();
             } else {
                 if(selectSort.find('option[value="manual"]').length === 0) {
                     selectSort.append(`<option value="manual">Manual</option>`);
                 }
+                orderTermBy.hide();
             }
         });
 

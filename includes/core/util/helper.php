@@ -881,13 +881,14 @@ endif;
  * Auto Populate All Terms
  * @param array $taxonomy List taxonomies.
  * @param bool $hide_empty Hide empty terms.
- *
+ * @param string $orderby Order by.
+ * @param string $order Order.
  * @return array Return array iDs terms or empty array
  * @return array|WP_Error Array of terms, or WP_Error if any of the taxonomies do not exist.
  *
  */
 if ( !function_exists( 'autoPopulateAllTerms' ) ) :
-	function autoPopulateAllTerms($taxonomy, $hide_empty = true) {
+	function autoPopulateAllTerms($taxonomy, $hide_empty = true, $orderby = 'name', $order = 'ASC') {
 
 		if( !is_array($taxonomy) ) return;
 
@@ -895,7 +896,9 @@ if ( !function_exists( 'autoPopulateAllTerms' ) ) :
 
 		$terms = get_terms([
 			'taxonomy'   => $taxonomy,
-			'hide_empty' => $hide_empty
+			'hide_empty' => $hide_empty,
+			'orderby' => $orderby,
+			'order' => $order
 		]);
 
 		if( $terms && ! is_wp_error( $terms ) ) {
@@ -908,7 +911,4 @@ if ( !function_exists( 'autoPopulateAllTerms' ) ) :
 	}
 
 endif;
-
-
-
 

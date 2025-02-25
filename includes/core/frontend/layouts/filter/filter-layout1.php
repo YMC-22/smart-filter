@@ -42,9 +42,10 @@ echo '<style id="'.esc_attr($handle_filter).'">'. esc_html(preg_replace('|\s+|',
 				// Check Hierarchy of terms
 				$ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 
-	            if( $ymc_sort_terms !== 'manual' ) {
-					( $ymc_sort_terms === 'asc' ) ? sortTaxTerms($terms_selected, 'asc') :
-						sortTaxTerms($terms_selected, 'desc');
+	            if( $ymc_sort_terms !== 'manual' && ( $ymc_display_terms === 'selected_terms' || $ymc_display_terms  === 'hide_empty_terms' ) )
+                {
+		            sortTaxTerms($terms_selected, $ymc_sort_terms);
+					/*( $ymc_sort_terms === 'asc' ) ? sortTaxTerms($terms_selected, 'asc') : sortTaxTerms($terms_selected, 'desc');*/
 				}
 
 				$show_all = $ymc_post_elements['button_text_all'];

@@ -39,9 +39,9 @@ $term_settings = arrayToObject( generalArrayMerging( $ymc_terms_options, $ymc_te
 		        ksort($result_terms);
 	        }
 	        else {
-		        ( $ymc_sort_terms === 'asc' ) ? sortTaxTerms($terms_selected, 'asc') :
-			        sortTaxTerms($terms_selected, 'desc');
-		        $result_terms = $terms_selected;
+		        sortTaxTerms($terms_selected, $ymc_sort_terms);
+		        //( $ymc_sort_terms === 'asc' ) ? sortTaxTerms($terms_selected, 'asc') : sortTaxTerms($terms_selected, 'desc');
+	            $result_terms = $terms_selected;
 	        }
 
             $layout  = '<div class="cf-wrp"><header class="head-filter">'.esc_html__('Add Custom Extra Filter Layout.','ymc-smart-filter').'</header>';

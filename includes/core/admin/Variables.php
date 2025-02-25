@@ -134,6 +134,8 @@ class Variables {
 
 	public $ymc_sort_terms = 'asc';
 
+	public $ymc_order_term_by = 'name';
+
 	public $ymc_display_terms = 'selected_terms';
 
 	public $ymc_order_post_by = 'title';
@@ -632,6 +634,15 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_sort_terms', true );
 		}
 		return $this->ymc_sort_terms;
+	}
+
+
+	public function get_order_term_by( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_order_term_by' ) ) {
+			return get_post_meta( $post_id, 'ymc_order_term_by', true );
+		}
+		return $this->ymc_order_term_by;
 	}
 
 	public function get_display_terms( $post_id ) {

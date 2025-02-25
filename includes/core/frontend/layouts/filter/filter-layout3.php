@@ -51,9 +51,10 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
 
 			$type_multiple = ( (bool) $ymc_multiple_filter ) ? 'multiple' : '';
 
-			if( $ymc_sort_terms !== 'manual' ) {
-				( $ymc_sort_terms === 'asc' ) ? sortTaxTerms($terms_selected, 'asc') :
-					sortTaxTerms($terms_selected, 'desc');
+		    if( $ymc_sort_terms !== 'manual' && ( $ymc_display_terms === 'selected_terms' || $ymc_display_terms  === 'hide_empty_terms' ) )
+            {
+	            sortTaxTerms($terms_selected, $ymc_sort_terms);
+                //( $ymc_sort_terms === 'asc' ) ? sortTaxTerms($terms_selected, 'asc') : sortTaxTerms($terms_selected, 'desc');
 			}
 
             $arr_taxonomies = [];
