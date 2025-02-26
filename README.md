@@ -1039,6 +1039,12 @@ wp.hooks.addAction('ymc_after_loaded_data_545_1', 'smartfilter', function(class_
 
 **List of Filters and Actions to override default settings of the Masonry Grid**
 ```js
+
+// Static content
+wp.hooks.addFilter('ymc_magicGrid_staticContent', 'smartfilter', 'callback');
+wp.hooks.addFilter('ymc_magicGrid_staticContent_FilterID', 'smartfilter', 'callback');
+wp.hooks.addFilter('ymc_magicGrid_staticContent_FilterID_LayoutID', 'smartfilter', 'callback');
+
 // Space between items
 wp.hooks.addFilter('ymc_magicGrid_gutter', 'smartfilter', 'callback');
 wp.hooks.addFilter('ymc_magicGrid_gutter_FilterID', 'smartfilter', 'callback');

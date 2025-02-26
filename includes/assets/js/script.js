@@ -552,12 +552,17 @@
                 wp.hooks.addAction('ymc_after_loaded_data_'+f+'_'+c, 'smartfilter', function(class_name, response) {
 
                     // Default Parameters
+                    let staticContent = false;
                     let gutter       = 15;
                     let maxColumns   = 5;
                     let useMin       = false;
                     let useTransform = true;
                     let animate      = false;
                     let center       = true;
+
+                    staticContent = wp.hooks.applyFilters('ymc_magicGrid_staticContent', staticContent);
+                    staticContent = wp.hooks.applyFilters('ymc_magicGrid_staticContent_'+ f+'', staticContent);
+                    staticContent = wp.hooks.applyFilters('ymc_magicGrid_staticContent_'+ f+'_'+c, staticContent);
 
                     gutter = wp.hooks.applyFilters('ymc_magicGrid_gutter', gutter);
                     gutter = wp.hooks.applyFilters('ymc_magicGrid_gutter_'+ f+'', gutter);
@@ -585,6 +590,7 @@
 
                     let magicGrid = new MagicGrid({
                         container: `.${class_name} .post-entry`,
+                        static: staticContent,
                         items: response.post_count,
                         gutter: gutter,
                         maxColumns: maxColumns,
@@ -594,7 +600,7 @@
                         center: center
                     });
 
-                     magicGrid.onReady(() => {
+                    magicGrid.onReady(() => {
                          wp.hooks.doAction('ymc_magicGrid_ready');
                          wp.hooks.doAction('ymc_magicGrid_ready_'+f);
                          wp.hooks.doAction('ymc_magicGrid_ready_'+f+'_'+c);

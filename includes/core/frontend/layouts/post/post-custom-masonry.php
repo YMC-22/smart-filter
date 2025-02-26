@@ -21,7 +21,7 @@ while ($query->have_posts()) : $query->the_post();
 	do_action( "ymc_before_custom_layout_". esc_attr($filter_id), $increment_post, $arrOptions );
 	do_action( "ymc_before_custom_layout_". esc_attr($filter_id).'_'. esc_attr($target_id), $increment_post, $arrOptions );
 
-	echo '<article class="ymc-'.esc_attr($post_layout).' post-'.esc_attr(get_the_id()).' post-item fade-in">';
+	echo '<article class="ymc-'.esc_attr($post_layout).' post-'.esc_attr(get_the_id()).' post-item '.esc_attr($class_animation).'">';
 
 	$layouts .= '<header class="head-post">'.esc_html__('Add Custom Masonry Layout.','ymc-smart-filter').'</header>';
 	$layouts .= '<div class="inform">'.esc_html__('Use a filter:','ymc-smart-filter').' 
