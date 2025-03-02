@@ -908,14 +908,14 @@
                 url: _smart_filter_object.ajax_url,
                 data: data,
                 beforeSend: function () {
-
-                    // Load-more && Scroll-infinity
+                    container.find('.container-posts').addClass('loading');
+                    // Load more or Scroll infinity
                     if(toggle_pg === 0) {
-                        container.find('.container-posts').addClass('loading').find('.post-entry').
+                        container.find('.post-entry').
                         append(`<img class="preloader preloader--load" src="${stylePreloader}" style="${preloaderFilter}">`);
                     }
                     else {
-                        container.find('.container-posts').addClass('loading').
+                        container.find('.container-posts').
                         prepend(`<img class="preloader preloader--numeric" src="${stylePreloader}" style="${preloaderFilter}">`);
                     }
 
@@ -989,9 +989,6 @@
                                 append(res.pagin);
                             }
                             else  {
-                                // Filter is act scroll top
-                                //$('html, body').animate({scrollTop: container.offset().top}, 300);
-
                                 container.
                                 find('.container-posts').
                                 removeClass('loading').
@@ -1004,18 +1001,19 @@
                                 append(res.pagin);
                             }
 
-                            if( res.get_current_posts > 0 && postLayout !== 'post-carousel-layout' ) {
+                            if(res.get_current_posts > 0 && postLayout !== 'post-carousel-layout') {
                                 postsObserver.observe(document.querySelector('.'+target+' .post-entry .post-item:last-child'));
                             }
 
                             break;
 
-                        default :
-                            // Filter is act scroll top
-                            if( ! container.hasClass('ymc-loaded-filter') ) {
-                                if( toggle_pg === 1 && parseInt(pageScroll) === 1 ) {
-                                    $('html, body').animate({scrollTop: container.offset().top - 100}, 500);
-                                }
+                        case 'numeric' :
+                            // Scroll top
+                            if(!container.hasClass('ymc-loaded-filter') && toggle_pg === 1 && parseInt(pageScroll) === 1 ) {
+                                //$('html, body').animate({scrollTop: container.offset().top}, 500);
+                                document.querySelector('.'+target).scrollIntoView(
+                                    {behavior: "smooth", block: "start", inline: "start"}
+                                );
                             }
 
                             container.
@@ -1031,6 +1029,8 @@
                             remove().
                             end().
                             append(res.pagin);
+
+                            break;
                     }
 
                     // Updated attr data-loading
