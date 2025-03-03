@@ -78,9 +78,7 @@ class Shortcode {
 				$ymc_tax = implode(",", $tax_selected);
 			}
 
-			if ( is_array($terms_selected) &&
-			     ( $ymc_display_terms === 'selected_terms' ||
-			       $ymc_display_terms === 'hide_empty_terms') )
+			if ( is_array($terms_selected) && ($ymc_display_terms === 'selected_terms' || $ymc_display_terms === 'hide_empty_terms'))
 			{
 				// Remove empty terms
 				if( $ymc_display_terms === 'hide_empty_terms' ) {
@@ -89,9 +87,7 @@ class Shortcode {
 				$ymc_terms = implode(',', $terms_selected);
 			}
 
-			if( !$ymc_hierarchy_terms &&
-			    ($ymc_display_terms === 'auto_populate_all' ||
-			     $ymc_display_terms === 'auto_populate_all_empty') )
+			if(!$ymc_hierarchy_terms && ($ymc_display_terms === 'auto_populate_all' || $ymc_display_terms === 'auto_populate_all_empty'))
 			{
 				if( $ymc_display_terms === 'auto_populate_all' ) {
 					// Auto populate all terms
@@ -326,6 +322,27 @@ class Shortcode {
 
 			if ( $ymc_filter_layout )
 			{
+				if (is_array($terms_selected) && ($ymc_display_terms === 'selected_terms' || $ymc_display_terms === 'hide_empty_terms'))
+				{
+					// Remove empty terms
+					if( $ymc_display_terms === 'hide_empty_terms' ) {
+						$terms_selected = array_filter($terms_selected, 'hideEmptyTerm');
+					}
+					$ymc_terms = implode(',', $terms_selected);
+				}
+
+				if(!$ymc_hierarchy_terms && ($ymc_display_terms === 'auto_populate_all' || $ymc_display_terms === 'auto_populate_all_empty'))
+				{
+					if( $ymc_display_terms === 'auto_populate_all' ) {
+						// Auto populate all terms
+						$terms_selected = autoPopulateAllTerms($tax_selected, false, $ymc_order_term_by, $ymc_sort_terms);
+					} else {
+						// Auto populate all without empty
+						$terms_selected = autoPopulateAllTerms($tax_selected,true, $ymc_order_term_by, $ymc_sort_terms);
+					}
+					$ymc_terms = implode(',', $terms_selected);
+				}
+
 				$filepath_filter = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/filter/" . $ymc_filter_layout . ".php";
 
 				if ( file_exists($filepath_filter) )
