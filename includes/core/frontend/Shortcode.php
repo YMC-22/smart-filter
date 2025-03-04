@@ -78,7 +78,7 @@ class Shortcode {
 				$ymc_tax = implode(",", $tax_selected);
 			}
 
-			if ( is_array($terms_selected) && ($ymc_display_terms === 'selected_terms' || $ymc_display_terms === 'hide_empty_terms'))
+			if ( is_array($terms_selected) && ($ymc_display_terms === 'selected_terms' || $ymc_display_terms === 'hide_empty_terms') )
 			{
 				// Remove empty terms
 				if( $ymc_display_terms === 'hide_empty_terms' ) {
@@ -87,7 +87,7 @@ class Shortcode {
 				$ymc_terms = implode(',', $terms_selected);
 			}
 
-			if(!$ymc_hierarchy_terms && ($ymc_display_terms === 'auto_populate_all' || $ymc_display_terms === 'auto_populate_all_empty'))
+			if( !$ymc_hierarchy_terms && ($ymc_display_terms === 'auto_populate_all' || $ymc_display_terms === 'auto_populate_all_empty') )
 			{
 				if( $ymc_display_terms === 'auto_populate_all' ) {
 					// Auto populate all terms
@@ -103,9 +103,7 @@ class Shortcode {
 				$ymc_choices_posts = implode(',', $ymc_choices_posts);
 			}
 
-			if( is_array($ymc_terms_options) &&
-			    ! empty($ymc_terms_options) &&
-			    $ymc_filter_layout !== 'alphabetical-layout' )
+			if( is_array($ymc_terms_options) && ! empty($ymc_terms_options) && $ymc_filter_layout !== 'alphabetical-layout' )
 			{
 				$arr_default_terms = array_column($ymc_terms_options, 'default', 'termid');
 
@@ -151,9 +149,7 @@ class Shortcode {
 			}
 
 			// Before Filter insert Featured Posts
-			if ( $ymc_featured_post_status === 'on' &&
-			     $ymc_location_featured_posts === 'top_before' &&
-			     !empty($ymc_featured_posts) )
+			if ( $ymc_featured_post_status === 'on' && $ymc_location_featured_posts === 'top_before' && !empty($ymc_featured_posts) )
 			{
 				$filepath_featured_post = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/featured-post/" . $ymc_featured_post_layout . ".php";
 
@@ -177,9 +173,7 @@ class Shortcode {
 			}
 
 			// After Filter insert Featured Posts
-			if ( $ymc_featured_post_status === 'on' &&
-			     $ymc_location_featured_posts === 'top_after' &&
-			     !empty($ymc_featured_posts) )
+			if ( $ymc_featured_post_status === 'on' && $ymc_location_featured_posts === 'top_after' && !empty($ymc_featured_posts) )
 			{
 				$filepath_featured_post = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/featured-post/" . $ymc_featured_post_layout . ".php";
 
@@ -225,9 +219,7 @@ class Shortcode {
 			echo '</div>';
 
 			// Bottom Grid insert Featured Posts
-			if ( $ymc_featured_post_status === 'on' &&
-			     $ymc_location_featured_posts === 'bottom' &&
-			     !empty($ymc_featured_posts) )
+			if ( $ymc_featured_post_status === 'on' && $ymc_location_featured_posts === 'bottom' && !empty($ymc_featured_posts) )
 			{
 				$filepath_featured_post = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/featured-post/" . $ymc_featured_post_layout . ".php";
 

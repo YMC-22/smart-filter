@@ -15,7 +15,7 @@ $query = new \WP_query($args);
 
 if ( $query->have_posts() ) : ?>
 
-	<div class="featured-posts">
+	<div class="featured-posts featured-posts-<?php echo  esc_attr($ymc_filter_layout) .'--'. esc_attr($ymc_location_featured_posts); ?>">
 
 		<div class="featured-posts__wrapper location_<?php echo esc_attr($ymc_location_featured_posts); ?>">
 
