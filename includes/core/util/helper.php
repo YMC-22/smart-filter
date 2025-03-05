@@ -843,6 +843,7 @@ endif;
 /**
  * Debug in Console
  */
+/*
 if ( !function_exists( 'js_console_log' ) ) {
 	function js_console_log( $x, $as_text = true ) {
 		$str = '<div class="php-to-js-console-log" style="display: none !important;" data-as-text="' . esc_attr( (bool) $as_text ) .
@@ -858,7 +859,7 @@ if ( !function_exists( 'js_console_log' ) ) {
 		}, 99999 );
 	}
 }
-
+*/
 
 /**
  * Hide Empty Term

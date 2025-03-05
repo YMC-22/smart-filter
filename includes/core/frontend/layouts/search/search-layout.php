@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 
-<div id="search-layout" class="search-layout search-layout__<?php echo esc_attr($ymc_filter_layout).'--featured-'.esc_attr($ymc_featured_post_status); ?>">
+<div id="search-layout" class="search-layout">
 
     <form class="search-form">
 

@@ -126,10 +126,32 @@ class Shortcode {
 
 			$ymc_carousel_params = ( $ymc_post_layout === 'post-carousel-layout' ) ? wp_json_encode($ymc_carousel_params) : '""';
 
+			// General Custom CSS
 			if( ! empty($ymc_custom_css) ) :
 				// phpcs:ignore WordPress
 				echo '<style id="filter-grids-css-'.esc_attr($id) .'-'. esc_attr($c_target).'">'. wp_strip_all_tags($ymc_custom_css) .'</style>';
 			endif;
+
+			// Filters Styles
+			if ( $ymc_filter_layout !== 'filter-custom-layout')
+			{
+				$filepath_filter_css = YMC_SMART_FILTER_DIR . '/includes/core/frontend/layouts/filter-css/'. $ymc_filter_layout .'-css.php';
+
+				if ( file_exists($filepath_filter_css) ) {
+					require $filepath_filter_css;
+				}
+			}
+
+			// Posts Styles
+			if ( $ymc_post_layout !== 'post-custom-layout')
+			{
+				$filepath_post_css = YMC_SMART_FILTER_DIR . '/includes/core/frontend/layouts/post-css/'. $ymc_post_layout .'-css.php';
+
+				if ( file_exists($filepath_post_css) ) {
+					require $filepath_post_css;
+				}
+			}
+
 
 			// Include JSON
 			require YMC_SMART_FILTER_DIR . '/includes/core/util/json.php';
@@ -139,15 +161,6 @@ class Shortcode {
 				  data-params=\''. wp_kses_post(str_replace(array("\r","\n","\t"," "), '', $json)) .'\'>';
 
 
-			if ( $ymc_filter_search_status === 'on' )
-			{
-				$filepath_search = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/search/search-layout.php";
-
-				if ( file_exists($filepath_search) ) {
-					require $filepath_search;
-				}
-			}
-
 			// Before Filter insert Featured Posts
 			if ( $ymc_featured_post_status === 'on' && $ymc_location_featured_posts === 'top_before' && !empty($ymc_featured_posts) )
 			{
@@ -156,6 +169,15 @@ class Shortcode {
 				if ( file_exists($filepath_featured_post) )
 				{
 					require $filepath_featured_post;
+				}
+			}
+
+			if ( $ymc_filter_search_status === 'on' )
+			{
+				$filepath_search = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/search/search-layout.php";
+
+				if ( file_exists($filepath_search) ) {
+					require $filepath_search;
 				}
 			}
 
@@ -189,15 +211,6 @@ class Shortcode {
 
 				if ( file_exists($filepath_sort) ) {
 					require $filepath_sort;
-				}
-			}
-
-			if ( $ymc_post_layout !== 'post-custom-layout')
-			{
-				$filepath_post_css = YMC_SMART_FILTER_DIR . '/includes/core/frontend/layouts/post-css/'. $ymc_post_layout .'-css.php';
-
-				if ( file_exists($filepath_post_css) ) {
-					require $filepath_post_css;
 				}
 			}
 
