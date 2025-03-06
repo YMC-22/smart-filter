@@ -469,6 +469,7 @@ class Get_Posts {
 					'wp_query_custom' => $custom_args,
 					'wp_query' => $args,
 					'message' => $message,
+					'sql_request' => $query->request,
 					'all_incoming_data' => $clean_data
 				]
 			]);
