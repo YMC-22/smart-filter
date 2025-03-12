@@ -22,9 +22,7 @@ class Meta_Boxes {
 
 	public function ymc_save_meta_box( $post_id, $post ) {
 
-		if ( ! current_user_can( 'edit_page', $post_id ) ) {
-			return $post_id;
-		}
+		if ( ! current_user_can( 'edit_page', $post_id ) ) 	return;
 
 		// CPT
 		if( isset($_POST['ymc-cpt-select']) && check_admin_referer('save-post-'.$post_id, 'ymc_nonce')) {

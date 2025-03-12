@@ -2,7 +2,7 @@
 (function( $ ) {
     "use strict"
 
-    if( 'undefined' === typeof jQuery.migrateMute ) {
+    if( 'undefined' === typeof jQuery.migrateVersion ) {
         console.error('jQuery Migrate is not defined.');
     }
 

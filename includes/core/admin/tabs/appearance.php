@@ -443,13 +443,13 @@
                                                 <?php echo esc_html__('Modified', 'ymc-smart-filter'); ?>
                                             </option>
                                             <option value="type" <?php if ( in_array('type', $item) ) { echo "selected"; } ?>>
-                                                <?php echo esc_html__('Type ', 'ymc-smart-filter'); ?>
+                                                <?php echo esc_html__('Type', 'ymc-smart-filter'); ?>
                                             </option>
                                             <option value="parent" <?php if ( in_array('parent', $item) ) { echo "selected"; } ?>>
-                                                <?php echo esc_html__('Parent ', 'ymc-smart-filter'); ?>
+                                                <?php echo esc_html__('Parent', 'ymc-smart-filter'); ?>
                                             </option>
                                             <option value="rand" <?php if ( in_array('rand', $item) ) { echo "selected"; } ?>>
-                                                <?php echo esc_html__('Rand ', 'ymc-smart-filter'); ?>
+                                                <?php echo esc_html__('Rand', 'ymc-smart-filter'); ?>
                                             </option>
                                         </select>
                                     </fieldset>
