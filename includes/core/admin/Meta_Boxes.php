@@ -13,11 +13,9 @@ class Meta_Boxes {
 	public function __construct() {
 		add_action( 'add_meta_boxes', array($this, 'ymc_add_post_metabox'));
 		add_action( 'add_meta_boxes', array($this, 'ymc_attached_filters'));
-		add_action( 'save_post', array($this, 'ymc_save_meta_box'), 10, 2);
+		add_action( 'save_post_ymc_filters', array($this, 'ymc_save_meta_box'), 10, 2);
 		add_action( 'wp_dashboard_setup', array($this, 'ymc_filter_grids_widget'));
 		add_action( 'admin_bar_menu', array($this, 'ymc_admin_bar_menu'), 120);
-		// Run popup
-		//add_thickbox();
 	}
 
 	public function ymc_save_meta_box( $post_id, $post ) {
@@ -570,16 +568,6 @@ class Meta_Boxes {
 		add_meta_box( 'ymc_side_meta_box' , __('Filter & Grids Features','ymc-smart-filter'), array($this,'ymc_side_meta_box'), 'ymc_filters', 'side', 'core');
 
 	}
-
-	/*public function ymc_side_meta_box_advertising() { ?>
-
-		<article class="fg-plugin-features">
-			<div class="fg-plugin-banner">
-				<?php esc_html_e('Our Team accepts orders for the development of custom Filters of any complexity for your design. Please, email us:','ymc-smart-filter');?> <a href="mailto:wss.office21@gmail.com">wss.office21@gmail.com</a>
-			</div>
-		</article>
-
-	<?php }*/
 
 	public function ymc_top_meta_box() { ?>
 

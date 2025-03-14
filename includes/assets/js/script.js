@@ -3,10 +3,10 @@
     "use strict"
 
     if( 'undefined' === typeof jQuery.migrateVersion ) {
-        console.error('jQuery Migrate is not defined.');
+        console.warn('F&G: jQuery Migrate is not defined.');
     }
 
-    $(document).on('ready', function () {
+    document.addEventListener("DOMContentLoaded", (e) => {
 
         /*** API YMCTools ***/
 
@@ -553,6 +553,7 @@
 
                     // Default Parameters
                     let staticContent = false;
+                    let items = (response.post_count !== 0) ? response.post_count : 4;
                     let gutter       = 15;
                     let maxColumns   = 5;
                     let useMin       = false;
@@ -591,7 +592,7 @@
                     let magicGrid = new MagicGrid({
                         container: `.${class_name} .post-entry`,
                         static: staticContent,
-                        items: response.post_count,
+                        items: items,
                         gutter: gutter,
                         maxColumns: maxColumns,
                         useMin: useMin,
