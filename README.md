@@ -560,7 +560,7 @@ add_filter('ymc_featured_post_custom_layout_545_1', function ( $layouts, $post_i
 
 To control the post filter via javascript, use the following methods of the Filter's global YMCTools object. All parameters, their name and values that are passed to the object, are built on the principles and rules of the global WP_Query object in the WordPress core. Therefore, please, refer to the relevant documentation for using the WP_Query object for clarification. All of these methods should be used when creating event handlers. but for example, when clicking on a button or link, call one or another method.
 
-**Note**: calling the YMCTools() object when the page is fully loaded should be placed in the block jQuery(document).on("ready", function () { });
+**Note**: calling the YMCTools() object when the page is fully loaded should be placed in the block document.addEventListener("DOMContentLoaded", (e) => { ... });
 In some cases, this object is used in handler function callbacks.
 
 
