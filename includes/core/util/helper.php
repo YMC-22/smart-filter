@@ -817,7 +817,7 @@ if( !function_exists('hierarchyTermsLayout') ) :
 				            esc_attr($is_disabled).' '.
 				            esc_attr($default_term_active) .'"
 				            style="'.esc_attr($bg_term).esc_attr($color_term).'" 
-							href="#" data-selected="'.esc_attr($term->slug).'" data-termid="'.esc_attr($term->term_id).'" data-name="'.esc_attr($name_term).'">'.
+							aria-label="'.esc_html($name_term).'" role="link" data-selected="'.esc_attr($term->slug).'" data-termid="'.esc_attr($term->term_id).'" data-name="'.esc_attr($name_term).'">'.
 				            $terms_icons . '<span class="link-inner">'. esc_html($name_term) . '</span></a>';
 
 				$output .= ( in_array($arrayTermsOptions['filter_layout'], $listDropdownLayouts) ) ? $arrow : '';
