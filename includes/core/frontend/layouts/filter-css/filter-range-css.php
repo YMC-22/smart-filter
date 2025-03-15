@@ -23,5 +23,7 @@ if( $ymc_filter_font !== 'inherit' ) {
     #ymc-extra-filter-".$c_target." .filter-range .filter-entry {font-family:".$ymc_filter_font."}";
 }
 
-echo '<style id="'.esc_attr($handle_filter).'">'. esc_html(preg_replace('|\s+|', ' ', $filter_css)) .'</style>';
+if(!empty($filter_css)) :
+	echo '<style id="'.esc_attr($handle_filter).'">'. esc_html(preg_replace('|\s+|', ' ', $filter_css)) .'</style>';
+endif;
 

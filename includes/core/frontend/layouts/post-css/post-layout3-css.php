@@ -3,20 +3,28 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Add Style
-$ymc_post_text_color = !empty($ymc_post_text_color) ? "color:".$ymc_post_text_color.";" : '';
-$ymc_post_bg_color   = !empty($ymc_post_bg_color) ? "background-color:".$ymc_post_bg_color.";" : '';
-$ymc_post_active_color = !empty($ymc_post_active_color) ? "color:".$ymc_post_active_color.";" : '';
-$ymc_post_font = !empty($ymc_post_font) ? "font-family:".$ymc_post_font.";" : '';
+$post_css = "";
 
+if(!empty($ymc_post_text_color)) :
+	$post_css .= "#ymc-smart-filter-container-".$c_target." .container-posts .post-entry {color:".$ymc_post_text_color."}";
+	$post_css .= "#ymc-smart-filter-container-".$c_target." .ymc-pagination li a {color:".$ymc_post_text_color."}";
+endif;
 
-$post_css = "
-#ymc-smart-filter-container-".$c_target." .container-posts .post-entry {".$ymc_post_text_color."}
-#ymc-smart-filter-container-".$c_target." .container-posts .post-entry .ymc-post-layout3 {".$ymc_post_bg_color."}
-#ymc-smart-filter-container-".$c_target." .container-posts .post-entry .ymc-post-layout3 .read-more .btn {".$ymc_post_active_color."}
-#ymc-smart-filter-container-".$c_target." .ymc-pagination li a {".$ymc_post_text_color . $ymc_post_bg_color."}
-#ymc-smart-filter-container-".$c_target." .container-posts .post-entry.post-layout3 {".$ymc_post_font."}";
+if(!empty($ymc_post_bg_color)) :
+	$post_css .= "#ymc-smart-filter-container-".$c_target." .container-posts .post-entry .ymc-post-layout3 {background-color:".$ymc_post_bg_color."}";
+	$post_css .= "#ymc-smart-filter-container-".$c_target." .ymc-pagination li a {background-color:".$ymc_post_bg_color."}";
+endif;
 
-echo '<style id="'.esc_attr($handle_post).'">'. esc_html(preg_replace('|\s+|', ' ', $post_css)) .'</style>';
+if($ymc_post_active_color) :
+	$post_css .= "#ymc-smart-filter-container-".$c_target." .container-posts .post-entry .ymc-post-layout3 .read-more .btn {color:".$ymc_post_active_color."}";
+endif;
 
+if($ymc_post_font !== 'inherit') :
+	$post_css .= "#ymc-smart-filter-container-".$c_target." .container-posts .post-entry.post-layout3 {font-family:".$ymc_post_font."}";
+endif;
+
+if(!empty($post_css)) :
+	echo '<style id="'.esc_attr($handle_post).'">'. esc_html(preg_replace('|\s+|', ' ', $post_css)) .'</style>';
+endif;
 
 

@@ -20,8 +20,9 @@ if( $ymc_filter_font !== 'inherit' ) {
 	$filter_css .= "#ymc-smart-filter-container-".$c_target." .filter-layout2 .filter-entry .filter-link, 
                     #ymc-extra-filter-".$c_target." .filter-layout2 .filter-entry .filter-link { font-family:".$ymc_filter_font.";}";
 }
-
-echo '<style id="'.esc_attr($handle_filter).'">'. esc_html(preg_replace('|\s+|', ' ', $filter_css)) .'</style>';
+if(!empty($filter_css)) :
+	echo '<style id="'.esc_attr($handle_filter).'">'. esc_html(preg_replace('|\s+|', ' ', $filter_css)) .'</style>';
+endif;
 
 
 
