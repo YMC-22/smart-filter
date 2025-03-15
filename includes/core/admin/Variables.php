@@ -48,47 +48,27 @@ class Variables {
 	 */
 
 	public $filter_status = 'on';
-
 	public $sort_status = 'off';
-
 	public $ymc_featured_post_status = 'off';
-
 	public $filter_layout = 'filter-layout1';
-
 	public $filter_extra_layout = 'filter-layout1';
-
 	public $filter_text_color = '';
-
 	public $filter_bg_color = '';
-
 	public $filter_active_color = '';
-
 	public $ymc_post_layout = 'post-layout1';
-
 	public $ymc_featured_post_layout = 'featured-post-layout-default';
-
 	public $ymc_post_text_color = '';
-
 	public $ymc_post_bg_color = '';
-
 	public $ymc_post_active_color = '';
 
 	public $ymc_multiple_filter = 0;
-
 	public $ymc_post_status = ['publish'];
-
 	public $ymc_desktop_xxl = 4;
-
 	public $ymc_desktop_xl = 4;
-
 	public $ymc_desktop_lg = 4;
-
 	public $ymc_tablet_md = 3;
-
 	public $ymc_tablet_sm = 2;
-
 	public $ymc_mobile_xs = 1;
-
 	public $ymc_carousel_params = [
 		"parameters" => [
 			"disabled"      => "true",
@@ -125,38 +105,24 @@ class Variables {
 	public $ymc_empty_post_result = "No posts found.";
 
 	public $ymc_link_target = "_blank";
-
 	public $ymc_per_page = 4;
-
 	public $ymc_pagination_type = 'numeric';
-
 	public $ymc_pagination_hide = 'off';
 
 	public $ymc_sort_terms = 'asc';
-
 	public $ymc_order_term_by = 'name';
 
 	public $ymc_display_terms = 'selected_terms';
-
 	public $ymc_order_post_by = 'title';
-
 	public $ymc_order_post_type = 'asc';
-
 	public $ymc_meta_key = null;
-
 	public $ymc_meta_value = null;
-
 	public $ymc_multiple_sort = null;
-
 	public $ymc_post_animation = null;
 
-
 	public $ymc_popup_status = 'off';
-
 	public $ymc_popup_animation = null;
-
 	public $ymc_popup_animation_origin = 'center center';
-
 	public $ymc_popup_settings = [
 		"custom_width" => "50",
 		"custom_width_unit" => "%",
@@ -178,7 +144,6 @@ class Variables {
 		'length_excerpt'  => 30,
 		'button_text_all'  => 'All'
 	];
-
 	public $ymc_pagination_elements = [
 		'prev_btn_text' => 'Prev',
 		'next_btn_text' => 'Next',
@@ -190,35 +155,24 @@ class Variables {
 	public $ymc_image_clickable = 'off';
 
 	public $ymc_excerpt_truncate_method = 'excerpt_truncated_text';
+	public $ymc_html_tag_button = 'a';
 
 
 	/**
 	 * Advanced tab used default variables
 	 */
 	public $ymc_special_post_class = '';
-
 	public $ymc_preloader_icon = 'preloader';
-
 	public $ymc_preloader_filters = 'none';
-
 	public $ymc_preloader_filters_rate = '0.5';
-
 	public $ymc_preloader_filters_custom = '';
-
 	public $ymc_advanced_query_status = 'off';
-
 	public $ymc_query_type = 'query_custom';
-
 	public $ymc_query_type_custom = '';
-
 	public $ymc_query_type_callback = '';
-
 	public $ymc_suppress_filters = 0;
-
 	public $ymc_debug_code = 0;
-
 	public $ymc_custom_css   = '';
-
 	public $ymc_custom_after_js  = '';
 
 
@@ -226,7 +180,6 @@ class Variables {
 	 * Typography tab used default variables
 	 */
 	public $ymc_filter_font = 'inherit';
-
 	public $ymc_post_font = 'inherit';
 
 
@@ -234,19 +187,12 @@ class Variables {
 	 * Search tab used default variables
 	 */
 	public $ymc_filter_search_status = 'off';
-
 	public $ymc_search_text_button = 'Search';
-
 	public $ymc_search_placeholder = 'Search posts...';
-
 	public $ymc_autocomplete_state = 0;
-
 	public $ymc_scroll_page = 1;
-
 	public $ymc_search_filtered_posts  = 0;
-
 	public $ymc_exact_phrase = false;
-
 
 
 
@@ -271,7 +217,6 @@ class Variables {
 		return $cpost_types;
 	}
 
-
 	public function get_cpt( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_cpt_value' ) ) {
@@ -279,7 +224,6 @@ class Variables {
 		}
 		return $this->cpt;
 	}
-
 
 	public function get_tax_sel( $post_id ) {
 
@@ -289,7 +233,6 @@ class Variables {
 		return $this->tax_sel;
 	}
 
-
 	public function get_terms_sel( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_terms' ) ) {
@@ -297,7 +240,6 @@ class Variables {
 		}
 		return $this->terms_sel;
 	}
-
 
 	public function get_tax_rel( $post_id ) {
 
@@ -307,7 +249,6 @@ class Variables {
 		return $this->tax_rel;
 	}
 
-
 	public function get_tax_sort( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_tax_sort' ) ) {
@@ -316,7 +257,6 @@ class Variables {
 		return $this->tax_sort;
 	}
 
-
 	public function get_term_sort( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_term_sort' ) ) {
@@ -324,7 +264,6 @@ class Variables {
 		}
 		return $this->term_sort;
 	}
-
 
 	public function get_choices_posts( $post_id ) {
 
@@ -382,7 +321,6 @@ class Variables {
 		return $this->ymc_terms_icons;
 	}
 
-
 	public function get_terms_align( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_terms_align' ) ) {
@@ -390,7 +328,6 @@ class Variables {
 		}
 		return $this->ymc_terms_align;
 	}
-
 
 	public function get_terms_options( $post_id ) {
 
@@ -428,7 +365,6 @@ class Variables {
 		return $this->filter_status;
 	}
 
-
 	public function get_sort_status( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_sort_status' ) ) {
@@ -436,7 +372,6 @@ class Variables {
 		}
 		return $this->sort_status;
 	}
-
 
 	public function get_filter_layout( $post_id ) {
 
@@ -446,7 +381,6 @@ class Variables {
 		return $this->filter_layout;
 	}
 
-
 	public function get_filter_extra_layout( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_filter_extra_layout' ) ) {
@@ -454,7 +388,6 @@ class Variables {
 		}
 		return $this->filter_extra_layout;
 	}
-
 
 	public function get_filter_text_color( $post_id ) {
 
@@ -464,7 +397,6 @@ class Variables {
 		return $this->filter_text_color;
 	}
 
-
 	public function get_filter_bg_color( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_filter_bg_color' ) ) {
@@ -472,7 +404,6 @@ class Variables {
 		}
 		return $this->filter_bg_color;
 	}
-
 
 	public function get_filter_active_color( $post_id ) {
 
@@ -482,7 +413,6 @@ class Variables {
 		return $this->filter_active_color;
 	}
 
-
 	public function get_multiple_filter( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_multiple_filter' ) ) {
@@ -490,7 +420,6 @@ class Variables {
 		}
 		return $this->ymc_multiple_filter;
 	}
-
 
 	public function get_post_layout( $post_id ) {
 
@@ -500,7 +429,6 @@ class Variables {
 		return $this->ymc_post_layout;
 	}
 
-
 	public function get_post_text_color( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_post_text_color' ) ) {
@@ -509,7 +437,6 @@ class Variables {
 		return $this->ymc_post_text_color;
 	}
 
-
 	public function get_post_bg_color( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_post_bg_color' ) ) {
@@ -517,7 +444,6 @@ class Variables {
 		}
 		return $this->ymc_post_bg_color;
 	}
-
 
 	public function get_post_active_color( $post_id ) {
 
@@ -574,7 +500,6 @@ class Variables {
 		}
 		return $this->ymc_mobile_xs;
 	}
-
 
 	public function get_ymc_carousel_params( $post_id ) {
 
@@ -635,7 +560,6 @@ class Variables {
 		}
 		return $this->ymc_sort_terms;
 	}
-
 
 	public function get_order_term_by( $post_id ) {
 
@@ -749,7 +673,6 @@ class Variables {
 		return $this->ymc_post_elements;
 	}
 
-
 	public function get_ymc_pagination_elements( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_pagination_elements' ) ) {
@@ -757,7 +680,6 @@ class Variables {
 		}
 		return $this->ymc_pagination_elements;
 	}
-
 
 	public function get_post_image_size( $post_id ) {
 
@@ -781,6 +703,14 @@ class Variables {
 			return get_post_meta( $post_id, 'ymc_excerpt_truncate_method', true );
 		}
 		return $this->ymc_excerpt_truncate_method;
+	}
+
+	public function get_html_tag_button( $post_id ) {
+
+		if( get_post_meta( $post_id, 'ymc_html_tag_button' ) ) {
+			return get_post_meta( $post_id, 'ymc_html_tag_button', true );
+		}
+		return $this->ymc_html_tag_button;
 	}
 
 
@@ -911,7 +841,6 @@ class Variables {
 		return $this->ymc_filter_font;
 	}
 
-
 	public function get_post_font( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_post_font' ) ) {
@@ -932,7 +861,6 @@ class Variables {
 		return $this->ymc_filter_search_status;
 	}
 
-
 	public function get_search_text_button( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_search_text_button' ) ) {
@@ -940,7 +868,6 @@ class Variables {
 		}
 		return $this->ymc_search_text_button;
 	}
-
 
 	public function get_ymc_search_placeholder( $post_id ) {
 
@@ -950,7 +877,6 @@ class Variables {
 		return $this->ymc_search_placeholder;
 	}
 
-
 	public function get_ymc_autocomplete_state( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_autocomplete_state' ) ) {
@@ -959,7 +885,6 @@ class Variables {
 		return $this->ymc_autocomplete_state;
 	}
 
-
 	public function get_search_filtered_posts( $post_id ) {
 
 		if( get_post_meta( $post_id, 'ymc_search_filtered_posts' ) ) {
@@ -967,7 +892,6 @@ class Variables {
 		}
 		return $this->ymc_search_filtered_posts;
 	}
-
 
 	public function get_ymc_exact_phrase( $post_id ) {
 

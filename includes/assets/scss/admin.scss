@@ -1265,6 +1265,15 @@ $font-size: 16;
 								.appearance-section {
 									margin-bottom: 30px;
 
+									.select-buttons-param {
+										display: flex;
+										align-items: center;
+										margin-top: 10px;
+										.radio-item {
+											margin-right: 15px;
+										}
+									}
+
 									.from-element--multiple-sort {
 										height: max-content;
 										padding-right: 10px;

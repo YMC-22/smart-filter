@@ -112,7 +112,7 @@
                 echo '<div class="menu-passive">';
                 echo '<i class="btn-close">x</i>';
 				echo '<div class="menu-passive__item item-all">
-                    <a class="menu-link all '. esc_attr($type_multiple) .' active" href="#" data-name="'.esc_attr($text_all).'" data-termid="'. esc_attr(rtrim($terms_categories, ',')) .'">'.
+                    <a class="menu-link all '. esc_attr($type_multiple) .' active" aria-label="'.esc_attr($text_all).'" role="link" data-name="'.esc_attr($text_all).'" data-termid="'. esc_attr(rtrim($terms_categories, ',')) .'">'.
                      esc_html__('All','ymc-smart-filter'). '</a></div>';
 
 				echo '<div class="menu-passive__inner-items">';
@@ -172,7 +172,7 @@
                               esc_attr($is_disabled) .' '.
                               esc_attr($type_multiple) .' '.
                               esc_attr($class_term) . " ". esc_attr($default_term_active) .'" style="'.esc_attr($bg_term) . esc_attr($color_term).'" 
-                              href="#" data-selected="'. esc_attr($object_term->slug) .'" data-termid="' . esc_attr($term) . '" data-name="'.esc_attr($object_term->name).'">'.
+                              aria-label="'.esc_attr($name_term).'" role="link" data-selected="'. esc_attr($object_term->slug) .'" data-termid="' . esc_attr($term) . '" data-name="'.esc_attr($object_term->name).'">'.
                               esc_html($name_term) . ' <span class="count">'. esc_html($object_term->count) .'</span></a></div>';
                     }
 

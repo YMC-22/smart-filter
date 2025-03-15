@@ -266,6 +266,10 @@ $font-size: 16;
 					background-color: #098ab8;
 					font-weight: inherit;
 					margin: 0 10px 10px 0;
+					border-radius: 3px;
+					border: none;
+					cursor: pointer;
+					transition: .3s ease;
 					i {
 						font-size: 15px;
 						margin-right: 7px;
@@ -283,6 +287,7 @@ $font-size: 16;
 					}
 					&:hover {
 						text-decoration: none;
+						opacity: 0.85;
 					}
 					&.isDisabled {
 						cursor: text;
@@ -429,8 +434,13 @@ $font-size: 16;
 					color: #fff;
 					background-color: #098ab8;
 					margin: 0 5px 5px 0;
+					border-radius: 3px;
+					border: none;
+					cursor: pointer;
+					transition: .3s ease;
 					&:hover {
 						text-decoration: none;
+						opacity: 0.85;
 					}
 					&.active {
 						color: #222;
@@ -815,8 +825,15 @@ $font-size: 16;
 					color: #fff;
 					background-color: #098ab8;
 					margin: 10px 5px;
+					width: 100%;
+					border: none;
+					border-radius: 3px;
+					text-align: left;
+					transition: .3s ease;
+					cursor: pointer;
 					&:hover {
 						text-decoration: none;
+						opacity: .85;
 					}
 					&.active {
 						color: #222;
@@ -1511,15 +1528,17 @@ $font-size: 16;
 			margin: 0 0 20px;
 			padding: 0;
 			.filter-item {
-				a {
+				.filter-link {
 					font-size: 16px;
 					background-color: #098ab8;
 					color: #fff;
 					display: inline-block;
 					padding: 10px 15px;
 					border: 1px solid #fff;
-					transition: .3s;
+					transition: .3s ease;
 					text-decoration: none;
+					cursor: pointer;
+					line-height: 1.3;
 					&:hover {
 						text-decoration: none;
 						background-color: #141518;
@@ -1532,7 +1551,8 @@ $font-size: 16;
 		}
 	}
 
-	.filter-custom-layout, .filter-custom-extra-layout {
+	.filter-custom-layout,
+	.filter-custom-extra-layout {
 		.cf-wrp {
 			border: 1px solid #ccc;
 			margin-bottom: 15px;

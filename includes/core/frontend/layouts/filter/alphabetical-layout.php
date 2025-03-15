@@ -17,18 +17,25 @@
 	<ul class="filter-entry">
 
 		<li class="filter-item">
-			<a class="filter-link active" href="#" data-letter="all"><?php echo esc_html($ymc_post_elements['button_text_all']); ?></a>
+			<<?php echo esc_attr($ymc_html_tag_button); ?>
+            class="filter-link active"
+            aria-label="<?php echo esc_html($ymc_post_elements['button_text_all']); ?>"
+            role="button"
+            data-letter="all">
+            <?php echo esc_html($ymc_post_elements['button_text_all']); ?>
+            </<?php echo esc_attr($ymc_html_tag_button); ?>>
 		</li>
 
 		<?php
-
 			foreach ( $letters as $letter) {
-
 				echo '<li class="filter-item">';
-				echo '<a class="filter-link" href="#" data-letter="'.esc_attr($letter).'">'. esc_html($letter) .'</a>';
+				echo '<'.esc_attr($ymc_html_tag_button).' 
+				        class="filter-link" 
+				        aria-label="'.esc_html($letter).'" 
+				        role="button" data-letter="'.esc_attr($letter).'">'.
+                        esc_html($letter) .'</'.esc_attr($ymc_html_tag_button).'>';
 				echo '</li>';
 			}
-
 		?>
 
 	</ul>

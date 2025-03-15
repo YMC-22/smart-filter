@@ -44,7 +44,7 @@
 
 	            $all_class_active = ( empty($default_terms) ) ? 'active' : '';
 
-				echo '<li class="filter-item"><a class="filter-link all '. esc_attr($all_class_active) .'" href="#" data-selected="all" data-termid="' . esc_attr($ymc_terms) . '">'. esc_html($show_all) .'</a></li>';
+				echo '<li class="filter-item"><'.esc_attr($ymc_html_tag_button).' class="filter-link all '. esc_attr($all_class_active) .'" aria-label="'. esc_html($show_all) .'" role="button" data-selected="all" data-termid="' . esc_attr($ymc_terms) . '">'. esc_html($show_all) .'</'.esc_attr($ymc_html_tag_button).'></li>';
 
                 $arr_taxonomies = [];
                 foreach ($terms_selected as $term) {
@@ -130,15 +130,15 @@
 							$is_disabled = ( $object_term->count === 0 ) ? 'isDisabled' : '';
 
                             echo  "<li class='filter-item'>
-                                   <a class='filter-link ".
+                                   <".esc_attr($ymc_html_tag_button)." class='filter-link ".
                                    esc_attr($type_multiple) ." ".
                                    esc_attr($class_terms_align) ." ".
                                    esc_attr($is_disabled) ." ".
                                    esc_attr($class_term) . " ". esc_attr($default_term_active) . "' style='".
-                                   esc_attr($bg_term) . esc_attr($color_term) ."' href='#' data-selected='" .
+                                   esc_attr($bg_term) . esc_attr($color_term) ."' aria-label='". esc_html($name_term) ."' role='button' data-selected='" .
                                    esc_attr($object_term->slug) . "' data-termid='" .
                                    esc_attr($term) . "'>" . wp_kses_post($terms_icons) .
-                                   '<span class="link-inner">'.esc_html($name_term) .'</span>'."</a></li>";
+                                   '<span class="link-inner">'.esc_html($name_term) .'</span>'."</".esc_attr($ymc_html_tag_button)."></li>";
                         }
 
 	                    $terms_icons = null;

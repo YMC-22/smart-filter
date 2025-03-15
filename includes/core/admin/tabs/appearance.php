@@ -123,13 +123,36 @@
 
                 <div class="from-element">
                     <label class="form-label">
-                        <?php echo esc_html__('Button Text ALL', 'ymc-smart-filter'); ?>
+                        <?php echo esc_html__('Button Text "ALL"', 'ymc-smart-filter'); ?>
                         <span class="information">
                         <?php echo esc_html__('Change the text of the ALL button on filter bar.', 'ymc-smart-filter');?>
                         </span>
                     </label>
                     <input class="input-field" type="text" name="ymc-post-elements[button_text_all]"
                            value="<?php echo !empty($ymc_post_elements['button_text_all']) ? esc_attr($ymc_post_elements['button_text_all']) : 'All'; ?>">
+                </div>
+
+                <div class="from-element">
+                    <label class="form-label">
+		                <?php echo esc_html__('HTML Tag', 'ymc-smart-filter'); ?>
+                        <span class="information">
+                        <?php echo wp_kses_post('Set HTML tag for filter buttons. Applies to the following layouts: <b>Default Filter, Grouped Filter, Sidebar Filter, Alphabetical Navigation</b>.'); ?>
+                        </span>
+                    </label>
+
+                    <div class="select-buttons-param">
+                        <div class="radio-item">
+                            <?php $checked = ($ymc_html_tag_button === 'a') ? 'checked' : ''; ?>
+                            <input type="radio" id="tag_a" name="ymc_html_tag_button" value="a" <?php echo esc_attr($checked); ?> />
+                            <label for="tag_a">a</label>
+                        </div>
+                        <div class="radio-item">
+                            <?php $checked = ($ymc_html_tag_button === 'button') ? 'checked' : ''; ?>
+                            <input type="radio" id="tag_button" name="ymc_html_tag_button" value="button" <?php echo esc_attr($checked); ?> />
+                            <label for="tag_button">button</label>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>

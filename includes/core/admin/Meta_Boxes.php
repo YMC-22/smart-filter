@@ -203,7 +203,6 @@ class Meta_Boxes {
 			update_post_meta($post_id, 'ymc_sort_terms', $ymc_sort_terms);
 		}
 
-
         // Type Order Term By
 		if (isset($_POST['ymc_order_term_by'])) {
 			$ymc_order_term_by = sanitize_text_field(wp_unslash($_POST['ymc_order_term_by']));
@@ -499,6 +498,12 @@ class Meta_Boxes {
 		if( isset($_POST['ymc_hierarchy_terms']) ) {
 			$ymc_hierarchy_terms = sanitize_text_field(wp_unslash($_POST['ymc_hierarchy_terms']));
 			update_post_meta( $post_id, 'ymc_hierarchy_terms', $ymc_hierarchy_terms );
+		}
+
+		// HTML Tag
+		if( isset($_POST['ymc_html_tag_button']) ) {
+			$html_tag_button = sanitize_text_field(wp_unslash($_POST['ymc_html_tag_button']));
+			update_post_meta( $post_id, 'ymc_html_tag_button', $html_tag_button );
 		}
 
 	}

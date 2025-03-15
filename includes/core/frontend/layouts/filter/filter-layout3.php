@@ -39,7 +39,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
             $show_all = apply_filters('ymc_button_show_all_'.$id, $show_all);
             $show_all = apply_filters('ymc_button_show_all_'.$id.'_'.$c_target, $show_all);
 
-            echo '<a class="btn-all" href="#" data-selected="all" data-terms="' . esc_attr($ymc_terms) . '">'. esc_html($show_all) .'</a>';
+            echo '<a class="btn-all" aria-label="'. esc_html($show_all) .'" role="button" data-selected="all" data-terms="' . esc_attr($ymc_terms) . '">'. esc_html($show_all) .'</a>';
 
 			// Taxonomies sorting
             if( !is_null($tax_sort) && is_array($tax_sort) ) {
@@ -183,7 +183,7 @@ $ymc_hierarchy_terms = (bool) $ymc_hierarchy_terms;
                               esc_attr($is_disabled) .' '.
                               esc_attr($type_multiple) .' '.
                               esc_attr($class_term) . " ". esc_attr($default_term_active) .'" style="'.esc_attr($bg_term) . esc_attr($color_term).'" 
-                              href="#" data-selected="'. esc_attr($object_term->slug) .'" data-termid="' . esc_attr($term) . '" data-name="'.esc_attr($object_term->name).'">'.
+                              aria-label="'. esc_html($name_term) .'" role="link" data-selected="'. esc_attr($object_term->slug) .'" data-termid="' . esc_attr($term) . '" data-name="'.esc_attr($object_term->name).'">'.
                               esc_html($name_term) . ' <span class="count">'. esc_html($object_term->count) .'</span></a>';
 
 						echo wp_kses_post($arrow);
