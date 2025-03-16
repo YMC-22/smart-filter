@@ -1449,10 +1449,25 @@ $font-size: 16;
 										.info-hint {
 											color: #addcff;
 											overflow-y: auto;
-											overflow-x: hidden;
+											overflow-x: auto;
 											height: 400px;
 											max-height: 100%;
 											padding-right: 20px;
+											&::-webkit-scrollbar {
+												width: 5px;
+												height: 5px;
+												background-color: #141518;
+											}
+											&::-webkit-scrollbar-thumb {
+												border-radius: 10px;
+												background: #fff;
+											}
+											&::-webkit-scrollbar-track {
+												border-radius: 5px;
+											}
+											/*** Firefox ***/
+											scrollbar-color: #fff #141518;
+											scrollbar-width: thin;
 											h2 {
 												color: #fff;
 												font-size: 20px;
@@ -1509,6 +1524,18 @@ $font-size: 16;
 													overflow-y: hidden;
 													min-height: 50px;
 													margin-top: 20px;
+													&::-webkit-scrollbar {
+														width: 5px;
+														height: 5px;
+														background-color: #141518;
+													}
+													&::-webkit-scrollbar-thumb {
+														border-radius: 10px;
+														background: #fff;
+													}
+													&::-webkit-scrollbar-track {
+														border-radius: 5px;
+													}
 												}
 												.clipboard-container {
 													svg {

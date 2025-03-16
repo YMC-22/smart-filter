@@ -838,10 +838,10 @@ wp.hooks.addAction('ymc_stop_loading_data', 'smartfilter', function(el) {
 **Note**: hooks should be used in: 
 
 **Vanilla javascript**
-- addEventListener('DOMContentLoaded', (event) => {});
+- document.addEventListener('DOMContentLoaded', (e) => {...});
  
 **jQuery**
-- $(document).on('ready', function() {});
+- $(document).on('ready', function(e) {...});
 
 **Stop loading posts on page load.**
 

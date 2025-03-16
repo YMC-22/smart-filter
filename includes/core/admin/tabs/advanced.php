@@ -263,7 +263,7 @@
                     <h2 class="popup-hints--header"><?php esc_html_e('Methods and Hooks JS', 'ymc-smart-filter'); ?></h2>
                     <p class="popup-hints--note">
                         <?php echo wp_kses_post('<u><b>Note:</b></u> The call to the global <b>YMCTools</b> object should be used
-                        when the document is fully loaded, for example using the notation:: <b>$(document).on("ready", function () { ... });</b> or inside a hook callback function. <br>
+                        when the document is fully loaded, for example using the notation:: <b>document.addEventListener("DOMContentLoaded", (e) => { ... });</b> or inside a hook callback function. <br>
                         If there is only one filter on the page, then the object property: <b>"target"</b> can be skipped for calling methods.'); ?>
                     </p>
                     <hr/>
