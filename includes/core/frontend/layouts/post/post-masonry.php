@@ -70,7 +70,8 @@ while ($query->have_posts()) : $query->the_post();
 
 			if( $term_list && ! is_wp_error($term_list)) {
 				foreach($term_list as $term_single) {
-					$list_categories .= '<span class="cat-inner '. esc_attr($term_single->slug) .'">'. esc_html($term_single->name) .'</span>';
+					$list_categories .= '<a class="cat-inner '.esc_attr($term_single->slug).'" 
+					    href="'. esc_url(get_term_link($term_single->term_id, $tax)) .'">'. esc_html($term_single->name) .'</a>';
 				}
 			}
 		}
@@ -87,7 +88,7 @@ while ($query->have_posts()) : $query->the_post();
 	endif;
 
 	if( !empty($list_categories) && $ymc_post_elements['tag'] === 'show' ) :
-		echo '<div class="category">'. wp_kses($list_categories, ['span' => ['class' => true]]) .'</div>';
+		echo '<div class="category">'. wp_kses($list_categories, ['a' => ['class' => true, 'href' => true]]) .'</div>';
 	endif;
 
 	if( $ymc_post_elements['title'] === 'show' ) :

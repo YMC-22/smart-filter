@@ -87,7 +87,8 @@ $arrOptions['terms_settings'] = arrayToObject( generalArrayMerging( $ymc_terms_o
 
 					foreach($terms_list as $term) {
 
-						$all_terms .= '<span class="category__item '.esc_attr($term->slug).'">'. esc_html($term->name) .'</span>';
+						$all_terms .= '<a class="category__item '.esc_attr($term->slug).'" 
+						href="'. esc_url(get_term_link($term->term_id, $tax)) .'">'. esc_html($term->name) .'</a>';
 					}
 				}
 			}
@@ -123,7 +124,7 @@ $arrOptions['terms_settings'] = arrayToObject( generalArrayMerging( $ymc_terms_o
 				endif;
 
 				if( !empty($all_terms) && $ymc_post_elements['tag'] === 'show' ) :
-					$layout .= '<div class="category">'. wp_kses($all_terms, ['span' => ['class' => true]]) .'</div>';
+					$layout .= '<div class="category">'. wp_kses($all_terms, ['a' => ['class' => true, 'href' => true]]) .'</div>';
 				endif;
 
 				$layout .= '<div class="date_author">';
