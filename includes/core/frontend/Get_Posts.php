@@ -365,7 +365,11 @@ class Get_Posts {
 			{
 				if( function_exists(''. $ymc_query_type_callback .'' ) )
 				{
-					$atts = [ 'cpt' => $post_types, 'tax' => $taxonomy, 'term' => $terms ];
+					$atts = [
+						'cpt' => $post_types,
+						'tax' => $taxonomy,
+						'term' => $terms
+					];
 
 					$custom_args =  $ymc_query_type_callback( $atts );
 
