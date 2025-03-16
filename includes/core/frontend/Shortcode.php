@@ -73,12 +73,15 @@ class Shortcode {
 
 		if ( !empty($id) && $ymc_post_type === 'ymc_filters' && $post_status === 'publish' )
 		{
-
+			// Get Taxonomies
 			if ( is_array($tax_selected) ) {
 				$ymc_tax = implode(",", $tax_selected);
 			}
 
-			if ( is_array($terms_selected) && ($ymc_display_terms === 'selected_terms' || $ymc_display_terms === 'hide_empty_terms') )
+			// Get Terms
+			if ( is_array($terms_selected) &&
+			   ( $ymc_display_terms === 'selected_terms' ||
+			     $ymc_display_terms === 'hide_empty_terms') )
 			{
 				// Remove empty terms
 				if( $ymc_display_terms === 'hide_empty_terms' ) {
@@ -87,7 +90,9 @@ class Shortcode {
 				$ymc_terms = implode(',', $terms_selected);
 			}
 
-			if( !$ymc_hierarchy_terms && ($ymc_display_terms === 'auto_populate_all' || $ymc_display_terms === 'auto_populate_all_empty') )
+			if( !$ymc_hierarchy_terms &&
+			  ( $ymc_display_terms === 'auto_populate_all' ||
+				$ymc_display_terms === 'auto_populate_all_empty') )
 			{
 				if( $ymc_display_terms === 'auto_populate_all' ) {
 					// Auto populate all terms
@@ -99,11 +104,13 @@ class Shortcode {
 				$ymc_terms = implode(',', $terms_selected);
 			}
 
+			// Get Choices Posts
 			if ( is_array($ymc_choices_posts) ) {
 				$ymc_choices_posts = implode(',', $ymc_choices_posts);
 			}
 
-			if( is_array($ymc_terms_options) && ! empty($ymc_terms_options) && $ymc_filter_layout !== 'alphabetical-layout' )
+			// Get Default Terms
+			if( is_array($ymc_terms_options) && !empty($ymc_terms_options) && $ymc_filter_layout !== 'alphabetical-layout' )
 			{
 				$arr_default_terms = array_column($ymc_terms_options, 'default', 'termid');
 
@@ -120,20 +127,18 @@ class Shortcode {
 				}
 			}
 
-			$css_special = !empty($ymc_special_post_class) ? $ymc_special_post_class : '';
-
 			$ymc_filter_layout = ( $ymc_filter_status === 'on' ) ? $ymc_filter_layout : 'no-filter-layout';
 
 			$ymc_carousel_params = ( $ymc_post_layout === 'post-carousel-layout' ) ? wp_json_encode($ymc_carousel_params) : '""';
 
-			// General Custom CSS
-			if( ! empty($ymc_custom_css) ) :
+			// Custom CSS
+			if( !empty($ymc_custom_css) ) :
 				// phpcs:ignore WordPress
-				echo '<style id="filter-grids-css-'.esc_attr($id) .'-'. esc_attr($c_target).'">'. wp_strip_all_tags($ymc_custom_css) .'</style>';
+				echo '<style id="filter-grids-custom-css-'. esc_attr($c_target).'">'. wp_strip_all_tags($ymc_custom_css) .'</style>';
 			endif;
 
-			// Filters Styles
-			if ( $ymc_filter_layout !== 'filter-custom-layout')
+			// Filter CSS
+			if ( $ymc_filter_status === 'on' )
 			{
 				$filepath_filter_css = YMC_SMART_FILTER_DIR . '/includes/core/frontend/layouts/filter-css/'. $ymc_filter_layout .'-css.php';
 
@@ -142,8 +147,8 @@ class Shortcode {
 				}
 			}
 
-			// Posts Styles
-			if ( $ymc_post_layout !== 'post-custom-layout')
+			// Post CSS
+			if ( !empty($ymc_post_layout) )
 			{
 				$filepath_post_css = YMC_SMART_FILTER_DIR . '/includes/core/frontend/layouts/post-css/'. $ymc_post_layout .'-css.php';
 
@@ -152,17 +157,18 @@ class Shortcode {
 				}
 			}
 
-
 			// Include JSON
 			require YMC_SMART_FILTER_DIR . '/includes/core/util/json.php';
 
 			echo '<div id="ymc-smart-filter-container-'. esc_attr($c_target) .'" 
-				  class="ymc-smart-filter-container ymc-filter-'. esc_attr($id) .' ymc-loaded-filter ymc-'. esc_attr($ymc_filter_layout) .' ymc-'. esc_attr($ymc_post_layout) .' ymc-pagination-'. esc_attr($ymc_pagination_type) .' data-target-ymc'.esc_attr($id).'-'.esc_attr($c_target).' data-target-ymc'. esc_attr($c_target) .' '. esc_attr($css_special) .'" data-loading="true"
+				  class="ymc-smart-filter-container ymc-filter-'. esc_attr($id) .' ymc-loaded-filter ymc-'. esc_attr($ymc_filter_layout) .' ymc-'. esc_attr($ymc_post_layout) .' ymc-pagination-'. esc_attr($ymc_pagination_type) .' data-target-ymc'.esc_attr($id).'-'.esc_attr($c_target).' data-target-ymc'. esc_attr($c_target) .' '. esc_attr($ymc_special_post_class) .'" data-loading="true"
 				  data-params=\''. wp_kses_post(str_replace(array("\r","\n","\t"," "), '', $json)) .'\'>';
 
 
 			// Before Filter insert Featured Posts
-			if ( $ymc_featured_post_status === 'on' && $ymc_location_featured_posts === 'top_before' && !empty($ymc_featured_posts) )
+			if ( $ymc_featured_post_status === 'on' &&
+			     $ymc_location_featured_posts === 'top_before' &&
+			     !empty($ymc_featured_posts) )
 			{
 				$filepath_featured_post = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/featured-post/" . $ymc_featured_post_layout . ".php";
 
@@ -172,6 +178,7 @@ class Shortcode {
 				}
 			}
 
+			// Search Bar
 			if ( $ymc_filter_search_status === 'on' )
 			{
 				$filepath_search = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/search/search-layout.php";
@@ -181,21 +188,21 @@ class Shortcode {
 				}
 			}
 
+			// Filter Layout
 			if ( $ymc_filter_status === 'on' )
 			{
-				if ( $ymc_filter_layout )
-				{
-					$filepath_filter = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/filter/" . $ymc_filter_layout . ".php";
+				$filepath_filter = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/filter/" . $ymc_filter_layout . ".php";
 
-					if ( file_exists($filepath_filter) )
-					{
-						require $filepath_filter;
-					}
+				if ( file_exists($filepath_filter) )
+				{
+					require $filepath_filter;
 				}
 			}
 
 			// After Filter insert Featured Posts
-			if ( $ymc_featured_post_status === 'on' && $ymc_location_featured_posts === 'top_after' && !empty($ymc_featured_posts) )
+			if ( $ymc_featured_post_status === 'on' &&
+			     $ymc_location_featured_posts === 'top_after' &&
+			     !empty($ymc_featured_posts) )
 			{
 				$filepath_featured_post = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/featured-post/" . $ymc_featured_post_layout . ".php";
 
@@ -205,6 +212,7 @@ class Shortcode {
 				}
 			}
 
+			// Sort Bar
 			if ( $ymc_sort_status === 'on' )
 			{
 				$filepath_sort = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/sort/sort-posts.php";
@@ -221,18 +229,20 @@ class Shortcode {
 
 			echo '<div class="container-posts container-'. esc_attr($ymc_post_layout) .'">';
 
-			do_action("ymc_before_post_layout_".$id);
-			do_action("ymc_before_post_layout_".$id.'_'.$c_target);
+			do_action("ymc_before_post_layout_".esc_attr($id));
+			do_action("ymc_before_post_layout_".esc_attr($id).'_'.esc_attr($c_target));
 
 			echo '<div class="post-entry '. esc_attr($breakpoints_classes) .' '. esc_attr($ymc_post_layout) .' '. esc_attr($ymc_post_layout) .'-'.esc_attr($id).' '.esc_attr($ymc_post_layout).'-'.esc_attr($id).'-'.esc_attr($c_target).'"></div>';
 
-			do_action("ymc_after_post_layout_".$id);
-			do_action("ymc_after_post_layout_".$id.'_'.$c_target);
+			do_action("ymc_after_post_layout_".esc_attr($id));
+			do_action("ymc_after_post_layout_".esc_attr($id).'_'.esc_attr($c_target));
 
 			echo '</div>';
 
 			// Bottom Grid insert Featured Posts
-			if ( $ymc_featured_post_status === 'on' && $ymc_location_featured_posts === 'bottom' && !empty($ymc_featured_posts) )
+			if ( $ymc_featured_post_status === 'on' &&
+			     $ymc_location_featured_posts === 'bottom' &&
+			     !empty($ymc_featured_posts) )
 			{
 				$filepath_featured_post = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/featured-post/" . $ymc_featured_post_layout . ".php";
 
@@ -242,6 +252,7 @@ class Shortcode {
 				}
 			}
 
+			// Popup
 			if ( $ymc_popup_status === 'on' )
 			{
 				$filepath_popup = YMC_SMART_FILTER_DIR . "/includes/core/frontend/layouts/popup/popup-layout.php";
@@ -327,7 +338,9 @@ class Shortcode {
 
 			if ( $ymc_filter_layout )
 			{
-				if (is_array($terms_selected) && ($ymc_display_terms === 'selected_terms' || $ymc_display_terms === 'hide_empty_terms'))
+				if (is_array($terms_selected) &&
+				   ( $ymc_display_terms === 'selected_terms' ||
+				     $ymc_display_terms === 'hide_empty_terms'))
 				{
 					// Remove empty terms
 					if( $ymc_display_terms === 'hide_empty_terms' ) {
@@ -336,7 +349,9 @@ class Shortcode {
 					$ymc_terms = implode(',', $terms_selected);
 				}
 
-				if(!$ymc_hierarchy_terms && ($ymc_display_terms === 'auto_populate_all' || $ymc_display_terms === 'auto_populate_all_empty'))
+				if(!$ymc_hierarchy_terms &&
+				  ( $ymc_display_terms === 'auto_populate_all' ||
+				    $ymc_display_terms === 'auto_populate_all_empty'))
 				{
 					if( $ymc_display_terms === 'auto_populate_all' ) {
 						// Auto populate all terms
