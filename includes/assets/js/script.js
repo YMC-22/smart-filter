@@ -739,7 +739,12 @@
                     dataType: 'json',
                     url: _smart_filter_object.ajax_url,
                     data: data,
-                    beforeSend: function () {},
+                    beforeSend: function () {
+                        // Add Hook: before open popup
+                        wp.hooks.doAction('ymc_before_popup_open');
+                        wp.hooks.doAction('ymc_before_popup_open_'+params.filter_id);
+                        wp.hooks.doAction('ymc_before_popup_open_'+params.filter_id+'_'+params.target_id);
+                    },
                     success: function (res) {
                         if(res.data !== '') {
                             popupContainer.html(res.data);
@@ -748,6 +753,8 @@
                         }
 
                         // Add Hook: after open popup
+                        wp.hooks.doAction('ymc_after_popup_open', res.data);
+                        wp.hooks.doAction('ymc_after_popup_open_'+params.filter_id, res.data);
                         wp.hooks.doAction('ymc_after_popup_open_'+params.filter_id+'_'+params.target_id, res.data);
                     },
                     error: function (obj, err) {
