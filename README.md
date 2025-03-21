@@ -970,6 +970,16 @@ wp.hooks.addAction('ymc_after_popup_open_FilterID', 'smartfilter', 'callback(dat
 wp.hooks.addAction('ymc_after_popup_open_FilterID_LayoutID', 'smartfilter', 'callback(data)');
 ```
 
+**Params function callback:**
+- `data - data that is loaded into the popup container.`
+
+Usage example:
+```js 
+wp.hooks.addAction('ymc_after_popup_open_545_1', 'smartfilter', function(data){
+    console.log('Loaded data: '  + data);
+}); 
+```
+
 **Change custom preloader:**
 
 This filter allows you to override preloader when loading grid posts or other content into opening popups.
@@ -990,15 +1000,7 @@ wp.hooks.addFilter('ymc_custom_popup_preloader_545_1', 'smartfilter', function(s
 });
 ```
 
-**Params function callback:**
-- `data - data that is loaded into the popup container.`
-  
-Usage example:
-```js 
-wp.hooks.addAction('ymc_after_popup_open_545_1', 'smartfilter', function(data){
-    console.log('Loaded data: '  + data);
-}); 
-```
+
 
 
 ### Masonry Layout.
