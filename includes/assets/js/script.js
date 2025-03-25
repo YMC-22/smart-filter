@@ -724,6 +724,7 @@
             let params = JSON.parse(document.querySelector(target).dataset.params);
             let filterID = params.filter_id;
             let targetID = params.target_id;
+            let classAnimation = params.popup_animation;
 
             const data = {
                 'action'     : 'get_post_popup',
@@ -750,6 +751,7 @@
                             popupContainer.html(res.data);
                             popupOverlay.css({'display':'block','opacity':'1'});
                             bodyHtml.css({'overflow' : 'hidden'});
+                            popupContainer.closest('.ymc-popup-wrp').addClass(classAnimation);
                         }
 
                         // Add Hook: after open popup
