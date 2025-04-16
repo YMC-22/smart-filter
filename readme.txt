@@ -1,11 +1,11 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.9.68
+Version: 2.9.69
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
 Tags: filter, grid, ajax, search, sort
 Requires at least: 5.5
-Tested up to: 6.7
+Tested up to: 6.8
 Stable tag: trunk
 Requires PHP: 7.2
 License: GPLv2 or later
