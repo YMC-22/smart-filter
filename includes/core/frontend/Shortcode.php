@@ -41,6 +41,7 @@ class Shortcode {
 		], $atts );
 
 		$id = (int) $atts['id'];
+		$page_id = get_queried_object_id();
 
 		static $c_target = 1;
 

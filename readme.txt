@@ -1,7 +1,7 @@
 ===  Filter & Grids ===
 Plugin Name: Filter & Grids
 Contributors: YMC, Roman
-Version: 2.9.69
+Version: 2.9.70
 Donate link: https://www.paypal.com/donate/?hosted_button_id=B2MHM5LM29UGW
 Tags: filter, grid, ajax, search, sort
 Requires at least: 5.5

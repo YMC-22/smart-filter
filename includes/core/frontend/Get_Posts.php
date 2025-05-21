@@ -67,6 +67,7 @@ class Get_Posts {
 		$meta_key = $clean_data['meta_key'];
 		$class_animation = $clean_data['post_animation'];
 		$letter = $clean_data['letter'];
+		$page_id = $clean_data['page_id'];
 		$custom_args = null;
 
 		$paged = !empty( $_POST['paged'] ) ? (int) $_POST['paged'] : 1;
@@ -366,9 +367,10 @@ class Get_Posts {
 				if( function_exists(''. $ymc_query_type_callback .'' ) )
 				{
 					$atts = [
-						'cpt' => $post_types,
-						'tax' => $taxonomy,
-						'term' => $terms
+						'cpt'     => $post_types,
+						'tax'     => $taxonomy,
+						'term'    => $terms,
+						'page_id' => $page_id
 					];
 
 					$custom_args =  $ymc_query_type_callback( $atts );
@@ -392,7 +394,7 @@ class Get_Posts {
 					else {
 						$custom_args = 'Function \'' . $ymc_query_type_callback . '\' returns an invalid value. Must be an array.';
 					}
-
+					unset($args['page_id']);
 					$args['paged'] = $paged;
 				}
 				else
@@ -457,7 +459,8 @@ class Get_Posts {
 			'post_count' => $query->post_count,
 			'get_current_posts' => ($query->found_posts - $paged * $per_page),
 			'pagin' => !empty($pagin) ? $pagin : null,
-			'paged' => $paged
+			'paged' => $paged,
+			'page_id' => (int) $page_id
 		];
 
 		if( (int) $ymc_debug_code === 1 )

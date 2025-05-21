@@ -1134,7 +1134,7 @@ In order to white list functions you need to define the “YMC_CALLBACK_FUNCTION
         'my_custom_function_name_2',
         'my_custom_function_name_3',
     ) ); 
- }
+ }[functions.php](..%2F..%2Fthemes%2Finnovations%2Ffunctions.php)
  
 
 ```
@@ -1143,11 +1143,12 @@ The $atts function argument is an array of dynamic data set in the plugin settin
 - $atts['cpt']  - ( Array ) array of selected post types
 - $atts['tax']  - ( Array | Bool ) array of all selected taxonomies or false
 - $atts['term'] - ( Array | Bool ) array of all taxonomy terms or false
+- $atts['page_id'] - (int ) ID of the page where the filter is located
 - 
 Example of use:
 ```php
 function my_custom_function_name_1( $atts ) {
-
+[functions.php](..%2F..%2Fthemes%2Finnovations%2Ffunctions.php)
    	$term_ids = [];
 
     // Get all terms related to the post_tag taxonomy

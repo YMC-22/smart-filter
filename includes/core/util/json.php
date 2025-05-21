@@ -33,7 +33,8 @@ $json = '{
 "meta_query":"",
 "date_query":"",
 "data_target":"data-target-ymc'.esc_attr($c_target).'",
-"target_id":"'.esc_attr($c_target).'"
+"target_id":"'.esc_attr($c_target).'",
+"page_id":"'.esc_attr($page_id).'"
 }';
 
 
