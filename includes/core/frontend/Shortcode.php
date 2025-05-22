@@ -115,7 +115,7 @@ class Shortcode {
 			{
 				$arr_default_terms = array_column($ymc_terms_options, 'default', 'termid');
 
-				if( !empty($arr_default_terms) )
+				if( !empty($arr_default_terms) && is_array($terms_selected) )
 				{
 					foreach ( $arr_default_terms as $k => $v )
 					{
