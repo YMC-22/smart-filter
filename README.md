@@ -1148,7 +1148,6 @@ The $atts function argument is an array of dynamic data set in the plugin settin
 Example of use:
 ```php
 function my_custom_function_name_1( $atts ) {
-[functions.php]
    	$term_ids = [];
 
     // Get all terms related to the post_tag taxonomy
