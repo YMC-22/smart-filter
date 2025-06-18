@@ -1134,7 +1134,7 @@ In order to white list functions you need to define the “YMC_CALLBACK_FUNCTION
         'my_custom_function_name_2',
         'my_custom_function_name_3',
     ) ); 
- }[functions.php]
+ }
  
 
 ```
